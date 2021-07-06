@@ -1,0 +1,24 @@
+﻿@using System.Web.Optimization
+@model Macss.Database.Entity.AccountMaster
+
+@{
+    ViewBag.Title = "運送業務 - TASS";
+    ViewBag.PageMainTitle = "月次集計データ出力";
+    ViewBag.ScreenId = "";
+    ViewBag.ButtonText = MacssWeb.Resources.ControlText.Execute;
+    ViewBag.ConfirmMessage = "出力する月次集計データを選択してください。";
+    ViewBag.ConfirmDialogText = "月次集計データを出力します。よろしいですか？";
+
+    ViewBag.CreateExec = true;
+}
+
+@using (Html.BeginForm("MonthaggResult", "D033", null, FormMethod.Post))
+{
+    @Html.Hidden("preAction", MacssWeb.Common.Actions.Create);
+
+    @Html.Partial("_MonthaggForm", Model)
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

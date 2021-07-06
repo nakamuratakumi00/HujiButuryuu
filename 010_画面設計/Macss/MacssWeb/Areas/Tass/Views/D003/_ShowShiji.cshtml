@@ -1,0 +1,119 @@
+﻿@Html.AntiForgeryToken()
+
+@if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+{
+    <div class="alert alert-info">
+        <span>@ViewBag.ConfirmMessage</span>
+    </div>
+}
+
+@{ var transAction = ViewContext.Controller.ValueProvider.GetValue("action").RawValue; }
+
+@{ var showAction = string.Empty; }
+@{ var setConfirmStyle = string.Empty; }
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="row justify-content-between macss-form-button-group-row">
+        <div class="col-4">
+            <button type="submit" class="btn btn-secondary" name="cmdTopBack" value="@((int)MacssWeb.Common.ButtonValues.Back)">@MacssWeb.Resources.ControlText.Back</button>
+        </div>
+    </div>
+</div>
+
+<!-- ■明細 -->
+<div class="accordion mt-3 mb-3" id="ConditionAccordion1">
+    <div class="card">
+        <div class="card-header macss-search-config-collapse-header" id="headingOne1">
+            <div class="mb-0">
+                <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain1" aria-expanded="true" aria-controls="ConditionMain3">
+                    <div class="d-inline-block" style="color:#333">出荷現品 明細項目</div>
+                    <i id="CollapseHidden1" class="fas fa-chevron-circle-up" aria-hidden="true" style="color: rgb(120, 188, 255);"></i>
+                    <i id="CollapseShow1" class="fas fa-chevron-circle-down" aria-hidden="true" style="color: rgb(120, 188, 255); display: none;"></i>
+                </button>
+            </div>
+        </div>
+        <div id="ConditionMain1" class="container-fluid mb-3 pr-1 collapse show" aria-labelledby="headingOne1" data-parent="#ConditionAccordion1">
+            <table id="SampleList" class="table table-striped table-hover macss-data-table">
+                <thead class="macss-data-table-header">
+                    <!-- thの文字数で列の幅が決まってしまうため、必要に応じて全角スペースを入れて列の幅を調整する必要がある-->
+                    <tr>
+                        <th>出荷No</th>
+                        <th>品名コード</th>
+                        <th>出荷数</th>
+                        <th>顧客品番　　　　　</th>
+                        <th>顧客品番有無</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>61283</td>
+                        <td>0120107929</td>
+                        <td class="text-right">500</td>
+                        <td>MS906C3-TE241LSC</td>
+                        <td>有</td>
+                    </tr>
+                    <tr>
+                        <td>21282</td>
+                        <td>0120107929</td>
+                        <td class="text-right">100</td>
+                        <td>MS906C3-TE241LSC</td>
+                        <td>有</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4"></div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    @if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+    {
+        <div class="col-4">
+            <button type="submit" class="btn btn-secondary" name="cmdBtmBack" value="@((int)MacssWeb.Common.ButtonValues.Back)">@MacssWeb.Resources.ControlText.Back</button>
+        </div>
+        <div class="col-4 text-right">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDialog">@ViewBag.ButtonText</button>
+        </div>
+    }
+    else
+    {
+        <div class="col-4">
+            <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.Back</a>
+        </div>
+        <div class="col-8 text-right">
+            <a role="button" class="btn btn-primary" href="@Url.Action("EditZaiko", new { id = @"01736" })">@MacssWeb.Resources.ControlText.Edit</a>
+            <a role="button" class="btn btn-danger" href="@Url.Action("DeleteZaikoConfirm", new { id = @"01746" })">@MacssWeb.Resources.ControlText.Delete</a>
+        </div>
+    }
+</div>
+
+<div class="modal" id="ConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @ViewBag.ConfirmDialogText
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" name="cmdBtmExec" value="@((int)MacssWeb.Common.ButtonValues.Exec)">@MacssWeb.Resources.ControlText.Yes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        var dt = new Macss.DataTables.MacssDataTable("#SampleList");
+        dt.configure();
+        var cond = new Macss.Collapse.ConditionsPanel("#ConditionAccordion1", "#CollapseShow1", "#CollapseHidden1");
+        cond.setCollapseEvent();
+    });
+</script>

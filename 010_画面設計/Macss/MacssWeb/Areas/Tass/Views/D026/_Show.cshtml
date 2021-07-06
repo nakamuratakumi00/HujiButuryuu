@@ -1,0 +1,551 @@
+﻿<!-- ■詳細・確認系フォーム -->
+@Html.AntiForgeryToken()
+
+@if (ViewBag.DetailsExec == null || ViewBag.DetailsExec == false)
+{
+    <div class="alert alert-info">
+        <span>@ViewBag.ConfirmMessage</span>
+    </div>
+}
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="row justify-content-between macss-form-button-group-row">
+        @if (ViewBag.DetailsExec == null || ViewBag.DetailsExec == false)
+        {
+            <div class="col-4">
+                @if (ViewBag.DeleteExec != null && ViewBag.DeleteExec == true)
+                {
+                    <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.BackToList</a>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-secondary" name="cmdBtmBack" value="@((int)MacssWeb.Common.ButtonValues.Back)">@MacssWeb.Resources.ControlText.Back</button>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="col-4">
+                <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.BackToList</a>
+            </div>
+        }
+    </div>
+</div>
+<table class="table macss-form-table">
+    <colgroup>
+        <col class="macss-form-table-title" />
+        <col class="macss-form-table-contents" />
+    </colgroup>
+    <tr>
+        <th scope="row">
+            @Html.Label("配布先コード", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                <div>XX</div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("印刷コード", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                XXX
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("配布先名", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                ああああああああああああああああああああ
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("用途", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                0 出荷No発番用
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("登録依頼元", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                あああああああああああああ
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("登録依頼元電話番号", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                XXXXXXXXXXXXXXXXXXXX
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("配布枚数", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                9999
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("有効期限印刷", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                1 印刷する
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("出荷No印刷", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                0 印刷しない
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("発注元会社名１", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                ああああああああ
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("発注元会社名２", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                ああああああああ
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("課補係長１", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                ああああ
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("課補係長２", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                ああああ
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("担当１", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                ああああ
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("担当２", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                ああああ
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("発注元電話番号１", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                XXXXXXXXXXXXXXXXXXXX
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("発注元電話番号２", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                XXXXXXXXXXXXXXXXXXXX
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("現品保管場所", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                ああああああああああ
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("運賃負担区分", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                1 先方
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("経費負担No", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("届先マスター使用", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                0 使用しない
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("届先コード", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                XXXXXXXXXXXXXXX
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("届先名１", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                ああああああああああああああああああああああああああ
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("届先名２", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                ああああああああああああああああああああああああああ
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("届先郵便番号", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                XXXXXXXXXX
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("届先電話番号", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                XXXXXXXXXXXXXXXXXXXX
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("届先住所", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                あああああああああああああああああああああああああああ
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("品名型式寸法１", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                あああああああああああああああああああああああああ
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("出荷数１", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                ああああああ
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("品名型式寸法２", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                あああああああああああああああああああああああああ
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("出荷数２", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                ああああああ
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("品名型式寸法３", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                あああああああああああああああああああああああああ
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("出荷数３", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                ああああああ
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("品名型式寸法４", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                あああああああああああああああああああああああああ
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("出荷数４", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                ああああああ
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("品名型式寸法５", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                あああああああああああああああああああああああああ
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("出荷数５", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                ああああああ
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("特記事項１", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                ああああああああああああ
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("特記事項２", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                ああああああああああああ
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("得意先コード", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                XXXXXXXXX
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("出荷場所コード", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                XXX
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("出荷場所名", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                ああああああああ
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("運送方法コード", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                XXXXXXXXX
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("運送方法名称", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                ああああああああああああああああああああ
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("運送コースコード", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                XX
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("伝票区分", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                XX
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    @if (ViewBag.DetailsExec == null || ViewBag.DetailsExec == false)
+    {
+        <div class="col-4">
+            @if (ViewBag.DeleteExec != null && ViewBag.DeleteExec == true)
+            {
+                <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.BackToList</a>
+            }
+            else
+            {
+                <button type="submit" class="btn btn-secondary" name="cmdBtmBack" value="@((int)MacssWeb.Common.ButtonValues.Back)">@MacssWeb.Resources.ControlText.Back</button>
+            }
+        </div>
+        <div class="col-4 text-right">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDialog">@ViewBag.ButtonText</button>
+        </div>
+    }
+    else
+    {
+        <div class="col-4">
+            <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.BackToList</a>
+        </div>
+        <div class="col-8 text-right">
+
+            <a role="button" class="btn btn-primary" href="@Url.Action("Print", new { id = @"0173146" })">固定出荷注文書印刷</a>
+            <a role="button" class="btn btn-primary" href="@Url.Action("Edit", new { id = @"0173146" })">@MacssWeb.Resources.ControlText.Edit</a>
+            <a role="button" class="btn btn-primary" href="@Url.Action("Create", new { id = @"0173146" })">参照作成</a>
+            <a role="button" class="btn btn-danger" href="@Url.Action("DeleteConfirm", new { id = @"0173146" })">@MacssWeb.Resources.ControlText.Delete</a>
+        </div>
+    }
+</div>
+
+<div class="modal" id="ConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @ViewBag.ConfirmDialogText
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" name="cmdBtmExec" value="@((int)MacssWeb.Common.ButtonValues.Exec)">@MacssWeb.Resources.ControlText.Yes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>

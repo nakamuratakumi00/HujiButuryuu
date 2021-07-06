@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "共通管理";
+    ViewBag.PageMainTitle = "共通管理-BASE";
+}
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <ul class="macss-submenu">
+
+                <li>
+                    @Html.ActionLink("マスターメンテナンス(エントリ一覧式・承認有)", "SubMenuD100", "Home", new { area = "Base" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("マスターメンテナンス(エントリ一覧式・承認無)", "SubMenuD200", "Home", new { area = "Base" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("マスターメンテナンス(一括)", "SubMenuD300", "Home", new { area = "Base" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("マスターメンテナンス(汎用)", "SubMenuD400", "Home", new { area = "Base" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("操作手引書", "ManualList", "Manual", new { area = "Base" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("保存データ", "StorageList", "Storage", new { area = "Base" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("承認", "ApprovalList", "Approval", new { area = "Base" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("バッチ管理一覧", "BatchList", "Batch", new { area = "Base" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("バッチ管理起動", "Exec", "Batch", new { area = "Base" }, null)
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

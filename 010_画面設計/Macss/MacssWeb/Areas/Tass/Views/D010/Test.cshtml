@@ -1,0 +1,260 @@
+﻿@model IEnumerable<Macss.Database.Entity.AccountMaster>
+
+@{
+    ViewBag.Title = "運送業務 - TASS";
+    ViewBag.ScreenId = "";
+    ViewBag.PageMainTitle = "バーコードリーダー検討 ";
+}
+@section Scripts {
+    <script>
+        $(function () {
+
+
+            var cond = new Macss.Collapse.ConditionsPanel("#ConditionAccordion", "#CollapseShow", "#CollapseHidden");
+            cond.setCollapseEvent();
+
+         
+        });
+    </script>
+}
+
+
+
+
+@using (Html.BeginForm("SearchAAAA", "D010", null, FormMethod.Post))
+{
+
+    <div class="accordion" id="ConditionAccordion">
+        <div class="card">
+            <div class="card-header macss-search-config-collapse-header" id="headingOne">
+                <div class="mb-0">
+                    <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain" aria-expanded="true" aria-controls="ConditionMain">
+                        <div class="d-inline-block" style="color:#333">検索設定</div>
+                        <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="display:none;"></i>
+                        <i id="CollapseShow" class="fas fa-chevron-circle-down" aria-hidden="true" style="display:none;"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+                <div class="row mr-0 mb-1">
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition11212">バーコードリーダ検討No</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Condition11212" aria-describedby="Condition11212" id="TestNo">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">キーコード</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Condition1" aria-describedby="Condition1" id="Test01">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition3">テストNo02</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Condition2" aria-describedby="Condition2" id="Test02">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div>バーコードリーダの値に付加するキー</div>
+                    <label><input type="radio" name="BarcodeKeyKbn" value="1" checked>Enterキーを設定　　</label>
+                    <label><input type="radio" name="BarcodeKeyKbn" value="2">Tabキーを設定</label>
+                    <div id="BarcodeKeyMsg" style="color:red;margin :8px;"></div>
+                </div>
+
+                <textarea name="kanso" rows="4" cols="40"></textarea>
+
+                <div class="container-fluid pt-4 pb-3 pl-0 clearfix">
+                    <div class="float-left">
+                        <button type="button" class="btn btn-secondary btn-lg macss-btn-main" id="Clear">クリア</button>
+                        <button type="button" class="btn btn-primary btn-lg macss-btn-main" id="Barcode">バーコードリーダ読込</button>
+                        <button type="button" class="btn btn-primary btn-lg macss-btn-main" id="BeepSound">Beep音の再生</button>
+                    </div>
+                    <div class="float-right">
+                        <button type="submit" class="btn btn-primary btn-lg macss-btn-main" id="search">更新</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+    <div style="margin-top:10px;">
+        <div>リスト</div>
+        <select class="custom-select form-control" id="IDListBox" size="10" multiple>
+            @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+            {
+            }
+            else
+            {
+                <option value="0">29-00019</option>
+                <option value="1">29-00020</option>
+                <option value="2">29-00021</option>
+            }
+        </select>
+    </div>
+    <button type="button" class="btn btn-secondary btn-lg macss-btn-main" id="ListRemove">選択削除</button>
+
+
+<script>
+    $(function () {
+        const KEY_ENTER = 13; //Enterキー
+        const KEY_TAB = 9; //TABキー
+        
+        var m_TargetKey = KEY_ENTER;
+        var m_EnterMsg = 'バーコードリーダ検討Noテキストボックスにフォーカスがある状態の場合、<br>空白でEnterを押下してもFormはSubmitされません。<br>キーコードテキストボックスにフォーカスがあり、空白でEnterを押下した場合、FormはSubmitします。<br>値が入力されておりEnterを押下した場合、下部のリストに入力した値が追加されます。<br>バーコードリーダ読込ボタン押下で自動でリストに追加されます。（バーコードリーダ読込時の文字にEnterを付加）';
+        var m_TabMsg = 'バーコードリーダ検討Noテキストボックスにフォーカスがある状態の場合、<br>Tabを押下してもコントロールのフォーカスが遷移されません。<br>値が入力されておりTabを押下した場合、下部のリストに入力した値が追加されます。<br>バーコードリーダ読込ボタン押下で自動でリストに追加されます。（バーコードリーダ読込時の文字にTabを付加）';
+
+        function CheckIDName(val) {
+            var result = '';
+            if (val.length > 0) {
+                //一文字以上入力されていればいったんOKとする
+                if (val.length > 1) {
+                    result = val;
+                }
+            }
+            return result;
+        }
+
+        function CheckBarcodeKeyKbn() {
+            var b_kbn;
+            b_kbn = $('input:radio[name="BarcodeKeyKbn"]:checked').val();
+
+            if (b_kbn == '1') {
+                m_TargetKey = KEY_ENTER;
+            }
+            else {
+                m_TargetKey = KEY_TAB;
+            }
+
+            if (m_TargetKey == KEY_ENTER) {
+                $('#BarcodeKeyMsg').html(m_EnterMsg);
+            }
+            else {
+                $('#BarcodeKeyMsg').html(m_TabMsg);
+            }
+        }
+
+        CheckBarcodeKeyKbn();
+
+        $('#BarcodeKeyMsg').html(m_EnterMsg);
+
+        $('#BeepSound').click(function () {
+            new Audio("data:audio/wav;base64,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").play();
+        })
+
+        $('#Clear').click(function () {
+            $('#IDListBox').html('');
+        })
+
+        $('#ListRemove').click(function () {
+            $('#IDListBox').children(':selected').remove();
+        })
+
+        $('#Barcode').click(function () {
+            var val = '';
+            var e_time;
+
+            e_time = new Date();
+
+            val = CheckIDName(e_time.getTime().toString());
+
+            if (val.length > 0) {
+                $('#TestNo').focus();
+                $('#TestNo').val(val);
+                //キー入力イベント（バーコードリーダはkeypressでデータが来る。キーダウンとかキーアップはない。）
+                var evt = $.Event('keypress');
+                evt.keyCode = m_TargetKey;
+                $('#TestNo').trigger(evt);
+                ////キー入力イベント
+                //var evt = $.Event('keydown');
+                //evt.which = m_TargetKey;
+                //$('#TestNo').trigger(evt);
+              
+             
+                $('#TestNo').val('');
+            }
+            else
+            {
+                //ビープ音
+            }
+        })
+
+        $('input:radio[name="BarcodeKeyKbn"]').change(function (e) {
+
+            CheckBarcodeKeyKbn();
+        })
+
+        //tabキー手入力された場合用（手入力ではタブキーのkeypressが対応していない為）
+        //$('#TestNo').keydown(function (e) {
+        //    var val = '';
+        //    var e_time;
+
+        //    $('#Test01').val(e.keyCode);
+
+        //    //alert(m_TargetKey);
+        //    //if (e.which == m_TargetKey) {
+        //    //if (e.keyCode == m_TargetKey) {KEY_TAB
+        //    if (m_TargetKey == KEY_TAB && e.keyCode == KEY_TAB) {
+
+        //        e_time = new Date();
+        //        e_time.getTime();
+
+        //        val = CheckIDName($('#TestNo').val().trim());
+        //        if (val.length > 0) {
+        //            $('#IDListBox').append('<option value="' + e_time.getTime() + '">' + val + '</option>');
+        //            $('#TestNo').val('');
+        //        }
+
+        //        //対象のキーがエンターキーの場合、FormをSubmitさせない
+        //        //対象のキーがTabキーの場合、タブ遷移させない
+        //        return false;
+        //    }
+        //});
+
+        ////テキストボックスの「Enter」キー押下でFormのsubmitをできないようにする
+        //$('input[type="text"]').keypress(function (e) {
+        //    if (e.keyCode == KEY_ENTER) {
+        //        return false;
+        //    }
+        //});
+
+
+
+        //手入力、バーコードリーダのEnterキーおよびバーコードリーダのTabキー用（手入力ではタブキーのkeypressが対応していない為）
+        $('#TestNo').keypress(function (e) {
+            var val = '';
+            var e_time;
+
+            $('#Test01').val(e.keyCode);
+
+            //alert(m_TargetKey);
+            //if (e.which == m_TargetKey) {
+            if (e.keyCode == m_TargetKey) {
+                e_time = new Date();
+                e_time.getTime();
+
+                val = CheckIDName($('#TestNo').val().trim());
+                if (val.length > 0) {
+                    $('#IDListBox').append('<option value="' + e_time.getTime() + '">' + val + '</option>');
+                    $('#TestNo').val('');
+                }
+
+                //対象のキーがエンターキーの場合、FormをSubmitさせない
+                //対象のキーがTabキーの場合、タブ遷移させない
+                return false;
+            }
+        });
+
+
+
+    });
+
+</script>

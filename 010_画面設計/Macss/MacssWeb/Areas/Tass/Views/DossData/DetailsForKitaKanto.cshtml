@@ -1,0 +1,213 @@
+﻿
+@using MacssWeb.Areas.Tass.Helper
+
+@model IEnumerable<Macss.Database.Entity.DummyDossDataForKitaKanto>
+
+@{
+    ViewBag.Title = MacssWeb.Resources.Tass.DossDataMainTitle;
+    ViewBag.PageMainTitle = String.Format("{0} - {1}"
+        , MacssWeb.Resources.Tass.DossDataDetailsMainTitle, MacssWeb.Resources.Tass.DossDataForKitaKanto);
+    ViewBag.ScreenId = "TASS-D006-02";
+}
+@section Scripts {
+    <script>
+        $(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#SampleList", null, 0);
+            dt.configure();
+        });
+    </script>
+}
+
+@section CssExtended{
+    <style type="text/css">
+    </style>
+}
+
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.BackToList</a>
+    </div>
+</div>
+
+<div class="row mt-3 mb-4">
+    <div class="col-8">
+        @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDialog">メール送信</button>*@
+    </div>
+    <div class="col-4 text-right">
+        <div class="dropdown">
+            <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#">CSVダウンロード</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid mt-2">
+    <div class="form-inline">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">件数</span>
+            </div>
+            <span class="form-control">@ViewBag.DataCount</span>
+        </div>
+    </div>
+</div>
+
+
+<table id="SampleList" class="table table-striped table-hover macss-data-table" style="width:100%">
+    <thead class="macss-data-table-header">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PackingYMD)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShippingName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShippingCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FBNO)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InvoiceNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeliverQuantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeliverWeight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeliveryYMD)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DestinationZipCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DestinationPhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DestinationCode)
+            </th>
+            <th style="min-width:200px;">
+                @Html.DisplayNameFor(model => model.DestinationName)
+            </th>
+            <th style="min-width:200px;">
+                @Html.DisplayNameFor(model => model.DestinationAddress)
+            </th>
+            <th style="min-width:200px;">
+                @Html.DisplayNameFor(model => model.Note1)
+            </th>
+            <th style="min-width:200px;">
+                @Html.DisplayNameFor(model => model.Note2)
+            </th>
+            <th style="min-width:200px;">
+                @Html.DisplayNameFor(model => model.Note3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataRegistrationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PeriodStart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PeriodEnd)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PackingYMD)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShippingName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShippingCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FBNO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InvoiceNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeliverQuantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeliverWeight)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeliveryYMD)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DestinationZipCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DestinationPhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DestinationCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DestinationName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DestinationAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Note1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Note2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Note3)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataRegistrationDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PeriodStart)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PeriodEnd)
+                </td>
+            </tr>
+            break;
+        }
+    </tbody>
+</table>
+<div class="modal" id="ConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.MailSendConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                メール送信します。よろしいですか？
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.Cancel</button>
+                @using (Html.BeginForm("AllocationPlanCancelResult", "StockAllocation", null, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="UploadFileName" name="uploadFileName" value="@ViewBag.UploadFileName" />
+                    <button type="submit" class="btn btn-primary">送信</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,208 @@
+﻿@model Macss.Database.Entity.AccountMaster
+@{
+    ViewBag.Title = "TMS用取引先スポット登録";
+    ViewBag.PageMainTitle = "TMS用取引先スポット登録";
+    ViewBag.ConfirmMessage = MacssWeb.Resources.Messages.DeleteConfirm;
+    ViewBag.ButtonText = MacssWeb.Resources.ControlText.DeleteExec;
+    ViewBag.ConfirmDialogText = MacssWeb.Resources.Messages.DeleteReconfirm;
+}
+@section Scripts {
+    <script>
+        $(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#SampleList");
+            dt.configure();
+
+            //MacssDataTable（dataTables.fixedColumns.js）に表示する列が15件以上あると計算間違いで最左端列にスクロールバーが表示されるため、非表示にする
+            $('.DTFC_LeftBodyLiner').css('overflow-y', 'hidden');
+
+        });</script>
+}
+@*@Html.Partial("../Shared/Dialog/_SoukoCodeSearch")*@
+@*@Html.Partial("../Shared/Dialog/_StockCreate")
+    @Html.Partial("../Shared/Dialog/_StockEdit")
+    @Html.Partial("../Shared/Dialog/_TokuisakiCodeSearch")
+    @Html.Partial("../Shared/Dialog/_RevertBeforeDeletionDialog")*@
+@Html.Partial("../Shared/Dialog/_D101Create")
+@Html.Partial("../Shared/Dialog/_D101Edit")
+
+@using (Html.BeginForm("CreateConfirm", "StockCreate", null, FormMethod.Post))
+{
+    <div class="row justify-content-between macss-form-button-group-row">
+        <div class="col-4">
+            <a class="btn btn-secondary" data-toggle="modal" data-target="#TransitionConfirmDialog" role="button">@MacssWeb.Resources.ControlText.BackToList</a>
+        </div>
+        <div class="col-4 text-right">
+            <a class="btn btn-primary" href="@Url.Action("CreateConfirm")" role="button">@MacssWeb.Resources.ControlText.InputConfirm</a>
+        </div>
+    </div>
+    <div class="accordion" id="ConditionAccordion">
+        <div class="card">
+            <div class="card-header macss-search-config-collapse-header" id="headingOne">
+                <div class="mb-0">
+                    <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain" aria-expanded="true" aria-controls="ConditionMain">
+                        <div class="d-inline-block" style="color:#333"></div>
+                        <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="color: rgb(120, 188, 255);"></i>
+                        <i id="CollapseShow" class="fas fa-chevron-circle-down" aria-hidden="true" style="color: rgb(120, 188, 255); display: none;"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+                <table class="table macss-form-table2">
+                    <colgroup>
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label required" for="account_id">得意先コード先頭1桁</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label required" for="account_id">得意先名</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label required" for="account_id">住所</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">締日</label>
+                            </th>
+                            <td>
+                                <div class="input-group">
+                                    <input type="text" id="SampleDTPicker1" class="form-control">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button" id="SampleCalendar1"><i class="fa fa-calendar-alt"></i></button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table macss-form-table2">
+                    <colgroup>
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">TMS用使用目的区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option></option>
+                                        <option value="null">未使用</option>
+                                        <option value="00">0:仕入＆売上</option>
+                                        <option value="01">1:仕入</option>
+                                        <option value="02">2:売上</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">FB本社得意先コード(TMS顧客グループNo)</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">PC顧客区分コード(TMS顧客グループNo)</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+<div class="mt-4"></div>
+<div class="row justify-content-between macss-form-button-group-row mt-4">
+    <div class="col-4">
+        <a class="btn btn-secondary" data-toggle="modal" data-target="#TransitionConfirmDialog" role="button">@MacssWeb.Resources.ControlText.BackToList</a>
+    </div>
+    <div class="col-4 text-right">
+        <a class="btn btn-primary" href="@Url.Action("CreateConfirm")" role="button">@MacssWeb.Resources.ControlText.InputConfirm</a>
+    </div>
+</div>
+<script>
+    function setDepartmentCode(code, value) {
+        $("#bumon_cd").val(code);
+        $("#DepartmentName").text(value);
+    }
+    $(function () {
+        var createDatePicker = new Macss.DatetimePicker.MacssDtPicker("#create_date", "#CreateDateCalendar");
+        createDatePicker.configure();
+        var updateDatePicker = new Macss.DatetimePicker.MacssDtPicker("#update_date", "#UpdateDateCalendar");
+        updateDatePicker.configure();
+    });</script></form>
+
+</div>
+
+<div class="modal" id="TransitionConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.TransitionConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @MacssWeb.Resources.Messages.TransitionConfirm
+                <br>
+                @MacssWeb.Resources.Messages.Confirm
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary macss-btn" href="@Url.Action("Index")" role="button">@MacssWeb.Resources.ControlText.Yes</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>

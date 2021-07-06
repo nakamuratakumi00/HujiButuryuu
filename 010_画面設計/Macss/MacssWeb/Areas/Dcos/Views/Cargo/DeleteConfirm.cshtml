@@ -1,0 +1,22 @@
+﻿<html lang="ja">
+
+
+@model Macss.Database.Entity.AccountMaster
+
+@{
+    ViewBag.Title = "保管料荷役料";
+    ViewBag.PageMainTitle = "保管料荷役料削除確認";
+    ViewBag.ConfirmMessage = MacssWeb.Resources.Messages.DeleteConfirm;
+    ViewBag.ButtonText = MacssWeb.Resources.ControlText.DeleteExec;
+    ViewBag.ConfirmDialogText = MacssWeb.Resources.Messages.DeleteReconfirm;
+    ViewBag.hokan_niyaku_no = true;
+    ViewBag.Edit = false;
+    ViewBag.is_deleted = true;
+}
+
+@using (Html.BeginForm("List", "Cargo", null, FormMethod.Post))
+{
+
+    @Html.Partial("_Show")
+}
+

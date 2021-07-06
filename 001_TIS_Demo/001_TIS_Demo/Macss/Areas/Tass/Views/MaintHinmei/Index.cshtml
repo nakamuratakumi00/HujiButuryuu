@@ -1,0 +1,149 @@
+﻿@using Macss.Areas.Tass.ViewModels
+@model MaintHinmeiViewModel
+
+<style>
+    input[type=radio] {
+        display: none;
+    }
+
+    input[type="radio"]:checked + label {
+        background: #31A9EE;
+        color: #ffffff;
+    }
+
+    .label {
+        color: #333;
+        font-size: 90%;
+        font-weight: normal;
+        display: block;
+        float: left;
+        width: 45px;
+        height: 28px;
+        padding-left: 5px;
+        padding-right: 5px;
+        text-align: center;
+        line-height: 20px;
+        border: 1px solid #ccc;
+        border-radius: 0px;
+    }
+
+    h1, .h1,
+    h2, .h2,
+    h3, .h3 {
+        margin-top: 2px;
+        margin-bottom: 0px;
+    }
+
+    select {
+        text-transform: none;
+        width: 100%;
+    }
+</style>
+
+<div class="row">
+    <div class="navbar2 navbar-default" style="padding-bottom:10px;">
+        <h4>@ViewBag.Title</h4>
+        <hr />
+        @using (Html.BeginForm("", "MaintHinmei/Index", FormMethod.Post, new { enctype = "multipart/form-data", id = "MaintHinmeiForm" }))
+        {
+            <div class="form-horizontal">
+
+                <div class="row">
+                    <div class="col-sm-10">
+                        <div class="row" style="line-height:4; display:inline-flex;">
+                            @Html.LabelFor(model => model.Ctlfl1, htmlAttributes: new { @class = "control-label col-sm-2", style = "width: 80px" })
+                            <div class="col-sm-2" style="width:270px; padding-top:13px">
+                                @Html.DropDownListFor(model => model.Ctlfl1, (IEnumerable<SelectListItem>)ViewBag.Ctlfl1, "", htmlAttributes: new { @class = "form-control col-md-2 text_jp_middle" })
+                            </div>
+                            <div class="col-sm-2" style="width: 58px;">
+                                <input type="submit" name="output" id='output' value="出力" class="btn btn-default" style="width:50px; height:30px; padding:0; text-align: center" onclick="return window.confirm('ダウンロードしてもよろしいですか？');" />
+                            </div>
+                            <div class="col-sm-2" style="width:58px;">
+                                <input type="submit" name="import" id='import' value="取込" class="btn btn-default" style="width:50px; height:30px; padding:0; text-align: center" />
+                            </div>
+                            <div class="col-sm-2" style="width:80px; text-align: center; margin-top: 2px;">
+                                Excel
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="control-label col-sm-2" style="width: 80px;"></label>
+                            <div class="col-sm-2" style="width:300px">
+                                <input type="file" class="FullWidth" name="uploadFile" id="uploadFile" style="float: left;" accept=".xlsx" />
+                            </div>
+                        </div>
+                        <div>
+                            @(ViewBag.Success == 1 ?
+                                @Html.ValidationSummary(true, "", new { @class = "validation-summary-success", id = "info" }) :
+                                @Html.ValidationSummary(true, "", new { @class = "", id = "error" })
+                            )
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+
+@section Scripts {
+    @Html.Partial("_BootstrapFunction")
+    @Scripts.Render("~/bundles/my-bootstrap-export")
+
+    <script>
+
+    window.onload = function () {
+        $('#sidebar').toggleClass('active');
+    };
+
+    $(function () {
+        $('#import').click(function () {
+            $("#import").prop("disabled", true);
+            $("#output").prop("disabled", true);
+
+        });
+    });
+
+    $(function () {
+        $('#uploadFile').click(function () {
+            if (document.getElementById("error") != null) {
+                document.getElementById("error").style.display = "none";
+            }
+
+            if (document.getElementById("info") != null) {
+                document.getElementById("info").style.display = "none";
+            }
+
+        });
+    });
+
+    (function ($) {
+        $.fn.resetValidation = function () {
+            $("div#error").removeClass("validation-summary-errors");
+            $("div#error").addClass("validation-summary-valid").find("ul").empty();
+            return;
+        };
+    })(jQuery);
+
+    $(function () {
+        $('#output').click(function () {
+            // ボタンを有効・無効を設定
+            outputBtn = document.getElementById('output');
+            importBtn = document.getElementById('import');
+            outputBtn.disabled = "true";
+            importBtn.disabled = "true";
+
+            $(this).resetValidation();
+            // ボタンの属性設定
+            $('<input>').attr({
+                type: 'hidden',
+                id: 'output',
+                name: 'output',
+                value: '出力'
+            }).appendTo('.output');
+            $('#output').submit();
+
+            outputBtn.disabled = "";
+            importBtn.disabled = "";
+        });
+    });
+    </script>
+}

@@ -1,0 +1,1150 @@
+﻿@model IEnumerable<Macss.Database.Entity.AccountMaster>
+
+@{
+    ViewBag.Title = "運送業務 - TASS";
+    ViewBag.ScreenId = "";
+    ViewBag.PageMainTitle = "出荷現品情報一覧";
+}
+@section Scripts {
+    <script>
+        $(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#SampleList", [
+                { "className": "macss-table-proc-column", "width": 0, "orderable": false, "targets": 0 },
+                { "className": "macss-table-proc-column", "width": 0, "orderable": false, "targets": 1 },
+                { "className": "macss-table-proc-column", "width": 0, "orderable": false, "targets": 2 }
+            ],3);
+            dt.configure();
+
+            var cond = new Macss.Collapse.ConditionsPanel("#ConditionAccordion", "#CollapseShow", "#CollapseHidden");
+            cond.setCollapseEvent();
+            var cond2 = new Macss.Collapse.ConditionsPanel("#ConditionAccordion2", "#CollapseShow2", "#CollapseHidden2");
+            cond2.setCollapseEvent();
+            var cond3 = new Macss.Collapse.ConditionsPanel("#ConditionAccordion3", "#CollapseShow3", "#CollapseHidden3");
+            cond3.setCollapseEvent();
+
+            var sampleDatePicker0 = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker", "#SampleCalendar0");
+            sampleDatePicker0.configure();
+            var sampleDatePicker = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker", "#SampleCalendar");
+            sampleDatePicker.configure();
+            var sampleDatePicker1 = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker1", "#SampleCalendar1");
+            sampleDatePicker1.configure();
+            var sampleDatePicker2 = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker2", "#SampleCalendar2");
+            sampleDatePicker2.configure();
+
+            var sampleDatePicker3 = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker3", "#SampleCalendar3");
+            sampleDatePicker3.configure();
+            var sampleDatePicker4 = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker4", "#SampleCalendar4");
+            sampleDatePicker4.configure();
+
+            var sampleTime1 = new Macss.Time.MacssTime("#TimeExample1");
+            sampleTime1.configure();
+            var sampleTime2 = new Macss.Time.MacssTime("#TimeExample2");
+            sampleTime2.configure();
+            var sampleTime3 = new Macss.Time.MacssTime("#TimeExample3");
+            sampleTime3.configure();
+            var sampleTime4 = new Macss.Time.MacssTime("#TimeExample4");
+            sampleTime4.configure();
+
+            $(".kenpin").show();
+            $(".zaiko").show();
+
+            //MacssDataTable（dataTables.fixedColumns.js）に表示する列が15件以上あると計算間違いで最左端列にスクロールバーが表示されるため、非表示にする
+            $('.DTFC_LeftBodyLiner').css('overflow-y', 'hidden');
+
+
+            $('[data-toggle="popover"]').popover();
+        });
+
+        function changeTarget21(obj) {
+            if (obj.checked) {
+                $(".kenpin").show();
+            } else {
+                $(".kenpin").hide();
+            }
+        }
+
+        function changeTarget59(obj) {
+            if (obj.checked) {
+                $(".zaiko").show();
+            }else{
+                $(".zaiko").hide();
+            }
+        }
+
+    </script>
+}
+
+@using (Html.BeginForm("Search", "D003", null, FormMethod.Post))
+{
+    <div class="accordion mb-1" id="ConditionAccordion">
+        <div class="card">
+            <div class="card-header macss-search-config-collapse-header" id="headingOne">
+                <div class="mb-0">
+                    <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain" aria-expanded="true" aria-controls="ConditionMain">
+                        <div class="d-inline-block" style="color:#333">検索設定</div>
+                        <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="display:none;"></i>
+                        <i id="CollapseShow" class="fas fa-chevron-circle-down" aria-hidden="true" style="display:none;"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+                <div class="row mr-0 mb-1">
+                    @* 2 レコード区分 *@
+                    <div class="col-8">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">レコード区分</span>
+                            </div>
+                            <div class="macss-input-group-input form-control">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" checked onChange="changeTarget21(this);">
+                                    <label class="form-check-label" for="inlineCheckbox3">21：出荷検品関係</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" checked onChange="changeTarget59(this);">
+                                    <label class="form-check-label" for="inlineCheckbox2">59：営業在庫関係</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" checked>
+                                    <label class="form-check-label" for="inlineCheckbox1">11：検品用／荷札用</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @* 5 検品完了 *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">検品完了</span>
+                            </div>
+                            <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                <option value="" selected></option>
+                                <option value="0">未完了</option>
+                                <option value="1">完了</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mr-0 mb-1">
+                    @* 6 代表出荷No *@
+                    <div class="col-4 kenpin">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">代表出荷No</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                        </div>
+                    </div>
+                    @* 7 代表手配No *@
+                    <div class="col-4 zaiko">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">代表手配No</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                        </div>
+                    </div>
+                    @* 8 代表項番 *@
+                    <div class="col-4 zaiko">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">代表項番</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mr-0 mb-1">
+                    @* 9 出荷No *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">出荷No</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                        </div>
+                    </div>
+                    @* 10 手配No *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">手配No</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                        </div>
+                    </div>
+                    @* 11 項番 *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">項番</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mr-0 mb-1">
+                    @* 12 出荷日 *@
+                    <div class="col-8">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">出荷日</span>
+                            </div>
+                            <input type="text" id="SampleDTPicker1" class="form-control" value="" />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar1"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                            <div class="input-group-append">
+                                <span class="input-group-text">～</span>
+                            </div>
+                            <input type="text" id="SampleDTPicker2" class="form-control" value="" />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar2"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    @* 14 出荷場所コード *@
+                    <div class="col-4">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition8">出荷場所コード</span>
+                            </div>
+                            <input class="form-control text-box single-line" data-val="true" id="SyukkaBashoCd" name="SyukkaBashoCd" type="text" value="" style="border-top-left-radius:0; border-bottom-left-radius:0;">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#SyukkaBashoCodeSearchDialog" style="border-top-right-radius:0.25rem; border-bottom-right-radius:0.25rem;">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="">
+                            <span id="SyukkaBashoName" class="align-middle"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mr-0 mb-1">
+                    @* 17 品名コード *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition8">品名コード</span>
+
+                            </div>
+                            <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="bumon_cd" name="bumon_cd" type="text" value="" style="border-top-left-radius:0; border-bottom-left-radius:0;">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#TokuisakiCodeSearchDialog" style="border-top-right-radius:0.25rem; border-bottom-right-radius:0.25rem;">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="">
+                            <span id="TokuisakiName" class="align-middle"></span>
+                        </div>
+                    </div>
+                    @* 18 品名 *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">品名</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                        </div>
+                    </div>
+                    @* 19 品名カナ *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">品名カナ</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mr-0 mb-1">
+                    @* 20 顧客品番 *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">顧客品番</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                        </div>
+                    </div>
+                    @* 21 機種コードA *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition8">機種コードA</span>
+
+                            </div>
+                            <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="bumon_cd" name="bumon_cd" type="text" value="" style="border-top-left-radius:0; border-bottom-left-radius:0;">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#TokuisakiCodeSearchDialog" style="border-top-right-radius:0.25rem; border-bottom-right-radius:0.25rem;">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="">
+                            <span id="TokuisakiName" class="align-middle"></span>
+                        </div>
+                    </div>
+                    @* 24 機種コードB *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition8">機種コードB</span>
+
+                            </div>
+                            <input type="text" class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mr-0 mb-1">
+                    @* 25 運送方法コード *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition8">運送方法コード</span>
+
+                            </div>
+                            <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="bumon_cd" name="bumon_cd" type="text" value="" style="border-top-left-radius:0; border-bottom-left-radius:0;">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#TokuisakiCodeSearchDialog" style="border-top-right-radius:0.25rem; border-bottom-right-radius:0.25rem;">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="">
+                            <span id="TokuisakiName" class="align-middle"></span>
+                        </div>
+                    </div>
+                    @* 28 運送コースコード *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition8">運送コースコード</span>
+
+                            </div>
+                            <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="bumon_cd" name="bumon_cd" type="text" value="" style="border-top-left-radius:0; border-bottom-left-radius:0;">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#TokuisakiCodeSearchDialog" style="border-top-right-radius:0.25rem; border-bottom-right-radius:0.25rem;">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="">
+                            <span id="TokuisakiName" class="align-middle"></span>
+                        </div>
+                    </div>
+                    @* 29 得意先コード *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition8">得意先コード</span>
+
+                            </div>
+                            <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="bumon_cd" name="bumon_cd" type="text" value="" style="border-top-left-radius:0; border-bottom-left-radius:0;">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#TokuisakiCodeSearchDialog" style="border-top-right-radius:0.25rem; border-bottom-right-radius:0.25rem;">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="">
+                            <span id="TokuisakiName" class="align-middle"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mr-0 mb-1">
+                    @* 32 届先コード *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition8">届先コード</span>
+
+                            </div>
+                            <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="bumon_cd" name="bumon_cd" type="text" value="" style="border-top-left-radius:0; border-bottom-left-radius:0;">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#TokuisakiCodeSearchDialog" style="border-top-right-radius:0.25rem; border-bottom-right-radius:0.25rem;">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="">
+                            <span id="TokuisakiName" class="align-middle"></span>
+                        </div>
+                    </div>
+                    @* 35 削除データ含む *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">表示データ</span>
+                            </div>
+                            <div class="macss-input-group-input form-control">
+                                <div class="form-check form-check-inline mr-4">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                                    <label class="form-check-label" for="inlineCheckbox6">削除済データを含む</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @* 36 出荷検品訂正有無 *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">出荷検品訂正有無</span>
+                            </div>
+                            <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                <option value="" selected></option>
+                                <option value="0">無</option>
+                                <option value="1">有</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mr-0 mb-1 kenpin">
+                    @* 37 ロットNo *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition8">ロットNo</span>
+
+                            </div>
+                            <input type="text" class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                        </div>
+                    </div>
+                    @* 38 出荷検品日 *@
+                    <div class="col-8">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">出荷検品日</span>
+                            </div>
+                            <input type="text" id="SampleDTPicker1" class="form-control" value="" />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar1"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                            <div class="input-group-append">
+                                <span class="input-group-text">～</span>
+                            </div>
+                            <input type="text" id="SampleDTPicker2" class="form-control" value="" />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar2"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mr-0 mb-1 kenpin">
+                    @* 40 品名種別 *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="Condition8">品名種別</span>
+                                </div>
+                                <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="bumon_cd" name="bumon_cd" type="text" value="">
+                            </div>
+                        </div>
+                    </div>
+                    @* 41 出荷検品データ送信日時 *@
+                    <div class="col-8">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">出荷検品データ送信日時</span>
+                            </div>
+                            <input type="text" id="SampleDTPicker3" class="form-control" value="" />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar3"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                            <input class="time-control" id="TimeExample1" type="text" maxlength="5">
+                            <div class="input-group-append">
+                                <span class="input-group-text">～</span>
+                            </div>
+                            <input type="text" id="SampleDTPicker4" class="form-control" value="" />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar4"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                            <input class="time-control" id="TimeExample2" type="text" maxlength="5">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mr-0 mb-1 kenpin">
+                    @* 43 FB統合WMS向け送信データ送信済 *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">FB統合WMS向け送信データ送信済</span>
+                            </div>
+                            <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                <option value="" selected></option>
+                                <option value="0">未送信</option>
+                                <option value="1">送信済</option>
+                            </select>
+                        </div>
+                    </div>
+                    @* 44 出荷検品者 *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="Condition8">出荷検品者</span>
+                                </div>
+                                <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="bumon_cd" name="bumon_cd" type="text" value="">
+                            </div>
+                        </div>
+                    </div>
+                    @* 45 外装出荷検品有無 *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">外装出荷検品有無</span>
+                            </div>
+                            <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                <option value="" selected></option>
+                                <option value="0">無</option>
+                                <option value="1">有</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mr-0 mb-1 kenpin">
+                    @* 46 顧客品番対象有無 *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">顧客品番対象有無</span>
+                            </div>
+                            <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                <option value="" selected></option>
+                                <option value="0">無</option>
+                                <option value="1">有</option>
+                            </select>
+                        </div>
+                    </div>
+                    @* 47 お客様コード *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="Condition8">お客様コード</span>
+                                </div>
+                                <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="bumon_cd" name="bumon_cd" type="text" value="">
+                            </div>
+                        </div>
+                    </div>
+                    @* 48 最終需要家名称 *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="Condition8">最終需要家名称</span>
+                                </div>
+                                <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="bumon_cd" name="bumon_cd" type="text" value="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mr-0 mb-1 zaiko">
+                    @* 49 パレットNo *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="Condition8">パレットNo</span>
+                                </div>
+                                <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="bumon_cd" name="bumon_cd" type="text" value="">
+                            </div>
+                        </div>
+                    </div>
+                    @* 50 届先棟 *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="Condition8">届先棟</span>
+                                </div>
+                                <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="bumon_cd" name="bumon_cd" type="text" value="">
+                            </div>
+                        </div>
+                    </div>
+                    @* 51 注文番号（お客様） *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="Condition8">注文番号（お客様）</span>
+                                </div>
+                                <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="bumon_cd" name="bumon_cd" type="text" value="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mr-0 mb-1 zaiko">
+                    @* 52 届先別出庫リスト対象外 *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">対象データ</span>
+                            </div>
+                            <div class="macss-input-group-input form-control">
+                                <div class="form-check form-check-inline mr-4">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                                    <label class="form-check-label" for="inlineCheckbox6">届先入出庫集計表用機種用機種コード</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mr-0 mb-1 zaiko">
+                    @* 53 作成者名 *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="Condition8">作成者名</span>
+                                </div>
+                                <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="bumon_cd" name="bumon_cd" type="text" value="">
+                            </div>
+                        </div>
+                    </div>
+                    @* 54 作成日時 *@
+                    <div class="col-8">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">作成日時</span>
+                            </div>
+                            <input type="text" id="SampleDTPicker3" class="form-control" value="" />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar3"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                            <input class="time-control" id="TimeExample1" type="text" maxlength="5">
+                            <div class="input-group-append">
+                                <span class="input-group-text">～</span>
+                            </div>
+                            <input type="text" id="SampleDTPicker4" class="form-control" value="" />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar4"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                            <input class="time-control" id="TimeExample2" type="text" maxlength="5">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mr-0 mb-1 zaiko">
+                    @* 58 更新者名 *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="Condition8">更新者名</span>
+                                </div>
+                                <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="bumon_cd" name="bumon_cd" type="text" value="">
+                            </div>
+                        </div>
+                    </div>
+                    @* 59 更新日時 *@
+                    <div class="col-8">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">更新日時</span>
+                            </div>
+                            <input type="text" id="SampleDTPicker3" class="form-control" value="" data-val-length-max="4" />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar3"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                            <input class="time-control" id="TimeExample3" type="text" maxlength="5">
+                            <div class="input-group-append">
+                                <span class="input-group-text">～</span>
+                            </div>
+                            <input type="text" id="SampleDTPicker4" class="form-control" value="" data-val-length-max="4" />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar4"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                            <input class="time-control" id="TimeExample4" type="text" maxlength="5">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-fluid pt-4 pb-3 pl-0 clearfix">
+                    <div class="float-left">
+                        <button type="reset" class="btn btn-secondary btn-lg macss-btn-main">@MacssWeb.Resources.ControlText.ConditionClear</button>
+                    </div>
+                    <div class="float-right">
+                        <button type="submit" class="btn btn-primary btn-lg macss-btn-main" id="search">@MacssWeb.Resources.ControlText.Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="row mt-3 mb-4">
+    <div class="col-6">
+        <a class="btn btn-primary" href="@Url.Action("Create", "D003")" role="button">新規作成（出荷指示）</a>
+        <a class="btn btn-primary" href="@Url.Action("CreateZaiko", "D003")" role="button">新規作成（営業在庫）</a>
+    </div>
+    <div class="col-6 text-right">
+    </div>
+</div>
+
+
+<div class="row mt-3">
+    <div class="col-8">
+    </div>
+    <div class="col-4 text-right">
+        <div class="dropdown mr-1">
+            <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#CsvDownloadDialog">CSVダウンロード</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table id="SampleList" class="table table-striped table-hover macss-data-table">
+    <thead class="macss-data-table-header">
+        <tr>
+            <th>　　　　</th>
+            <th>振替　　</th>
+            <th>伝送後　</th>
+            <th>レコード区分　　</th>
+            <th>削除</th>
+            <th>検品完了</th>
+            <th>代表出荷No</th>
+            <th>代表手配No</th>
+            <th>代表項番</th>
+            <th>出荷No</th>
+            <th>手配No</th>
+            <th>項番</th>
+            <th>出荷日</th>
+            <th>出荷場所コード</th>
+            <th>品名コード</th>
+            <th>品名カナ　　　　　　　</th>
+            <th>顧客品名カナ　　　　　</th>
+            <th>機種コードA</th>
+            <th>運送方法コード</th>
+            <th>運送コースコード</th>
+            <th>届先名　　　　　　</th>
+            <th>出荷数</th>
+            <th>包装数</th>
+            <th>出荷検品日</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <div class="macss-icon-container">
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("EditMiKenpin", new { id = @"1212" })" title="編集" style="display:none;"><i class="fas fa-pencil-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("Details", new { id = @"1212" })" title="詳細"><i class="far fa-file-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("DeleteMiKenpinConfirm", new { id = @"1212" })" title="削除" style="display:none;"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="macss-icon-container">
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("Transfer", new { id = @"1212" })" title="振替" style="display:none;"><i class="fas fa-exchange-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("TransferDelete", new { id = @"1212" })" title="削除" style="display:none;"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="macss-icon-container">
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("EditDenso", new { id = @"1212" })" title="編集" style="display:none;"><i class="fas fa-pencil-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("DeleteDensoConfirm", new { id = @"1212" })" title="削除" style="display:none;"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </td>
+            <td>11 検品用／荷札用</td>
+            <td>　</td>
+            <td>　</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>1234560001</td>
+            <td></td>
+            <td></td>
+            <td>2021/01/01</td>
+            <td>H1</td>
+            <td>123456789</td>
+            <td>２ＳＣ４２７４＜０１ＳＣ</td>
+            <td>２ＳＣ４２７４＜０１ＳＣ</td>
+            <td>DU</td>
+            <td>68</td>
+            <td>1</td>
+            <td>会社名 支店名 部課名</td>
+            <td class="text-right">500</td>
+            <td class="text-right">500</td>
+            <td>2021/01/01</td>
+        </tr>
+        <tr>
+            <td>
+                <div class="macss-icon-container">
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("EditMiKenpin", new { id = @"1212" })" title="編集"><i class="fas fa-pencil-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("Details", new { id = @"1212" })" title="詳細"><i class="far fa-file-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("DeleteMiKenpinConfirm", new { id = @"1212" })" title="削除"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="macss-icon-container">
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("Transfer", new { id = @"1212" })" title="振替" style="display:none;"><i class="fas fa-exchange-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("TransferDelete", new { id = @"1212" })" title="削除" style="display:none;"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="macss-icon-container">
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("EditDenso", new { id = @"1212" })" title="編集" style="display:none;"><i class="fas fa-pencil-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("DeleteDensoConfirm", new { id = @"1212" })" title="削除" style="display:none;"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </td>
+            <td>21 出荷検品関係</td>
+            <td>　</td>
+            <td>未完了</td>
+            <td>1234560002</td>
+            <td></td>
+            <td></td>
+            <td>1234560002</td>
+            <td></td>
+            <td></td>
+            <td>2021/01/01</td>
+            <td>H1</td>
+            <td>123456789</td>
+            <td>２ＳＣ４２７４＜０１ＳＣ</td>
+            <td>２ＳＣ４２７４＜０１ＳＣ</td>
+            <td>DU</td>
+            <td>68</td>
+            <td>1</td>
+            <td>会社名 支店名 部課名</td>
+            <td class="text-right">500</td>
+            <td class="text-right">500</td>
+            <td>2021/01/01</td>
+        </tr>
+        <tr>
+            <td>
+                <div class="macss-icon-container">
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("EditKenpin", new { id = @"1212" })" title="編集"><i class="fas fa-pencil-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("Details", new { id = @"1212" })" title="詳細"><i class="far fa-file-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("DeleteKenpinConfirm", new { id = @"1212" })" title="削除"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="macss-icon-container">
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("Transfer", new { id = @"1212" })" title="振替" style="display:none;"><i class="fas fa-exchange-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("TransferDelete", new { id = @"1212" })" title="削除" style="display:none;"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="macss-icon-container">
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("EditDenso", new { id = @"1212" })" title="編集" style="display:none;"><i class="fas fa-pencil-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("DeleteDensoConfirm", new { id = @"1212" })" title="削除" style="display:none;"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </td>
+            <td>21 出荷検品関係</td>
+            <td>　</td>
+            <td>完了</td>
+            <td>1234560003</td>
+            <td></td>
+            <td></td>
+            <td>1234560003</td>
+            <td></td>
+            <td></td>
+            <td>2021/01/01</td>
+            <td>H1</td>
+            <td>123456789</td>
+            <td>２ＳＣ４２７４＜０１ＳＣ</td>
+            <td>２ＳＣ４２７４＜０１ＳＣ</td>
+            <td>DU</td>
+            <td>68</td>
+            <td>1</td>
+            <td>会社名 支店名 部課名</td>
+            <td class="text-right">500</td>
+            <td class="text-right">500</td>
+            <td>2021/01/01</td>
+        </tr>
+        <tr>
+            <td>
+                <div class="macss-icon-container">
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("EditKenpin", new { id = @"1212" })" title="編集" style="display:none;"><i class="fas fa-pencil-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("Details", new { id = @"1212" })" title="詳細"><i class="far fa-file-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("DeleteKenpinConfirm", new { id = @"1212" })" title="削除" style="display:none;"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="macss-icon-container">
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("Transfer", new { id = @"1212" })" title="振替"><i class="fas fa-exchange-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("TransferDelete", new { id = @"1212" })" title="削除" style="display:none;"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="macss-icon-container">
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("EditDenso", new { id = @"1212" })" title="編集"><i class="fas fa-pencil-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("DeleteDensoConfirm", new { id = @"1212" })" title="削除"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </td>
+            <td>21 出荷検品関係</td>
+            <td>　</td>
+            <td>完了</td>
+            <td>1234560004</td>
+            <td></td>
+            <td></td>
+            <td>1234560004</td>
+            <td></td>
+            <td></td>
+            <td>2021/01/01</td>
+            <td>H1</td>
+            <td>123456789</td>
+            <td>２ＳＣ４２７４＜０１ＳＣ</td>
+            <td>２ＳＣ４２７４＜０１ＳＣ</td>
+            <td>DU</td>
+            <td>68</td>
+            <td>1</td>
+            <td>会社名 支店名 部課名</td>
+            <td class="text-right">500</td>
+            <td class="text-right">500</td>
+            <td>2021/01/01</td>
+        </tr>
+        <tr>
+            <td>
+                <div class="macss-icon-container">
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("EditKenpin", new { id = @"1212" })" title="編集" style="display:none;"><i class="fas fa-pencil-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("Details", new { id = @"1212" })" title="詳細"><i class="far fa-file-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("DeleteKenpinConfirm", new { id = @"1212" })" title="削除" style="display:none;"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="macss-icon-container">
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("Transfer", new { id = @"1212" })" title="振替" style="display:none;"><i class="fas fa-exchange-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("TransferDelete", new { id = @"1212" })" title="削除"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="macss-icon-container">
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("EditDenso", new { id = @"1212" })" title="編集" style="display:none;"><i class="fas fa-pencil-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("DeleteDensoConfirm", new { id = @"1212" })" title="削除" style="display:none;"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </td>
+            <td>21 出荷検品関係</td>
+            <td>　</td>
+            <td>完了</td>
+            <td>1234560005</td>
+            <td></td>
+            <td></td>
+            <td>1234560005</td>
+            <td></td>
+            <td></td>
+            <td>2021/01/01</td>
+            <td>H1</td>
+            <td>123456789</td>
+            <td>２ＳＣ４２７４＜０１ＳＣ</td>
+            <td>２ＳＣ４２７４＜０１ＳＣ</td>
+            <td>DU</td>
+            <td>68</td>
+            <td>1</td>
+            <td>会社名 支店名 部課名</td>
+            <td class="text-right">500</td>
+            <td class="text-right">500</td>
+            <td>2021/01/01</td>
+        </tr>
+        <tr>
+            <td>
+                <div class="macss-icon-container">
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("EditZaiko", new { id = @"1212" })" title="編集"><i class="fas fa-pencil-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("DetailsZaiko", new { id = @"1212" })" title="詳細"><i class="far fa-file-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("DeleteZaikoConfirm", new { id = @"1212" })" title="削除"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="macss-icon-container">
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("Transfer", new { id = @"1212" })" title="振替" style="display:none;"><i class="fas fa-exchange-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("TransferDelete", new { id = @"1212" })" title="削除" style="display:none;"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="macss-icon-container">
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("EditDenso", new { id = @"1212" })" title="編集" style="display:none;"><i class="fas fa-pencil-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("DeleteDensoConfirm", new { id = @"1212" })" title="削除" style="display:none;"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </td>
+            <td>59 営業在庫関係</td>
+            <td>　</td>
+            <td>　</td>
+            <td></td>
+            <td>34007801</td>
+            <td>001</td>
+            <td>1234560006</td>
+            <td>34007801</td>
+            <td>001</td>
+            <td>2021/01/01</td>
+            <td>H1</td>
+            <td>123456789</td>
+            <td>２ＳＣ４２７４＜０１ＳＣ</td>
+            <td>２ＳＣ４２７４＜０１ＳＣ</td>
+            <td>DU</td>
+            <td>68</td>
+            <td>1</td>
+            <td>会社名 支店名 部課名</td>
+            <td class="text-right">500</td>
+            <td class="text-right">500</td>
+            <td>2021/01/01</td>
+        </tr>
+        <tr>
+            <td>
+                <div class="macss-icon-container">
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("EditMiKenpin", new { id = @"1212" })" title="編集" style="display:none;"><i class="fas fa-pencil-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("Details", new { id = @"1212" })" title="詳細"><i class="far fa-file-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("DeleteMiKenpinConfirm", new { id = @"1212" })" title="削除" style="display:none;"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="macss-icon-container">
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("Transfer", new { id = @"1212" })" title="振替" style="display:none;"><i class="fas fa-exchange-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("TransferDelete", new { id = @"1212" })" title="削除" style="display:none;"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="macss-icon-container">
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("EditDenso", new { id = @"1212" })" title="編集" style="display:none;"><i class="fas fa-pencil-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="macss-icon-item">
+                        <a href="@Url.Action("DeleteDensoConfirm", new { id = @"1212" })" title="削除" style="display:none;"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </td>
+            <td>21 出荷検品関係</td>
+            <td>削除</td>
+            <td>未完了</td>
+            <td>1234560007</td>
+            <td></td>
+            <td></td>
+            <td>1234560007</td>
+            <td></td>
+            <td></td>
+            <td>2021/01/01</td>
+            <td>H1</td>
+            <td>123456789</td>
+            <td>２ＳＣ４２７４＜０１ＳＣ</td>
+            <td>２ＳＣ４２７４＜０１ＳＣ</td>
+            <td>DU</td>
+            <td>68</td>
+            <td>1</td>
+            <td>会社名 支店名 部課名</td>
+            <td class="text-right">500</td>
+            <td class="text-right">500</td>
+            <td>2021/01/01</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="row mt-3 mr-1 mb-2">
+    <div class="col-12 text-right">
+        <button type="button" class="btn btn-primary ">出荷管理台帳ダウンロード</button>
+        <button type="button" class="btn btn-primary ">納品連絡表印刷</button>
+    </div>
+</div>

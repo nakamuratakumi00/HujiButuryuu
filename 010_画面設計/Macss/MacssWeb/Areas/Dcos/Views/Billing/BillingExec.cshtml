@@ -1,0 +1,12 @@
+﻿<html lang="ja">
+@{
+    ViewBag.Title = "請求データ作成";
+    ViewBag.PageMainTitle = "請求データ作成";
+    ViewBag.Date = "2020年12月";
+}
+
+
+@using (Html.BeginForm("BillingExecConfirm", "Billing", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.Partial("_Billing")
+}

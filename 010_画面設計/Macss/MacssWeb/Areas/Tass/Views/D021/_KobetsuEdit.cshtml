@@ -1,0 +1,188 @@
+﻿@Html.Partial("../Shared/Dialog/_HinmeiCodeSearch")
+@Html.Partial("../Shared/Dialog/_DepartmentCodeSearch")
+
+<div class="modal" id="KobetsuEditDialog" tabindex="-1" role="dialog" aria-labelledby="KobetsuEditDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="StockEditDialogTitle">包装費実績明細入力</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="accordion" id="ConditionAccordion">
+                <table class="table macss-form-table2">
+                    <colgroup>
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label required" for="account_id">品名</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="input-group">
+                                                <input class="form-control text-box single-line" data-val="true" data-val-length="フィールド 品名コード は最大長が 4 の文字列である必要があります。" data-val-length-max="4" data-val-required="部門コード フィールドが必要です。" id="bumon_cd" name="bumon_cd" type="text" value="91009">
+                                                <div class="input-group-append">
+                                                    <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#HinmeiCodeSearchDialog">
+                                                        <i class="fas fa-search"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <span id="DepartmentName" class="align-middle">BS15</span>
+                                        </div>
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="hinmei_cd" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label required" for="account_id">包装数</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <input class="form-control text-box single-line" id="LotNo" name="IDName" type="text" value="1">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label required" for="account_id">単価コード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="input-group">
+                                                <input class="form-control text-box single-line" data-val="true" data-val-length="フィールド 品名コード は最大長が 4 の文字列である必要があります。" data-val-length-max="4" data-val-required="部門コード フィールドが必要です。" id="bumon_cd" name="bumon_cd" type="text" value="81130">
+                                                <div class="input-group-append">
+                                                    <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#HinmeiCodeSearchDialog">
+                                                        <i class="fas fa-search"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="hinmei_cd" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label required">単価区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3">
+                                        <option value=""></option>
+                                        <option value="11">11 設定単価</option>
+                                        <option value="19">19 修正単価</option>
+                                        <option value="21" selected>21 分単価</option>
+                                        <option value="29">29 修正分単価</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label required">振分区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3">
+                                        <option value=""></option>
+                                        <option value="11">11 内外装(国内)</option>
+                                        <option value="12">12 内外装(輸出)</option>
+                                        <option value="21" selected>21 内装(国内)</option>
+                                        <option value="22">22 内装(輸出)</option>
+                                        <option value="31">31 外装(国内)</option>
+                                        <option value="32">32 外装(輸出)</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">包装単価</label>
+                            </th>
+                            <td>
+                                <table class="table table-bordered" style="width:400px;">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:100px; background-color: #c8edf7; text-align:center;">内装</th>
+                                            <th style="width:100px; background-color: #c8edf7; text-align:center;">外装</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value=""></td>
+                                            <td><input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value=""></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">分単価</label>
+                            </th>
+                            <td>
+                                <table class="table table-bordered" style="width:700px;">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:100px; background-color: #c8edf7; text-align:center;">　</th>
+                                            <th style="width:100px; background-color: #c8edf7; text-align:center;">通常</th>
+                                            <th style="width:100px; background-color: #c8edf7; text-align:center;">残業</th>
+                                            <th style="width:100px; background-color: #c8edf7; text-align:center;">休日</th>
+                                            <th style="width:100px; background-color: #c8edf7; text-align:center;">深夜</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th style="width:100px; background-color: #c8edf7; text-align:center;">分数</th>
+                                            <td><input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="10"></td>
+                                            <td><input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value=""></td>
+                                            <td><input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value=""></td>
+                                            <td><input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value=""></td>
+                                        </tr>
+                                        <tr>
+                                            <th style="width:100px; background-color: #c8edf7; text-align:center;">分単価</th>
+                                            <td><input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="50.00"></td>
+                                            <td><input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value=""></td>
+                                            <td><input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value=""></td>
+                                            <td><input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value=""></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="input-group mb-1" style="width:300px;">
+                                    <div class="input-group-prepend" style="width:8rem;">
+                                        <span class="input-group-text w-100">合計</span>
+                                    </div>
+                                    <span class="form-control text-right">500</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer"></div>
+            <div class="row justify-content-between macss-form-button-group-row">
+                <div class="col-4">
+                    <a class="btn btn-secondary" data-dismiss="modal" role="button">キャンセル</a>
+                </div>
+                <div class="col-8 text-right">
+                    <a role="button" class="btn btn-primary" data-dismiss="modal">更新</a>
+                    <a role="button" class="btn btn-danger" data-dismiss="modal">削除</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

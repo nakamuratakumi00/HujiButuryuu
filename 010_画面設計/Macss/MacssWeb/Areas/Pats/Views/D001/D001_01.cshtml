@@ -1,0 +1,1147 @@
+﻿@* 内示・発注一覧 *@
+
+@section Scripts {
+    <script>
+        $(function () {
+            new Macss.DataTables.MacssDataTable("#D001_01List", [{
+                "className": "macss-table-proc-column", "width": 30, "orderable": false, "targets": 0
+            }, {
+                "className": "macss-table-proc-column", "width": 30, "orderable": false, "targets": 1
+            }], 2).configure();
+
+            var cond = new Macss.Collapse.ConditionsPanel("#ConditionAccordion", "#CollapseShow", "#CollapseHidden");
+            cond.setCollapseEvent();
+
+            var sampleDatePicker1 = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker1", "#SampleCalendar1");
+            sampleDatePicker1.configure();
+            var sampleDatePicker2 = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker2", "#SampleCalendar2");
+            sampleDatePicker2.configure();
+        });
+    </script>
+}
+
+@Html.Partial("../Shared/Dialog/_DepartmentCodeSearch")
+@Html.Partial("~/Areas/Tass/Views/Shared/Dialog/_HinmeiCodeSearch.cshtml")
+@Html.Partial("~/Areas/Tass/Views/Shared/Dialog/_TokuisakiCodeSearch.cshtml")
+
+@* 検索 *@
+@using (Html.BeginForm("Search", "Sample", null, FormMethod.Post))
+{
+
+    <div class="accordion" id="ConditionAccordion">
+        <div class="card">
+            <div class="card-header macss-search-config-collapse-header" id="headingOne">
+                <div class="mb-0">
+                    <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain" aria-expanded="true" aria-controls="ConditionMain">
+                        <div class="d-inline-block" style="color:#333">検索設定</div>
+                        <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="display:none;"></i>
+                        <i id="CollapseShow" class="fas fa-chevron-circle-down" aria-hidden="true" style="display:none;"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+                @* 一段目 *@
+                <div class="row mr-0 mb-1">
+                    @* 内示発注区分 *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend w-25">
+                                <span class="input-group-text w-100" id="">内示発注区分</span>
+                            </div>
+                            <select class="custom-select form-control" id="" aria-describedby="">
+                                <option></option>
+                                <option>内示</option>
+                                <option>注文</option>
+                                <option>内示から注文</option>
+                            </select>
+                        </div>
+                    </div>
+                    @* 注文No(内示No) *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend w-25">
+                                <span class="input-group-text w-100" id="">注文No(内示No)</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="" aria-describedby="">
+                        </div>
+                    </div>
+                    @* 承認状態 *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text w-100" id="">承認状態</span>
+                            </div>
+                            <div class="macss-input-group-input form-control-plaintext">
+                                <div class="form-check-inline mr-3">
+                                    <input class="form-check-input" type="checkbox" id="" value="">
+                                    <label class="form-check-label" for="">未申請</label>
+                                </div>
+                                <div class="form-check-inline mr-3">
+                                    <input class="form-check-input" type="checkbox" id="" value="">
+                                    <label class="form-check-label" for="">申請済</label>
+                                </div>
+                                <div class="form-check-inline mr-3">
+                                    <input class="form-check-input" type="checkbox" id="" value="" checked>
+                                    <label class="form-check-label" for="">承認済</label>
+                                </div>
+                                <div class="form-check-inline mr-3">
+                                    <input class="form-check-input" type="checkbox" id="" value="">
+                                    <label class="form-check-label" for="">否認済</label>
+                                </div>
+                                <div class="form-check-inline mr-3">
+                                    <input class="form-check-input" type="checkbox" id="" value="">
+                                    <label class="form-check-label" for="">取戻申請済</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @* 二段目 *@
+                <div class="row mr-0 mb-1">
+                    @* 検収区分 *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend w-25">
+                                <span class="input-group-text w-100" id="">検収区分</span>
+                            </div>
+                            <select class="custom-select form-control" id="" aria-describedby="">
+                                <option></option>
+                                <option>0:未検収</option>
+                                <option>1:検収済</option>
+                                <option>2:検収中</option>
+                            </select>
+                        </div>
+                    </div>
+                    @* 完了区分 *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend w-25">
+                                <span class="input-group-text w-100" id="">完了区分</span>
+                            </div>
+                            <select class="custom-select form-control" id="" aria-describedby="">
+                                <option></option>
+                                <option>0:注文未完了</option>
+                                <option>1:注文完了</option>
+                                <option>2:注残打切り</option>
+                            </select>
+                        </div>
+                    </div>
+                    @* 納期区分 *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend w-25">
+                                <span class="input-group-text w-100" id="">納期区分</span>
+                            </div>
+                            <select class="custom-select form-control" id="" aria-describedby="">
+                                <option></option>
+                                <option>1:納期遅れ</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                @* 三段目 *@
+                <div class="row mr-0 mb-1">
+                    @* 注文日　期間 *@
+                    <div class="col-8">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="">注文日</span>
+                            </div>
+                            <input type="text" id="SampleDTPicker1" class="form-control" />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar1"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                            <div class="input-group-append">
+                                <span class="input-group-text">～</span>
+                            </div>
+                            <input type="text" id="SampleDTPicker2" class="form-control" />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar1"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    @* 注文書発行済みフラグ *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend w-25">
+                                <span class="input-group-text w-100" id="">注文書発行</span>
+                            </div>
+                            <select class="custom-select form-control" id="" aria-describedby="">
+                                <option></option>
+                                <option>0:未発行</option>
+                                <option>1:発行済</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                @* 四段目 *@
+                <div class="row mr-0 mb-1">
+                    @* 内示書印刷日　期間 *@
+                    <div class="col-8">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="">内示書印刷日</span>
+                            </div>
+                            <input type="text" id="SampleDTPicker1" class="form-control" />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar1"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                            <div class="input-group-append">
+                                <span class="input-group-text">～</span>
+                            </div>
+                            <input type="text" id="SampleDTPicker2" class="form-control" />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar1"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    @* 内示書印刷者名 *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend w-25">
+                                <span class="input-group-text w-100" id="">内示書印刷者名</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="" aria-describedby="">
+                        </div>
+                    </div>
+                </div>
+                @* 四段目 *@
+                <div class="row mr-0 mb-1">
+                    @* 品名コード *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend w-25">
+                                <span class="input-group-text w-100" id="">品名コード</span>
+                            </div>
+                            <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="" name="" type="text" value="" style="border-top-left-radius:0; border-bottom-left-radius:0;">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#HinmeiCodeSearchDialog" style="border-top-right-radius:0.25rem; border-bottom-right-radius:0.25rem;">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="">
+                            <span id="" class="align-middle"></span>
+                        </div>
+                    </div>
+                    @* 発注先コード *@
+                    <div class="col-4">
+                        <div class="input-group">
+                            <div class="input-group-prepend w-25">
+                                <span class="input-group-text w-100" id="">発注先コード</span>
+                            </div>
+                            <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="" name="" type="text" value="" style="border-top-left-radius:0; border-bottom-left-radius:0;">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#TokuisakiCodeSearchDialog" style="border-top-right-radius:0.25rem; border-bottom-right-radius:0.25rem;">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="">
+                            <span id="" class="align-middle"></span>
+                        </div>
+                    </div>
+                    @* 得意先コード *@
+                    <div class="col-4">
+                        <div class="input-group">
+                            <div class="input-group-prepend w-25">
+                                <span class="input-group-text w-100" id="">得意先コード</span>
+                            </div>
+                            <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="" name="" type="text" value="" style="border-top-left-radius:0; border-bottom-left-radius:0;">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#TokuisakiCodeSearchDialog" style="border-top-right-radius:0.25rem; border-bottom-right-radius:0.25rem;">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="">
+                            <span id="" class="align-middle"></span>
+                        </div>
+                    </div>
+                </div>
+                @* 五段目 *@
+                <div class="row mr-0 mb-1">
+                    @* 得意先注文番号 *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend w-25">
+                                <span class="input-group-text w-100" id="">得意先注文番号</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="" aria-describedby="">
+                        </div>
+                    </div>
+                    @* 納入先コード *@
+                    <div class="col-4">
+                        <div class="input-group">
+                            <div class="input-group-prepend w-25">
+                                <span class="input-group-text w-100" id="">納入先コード</span>
+                            </div>
+                            <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="" name="" type="text" value="" style="border-top-left-radius:0; border-bottom-left-radius:0;">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#NonyusakiCodeSearchDialog" style="border-top-right-radius:0.25rem; border-bottom-right-radius:0.25rem;">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="">
+                            <span id="" class="align-middle"></span>
+                        </div>
+                    </div>
+                </div>
+
+                @* 以降共通検索項目 *@
+                @* 六段目 *@
+                <div class="row mr-0 mb-1">
+                    @* 表示データ *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend w-25">
+                                <span class="input-group-text w-100" id="">表示データ</span>
+                            </div>
+                            <div class="macss-input-group-input form-control">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="" value="">
+                                    <label class="form-check-label" for="">削除済データを含む</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @* 七段目 *@
+                <div class="row mr-0 mb-1">
+                    @* 作成者名 *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend w-25">
+                                <span class="input-group-text w-100" id="">作成者名</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="" aria-describedby="">
+                        </div>
+                    </div>
+                    @* 作成日時　期間 *@
+                    <div class="col-8">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="">作成日時</span>
+                            </div>
+                            <input type="text" id="date5" class="form-control" />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="Calendar5"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                            <div class="input-group-append">
+                                <input type="text" class="form-control" style="width:150px;" />
+                            </div>
+                            <div class="input-group-append">
+                                <span class="input-group-text">～</span>
+                            </div>
+                            <input type="text" id="date6" class="form-control" />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="Calendar6"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                            <div class="input-group-append">
+                                <input type="text" class="form-control" style="width:150px;" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @* 八段目 *@
+                <div class="row mr-0 mb-1">
+                    @* 更新者名 *@
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend w-25">
+                                <span class="input-group-text w-100" id="">更新者名</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="" aria-describedby="">
+                        </div>
+                    </div>
+                    @* 更新日時　期間 *@
+                    <div class="col-8">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="">更新日時</span>
+                            </div>
+                            <input type="text" id="date7" class="form-control" />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="Calendar7"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                            <div class="input-group-append">
+                                <input type="text" class="form-control" style="width:150px;" />
+                            </div>
+                            <div class="input-group-append">
+                                <span class="input-group-text">～</span>
+                            </div>
+                            <input type="text" id="date8" class="form-control" />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="Calendar8"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                            <div class="input-group-append">
+                                <input type="text" class="form-control" style="width:150px;" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @* ボタン *@
+                <div class="container-fluid pt-4 pb-3 pl-0 clearfix">
+                    <div class="float-left">
+                        <button type="reset" class="btn btn-secondary btn-lg macss-btn-main">@MacssWeb.Resources.ControlText.ConditionClear</button>
+                    </div>
+                    <div class="float-right">
+                        <button type="submit" class="btn btn-primary btn-lg macss-btn-main">@MacssWeb.Resources.ControlText.Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@* ボタン類 *@
+<div class="row mt-3 mb-4">
+    <div class="col-12">
+        <a class="btn btn-primary macss-btn-sub" href="@Url.Action("D001_03", "D001", new { naihatsu = "naiji" })" role="button">内示一括登録</a>
+        <a class="btn btn-primary macss-btn-sub" href="@Url.Action("D001_03", "D001", new { naihatsu = "hachu" })" role="button">発注一括登録</a>
+        <a class="btn btn-primary macss-btn-sub" href="@Url.Action("D001_05", "D001", new { naihatsu = "naiji" })" role="button">内示個別登録</a>
+        <a class="btn btn-primary macss-btn-sub" href="@Url.Action("D001_05", "D001", new { naihatsu = "hachu" })" role="button">発注個別登録</a>
+        <a class="btn btn-primary" href="@Url.Action("D001_10", "D001")" role="button">内示・発注情報アップロード</a>
+    </div>
+</div>
+
+@* ボタン類 *@
+<div class="row mt-3">
+    <div class="col-10">
+        <button class="btn btn-secondary">全選択</button>
+        <button class="btn btn-secondary">全解除</button>
+    </div>
+    <div class="col-2 text-right">
+        <div class="dropdown">
+            <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#">CSVダウンロード</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* 一覧 *@
+<table id="D001_01List" class="table table-striped table-hover macss-data-table">
+    <thead class="macss-data-table-header">
+        <tr>
+            <th>対象</th>
+            <th></th>
+            <th>
+                削除
+            </th>
+            <th>
+                承認状態
+            </th>
+            <th>
+                内示発注区分
+            </th>
+            <th>
+                検収区分
+            </th>
+            <th>
+                完了区分　
+            </th>
+            <th>
+                納期区分
+            </th>
+            <th>
+                注文No(内示No)
+            </th>
+            <th>
+                分納回数
+            </th>
+            <th>
+                注文日
+            </th>
+            <th>
+                内示書印刷日
+            </th>
+            <th>
+                納期
+            </th>
+            <th>
+                発注先コード
+            </th>
+            @*<th>表示無し
+                    発注先名
+                </th>*@
+            <th>
+                得意先コード
+            </th>
+            @*<th>表示無し
+                    得意先名
+                </th>*@
+            @*<th>表示無し
+                    得意先注文番号
+                </th>*@
+            <th>
+                注文数
+            </th>
+            <th>
+                元注文数
+            </th>
+            <th>
+                入荷累積
+            </th>
+            <th>
+                注文残数
+            </th>
+            <th>
+                倉庫コード
+            </th>
+            <th>
+                単位
+            </th>
+            <th>
+                納入先コード
+            </th>
+            @*<th>表示無し
+                    納入先名
+                </th>*@
+            <th>
+                品名コード
+            </th>
+            <th>
+                品名　　　　　　　　
+            </th>
+            @*<th>表示無し
+                    売上PCコード
+                </th>*@
+            @*<th>表示無し
+                    最新入荷日
+                </th>*@
+            @*<th>表示無し
+                    最新検収日
+                </th>*@
+            @*<th>表示無し
+                    注文単価
+                </th>*@
+            @*<th>表示無し
+                    注文金額
+                </th>*@
+            @*<th>表示無し
+                    在庫区分
+                </th>*@
+            @*<th>表示無し
+                    得意先注文日
+                </th>*@
+            @*<th>表示無し
+                    得意先注文番号
+                </th>*@
+            @*<th>表示無し
+                    得意先製造番号
+                </th>*@
+            @*<th>表示無し
+                    売上単価
+                </th>*@
+            @*<th>表示無し
+                    特記事項
+                </th>*@
+            <th>
+                内示書印刷者名　　　　　　　　
+            </th>
+            <th>
+                発注担当者名　　　　　　　　　
+            </th>
+            <th>
+                打切り担当者名　　　　　　　　
+            </th>
+            @* 以降共通項目 *@
+            <th>
+                作成者名　　　　　　　　　　　
+            </th>
+            <th>
+                作成日時
+            </th>
+            <th>
+                更新者名　　　　　　　　　　　
+            </th>
+            <th>
+                更新日時
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @* 未申請 削除 *@
+        <tr>
+            <td align="center">
+                <input class="form-check-input" type="checkbox" id="" value="" hidden>
+            </td>
+            <td style="white-space:nowrap;">
+                <a hidden href="@Url.Action("D001_07", "D001")" title="編集"><i class="fas fa-pencil-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                <a href="@Url.Action("D001_02", "D001")" title="詳細"><i class="far fa-file-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                <a hidden href="@Url.Action("D001_09", "D001")" title="削除"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+            </td>
+            <td>削除</td>
+            <td>未申請</td>
+            <td>2:内示から注文</td>
+            <td>0:未検収</td>
+            <td>0:注文未完了</td>
+            <td>1:納期遅れ</td>
+            <td>1234567890</td>
+            <td>12</td>
+            <td>YYYY/MM/DD</td>
+            <td>YYYY/MM/DD</td>
+            <td>YYYY/MM/DD</td>
+            <td>123456789</td>
+            <td>123456789</td>
+            <td>123,456,789</td>
+            <td>123,456,789</td>
+            <td>123,456,789</td>
+            <td>123,456,789</td>
+            <td>12</td>
+            <td>12</td>
+            <td>12345</td>
+            <td>123456789012</td>
+            <td>１２３４５６７８９０１２３４５６７８９０</td>
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            @* 以降共通項目 *@
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            <td>
+                YYYY/MM/DD hh:mm:ss
+            </td>
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            <td>
+                YYYY/MM/DD hh:mm:ss
+            </td>
+        </tr>
+        @* 未申請 *@
+        <tr>
+            <td align="center">
+                <input class="form-check-input" type="checkbox" id="" value="">
+            </td>
+            <td style="white-space:nowrap;">
+                <a href="@Url.Action("D001_07", "D001", new {naihatsu = "naiji", chuNo = "123456789012" })" title="編集"><i class="fas fa-pencil-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                <a href="@Url.Action("D001_02", "D001")" title="詳細"><i class="far fa-file-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                <a href="@Url.Action("D001_09", "D001")" title="削除"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                <a href="@Url.Action("D001_05", "D001", new { naihatsu = "inyo" })" title="内示引用登録" class="btn btn-sm btn-outline-primary">引</a>
+            </td>
+            <td></td>
+            <td>未申請</td>
+            <td>0:内示</td>
+            <td>0:未検収</td>
+            <td>0:注文未完了</td>
+            <td>1:納期遅れ</td>
+            <td>1234567890</td>
+            <td>12</td>
+            <td>YYYY/MM/DD</td>
+            <td>YYYY/MM/DD</td>
+            <td>YYYY/MM/DD</td>
+            <td>123456789</td>
+            <td>123456789</td>
+            <td>123,456,789</td>
+            <td>123,456,789</td>
+            <td>123,456,789</td>
+            <td>123,456,789</td>
+            <td>12</td>
+            <td>12</td>
+            <td>12345</td>
+            <td>123456789012</td>
+            <td>１２３４５６７８９０１２３４５６７８９０</td>
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            @* 以降共通項目 *@
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            <td>
+                YYYY/MM/DD hh:mm:ss
+            </td>
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            <td>
+                YYYY/MM/DD hh:mm:ss
+            </td>
+        </tr>
+        @* 申請済 *@
+        <tr>
+            <td align="center">
+                <input class="form-check-input" type="checkbox" id="" value="" disabled>
+            </td>
+            <td style="white-space:nowrap;">
+                <a href="@Url.Action("D001_07", "D001", new { chuNo = "9999999" })" title="編集"><i class="fas fa-pencil-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                <a href="@Url.Action("D001_02", "D001")" title="詳細"><i class="far fa-file-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                <a href="@Url.Action("D001_09", "D001")" title="削除"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+            </td>
+            <td></td>
+            <td>申請済</td>
+            <td>2:内示から注文</td>
+            <td>0:未検収</td>
+            <td>0:注文未完了</td>
+            <td>1:納期遅れ</td>
+            <td>1234567890</td>
+            <td>12</td>
+            <td>YYYY/MM/DD</td>
+            <td>YYYY/MM/DD</td>
+            <td>YYYY/MM/DD</td>
+            <td>123456789</td>
+            <td>123456789</td>
+            <td>123,456,789</td>
+            <td>123,456,789</td>
+            <td>123,456,789</td>
+            <td>123,456,789</td>
+            <td>12</td>
+            <td>12</td>
+            <td>12345</td>
+            <td>9999999</td>
+            <td>１２３４５６７８９０１２３４５６７８９０</td>
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            @* 以降共通項目 *@
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            <td>
+                YYYY/MM/DD hh:mm:ss
+            </td>
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            <td>
+                YYYY/MM/DD hh:mm:ss
+            </td>
+        </tr>
+        @* 一次承認済 *@
+        <tr>
+            <td align="center">
+                <input class="form-check-input" type="checkbox" id="" value="" disabled>
+            </td>
+            <td style="white-space:nowrap;">
+                <a href="@Url.Action("D001_07", "D001", new { chuNo = "123456789012" })" title="編集"><i class="fas fa-pencil-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                <a href="@Url.Action("D001_02", "D001")" title="詳細"><i class="far fa-file-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                <a href="@Url.Action("D001_09", "D001")" title="削除"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+            </td>
+            <td></td>
+            <td>一次承認</td>
+            <td>2:内示から注文</td>
+            <td>0:未検収</td>
+            <td>0:注文未完了</td>
+            <td>1:納期遅れ</td>
+            <td>1234567890</td>
+            <td>12</td>
+            <td>YYYY/MM/DD</td>
+            <td>YYYY/MM/DD</td>
+            <td>YYYY/MM/DD</td>
+            <td>123456789</td>
+            <td>123456789</td>
+            <td>123,456,789</td>
+            <td>123,456,789</td>
+            <td>123,456,789</td>
+            <td>123,456,789</td>
+            <td>12</td>
+            <td>12</td>
+            <td>12345</td>
+            <td>123456789012</td>
+            <td>１２３４５６７８９０１２３４５６７８９０</td>
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            @* 以降共通項目 *@
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            <td>
+                YYYY/MM/DD hh:mm:ss
+            </td>
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            <td>
+                YYYY/MM/DD hh:mm:ss
+            </td>
+        </tr>
+        @* 承認済 *@
+        <tr>
+            <td align="center">
+                <input class="form-check-input" type="checkbox" id="" value="">
+            </td>
+            <td style="white-space:nowrap;">
+                <a href="@Url.Action("D001_07", "D001", new { chuNo = "9999999" })" title="編集"><i class="fas fa-pencil-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                <a href="@Url.Action("D001_02", "D001")" title="詳細"><i class="far fa-file-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                <a href="@Url.Action("D001_09", "D001")" title="削除"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#D001_01_05Dialog" title="注残打切り">打</button>
+            </td>
+            <td></td>
+            <td>承認済</td>
+            <td>2:内示から注文</td>
+            <td>0:未検収</td>
+            <td>0:注文未完了</td>
+            <td>1:納期遅れ</td>
+            <td>1234567890</td>
+            <td>12</td>
+            <td>YYYY/MM/DD</td>
+            <td>YYYY/MM/DD</td>
+            <td>YYYY/MM/DD</td>
+            <td>123456789</td>
+            <td>123456789</td>
+            <td>123,456,789</td>
+            <td>123,456,789</td>
+            <td>123,456,789</td>
+            <td>123,456,789</td>
+            <td>12</td>
+            <td>12</td>
+            <td>12345</td>
+            <td>9999999</td>
+            <td>１２３４５６７８９０１２３４５６７８９０</td>
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            @* 以降共通項目 *@
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            <td>
+                YYYY/MM/DD hh:mm:ss
+            </td>
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            <td>
+                YYYY/MM/DD hh:mm:ss
+            </td>
+        </tr>
+        @* 一次否認済 *@
+        <tr>
+            <td align="center">
+                <input class="form-check-input" type="checkbox" id="" value="" disabled>
+            </td>
+            <td style="white-space:nowrap;">
+                <a href="@Url.Action("D001_07", "D001", new { chuNo = "123456789012" })" title="編集"><i class="fas fa-pencil-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                <a href="@Url.Action("D001_02", "D001")" title="詳細"><i class="far fa-file-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                <a href="@Url.Action("D001_09", "D001")" title="削除"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+            </td>
+            <td></td>
+            <td>一次否認</td>
+            <td>2:内示から注文</td>
+            <td>0:未検収</td>
+            <td>0:注文未完了</td>
+            <td>1:納期遅れ</td>
+            <td>1234567890</td>
+            <td>12</td>
+            <td>YYYY/MM/DD</td>
+            <td>YYYY/MM/DD</td>
+            <td>YYYY/MM/DD</td>
+            <td>123456789</td>
+            <td>123456789</td>
+            <td>123,456,789</td>
+            <td>123,456,789</td>
+            <td>123,456,789</td>
+            <td>123,456,789</td>
+            <td>12</td>
+            <td>12</td>
+            <td>12345</td>
+            <td>123456789012</td>
+            <td>１２３４５６７８９０１２３４５６７８９０</td>
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            @* 以降共通項目 *@
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            <td>
+                YYYY/MM/DD hh:mm:ss
+            </td>
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            <td>
+                YYYY/MM/DD hh:mm:ss
+            </td>
+        </tr>
+        @* 否認済 *@
+        <tr>
+            <td align="center">
+                <input class="form-check-input" type="checkbox" id="" value="">
+            </td>
+            <td style="white-space:nowrap;">
+                <a href="@Url.Action("D001_07", "D001", new { chuNo = "123456789012" })" title="編集"><i class="fas fa-pencil-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                <a href="@Url.Action("D001_02", "D001")" title="詳細"><i class="far fa-file-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                <a href="@Url.Action("D001_09", "D001")" title="削除"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+            </td>
+            <td></td>
+            <td>否認済</td>
+            <td>2:内示から注文</td>
+            <td>0:未検収</td>
+            <td>0:注文未完了</td>
+            <td>1:納期遅れ</td>
+            <td>1234567890</td>
+            <td>12</td>
+            <td>YYYY/MM/DD</td>
+            <td>YYYY/MM/DD</td>
+            <td>YYYY/MM/DD</td>
+            <td>123456789</td>
+            <td>123456789</td>
+            <td>123,456,789</td>
+            <td>123,456,789</td>
+            <td>123,456,789</td>
+            <td>123,456,789</td>
+            <td>12</td>
+            <td>12</td>
+            <td>12345</td>
+            <td>123456789012</td>
+            <td>１２３４５６７８９０１２３４５６７８９０</td>
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            @* 以降共通項目 *@
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            <td>
+                YYYY/MM/DD hh:mm:ss
+            </td>
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            <td>
+                YYYY/MM/DD hh:mm:ss
+            </td>
+        </tr>
+        @* 取戻申請済(一次) *@
+        <tr>
+            <td align="center">
+                <input class="form-check-input" type="checkbox" id="" value="" disabled>
+            </td>
+            <td style="white-space:nowrap;">
+                <a href="@Url.Action("D001_07", "D001", new { chuNo = "123456789012" })" title="編集"><i class="fas fa-pencil-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                <a href="@Url.Action("D001_02", "D001")" title="詳細"><i class="far fa-file-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                <a href="@Url.Action("D001_09", "D001")" title="削除"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+            </td>
+            <td></td>
+            <td>取戻一次</td>
+            <td>2:内示から注文</td>
+            <td>0:未検収</td>
+            <td>0:注文未完了</td>
+            <td>1:納期遅れ</td>
+            <td>1234567890</td>
+            <td>12</td>
+            <td>YYYY/MM/DD</td>
+            <td>YYYY/MM/DD</td>
+            <td>YYYY/MM/DD</td>
+            <td>123456789</td>
+            <td>123456789</td>
+            <td>123,456,789</td>
+            <td>123,456,789</td>
+            <td>123,456,789</td>
+            <td>123,456,789</td>
+            <td>12</td>
+            <td>12</td>
+            <td>12345</td>
+            <td>123456789012</td>
+            <td>１２３４５６７８９０１２３４５６７８９０</td>
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            @* 以降共通項目 *@
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            <td>
+                YYYY/MM/DD hh:mm:ss
+            </td>
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            <td>
+                YYYY/MM/DD hh:mm:ss
+            </td>
+        </tr>
+        @* 取戻申請済 *@
+        <tr>
+            <td align="center">
+                <input class="form-check-input" type="checkbox" id="" value="" disabled>
+            </td>
+            <td style="white-space:nowrap;">
+                <a href="@Url.Action("D001_07", "D001", new { chuNo = "123456789012" })" title="編集"><i class="fas fa-pencil-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                <a href="@Url.Action("D001_02", "D001")" title="詳細"><i class="far fa-file-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                <a href="@Url.Action("D001_09", "D001")" title="削除"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+            </td>
+            <td></td>
+            <td>取戻申請</td>
+            <td>2:内示から注文</td>
+            <td>0:未検収</td>
+            <td>0:注文未完了</td>
+            <td>1:納期遅れ</td>
+            <td>1234567890</td>
+            <td>12</td>
+            <td>YYYY/MM/DD</td>
+            <td>YYYY/MM/DD</td>
+            <td>YYYY/MM/DD</td>
+            <td>123456789</td>
+            <td>123456789</td>
+            <td>123,456,789</td>
+            <td>123,456,789</td>
+            <td>123,456,789</td>
+            <td>123,456,789</td>
+            <td>12</td>
+            <td>12</td>
+            <td>12345</td>
+            <td>123456789012</td>
+            <td>１２３４５６７８９０１２３４５６７８９０</td>
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            @* 以降共通項目 *@
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            <td>
+                YYYY/MM/DD hh:mm:ss
+            </td>
+            <td>１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２</td>
+            <td>
+                YYYY/MM/DD hh:mm:ss
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+@* ボタン類 *@
+<div class="row mt-4 mb-4">
+    <div class="col-11 text-right">
+        <div>
+            <button type="button" class="btn btn-primary macss-btn-sub" data-toggle="modal" data-target="#D001_01_01Dialog">内示書</button>
+            <button type="button" class="btn btn-primary" style="width:10rem" data-toggle="modal" data-target="#D001_01_02Dialog">注文書等</button>
+            <button type="button" class="btn btn-primary" style="width:12rem" data-toggle="modal" data-target="#D001_01_03Dialog">変更注文書一式</button>
+        </div>
+        <div class="mt-2">
+            <button type="button" class="btn btn-primary" style="width:10rem" data-toggle="modal" data-target="#D001_01_02Dialog">注文書等再発行</button>
+            <button type="button" class="btn btn-primary" style="width:12rem" data-toggle="modal" data-target="#D001_01_03Dialog">変更注文書一式再発行</button>
+        </div>
+    </div>
+    <div class="col-1 text-right">
+        <button type="button" class="btn btn-primary macss-btn-sub" data-toggle="modal" data-target="#D001_01_04Dialog">承認申請</button>
+    </div>
+</div>
+
+
+@* 内示書印刷　確認ダイアログ *@
+<div class="modal" id="D001_01_01Dialog" tabindex="-1" role="dialog" aria-labelledby="D001_01_01DialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="D001_01_01DialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                選択された明細の内示書を印刷します。よろしいですか？
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("D001_01", "D001", null, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-primary">@MacssWeb.Resources.ControlText.Yes</button>
+                }
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* 注文書等印刷　確認ダイアログ *@
+<div class="modal" id="D001_01_02Dialog" tabindex="-1" role="dialog" aria-labelledby="D001_01_02DialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="D001_01_02DialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                選択された明細の注文書／仕入先納品書一式を印刷します。よろしいですか？
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("D001_01", "D001", null, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-primary">@MacssWeb.Resources.ControlText.Yes</button>
+                }
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* 変更注文書一式印刷　確認ダイアログ *@
+<div class="modal" id="D001_01_03Dialog" tabindex="-1" role="dialog" aria-labelledby="D001_01_03DialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="D001_01_03DialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                選択された明細の変更注文書一式を印刷します。よろしいですか？
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("D001_01", "D001", null, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-primary">@MacssWeb.Resources.ControlText.Yes</button>
+                }
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* 承認申請　確認ダイアログ *@
+<div class="modal" id="D001_01_04Dialog" tabindex="-1" role="dialog" aria-labelledby="D001_01_04DialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="D001_01_04DialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                選択された明細の承認申請を実行します。よろしいですか？
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("D001_01", "D001", null, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-primary">@MacssWeb.Resources.ControlText.Yes</button>
+                }
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* 注残打切り　理由入力ダイアログ *@
+<div class="modal" id="D001_01_05Dialog" tabindex="-1" role="dialog" aria-labelledby="D001_01_05DialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="D001_01_05DialogTitle">注残打切り理由入力</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <table class="macss-form-table" style="width:100%">
+                    <colgroup>
+                        <col class="macss-form-table-title" />
+                        <col class="macss-form-table-contents" />
+                    </colgroup>
+                    <tr>
+                        <th scope="row" class="w-50">
+                            <label class="required align-middle">打切り理由</label>
+                        </th>
+                        <td>
+                            <select class="custom-select form-control">
+                                <option></option>
+                                <option>1:材料不足</option>
+                                <option>2:生産能力不足</option>
+                                <option>3:不良発生</option>
+                                <option>4:その他</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-6">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">戻る</button>
+                    </div>
+                    <div class="col-6 text-right">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">確定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

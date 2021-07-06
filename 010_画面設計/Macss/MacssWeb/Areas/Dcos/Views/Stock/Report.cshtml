@@ -1,0 +1,10 @@
+﻿<html lang="ja">
+@{
+    ViewBag.Title = "在庫データ";
+    ViewBag.PageMainTitle = "在庫報告書作成";
+}
+
+@using (Html.BeginForm("Index", "Stock", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.Partial("_Report")
+}

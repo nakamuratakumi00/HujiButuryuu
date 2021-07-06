@@ -1,0 +1,161 @@
+﻿@* 出庫実績登録確認 *@
+
+@section Scripts {
+    <script>
+        $(function () {
+
+            new Macss.DataTables.MacssDataTable("#D003_06List").configure();
+
+            //MacssDataTable（dataTables.fixedColumns.js）に表示する列が15件以上あると計算間違いで最左端列にスクロールバーが表示されるため、非表示にする
+            $('.DTFC_LeftBodyLiner').css('overflow-y', 'hidden');
+
+        });</script>
+}
+
+<div class="alert alert-info">
+    <span>以下を登録します。よろしいですか？</span>
+</div>
+
+@* ボタン類 *@
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a class="btn btn-secondary" href="@Url.Action("D003_05")" role="button">@MacssWeb.Resources.ControlText.Back</a>
+    </div>
+    <div class="col-4 text-right">
+    </div>
+</div>
+
+@* 共通入力項目 *@
+<div class="accordion" id="ConditionAccordion">
+    <div class="card">
+        <div class="card-header macss-search-config-collapse-header" id="headingOne">
+            <div class="mb-0">
+                <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain" aria-expanded="true" aria-controls="ConditionMain">
+                    <div class="d-inline-block" style="color:#333"></div>
+                    <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="color: rgb(120, 188, 255);"></i>
+                    <i id="CollapseShow" class="fas fa-chevron-circle-down" aria-hidden="true" style="color: rgb(120, 188, 255); display: none;"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+            <table class="table macss-form-table2">
+                <colgroup>
+                    <col class="macss-form-table-title2">
+                    <col class="macss-form-table-contents2">
+                </colgroup>
+                @* 倉庫コード *@
+                <tr>
+                    <th>
+                        <label class="control-label">倉庫</label>
+                    </th>
+                    <td>
+                        12 １２３４５６７８９０１２３４５
+                    </td>
+                </tr>
+                @* 在庫種別 *@
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">在庫種別</label>
+                    </th>
+                    <td>
+                        1:自社在庫
+                    </td>
+                </tr>
+                @* 出庫日 *@
+                <tr>
+                    <th>
+                        <label class="control-label">出庫日</label>
+                    </th>
+                    <td>
+                        YYYY/MM/DD
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+@* 明細一覧 *@
+<table id="D003_06List" class="table table-striped table-hover macss-data-table" style="width:100%">
+    <thead class="macss-data-table-header">
+        <!-- thの文字数で列の幅が決まってしまうため、必要に応じて全角スペースを入れて列の幅を調整する必要がある-->
+        <tr>
+            <th>
+                品名コード
+            </th>
+            <th>
+                品名
+            </th>
+            <th>
+                数量
+            </th>
+            <th>
+                得意先コード
+            </th>
+            <th>
+                得意先名
+            </th>
+            <th>
+                規格・寸法
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                123456789012
+            </td>
+            <td>
+                １２３４５６７８９０１２３４５６７８９０
+            </td>
+            <td>
+                123,456,789
+            </td>
+            <td>
+                1234567
+            </td>
+            <td>
+                １２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０
+            </td>
+            <td>
+                １２３４５６７８９０１２３４５６７８９０
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="mt-4"></div>
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a class="btn btn-secondary" href="@Url.Action("D003_05")" role="button">@MacssWeb.Resources.ControlText.Back</a>
+    </div>
+    <div class="col-4 text-right">
+        <a role="button" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDialog">登録</a>
+    </div>
+</div>
+
+@* 確認ダイアログ *@
+<div class="modal" id="ConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @MacssWeb.Resources.Messages.CreateReconfirm
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("D003_01", "D003", null, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="UploadFileName" name="uploadFileName" value="@ViewBag.UploadFileName" />
+                    <button type="submit" class="btn btn-primary">@MacssWeb.Resources.ControlText.Yes</button>
+                }
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>

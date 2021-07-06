@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ActiveReportsLayout Version="3.2" PrintWidth="11040" DocumentName="ARNet Document" ScriptLang="C#" MasterReport="0">
+  <StyleSheet>
+    <Style Name="Normal" Value="font-family: Arial; font-style: normal; text-decoration: none; font-weight: normal; font-size: 10pt; color: Black" />
+    <Style Name="Heading1" Value="font-size: 16pt; font-weight: bold" />
+    <Style Name="Heading2" Value="font-family: Times New Roman; font-size: 14pt; font-weight: bold; font-style: italic" />
+    <Style Name="Heading3" Value="font-size: 13pt; font-weight: bold" />
+  </StyleSheet>
+  <Sections>
+    <Section Type="PageHeader" Name="PageHeader" Height="1776.88" BackColor="16777215">
+      <Control Type="AR.Label" Name="Title" Left="2628" Top="561.6" Width="5745.6" Height="345.6001" Caption="Fe保管請求PCコードデータ作成エラーリスト" Style="font-size: 14.25pt; ddo-char-set: 0" />
+      <Control Type="AR.ReportInfo" Name="Page" Left="9810.721" Top="119.52" Width="1123.2" Height="209.64" FormatString="{PageNumber} / {PageCount}" Style="font-size: 8.25pt; text-align: right; ddo-char-set: 0" />
+      <Control Type="AR.ReportInfo" Name="Date" Left="8373.6" Top="119.52" Width="1634.041" Height="255" FormatString="{RunDateTime:yyyy/MM/dd HH:mm:ss}" Style="font-size: 8.25pt; text-align: right; ddo-char-set: 0" />
+      <Control Type="AR.Label" Name="lKisyuA" Left="1389.6" Top="1327.68" Width="885" Height="390" Caption="機種A" Style="vertical-align: middle" />
+      <Control Type="AR.Label" Name="lPCCod" Left="2217.6" Top="1327.68" Width="885" Height="390" Caption="PCコード" Style="vertical-align: middle" />
+      <Control Type="AR.Label" Name="lSikibetu" Left="3984.48" Top="1327.68" Width="1365.12" Height="390" Caption="識別名" Style="vertical-align: middle" />
+      <Control Type="AR.Label" Name="lPCKingaku" Left="5542.561" Top="1327.68" Width="1664.64" Height="390" Caption="PCコード毎金額" Style="vertical-align: middle" />
+      <Control Type="AR.Label" Name="lBasho" Left="7536.96" Top="1327.68" Width="675.3596" Height="390" Caption="場所" Style="vertical-align: middle" />
+      <Control Type="AR.Label" Name="Error" Left="8344.8" Top="1327.68" Width="1664.64" Height="390" Caption="エラー内容" Style="vertical-align: middle" />
+      <Control Type="AR.Label" Name="lSeiCod" Left="247.6799" Top="1327.68" Width="885" Height="390" Caption="請求先" Style="vertical-align: middle" />
+      <Control Type="AR.Line" Name="Line1" X1="11023.2" Y1="1766.88" X2="73.20053" Y2="1766.88" />
+      <Control Type="AR.Field" Name="Nen" Left="8834.4" Top="675.36" Width="570" Height="225" Text="YYYY" Style="font-size: 9pt; text-align: right; ddo-char-set: 0" />
+      <Control Type="AR.Label" Name="Label1" Left="9423.36" Top="675.36" Width="345.0002" Height="224.64" Caption="年" Style="font-size: 9pt; ddo-char-set: 0" />
+      <Control Type="AR.Field" Name="Tuki" Left="9840.96" Top="675.36" Width="406.0799" Height="225" Text="MM" Style="font-size: 9pt; text-align: right; ddo-char-set: 0" />
+      <Control Type="AR.Label" Name="Label2" Left="10283.04" Top="675.36" Width="465.1199" Height="224.64" Caption="月度" Style="font-size: 9pt; ddo-char-set: 0" />
+      <Control Type="AR.Label" Name="Label16" Left="73.44017" Top="119.52" Width="1557.721" Height="254.88" Caption="FDASS_LA1M001a" Style="font-size: 8.25pt; vertical-align: middle" />
+    </Section>
+    <Section Type="Detail" Name="Detail" Height="375" BackColor="16777215">
+      <Control Type="AR.Field" Name="Seicod" DataField="Seicod" Left="247.6799" Top="60.48" Width="1084.32" Height="225" Text="XXXXXXX" />
+      <Control Type="AR.Field" Name="KisyuA" DataField="Kisyua" Left="1450.08" Top="60.48" Width="453.6" Height="225" Text="XX" />
+      <Control Type="AR.Field" Name="PCCod" DataField="Pccod" Left="2181.6" Top="74.88" Width="1653.12" Height="225" Text="XXXXXXXXXXXX" />
+      <Control Type="AR.Field" Name="Sikibetu" DataField="Shikibetu" Left="4076.64" Top="74.88" Width="1382.4" Height="225" Text="ＮＮＮＮＮ" />
+      <Control Type="AR.Field" Name="PCKingaku" DataField="Kingaku" Left="5542.561" Top="74.88" Width="1548" Height="225" Text="ZZZ,ZZZ,ZZ9" OutputFormat="#,##0" Style="text-align: right" />
+      <Control Type="AR.Field" Name="Basho" DataField="Hokcod" Left="7536.96" Top="74.88" Width="767.5203" Height="225" Text="XX" />
+      <Control Type="AR.Field" Name="TextBox1" DataField="Errorstr" Left="8380.8" Top="74.88" Width="2524.321" Height="225" Text="ＮＮＮＮＮＮＮＮＮＮＮＮＮＮ" />
+    </Section>
+    <Section Type="PageFooter" Name="PageFooter" Height="45" BackColor="16777215" />
+  </Sections>
+  <ReportComponentTray />
+  <Script><![CDATA[
+bool color = true;
+private int RowNumber = 0;
+
+
+public void Detail_Format()
+{
+	RowNumber++;
+
+	if (RowNumber < 30)
+	{
+		this.Detail.NewPage = NewPage.None;
+	}
+	else
+	{
+		this.Detail.NewPage = NewPage.After;
+		RowNumber = 0;
+	}
+	
+	if(color)
+	{
+		this.Detail.BackColor = System.Drawing.Color.LightGray;
+		color = false;
+	}
+	else
+	{
+		this.Detail.BackColor = System.Drawing.Color.Transparent;
+		color = true;
+	}
+}
+
+
+
+
+]]></Script>
+  <PageSettings LeftMargin="432" RightMargin="432" TopMargin="432" PaperSize="9" PaperWidth="11906" PaperHeight="16838" PaperName="" Orientation="1" />
+  <Parameters />
+</ActiveReportsLayout>

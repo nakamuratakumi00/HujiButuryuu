@@ -1,0 +1,82 @@
+﻿@* 請求関連書類印刷 *@
+
+@{
+    ViewBag.ResultMessage = "承認が必要です。";
+}
+
+<div class="alert @ViewBag.AlertType">
+    <span>@ViewBag.ResultMessage</span>
+</div>
+
+@using (Html.BeginForm("Print", "Aims", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.Partial("_Print")
+}
+
+@* 承認関係ボタン類 *@
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+    </div>
+    <div class="col-4 text-right">
+        <a role="button" class="btn btn-primary" href="@Url.Action("PrintApprovalIndex")">承認申請</a>
+        <a role="button" class="btn btn-secondary" href="@Url.Action("PrintCancelApprovalIndex")">承認解除申請</a>
+    </div>
+</div>
+
+<hr />
+
+@* 指定項目 *@
+<div class="container-fluid mt-4">
+    <div class="row mr-0 mb-1">
+        @* 発行対象 *@
+        <div class="col-4">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">発行対象　　</span>
+                </div>
+                <select class="custom-select form-control">
+                    <option>全請求先</option>
+                    <option>１手番</option>
+                    <option>２手番</option>
+                </select>
+            </div>
+        </div>
+        @* 請求先コード *@
+        <div class="col-4">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">請求先コード</span>
+                </div>
+                <input type="text" class="form-control" value="90101" />
+                <div class="">
+                    <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#DepartmentCodeSearchDialog">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="ml-5">富士物流（株）　松本支社３４５６７８９０１２３４５６７８９０１２３４５６７８９０</div>
+        </div>
+        @* ラベル用発送日 *@
+        <div class="col-4">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="Condition1">ラベル用発送日</span>
+                </div>
+
+                <!--@DateTime.Now.ToString(@"yyyy/MM/dd")-->
+
+                <input type="text" id="SampleDTPicker1" class="form-control" value="@DateTime.Now.ToString(@"yyyy/MM/dd")" />
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="SampleCalendar1"><i class="fa fa-calendar-alt"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* ボタン類 *@
+<div class="row justify-content-end macss-form-button-group-row">
+    <div class="col-4 text-right">
+        <a role="button" class="btn btn-primary" href="@Url.Action("PrintConfirm")">確認</a>
+    </div>
+</div>

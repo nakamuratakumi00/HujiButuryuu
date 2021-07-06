@@ -1,0 +1,10 @@
+﻿@model Macss.Database.Entity.DummyStock
+
+@{
+    ViewBag.Title = "在庫データ詳細";
+    ViewBag.PageMainTitle = "在庫データ詳細";
+    ViewBag.ScreenId = "DCOS-D005-02";
+    ViewBag.OnlyShow = true;
+}
+
+@Html.Partial("~/Areas/Dcos/Views/Stock/_Show.cshtml", Model)

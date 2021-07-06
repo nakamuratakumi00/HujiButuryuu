@@ -1,0 +1,19 @@
+﻿@model Macss.Database.Entity.DummyTMSFixedDataRequest
+
+@{
+    ViewBag.Title = MacssWeb.Resources.Tass.TMSFixedDataMainTitle;
+    ViewBag.PageMainTitle = MacssWeb.Resources.Tass.TMSFixedDataEditMainTitle;
+    ViewBag.ScreenId = "TASS-D025-03";
+}
+
+@using (Html.BeginForm("EditConfirm", "TMSFixedData", null, FormMethod.Post))
+{
+
+    @Html.Partial("_Form", Model)
+
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,649 @@
+﻿@model Macss.Database.Entity.AccountMaster
+@{
+    ViewBag.Title = "固定請求マスター更新";
+    ViewBag.PageMainTitle = "固定請求マスター更新";
+
+    ViewBag.ConfirmMessage = MacssWeb.Resources.Messages.DeleteConfirm;
+    ViewBag.ButtonText = MacssWeb.Resources.ControlText.DeleteExec;
+    ViewBag.ConfirmDialogText = MacssWeb.Resources.Messages.DeleteReconfirm;
+
+}
+@section Scripts {
+    <script>
+        $(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#SampleList");
+            dt.configure();
+
+            //MacssDataTable（dataTables.fixedColumns.js）に表示する列が15件以上あると計算間違いで最左端列にスクロールバーが表示されるため、非表示にする
+            $('.DTFC_LeftBodyLiner').css('overflow-y', 'hidden');
+
+        });</script>
+}
+
+@using (Html.BeginForm("EditConfirm", "StockCreate", null, FormMethod.Post))
+{
+    <div class="row justify-content-between macss-form-button-group-row">
+        <div class="col-4">
+            <a class="btn btn-secondary" data-toggle="modal" data-target="#TransitionConfirmDialog" role="button">@MacssWeb.Resources.ControlText.BackToList</a>
+        </div>
+        <div class="col-4 text-right">
+            <a class="btn btn-primary" href="@Url.Action("EditConfirm")" role="button">@MacssWeb.Resources.ControlText.InputConfirm</a>
+        </div>
+    </div>
+    <div class="accordion" id="ConditionAccordion">
+        <div class="card">
+            <div class="card-header macss-search-config-collapse-header" id="headingOne">
+                <div class="mb-0">
+                    <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain" aria-expanded="true" aria-controls="ConditionMain">
+                        <div class="d-inline-block" style="color:#333"></div>
+                        <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="color: rgb(120, 188, 255);"></i>
+                        <i id="CollapseShow" class="fas fa-chevron-circle-down" aria-hidden="true" style="color: rgb(120, 188, 255); display: none;"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+                <table class="table macss-form-table2">
+                    <colgroup>
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">請求先コード</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">印刷コード</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">行番号</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">印刷内容</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">自社住所区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option></option>
+                                        <option value="0">0:松本</option>
+                                        <option value="1">1:長野</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">消費税欄印字</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                        <label class="form-check-label" for="inlineRadio1">印字不要</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                        <label class="form-check-label" for="inlineRadio2">消費税欄印字</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">請求金額合計</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">消費税額</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">税抜金額</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">内容1</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">内容2</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">内容3</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">内容4</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">内容5</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">内容6</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">内容7</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">内容8</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">内容9</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">内容10</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">明細コード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">PCコード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">課税区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option></option>
+                                        <option value="1">1:課税</option>
+                                        <option value="2">2:非課税</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">税抜内訳金額</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">計上区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option></option>
+                                        <option value="null">計上しない</option>
+                                        <option value="1">1:計上する(毎月)</option>
+                                        <option value="2">2:計上する(発行日のみ)</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">計上期間開始日</label>
+                            </th>
+                            <td>
+                                <div class="input-group">
+                                    <input type="text" id="SampleDTPicker1" class="form-control">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button" id="SampleCalendar1"><i class="fa fa-calendar-alt"></i></button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">計上期間終了日</label>
+                            </th>
+                            <td>
+                                <div class="input-group">
+                                    <input type="text" id="SampleDTPicker1" class="form-control">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button" id="SampleCalendar1"><i class="fa fa-calendar-alt"></i></button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">客先伝票発行日</label>
+                            </th>
+                            <td>
+                                <div class="input-group">
+                                    <input type="text" id="SampleDTPicker1" class="form-control">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button" id="SampleCalendar1"><i class="fa fa-calendar-alt"></i></button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">計上日付</label>
+                            </th>
+                            <td>
+                                <div class="input-group">
+                                    <input type="text" id="SampleDTPicker1" class="form-control">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button" id="SampleCalendar1"><i class="fa fa-calendar-alt"></i></button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">請求期間取得加算月数1</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">請求期間取得加算月数2</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">請求期間取得加算月数3</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">請求期間取得加算月数4</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">請求期間取得加算月数5</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">請求期間取得加算月数6</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">請求伝票発行区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option></option>
+                                        <option value="null">発行しない</option>
+                                        <option value="1">1:発行する</option>
+                                        <option value="2">2:発行する(枝番を統合したNo)</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">売上伝票発行区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option></option>
+                                        <option value="null">発行しない</option>
+                                        <option value="1">1:発行する</option>
+                                        <option value="2">2:発行する(枝番付き)</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">請求担当者コード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">責任者コード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">業務コード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">売上パターンコード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">使用不可開始日</label>
+                            </th>
+                            <td>
+                                <div class="input-group">
+                                    <input type="text" id="SampleDTPicker1" class="form-control">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button" id="SampleCalendar1"><i class="fa fa-calendar-alt"></i></button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">使用不可理由</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="mt-4"></div>
+<div class="row justify-content-between macss-form-button-group-row mt-4">
+    <div class="col-4">
+        <a class="btn btn-secondary" data-toggle="modal" data-target="#TransitionConfirmDialog" role="button">@MacssWeb.Resources.ControlText.BackToList</a>
+    </div>
+    <div class="col-4 text-right">
+        <a class="btn btn-primary" href="@Url.Action("EditConfirm")" role="button">@MacssWeb.Resources.ControlText.InputConfirm</a>
+    </div>
+</div>
+<script>
+    function setDepartmentCode(code, value) {
+        $("#bumon_cd").val(code);
+        $("#DepartmentName").text(value);
+    }
+    $(function () {
+        var createDatePicker = new Macss.DatetimePicker.MacssDtPicker("#create_date", "#CreateDateCalendar");
+        createDatePicker.configure();
+        var updateDatePicker = new Macss.DatetimePicker.MacssDtPicker("#update_date", "#UpdateDateCalendar");
+        updateDatePicker.configure();
+    });</script></form>
+
+</div>
+
+
+
+<div class="modal" id="TransitionConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.TransitionConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @MacssWeb.Resources.Messages.TransitionConfirm
+                <br>
+                @MacssWeb.Resources.Messages.Confirm
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary macss-btn" href="@Url.Action("Index")" role="button">@MacssWeb.Resources.ControlText.Yes</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>

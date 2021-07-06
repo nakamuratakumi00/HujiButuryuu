@@ -1,0 +1,574 @@
+﻿@using Macss.Areas.Tass.ViewModels
+@model HinmeiData
+@using Macss.HtmlHelpers
+
+@{
+    ViewBag.Title = ViewBag.Title;
+}
+<style>
+
+    h1, .h1,
+    h2, .h2,
+    h3, .h3 {
+        margin-top: 2px;
+        margin-bottom: 0px;
+    }
+
+    #tbl-bdr table, #tbl-bdr td, #tbl-bdr th {
+        border-collapse: collapse;
+        border: 1px solid #dcdcdc;
+    }
+</style>
+<div class="row">
+
+    <div class="navbar2 navbar-default" style="padding-bottom:10px;">
+        <h2>@ViewBag.Title</h2>
+        <hr />
+
+        @using (Html.BeginForm("Index", "Hinmei", FormMethod.Post, htmlAttributes: new { id = "transitions" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="row">
+                @Html.ValidationSummary(true, "", new { @id = "oputError" })
+                <br />
+            </div>
+            <div class="row">
+                <div class="col-sm-10 validation-summary-errors " style="display: none" id="error"><ul><li></li></ul></div>
+                <br />
+            </div>
+            <div class="row">
+                <div class="col-sm-10">
+                    <div class="row" style="line-height: 2">
+                        @Html.LabelFor(model => model.Serch.Hincod, htmlAttributes: new { @class = "control-label col-sm-1 label_large" })
+                        <div class="col-sm-2 text_cd_middle">
+                            @Html.EditorFor(model => model.Serch.Hincod, new { htmlAttributes = new { @class = "form-control", @maxlength = "15", style = "ime-mode: inactive" } })
+                        </div>
+                        @Html.LabelFor(model => model.Serch.Khincd, htmlAttributes: new { @class = "control-label col-sm-1 label_large", style = "margin-left: 30px;" })
+                        <div class="col-sm-2 text_cd_middle">
+                            @Html.EditorFor(model => model.Serch.Khincd, new { htmlAttributes = new { @class = "form-control", @maxlength = "15", style = "ime-mode: inactive" } })
+                        </div>
+                    </div>
+
+                    <div class="row" style="line-height: 2">
+                        @Html.LabelFor(model => model.Serch.Hinnmk, htmlAttributes: new { @class = "control-label col-sm-1 label_large" })
+                        <div class="col-sm-2" style="width: 410px;">
+                            @Html.EditorFor(model => model.Serch.Hinnmk, new { htmlAttributes = new { @class = "form-control", @maxlength = "80", style = "ime-mode: inactive" } })
+                        </div>
+                    </div>
+
+                    <div class="row" style="line-height: 2">
+                        @Html.LabelFor(model => model.Serch.Hinnam, htmlAttributes: new { @class = "control-label col-sm-1 label_large" })
+                        <div class="col-sm-2" style="width: 410px;">
+                            @Html.EditorFor(model => model.Serch.Hinnam, new { htmlAttributes = new { @class = "form-control", @maxlength = "80", style = "ime-mode: active" } })
+                        </div>
+                    </div>
+
+                    <div class="row" style="line-height:2">
+                        <div class="col-sm-4" style="display:inline-flex; width:230px">
+                            @Html.RadioButtonFor(model => model.Serch.CuCodCh, "1", htmlAttributes: new { @checked = true, style = "margin-bottom:10px" })
+                            <label class="control-label col-sm-2" style="width:80px; padding:3px">登録担当者</label>
+                            <div class="col-sm-1" style="width:5px"></div>
+                            @Html.RadioButtonFor(model => model.Serch.CuCodCh, "2", htmlAttributes: new { style = "margin-bottom:10px" })
+                            <label class="control-label col-sm-2" style="width:80px; padding:3px">更新担当者</label>
+                        </div>
+                        <div class="col-sm-1" style="width:100px; padding:0px">
+                            @Html.EditorFor(model => model.Serch.CuName, new { htmlAttributes = new { @class = "form-control", style = "ime-mode: active" } })
+                            @Html.ValidationMessageFor(model => model.Serch.CuName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-sm-1" style="width:40px"></div>
+                        @Html.LabelFor(model => model.Serch.Del, htmlAttributes: new { @class = "control-label; col-sm-1", style = "width:100px" })
+                        <div class="col-sm-1" style="width:25px">
+                            @Html.CheckBoxFor(model => model.Serch.Del, new { htmlAttributes = new { @class = "form-control checkbox-inline" } })
+                        </div>
+                    </div>
+                    <div class="row" style="line-height:2">
+                        <div class="col-sm-4" style="display:inline-flex; width:230px">
+                            @Html.RadioButtonFor(model => model.Serch.CuDateCh, "1", htmlAttributes: new { @checked = true, style = "margin-bottom:10px; padding:0px" })
+                            <label class="control-label col-sm-2" style="width:80px; padding:3px">登録日</label>
+                            <div class="col-sm-1" style="width:5px"></div>
+                            @Html.RadioButtonFor(model => model.Serch.CuDateCh, "2", htmlAttributes: new { style = "margin-bottom:10px" })
+                            <label class="control-label col-sm-2" style="width:80px; padding:3px">更新日</label>
+                        </div>
+
+                        <div class="col-sm-4" style="display:inline-flex; width:310px; padding:0px">
+                            @Html.TextBoxFor(model => model.Serch.CuFrom, htmlAttributes: new { @class = "form-control datearea-form date", style = "ime-mode: inactive; width:80px" })
+                            <b class="side-comment" style="padding-left:5px; padding-right:2px"></b>
+                            @Html.TextBoxFor(model => model.Serch.CuTFrom, htmlAttributes: new { @class = "form-control", style = "ime-mode: inactive; width:38px", @maxlength = "4" })
+
+                            <b class="side-comment" style="padding-left:5px; padding-right:5px">～</b>
+                            @Html.TextBoxFor(model => model.Serch.CuTo, htmlAttributes: new { @class = "form-control datearea-form date", style = "ime-mode: inactive; width:80px" })
+                            <b class="side-comment" style="padding-left:5px; padding-right:2px"></b>
+                            @Html.TextBoxFor(model => model.Serch.CuTTo, htmlAttributes: new { @class = "form-control", style = "ime-mode: inactive; width:38px", @maxlength = "4" })
+                        </div>
+                    </div>
+
+                    <div class="row" style="line-height: 2">
+                        @Html.LabelFor(model => model.Serch.Ctlfl1, htmlAttributes: new { @class = "control-label col-sm-1 label_large" })
+                        <div class="col-sm-3 text_jp_middle">
+                            @Html.DropDownListFor(model => model.Serch.Ctlfl1, (IEnumerable<SelectListItem>)ViewBag.SCtlfl1, "", htmlAttributes: new { @class = "form-control" })
+                        </div>
+
+                        @Html.LabelFor(model => model.Serch.Dtmoto, htmlAttributes: new { @class = "control-label col-sm-2 label_large" })
+                        <div class="col-sm-1" style="width: 62px">
+                            @Html.EditorFor(model => model.Serch.Dtmoto, new { htmlAttributes = new { @class = "form-control", @maxlength = "1", style = "ime-mode: inactive" } })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+
+                    <div id="tbl-bdr">
+                        <table>
+                            <tr>
+                                <td width="20px">列</td>
+                                <td width="60px">項目名</td>
+                                <td width="20px">S</td>
+                            </tr>
+                            <tr bgcolor="#d9edf7">
+                                <td>1</td>
+                                <td>抽出フラグ</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>品名C</td>
+                                <td></td>
+                            </tr>
+                            <tr bgcolor="#d9edf7">
+                                <td>3</td>
+                                <td>顧客品名C</td>
+                                <td></td>
+                            </tr>
+                            <tr bgcolor="#d9edf7">
+                                <td>4</td>
+                                <td>品名</td>
+                                <td>2↑</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>品名カナ</td>
+                                <td>1↑</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>管理元</td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <br />
+                </div>
+            </div>
+
+            @Html.HiddenFor(model => model.Serch.SearchFlg)
+            @Html.HiddenFor(model => model.Information.Hincod)
+            @Html.HiddenFor(model => model.Information.Dtmoto)
+            @Html.HiddenFor(model => model.Information.Del)
+            @Html.HiddenFor(model => model.Mode)
+
+            <div class="row">
+                <div class="col-sm-11 nbase-bootstrap-table" style="height:350px">
+                    <table id="table"
+                           class="table text-nowrap"
+                           data-method="POST"
+                           data-toggle="table"
+                           data-locale="ja-JP"
+                           data-query-params="queryParams"
+                           data-id-table="advancedTable"
+                           @*data-show-columns="true"
+                           data-show-pagination-switch="true"*@
+                           data-page-list="[10, 25, 50, 1000]"
+                           @*data-show-export="true"*@
+                           data-export-types="['excel','csv']"
+                           @*data-show-multi-sort="true"*@
+                           data-click-to-select="true"
+                           @*data-toolbar="#toolbar"*@
+                           data-filter-show-clear="true"
+                           data-pagination="true">
+                        <colgroup>
+                            <col />
+                            <col />
+                            <col />
+                            <col style="min-width: 20em" />
+                            <col style="min-width: 17em" />
+                            <col />
+                            <col style="min-width: 15em" />
+                            <col />
+                            <col />
+                            <col />
+                        </colgroup>
+                        <thead>
+                            <tr id="data">
+                                @Html.ThFor(model => model.Information.Ctlfl1, htmlAttributes: new { data_sortable = "true", @class = "info" })
+                                @Html.ThFor(model => model.Information.Hincod, htmlAttributes: new { data_sortable = "true" })
+                                @Html.ThFor(model => model.Information.Khincd, htmlAttributes: new { data_sortable = "true", @class = "info" })
+                                @Html.ThFor(model => model.Information.Hinnam, htmlAttributes: new { data_sortable = "true", @class = "info" })
+                                @Html.ThFor(model => model.Information.Hinnmk, htmlAttributes: new { data_sortable = "true" })
+                                @Html.ThFor(model => model.Information.Dtmoto, htmlAttributes: new { data_sortable = "true" })
+                                @Html.ThFor(model => model.Information.Del, htmlAttributes: new { data_sortable = "true", @class = "hide" })
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div>
+                    <div class="col-sm-1">
+                        <br />
+                        <input type="button" name="search" id="search" class="btn btn-primary" style="width:45px; height:30px; padding:0; text-align: center" value="検索" /><br />
+                        <br />
+                        <input type="button" name="inquiry" id="inquiry" class="btn btn-default" style="width:45px; height:30px; padding:0; text-align: center" value="照会"><br />
+                        <br />
+                        <input type="button" name="edit" id="edit" class="btn btn-default" style="width:45px; height:30px; padding:0; text-align: center" value="更新"><br />
+                        <br />
+                        <input type="button" name="delete" id="delete" class="btn btn-default" style="width:45px; height:30px; padding:0; text-align: center" value="削除"><br />
+                        <br />
+                        <input type="button" name="csv" id="csv" class="btn btn-default" style="width:45px; height:30px; padding:0; text-align: center" value="CSV"><br />
+                        <br />
+                        <input type="button" name="excel" id="excel" class="btn btn-default" style="width:45px; height:30px; padding:0; text-align: center" value="Excel">
+                    </div>
+
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts  {
+    @Styles.Render("~/Content/bootstrap-datepicker")
+    @Scripts.Render("~/bundles/bootstrap-datepicker")
+    @Html.Partial("_BootstrapFunction")
+    @Scripts.Render("~/bundles/my-bootstrap-export")
+<script>
+
+        window.onload = function () {
+
+            $('#sidebar').toggleClass('active');
+
+            // 登録 -> 一覧 明細表示
+            if ($('input[name="Serch.SearchFlg"]').val() == 1)
+            {
+                TableBootstrapTableRefresh();
+            }
+            $('#csv').prop('disabled', true);
+            $('#excel').prop('disabled', true);
+        };
+
+        $(function () {
+            $('.date').datepicker({
+                format: "yyyy/mm/dd",
+                language: "ja",
+                autoclose: true, //日付選択で自動的にカレンダーを閉じる
+                orientation: 'bottom left'
+            });
+        });
+
+        $('#search').click(function () {
+
+            document.getElementById("error").style.display = "none";
+            if (document.getElementById("oputError") != null) {
+                document.getElementById("oputError").style.display = "none";
+            }
+
+            // 検索
+            var CuDateCh = $('input[name="Serch.CuDateCh"]:checked').val();
+            var CuFrom = $('input[name="Serch.CuFrom"]').val();
+            var CuTo = $('input[name="Serch.CuTo"]').val();
+            if (CuFrom != "" && CuTo != "") {
+                if (CuFrom > CuTo) {
+                    if (CuDateCh == "1") {
+                        document.getElementById("error").className = "validation-summary-errors";
+                        document.getElementById("error").innerHTML = "<ul><li>登録日が不正です</li></ul>";
+                    } else {
+                        document.getElementById("error").className = "validation-summary-errors";
+                        document.getElementById("error").innerHTML = "<ul><li>更新日が不正です</li></ul>";
+                    }
+                    document.getElementById("error").style.display = "";
+                    $('#table').bootstrapTable('removeAll');
+                    return;
+                }
+            }
+
+            $('input[name="Serch.SearchFlg"]').val(1)
+            TableBootstrapTableRefresh();
+        });
+
+        function TableBootstrapTableRefresh() {
+
+            $('#table').bootstrapTable('removeAll');
+            var tbl = document.getElementById("table");
+            var tr = tbl.rows[1];
+            var td = tr.cells[0];
+            td.innerHTML = "検索中です。";
+
+            $.ajax({
+                url: '@Url.Action("Search")',
+                type: 'POST',
+                dataType: 'json',
+                data: queryParams(0),
+                contentType: 'application/json',
+            }).done(function (result) {
+                if (result.succsess == 1) {
+                    $('#table').bootstrapTable('load', result.data);
+                    $('#csv').prop('disabled', false);
+                    $('#excel').prop('disabled', false);
+                }
+                else {
+                    $('#csv').prop('disabled', true);
+                    $('#excel').prop('disabled', true);
+                    $('#table').bootstrapTable('removeAll');
+                    var tbl = document.getElementById("table");
+                    var tr = tbl.rows[1];
+                    var td = tr.cells[0];
+                    if (result.succsess == 2) {
+                        td.innerHTML = "検索結果がありません。";
+                    } else if (result.succsess == 3) {
+                        document.getElementById("error").innerHTML = "<ul><li>レプリケーション中です。しばらく待って検索してください。</li></ul>";
+                        document.getElementById("error").className = "validation-summary-errors validation-summary-success";
+                        document.getElementById("error").style.display = "";
+                        td.innerHTML = "検索結果がありません。";
+                        return;
+                    } else {
+                        td.innerHTML = "検索結果が多すぎます。検索条件を絞り込んでください。";
+                    }
+                }
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                //例外の場合、エラー画面に飛ばす
+                window.location.href = '/Error/Index'
+            }).always(function () {
+            });
+        }
+
+        $(function () {
+            // 選択確認用
+            $('#table').on('click-row.bs.table', function (e, row, $element) {
+                $('.success').removeClass('success');
+                $($element).addClass('success');
+            });
+            // 照会
+            $('#inquiry').click(function (e) {
+
+                $.ajax({
+                    url: '@Url.Action("CheckReplication")',
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                }).done(function (result) {
+                    if (result.Replication) {
+
+                        $('#csv').prop('disabled', true);
+                        $('#excel').prop('disabled', true);
+                        $('#table').bootstrapTable('removeAll');
+                        var tbl = document.getElementById("table");
+                        var tr = tbl.rows[1];
+                        var td = tr.cells[0];
+                        document.getElementById("error").innerHTML = "<ul><li>レプリケーション中です。しばらく待って操作してください。</li></ul>";
+                        document.getElementById("error").className = "validation-summary-errors validation-summary-success";
+                        document.getElementById("error").style.display = "";
+                        td.innerHTML = "検索結果がありません。";
+                        return;
+                    } else {
+                        var index = $('.success').attr('data-index');
+                        if (index) {
+                            var row = $('.success').parents('table:first').bootstrapTable('getData')[index];
+                            $('input[name="Information.Hincod"]').val(row.@nameof(HinmeiInformation.Hincod));
+                            $('input[name="Information.Dtmoto"]').val(row.@nameof(HinmeiInformation.Dtmoto));
+                            $('input[name="Information.Del"]').val(row.@nameof(HinmeiInformation.Del));
+                            $('input[name="Mode"]').val("1");
+                            $('#transitions').submit();
+                        }
+                    }
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    //例外の場合、エラー画面に飛ばす
+                    window.location.href = '/Error/Index'
+                    return;
+                }).always(function () {
+                });
+
+            });
+            // 更新
+            $('#edit').click(function (e) {
+                var index = $('.success').attr('data-index');
+                if (index) {
+                    var row = $('.success').parents('table:first').bootstrapTable('getData')[index];
+
+                    document.getElementById("error").style.display = "none";
+                    var Dtmoto = row.@nameof(HinmeiInformation.Dtmoto);
+                    var Del = row.@nameof(HinmeiInformation.Del);
+                    if (!checkData(Dtmoto)) {
+                        document.getElementById("error").innerHTML = "<ul><li>データ管理元：　「4」「7」以外の為、更新できません。</li></ul>";
+                        document.getElementById("error").style.display = "";
+                        return;
+                    }
+                    if (Del == "1") {
+                        document.getElementById("error").innerHTML = "<ul><li>更新：　削除済の為、更新できません。</li></ul>";
+                        document.getElementById("error").style.display = "";
+                        return;
+                    }
+
+                    $('input[name="Information.Hincod"]').val(row.@nameof(HinmeiInformation.Hincod));
+                    $('input[name="Information.Dtmoto"]').val(Dtmoto);
+                    $('input[name="Information.Del"]').val(Del);
+                    $('input[name="Mode"]').val("2");
+                    $('#transitions').submit();
+                }
+            });
+            // 削除
+            $('#delete').click(function (e) {
+                var index = $('.success').attr('data-index');
+                if (index) {
+                    var row = $('.success').parents('table:first').bootstrapTable('getData')[index];
+
+                    document.getElementById("error").style.display = "none";
+                    var Dtmoto = row.@nameof(HinmeiInformation.Dtmoto);
+                    var Del = row.@nameof(HinmeiInformation.Del);
+                    if (!checkData(Dtmoto)) {
+                        document.getElementById("error").innerHTML = "<ul><li>データ管理元：　「4」「7」以外の為、削除できません。</li></ul>";
+                        document.getElementById("error").style.display = "";
+                        return;
+                    }
+                    if (Del == "1") {
+                        document.getElementById("error").innerHTML = "<ul><li>削除：　削除済の為、削除できません。</li></ul>";
+                        document.getElementById("error").style.display = "";
+                        return;
+                    }
+
+                    $('input[name="Information.Hincod"]').val(row.@nameof(HinmeiInformation.Hincod));
+                    $('input[name="Information.Dtmoto"]').val(Dtmoto);
+                    $('input[name="Information.Del"]').val(Del);
+                    $('input[name="Mode"]').val("3");
+                    $('#transitions').submit();
+                }
+            });
+            // Excel出力
+            $('#excel').click(function (e) {
+
+                $.ajax({
+                    url: '@Url.Action("CheckReplication")',
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                }).done(function (result) {
+                    if (result.Replication) {
+                        $('#csv').prop('disabled', true);
+                        $('#excel').prop('disabled', true);
+                        $('#table').bootstrapTable('removeAll');
+                        var tbl = document.getElementById("table");
+                        var tr = tbl.rows[1];
+                        var td = tr.cells[0];
+                        document.getElementById("error").innerHTML = "<ul><li>レプリケーション中です。しばらく待って操作してください。</li></ul>";
+                        document.getElementById("error").className = "validation-summary-errors validation-summary-success";
+                        document.getElementById("error").style.display = "";
+                        td.innerHTML = "検索結果がありません。";
+                        return;
+                    } else {
+                        if (window.confirm('ダウンロードしてもよろしいですか？')) {
+                            $('input[name="Mode"]').val("9");
+                            $('#transitions').submit();
+                        }
+                    }
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    //例外の場合、エラー画面に飛ばす
+                    window.location.href = '/Error/Index'
+                    return;
+                }).always(function () {
+                });
+
+            });
+
+            // Csv出力
+            $('#csv').click(function (e) {
+
+                $.ajax({
+                    url: '@Url.Action("CheckReplication")',
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                }).done(function (result) {
+                    if (result.Replication) {
+                        $('#csv').prop('disabled', true);
+                        $('#excel').prop('disabled', true);
+                        $('#table').bootstrapTable('removeAll');
+                        var tbl = document.getElementById("table");
+                        var tr = tbl.rows[1];
+                        var td = tr.cells[0];
+                        document.getElementById("error").innerHTML = "<ul><li>レプリケーション中です。しばらく待って操作してください。</li></ul>";
+                        document.getElementById("error").className = "validation-summary-errors validation-summary-success";
+                        document.getElementById("error").style.display = "";
+                        td.innerHTML = "検索結果がありません。";
+                        return;
+                    } else {
+                        if (window.confirm('ダウンロードしてもよろしいですか？')) {
+                            $('input[name="Mode"]').val("8");
+                            $('#transitions').submit();
+                        }
+                    }
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    //例外の場合、エラー画面に飛ばす
+                    window.location.href = '/Error/Index'
+                    return;
+                }).always(function () {
+                });
+            });
+        });
+
+        $('#table').bootstrapTable({
+            exportUrl: "@Url.Action("Export")",
+            exportQueryParams: exportQueryParams,
+            exportFileName: "品名マスタ（一覧）",
+            onLoadError: function (status, res) {
+                if (res.responseText) {
+                    $('.top_nav a').prop('disabled', true);
+                    $('.right_col button').prop('disabled', true);
+                    setTimeout(function () {
+                        document.write(res.responseText);
+                    }, 0);
+                }
+            },
+        });
+
+        function exportQueryParams($el, ext) {
+            var data = $el.bootstrapTable('getData');
+            var list = [];
+            @{
+                var paramList = new List<string>() {
+                    nameof(HinmeiInformation.Hincod),
+                };
+            }
+            $.each($el.find('[data-index]'), function (i, v) {
+            var row = data[$(v).data('index')];
+                list.push({
+                    @foreach (var param in paramList) {
+                        @: @param: row.@param,
+                    }
+                });
+            });
+            return { paramList: list ,extention: ext};
+        }
+
+        function queryParams(params) {
+            return JSON.stringify({
+                'Hinnmk': $('input[name="Serch.Hinnmk"]').val(),
+                'Hincod': $('input[name="Serch.Hincod"]').val(),
+                'Khincd': $('input[name="Serch.Khincd"]').val(),
+                'Hinnam': $('input[name="Serch.Hinnam"]').val(),
+                'Ctlfl1': $('select[name="Serch.Ctlfl1"]').val(),
+                'Dtmoto': $('input[name="Serch.Dtmoto"]').val(),
+                'CuCodCh': $('input[name="Serch.CuCodCh"]:checked').val(),
+                'CuName': $('input[name="Serch.CuName"]').val(),
+                'CuDateCh': $('input[name="Serch.CuDateCh"]:checked').val(),
+                'CuFrom': $('input[name="Serch.CuFrom"]').val(),
+                'CuTFrom': $('input[name="Serch.CuTFrom"]').val(),
+                'CuTo': $('input[name="Serch.CuTo"]').val(),
+                'CuTTo': $('input[name="Serch.CuTTo"]').val(),
+                'Del': $('input[name="Serch.Del"]').prop("checked")
+            });
+        }
+
+    function checkData(Dtmoto) {
+        if (Dtmoto != "4" && Dtmoto != "7") {
+            return false;
+        }
+        return true;
+    }
+
+</script>
+}

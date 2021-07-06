@@ -1,0 +1,119 @@
+﻿<html lang="ja">
+
+@{
+    ViewBag.Title = "請求データ作成";
+    ViewBag.PageMainTitle = "請求データ作成完了";
+    ViewBag.Date = "2020年12月";
+    ViewBag.Data = "リハーサル";
+}
+
+@section Scripts {
+    <script>
+
+        $(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#UploadConfirmList");
+            
+            dt.setScrollY("600px");
+            dt.configure();
+
+            $('[data-toggle="popover"]').popover();
+
+        });
+    </script>
+}
+
+<div class="alert @ViewBag.AlertType">
+    <span>@ViewBag.ResultMessage</span>
+</div>
+
+@*<div class="row justify-content-between macss-form-button-group-row">
+        <div class="col-4">
+            <a role="button" class="btn btn-secondary" href="@Url.Action("Upload")">@MacssWeb.Resources.ControlText.BackToUpload</a>
+        </div>
+        <div class="col-4 text-right">
+            <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.BackToList</a>
+        </div>
+    </div>*@
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+    </div>
+    <div class="col-4 text-right">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("SubMenu", "Home")">サブメニューへ</a>
+    </div>
+</div>
+
+<div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+    <div class="row mr-0 mb-1">
+        <div class="col-4">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="Condition1">年月</span>
+                </div>
+                <span class="form-control">@ViewBag.Date</span>
+
+            </div>
+        </div>
+    </div>
+    <div class="row mr-0 mb-1">
+        <div class="col-4">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="Condition3">締日</span>
+                </div>
+                <div class="macss-input-group-input form-control">
+                    <label class="form-check-label" for="inlineRadio1">末締</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="Condition3">手番</span>
+                </div>
+                <div class="macss-input-group-input form-control">
+                    <label class="form-check-label" for="inlineRadio1">1手番</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="Condition3">得意先</span>
+                </div>
+                <div class="macss-input-group-input form-control">
+                    <label class="form-check-label" for="inlineRadio1">全て</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mr-0 mb-1">
+        <div class="col-4">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">件数</span>
+                </div>
+                <span class="form-control">100件</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-3 mb-4">
+    <div class="col-6">
+    </div>
+    <div class="col-6 text-right">
+        <div class="dropdown">
+            <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#CsvDownloadDialog">CSVダウンロード</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+

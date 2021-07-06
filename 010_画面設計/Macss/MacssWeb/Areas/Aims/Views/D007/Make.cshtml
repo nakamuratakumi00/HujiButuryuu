@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "請求仕入 - AIMS";
+    ViewBag.ScreenId = "";
+    ViewBag.PageMainTitle = "Fe注文データ作成";
+    ViewBag.Caption = "Fe注文データの作成を行います。";
+}
+
+
+@using (Html.BeginForm("MakeConfirm", "D007", FormMethod.Post))
+{
+
+    @Html.AntiForgeryToken()
+
+    <div class="container-fluid">
+        <div>
+            <p>
+                @ViewBag.Caption
+            </p>
+        </div>
+
+        <div class="row mr-0 mb-1">
+            <div class="col-3">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="Condition3">年月</span>
+                    </div>
+                    <div class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                        2021年 1月
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <div>
+                <div class="macss-form-button-group-row pr-0">
+                    <div class="text-right">
+                        <button type="button" id="Confirm" class="btn btn-primary">@MacssWeb.Resources.ControlText.Confirm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $(function () {
+        $('#Confirm').on('click', function () {
+            var form = $(this).parents('form');
+            form.submit();
+        });
+
+
+    })
+</script>

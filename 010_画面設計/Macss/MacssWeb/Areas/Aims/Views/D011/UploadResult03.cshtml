@@ -1,0 +1,127 @@
+﻿@model IEnumerable<MacssWeb.Models.AccountMasterUpload>
+
+@{
+    ViewBag.Title = "請求仕入 - AIMS";
+    ViewBag.ScreenId = "";
+    ViewBag.PageMainTitle = "ESP本社得意先マスタ取込結果";
+}
+@section Scripts {
+    <script>
+
+        $(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#UploadConfirmList");
+            dt.setScrollY("600px");
+            dt.configure();
+
+            $('[data-toggle="popover"]').popover();
+
+        });
+    </script>
+}
+
+<div class="alert @ViewBag.AlertType">
+    <span>@ViewBag.ResultMessage</span>
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("Upload03")">@MacssWeb.Resources.ControlText.BackToUpload</a>
+    </div>
+    <div class="col-4 text-right">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("Index", "Home")">@MacssWeb.Resources.ControlText.BackToSubMenu</a>
+    </div>
+</div>
+
+<div class="container-fluid mt-4">
+    <div class="form-inline">
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">ファイル</span>
+            </div>
+            <span class="form-control">@ViewBag.UploadFileName</span>
+        </div>
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">取込完了日時</span>
+            </div>
+            <span class="form-control">@System.DateTime.Now.ToString("yyyy/MM/dd HH:mm")</span>
+        </div>
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">取込件数</span>
+            </div>
+            <span class="form-control">1 件@*@ViewBag.UploadedCount*@</span>
+        </div>
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">エラー件数</span>
+            </div>
+            <span class="form-control">1 件@*@ViewBag.ErrorCount*@</span>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-2 mb-2">
+    <div class="col-12 text-right">
+        <div class="dropdown">
+            <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#CsvDownloadDialog">CSVダウンロード</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table id="UploadConfirmList" class="table table-striped table-hover macss-data-table">
+    <thead class="macss-data-table-header macss-multi-row-list-header">
+        <!-- thの文字数で列の幅が決まってしまうため、必要に応じて全角スペースを入れて列の幅を調整する必要がある-->
+        <tr>
+            <th rowspan="2" class="valign-middle">行No</th>
+            <th rowspan="2" class="valign-middle">エラー</th>
+            <th colspan="5">取引先マスタ</th>
+            <th colspan="7">ESP本社得意先マスタ</th>
+        </tr>
+        <tr>
+            <th>請求先コード</th>
+            <th>FB本社得意先コード</th>
+            <th>取引先名　　　　　　　　</th>
+            <th>PC顧客区分コード</th>
+            <th>締日</th>
+            <th>得意先コード</th>
+            <th>代表得意先コード</th>
+            <th>PC顧客区分コード</th>
+            <th>請求締日</th>
+            <th>親請求</th>
+            <th>適用開始日</th>
+            <th>適用終了日</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                1
+            </td>
+            <td>
+                <a tabindex="0" class="btn btn-sm btn-danger" role="button" data-toggle="popover"
+                   data-trigger="focus" title="エラー詳細"
+                   data-content="親請求対象ではありません">詳細</a>
+            </td>
+            <td>A1002A41</td>
+            <td>A1017B53</td>
+            <td>アオイ電子（株）</td>
+            <td>1128</td>
+            <td>99</td>
+            <td>A1017B53</td>
+            <td>A1017B53</td>
+            <td>1128</td>
+            <td>99</td>
+            <td>0</td>
+            <td>2011/07/01</td>
+            <td>2999/12/31</td>
+        </tr>
+    </tbody>
+</table>

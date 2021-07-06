@@ -1,0 +1,1076 @@
+﻿<!-- ■登録・更新系フォーム -->
+@model Macss.Database.Entity.AccountMaster
+
+@Html.AntiForgeryToken()
+
+@Html.Partial("../Shared/Dialog/_DenpyoKbnCodeSearch")
+@Html.Partial("../Shared/Dialog/_TokuisakiCodeSearch")
+
+@Html.Partial("../Shared/Dialog/_UnsohohoCodeSearch")
+@Html.Partial("../Shared/Dialog/_UnsocorseCodeSearch")
+@Html.Partial("../Shared/Dialog/_ShiiresakiCodeSearch")
+@Html.Partial("../Shared/Dialog/_SyukkaBashoCodeSearch")
+@Html.Partial("../Shared/Dialog/_UnsokbnCodeSearch")
+@Html.Partial("../Shared/Dialog/_KisyuACodeSearch")
+@Html.Partial("../Shared/Dialog/_TantoshaCodeSearch")
+@Html.Partial("../Shared/Dialog/_TodokesakiCodeSearch")
+@Html.Partial("../Shared/Dialog/_HinmeiCodeSearch")
+@Html.Partial("../Shared/Dialog/_YubinNoSearch")
+@Html.Partial("../Shared/Dialog/_SaisyuJuyoCodeSearch")
+@Html.Partial("../Shared/Dialog/_OkyakusamaCodeSearch")
+
+<!--テスト値-->
+@{ var testVal = string.Empty; }
+
+<div>
+    @Html.ValidationSummary(false, "入力エラーがあります。", new { @class = "alert alert-danger" })
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#TransitionConfirmDialog">@MacssWeb.Resources.ControlText.BackToList</button>
+    </div>
+    <div class="col-4 text-right">
+        <button type="submit" class="btn btn-primary">@MacssWeb.Resources.ControlText.InputConfirm</button>
+    </div>
+</div>
+<table class="table macss-form-table">
+    <colgroup>
+        <col class="macss-form-table-title" />
+        <col class="macss-form-table-contents" />
+    </colgroup>
+    <tr>
+        <th scope="row">
+            @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+            {
+            <label class="control-label required">配布先コード</label>
+            }
+            else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+            {
+            <label class="control-label">配布先コード</label>
+            }
+            else
+            {
+            <label class="control-label">配布先コード</label>
+            }
+
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <label class="control-label">XX</label>
+                }
+                else
+                {
+                    <label class="control-label"></label>
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+            {
+                <label class="control-label required">印刷コード</label>
+            }
+            else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+            {
+                <label class="control-label">印刷コード</label>
+            }
+            else
+            {
+                <label class="control-label">印刷コード</label>
+            }
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <label class="control-label">XXX</label>
+                }
+                else
+                {
+                    <label class="control-label"></label>
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label required">配布先名</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="ああああああああああああああああああああ">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">用途</label>
+        </th>
+        <td>
+            <div>
+                <select class="custom-select form-control" id="Condition3">
+                    @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                    {
+                        <option value="" selected></option>
+                        <option value="0">出荷No発番用</option>
+                        <option value="1">エントリー用</option>
+                    }
+                    else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                    {
+                        <option value=""></option>
+                        <option value="0" selected>出荷No発番用</option>
+                        <option value="1">エントリー用</option>
+                    }
+                    else
+                    {
+                        <option value="" selected></option>
+                        <option value="0">出荷No発番用</option>
+                        <option value="1">エントリー用</option>
+                    }
+                </select>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">登録依頼元</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="あああああああああああああ">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">登録依頼元電話番号</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="XXXXXXXXXXXXXXXXXXXX">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">配布枚数</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="9999">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label required">有効期限印刷</label>
+        </th>
+        <td>
+            <div>
+                <select class="custom-select form-control" id="Condition3">
+                    @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                    {
+                        <option value="0">印刷しない</option>
+                        <option value="1">印刷する</option>
+                    }
+                    else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                    {
+                        <option value="0">印刷しない</option>
+                        <option value="1" selected>印刷する</option>
+                    }
+                    else
+                    {
+                        <option value="0">印刷しない</option>
+                        <option value="1">印刷する</option>
+                    }
+                </select>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label required">出荷No印刷</label>
+        </th>
+        <td>
+            <div>
+                <select class="custom-select form-control" id="Condition3">
+                    @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                    {
+                        <option value="0">印刷しない</option>
+                        <option value="1">印刷する</option>
+                    }
+                    else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                    {
+                        <option value="0">印刷しない</option>
+                        <option value="1" selected>印刷する</option>
+                    }
+                    else
+                    {
+                        <option value="0">印刷しない</option>
+                        <option value="1">印刷する</option>
+                    }
+                </select>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">発注元会社名１</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="ああああああああ">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">発注元会社名２</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="ああああああああ">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">発注元課補係長１</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="ああああ">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">発注元課補係長２</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="ああああ">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">発注元担当１</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="ああああ">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">発注元担当２</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="ああああ">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">発注元電話番号１</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="XXXXXXXXXXXXXXXXXXXX">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">発注元電話番号２</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="XXXXXXXXXXXXXXXXXXXX">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">現品保管場所</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="ああああああああああ">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">運賃負担区分</label>
+        </th>
+        <td>
+            <div>
+                <select class="custom-select form-control" id="Condition3">
+                    @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                    {
+                        <option value="" selected></option>
+                        <option value="1">先方</option>
+                        <option value="2">当方</option>
+                    }
+                    else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                    {
+                        <option value=""></option>
+                        <option value="1" selected>先方</option>
+                        <option value="2">当方</option>
+                    }
+                    else
+                    {
+                        <option value=""></option>
+                        <option value="1" selected>先方</option>
+                        <option value="2">当方</option>
+                    }
+                </select>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">経費負担No</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label required">届先マスター使用</label>
+        </th>
+        <td>
+            <div>
+                <select class="custom-select form-control" id="Condition3">
+                    @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                    {
+                        <option value="0">使用しない</option>
+                        <option value="1">使用する</option>
+                    }
+                    else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                    {
+                        <option value="0" selected>使用しない</option>
+                        <option value="1">使用する</option>
+                    }
+                    else
+                    {
+                        <option value="0">使用しない</option>
+                        <option value="1">使用する</option>
+                    }
+                </select>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">届先コード</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="XXXXXXXXXXXXXXX">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">届先名１</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="ああああああああああああああああああああああああああ">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">届先名２</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="ああああああああああああああああああああああああああ">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">届先郵便番号</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="XXXXXXXXXX">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">届先電話番号</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="XXXXXXXXXXXXXXXXXXXX">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">届先住所</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="あああああああああああああああああああああああああああ">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">品名型式寸法１</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="あああああああああああああああああああああああああ">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">出荷数１</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="ああああああ">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">品名型式寸法２</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="あああああああああああああああああああああああああ">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">出荷数２</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="ああああああ">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">品名型式寸法３</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="あああああああああああああああああああああああああ">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">出荷数３</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="ああああああ">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">品名型式寸法４</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="あああああああああああああああああああああああああ">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">出荷数４</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="ああああああ">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">品名型式寸法５</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="あああああああああああああああああああああああああ">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">出荷数５</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="ああああああ">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">特記事項１</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="ああああああああああああ">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">特記事項２</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="ああああああああああああ">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">得意先コード</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="XXXXXXXXX">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">出荷場所名</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="ああああああああ">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">運送方法コード</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="XXXXXXXXX">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row">
+            <label class="control-label">運送方法名称</label>
+        </th>
+        <td>
+            <div>
+                <label class="control-label">ああああああああああああああああああああ</label>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">運送コースコード</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="ああああああああああああああああああああ">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">伝票区分</label>
+        </th>
+        <td>
+            <div>
+                @if (ViewBag.CreateFlg != null && ViewBag.CreateFlg == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+                else if (ViewBag.EditExec != null && ViewBag.EditExec == true)
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="XX">
+                }
+                else
+                {
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                }
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#TransitionConfirmDialog">@MacssWeb.Resources.ControlText.BackToList</button>
+    </div>
+    <div class="col-8 text-right">
+        <button type="submit" class="btn btn-primary">@MacssWeb.Resources.ControlText.InputConfirm</button>
+    </div>
+</div>
+
+<div class="modal" id="TransitionConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.TransitionConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @MacssWeb.Resources.Messages.TransitionConfirm
+                <br>
+                @MacssWeb.Resources.Messages.Confirm
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary macss-btn" href="@Url.Action("Index")" role="button">@MacssWeb.Resources.ControlText.Yes</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function setDepartmentCode(code, value) {
+        $("#bumon_cd").val(code);
+        $("#DepartmentName").text(value);
+    }
+    $(function () {
+        var createDatePicker = new Macss.DatetimePicker.MacssDtPicker("#totyaku_date", "#TotyakuDateCalendar");
+        createDatePicker.configure();
+        var updateDatePicker = new Macss.DatetimePicker.MacssDtPicker("#syukka_date", "#SyukkaDateCalendar");
+        updateDatePicker.configure();
+    });
+
+</script>

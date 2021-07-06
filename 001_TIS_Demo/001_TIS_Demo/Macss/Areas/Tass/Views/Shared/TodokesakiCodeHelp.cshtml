@@ -1,0 +1,384 @@
+﻿
+<style>
+    /*table {
+        border: solid 0.5px
+    }*/
+    h1, .h1,
+    h2, .h2,
+    h3, .h3 {
+        margin-top: 2px;
+        margin-bottom: 0px;
+    }
+
+    td.SDEK {
+        text-align: center;
+        width: 35px;
+        height: 35px;
+    }
+
+</style>
+
+@using Macss.Areas.Tass.ViewModels
+@model CodeHelpViewModels.TodokesakiViewData
+@using Macss.HtmlHelpers
+
+
+<button type="button" class="btn btn-default" data-toggle="modal" data-target="#TodokesakiModal" style="height:22px; width:30px; padding:4px">
+    *
+</button>
+
+<!-- コードヘルプ -->
+<div class="modal fade bs-example-modal-lg" data-backdrop="static" id="TodokesakiModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">コードヘルプ - 届先マスタ</h4>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row" style="line-height:2">
+                    @Html.LabelFor(model => model.Serch.Tdknmk, htmlAttributes: new { @class = "control-label col-sm-1 label_large"})
+                    <div class="col-sm-1 text_jp_middle">
+                        @Html.EditorFor(model => model.Serch.Tdknmk, new { htmlAttributes = new { @class = "form-control", @maxlength = "80" , style = "ime-mode: inactive" } })
+                        @*@Html.ValidationMessageFor(model => model.Serch.Tdknmk, "", new { @class = "text-danger" })*@
+                    </div>
+
+                    @Html.LabelFor(model => model.Serch.Tdkcod, htmlAttributes: new { @class = "control-label col-sm-2 label_large"})
+                    <div class="col-sm-2  text_cd_middle" >
+                        @Html.EditorFor(model => model.Serch.Tdkcod, new { htmlAttributes = new { @class = "form-control", @maxlength = "15" , style = "ime-mode: inactive" } })
+                        @*@Html.ValidationMessageFor(model => model.Serch.Tdkcod, "", new { @class = "text-danger" })*@
+                    </div>
+                </div>
+
+                <div class="row" style="line-height:2">
+                    @Html.LabelFor(model => model.Serch.Tdknam, htmlAttributes: new { @class = "control-label col-sm-2 label_large" })
+                    <div class="col-sm-1 text_jp_middle">
+                        @Html.EditorFor(model => model.Serch.Tdknam, new { htmlAttributes = new { @class = "form-control", @maxlength = "20" ,style = "ime-mode: active" } })
+                        @Html.ValidationMessageFor(model => model.Serch.Tdknam, "", new { @class = "text-danger" })
+                    </div>
+
+                    @Html.LabelFor(model => model.Serch.Tdknms, htmlAttributes: new { @class = "control-label col-sm-1 label_large"})
+                    <div class="col-sm-2 text_jp_middle">
+                        @Html.EditorFor(model => model.Serch.Tdknms, new { htmlAttributes = new { @class = "form-control", @maxlength = "20" , style = "ime-mode: active" } })
+                        @*@Html.ValidationMessageFor(model => model.Serch.Tdknms, "", new { @class = "text-danger" })*@
+                    </div>
+                    </div>
+                <div class="row" style="line-height:2">
+                    @Html.LabelFor(model => model.Serch.Tdbnam, htmlAttributes: new { @class = "control-label col-sm-1 label_large" })
+                    <div class="col-sm-1 text_jp_middle">
+                        @Html.EditorFor(model => model.Serch.Tdbnam, new { htmlAttributes = new { @class = "form-control", @maxlength = "20", style = "ime-mode: active" } })
+                        @Html.ValidationMessageFor(model => model.Serch.Tdbnam, "", new { @class = "text-danger" })
+                    </div>
+
+                    @Html.LabelFor(model => model.Serch.Ktdkcd, htmlAttributes: new { @class = "control-label col-sm-2 label_large" })
+                    <div class="col-sm-2  text_cd_middle">
+                        @Html.EditorFor(model => model.Serch.Ktdkcd, new { htmlAttributes = new { @class = "form-control", @maxlength = "15", style = "ime-mode: inactive" } })
+                        @*@Html.ValidationMessageFor(model => model.Serch.Tdkcod, "", new { @class = "text-danger" })*@
+                    </div>
+                </div>
+
+                    <div class="row" style="line-height:2">
+                        @Html.LabelFor(model => model.Serch.Jyusyo, htmlAttributes: new { @class = "control-label col-sm-2 label_large"})
+                        <div class="col-sm-1 text_jp_large">
+                            @Html.EditorFor(model => model.Serch.Jyusyo, new { htmlAttributes = new { @class = "form-control", @maxlength = "60" , style = "ime-mode: active" } })
+                            @*@Html.ValidationMessageFor(model => model.Serch.Jyusyo, "", new { @class = "text-danger" })*@
+                        </div>
+                    </div>
+                    <div class="row" style="line-height:2">
+                        @Html.LabelFor(model => model.Serch.Tornam, htmlAttributes: new { @class = "control-label col-sm-1 label_large", @style= "margin-right: 12px; ime-mode: inactive" })
+                        <table border="1">
+                            <tr>
+                                <td class="SDEK">
+                                    @Html.LabelFor(model => model.Serch.Sdek01, new { htmlAttributes = new { @class = "form-control", maxlength = 1 } })
+                                </td>
+                                <td class="SDEK">
+                                    @Html.LabelFor(model => model.Serch.Sdek02, new { htmlAttributes = new { @class = "form-control", maxlength = 1 } })
+                                </td>
+                                <td class="SDEK">
+                                    @Html.LabelFor(model => model.Serch.Sdek03, new { htmlAttributes = new { @class = "form-control", maxlength = 1 } })
+                                </td>
+                                <td class="SDEK">
+                                    @Html.LabelFor(model => model.Serch.Sdek04, new { htmlAttributes = new { @class = "form-control", maxlength = 1 } })
+                                </td>
+                                <td class="SDEK">
+                                    @Html.LabelFor(model => model.Serch.Sdek05, new { htmlAttributes = new { @class = "form-control", maxlength = 1 } })
+                                </td>
+                                <td class="SDEK">
+                                    @Html.LabelFor(model => model.Serch.Sdek06, new { htmlAttributes = new { @class = "form-control", maxlength = 1 } })
+                                </td>
+                                <td class="SDEK">
+                                    @Html.LabelFor(model => model.Serch.Sdek07, new { htmlAttributes = new { @class = "form-control", maxlength = 1 } })
+                                </td>
+                                <td class="SDEK">
+                                    @Html.LabelFor(model => model.Serch.Sdek08, new { htmlAttributes = new { @class = "form-control", maxlength = 1 } })
+                                </td>
+                                <td class="SDEK">
+                                    @Html.LabelFor(model => model.Serch.Sdek09, new { htmlAttributes = new { @class = "form-control", maxlength = 1 } })
+                                </td>
+                                <td class="SDEK">
+                                    @Html.LabelFor(model => model.Serch.Sdek10, new { htmlAttributes = new { @class = "form-control", maxlength = 1 } })
+                                </td>
+                                <td class="SDEK">
+                                    @Html.LabelFor(model => model.Serch.Sdek11, new { htmlAttributes = new { @class = "form-control", maxlength = 1 } })
+                                </td>
+                                <td class="SDEK">
+                                    @Html.LabelFor(model => model.Serch.Sdek12, new { htmlAttributes = new { @class = "form-control", maxlength = 1 } })
+                                </td>
+                                <td class="SDEK">
+                                    @Html.LabelFor(model => model.Serch.Sdek13, new { htmlAttributes = new { @class = "form-control", maxlength = 1 } })
+                                </td>
+                                <td class="SDEK">
+                                    @Html.LabelFor(model => model.Serch.Sdek14, new { htmlAttributes = new { @class = "form-control", maxlength = 1 } })
+                                </td>
+                                <td class="SDEK">
+                                    @Html.LabelFor(model => model.Serch.Sdek15, new { htmlAttributes = new { @class = "form-control", maxlength = 1 } })
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="SDEK">
+                                    @Html.EditorFor(model => model.Serch.Sdek01, new { htmlAttributes = new { @class = "form-control", maxlength = 1, style = "width: 37px; height: 35px;ime-mode: inactive" } })
+                                </td>
+                                <td class="SDEK">
+                                    @Html.EditorFor(model => model.Serch.Sdek02, new { htmlAttributes = new { @class = "form-control", maxlength = 1, style = "width: 37px; height: 35px;ime-mode: inactive" } })
+                                </td>
+                                <td class="SDEK">
+                                    @Html.EditorFor(model => model.Serch.Sdek03, new { htmlAttributes = new { @class = "form-control", maxlength = 1, style = "width: 37px; height: 35px;ime-mode: inactive" } })
+                                </td>
+                                <td class="SDEK">
+                                    @Html.EditorFor(model => model.Serch.Sdek04, new { htmlAttributes = new { @class = "form-control", maxlength = 1, style = "width: 37px; height: 35px;ime-mode: inactive" } })
+                                </td>
+                                <td class="SDEK">
+                                    @Html.EditorFor(model => model.Serch.Sdek05, new { htmlAttributes = new { @class = "form-control", maxlength = 1, style = "width: 37px; height: 35px;ime-mode: inactive" } })
+                                </td>
+                                <td class="SDEK">
+                                    @Html.EditorFor(model => model.Serch.Sdek06, new { htmlAttributes = new { @class = "form-control", maxlength = 1, style = "width: 37px; height: 35px;ime-mode: inactive" } })
+                                </td>
+                                <td class="SDEK">
+                                    @Html.EditorFor(model => model.Serch.Sdek07, new { htmlAttributes = new { @class = "form-control", maxlength = 1, style = "width: 37px; height: 35px;ime-mode: inactive" } })
+                                </td>
+                                <td class="SDEK">
+                                    @Html.EditorFor(model => model.Serch.Sdek08, new { htmlAttributes = new { @class = "form-control", maxlength = 1, style = "width: 37px; height: 35px;ime-mode: inactive" } })
+                                </td>
+                                <td class="SDEK">
+                                    @Html.EditorFor(model => model.Serch.Sdek09, new { htmlAttributes = new { @class = "form-control", maxlength = 1, style = "width: 37px; height: 35px;ime-mode: inactive" } })
+                                </td>
+                                <td class="SDEK">
+                                    @Html.EditorFor(model => model.Serch.Sdek10, new { htmlAttributes = new { @class = "form-control", maxlength = 1, style = "width: 37px; height: 35px;ime-mode: inactive" } })
+                                </td>
+                                <td class="SDEK">
+                                    @Html.EditorFor(model => model.Serch.Sdek11, new { htmlAttributes = new { @class = "form-control", maxlength = 1, style = "width: 37px; height: 35px;ime-mode: inactive" } })
+                                </td>
+                                <td class="SDEK">
+                                    @Html.EditorFor(model => model.Serch.Sdek12, new { htmlAttributes = new { @class = "form-control", maxlength = 1, style = "width: 37px; height: 35px;ime-mode: inactive" } })
+                                </td>
+                                <td class="SDEK">
+                                    @Html.EditorFor(model => model.Serch.Sdek13, new { htmlAttributes = new { @class = "form-control", maxlength = 1, style = "width: 37px; height: 35px;ime-mode: inactive" } })
+                                </td>
+                                <td class="SDEK">
+                                    @Html.EditorFor(model => model.Serch.Sdek14, new { htmlAttributes = new { @class = "form-control", maxlength = 1, style = "width: 37px; height: 35px;ime-mode: inactive" } })
+                                </td>
+                                <td class="SDEK">
+                                    @Html.EditorFor(model => model.Serch.Sdek15, new { htmlAttributes = new { @class = "form-control", maxlength = 1, style = "width: 37px; height: 35px;ime-mode: inactive" } })
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-11"></div>
+                        <div class="col-sm-1"><input type="button" name="TodokesakiSearch" id="TodokesakiSearch" class="btn btn-default" style="width:50px; height: 30px; padding:0; text-align: center;" value="検索" /></div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-12 nbase-bootstrap-table" style="height:300px">
+                            <table id="TodokesakiTable"
+                                   class="table"
+                                   data-method="POST"
+                                   data-toggle="table"
+                                   data-query-params="TodokesakiQueryParams"
+                                   data-id-table="advancedTable"
+                                   data-page-list="[10, 25, 50, 1000]"
+                                   data-click-to-select="true"
+                                   data-filter-show-clear="true"
+                                   data-pagination="true">
+                                <colgroup>
+                                    <col />
+                                    <col style="min-width: 15em" />
+                                    <col style="min-width: 10em" />
+                                    <col />
+                                    <col style="min-width: 20em" />
+                                    <col />
+                                    <col />
+                                    <col />
+                                    <col />
+                                    <col />
+                                    <col />
+                                    <col />
+                                    <col />
+                                    <col />
+                                    <col />
+                                    <col />
+                                    <col />
+                                    <col />
+                                    <col />
+                                    <col />
+                                </colgroup>
+                                <thead>
+                                    <tr id="data">
+                                        @*@Html.ThFor(model => model.Information.Tdknmk, htmlAttributes: new { data_sortable = "true" })*@
+                                        @Html.ThFor(model => model.Information.Tdkcod, htmlAttributes: new { data_sortable = "true" })
+                                        @Html.ThFor(model => model.Information.Tdknam, htmlAttributes: new { data_sortable = "true" })
+                                        @Html.ThFor(model => model.Information.Tdknms, htmlAttributes: new { data_sortable = "true" })
+                                        @Html.ThFor(model => model.Information.Tdbnam, htmlAttributes: new { data_sortable = "true" })
+                                        @Html.ThFor(model => model.Information.Jyusyo, htmlAttributes: new { data_sortable = "true" })
+                                        @Html.ThFor(model => model.Information.Sdek01, htmlAttributes: new { data_sortable = "true" })
+                                        @Html.ThFor(model => model.Information.Sdek02, htmlAttributes: new { data_sortable = "true" })
+                                        @Html.ThFor(model => model.Information.Sdek03, htmlAttributes: new { data_sortable = "true" })
+                                        @Html.ThFor(model => model.Information.Sdek04, htmlAttributes: new { data_sortable = "true" })
+                                        @Html.ThFor(model => model.Information.Sdek05, htmlAttributes: new { data_sortable = "true" })
+                                        @Html.ThFor(model => model.Information.Sdek06, htmlAttributes: new { data_sortable = "true" })
+                                        @Html.ThFor(model => model.Information.Sdek07, htmlAttributes: new { data_sortable = "true" })
+                                        @Html.ThFor(model => model.Information.Sdek08, htmlAttributes: new { data_sortable = "true" })
+                                        @Html.ThFor(model => model.Information.Sdek09, htmlAttributes: new { data_sortable = "true" })
+                                        @Html.ThFor(model => model.Information.Sdek10, htmlAttributes: new { data_sortable = "true" })
+                                        @Html.ThFor(model => model.Information.Sdek11, htmlAttributes: new { data_sortable = "true" })
+                                        @Html.ThFor(model => model.Information.Sdek12, htmlAttributes: new { data_sortable = "true" })
+                                        @Html.ThFor(model => model.Information.Sdek13, htmlAttributes: new { data_sortable = "true" })
+                                        @Html.ThFor(model => model.Information.Sdek14, htmlAttributes: new { data_sortable = "true" })
+                                        @Html.ThFor(model => model.Information.Sdek15, htmlAttributes: new { data_sortable = "true" })
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-9" style="width:700px"></div>
+                        <div class="col-sm-1"><input type="button" name="TodokesakiSelect" id="TodokesakiSelect" class="btn btn-default" data-dismiss="modal" style="width:50px; height: 30px; padding:0; text-align: center;" value="選択" /></div>
+                        <div class="col-sm-1" style="width:10px"></div>
+                        <div class="col-sm-1"><input type="button" name="close" id="TodokesakiClose" class="btn btn-default" data-dismiss="modal" style="width:50px; height: 30px; padding:0; text-align: center;" value="閉じる" /></div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts  {
+    @Html.Partial("_BootstrapFunction");
+    @Scripts.Render("~/bundles/my-bootstrap-export")
+
+    <script>
+
+
+        // *********************** コードヘルプ用 *************************
+        // ↓このスクリプトは各画面で実装
+        @*var $TodokesakiTable = $('#TodokesakiTable');
+
+        window.onload = function () {
+            if ($('input[name="Serch.Tdknmk"]').val() != '' ||
+                $('input[name="Serch.Tdkcod"]').val() != '' ||
+                $('input[name="Serch.Tdknam"]').val() != '' ||
+                $('input[name="Serch.Tdknms"]').val() != '' ||
+                $('input[name="Serch.Tdbnam"]').val() != '' ||
+                $('input[name="Serch.Jyusyo"]').val() != '' ||
+                $('input[name="Serch.Sdek01"]').val() != '' ||
+                $('input[name="Serch.Sdek02]').val() != '' ||
+                $('input[name="Serch.Sdek03').val() != '' ||
+                $('input[name="Serch.Sdek04"]').val() != '' ||
+                $('input[name="Serch.Sdek05"]').val() != '' ||
+                $('input[name="eSrch.Sdek06"]').val() != '' ||
+                $('input[name="Serch.Sdek07"]').val() != '' ||
+                $('input[name="Serch.Sdek08"]').val() != '' ||
+                $('input[name="Serch.Sdek09"]').val() != '' ||
+                $('input[name="Serch.Sdek10"]').val() != '' ||
+                $('input[name="Serch.Sdek11"]').val() != '' ||
+                $('input[name="Serch.Sdek12"]').val() != '' ||
+                $('input[name="Serch.Sdek13"]').val() != '' ||
+                $('input[name="Serch.Sdek14"]').val() != '' ||
+                $('input[name="Serch.Sdek15"]').val() != '')
+                {
+
+                $('#TodokesakiTable').bootstrapTable('refresh', { url: "@Url.Action("TodokesakiSearch", "CodeHelp")" });
+            }
+
+        };
+
+        $(function () {
+            $TodokesakiTable.on('click-row.bs.table', function (e, row, $element) {
+                $('.success').removeClass('success');
+                $($element).addClass('success');
+            });
+
+        });
+
+        $('#TodokesakiSelect').on('click', function (e) {
+            var index = $('.success').attr('data-index');
+            var row = $('.success').parents('table:first').bootstrapTable('getData')[index];
+
+            // ↓各画面で変更
+            //$("#serch_Hincod").val(row.@nameof(CodeHelpViewModels.TodokesakihelpInformation.Tdknmk));
+            //$("#serch_Hinnmk").val(row.@nameof(CodeHelpViewModels.TodokesakihelpInformation.Tdkcod));
+            //$("#serch_Hinnmk").val(row.@nameof(CodeHelpViewModels.TodokesakihelpInformation.Tdknam));
+            //$("#serch_Hinnmk").val(row.@nameof(CodeHelpViewModels.TodokesakihelpInformation.Tdknms));
+            //$("#serch_Hinnmk").val(row.@nameof(CodeHelpViewModels.TodokesakihelpInformation.Tdbnam));
+            //$("#serch_Hinnmk").val(row.@nameof(CodeHelpViewModels.TodokesakihelpInformation.Jyusyo));
+            //$("#serch_Hinnmk").val(row.@nameof(CodeHelpViewModels.TodokesakihelpInformation.Tornam));
+            //$("#serch_Hinnmk").val(row.@nameof(CodeHelpViewModels.TodokesakihelpInformation.Sdek01));
+            //$("#serch_Hinnmk").val(row.@nameof(CodeHelpViewModels.TodokesakihelpInformation.Sdek02));
+            //$("#serch_Hinnmk").val(row.@nameof(CodeHelpViewModels.TodokesakihelpInformation.Sdek03));
+            //$("#serch_Hinnmk").val(row.@nameof(CodeHelpViewModels.TodokesakihelpInformation.Sdek04));
+            //$("#serch_Hinnmk").val(row.@nameof(CodeHelpViewModels.TodokesakihelpInformation.Sdek05));
+            //$("#serch_Hinnmk").val(row.@nameof(CodeHelpViewModels.TodokesakihelpInformation.Sdek06));
+            //$("#serch_Hinnmk").val(row.@nameof(CodeHelpViewModels.TodokesakihelpInformation.Sdek07));
+            //$("#serch_Hinnmk").val(row.@nameof(CodeHelpViewModels.TodokesakihelpInformation.Sdek08));
+            //$("#serch_Hinnmk").val(row.@nameof(CodeHelpViewModels.TodokesakihelpInformation.Sdek09));
+            //$("#serch_Hinnmk").val(row.@nameof(CodeHelpViewModels.TodokesakihelpInformation.Sdek10));
+            //$("#serch_Hinnmk").val(row.@nameof(CodeHelpViewModels.TodokesakihelpInformation.Sdek11));
+            //$("#serch_Hinnmk").val(row.@nameof(CodeHelpViewModels.TodokesakihelpInformation.Sdek12));
+            //$("#serch_Hinnmk").val(row.@nameof(CodeHelpViewModels.TodokesakihelpInformation.Sdek13));
+            //$("#serch_Hinnmk").val(row.@nameof(CodeHelpViewModels.TodokesakihelpInformation.Sdek14));
+            //$("#serch_Hinnmk").val(row.@nameof(CodeHelpViewModels.TodokesakihelpInformation.Sdek15));
+        });
+
+        $('#TodokesakiSearch').on('click', function (e) {
+
+            $('#TodokesakiTable').bootstrapTable('refresh', { url: "@Url.Action("TodokesakiSearch", "CodeHelp")" });
+
+        });
+
+        function TodokesakiQueryParams(params) {
+            return JSON.stringify({
+                'Tdknmk': $('input[name="Serch.Tdknmk"]').val(),
+                'Tdkcod': $('input[name="Serch.Tdkcod"]').val(),
+                'Tdknam': $('input[name="Serch.Tdknam"]').val(),
+                'Tdknms': $('input[name="Serch.Tdknms"]').val(),
+                'Tdbnam': $('input[name="Serch.Tdbnam"]').val(),
+                'Jyusyo': $('input[name="Serch.Jyusyo"]').val(),
+                'Tornam': $('input[name="Serch.Tornam"]').val(),
+                'Sdek01': $('input[name="Serch.Sdek01"]').val(),
+                'Sdek02': $('input[name="Serch.Sdek02"]').val(),
+                'Sdek03': $('input[name="Serch.Sdek03"]').val(),
+                'Sdek04': $('input[name="Serch.Sdek04"]').val(),
+                'Sdek05': $('input[name="Serch.Sdek05"]').val(),
+                'Sdek06': $('input[name="Serch.Sdek06"]').val(),
+                'Sdek07': $('input[name="Serch.Sdek07"]').val(),
+                'Sdek08': $('input[name="Serch.Sdek08"]').val(),
+                'Sdek09': $('input[name="Serch.Sdek09"]').val(),
+                'Sdek10': $('input[name="Serch.Sdek10"]').val(),
+                'Sdek11': $('input[name="Serch.Sdek11"]').val(),
+                'Sdek12': $('input[name="Serch.Sdek12"]').val(),
+                'Sdek13': $('input[name="Serch.Sdek13"]').val(),
+                'Sdek14': $('input[name="Serch.Sdek14"]').val(),
+                'Sdek15': $('input[name="Serch.Sdek15"]').val()
+            });
+        }*@
+        // *********************** コードヘルプ用 *************************
+
+        // このコードを各画面に実装
+        // @Html.Partial("TodokesakiCodeHelp", new CodeHelpViewModels.TodokesakiViewData())
+
+    </script>
+}
+

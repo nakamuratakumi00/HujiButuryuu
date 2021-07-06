@@ -1,0 +1,176 @@
+﻿@functions {
+    public string GetAccept(List<string> accepts, string separator = ", ")
+    {
+        if(accepts == null || accepts.Count <= 0)
+        {
+            return String.Empty;
+        }
+
+        return String.Join(separator, accepts);
+    }
+
+    public string GetUploadFileCaption(List<string> accepts, string prefix)
+    {
+        var ext = GetAccept(accepts, "、");
+
+        return String.Format("ファイル名が\"{0}\"から始まる拡張子が{1}のファイルを選択してください。", prefix, ext);
+    }
+}
+
+@Html.AntiForgeryToken()
+
+<div class="container-fluid">
+    <div class="mb-2">
+        <p class="mb-1">
+            @ViewBag.Caption
+        </p>
+        <p>
+            @ViewBag.Caption2
+        </p>
+    </div>
+    <div id="UploadErrorMessageArea0" style="display:none">
+        <span id="UploadErrorMessage0" class="text-danger"></span>
+    </div>
+    <div class="mt-4 mb-2">
+        <h4 class="mb-0">作業依頼データ</h4>
+        <hr class="mt-1" />
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="customFile" name="postedFile1" accept="@GetAccept(ViewBag.UploadFileAccept)">
+            <label class="custom-file-label" id="customFileLabel" for="customFile" data-browse="参 照">ファイル選択...</label>
+        </div>
+        <small class="form-text text-muted">
+            @GetUploadFileCaption(ViewBag.UploadFileAccept, "sagyoirai")
+        </small>
+        <div id="UploadErrorMessageArea1" style="display:none">
+            <span id="UploadErrorMessage1" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="mt-4 mb-2">
+        <h4 class="mb-0">請求データ</h4>
+        <hr class="mt-1" />
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="customFile2" name="postedFile2" accept="@GetAccept(ViewBag.UploadFileAccept)">
+            <label class="custom-file-label" id="customFileLabel2" for="customFile2" data-browse="参 照">ファイル選択...</label>
+        </div>
+        <small class="form-text text-muted">
+            @GetUploadFileCaption(ViewBag.UploadFileAccept, "SEIKYU")
+        </small>
+        <div id="UploadErrorMessageArea2" style="display:none">
+            <span id="UploadErrorMessage2" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="mt-4 mb-2">
+        <h4 class="mb-0">支払データ1</h4>
+        <hr class="mt-1" />
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="customFile3" name="postedFile3" accept="@GetAccept(ViewBag.UploadFileAccept)" multiple>
+            <label class="custom-file-label" id="customFileLabel3" for="customFile3" data-browse="参 照">ファイル選択...</label>
+        </div>
+        <small class="form-text text-muted">
+            @GetUploadFileCaption(ViewBag.UploadFileAccept, "SHIHARAI")
+        </small>
+        <div id="UploadErrorMessageArea3" style="display:none">
+            <span id="UploadErrorMessage3" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="mt-4 mb-2">
+        <h4 class="mb-0">支払データ2</h4>
+        <hr class="mt-1" />
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="customFile3" name="postedFile3" accept="@GetAccept(ViewBag.UploadFileAccept)" multiple>
+            <label class="custom-file-label" id="customFileLabel3" for="customFile3" data-browse="参 照">ファイル選択...</label>
+        </div>
+        <small class="form-text text-muted">
+            @GetUploadFileCaption(ViewBag.UploadFileAccept, "SHIHARAI")
+        </small>
+        <div id="UploadErrorMessageArea3" style="display:none">
+            <span id="UploadErrorMessage3" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row mt-4 justify-content-between macss-form-button-group-row">
+        <div class="col-4">
+            <a class="btn btn-secondary" href="@Url.Action("Index")" role="button">@MacssWeb.Resources.ControlText.BackToList</a>
+        </div>
+        <div class="col-4 text-right">
+            <button type="button" id="UploadExec" class="btn btn-primary">@MacssWeb.Resources.ControlText.UploadConfirm</button>
+        </div>
+    </div>
+</div>
+<script>
+
+    function checkFileUpload(fu, accepts) {
+
+        @*TODO マルチには対応していない。*@
+        ret = fu.acceptExt(accepts);
+
+        if (ret == false) {
+            $("#UploadErrorMessage").text("@MacssWeb.Resources.Validation.NotAllowedFileExtension");
+            $("#UploadErrorMessageArea").show();
+            return false;
+        }
+
+        return true;
+    }
+
+    $(function () {
+
+        var fu1 = new Macss.FileUpload.MacssFileUpload("#customFile", "#customFileLabel");
+        fu1.configure();
+        var fu2 = new Macss.FileUpload.MacssFileUpload("#customFile2", "#customFileLabel2");
+        fu2.configure();
+        var fu3 = new Macss.FileUpload.MacssFileUpload("#customFile3", "#customFileLabel3", true);
+        fu3.configure();
+
+        $('#UploadExec').on('click', function () {
+
+            var form = $(this).parents('form');
+            $("#UploadErrorMessageArea0").hide();
+            $("#UploadErrorMessageArea1").hide();
+            $("#UploadErrorMessageArea2").hide();
+            $("#UploadErrorMessageArea3").hide();
+
+            var selectNum1 = fu1.getFileNum();
+            var selectNum2 = fu2.getFileNum();
+            var selectNum3 = fu3.getFileNum();
+
+            if (selectNum1 + selectNum2 + selectNum3 <= 0) {
+
+                $("#UploadErrorMessage0").text("いずれかのファイルを選択してください。");
+                $("#UploadErrorMessageArea0").show();
+                return false;
+
+            }
+
+            var accepts = [];
+
+            @foreach (var item in ViewBag.UploadFileAccept)
+            {
+                @:accepts.push("@item");
+            }
+
+            var ret = false;
+
+            var check1 = true;
+            if (selectNum1 > 0) {
+                check1 = checkFileUpload(fu1, accepts);
+            }
+
+            var check2 = true;
+            if (selectNum2 > 0) {
+                check2 = checkFileUpload(fu2, accepts);
+            }
+
+            var check3 = true;
+            if (selectNum3 > 0) {
+                check3 = checkFileUpload(fu3, accepts);
+            }
+
+            if ((check1 && check2 && check3) == false) {
+                return false;
+            }
+
+            form.submit();
+        });
+    })
+</script>
+

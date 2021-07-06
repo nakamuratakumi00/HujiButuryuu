@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "運送業務 - TASS";
+    ViewBag.ScreenId = "";
+    ViewBag.PageMainTitle = "特殊運賃・包装費データアップロード";
+    ViewBag.Caption = "データのアップロードを行います。";
+    //ViewBag.UploadFileAccept = new List<string>() { ".csv, .txt" };
+    ViewBag.UploadFileAccept = new List<string>() { ".csv" };
+}
+
+
+    @using (Html.BeginForm("UploadConfirm", "D030", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.Partial("_SimpleUpload")
+}

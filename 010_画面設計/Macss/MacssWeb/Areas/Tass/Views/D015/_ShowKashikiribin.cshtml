@@ -1,0 +1,465 @@
+﻿@Html.AntiForgeryToken()
+
+<!--テスト値-->
+@{ var testVal = string.Empty; }
+
+@if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+{
+    <div class="alert alert-info">
+        <span>@ViewBag.ConfirmMessage</span>
+    </div>
+}
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="row justify-content-between macss-form-button-group-row">
+        <div class="col-4">
+            <a role="button" class="btn btn-secondary" href="@Url.Action(ViewBag.TransAction, new { id = @"01736",mode=ViewBag.PrevMode,process="Back" })">@MacssWeb.Resources.ControlText.Back</a>
+        </div>
+    </div>
+</div>
+
+<table class="table macss-form-table">
+    <colgroup>
+        <col class="macss-form-table-title" />
+        <col class="macss-form-table-contents" />
+    </colgroup>
+    <tr>
+        <th scope="row">
+            @Html.Label("受付No", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                1430397
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("仕入先", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                90402 長野物流（株）長野支社
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("自車傭車区分", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                自社
+                <!--ｺｰﾄﾞ仕様定義【08】運送区分ｺｰﾄﾞ〔MX84〕.xls 自車・傭車区分-->
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("運送方法", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                77 長野物流（株）運輸係
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("伝票区分", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                I 出荷発注伝票
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("得意先", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                17601 ＦＥ）半導体営業　（松本・ＤＳ）
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("出荷No", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                38-43467
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("経費負担No", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("機種コードA", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("機種コードB", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("受付日", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                2021/01/19
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("出荷日", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                2021/01/18
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("出荷時間", htmlAttributes: new { @class = "control-label " })
+        </th>
+        <td>
+            <div>
+                10:00
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("到着日", htmlAttributes: new { @class = "control-label " })
+        </th>
+        <td>
+            <div>
+                2021/01/18
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("到着時間", htmlAttributes: new { @class = "control-label " })
+        </th>
+        <td>
+            <div>
+                15:00
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("届先コード", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                AA005C
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("届先住所", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                東京都千代田区神田小川町６－１２－１　アンリビル３Ｆ
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("届先会社名", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                ㈱エイシーエスエヌ
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("届先支店名", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                東京営業所
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">集貨場所コード</label><!--届先マスタを参照する-->
+        </th>
+        <td>
+            <div>
+                FB010A
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">集貨場所住所</label>
+        </th>
+        <td>
+            <div>
+                東京都千代田区神田小川町６－１２－１　アンリビル３Ｆ
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label ">集貨場所会社名</label>
+        </th>
+        <td>
+            <div>
+                ㈱エイシーエスエヌ
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">集貨場所支店名</label>
+        </th>
+        <td>
+            <div>
+                東京営業所
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("品名コード", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                001002
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("品名", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                電気部品
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">車種（台数）</label>
+        </th>
+        <td>
+            @{
+                testVal = "";
+            }
+            <table class="table table-bordered" style="width:700px;">
+                <thead>
+                    <tr>
+                        <th style="width:100px; background-color: #c8edf7; text-align:center;">軽</th>
+                        <th style="width:100px; background-color: #c8edf7; text-align:center;">1t</th>
+                        <th style="width:100px; background-color: #c8edf7; text-align:center;">2t</th>
+                        <th style="width:100px; background-color: #c8edf7; text-align:center;">4t</th>
+                        <th style="width:100px; background-color: #c8edf7; text-align:center;">11t</th>
+                        <th style="width:100px; background-color: #c8edf7; text-align:center;">コンテナ</th>
+                        <th style="width:100px; background-color: #c8edf7; text-align:center;">その他</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>　</td>
+                        <td>　</td>
+                        <td>　</td>
+                        <td>　</td>
+                        <td>　</td>
+                        <td>　</td>
+                        <td>　</td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">車種_車種指定1</label>
+        </th>
+        <td>
+            <div>
+                @{
+                    testVal = "";
+                }
+                <table class="table table-bordered" style="width:420px;">
+                    <thead>
+                        <tr>
+                            <th style="width:140px; background-color: #c8edf7; text-align:center;">トン数（t）</th>
+                            <th style="width:140px; background-color: #c8edf7; text-align:center;">台数</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>　</td>
+                            <td>　</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">車種_車種指定2</label>
+        </th>
+        <td>
+            <div>
+                @{
+                    testVal = "";
+                }
+                <table class="table table-bordered" style="width:420px;">
+                    <thead>
+                        <tr>
+                            <th style="width:140px; background-color: #c8edf7; text-align:center;">トン数（t）</th>
+                            <th style="width:140px; background-color: #c8edf7; text-align:center;">台数</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>　</td>
+                            <td>　</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">特記事項1</label>
+        </th>
+        <td>
+            <div>
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">特記コード2</label>
+        </th>
+        <td>
+            <div>
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">特記事項2</label>
+        </th>
+        <td>
+            <div>
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("PCコード", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                802810004299
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("出荷括りNo", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("実績作成区分", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("包装済総重量（kg）", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("出荷数", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">単位</label>
+        </th>
+        <td>
+            <div>
+
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a role="button" class="btn btn-secondary" href="@Url.Action(ViewBag.TransAction, new { id = @"01736",mode=ViewBag.PrevMode,process="Back" })">@MacssWeb.Resources.ControlText.Back</a>
+    </div>
+    <div class="col-8 text-right">
+        @if (ViewBag.DeleteFlg != null || ViewBag.DeleteFlg == true)
+        {
+            <a role="button" class="btn btn-danger" href="@Url.Action("Edit", new { id = @"01736",mode=ViewBag.PrevMode,process="Delete" })">@MacssWeb.Resources.ControlText.Delete</a>
+        }
+    </div>
+</div>

@@ -1,0 +1,15 @@
+﻿@model Macss.Database.Entity.AccountMaster
+
+@{
+    ViewBag.Title = "運送業務 - TASS";
+    ViewBag.PageMainTitle = "月次集計データ出力確認";
+    ViewBag.ScreenId = "";
+    ViewBag.ConfirmMessage = "月次集計データを作成します。よろしいですか？";
+    ViewBag.ButtonText = MacssWeb.Resources.ControlText.Execute;
+    ViewBag.ConfirmDialogText = "月次集計データを出力します。よろしいですか？";
+}
+
+@using (Html.BeginForm("MonthaggResult", "D033", null, FormMethod.Post))
+{
+    @Html.Partial("_MonthaggShow", Model)
+}

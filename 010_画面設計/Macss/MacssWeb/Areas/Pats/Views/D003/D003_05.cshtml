@@ -1,0 +1,317 @@
+﻿@* 出庫実績登録 *@
+
+@section Scripts {
+    <script>
+        $(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#D003_05List");
+            dt.configure();
+
+            //MacssDataTable（dataTables.fixedColumns.js）に表示する列が15件以上あると計算間違いで最左端列にスクロールバーが表示されるため、非表示にする
+            $('.DTFC_LeftBodyLiner').css('overflow-y', 'hidden');
+
+            $("#addDetail").show();
+            $("#editDetail").hide();
+
+        });
+
+        // 明細編集ボタンクリック
+        $("#detailEdit").click(function () {
+            console.log("click");
+            $("#addDetail").hide();
+            $("#editDetail").show();
+        });
+        // 明細更新ボタンクリック
+        $("#editDetail").click(function () {
+            console.log("click");
+            $("#addDetail").show();
+            $("#editDetail").hide();
+        });
+
+    </script>
+}
+
+@Html.Partial("~/Areas/Tass/Views/Shared/Dialog/_HinmeiCodeSearch.cshtml")
+@Html.Partial("~/Areas/Tass/Views/Shared/Dialog/_TokuisakiCodeSearch.cshtml")
+
+@* ボタン類 *@
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a class="btn btn-secondary" data-toggle="modal" data-target="#TransitionConfirmDialog" role="button">@MacssWeb.Resources.ControlText.BackToList</a>
+    </div>
+    <div class="col-4 text-right">
+        <a class="btn btn-primary" href="@Url.Action("D003_06")" role="button">@MacssWeb.Resources.ControlText.InputConfirm</a>
+    </div>
+</div>
+
+@* 共通入力項目 *@
+<div class="accordion" id="ConditionAccordion">
+    <div class="card">
+        <div class="card-header macss-search-config-collapse-header" id="headingOne">
+            <div class="mb-0">
+                <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain" aria-expanded="true" aria-controls="ConditionMain">
+                    <div class="d-inline-block" style="color:#333">共通項目</div>
+                    <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="color: rgb(120, 188, 255);"></i>
+                    <i id="CollapseShow" class="fas fa-chevron-circle-down" aria-hidden="true" style="color: rgb(120, 188, 255); display: none;"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+            <table class="table macss-form-table2">
+                <colgroup>
+                    <col class="macss-form-table-title2">
+                    <col class="macss-form-table-contents2">
+                </colgroup>
+                @* 倉庫コード 必須 倉庫名称 表示 *@
+                <tr>
+                    <th>
+                        <label class="control-label required">倉庫</label>
+                    </th>
+                    <td>
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="input-group">
+                                    <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="" name="" type="text" value="12" style="border-top-left-radius:0; border-bottom-left-radius:0;">
+                                    <div class="input-group-append">
+                                        <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="">
+                                            <i class="fas fa-redo"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <span id="" class="align-middle">１２３４５６７８９０１２３４５</span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                @* 在庫種別 必須 →自社在庫のみなので表示に変更 *@
+                <tr>
+                    <th scope="row">
+                        <label class="">在庫種別</label>
+                    </th>
+                    <td>
+                        1:自社在庫
+                    </td>
+                </tr>
+                @* 出庫日 必須 *@
+                <tr>
+                    <th>
+                        <label class="control-label required">出庫日</label>
+                    </th>
+                    <td>
+                        <div class="input-group">
+                            <input type="text" id="date1" class="form-control" value="YYYY/MM/DD" />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="Calendar1"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+@* 明細入力項目 *@
+<div class="accordion mt-3" id="DetailAccordion">
+    <div class="card">
+        <div class="card-header macss-search-config-collapse-header" id="headingOne">
+            <div class="mb-0">
+                <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#DetailMain" aria-expanded="true" aria-controls="DetailMain">
+                    <div class="d-inline-block" style="color:#333">明細項目</div>
+                    <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="color: rgb(120, 188, 255);"></i>
+                    <i id="CollapseShow" class="fas fa-chevron-circle-down" aria-hidden="true" style="color: rgb(120, 188, 255); display: none;"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="DetailMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#DetailAccordion">
+            <table class="table macss-form-table2">
+                <colgroup>
+                    <col class="macss-form-table-title2">
+                    <col class="macss-form-table-contents2">
+                </colgroup>
+
+                @* 品名コード 必須、品名 表示*@
+                <tr>
+                    <th>
+                        <label class="required">品名</label>
+                    </th>
+                    <td>
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="input-group">
+                                    <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="" name="" type="text" value="123456789012" style="border-top-left-radius:0; border-bottom-left-radius:0;">
+                                    <div class="input-group-append">
+                                        <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#HinmeiCodeSearchDialog">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <span id="" class="align-middle">１２３４５６７８９０１２３４５６７８９０</span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                @* 数量 必須 *@
+                <tr>
+                    <th scope="row">
+                        <label class="control-label required">数量</label>
+                    </th>
+                    <td>
+                        <div>
+                            <input class="form-control" type="text" value="123,456,789">
+                        </div>
+                    </td>
+                </tr>
+                @* 規格・寸法 表示 *@
+                <tr>
+                    <th>
+                        <label class="control-label">規格・寸法</label>
+                    </th>
+                    <td>
+                        １２３４５６７８９０１２３４５６７８９０
+                    </td>
+                </tr>
+                @* 処理理由 任意 *@
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">処理理由</label>
+                    </th>
+                    <td>
+                        <div>
+                            <input class="form-control" type="text" value="１２３４５６７８９０１２３４５６７８９０">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div class="row">
+                <div class="col-4">
+                    <a class="btn btn-secondary macss-btn-sub" role="button">キャンセル</a>
+                    <a id="addDetail" class="btn btn-primary macss-btn-sub" role="button">追加</a>
+                    <a id="editDetail" class="btn btn-primary macss-btn-sub" role="button">更新</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* 明細一覧 *@
+<table id="D003_05List" class="table table-striped table-hover macss-data-table" style="width:100%">
+    <thead class="macss-data-table-header">
+        <!-- thの文字数で列の幅が決まってしまうため、必要に応じて全角スペースを入れて列の幅を調整する必要がある-->
+        <tr>
+            <th></th>
+            <th>
+                品名コード
+            </th>
+            <th>
+                品名
+            </th>
+            <th>
+                数量
+            </th>
+            <th>
+                規格・寸法
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="white-space:nowrap;">
+                <a id="detailEdit" data-toggle="modal" data-target="" title="編集"><i class="fas fa-pencil-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                <a data-toggle="modal" data-target="#D003_05_01Dialog" title="削除"><i class="fas fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+            </td>
+            <td>
+                123456789012
+            </td>
+            <td>
+                １２３４５６７８９０１２３４５６７８９０
+            </td>
+            <td>
+                123,456,789
+            </td>
+            @*<td>
+                    1234567
+                </td>
+                <td>
+                    １２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０
+                </td>*@
+            <td>
+                １２３４５６７８９０１２３４５６７８９０
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="mt-4"></div>
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a class="btn btn-secondary" data-toggle="modal" data-target="#TransitionConfirmDialog" role="button">@MacssWeb.Resources.ControlText.BackToList</a>
+    </div>
+    <div class="col-4 text-right">
+        <a class="btn btn-primary" href="@Url.Action("D003_06")" role="button">@MacssWeb.Resources.ControlText.InputConfirm</a>
+    </div>
+</div>
+
+
+<script>
+    function setDepartmentCode(code, value) {
+        $("#bumon_cd").val(code);
+        $("#DepartmentName").text(value);
+    }
+    $(function () {
+        new Macss.DatetimePicker.MacssDtPicker("#date1", "#Calendar1").configure();
+    });</script>
+
+
+@* 確認ダイアログ *@
+<div class="modal" id="TransitionConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.TransitionConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @MacssWeb.Resources.Messages.TransitionConfirm
+                <br>
+                @MacssWeb.Resources.Messages.Confirm
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary macss-btn" href="@Url.Action("D003_01")" role="button">@MacssWeb.Resources.ControlText.Yes</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* 明細削除確認ダイアログ *@
+<div class="modal" id="D003_05_01Dialog" tabindex="-1" role="dialog" aria-labelledby="D0031_07_01DialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="D003_05_01DialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                明細を削除します。よろしいですか？
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("D003_05", "D003", null, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-primary">@MacssWeb.Resources.ControlText.Yes</button>
+                }
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>

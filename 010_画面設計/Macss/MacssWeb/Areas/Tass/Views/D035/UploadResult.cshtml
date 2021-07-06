@@ -1,0 +1,213 @@
+﻿@model IEnumerable<MacssWeb.Models.AccountMasterUpload>
+
+@{
+    ViewBag.Title = "運送業務 - TASS";
+    ViewBag.ScreenId = "";
+    ViewBag.PageMainTitle = "半導体輸出梱包実績データ取込結果";
+}
+@section Scripts {
+    <script>
+
+        $(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#UploadConfirmList");
+            dt.setScrollY("600px");
+            dt.configure();
+
+            $('[data-toggle="popover"]').popover();
+
+        });
+    </script>
+}
+
+<div class="alert @ViewBag.AlertType">
+    <span>@ViewBag.ResultMessage</span>
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("Upload")">@MacssWeb.Resources.ControlText.BackToUpload</a>
+    </div>
+    <div class="col-4 text-right">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.BackToList</a>
+    </div>
+</div>
+
+<div class="container-fluid mt-4">
+    <div class="form-inline">
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">ファイル</span>
+            </div>
+            <span class="form-control">@ViewBag.UploadFileName</span>
+        </div>
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">取込件数</span>
+            </div>
+            <span class="form-control">4 件@*@ViewBag.UploadedCount*@</span>
+        </div>
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">エラー件数</span>
+            </div>
+            <span class="form-control">2 件@*@ViewBag.ErrorCount*@</span>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-2 mb-2">
+    <div class="col-12 text-right">
+        <div class="dropdown">
+            <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#CsvDownloadDialog">CSVダウンロード</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table id="UploadConfirmList" class="table table-striped table-hover macss-data-table">
+    <thead class="macss-data-table-header">
+        <!-- thの文字数で列の幅が決まってしまうため、必要に応じて全角スペースを入れて列の幅を調整する必要がある-->
+        <tr>
+            <th>No</th>
+            <!--
+    <th>
+        処理区分
+    </th>
+        -->
+            <th>
+                エラー
+            </th>
+            <th>
+                元出荷No
+            </th>
+            <th>
+                輸出出荷No
+            </th>
+            <th>
+                FB出荷No
+            </th>
+            <th>
+                出荷日　　　　　　　　　　　　
+            </th>
+            <th>
+                手配番号
+            </th>
+            <th>
+                項番
+            </th>
+            <th>
+                届先コード　　　　　　　　　　　　
+            </th>
+            <th>
+                ケースマークコード
+            </th>
+            <th>
+                注文番号
+            </th>
+            <th>
+                最終需要家
+            </th>
+            <th>
+                顧客識別
+            </th>
+            <th>
+                ケースNo
+            </th>
+            <th>
+                枝番
+            </th>
+            <th>
+                箱種
+            </th>
+            <th>
+                包装数
+            </th>
+            <th>
+                1箱入数
+            </th>
+            <th>
+                重量Ｎ／Ｗ
+            </th>
+            <th>
+                重量Ｇ／Ｗ
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                1
+            </td>
+            <!--
+    <td>
+        新規
+    </td>
+        -->
+            <td>
+                <a tabindex="0" class="btn btn-sm btn-danger" role="button" data-toggle="popover"
+                   data-trigger="focus" title="エラー詳細"
+                   data-content="既に登録されています。">詳細</a>
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,163 @@
+﻿<html lang="ja">
+@*@model IEnumerable<Macss.Database.Entity.CustomerData>*@
+
+@{
+    ViewBag.Title = "得意先在庫データ照合";
+    ViewBag.PageMainTitle = "得意先在庫データ照合結果";
+
+    ViewBag.Date = "2020年12月14日";
+    ViewBag.ErrorNum = "230件";
+    ViewBag.MatchNum = "71件";
+
+}
+@section Scripts {
+    <script>
+        $(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#EPPriceList");
+            dt.configure();
+
+            var cond = new Macss.Collapse.ConditionsPanel("#ConditionAccordion", "#CollapseShow", "#CollapseHidden");
+            cond.setCollapseEvent();
+
+            var sampleDatePicker = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker", "#SampleCalendar");
+            sampleDatePicker.configure();
+            var sampleDatePicker1 = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker1", "#SampleCalendar1");
+            sampleDatePicker1.configure();
+            var sampleDatePicker2 = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker2", "#SampleCalendar2");
+            sampleDatePicker2.configure();
+        });
+    </script>
+}
+
+<div class="alert @ViewBag.AlertType">
+    <span>@ViewBag.ResultMessage</span>
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+    </div>
+    <div class="col-4 text-right">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("SubMenu", "Home")">サブメニューへ</a>
+    </div>
+</div>
+
+
+<div class="container-fluid mt-3">
+    <div class="form-inline">
+        <div class="col-2">
+            <div class="input-group mr-2 mb-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="Condition3">得意先</span>
+                </div>
+                <span class="form-control">000073831</span>
+            </div>
+        </div>
+        <div class="col-10">
+            <span id="ClientName">サンプル商事(株)</span>
+        </div>
+        <div class="col-2">
+            <div class="input-group mr-2 mb-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="Condition3">照合日付</span>
+                </div>
+                <span class="form-control">@ViewBag.Date</span>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="input-group mr-2 mb-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="Condition3">エラー件数</span>
+                </div>
+                <span class="form-control">@ViewBag.ErrorNum</span>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="input-group mr-2 mb-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="Condition3">マッチ件数</span>
+                </div>
+                <span class="form-control">@ViewBag.MatchNum</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mt-3 mb-4">
+    <div class="col-6">
+    </div>
+    <div class="col-6 text-right">
+        <div class="dropdown">
+            <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#CsvDownloadDialog">CSVダウンロード</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table id="EPPriceList" class="table table-striped table-hover macss-data-table">
+    <thead class="macss-data-table-header">
+        <tr>
+            <th>
+                品名コード　　
+            </th>
+            <th>
+                品名　　　　　　　　　　　　　　
+            </th>
+            <th>
+                品名単位
+            </th>
+            <th>
+                得意先倉庫コード
+            </th>
+            <th>
+                得意先物品管理コード
+            </th>
+            <th>
+                得意先在庫数
+            </th>
+            <th>
+                FB在庫数　
+            </th>
+            <th>
+                差異　
+            </th>
+            <th>
+                エラーメッセージ　　　　　　
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                P61032339
+            </td>
+            <td>
+                タンシフレームＰ６１０＜ＢＰＮ＞
+            </td>
+            <td>
+                個
+            </td>
+            <td>
+                16
+            </td>
+            <td>
+                0
+            </td>
+            <td>
+                12
+            </td>
+            <td></td>
+            <td>
+                12
+            </td>
+            <td>
+                FB:在庫マスタ無し
+            </td>
+        </tr>
+    </tbody>
+</table>
+

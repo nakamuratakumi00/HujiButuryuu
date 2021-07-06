@@ -1,0 +1,183 @@
+﻿@model Macss.Database.Entity.AccountMaster
+@{
+    ViewBag.PageMainTitle = "到着便実績登録確認";
+    ViewBag.ConfirmMessage = MacssWeb.Resources.Messages.DeleteConfirm;
+    ViewBag.ButtonText = MacssWeb.Resources.ControlText.DeleteExec;
+    ViewBag.ConfirmDialogText = MacssWeb.Resources.Messages.DeleteReconfirm;
+}
+@section Scripts {
+    <script>
+        $(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#SampleList", [{
+                "className": "macss-table-proc-column", "width": 90, "orderable": true, "targets": 0
+            }]);
+            dt.configure();
+
+            //MacssDataTable（dataTables.fixedColumns.js）に表示する列が15件以上あると計算間違いで最左端列にスクロールバーが表示されるため、非表示にする
+            $('.DTFC_LeftBodyLiner').css('overflow-y', 'hidden');
+
+        });
+    </script>
+}
+@using (Html.BeginForm("CreateConfirm", "D018", null, FormMethod.Post))
+{
+    <div class="alert alert-info">
+        <span>以下を登録します。よろしいですか？</span>
+    </div>
+    <div class="row justify-content-between macss-form-button-group-row">
+        <div class="col-4">
+            <a class="btn btn-secondary" href="@Url.Action("Create")" role="button">@MacssWeb.Resources.ControlText.Back</a>
+        </div>
+    </div>
+    <div class="accordion" id="ConditionAccordion">
+        <div class="card">
+            <div class="card-header macss-search-config-collapse-header" id="headingOne">
+                <div class="mb-0">
+                    <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain" aria-expanded="true" aria-controls="ConditionMain">
+                        <div class="d-inline-block" style="color:#333"></div>
+                        <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="color: rgb(120, 188, 255);"></i>
+                        <i id="CollapseShow" class="fas fa-chevron-circle-down" aria-hidden="true" style="color: rgb(120, 188, 255); display: none;"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+                <table class="table macss-form-table2">
+                    <colgroup>
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">仕入先</label>
+                            </th>
+                            <td>
+                                <div>
+                                    123456789 ダミー商事（株）
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">到着場所</label>
+                            </th>
+                            <td>
+                                <div>
+                                    BB ダミーセンター
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">運送区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    2400 到着便
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">伝票区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    P 到着便
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">出荷日</label>
+                            </th>
+                            <td>
+                                <div>
+                                    2021/01/01
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+<table id="SampleList" class="table table-striped table-hover macss-data-table">
+    <thead class="macss-data-table-header">
+        <!-- thの文字数で列の幅が決まってしまうため、必要に応じて全角スペースを入れて列の幅を調整する必要がある-->
+        <tr>
+            <th>仕入先原票No</th>
+            <th>出荷No</th>
+            <th>到着日</th>
+            <th>得意先コード</th>
+            <th>経費負担No</th>
+            <th>担当者　　　　</th>
+            <th>届先名　　　　</th>
+            <th>包装数</th>
+            <th>重量</th>
+            <th>発送住所　　　　　　</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>12347567890</td>
+            <td>12347567890</td>
+            <td>2021/01/01</td>
+            <td>1234756789</td>
+            <td>12347567890</td>
+            <td>ダミー担当者</td>
+            <td>ダミー届先</td>
+            <td class="text-right">1,300</td>
+            <td class="text-right">12.00</td>
+            <td>長野県長野市ダミー町</td>
+        </tr>
+        <tr>
+            <td>12347567890</td>
+            <td>12347567890</td>
+            <td>2021/01/01</td>
+            <td>1234756789</td>
+            <td>12347567890</td>
+            <td>ダミー担当者</td>
+            <td>ダミー届先</td>
+            <td class="text-right">1,300</td>
+            <td class="text-right">12.00</td>
+            <td>長野県長野市ダミー町</td>
+        </tr>
+    </tbody>
+</table>
+<div class="mt-4"></div>
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a class="btn btn-secondary" href="@Url.Action("Create")" role="button">@MacssWeb.Resources.ControlText.Back</a>
+    </div>
+    <div class="col-4 text-right">
+        <a role="button" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDialog">登録</a>
+    </div>
+</div>
+<div class="modal" id="ConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @MacssWeb.Resources.Messages.CreateReconfirm
+            </div>
+            <div class="modal-footer">
+                @*@using (Html.BeginForm("Create", "D001", null, FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" id="UploadFileName" name="uploadFileName" value="@ViewBag.UploadFileName" />
+                        <button type="submit" class="btn btn-primary">@MacssWeb.Resources.ControlText.Yes</button>
+                    }*@
+                <a class="btn btn-primary macss-btn" href="@Url.Action("Create")" role="button">@MacssWeb.Resources.ControlText.Yes</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>

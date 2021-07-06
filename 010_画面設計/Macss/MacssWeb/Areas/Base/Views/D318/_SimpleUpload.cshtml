@@ -1,0 +1,139 @@
+﻿@functions {
+    public string GetAccept(List<string> accepts, string separator = ", ")
+    {
+        if (accepts == null || accepts.Count <= 0)
+        {
+            return String.Empty;
+        }
+
+        return String.Join(separator, accepts);
+    }
+
+    public string GetUploadFileCaption(List<string> accepts)
+    {
+        var ext = GetAccept(accepts, "、");
+
+        //return String.Format("拡張子が、{0}で{1}以下のファイルを選択してください。", ext, MacssWeb.Common.Config.UploadMaxFileSizeText);
+        return String.Format("EXCEL形式で{0}以下のファイルを選択してください。", MacssWeb.Common.Config.UploadMaxFileSizeText);
+    }
+}
+@Html.AntiForgeryToken()
+<div class="card">
+    <div class="card-header macss-search-config-collapse-header" id="headingOne">
+        <div class="mb-0">
+            <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain" aria-expanded="true" aria-controls="ConditionMain">
+                <div class="d-inline-block" style="color:#333">ダウンロード</div>
+                <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="color: rgb(120, 188, 255);"></i>
+                <i id="CollapseShow" class="fas fa-chevron-circle-down" aria-hidden="true" style="color: rgb(120, 188, 255); display: none;"></i>
+            </button>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div>
+            <p>
+                マスターメンテナンス用のExcelファイルをダウンロードします。
+            </p>
+        </div>
+        <div class="mt-4"></div>
+        <div class="row justify-content-between macss-form-button-group-row">
+            <div class="col-4">
+            </div>
+            <div class="col-4 text-right">
+                <button type="button" class="btn btn-primary">ダウンロード</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mt-4"></div>
+
+<div class="card">
+    <div class="card-header macss-search-config-collapse-header" id="headingOne">
+        <div class="mb-0">
+            <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain" aria-expanded="true" aria-controls="ConditionMain">
+                <div class="d-inline-block" style="color:#333">アップロード</div>
+                <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="color: rgb(120, 188, 255);"></i>
+                <i id="CollapseShow" class="fas fa-chevron-circle-down" aria-hidden="true" style="color: rgb(120, 188, 255); display: none;"></i>
+            </button>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div>
+            <div>
+                <div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                        <label class="form-check-label" for="inlineRadio1">通常</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                        <label class="form-check-label" for="inlineRadio2">一括</label>
+                    </div>
+                </div>
+            </div>
+            <p>
+                @ViewBag.Caption
+            </p>
+        </div>
+        <div>
+            <div>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="customFile" name="postedFile" accept="@GetAccept(ViewBag.UploadFileAccept)">
+                    <label class="custom-file-label" for="customFile" data-browse="参 照">ファイル選択...</label>
+                </div>
+                <small class="form-text text-muted">
+                    @GetUploadFileCaption(ViewBag.UploadFileAccept)
+                </small>
+                <div id="UploadErrorMessageArea" style="display:none">
+                    <span id="UploadErrorMessage" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="mt-4"></div>
+        <div class="row justify-content-between macss-form-button-group-row">
+            <div class="col-4">
+            </div>
+            <div class="col-4 text-right">
+                <button type="button" id="UploadExec" class="btn btn-primary">@MacssWeb.Resources.ControlText.UploadConfirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+
+        var fu = new Macss.FileUpload.MacssFileUpload();
+        fu.configure();
+
+        $('#UploadExec').on('click', function () {
+
+            var form = $(this).parents('form');
+            $("#UploadErrorMessageArea").hide();
+            var accepts = [];
+
+            @foreach (var item in ViewBag.UploadFileAccept)
+            {
+                @:accepts.push("@item");
+            }
+
+            var ret = false;
+
+            ret = fu.acceptExt(accepts);
+
+            if (ret == false) {
+                $("#UploadErrorMessage").text("@MacssWeb.Resources.Validation.NotAllowedFileExtension");
+                $("#UploadErrorMessageArea").show();
+                return false;
+            }
+
+            ret = fu.withinRangeOfFileSize(@MacssWeb.Common.Config.UploadMaxFileSize);
+
+            if (ret == false) {
+                $("#UploadErrorMessage").text("@MacssWeb.Resources.Validation.OverFileSize");
+                $("#UploadErrorMessageArea").show();
+                return false;
+            }
+
+            form.submit();
+        });
+    })
+</script>

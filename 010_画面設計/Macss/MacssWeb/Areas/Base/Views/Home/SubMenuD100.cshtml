@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "マスターメンテナンス";
+    ViewBag.PageMainTitle = "マスターメンテナンス(エントリ一覧式・承認有)";
+}
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <ul class="macss-submenu">
+                <li>
+                    @Html.ActionLink("契約品名マスター一覧", "Index", "D101", new { area = "Base" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("契約品名マスター登録", "Create", "D101", new { area = "Base" }, null)
+                </li>
+                 <li>
+                    @Html.ActionLink("商品単価マスター一覧", "Index", "D102", new { area = "Base" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("商品単価マスター登録", "Create", "D102", new { area = "Base" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("包装費単価マスター一覧", "Index", "D103", new { area = "Base" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("包装費単価マスター登録", "Create", "D103", new { area = "Base" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("包装費資材マスター一覧", "Index", "D104", new { area = "Base" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("包装費資材マスター登録", "Create", "D104", new { area = "Base" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("請求パターンマスター一覧", "Index", "D105", new { area = "Base" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("請求パターンマスター登録", "Create", "D105", new { area = "Base" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("営業費用パターンマスター一覧", "Index", "D106", new { area = "Base" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("営業費用パターンマスター登録", "Create", "D106", new { area = "Base" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("固定請求マスター一覧", "Index", "D107", new { area = "Base" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("固定請求マスター登録", "Create", "D107", new { area = "Base" }, null)
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

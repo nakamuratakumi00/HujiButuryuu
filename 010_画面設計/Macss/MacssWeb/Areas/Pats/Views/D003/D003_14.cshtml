@@ -1,0 +1,210 @@
+﻿@* 納品明細書出力確認 *@
+
+@section Scripts {
+    <script>
+        $(function () {
+        });
+    </script>
+}
+
+@* メッセージ *@
+<div class="alert @ViewBag.AlertType">
+    <span>@ViewBag.ResultMessage</span>
+</div>
+
+@* 戻る／実行 *@
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("D003_13")">@MacssWeb.Resources.ControlText.Back</a>
+    </div>
+    <div class="col-4 text-right">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDialog">@MacssWeb.Resources.ControlText.Execute</button>
+    </div>
+</div>
+
+@*  指定内容 *@
+<div class="container-fluid mt-4">
+    @* 一段目 *@
+    <div class="row mr-0 mb-3">
+        @* 種別 *@
+        <div class="col-4">
+            <div class="input-group">
+                <div class="input-group-prepend w-25">
+                    <span class="input-group-text w-100">種別</span>
+                </div>
+                @if (@ViewBag.Syubetsu == 1)
+                {
+                    <label class="form-control">明細</label>
+                }
+                else
+                {
+                    <label class="form-control">数量合計</label>
+                }
+            </div>
+        </div>
+    </div>
+
+    @* 二段目 *@
+    <div class="row mr-0 mb-3">
+        @* 得意先 (共通) *@
+        <div class="col-4">
+            <div class="input-group">
+                <div class="input-group-prepend w-25">
+                    <span class="input-group-text w-100" id="">得意先コード</span>
+                </div>
+                <label class="form-control">1234567</label>
+            </div>
+            <div class="">
+                <span id="" class="align-middle">得意先名</span>
+            </div>
+        </div>
+        @* 発行用登録日 (明細選択時有効) *@
+        @* FB松本で直売り分の「検収処理」を行った日付を入力する *@
+        <div class="col-4">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend w-25">
+                    <span class="input-group-text w-100" id="">発行用登録日</span>
+                </div>
+                @if (ViewBag.Syubetsu == 1)
+                {
+                    <label class="form-control">YYYY/MM/DD</label>
+                }
+                else
+                {
+                    <label class="form-control" style="background-color:lightgray"></label>
+                }
+            </div>
+        </div>
+        @* 発行用納品日 (明細選択時有効) *@
+        @* 当日日付が初期表示される *@
+        <div class="col-4">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend w-25">
+                    <span class="input-group-text w-100" id="">発行用納品日</span>
+                </div>
+                @if (ViewBag.Syubetsu == 1)
+                {
+                    <label class="form-control">YYYY/MM/DD</label>
+                }
+                else
+                {
+                    <label class="form-control" style="background-color:lightgray"></label>
+                }
+            </div>
+        </div>
+    </div>
+
+    @* 三段目 *@
+    <div class="row mr-0 mb-3">
+        @* 担当者 (共通) *@
+        <div class="col-4">
+            <div class="input-group">
+                <div class="input-group-prepend w-25">
+                    <span class="input-group-text w-100" id="">担当者コード</span>
+                </div>
+                <label class="form-control">1234567890</label>
+            </div>
+            <div class="">
+                <span id="" class="align-middle">担当者名</span>
+            </div>
+        </div>
+        @* 発行用取引日　期間 (数量合計選択時有効) *@
+        @* 出力対象期間 *@
+        <div class="col-8">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="">発行用取引日</span>
+                </div>
+                @if (ViewBag.Syubetsu == 2)
+                {
+                    <label class="form-control">YYYY/MM/DD</label>
+                }
+                else
+                {
+                    <label class="form-control" style="background-color:lightgray"></label>
+                }
+                <div class="input-group-append">
+                    <span class="input-group-text">～</span>
+                </div>
+                @if (ViewBag.Syubetsu == 2)
+                {
+                    <label class="form-control">YYYY/MM/DD</label>
+                }
+                else
+                {
+                    <label class="form-control" style="background-color:lightgray"></label>
+                }
+            </div>
+        </div>
+    </div>
+
+    @* 四段目 *@
+    <div class="row mr-0 mb-3">
+        @* 再発行用納品日 (共通) *@
+        @* 再発行する「納品明細書」の右下端の「識別」を入力する *@
+        <div class="col-4">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend w-25">
+                    <span class="input-group-text w-100" id="">再発行用納品日</span>
+                </div>
+                <label class="form-control">YYYY/MM/DD</label>
+            </div>
+        </div>
+        @* 再発行用印刷用取引開始日 (数量合計選択時有効) *@
+        @* 再発行したい「納品明細書」の出力対象期間(自)を入力する(ノーチェック) *@
+        <div class="col-4">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="">再発行用印刷用取引開始日</span>
+                </div>
+                @if (ViewBag.Syubetsu == 2)
+                {
+                    <label class="form-control">YYYY/MM/DD</label>
+                }
+                else
+                {
+                    <label class="form-control" style="background-color:lightgray"></label>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@* 件数 *@
+<hr />
+<div class="mx-lg-0 mt-4">
+    <div class="col-4">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="">明細件数</span>
+            </div>
+            <label class="form-control">100件</label>
+        </div>
+    </div>
+</div>
+
+
+@* 確認ダイアログ *@
+<div class="modal" id="ConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @ViewBag.ResultMessage
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("D003_01", "D003", new { syubetsu = @ViewBag.Syubetsu }, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-primary">@MacssWeb.Resources.ControlText.Yes</button>
+                }
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,531 @@
+﻿@using MacssWeb.Areas.Tass.Helper
+@model Macss.Database.Entity.DummyTMSFixedDataRequest
+
+@Html.AntiForgeryToken()
+
+<div>
+    @Html.ValidationSummary(false, "入力エラーがあります。", new { @class = "alert alert-danger" })
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a class="btn btn-secondary" href="@Url.Action("Index")" role="button">@MacssWeb.Resources.ControlText.BackToList</a>
+    </div>
+    <div class="col-4 text-right">
+        <button type="submit" class="btn btn-primary">入力確認</button>
+    </div>
+</div>
+<table class="table macss-form-table">
+    <colgroup>
+        <col class="macss-form-table-title" />
+        <col class="macss-form-table-contents" />
+    </colgroup>
+    <tr>
+        <th scope="row">区分
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.Category, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.Category)
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            取込日時
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.ImportedAt, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.ImportedAt)
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            メッセージ
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.Error, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.ErrorCode)
+            @Html.HiddenFor(model => model.ImportedErrorMessage)
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            受付日
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.AcceptanceYMD, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.AcceptanceYMD)
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            受付No
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.AcceptanceNumber, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.AcceptanceNumber)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            発注日
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.OrderYMD, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.OrderYMD)
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            発注No
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.OrderNumber, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.OrderNumber)
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label required">顧客伝票No</label>
+        </th>
+        <td>
+            <div>
+                @Html.EditorFor(model => model.CustomerSlipNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CustomerSlipNumber, "", new { @class = "text-danger" })
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th>
+            積日時
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.LoadingAt, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.LoadingAt)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            顧客
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.Customer, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.CustomerCode)
+            @Html.HiddenFor(model => model.CustomerName)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            降地名
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.UnloadingName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.UnloadingName)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            協力会社
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.Partner, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.PartnerCode)
+            @Html.HiddenFor(model => model.PartnerName)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            進捗状況(作業依頼)
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.Progress, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.ProgressCode)
+            @Html.HiddenFor(model => model.ProgressName)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            業務
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.Operation, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.OperationNumber)
+            @Html.HiddenFor(model => model.OperationName)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            輸送モード(作業依頼)
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.TransportationModeForWorkRequest, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.TransportationModeForWorkRequest)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            貨物重量
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.ShipmentWeight, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.ShipmentWeight)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            備考(作業依頼)
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.NoteForWorkRequest, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.NoteForWorkRequest)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            車種(作業依頼)
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.VehicleClassForWorkRequest, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.VehicleClassForWorkRequest)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            付帯設備
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.EquipmentsForWorkRequest, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.EquipmentsForWorkRequest)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            送り状No
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.InvoiceNumber, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.InvoiceNumber)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.Quantity)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.ProductName, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.ProductName)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.PackageQuantity, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.PackageQuantity, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.PackageQuantity)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.ClientShipmentSize, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.ClientShipmentSize, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.ClientShipmentSizeCode)
+            @Html.HiddenFor(model => model.ClientShipmentSizeName)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.VehicleClassForOrder, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.VehicleClassForOrder, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.VehicleClassCodeForOrder)
+            @Html.HiddenFor(model => model.VehicleClassNameForOrder)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.EquipmentsForOrder, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.EquipmentsForOrder, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.EquipmentsCodeForOrder)
+            @Html.HiddenFor(model => model.EquipmentsNameForOrder)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.VehicleNumber, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.VehicleNumber, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.VehicleNumber)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.Driver, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.Driver, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.Driver)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.TransportationModeForOrder, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.TransportationModeForOrder, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.TransportationModeForOrder)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.ShipingCostTypeForOrder, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.ShipingCostTypeForOrder, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.ShipingCostTypeForOrder)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.ShipingCostForOrder, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.ShipingCostForOrder, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.ShipingCostForOrder)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.LoadingName, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.LoadingName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.LoadingName)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.LoadingLocation, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.LoadingLocation, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.LoadingLocation)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.LoadingLocationDetail, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.LoadingLocationDetail, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.LoadingLocationDetail)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.LoadingLocationDepartment, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.LoadingLocationDepartment, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.LoadingLocationDepartment)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.LoadingLocationStaff, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.EditorFor(model => model.LoadingLocationStaff, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.LoadingLocationStaff, "", new { @class = "text-danger" })
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.LoadingNote, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.LoadingNote, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.LoadingNote)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.UnloadingAt, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.UnloadingAt, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.UnloadingAt)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.UnloadingName, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.UnloadingName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.UnloadingName)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.UnloadingLocationJIS, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.UnloadingLocationJIS, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.UnloadingLocationJIS)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.UnloadingLocationZipCode, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.UnloadingLocationZipCode, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.UnloadingLocationZipCode)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.UnloadingLocation, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.UnloadingLocation, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.UnloadingLocation)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.UnloadingLocationDetail, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.UnloadingLocationDetail, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.UnloadingLocationDetail)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.UnloadingLocationPhoneNumber, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.UnloadingLocationPhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.UnloadingLocationPhoneNumber)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.UnloadingLocationDepartment, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.UnloadingLocationDepartment, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.UnloadingLocationDepartment)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.UnloadingLocationStaff, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.UnloadingLocationStaff, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.UnloadingLocationStaff)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.UnloadingNote, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.UnloadingNote, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.UnloadingNote)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.BillingRecordedStatus1, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.BillingRecordedStatus1, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.BillingRecordedStatus1)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.BillingRecordedStatus2, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.BillingRecordedStatus2, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.BillingRecordedStatus2)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.PaymentRecordedStatus1, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.PaymentRecordedStatus1, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.PaymentRecordedStatus1)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.PaymentRecordedStatus2, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.PaymentRecordedStatus2, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.PaymentRecordedStatus2)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.BillingDistance, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.BillingDistance, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.BillingDistance)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.PaymentDistance, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.PaymentDistance, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.PaymentDistance)
+        </td>
+    </tr>
+</table>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a class="btn btn-secondary" href="@Url.Action("Index")" role="button">@MacssWeb.Resources.ControlText.BackToList</a>
+    </div>
+    <div class="col-4 text-right">
+        <button type="submit" class="btn btn-primary">入力確認</button>
+    </div>
+</div>
+
+<script>
+    function setDepartmentCode(code, value) {
+        $("#bumon_cd").val(code);
+        $("#DepartmentName").text(value);
+    }
+    $(function () {
+        var createDatePicker = new Macss.DatetimePicker.MacssDtPicker("#OutYMD", "#OutYMDCalendar");
+        createDatePicker.configure();
+
+    });
+
+</script>

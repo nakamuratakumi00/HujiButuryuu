@@ -1,0 +1,80 @@
+﻿@model IEnumerable<MacssWeb.Models.AccountMasterUpload>
+
+@{
+    ViewBag.Title = "運送業務 - TASS";
+    ViewBag.ScreenId = "";
+    ViewBag.PageMainTitle = String.Format("{0}{1}", MacssWeb.Resources.Tass.DossDataCreateMainTitle, "完了");
+}
+@section Scripts {
+    <script>
+
+        $(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#UploadConfirmList");
+            dt.setScrollY("600px");
+            dt.configure();
+            var dt = new Macss.DataTables.MacssDataTable("#UploadConfirmList2");
+            dt.setScrollY("600px");
+            dt.configure();
+
+            $('[data-toggle="popover"]').popover();
+
+        });
+    </script>
+}
+
+<div class="alert @ViewBag.AlertType">
+    <span>@ViewBag.ResultMessage</span>
+</div>
+
+<div class="alert alert-info">
+    <span>DOSS連携データを作成しました。</span>
+</div>
+
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+    </div>
+    <div class="col-4 text-right">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("Index", "Home")">サブメニューへ戻る</a>
+    </div>
+</div>
+
+<div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" data-parent="#ConditionAccordion">
+    <div class="row mr-0 mb-3">
+        <div class="col-4">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="StockSearchTargetTitle">ファイル</span>
+                </div>
+                <span class="form-control text-right"></span>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="StockSearchTargetTitle">作成件数</span>
+                </div>
+                <span class="form-control text-right">1 件</span>
+            </div>
+        </div>
+    </div>
+    <div class="row mr-0 mb-3">
+        <div class="col-4">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="StockSearchTargetTitle">ファイル</span>
+                </div>
+                <span class="form-control text-right"></span>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="StockSearchTargetTitle">作成件数</span>
+                </div>
+                <span class="form-control text-right">1 件</span>
+            </div>
+        </div>
+    </div>
+</div>

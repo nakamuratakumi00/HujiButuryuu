@@ -1,0 +1,19 @@
+﻿@model Macss.Database.Entity.AccountMaster
+
+@{
+    ViewBag.Title = "運送業務 - TASS";
+    ViewBag.PageMainTitle = "詰合せ実績確認";
+    ViewBag.ScreenId = "";
+    //ViewBag.ConfirmMessage = MacssWeb.Resources.Messages.EditConfirm;
+    //ViewBag.ButtonText = MacssWeb.Resources.ControlText.EditExec;
+    //ViewBag.ConfirmDialogText = MacssWeb.Resources.Messages.EditReconfirm;
+    ViewBag.OnlyShow = true;
+}
+
+@*@using (Html.BeginForm("Edit", "D015", null, FormMethod.Post))
+    {
+
+        @Html.Partial("_Show", Model)
+    }*@
+
+@Html.Partial("_ShowTsumeawase", Model)

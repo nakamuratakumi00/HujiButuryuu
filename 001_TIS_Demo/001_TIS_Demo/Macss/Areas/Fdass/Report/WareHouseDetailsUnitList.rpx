@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ActiveReportsLayout Version="3.2" PrintWidth="16470" DocumentName="ARNet Document" ScriptLang="C#" MasterReport="0">
+  <StyleSheet>
+    <Style Name="Normal" Value="font-family: Arial; font-style: normal; text-decoration: none; font-weight: normal; font-size: 10pt; color: Black" />
+    <Style Name="Heading1" Value="font-size: 16pt; font-weight: bold" />
+    <Style Name="Heading2" Value="font-family: Times New Roman; font-size: 14pt; font-weight: bold; font-style: italic" />
+    <Style Name="Heading3" Value="font-size: 13pt; font-weight: bold" />
+  </StyleSheet>
+  <Sections>
+    <Section Type="PageHeader" Name="PageHeader" Height="2384.64" BackColor="16777215">
+      <Control Type="AR.Label" Name="Title" Left="0" Top="119.52" Width="16469.28" Height="509.76" Caption="倉庫料明細書" Style="font-size: 20.25pt; text-align: center; ddo-char-set: 0" />
+      <Control Type="AR.Label" Name="Label14" Left="260.6383" Top="119.5199" Width="1095.841" Height="254.88" Caption="XXXXXXXXX" Style="font-size: 8.25pt; vertical-align: middle" />
+      <Control Type="AR.Label" Name="Label16" Left="260.6384" Top="374.3999" Width="2625.541" Height="254.88" Caption="NNNNNNNNNNNNNNNNNNNN" Style="font-size: 8.25pt; vertical-align: middle" />
+      <Control Type="AR.Label" Name="Label2" Left="260.6384" Top="629.28" Width="2625.541" Height="254.88" Caption="NNNNNNNNNNNNNNNNNNNN" Style="font-size: 8.25pt; vertical-align: middle" />
+      <Control Type="AR.Label" Name="Label3" Left="2960.639" Top="629.28" Width="286.5602" Height="254.88" Caption="殿" Style="font-size: 8.25pt; vertical-align: middle" />
+      <Control Type="AR.Line" Name="Line1" X1="260.6383" Y1="884.16" X2="3247.198" Y2="884.16" />
+      <Control Type="AR.Label" Name="Label4" Left="7528.317" Top="771.84" Width="465.1199" Height="194.64" Caption="月度" Style="font-size: 9pt; ddo-char-set: 0" />
+      <Control Type="AR.Field" Name="TextBox1" Left="6134.385" Top="771.8398" Width="570" Height="225" Text="YYYY" Style="font-size: 9pt; ddo-char-set: 0" />
+      <Control Type="AR.Label" Name="Label12" Left="6723.349" Top="771.8398" Width="345.0002" Height="194.64" Caption="年" Style="font-size: 9pt; ddo-char-set: 0" />
+      <Control Type="AR.Field" Name="TextBox2" Left="7140.959" Top="771.8398" Width="406.0799" Height="225" Text="MM" Style="font-size: 9pt; ddo-char-set: 0" />
+      <Control Type="AR.Label" Name="Label5" Left="8108.64" Top="771.84" Width="744.4796" Height="254.88" Caption="得意先 =" Style="font-size: 8.25pt; vertical-align: middle" />
+      <Control Type="AR.Label" Name="Label6" Left="8932.317" Top="771.84" Width="1006.26" Height="254.88" Caption="XXXXXXX" Style="font-size: 8.25pt; vertical-align: middle" />
+      <Control Type="AR.Label" Name="Label7" Left="10094.4" Top="771.84" Width="412.9805" Height="254.88" Caption="ZZ9" Style="font-size: 8.25pt; vertical-align: middle" />
+      <Control Type="AR.Label" Name="Label8" Left="10634.4" Top="771.84" Width="412.9802" Height="254.88" Caption="ZZ9" Style="font-size: 8.25pt; vertical-align: middle" />
+      <Control Type="AR.Label" Name="Label9" Left="10507.68" Top="771.84" Width="173.0703" Height="254.88" Caption="/" Style="font-size: 8.25pt; vertical-align: middle" />
+      <Control Type="AR.Label" Name="Label10" Left="11047.68" Top="771.84" Width="292.3201" Height="254.88" Caption="頁" Style="font-size: 8.25pt; vertical-align: middle" />
+      <Control Type="AR.Label" Name="Label11" Left="260.6391" Top="1634.4" Width="352.7999" Height="254.88" Caption="NN" Style="font-size: 8.25pt; vertical-align: middle" />
+      <Control Type="AR.Label" Name="Label13" Left="613.439" Top="1634.4" Width="181.1405" Height="254.88" Caption="：" Style="font-size: 8.25pt; vertical-align: middle" />
+      <Control Type="AR.Label" Name="Label15" Left="794.879" Top="1634.4" Width="1920.661" Height="254.88" Caption="NNNNNNNNNNNNNNN" Style="font-size: 8.25pt; vertical-align: middle" />
+      <Control Type="AR.Label" Name="Label17" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="260.6383" Top="1889.28" Width="861.1202" Height="495.36" Caption="&#xD;&#xA;機種B" Style="font-size: 8.25pt; text-align: center; ddo-char-set: 1" PaddingTop="3" />
+      <Control Type="AR.Label" Name="Label19" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="3247.199" Top="1889.28" Width="1438.56" Height="495.36" Caption="&#xD;&#xA;前月残数" Style="font-size: 8.25pt; text-align: center; ddo-char-set: 1" PaddingTop="3" />
+      <Control Type="AR.Label" Name="Label23" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="4685.759" Top="1889.28" Width="1438.56" Height="495.36" Caption="&#xD;&#xA;入　庫　数" Style="font-size: 8.25pt; text-align: center; ddo-char-set: 1" PaddingTop="3" />
+      <Control Type="AR.Label" Name="Label25" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="6124.319" Top="1889.28" Width="1438.56" Height="495.36" Caption="&#xD;&#xA;面積(坪)" Style="font-size: 8.25pt; text-align: center; ddo-char-set: 1" PaddingTop="3" />
+      <Control Type="AR.Label" Name="Label27" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="7562.879" Top="1889.28" Width="1438.56" Height="495.36" Caption="&#xD;&#xA;坪＠" Style="font-size: 8.25pt; text-align: center; ddo-char-set: 1" PaddingTop="3" />
+      <Control Type="AR.Label" Name="Label29" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="9001.439" Top="1889.28" Width="1438.56" Height="495.36" Caption="&#xD;&#xA;使　用　料" Style="font-size: 8.25pt; text-align: center; ddo-char-set: 1" PaddingTop="3" />
+      <Control Type="AR.Label" Name="Label31" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="10440" Top="1889.28" Width="1438.56" Height="495.36" Caption="&#xD;&#xA;NNNNN" Style="font-size: 8.25pt; text-align: center; ddo-char-set: 1" PaddingTop="3" />
+      <Control Type="AR.Label" Name="Label28" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="11878.56" Top="1889.28" Width="1438.56" Height="495.36" Caption="&#xD;&#xA;荷役＠" Style="font-size: 8.25pt; text-align: center; ddo-char-set: 1" PaddingTop="3" />
+      <Control Type="AR.Label" Name="Label26" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="13317.12" Top="1889.28" Width="1438.56" Height="495.36" Caption="&#xD;&#xA;荷　役　料" Style="font-size: 8.25pt; text-align: center; ddo-char-set: 1" PaddingTop="3" />
+      <Control Type="AR.Label" Name="Label30" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="14755.68" Top="1889.28" Width="1452.389" Height="495.36" Caption="&#xD;&#xA;合　　　計" Style="font-size: 8.25pt; text-align: center; ddo-char-set: 1" PaddingTop="3" />
+      <Control Type="AR.Label" Name="Label50" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="1121.758" Top="1889.28" Width="2125.441" Height="495.3599" Caption="品　名　型　式&#xD;&#xA;　品　番　コ　ー　ド" Style="font-size: 8.25pt; text-align: center" PaddingTop="3" />
+    </Section>
+    <Section Type="Detail" Name="Detail" Height="810" BackColor="16777215">
+      <Control Type="AR.Label" Name="Label24" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="3247.2" Top="0" Width="1438.56" Height="480.84" Caption="&#xD;&#xA;ZZZ,ZZZ,ZZ9" Style="font-size: 8.25pt; text-align: right; ddo-char-set: 1" PaddingTop="3" PaddingRight="2" />
+      <Control Type="AR.Label" Name="Label35" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="10440" Top="0" Width="1438.56" Height="480.96" Caption="&#xD;&#xA;ZZZZZZZZZ9" Style="font-size: 8.25pt; text-align: right; ddo-char-set: 1" PaddingTop="3" PaddingRight="2" />
+      <Control Type="AR.Label" Name="Label33" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="6124.32" Top="0" Width="1438.56" Height="480.96" Caption="&#xD;&#xA;ZZZ,ZZZ,ZZ9" Style="font-size: 8.25pt; text-align: right; ddo-char-set: 1" PaddingTop="3" PaddingRight="2" />
+      <Control Type="AR.Label" Name="Label32" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="4685.76" Top="0" Width="1438.56" Height="480.96" Caption="&#xD;&#xA;ZZZ,ZZZ,ZZ9" Style="font-size: 8.25pt; text-align: right; ddo-char-set: 1" PaddingTop="3" PaddingRight="2" />
+      <Control Type="AR.Label" Name="Label38" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="15069.6" Top="0" Width="1139.041" Height="480.96" Caption="&#xD;&#xA;ZZZ,ZZZ,ZZ9" Style="font-size: 8.25pt; text-align: right; ddo-char-set: 1" PaddingTop="3" PaddingRight="2" />
+      <Control Type="AR.Label" Name="Label20" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="260.639" Top="0" Width="861.1202" Height="480.96" Caption="&#xD;&#xA;XXX" Style="font-size: 8.25pt; text-align: center; ddo-char-set: 1" PaddingTop="3" />
+      <Control Type="AR.Label" Name="Label21" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="1" Left="1121.758" Top="0" Width="2125.442" Height="240.48" Caption="XXXXXXXXXXXXXXXXXXXX" Style="font-size: 8.25pt; text-align: center; ddo-char-set: 1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label18" BorderLeftStyle="1" BorderBottomStyle="1" Left="1121.758" Top="240.48" Width="887.0401" Height="240.48" Caption="XXXXXXXX" Style="font-size: 8.25pt; text-align: center; ddo-char-set: 1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label52" BorderRightStyle="1" BorderBottomStyle="1" Left="2008.799" Top="240.48" Width="1238.402" Height="240.48" Caption="ＮＮＮＮＮＮＮＮ" Style="font-size: 8.25pt; text-align: center; ddo-char-set: 1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label22" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="7562.88" Top="0" Width="1428.48" Height="480.84" Caption="&#xD;&#xA;ZZZ9.99999" Style="font-size: 8.25pt; text-align: right; ddo-char-set: 1" PaddingTop="3" PaddingRight="2" />
+      <Control Type="AR.Label" Name="Label56" BorderLeftStyle="1" BorderTopStyle="1" BorderBottomStyle="1" Left="9001.44" Top="0" Width="314.4596" Height="480.84" Caption="&#xD;&#xA;Ｎ" Style="font-size: 8.25pt; text-align: right; ddo-char-set: 1" PaddingTop="3" PaddingRight="2" />
+      <Control Type="AR.Label" Name="Label34" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="9315.36" Top="0" Width="1124.64" Height="480.84" Caption="&#xD;&#xA;ZZZ9.99999" Style="font-size: 8.25pt; text-align: right; ddo-char-set: 1" PaddingTop="3" PaddingRight="2" />
+      <Control Type="AR.Label" Name="Label36" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="11878.56" Top="0" Width="1438.56" Height="480.96" Caption="&#xD;&#xA;ZZZ9.99999" Style="font-size: 8.25pt; text-align: right; ddo-char-set: 1" PaddingTop="3" PaddingRight="2" />
+      <Control Type="AR.Label" Name="Label57" BorderLeftStyle="1" BorderTopStyle="1" BorderBottomStyle="1" Left="13317.12" Top="0" Width="314.4596" Height="480.84" Caption="&#xD;&#xA;Ｎ" Style="font-size: 8.25pt; text-align: right; ddo-char-set: 1" PaddingTop="3" PaddingRight="2" />
+      <Control Type="AR.Label" Name="Label58" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="13631.04" Top="0" Width="1124.64" Height="480.84" Caption="&#xD;&#xA;ZZZ9.99999" Style="font-size: 8.25pt; text-align: right; ddo-char-set: 1" PaddingTop="3" PaddingRight="2" />
+      <Control Type="AR.Label" Name="Label59" BorderLeftStyle="1" BorderTopStyle="1" BorderBottomStyle="1" Left="14755.68" Top="0" Width="314.4596" Height="480.84" Caption="&#xD;&#xA;Ｎ" Style="font-size: 8.25pt; text-align: right; ddo-char-set: 1" PaddingTop="3" PaddingRight="2" />
+    </Section>
+    <Section Type="PageFooter" Name="PageFooter" Height="824.9999" BackColor="16777215">
+      <Control Type="AR.Label" Name="Label39" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="260.6403" Top="0" Width="861.1202" Height="480.96" Caption="" Style="font-size: 8.25pt; text-align: center; ddo-char-set: 1" PaddingTop="3" />
+      <Control Type="AR.Label" Name="Label40" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="1121.761" Top="0" Width="2125.441" Height="480.84" Caption="&#xD;&#xA;【合　　　　　　計】" Style="font-size: 8.25pt; text-align: center; ddo-char-set: 1" PaddingTop="3" />
+      <Control Type="AR.Label" Name="Label41" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="3247.2" Top="0" Width="1438.56" Height="480.84" Caption="&#xD;&#xA;ZZZZZZZZZ9" Style="font-size: 8.25pt; text-align: right; ddo-char-set: 1" PaddingTop="3" PaddingRight="2" />
+      <Control Type="AR.Label" Name="Label48" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="13317.12" Top="0" Width="1438.559" Height="480.84" Caption="&#xD;&#xA;ZZZ,ZZZ,ZZ9" Style="font-size: 8.25pt; text-align: right; ddo-char-set: 1" PaddingTop="3" PaddingRight="2" />
+      <Control Type="AR.Label" Name="Label49" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="14755.68" Top="0" Width="1452.96" Height="480.84" Caption="&#xD;&#xA;ZZZ,ZZZ,ZZ9" Style="font-size: 8.25pt; text-align: right; ddo-char-set: 1" PaddingTop="3" PaddingRight="2" />
+      <Control Type="AR.Label" Name="Label51" Left="14963.04" Top="570.2401" Width="412.9805" Height="254.88" Caption="ZZ9" Style="font-size: 8.25pt; vertical-align: middle" />
+      <Control Type="AR.Label" Name="Label53" Left="15503.04" Top="570.2401" Width="412.9802" Height="254.88" Caption="ZZ9" Style="font-size: 8.25pt; vertical-align: middle" />
+      <Control Type="AR.Label" Name="Label54" Left="15376.32" Top="570.2401" Width="173.0703" Height="254.88" Caption="/" Style="font-size: 8.25pt; vertical-align: middle" />
+      <Control Type="AR.Label" Name="Label55" Left="15916.32" Top="570.2401" Width="292.3201" Height="254.88" Caption="頁" Style="font-size: 8.25pt; vertical-align: middle" />
+      <Control Type="AR.Label" Name="Label37" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="4685.76" Top="0" Width="1438.56" Height="480.84" Caption="&#xD;&#xA;ZZZZZZZZZ9" Style="font-size: 8.25pt; text-align: right; ddo-char-set: 1" PaddingTop="3" PaddingRight="2" />
+      <Control Type="AR.Label" Name="Label42" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="6124.32" Top="0" Width="1438.56" Height="480.84" Caption="&#xD;&#xA;ZZZZZZZZZ9" Style="font-size: 8.25pt; text-align: right; ddo-char-set: 1" PaddingTop="3" PaddingRight="2" />
+      <Control Type="AR.Label" Name="Label43" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="7552.8" Top="0" Width="1438.56" Height="480.96" Caption="" Style="font-size: 8.25pt; text-align: right; ddo-char-set: 1" PaddingTop="3" PaddingRight="2" />
+      <Control Type="AR.Label" Name="Label44" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="9001.439" Top="0" Width="1438.56" Height="480.96" Caption="&#xD;&#xA;ZZZ,ZZZ,ZZ9" Style="font-size: 8.25pt; text-align: right; ddo-char-set: 1" PaddingTop="3" PaddingRight="2" />
+      <Control Type="AR.Label" Name="Label46" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="10440" Top="0" Width="1438.56" Height="480.96" Caption="&#xD;&#xA;ZZZZZZZZZ9" Style="font-size: 8.25pt; text-align: right; ddo-char-set: 1" PaddingTop="3" PaddingRight="2" />
+      <Control Type="AR.Label" Name="Label47" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="11878.56" Top="0" Width="1438.56" Height="480.96" Caption="" Style="font-size: 8.25pt; text-align: right; ddo-char-set: 1" PaddingTop="3" PaddingRight="2" />
+    </Section>
+  </Sections>
+  <ReportComponentTray />
+  <PageSettings LeftMargin="144" RightMargin="144" TopMargin="432" BottomMargin="432" Orientation="2" />
+  <Parameters />
+</ActiveReportsLayout>

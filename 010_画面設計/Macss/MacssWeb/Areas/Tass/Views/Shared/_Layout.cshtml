@@ -1,0 +1,13 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--Home/indexに@section Css の記述あり-->
+@RenderSection("Css", false)
+@RenderSection("CssExtended", required: false)
+
+<!--<h1>TASS</h1>-->
+<div>
+    @RenderBody()
+</div>
+@RenderSection("Scripts", required: false)

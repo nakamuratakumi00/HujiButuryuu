@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "出庫指示";
+    ViewBag.PageMainTitle = "出庫指示アップロード";
+
+    ViewBag.Caption = "データのアップロードを行います。";
+    //ViewBag.UploadFileAccept = new List<string>() { ".csv, .txt" };
+    ViewBag.UploadFileAccept = new List<string>() { ".csv" };
+}
+
+
+@using (Html.BeginForm("UploadConfirm", "D002", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.Partial("_SimpleUpload")
+}

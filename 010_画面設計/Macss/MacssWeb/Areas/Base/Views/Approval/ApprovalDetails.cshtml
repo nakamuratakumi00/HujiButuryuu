@@ -1,0 +1,21 @@
+
+@model Macss.Database.Entity.ApprovalData
+
+@{
+    ViewBag.Title = "³”F";
+    ViewBag.ScreenId = "BASE-D007-02";
+    ViewBag.PageMainTitle = "³”F Ú×(¿‹ŠÖŒW‘ˆóü)";
+}
+
+@using (Html.BeginForm("EditConfirm", "Sample", null, FormMethod.Post))
+{
+
+    @Html.Partial("_FormApprovalDetails", Model)
+
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

@@ -1,0 +1,139 @@
+﻿@model IEnumerable<MacssWeb.Models.AccountMasterUpload>
+
+@{
+    ViewBag.Title = "請求仕入 - AIMS";
+    ViewBag.ScreenId = "";
+    ViewBag.PageMainTitle = "ESPデータ変換マスタアップロード確認";
+}
+@section Scripts {
+    <script>
+        $(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#UploadConfirmList");
+            dt.setScrollY("600px");
+            dt.configure();
+
+        });
+    </script>
+}
+
+<div class="alert alert-info">
+    <span>@ViewBag.ConfirmMessage</span>
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("Upload02")">@MacssWeb.Resources.ControlText.BackToUpload</a>
+    </div>
+    <div class="col-4 text-right">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDialog">@MacssWeb.Resources.ControlText.UploadExec</button>
+    </div>
+</div>
+
+<div class="container-fluid mt-4">
+    <div class="form-inline">
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">ファイル</span>
+            </div>
+            <span class="form-control">@ViewBag.UploadFileNameWithSize</span>
+        </div>
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">件数</span>
+            </div>
+            <span class="form-control">3 件@*@ViewBag.UploadFileContentsCount*@</span>
+        </div>
+    </div>
+</div>
+
+<!--
+<div class="container-fluid mt-4">
+    <div class="macss-label-like-btn-primary">新規：1 件@*@ViewBag.NewCountText*@</div>
+    <div class="macss-label-like-btn-sucess">更新：2 件@*@ViewBag.UpdCountText*@</div>
+    <div class="macss-label-like-btn-warning">削除：1 件@*@ViewBag.DelCountText*@</div>
+</div>
+    -->
+<!--
+<table id="UploadConfirmList" class="table table-striped table-hover macss-data-table">
+    <thead class="macss-data-table-header">
+        <tr>
+            <th>No</th>
+            <th>システムID</th>
+            <th>ファイルID</th>
+            <th>変換項目識別</th>
+            <th>変換前コード</th>
+            <th>PC部門コード</th>
+            <th>請求受付番号</th>
+            <th>明細識別区分</th>
+            <th>業務ID</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                1
+            </td>
+            <td>0701</td>
+            <td>0010</td>
+            <td>01</td>
+            <td>A1002A41</td>
+            <td>4007</td>
+            <td>07006854</td>
+            <td>T1</td>
+            <td>T18038210176261</td>
+        </tr>
+        <tr>
+            <td>
+                2
+            </td>
+            <td>0701</td>
+            <td>0010</td>
+            <td>01</td>
+            <td>A1012B41</td>
+            <td>4007</td>
+            <td>07008130</td>
+            <td>21</td>
+            <td>218041320171001</td>
+        </tr>
+        <tr>
+            <td>
+                3
+            </td>
+            <td>0701</td>
+            <td>0010</td>
+            <td>01</td>
+            <td>A1012B41</td>
+            <td>4007</td>
+            <td>07008130</td>
+            <td>U1</td>
+            <td>U18041310171001</td>
+        </tr>
+    </tbody>
+</table>
+-->
+
+<div class="modal" id="ConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @MacssWeb.Resources.Messages.UploadReconfirm
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("UploadResult02", "D011", null, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="UploadFileName" name="uploadFileName" value="@ViewBag.UploadFileName" />
+                    <button type="submit" class="btn btn-primary">@MacssWeb.Resources.ControlText.Yes</button>
+                }
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+﻿<html lang="ja">
+@{
+    ViewBag.Title = "月次データ更新";
+    ViewBag.PageMainTitle = "月次データ更新";
+    //ViewBag.Caption = "データのアップロードを行います。";
+    //ViewBag.UploadFileAccept = new List<string>() { ".csv, .txt" };
+    ViewBag.UploadFileAccept = new List<string>() { ".csv" };
+    ViewBag.Date = "2020年12月";
+}
+
+
+@using (Html.BeginForm("MonthlyComplete", "Monthly", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.Partial("_Monthly")
+}

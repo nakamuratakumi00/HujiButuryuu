@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1259
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MacssDb", "MacssDb\MacssDb.csproj", "{FA25B8F0-AECD-4967-A188-1347E1631D70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MacssWeb", "MacssWeb\MacssWeb.csproj", "{78E3B814-735B-4A7E-BE90-AEEF23AAF450}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MacssWeb.Tests", "MacssWeb.Tests\MacssWeb.Tests.csproj", "{1DB8C028-CD19-4305-85E4-FFDEC6958636}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FA25B8F0-AECD-4967-A188-1347E1631D70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA25B8F0-AECD-4967-A188-1347E1631D70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA25B8F0-AECD-4967-A188-1347E1631D70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA25B8F0-AECD-4967-A188-1347E1631D70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78E3B814-735B-4A7E-BE90-AEEF23AAF450}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78E3B814-735B-4A7E-BE90-AEEF23AAF450}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78E3B814-735B-4A7E-BE90-AEEF23AAF450}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78E3B814-735B-4A7E-BE90-AEEF23AAF450}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DB8C028-CD19-4305-85E4-FFDEC6958636}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DB8C028-CD19-4305-85E4-FFDEC6958636}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DB8C028-CD19-4305-85E4-FFDEC6958636}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DB8C028-CD19-4305-85E4-FFDEC6958636}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {91066F97-8156-4943-AC3B-70E17E2D398A}
+	EndGlobalSection
+EndGlobal

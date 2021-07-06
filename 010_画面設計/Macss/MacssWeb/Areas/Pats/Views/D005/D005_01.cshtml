@@ -1,0 +1,82 @@
+﻿<div class="alert @ViewBag.AlertType">
+    <span>@ViewBag.ResultMessage</span>
+</div>
+
+@* ボタン *@
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+    </div>
+    <div class="col-4 text-right">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDialog">実行</button>
+    </div>
+</div>
+
+@* 設定項目 *@
+<div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+    <div class="row mr-0 mb-1">
+        <div class="col-4">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">年月</span>
+                </div>
+                <span class="form-control">YYYY年 MM月</span>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">締日</span>
+                </div>
+                <div class="macss-input-group-input form-control">
+                    <label class="form-check-label" for="inlineRadio1">20日</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="row mr-0 mb-1">
+        <div class="col-4">
+            <div class="input-group mt-3 mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">請求データ件数</span>
+                </div>
+                <span class="form-control">100件</span>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="input-group mt-3 mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">仕入データ件数</span>
+                </div>
+                <span class="form-control">100件</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* 確認ダイアログ *@
+<div class="modal" id="ConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                請求・仕入データを作成します。よろしいですか？
+            </div>
+            <div class="modal-footer">
+                @*                <button type="submit" class="btn btn-primary" name="cmdBtmExec" value="@((int)MacssWeb.Common.ButtonValues.Exec)">@MacssWeb.Resources.ControlText.Yes</button>*@
+                @using (Html.BeginForm("D005_02", "D005", null, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="UploadFileName" name="uploadFileName" value="@ViewBag.UploadFileName" />
+                    <button type="submit" class="btn btn-primary">はい</button>
+                }
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,196 @@
+﻿@model Macss.Database.Entity.AccountMaster
+
+<!--D003-->
+
+@Html.AntiForgeryToken()
+
+@Html.Partial("../Shared/Dialog/_DenpyoKbnCodeSearch")
+@Html.Partial("../Shared/Dialog/_TokuisakiCodeSearch")
+
+@Html.Partial("../Shared/Dialog/_UnsohohoCodeSearch")
+@Html.Partial("../Shared/Dialog/_UnsocorseCodeSearch")
+@Html.Partial("../Shared/Dialog/_ShiiresakiCodeSearch")
+@Html.Partial("../Shared/Dialog/_SyukkaBashoCodeSearch")
+@Html.Partial("../Shared/Dialog/_UnsokbnCodeSearch")
+@Html.Partial("../Shared/Dialog/_KisyuACodeSearch")
+@Html.Partial("../Shared/Dialog/_TantoshaCodeSearch")
+@Html.Partial("../Shared/Dialog/_TodokesakiCodeSearch")
+@Html.Partial("../Shared/Dialog/_HinmeiCodeSearch")
+@Html.Partial("../Shared/Dialog/_YubinNoSearch")
+@Html.Partial("../Shared/Dialog/_SaisyuJuyoCodeSearch")
+@Html.Partial("../Shared/Dialog/_OkyakusamaCodeSearch")
+
+<!--テスト値-->
+@{ var testVal = string.Empty; }
+@{ var processVal = string.Empty; }
+@{ processVal = "Edit"; }
+
+<div>
+    @Html.ValidationSummary(false, "入力エラーがあります。", new { @class = "alert alert-danger" })
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#TransitionConfirmDialog">@MacssWeb.Resources.ControlText.BackToList</button>
+    </div>
+    <div class="col-4 text-right">
+        <button type="submit" class="btn btn-primary ctrl-item">@MacssWeb.Resources.ControlText.InputConfirm</button>
+    </div>
+</div>
+
+@* 基本項目 *@
+<div class="accordion mt-3" id="ConditionAccordion1">
+    <div class="card">
+        <div class="card-header macss-search-config-collapse-header" id="headingOne1">
+            <div class="mb-0">
+                <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain1" aria-expanded="true" aria-controls="ConditionMain">
+                    <div class="d-inline-block" style="color:#333">出荷現品 基本項目</div>
+                    <i id="CollapseHidden1" class="fas fa-chevron-circle-up" aria-hidden="true" style="color: rgb(120, 188, 255);"></i>
+                    <i id="CollapseShow1" class="fas fa-chevron-circle-down" aria-hidden="true" style="color: rgb(120, 188, 255); display: none;"></i>
+                </button>
+            </div>
+        </div>
+        <div id="ConditionMain1" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne1" data-parent="#ConditionAccordion1">
+            <table class="table macss-form-table ml-3">
+                <colgroup>
+                    <col class="macss-form-table-title" />
+                    <col class="macss-form-table-contents" />
+                </colgroup>
+                <!-- ■出荷No -->
+                <tr>
+                    <th scope="row">
+                        <label class="control-label required" for="account_id">出荷No</label>
+                    </th>
+                    <td>
+                        <div>
+                            <input class="form-control text-box single-line" id="LotNo" name="IDName" type="text" value="1234560001">
+                        </div>
+                    </td>
+                </tr>
+                <!-- ■品名コード -->
+                <tr>
+                    <th scope="row">
+                        <label class="control-label required">品名コード</label>
+                    </th>
+                    <td>
+                        <div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="input-group">
+                                        <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="ESS0546">
+                                        <div class="input-group-append">
+                                            <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#HinmeiCodeSearchDialog">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="macss-val-ref col-6">
+                                    <span id="HinmeiCodeName" class="align-middle">２ＲＩ１００Ｇ－１６０</span>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <!-- ■出荷数 -->
+                <tr>
+                    <th scope="row">
+                        <label class="control-label required" for="account_id">出荷数</label>
+                    </th>
+                    <td>
+                        <div>
+                            <input class="form-control text-box single-line" id="LotNo" name="IDName" type="text" value="500">
+                        </div>
+                    </td>
+                </tr>
+                <!-- ■顧客品番 -->
+                <tr>
+                    <th scope="row">
+                        <label class="control-label" for="account_id">顧客品番</label>
+                    </th>
+                    <td>
+                        <div>
+                            <input class="form-control text-box single-line" id="LotNo" name="IDName" type="text" value="Ａ５０Ｌ－２００１－０４３１３">
+                        </div>
+                    </td>
+                </tr>
+                <!-- ■顧客品番有無 -->
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">顧客品番有無</label>
+                    </th>
+                    <td>
+                        <div>
+                            <select class="custom-select form-control" id="Condition3">
+                                <option value=""></option>
+                                <option value="0">無</option>
+                                <option value="1" selected>有</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4"></div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#TransitionConfirmDialog">@MacssWeb.Resources.ControlText.BackToList</button>
+    </div>
+    <div class="col-8 text-right">
+        <button type="submit" class="btn btn-primary ctrl-item">@MacssWeb.Resources.ControlText.InputConfirm</button>
+    </div>
+</div>
+
+<div class="modal" id="TransitionConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.TransitionConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @MacssWeb.Resources.Messages.TransitionConfirm
+                <br>
+                @MacssWeb.Resources.Messages.Confirm
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary macss-btn" href="@Url.Action("Index")" role="button">@MacssWeb.Resources.ControlText.Yes</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>
+@if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+{
+    <div id="create" style="display:none">1</div>
+}
+else
+{
+    <div id="create" style="display:none">0</div>
+}
+
+<script>
+    function setDepartmentCode(code, value) {
+        $("#bumon_cd").val(code);
+        $("#DepartmentName").text(value);
+    }
+    $(function () {
+        var dt = new Macss.DataTables.MacssDataTable("#SampleList");
+        dt.configure();
+
+        var cond = new Macss.Collapse.ConditionsPanel("#ConditionAccordion1", "#CollapseShow1", "#CollapseHidden1");
+        cond.setCollapseEvent();
+
+        var createDatePicker = new Macss.DatetimePicker.MacssDtPicker("#totyaku_date", "#TotyakuDateCalendar");
+        createDatePicker.configure();
+        var updateDatePicker = new Macss.DatetimePicker.MacssDtPicker("#syukka_date", "#SyukkaDateCalendar");
+        updateDatePicker.configure();
+    });
+
+</script>

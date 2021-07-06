@@ -1,0 +1,403 @@
+﻿
+@Html.AntiForgeryToken()
+
+@Html.Partial("../Shared/Dialog/_DepartmentCodeSearch")
+
+@{
+    ViewBag.Title = "保存データ";
+    ViewBag.PageMainTitle = "保存データ";
+}
+
+@section Scripts {
+    <script>
+        $(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#BatchList");
+            dt.configure();
+
+            var cond = new Macss.Collapse.ConditionsPanel("#ConditionAccordion", "#CollapseShow", "#CollapseHidden");
+            cond.setCollapseEvent();
+
+            var sampleDatePicker1 = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker1", "#SampleCalendar1");
+            sampleDatePicker1.configure();
+            var sampleDatePicker2 = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker2", "#SampleCalendar2");
+            sampleDatePicker2.configure();
+        });
+    </script>
+}
+
+@using (Html.BeginForm("Search", "Sample", null, FormMethod.Post))
+{
+    <div class="accordion" id="ConditionAccordion">
+        <div class="card">
+            <div class="card-header macss-search-config-collapse-header" id="headingOne">
+                <div class="mb-0">
+                    <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain" aria-expanded="true" aria-controls="ConditionMain">
+                        <div class="d-inline-block" style="color:#333">検索設定</div>
+                        <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="display:none;"></i>
+                        <i id="CollapseShow" class="fas fa-chevron-circle-down" aria-hidden="true" style="display:none;"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="ConditionMain" class="container-fluid mt-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+                <div class="row mr-0 mb-1">
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">サブシステム</span>
+                            </div>
+                            <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                <option value=""></option>
+                                <option value="TASS">運送業務(TASS)</option>
+                                <option value="PATS">包装商品販売(PATS)</option>
+                                <option value="DCOS">保管業務(DCOS)</option>
+                                <option value="AIMS">請求仕入(AIMS)</option>
+                                <option value="BASE">共通管理(BASE)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">ファイル種類</span>
+                            </div>
+                            <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                <option value=""></option>
+                                <option value="FormCopy">帳票(控)</option>
+                                <option value="ETC">...</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mr-0 mb-1">
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition3">作成者名</span>
+                            </div>
+                            <input class="form-control text-box single-line" data-val="true" data-val-length-max="20" id="bumon_cd" name="bumon_cd" type="text">
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">作成日時</span>
+                            </div>
+                            <input type="text" id="SampleDTPicker1" class="form-control">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar1"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                            <input class="time-control" id="TimeExample3" type="text" maxlength="5">
+                            <div class="input-group-append">
+                                <span class="input-group-text">～</span>
+                            </div>
+                            <input type="text" id="SampleDTPicker1" class="form-control">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar2"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                            <input class="time-control" id="TimeExample2" type="text" maxlength="5">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mr-0 mt-3 d-none">
+                    <div class="col-1">
+                        <label class="col-form-label" for="inputGroupSelect">並び替え</label>
+                    </div>
+                    <div class="col-3">
+                        <div class="input-group mb-3">
+                            <select class="custom-select form-control" id="inputGroupSelect11">
+                                <option value=""></option>
+                                <option value="sub_systerm">サブシステム</option>
+                                <option value="file_type">ファイル種類</option>
+                                <option value="file_name">ファイル名称</option>
+                                <option value="author">作成者</option>
+                                <option value="created_date">作成日</option>
+                            </select>
+                            <div class="input-group-append">
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-outline-info active">
+                                        <input type="radio" name="options" id="asc1" autocomplete="off" checked>
+                                        昇順
+                                    </label>
+                                    <label class="btn btn-outline-info">
+                                        <input type="radio" name="options" id="desc1" autocomplete="off">
+                                        降順
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="input-group mb-3">
+                            <select class="custom-select form-control" id="inputGroupSelect12">
+                                <option value=""></option>
+                                <option value="sub_systerm">サブシステム</option>
+                                <option value="file_type">ファイル種類</option>
+                                <option value="file_name">ファイル名称</option>
+                                <option value="author">作成者</option>
+                                <option value="created_date">作成日</option>
+                            </select>
+                            <div class="input-group-append">
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-outline-info active">
+                                        <input type="radio" name="options" id="asc2" autocomplete="off" checked>
+                                        昇順
+                                    </label>
+                                    <label class="btn btn-outline-info">
+                                        <input type="radio" name="options" id="desc2" autocomplete="off">
+                                        降順
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="input-group mb-3">
+                            <select class="custom-select form-control" id="inputGroupSelect13">
+                                <option value=""></option>
+                                <option value="sub_systerm">サブシステム</option>
+                                <option value="file_type">ファイル種類</option>
+                                <option value="file_name">ファイル名称</option>
+                                <option value="author">作成者</option>
+                                <option value="created_date">作成日</option>
+                            </select>
+                            <div class="input-group-append">
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-outline-info active">
+                                        <input type="radio" name="options" id="asc3" autocomplete="off" checked>
+                                        昇順
+                                    </label>
+                                    <label class="btn btn-outline-info">
+                                        <input type="radio" name="options" id="desc3" autocomplete="off">
+                                        降順
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid pt-4 pb-3 pl-0 clearfix">
+                    <div class="float-left">
+                        <button type="reset" class="btn btn-secondary btn-lg macss-btn-main">@MacssWeb.Resources.ControlText.ConditionClear</button>
+                    </div>
+                    <div class="float-right">
+                        <button type="submit" class="btn btn-primary btn-lg macss-btn-main">@MacssWeb.Resources.ControlText.Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="row mt-3 mb-4">
+    <div class="col-6">
+    </div>
+    <div class="col-6 text-right">
+        <div class="dropdown">
+            <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#CsvDownloadDialog">CSVダウンロード</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<table id="BatchList" class="table table-striped table-hover macss-data-table">
+    <thead class="macss-data-table-header">
+        <tr>
+            <th>
+            </th>
+            <th>
+                サブシステム　　　　　　　　
+            </th>
+            <th>
+                ファイル種類　　　　　　　　
+            </th>
+            <th>
+                ファイル名称　　　　　　　　　　　　　　　　　
+            </th>
+            <th>
+                作成者　　　　　　　　　
+            </th>
+            <th>
+                作成日　　　　　　　　　　　　
+            </th>
+            <th>
+                保存期限　　　　　　　　
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a></td>
+            <td>運送業務(TASS)</td>
+            <td>帳票(控)</td>
+            <td>ファナック向け納品連絡表</td>
+            <td>佐藤　和光</td>
+            <td>2020-12-07 17:19:00</td>
+            <td>2025-12-07</td>
+        </tr>
+        @*<tr>
+            <td><a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a></td>
+            <td>運送業務(TASS)</td>
+            <td>帳票(控)</td>
+            <td>輸送明細書</td>
+            <td>岸　紀雄</td>
+            <td>2020-12-08 12:00:00.000</td>
+            <td>2025-12-08</td>
+        </tr>
+        <tr>
+            <td><a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a></td>
+            <td>運送業務(TASS)</td>
+            <td>データファイル</td>
+            <td>FB本社向け出荷実績データ</td>
+            <td>向井　瑠美</td>
+            <td>2020-12-09 12:00:00.000</td>
+            <td>2025-12-08</td>
+        </tr>
+        <tr>
+            <td><a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a></td>
+            <td>運送業務(TASS)</td>
+            <td>...</td>
+            <td>...</td>
+            <td>阪野　佳子</td>
+            <td>2020-12-10 12:00:00.000</td>
+            <td>2025-12-08</td>
+        </tr>
+        <tr>
+            <td><a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a></td>
+            <td>包装商品販売(PATS)</td>
+            <td>帳票(控)</td>
+            <td>内示書</td>
+            <td>佐藤　久</td>
+            <td>2020-12-11 12:00:00.000</td>
+            <td>2025-12-08</td>
+        </tr>
+        <tr>
+            <td><a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a></td>
+            <td>保管業務(DCOS)</td>
+            <td>帳票(控)</td>
+            <td>入庫ラベル</td>
+            <td>小西　典明</td>
+            <td>2020-12-12 12:00:00.000</td>
+            <td>2025-12-08</td>
+        </tr>
+        <tr>
+            <td><a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a></td>
+            <td>請求仕入(AIMS)</td>
+            <td>帳票(控)</td>
+            <td>請求明細書・売上明細書</td>
+            <td>芳賀　信之</td>
+            <td>2020-12-13 12:00:00.000</td>
+            <td>2025-12-08</td>
+        </tr>
+        <tr>
+            <td><a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a></td>
+            <td>請求仕入(AIMS)</td>
+            <td>帳票(控)</td>
+            <td>請求書・売上伝票</td>
+            <td>百瀬由起子</td>
+            <td>2020-12-14 12:00:00.000</td>
+            <td>2025-12-08</td>
+        </tr>
+        <tr>
+            <td><a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a></td>
+            <td>請求仕入(AIMS)</td>
+            <td>帳票(控)</td>
+            <td>請求書（固定項目）・売上伝票（固定項目）</td>
+            <td>大久保　秀子</td>
+            <td>2020-12-15 12:00:00.000</td>
+            <td>2025-12-08</td>
+        </tr>
+        <tr>
+            <td><a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a></td>
+            <td>請求仕入(AIMS)</td>
+            <td>帳票(控)</td>
+            <td>請求総括表[大分類]・売上総括表[大分類]</td>
+            <td>大澤　弘子</td>
+            <td>2020-12-16 12:00:00.000</td>
+            <td>2025-12-08</td>
+        </tr>
+        <tr>
+            <td><a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a></td>
+            <td>請求仕入(AIMS)</td>
+            <td>帳票(控)</td>
+            <td>請求総括表・売上総括表</td>
+            <td>小口　和美</td>
+            <td>2020-12-17 12:00:00.000</td>
+            <td>2025-12-08</td>
+        </tr>
+        <tr>
+            <td><a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a></td>
+            <td>請求仕入(AIMS)</td>
+            <td>帳票(控)</td>
+            <td>メール宛名ラベル</td>
+            <td>平林　弘成</td>
+            <td>2020-12-18 12:00:00.000</td>
+            <td>2025-12-08</td>
+        </tr>
+        <tr>
+            <td><a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a></td>
+            <td>請求仕入(AIMS)</td>
+            <td>帳票(控)</td>
+            <td>包装費・運賃明細書(請求・売上計上)</td>
+            <td>岩垂　範久</td>
+            <td>2020-12-19 12:00:00.000</td>
+            <td>2025-12-08</td>
+        </tr>
+        <tr>
+            <td><a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a></td>
+            <td>請求仕入(AIMS)</td>
+            <td>帳票(控)</td>
+            <td>包装費運賃集計表(請求・売上計上)</td>
+            <td>柳沢　京子</td>
+            <td>2020-12-20 12:00:00.000</td>
+            <td>2025-12-08</td>
+        </tr>
+        <tr>
+            <td><a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a></td>
+            <td>共通管理(BASE)</td>
+            <td>...</td>
+            <td>...</td>
+            <td>野村　昌俊</td>
+            <td>2020-12-21 12:00:00.000</td>
+            <td>2025-12-08</td>
+        </tr>*@
+    </tbody>
+</table>
+
+<div class="modal" id="DownloadConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">ダウンロードします。よろしいですか?</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.Cancel</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">ダウンロード</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function setDepartmentCode(code, value) {
+        $("#bumon_cd").val(code);
+        $("#DepartmentName").text(value);
+    }
+    $(function () {
+        var createDatePicker = new Macss.DatetimePicker.MacssDtPicker("#create_date", "#CreateDateCalendar");
+        createDatePicker.configure();
+        var updateDatePicker = new Macss.DatetimePicker.MacssDtPicker("#update_date", "#UpdateDateCalendar");
+        updateDatePicker.configure();
+    });
+
+</script>

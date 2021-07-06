@@ -1,0 +1,15 @@
+﻿@model Macss.Database.Entity.AccountMaster
+
+@{
+    ViewBag.Title = "運送業務 - TASS";
+    ViewBag.PageMainTitle = "請求データ作成確認";
+    ViewBag.ScreenId = "";
+    ViewBag.ConfirmMessage = "請求データを作成します。よろしいですか？";
+    ViewBag.ButtonText = MacssWeb.Resources.ControlText.Execute;
+    ViewBag.ConfirmDialogText = "請求データを作成します。よろしいですか？";
+}
+
+@using (Html.BeginForm("RequestdataResult", "D029", null, FormMethod.Post))
+{
+    @Html.Partial("_RequestdataShow", Model)
+}

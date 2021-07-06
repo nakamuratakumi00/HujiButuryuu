@@ -1,0 +1,110 @@
+﻿@model MacssWeb.Areas.Dcos.ViewModels.D011UpdateViewModel
+
+@{
+    ViewBag.Title = MacssWeb.Resources.Dcos.D011MainTitle;
+    ViewBag.PageMainTitle = MacssWeb.Resources.Dcos.D011MainTitle;
+    ViewBag.ScreenId = "DCOS-D011-02";
+}
+
+@using (Html.BeginForm("UpdateResult", null, FormMethod.Post))
+{
+
+    @Html.AntiForgeryToken()
+
+    <div>
+        @Html.ValidationSummary(false, "入力エラーがあります。", new { @class = "alert alert-danger" })
+    </div>
+
+    <div class="row justify-content-between macss-form-button-group-row">
+        <div class="col-4">
+            <a class="btn btn-secondary" href="@Url.Action("Index")" role="button">条件設定へ戻る</a>
+        </div>
+        <div class="col-4 text-right">
+            <button type="submit" class="btn btn-primary">実行</button>
+        </div>
+    </div>
+    <div class="accordion" id="ConditionAccordion">
+        <div class="card">
+            <div class="card-header macss-search-config-collapse-header" id="headingOne">
+                <div class="mb-0">
+                    <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain" aria-expanded="true" aria-controls="ConditionMain">
+                        <div class="d-inline-block" style="color:#333">変更後　倉庫・保存期限</div>
+                        <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="color: rgb(120, 188, 255);"></i>
+                        <i id="CollapseShow" class="fas fa-chevron-circle-down" aria-hidden="true" style="color: rgb(120, 188, 255); display: none;"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+                <table class="table macss-form-table">
+                    <colgroup>
+                        <col class="macss-form-table-title" />
+                        <col class="macss-form-table-contents" />
+                    </colgroup>
+                    <tr>
+                        <th scope="row">
+                            @Html.LabelFor(model => model.Warehouse, htmlAttributes: new { @class = "control-label" })
+                        </th>
+                        <td>
+                            <div>
+                                <div class="row">
+                                    <div class="col-2">
+                                        <div class="input-group">
+                                            @Html.EditorFor(model => model.WarehouseCode, new { htmlAttributes = new { @class = "form-control" } })
+                                            <div class="input-group-append">
+                                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#DepartmentCodeSearchDialog">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-8">
+                                        @Html.DisplayFor(model => model.WarehouseName, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.WarehouseCode, "", new { @class = "text-danger" })
+                            </div>
+                            @Html.HiddenFor(model => model.WarehouseName)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            @Html.LabelFor(model => model.StockLimitYM, htmlAttributes: new { @class = "control-label" })
+                        </th>
+                        <td>
+                            <div class="row">
+                                <div class="col-3">
+                                    <div class="input-group">
+                                        @Html.EditorFor(model => model.StockLimitYM, new { htmlAttributes = new { @class = "form-control" } })
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary" type="button" id="UpdateDateCalendar"><i class="fa fa-calendar-alt"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.StockLimitYM, "", new { @class = "text-danger" })
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    @Html.Partial("_List", Model.Stocks)
+
+    <script>
+        function setDepartmentCode(code, value) {
+            $("#bumon_cd").val(code);
+            $("#DepartmentName").text(value);
+        }
+        $(function () {
+            var createDatePicker = new Macss.DatetimePicker.MacssDtPicker("#OutYMD", "#OutYMDCalendar");
+            createDatePicker.configure();
+
+        });
+    </script>
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

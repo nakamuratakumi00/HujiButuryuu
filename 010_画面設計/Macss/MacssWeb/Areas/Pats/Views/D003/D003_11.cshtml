@@ -1,0 +1,285 @@
+﻿@* 受入払出実績データアップロード確認 *@
+
+@section Scripts {
+    <script>
+        $(function () {
+
+            new Macss.DataTables.MacssDataTable("#UploadConfirmList").configure();
+            new Macss.DataTables.MacssSimpleTable("#SumList").configure();
+
+        });</script>
+}
+
+<div class="alert alert-info">
+    <span>@ViewBag.ConfirmMessage</span>
+</div>
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("D003_10")">@MacssWeb.Resources.ControlText.BackToUpload</a>
+    </div>
+    <div class="col-4 text-right">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDialog">@MacssWeb.Resources.ControlText.UploadExec</button>
+    </div>
+</div>
+<div class="container-fluid mt-4">
+    <div class="form-inline">
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">ファイル</span>
+            </div>
+            <span class="form-control">@ViewBag.UploadFileNameWithSize</span>
+        </div>
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">件数</span>
+            </div>
+            <span class="form-control">@ViewBag.UploadFileContentsCount</span>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt-4">
+    <div class="row mr-0 mb-1">
+        @* 倉庫 *@
+        <div class="col-4">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="">倉庫</span>
+                </div>
+                <label class="form-control">12</label>
+            </div>
+            <label class="">１２３４５６７８９０</label>
+
+        </div>
+        @* 在庫種別 *@
+        <div class="col-4">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="">在庫種別</span>
+                </div>
+                <label class="form-control">1 自社在庫</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* 集計一覧 *@
+<div class="container-fluid mt-3">
+    <table id="SumList" class="table table-striped table-hover macss-data-table" style="width:30%">
+        <thead class="macss-data-table-header">
+            <tr>
+                <th>データ区分</th>
+                <th>件数</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>101</td>
+                <td>10 件</td>
+            </tr>
+            <tr>
+                <td>111</td>
+                <td>10 件</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<hr />
+
+@* 一覧 *@
+<table id="UploadConfirmList" class="table table-striped table-hover macss-data-table" style="width:100%">
+    <thead class="macss-data-table-header">
+        <tr>
+            <th>
+                行No
+            </th>
+            <th>
+                品名コード
+            </th>
+            <th>
+                管理
+            </th>
+            <th>
+                管理名
+            </th>
+            <th>
+                品名
+            </th>
+            <th>
+                規格・寸法
+            </th>
+            <th>
+                単位
+            </th>
+            <th>
+                単位略称
+            </th>
+            <th>
+                帳簿在庫数
+            </th>
+            <th>
+                棚卸数
+            </th>
+            <th>
+                受払数
+            </th>
+            <th>
+                データ区分
+            </th>
+            <th>
+                取引日
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                1
+            </td>
+            <td>
+                123456789012
+            </td>
+            <td>
+                A
+            </td>
+            <td>
+                主要部材
+            </td>
+            <td>
+                １２３４５６７８９０１２３４５６７８９０
+            </td>
+            <td>
+                １２３４５６７８９０１２３４５６７８９０
+            </td>
+            <td>
+                12
+            </td>
+            <td>
+                １２３４
+            </td>
+            <td>
+                123,456,789
+            </td>
+            <td>
+                123,456,789
+            </td>
+            <td>
+                123,456,789
+            </td>
+            <td>
+                123
+            </td>
+            <td>
+                YYYY/MM/DD
+            </td>
+        </tr>
+        <tr>
+            <td>
+                2
+            </td>
+            <td>
+                123456789012
+            </td>
+            <td>
+                C
+            </td>
+            <td>
+                副資材
+            </td>
+            <td>
+                １２３４５６７８９０１２３４５６７８９０
+            </td>
+            <td>
+                １２３４５６７８９０１２３４５６７８９０
+            </td>
+            <td>
+                12
+            </td>
+            <td>
+                １２３４
+            </td>
+            <td>
+                123,456,789
+            </td>
+            <td>
+                123,456,789
+            </td>
+            <td>
+                123,456,789
+            </td>
+            <td>
+                123
+            </td>
+            <td>
+                YYYY/MM/DD
+            </td>
+        </tr>
+        <tr>
+            <td>
+                3
+            </td>
+            <td>
+                123456789012
+            </td>
+            <td>
+                D
+            </td>
+            <td>
+                副資材
+            </td>
+            <td>
+                １２３４５６７８９０１２３４５６７８９０
+            </td>
+            <td>
+                １２３４５６７８９０１２３４５６７８９０
+            </td>
+            <td>
+                12
+            </td>
+            <td>
+                １２３４
+            </td>
+            <td>
+                123,456,789
+            </td>
+            <td>
+                123,456,789
+            </td>
+            <td>
+                123,456,789
+            </td>
+            <td>
+                123
+            </td>
+            <td>
+                YYYY/MM/DD
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="modal" id="ConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @MacssWeb.Resources.Messages.UploadReconfirm
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("D003_12", "D003", null, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="UploadFileName" name="uploadFileName" value="@ViewBag.UploadFileName" />
+                    <button type="submit" class="btn btn-primary">@MacssWeb.Resources.ControlText.Yes</button>
+                }
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>

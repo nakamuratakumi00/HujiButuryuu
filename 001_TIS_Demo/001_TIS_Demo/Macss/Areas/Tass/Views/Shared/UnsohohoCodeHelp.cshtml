@@ -1,0 +1,136 @@
+﻿
+@using Macss.Areas.Tass.ViewModels
+@model CodeHelpViewModels.UnsohohoViewData
+@using Macss.HtmlHelpers
+
+
+<button type="button" class="btn btn-default" data-toggle="modal" data-target="#UnsohohoModal" style="height:22px; width:30px; padding:4px">
+    *
+</button>
+
+<!-- コードヘルプ -->
+<div class="modal fade bs-example-modal-lg" data-backdrop="static" id="UnsohohoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">コードヘルプ - 運送方法マスタ</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row" style="line-height:2">
+                    @Html.LabelFor(model => model.Serch.Unscod, htmlAttributes: new { @class = "control-label col-sm-1 label_small"})
+                    <div class="col-sm-1 text_cd_middle" >
+                        @Html.EditorFor(model => model.Serch.Unscod, new { htmlAttributes = new { @class = "form-control", @maxlength = "2" , style = "ime-mode: inactive" } })
+                        @Html.ValidationMessageFor(model => model.Serch.Unscod, "", new { @class = "text-danger" })
+                    </div>
+
+                    @Html.LabelFor(model => model.Serch.Unsnam, htmlAttributes: new { @class = "control-label col-sm-2 label_small" })
+                    <div class="col-sm-2 text_jp_middle" >
+                        @Html.EditorFor(model => model.Serch.Unsnam, new { htmlAttributes = new { @class = "form-control", @maxlength = "20" , style = "ime-mode: active" } })
+                        @Html.ValidationMessageFor(model => model.Serch.Unsnam, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-sm-11"></div>
+                    <div class="col-sm-1"><input type="button" name="UnsohohoSearch" id="UnsohohoSearch" class="btn btn-default"  style="width:50px; height: 30px; padding:0; text-align: center;" value="検索" /></div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-sm-12 nbase-bootstrap-table" style="height:350px">
+                        <table id="UnsohohoTable"
+                               class="table"
+                               data-method="POST"
+                               data-toggle="table"
+                               data-query-params="UnsohohoQueryParams"
+                               data-id-table="advancedTable"
+                               data-page-list="[10, 25, 50, 1000]"
+                               data-click-to-select="true"
+                               data-filter-show-clear="true"
+                               data-pagination="true">
+                            <colgroup>
+                                <col style="width: 100px" />
+                                <col />
+                            </colgroup>
+                            <thead>
+                                <tr id="data">
+                                    @Html.ThFor(model => model.Information.Unscod, htmlAttributes: new { data_sortable = "true" })
+                                    @Html.ThFor(model => model.Information.Unsnam, htmlAttributes: new { data_sortable = "true" })
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-sm-9" style="width:700px"></div>
+                    <div class="col-sm-1"><input type="button" name="UnsohohoSelect" id="UnsohohoSelect" class="btn btn-default" data-dismiss="modal"  style="width:50px; height: 30px; padding:0; text-align: center;" value="選択" /></div>
+                    <div class="col-sm-1" style="width:10px"></div>
+                    <div class="col-sm-1"><input type="button" name="UnsohohoClose" id="UnsohohoClose" class="btn btn-default" data-dismiss="modal"  style="width:50px; height: 30px; padding:0; text-align: center;" value="閉じる" /></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts  {
+    @Html.Partial("_BootstrapFunction")
+    @Scripts.Render("~/bundles/my-bootstrap-export")
+
+    <script>
+
+
+        // *********************** コードヘルプ用 *************************
+        // ↓このスクリプトは各画面で実装
+        @*var $UnsohohoTable = $('#UnsohohoTable');
+
+        window.onload = function () {
+
+            if ($('input[name="Serch.Unscod"]').val() != '' ||
+                $('input[name="Serch.Unsnam"]').val() != '') {
+
+                $('#UnsohohoTable').bootstrapTable('refresh', { url: "@Url.Action("UnsohohoSearch", "CodeHelp")" });
+            }
+
+        };
+
+        $(function () {
+            $UnsohohoTable.on('click-row.bs.table', function (e, row, $element) {
+                $('.success').removeClass('success');
+                $($element).addClass('success');
+            });
+
+        });
+
+        $('#UnsohohoSelect').on('click', function (e) {
+            var index = $('.success').attr('data-index');
+            var row = $('.success').parents('table:first').bootstrapTable('getData')[index];
+            // ↓各画面で変更
+            //$("#serch_Hincod").val(row.@nameof(CodeHelpViewModels.UnsohohoInformation.Unscod));
+            //$("#serch_Hinnmk").val(row.@nameof(CodeHelpViewModels.UnsohohoInformation.Unsnam));
+
+        });
+
+        $('#UnsohohoSearch').on('click', function (e) {
+
+            $('#UnsohohoTable').bootstrapTable('refresh', { url: "@Url.Action("UnsohohoSearch", "CodeHelp")" });
+
+        });
+
+        function UnsohohoQueryParams(params) {
+
+            return JSON.stringify({
+                'Unscrs': $('input[name="Serch.Unscod"]').val(),
+                'Crsnam': $('input[name="Serch.Unsnam"]').val()
+            });
+        }*@
+        // *********************** コードヘルプ用 *************************
+
+        // このコードを各画面に実装
+        // @Html.Partial("UnsohohoCodeHelp", new CodeHelpViewModels.UnsohohoViewData())
+
+    </script>
+}
+

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+	<assembly>
+		<name>GrapeCity.ActiveReports.Export.Xaml.v12</name>
+	</assembly>
+	<members>
+		<member name="T:GrapeCity.ActiveReports.Rendering.Text.IFormattingService">
+			<summary>
+            Providers functionality for values converting and formatting according to the current language. For internal use.
+            </summary>
+		</member>
+		<member name="M:GrapeCity.ActiveReports.Rendering.Text.IFormattingService.Format(System.Object,GrapeCity.ActiveReports.Extensibility.Rendering.Components.IStyle)">
+			<summary>
+            Returns a string representation of the specified value using <see cref="T:GrapeCity.ActiveReports.Extensibility.Rendering.Components.IStyle" /> 
+            and according to the language settings defined in the report or current server language.
+            </summary>
+			<remarks>
+            According to RDL specs. report item language takes precedence over report language
+            and everything fallbacks on a default (server -- whatever it is) language. 
+            </remarks>
+		</member>
+		<member name="M:GrapeCity.ActiveReports.Rendering.Text.IFormattingService.Format(System.Object,System.String)">
+			<summary>
+            Returns a string representation of the specified value consistent with the current report language settings
+            and using the specified format string.
+            </summary>
+		</member>
+		<member name="T:GrapeCity.ActiveReports.Export.Xaml.DDR.IDelayedImages">
+			<summary>
+            Interface for delayed rendering of image items. For internal use only.
+            </summary>
+		</member>
+		<member name="P:GrapeCity.ActiveReports.Export.Xaml.DDR.IDelayedImages.DelayedImages">
+			<summary>
+            Gets delayed image stream delegates
+            </summary>
+		</member>
+		<member name="T:GrapeCity.ActiveReports.Export.Xaml.DDR.XamlRenderingExtension">
+			<summary>
+            XAML export is for internal use and it is not designed to use in any other products. Can be changed without notification.
+            </summary>
+		</member>
+		<member name="M:GrapeCity.ActiveReports.Export.Xaml.DDR.XamlRenderingExtension.Render(GrapeCity.ActiveReports.Extensibility.Rendering.Components.IReport,GrapeCity.ActiveReports.Extensibility.Rendering.IO.StreamProvider)">
+			<summary>
+            Renders the specified report. For internal use only.
+            </summary>
+			<param name="report">The report.</param>
+			<param name="streams">The streams.</param>
+		</member>
+		<member name="M:GrapeCity.ActiveReports.Export.Xaml.DDR.XamlRenderingExtension.Render(GrapeCity.ActiveReports.Extensibility.Rendering.Components.IReport,GrapeCity.ActiveReports.Extensibility.Rendering.IO.StreamProvider,System.Collections.Specialized.NameValueCollection)">
+			<summary>
+            Renders the specified report. For internal use only.
+            </summary>
+			<param name="report">The report.</param>
+			<param name="streams">The stream provider.</param>
+			<param name="settings">The settings.</param>
+		</member>
+		<member name="M:GrapeCity.ActiveReports.Export.Xaml.DDR.XamlRenderingExtension.GetSupportedSettings">
+			<summary>
+            Returns the settings for the <see cref="T:GrapeCity.ActiveReports.Export.Xaml.DDR.XamlRenderingExtension" />. For internal use only
+            </summary>
+		</member>
+		<member name="M:GrapeCity.ActiveReports.Export.Xaml.DDR.XamlRenderingExtension.GetSupportedSettings(System.Boolean)">
+			<summary>
+            Returns the settings for the <see cref="T:GrapeCity.ActiveReports.Export.Xaml.DDR.XamlRenderingExtension" />. For internal use only
+            </summary>
+			<param name="fpl">Is fixed page layout</param>
+		</member>
+		<member name="M:GrapeCity.ActiveReports.Export.Xaml.DDR.XamlRenderingExtension.Dispose">
+			<summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+			<filterpriority>2</filterpriority>
+		</member>
+		<member name="P:GrapeCity.ActiveReports.Export.Xaml.DDR.XamlRenderingExtension.LayoutTree">
+			<summary>
+            Gets layout tree. For internal use only
+            </summary>
+		</member>
+		<member name="E:GrapeCity.ActiveReports.Export.Xaml.DDR.XamlRenderingExtension.PageReady">
+			<summary>
+            PageReady event. For internal use only
+            </summary>
+		</member>
+	</members>
+</doc>

@@ -1,0 +1,164 @@
+﻿
+@using Macss.Areas.Tass.ViewModels
+@model CodeHelpViewModels.HinmeisakiViewData
+@using Macss.HtmlHelpers
+
+
+<button type="button" class="btn btn-default" data-toggle="modal" data-target="#HinmeisakiModal" style="height:22px; width:30px; padding:4px" onClick="onClickChHinmei(this)">
+    *
+</button>
+
+<!-- コードヘルプ -->
+<div class="modal fade bs-example-modal-lg" data-backdrop="static" id="HinmeisakiModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">コードヘルプ - 品名マスタ</h4>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row" style="line-height:2">
+                    @Html.LabelFor(model => model.Serch.Hinnmk, htmlAttributes: new { @class = "control-label col-sm-1 label_large" })
+                    <div class="col-sm-1 text_jp_middle">
+                        @Html.EditorFor(model => model.Serch.Hinnmk, new { htmlAttributes = new { @class = "form-control", @maxlength = "80", style = "ime-mode: inactive" } })
+                        @*@Html.ValidationMessageFor(model => model.Serch.Hinnmk, "", new { @class = "text-danger" })*@
+                    </div>
+
+                    @Html.LabelFor(model => model.Serch.Hincod, htmlAttributes: new { @class = "control-label col-sm-2 label_large" })
+                    <div class="col-sm-2 text_cd_middle">
+                        @Html.EditorFor(model => model.Serch.Hincod, new { htmlAttributes = new { @class = "form-control", @maxlength = "15", style = "ime-mode: inactive" } })
+                        @Html.ValidationMessageFor(model => model.Serch.Hincod, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row" style="line-height:2">
+                    @Html.LabelFor(model => model.Serch.Hinnam, htmlAttributes: new { @class = "control-label col-sm-2 label_large" })
+                    <div class="col-sm-1 text_jp_middle">
+                        @Html.EditorFor(model => model.Serch.Hinnam, new { htmlAttributes = new { @class = "form-control", @maxlength = "80", style = "ime-mode: active" } })
+                        @*@Html.ValidationMessageFor(model => model.Serch.Hinnam, "", new { @class = "text-danger" })*@
+                    </div>
+
+                    @Html.LabelFor(model => model.Serch.Ctlfl1, htmlAttributes: new { @class = "control-label col-sm-1 label_large" })
+                    <div class="col-sm-2 text_jp_middle">
+                        @Html.DropDownListFor(model => model.Serch.Ctlfl1, (IEnumerable<SelectListItem>)ViewBag.SCtlfl1, "", htmlAttributes: new { @class = "form-control" })
+                        @*@Html.EditorFor(model => model.Serch.Ctlfl1, new { htmlAttributes = new { @class = "form-control", @maxlength = "2", style = "ime-mode: inactive" } })*@
+                        @*@Html.ValidationMessageFor(model => model.Serch.Ctlfl1, "", new { @class = "text-danger" })*@
+                    </div>
+                </div>
+
+                <div class="row" style="line-height:2">
+                    @Html.LabelFor(model => model.Serch.Khincd, htmlAttributes: new { @class = "control-label col-sm-2 label_large" })
+                    <div class="col-sm-1 text_cd_middle">
+                        @Html.EditorFor(model => model.Serch.Khincd, new { htmlAttributes = new { @class = "form-control", @maxlength = "15", style = "ime-mode: inactive" } })
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-11"></div>
+                    <div class="col-sm-1"><input type="button" name="HinmeisakiSearch" id="HinmeisakiSearch" class="btn btn-default" style="width:50px; height: 30px; padding:0; text-align: center;" value="検索" /></div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-sm-12 nbase-bootstrap-table" style="height:350px">
+                        <table id="HinmeisakiTable"
+                               class="table"
+                               data-method="POST"
+                               data-toggle="table"
+                               data-query-params="hinmeiQueryParams"
+                               data-id-table="advancedTable"
+                               data-page-list="[10, 25, 50, 1000]"
+                               data-click-to-select="true"
+                               data-filter-show-clear="true"
+                               data-pagination="true">
+                            <thead>
+                                <tr id="data">
+                                    @Html.ThFor(model => model.Information.Hinnmk, htmlAttributes: new { data_sortable = "true" })
+                                    @Html.ThFor(model => model.Information.Hincod, htmlAttributes: new { data_sortable = "true" })
+                                    @Html.ThFor(model => model.Information.Hinnam, htmlAttributes: new { data_sortable = "true" })
+                                    @Html.ThFor(model => model.Information.Ctlfl1, htmlAttributes: new { data_sortable = "true" })
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-sm-9" style="width:700px"></div>
+                    <div class="col-sm-1"><input type="button" name="HinmeisakiSelect" id="HinmeisakiSelect" class="btn btn-default" data-dismiss="modal" style="width:50px; height: 30px; padding:0; text-align: center;" value="選択" /></div>
+                    <div class="col-sm-1" style="width:10px"></div>
+                    <div class="col-sm-1"><input type="button" name="close" id="HinmeisakiClose" class="btn btn-default" data-dismiss="modal" style="width:50px; height: 30px; padding:0; text-align: center;" value="閉じる" /></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts  {
+    @Html.Partial("_BootstrapFunction")
+    @Scripts.Render("~/bundles/my-bootstrap-export")
+
+    <script>
+
+
+        // *********************** コードヘルプ用 *************************
+        // ↓このスクリプトは各画面で実装
+        @*var $HinmeisakiTable = $('#HinmeisakiTable');
+
+        window.onload = function () {
+
+            if ($('input[name="Serch.Hinnmk"]').val() != '' ||
+                $('input[name="Serch.Hincod"]').val() != '' ||
+                $('input[name="Serch.Hinnam"]').val() != '' ||
+                $('input[name="Serch.Ctlfl1"]').val() != '') {
+
+                $('#HinmeisakiTable').bootstrapTable('refresh', { url: "@Url.Action("HinmeisakiSearch", "CodeHelp")" });
+            }
+
+        };
+
+        $(function () {
+            $HinmeisakiTable.on('click-row.bs.table', function (e, row, $element) {
+                $('.success').removeClass('success');
+                $($element).addClass('success');
+            });
+
+        });
+
+        $('#HinmeisakiSelect').on('click', function (e) {
+            var index = $('.success').attr('data-index');
+            var row = $('.success').parents('table:first').bootstrapTable('getData')[index];
+
+            // ↓各画面で変更
+            //$("#serch_Hincod").val(row.@nameof(CodeHelpViewModels.HinmeisakiInformation.Hinnmk));
+            //$("#serch_Hinnmk").val(row.@nameof(CodeHelpViewModels.HinmeisakiInformation.Hincod));
+            //$("#serch_Hinnmk").val(row.@nameof(CodeHelpViewModels.HinmeisakiInformation.Hinnam));
+            //$("#serch_Hinnmk").val(row.@nameof(CodeHelpViewModels.HinmeisakiInformation.Ctlfl1));
+
+
+        });
+
+        $('#HinmeisakiSearch').on('click', function (e) {
+
+            $('#HinmeisakiTable').bootstrapTable('refresh', { url: "@Url.Action("HinmeisakiSearch", "CodeHelp")" });
+
+        });
+
+        function hinmeiQueryParams(params) {
+
+            return JSON.stringify({
+                'Hinnmk': $('input[name="Serch.Hinnmk"]').val(),
+                'Hincod': $('input[name="Serch.Hincod"]').val(),
+                'Hinnam': $('input[name="Serch.Hinnam"]').val(),
+                'Ctlfl1': $('input[name="Serch.Ctlfl1"]').val()
+            });
+        }*@
+        // *********************** コードヘルプ用 *************************
+
+        // このコードを各画面に実装
+        // @Html.Partial("HinmeisakiCodeHelp", new CodeHelpViewModels.HinmeisakiViewData())
+
+    </script>
+}
+

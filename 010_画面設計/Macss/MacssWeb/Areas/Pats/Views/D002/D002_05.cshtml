@@ -1,0 +1,202 @@
+﻿@* 検収更新 *@
+
+@Html.AntiForgeryToken()
+
+@Html.Partial("../Shared/Dialog/_DepartmentCodeSearch")
+@Html.Partial("~/Areas/Tass/Views/Shared/Dialog/_HinmeiCodeSearch.cshtml")
+
+<div>
+    @Html.ValidationSummary(false, "登録エラーがあります。", new { @class = "alert alert-danger" })
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#TransitionConfirmDialog">@MacssWeb.Resources.ControlText.BackToList</button>
+    </div>
+    <div class="col-4 text-right">
+        <a class="btn btn-primary macss-btn" href="@Url.Action("D002_06")" role="button">@MacssWeb.Resources.ControlText.InputConfirm</a>
+    </div>
+</div>
+
+@* 更新項目 *@
+<table class="table macss-form-table">
+    <colgroup>
+        <col class="macss-form-table-title" />
+        <col class="macss-form-table-contents" />
+    </colgroup>
+    @* 検収区分 表示 *@
+    <tr>
+        <th scope="row">
+            検収区分
+        </th>
+        <td>
+            2:検収中
+        </td>
+    </tr>
+    @* 検収順番 表示 *@
+    <tr>
+        <th scope="row">
+            <label class="">検収順番</label>
+        </th>
+        <td>
+            1
+        </td>
+    </tr>
+    @* 注文No 表示 *@
+    <tr>
+        <th scope="row">
+            <label class="">注文No</label>
+        </th>
+        <td>
+            1234567890
+        </td>
+    </tr>
+    @* 分納回数 表示 *@
+    <tr>
+        <th scope="row">
+            <label class="">分納回数</label>
+        </th>
+        <td>
+            12
+        </td>
+    </tr>
+    @* 検収日 必須 *@
+    <tr>
+        <th scope="row">
+            <label class="required">検収日</label>
+        </th>
+        <td>
+            <div class="input-group">
+                <input type="text" id="date2" class="form-control" value="YYYY/MM/DD" />
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="Calendar2"><i class="fa fa-calendar-alt"></i></button>
+                </div>
+            </div>
+        </td>
+    </tr>
+    @* 検収数 入力 *@
+    <tr>
+        <th scope="row">
+            <label class="required">検収数</label>
+        </th>
+        <td>
+            <input class="form-control" type="text" value="123,456,789" />
+        </td>
+    </tr>
+    @* 注文残数 表示 *@
+    <tr>
+        <th scope="row">
+            <label class="">注文残数</label>
+        </th>
+        <td>
+            123,456,789
+        </td>
+    </tr>
+    @* 得意先 表示 *@
+    <tr>
+        <th scope="row">
+            得意先
+        </th>
+        <td>
+            1234567 １２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０
+        </td>
+    </tr>
+    @* 原価区分 *@
+    <tr>
+        <th scope="row">
+            原価区分
+        </th>
+        <td>
+            1:原価
+        </td>
+    </tr>
+    @* 納品書発行区分 入力 *@
+    <tr>
+        <th scope="row">
+            納品書発行区分
+        </th>
+        <td>
+            <select class="custom-select form-control">
+                <option></option>
+                <option>発行しない</option>
+                <option>発行する</option>
+            </select>
+        </td>
+    </tr>
+    @* 品名 表示 *@
+    <tr>
+        <th scope="row">
+            品名
+        </th>
+        <td>
+            123456789012 １２３４５６７８９０１２３４５６７８９０
+        </td>
+    </tr>
+    @* 規格・寸法 表示 *@
+    <tr>
+        <th scope="row">
+            規格・寸法
+        </th>
+        <td>
+            １２３４５６７８９０１２３４５６７８９０
+        </td>
+    </tr>
+    @* 売上単価 表示 *@
+    <tr>
+        <th scope="row">
+            <label class="">売上単価</label>
+        </th>
+        <td>
+            12,345,678,901.12
+        </td>
+    </tr>
+    @* 売上PCコード 表示 *@
+    <tr>
+        <th scope="row">
+            売上PCコード
+        </th>
+        <td>
+            123456789012
+        </td>
+    </tr>
+</table>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#TransitionConfirmDialog">@MacssWeb.Resources.ControlText.BackToList</button>
+    </div>
+    <div class="col-4 text-right">
+        <a class="btn btn-primary macss-btn" href="@Url.Action("D002_06")" role="button">@MacssWeb.Resources.ControlText.InputConfirm</a>
+    </div>
+</div>
+
+@* 画面遷移確認ダイアログ *@
+<div class="modal" id="TransitionConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.TransitionConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @MacssWeb.Resources.Messages.TransitionConfirm
+                <br>
+                @MacssWeb.Resources.Messages.Confirm
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary macss-btn" href="@Url.Action("D002_01")" role="button">@MacssWeb.Resources.ControlText.Yes</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        new Macss.DatetimePicker.MacssDtPicker("#date1", "#Calendar1").configure();
+        new Macss.DatetimePicker.MacssDtPicker("#date2", "#Calendar2").configure();
+    });
+
+</script>

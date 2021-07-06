@@ -1,0 +1,273 @@
+﻿@Html.AntiForgeryToken()
+
+@if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+{
+    <div class="alert alert-info">
+        <span>@ViewBag.ConfirmMessage</span>
+    </div>
+}
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="row justify-content-between macss-form-button-group-row">
+        <div class="col-4">
+            <a role="button" class="btn btn-secondary" href="@Url.Action(ViewBag.TransAction, new { id = @"01736",mode=ViewBag.PrevMode,process="Back" })">@MacssWeb.Resources.ControlText.Back</a>
+        </div>
+    </div>
+</div>
+
+<table class="table macss-form-table">
+    <colgroup>
+        <col class="macss-form-table-title" />
+        <col class="macss-form-table-contents" />
+    </colgroup>
+    <tr>
+        <th scope="row">
+            @Html.Label("出荷No", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                10-02600
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("得意先", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                17601 ＦＥ）半導体営業　（松本・ＤＳ）
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("出荷日", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                2020/01/04
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("経費負担No", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("担当者名", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("届先会社名", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                ㈱エイシーエスエヌ
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("届先支店名", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                東京営業所
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("届先部課名", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                システム本部
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("届先担当者名", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                田中部長代理
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("品名", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                電気部品
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("出荷数", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                1
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div id="ichiran" class="row mt-1">
+    <div class="col-12">
+        <div style="padding-left:15px;">
+            <table id="SeikyuList" class="table table-striped table-hover macss-data-table">
+                <thead class="macss-data-table-header">
+                    <!-- thの文字数で列の幅が決まってしまうため、必要に応じて全角スペースを入れて列の幅を調整する必要がある-->
+                    <tr>
+                        <th>　　　　</th>
+                        <th>　　　　　　　　</th>
+                        <th>2021年4月</th>
+                        <th>2021年3月</th>
+                        <th>2021年2月</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>国内梱包</td>
+                        <td>包装数</td>
+                        <td class="text-right">1</td>
+                        <td class="text-right">0</td>
+                        <td class="text-right">0</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>ダンボール請求額</td>
+                        <td class="text-right">0</td>
+                        <td class="text-right">0</td>
+                        <td class="text-right">0</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>資材請求額</td>
+                        <td class="text-right">0</td>
+                        <td class="text-right">0</td>
+                        <td class="text-right">0</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>工賃</td>
+                        <td class="text-right">126</td>
+                        <td class="text-right">0</td>
+                        <td class="text-right">0</td>
+                    </tr>
+                    <tr>
+                        <td>輸出梱包</td>
+                        <td>包装数</td>
+                        <td class="text-right">0</td>
+                        <td class="text-right">0</td>
+                        <td class="text-right">0</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>ダンボール請求額</td>
+                        <td class="text-right">0</td>
+                        <td class="text-right">0</td>
+                        <td class="text-right">0</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>資材請求額</td>
+                        <td class="text-right">0</td>
+                        <td class="text-right">0</td>
+                        <td class="text-right">0</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>工賃</td>
+                        <td class="text-right">0</td>
+                        <td class="text-right">0</td>
+                        <td class="text-right">0</td>
+                    </tr>
+                    <tr>
+                        <td>国内運賃</td>
+                        <td>課税</td>
+                        <td class="text-right">500</td>
+                        <td class="text-right">0</td>
+                        <td class="text-right">0</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>非課税</td>
+                        <td class="text-right">0</td>
+                        <td class="text-right">0</td>
+                        <td class="text-right">0</td>
+                    </tr>
+                    <tr>
+                        <td>海外運賃</td>
+                        <td>課税</td>
+                        <td class="text-right">0</td>
+                        <td class="text-right">0</td>
+                        <td class="text-right">0</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>非課税</td>
+                        <td class="text-right">0</td>
+                        <td class="text-right">0</td>
+                        <td class="text-right">0</td>
+                    </tr>
+                    <tr>
+                        <td>合計</td>
+                        <td></td>
+                        <td class="text-right">626</td>
+                        <td class="text-right">0</td>
+                        <td class="text-right">0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-6">
+        <div class="input-group mb-1 w-50" style="padding-left:20px;">
+            <div class="input-group-prepend" style="width:8rem;">
+                <span class="input-group-text w-100">総合計</span>
+            </div>
+            <span class="form-control text-right">626</span>
+        </div>
+    </div>
+    <div class="col-6">
+    </div>
+</div>
+
+<div class="row mt-2 mb-2"></div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a role="button" class="btn btn-secondary" href="@Url.Action(ViewBag.TransAction, new { id = @"01736",mode=ViewBag.PrevMode,process="Back" })">@MacssWeb.Resources.ControlText.Back</a>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        var dtSeikyu = new Macss.DataTables.MacssSimpleTable("#SeikyuList");
+        dtSeikyu.configure();
+    });
+</script>

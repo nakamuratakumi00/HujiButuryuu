@@ -1,0 +1,259 @@
+﻿@using Macss.ViewModels
+@model ControlViewModel
+
+<style>
+    h1, .h1,
+    h2, .h2,
+    h3, .h3 {
+        margin-top: 2px;
+        margin-bottom: 0px;
+    }
+</style>
+
+@section Heads {
+    <link href="/Content/details.css" rel="stylesheet" />
+}
+<div class="row">
+    <div class="navbar2 navbar-default" style="padding-bottom:10px;">
+
+        @using (Html.BeginForm("", "Control/Index", FormMethod.Post, htmlAttributes: new { id = "update" }))
+        {
+
+            @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <h2>@ViewBag.Title</h2>
+            <hr />
+            <div>
+                <input type="button" name="run" id="run" style="width:50px; height:30px; padding:0; text-align: center;" id='btnUpdate' value="登録" class="btn btn-default" />
+            </div>
+            <div>
+                @Html.ValidationSummary(true, "", new { @class = "" })
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-10 validation-summary-errors " style="display: none" id="error"><ul><li></li></ul></div>
+                <br />
+            </div>
+            <div class="row" style="line-height: 2">
+                @Html.LabelFor(model => model.InPostUser, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-2" style="width:300px; white-space: nowrap">
+                    @*@Html.EditorFor(model => model.PostUser, new { htmlAttributes = new { @class = "form-control", style = "ime-mode: active", @disabled = "@disabled" } })*@
+                    @Html.DisplayFor(model => model.InPostDate)：@Html.DisplayFor(model => model.InPostUser)
+                </div>
+            </div>
+            <div class="row" style="line-height: 2;">
+                @Html.LabelFor(model => model.InDateFrom, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-2" style="width:110px; white-space: nowrap">
+                    @Html.EditorFor(model => model.InDateFrom, new { htmlAttributes = new { @class = "form-control : date", style = "width:100px" } })
+                </div>
+                <div class="col-md-2" style="width:20px; white-space: nowrap; text-align:center">
+                    ～
+                </div>
+                <div class="col-md-2" style="width:110px; white-space: nowrap">
+                    @Html.EditorFor(model => model.InDateTo, new { htmlAttributes = new { @class = "form-control : date", style = "width:100px" } })
+                </div>
+            </div>
+            <div class="row" style="line-height: 2">
+                @Html.LabelFor(model => model.InInformation, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-5" style="width:300px;">
+                    @Html.TextAreaFor(model => model.InInformation, 10, 30, htmlAttributes: new { @class = "form-control", style = "ime-mode: active" })
+                    @Html.ValidationMessageFor(model => model.InInformation, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row" style="line-height: 1">　</div>
+            <div class="row" style="line-height: 2">
+                @Html.LabelFor(model => model.OutPostUser, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-2" style="width:300px; white-space: nowrap">
+                    @*@Html.EditorFor(model => model.PostUser, new { htmlAttributes = new { @class = "form-control", style = "ime-mode: active", @disabled = "@disabled" } })*@
+                    @Html.DisplayFor(model => model.OutPostDate)：@Html.DisplayFor(model => model.OutPostUser)
+                </div>
+            </div>
+            <div class="row" style="line-height: 2;">
+                @Html.LabelFor(model => model.OutDateFrom, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-2" style="width:110px; white-space: nowrap">
+                    @Html.EditorFor(model => model.OutDateFrom, new { htmlAttributes = new { @class = "form-control : date", style = "width:100px" } })
+                </div>
+                <div class="col-md-2" style="width:20px; white-space: nowrap; text-align:center">
+                    ～
+                </div>
+                <div class="col-md-2" style="width:110px; white-space: nowrap">
+                    @Html.EditorFor(model => model.OutDateTo, new { htmlAttributes = new { @class = "form-control : date", style = "width:100px" } })
+                </div>
+            </div>
+            <div class="row" style="line-height: 2">
+                @Html.LabelFor(model => model.OutInformation, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-5" style="width:300px;">
+                    @Html.TextAreaFor(model => model.OutInformation, 10, 30, htmlAttributes: new { @class = "form-control", style = "ime-mode: active" })
+                    @Html.ValidationMessageFor(model => model.OutInformation, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row" style="line-height: 1">　</div>
+            <div class="row" style="line-height: 2">
+                @Html.LabelFor(model => model.PsPostUser, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-2" style="width:300px; white-space: nowrap">
+                    @Html.DisplayFor(model => model.PsPostDate)：@Html.DisplayFor(model => model.PsPostUser)
+                </div>
+            </div>
+            <div class="row">
+                @Html.LabelFor(model => model.PassType1, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-6">
+                    <div class="col-sm-1" style="width:150px; padding-left:0px">
+                        @Html.CheckBoxFor(model => model.PassType1, new { htmlAttributes = new { @class = "form-control" } })
+                        アルファベット大文字
+                    </div>
+                    <div class="col-sm-1" style="width:150px; padding-left:0px">
+                        @Html.CheckBoxFor(model => model.PassType2, new { htmlAttributes = new { @class = "form-control" } })
+                        アルファベット小文字
+                    </div>
+                    <div class="col-sm-1" style="width:55px; padding-left:0px">
+                        @Html.CheckBoxFor(model => model.PassType3, new { htmlAttributes = new { @class = "form-control" } })
+                        数字
+                    </div>
+                    <div class="col-sm-1" style="width:50px; padding-left:0px">
+                        @Html.CheckBoxFor(model => model.PassType4, new { htmlAttributes = new { @class = "form-control" } })
+                        記号
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="line-height: 2">
+                @Html.LabelFor(model => model.PassKetaFrom, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-2" style="width:45px; padding-right:00px">
+                    @Html.EditorFor(model => model.PassKetaFrom, new { htmlAttributes = new { @class = "form-control", @maxlength = "2", style = "width:30px; ime-mode: inactive" } })
+                </div>
+                <div class="col-md-1 text-center" style="width:30px; padding-left:0px; text-align:left">
+                    桁
+                </div>
+                <div class="col-md-1" style="width:30px;">
+                    ～
+                </div>
+                <div class="col-md-2" style="width:45px; padding-right:0px">
+                    @Html.EditorFor(model => model.PassKetaTo, new { htmlAttributes = new { @class = "form-control", @maxlength = "2", style = "width:30px; ime-mode: inactive" } })
+                </div>
+                <div class="col-md-1 text-center" style="width:30px; padding-left:0px; text-align:left">
+                    桁
+                </div>
+            </div>
+            <div class="row" style="line-height: 2">
+                <label class="control-label col-md-2"></label>
+                <div class="col-md-3" style="width:100px; padding-right:0px">
+                    @Html.ValidationMessageFor(model => model.PassKetaFrom, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3" style="width:100px; padding-right:0px">
+                    @Html.ValidationMessageFor(model => model.PassKetaTo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row" style="line-height: 2">
+                @Html.LabelFor(model => model.PassMonth, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-2" style="width:45px; padding-right:0px">
+                    @Html.EditorFor(model => model.PassMonth, new { htmlAttributes = new { @class = "form-control", @maxlength = "2", style = "width:30px; ime-mode: inactive" } })
+                </div>
+                <div class="col-md-1 text-center" style="width:48px; padding-left:0px; text-align:left">
+                    ヶ月
+                </div>
+            </div>
+            <div class="row" style="line-height: 2">
+                <label class="control-label col-md-2"></label>
+                <div class="col-md-3" style="width:100px; padding-right:0px">
+                    @Html.ValidationMessageFor(model => model.PassMonth, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row" style="line-height: 2">
+                @Html.LabelFor(model => model.PassMiss, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-2" style="width:45px; padding-right:0px">
+                    @Html.EditorFor(model => model.PassMiss, new { htmlAttributes = new { @class = "form-control", @maxlength = "2", style = "width:30px; ime-mode: inactive" } })
+                </div>
+                <div class="col-md-1 text-center" style="width:48px; padding-left:0px; text-align:left">
+                    回
+                </div>
+            </div>
+            <div class="row" style="line-height: 2">
+                <label class="control-label col-md-2"></label>
+                <div class="col-md-3" style="width:100px; padding-right:0px">
+                    @Html.ValidationMessageFor(model => model.PassMiss, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row" style="line-height: 2">
+                @Html.LabelFor(model => model.PassGene, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-2" style="width:45px; padding-right:0px">
+                    @Html.EditorFor(model => model.PassGene, new { htmlAttributes = new { @class = "form-control", @maxlength = "2", style = "width:30px; ime-mode: inactive" } })
+                </div>
+                <div class="col-md-1 text-center" style="width:48px; padding-left:0px; text-align:left">
+                    世代
+                </div>
+            </div>
+            <div class="row" style="line-height: 2">
+                <label class="control-label col-md-2"></label>
+                <div class="col-md-3" style="width:100px; padding-right:0px">
+                    @Html.ValidationMessageFor(model => model.PassGene, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>
+
+<br />
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap-datepicker")
+    <script>
+
+        window.onload = function () {
+
+            if ("@ViewBag.Message" != ""){
+                alert("@ViewBag.Message");
+                window.location.href = '@Url.Action("Index")';
+            }
+
+            $('#sidebar').toggleClass('active');
+        };
+
+        $(function () {
+            $('.date').datepicker({
+                format: "yyyy/mm/dd",
+                language: "ja",
+                autoclose: true, //日付選択で自動的にカレンダーを閉じる
+                orientation: 'bottom left'
+            });
+        });
+
+        $('#run').click(function (e) {
+
+            document.getElementById("error").style.display = "none";
+            var InDateFrom = $('input[name="InDateFrom"]').val();
+            var InDateTo = $('input[name="InDateTo"]').val();
+            if (InDateFrom != "" && InDateTo != "") {
+                if (InDateFrom > InDateTo) {
+                    document.getElementById("error").className = "validation-summary-errors";
+                    document.getElementById("error").innerHTML = "<ul><li>日付が不正です</li></ul>";
+                    document.getElementById("error").style.display = "";
+                    return;
+                }
+            }
+
+            var OutDateFrom = $('input[name="OutDateFrom"]').val();
+            var OutDateTo = $('input[name="OutDateTo"]').val();
+            if (OutDateFrom != "" && OutDateTo != "") {
+                if (OutDateFrom > OutDateTo) {
+                    document.getElementById("error").className = "validation-summary-errors";
+                    document.getElementById("error").innerHTML = "<ul><li>日付が不正です</li></ul>";
+                    document.getElementById("error").style.display = "";
+                    return;
+                }
+            }
+
+            var PassKetaFrom = $('input[name="PassKetaFrom"]').val();
+            var PassKetaTo = $('input[name="PassKetaTo"]').val();
+            if (PassKetaFrom != "" && PassKetaTo != "") {
+                if (Number(PassKetaFrom) > Number(PassKetaTo)) {
+                    document.getElementById("error").innerHTML = "<ul><li>パスワード桁数が不正です</li></ul>";
+                    document.getElementById("error").style.display = "";
+                    return;
+                }
+            }
+            $('#update').submit();
+        });
+
+    </script>
+}

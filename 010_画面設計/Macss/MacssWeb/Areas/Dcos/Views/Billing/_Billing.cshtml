@@ -1,0 +1,67 @@
+﻿<html lang="ja">
+<div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+    <div class="row mr-0 mb-1">
+        <div class="col-4">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="Condition1">年月</span>
+                </div>
+                <span class="form-control">@ViewBag.Date</span>
+
+            </div>
+        </div>
+    </div>
+    <div class="row mr-0 mb-1">
+        <div class="col-4">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="Condition3">締日</span>
+                </div>
+                <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                    <option value="0"></option>
+                    <option value="0">20日締</option>
+                    <option value="1">末締</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="Condition3">手番</span>
+                </div>
+                <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                    <option value="0"></option>
+                    <option value="1">1手番</option>
+                    <option value="2">2手番</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="Condition3">得意先</span>
+                </div>
+                <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                    <option value="0">全て</option>
+                    <option value="1">0051081　鳥取電機製造㈱</option>
+                    <option value="2">0071991　㈱トビタ機材</option>
+                    <option value="2">0071951　長野森紙業㈱</option>
+                    <option value="9">0099999　..........</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="mt-4">
+        <div>
+            <div class="macss-form-button-group-row pr-0">
+                <div class="text-right">
+                    <a class="btn btn-primary macss-btn-sub" href="@Url.Action("BillingExecConfirm", "Billing")" role="button">確認</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

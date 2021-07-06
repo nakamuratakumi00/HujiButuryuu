@@ -1,0 +1,259 @@
+﻿
+@using MacssWeb.Areas.Tass.Helper
+
+@model IEnumerable<Macss.Database.Entity.DummyDossDataForAll>
+
+@{
+    ViewBag.Title = MacssWeb.Resources.Tass.DossDataMainTitle;
+    ViewBag.PageMainTitle = String.Format("{0} - {1}"
+        , MacssWeb.Resources.Tass.DossDataDetailsMainTitle, MacssWeb.Resources.Tass.DossDataForAll);
+    ViewBag.ScreenId = "TASS-D006-03";
+}
+@section Scripts {
+    <script>
+        $(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#SampleList", null, 0);
+            dt.configure();
+        });
+    </script>
+}
+
+@section CssExtended{
+    <style type="text/css">
+    </style>
+}
+
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.BackToList</a>
+    </div>
+</div>
+
+<div class="row mt-3 mb-4">
+    <div class="col-8">
+        @*<a role="button" class="btn btn-primary" href="@Url.Action("")">再作成</a>*@
+    </div>
+    <div class="col-4 text-right">
+        <div class="dropdown">
+            <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#">CSVダウンロード</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid mt-4">
+    <div class="form-inline">
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">システムID</span>
+            </div>
+            <span class="form-control">0701</span>
+        </div>
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">ファイルID</span>
+            </div>
+            <span class="form-control">10</span>
+        </div>
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">ユニークキー</span>
+            </div>
+            <span class="form-control">@ViewBag.UniqueKey</span>
+        </div>
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">表示用処理名</span>
+            </div>
+            <span class="form-control">@ViewBag.ProcName</span>
+        </div>
+    </div>
+</div>
+<div class="container-fluid mt-2">
+    <div class="form-inline">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">件数</span>
+            </div>
+            <span class="form-control">@ViewBag.DataCount</span>
+        </div>
+    </div>
+</div>
+
+
+<table id="SampleList" class="table table-striped table-hover macss-data-table" style="width:100%">
+    <thead class="macss-data-table-header">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OutYMD)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LocationCode)
+            </th>
+            <th style="min-width:120px;">
+                @Html.DisplayNameFor(model => model.OutNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RouteCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RouteName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VehicleCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DestinationCode)
+            </th>
+            <th style="min-width:200px;">
+                @Html.DisplayNameFor(model => model.DestinationName)
+            </th>
+            <th style="min-width:200px;">
+                @Html.DisplayNameFor(model => model.DestinationAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DestinationZipCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DestinationPhoneNumber)
+            </th>
+            <th style="min-width:200px;">
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OutQuantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InquiryNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PackageQuantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Weight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClientCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClientShortName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PcCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WMSDestinationCode)
+            </th>
+            <th style="min-width:200px;">
+                @Html.DisplayNameFor(model => model.WMSDestinationName)
+            </th>
+            <th style="min-width:200px;">
+                @Html.DisplayNameFor(model => model.WMSDestinationAddress)
+            </th>
+            <th style="min-width:200px;">
+                @Html.DisplayNameFor(model => model.Note1)
+            </th>
+            <th style="min-width:200px;">
+                @Html.DisplayNameFor(model => model.Note2)
+            </th>
+            <th style="min-width:200px;">
+                @Html.DisplayNameFor(model => model.Note3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeliverYMD)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OutYMD)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LocationCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OutNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RouteCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RouteName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VehicleCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DestinationCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DestinationName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DestinationAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DestinationZipCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DestinationPhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OutQuantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InquiryNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PackageQuantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Weight)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClientCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClientShortName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PcCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WMSDestinationCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WMSDestinationName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WMSDestinationAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Note1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Note2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Note3)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeliverYMD)
+                </td>
+            </tr>
+            break;
+        }
+    </tbody>
+</table>

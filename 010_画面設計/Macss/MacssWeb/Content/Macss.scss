@@ -1,0 +1,669 @@
+﻿$main_color: #49c3e7;
+$header_menu_color: #3399cc;
+$header_color: #76d2ed;
+$title_color: #c8edf7;
+$table_border_color: #558ee9;
+
+
+// トップリンク↓
+#TopLinkBox {
+    right: 15px;
+    bottom: 50px;
+    display: none;
+    position: fixed;
+}
+
+#TopLink {
+    cursor: pointer;
+    display: block;
+    font-size: 2rem;
+    color: #cce4ff;
+
+    :hover {
+        color: #007bff
+    }
+}
+// ↑トップリンク
+
+// ボタン↓
+.macss-btn-main {
+    width: 15rem;
+}
+
+.macss-btn-sub {
+    width: 8rem;
+}
+// ↑ボタン
+
+// ナビゲーションバー↓
+.main-logo {
+    height: 84px;
+    padding-right: 16px;
+    margin-bottom: -20px;
+}
+
+.shared-nav-bar {
+    background-color: $main_color;
+}
+
+.shared-nav-bar-menu-row {
+    z-index: 10;
+    padding-left: 124px;
+    /*padding-right:0;*/
+    background-color: $main_color;
+}
+
+.shared-nav-bar-menu {
+    padding-top: 8px;
+    padding-left: 15px;
+    background-color: $header_menu_color;
+}
+
+.nav-top-fixed {
+    padding-bottom: 0;
+}
+
+.nav-sub-fixed {
+    top: 78px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.nav-menu-item {
+    font-size: x-large;
+    color: white !important;
+    margin-right: 32px;
+    padding-top: 0;
+}
+
+.brand-text {
+    color: #555;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #fff, -1px 1px 0 #fff, 1px -1px 0 #fff, -1px -1px 0 #fff;
+}
+
+.macss-navbar-toggle {
+    margin: 5px;
+}
+// ↑ナビゲーションバー
+
+.macss-screen-id-row {
+    text-align: right;
+    min-height: 1rem;
+}
+
+.page-title {
+    color: blue;
+}
+
+.main-contents {
+    min-height: 600px;
+}
+
+footer {
+    min-height: 15px;
+
+    p.version {
+        padding-top: 20px;
+        text-align: right;
+    }
+}
+
+.macss-login-info {
+    font-size: 0.9rem;
+}
+
+.macss-account-name {
+    color: white;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.macss-main-menu-subsystem {
+    margin-bottom: 0.5rem;
+
+    .macss-main-menu-subsystem-title {
+        padding: 0.5rem;
+        margin-bottom: 0.5rem;
+        line-height: 1.5;
+        list-style-type: none !important;
+        background: linear-gradient(to bottom, $main_color 0%, #41a0e0 100%);
+        color: white;
+        text-shadow: 1px 1px 1px #333;
+
+        a {
+            color: white;
+        }
+    }
+
+    .macss-main-menu-subsystem-item {
+        ul {
+            padding-left: 1rem;
+        }
+    }
+}
+//検索設定↓
+.macss-search-config-collapse-header {
+    padding: 0.2rem 0.8rem;
+}
+
+.macss-btn-condition-collapse {
+    padding: 0;
+}
+
+.macss-condition-result-title {
+    font-weight: bold;
+}
+//↑検索設定
+
+// 一覧↓
+.macss-data-table {
+    margin: 0 !important;
+    width: 100%;
+
+    thead.macss-data-table-header {
+        background-color: $header_color;
+        white-space: nowrap;
+        color: #fff;
+    }
+
+    thead th.valign-middle {
+        vertical-align: middle;
+    }
+
+    .macss-icon-container {
+        display: flex;
+    }
+
+    .macss-icon-item {
+        width: 20px;
+    }
+}
+
+.macss-dialog-data-table {
+    margin: 0 !important;
+
+    thead.macss-data-table-header {
+        background-color: #ccc;
+        white-space: nowrap;
+        color: #fff;
+    }
+}
+
+th.macss-table-proc-column {
+    background-color: #76d2ed;
+    white-space: nowrap;
+}
+
+td.macss-table-proc-column {
+    white-space: nowrap;
+}
+
+.DTFC_LeftBodyLiner {
+    overflow: hidden;
+}
+
+.macss-table-info-row {
+    padding-top: 1rem;
+    padding-bottom: 0;
+
+    > div > div {
+        padding-top: 0 !important;
+    }
+
+    .macss-table-display-count {
+        padding-top: 10px;
+    }
+
+    .macss-table-page-info {
+        padding-top: 10px;
+    }
+
+    .macss-paginate-button {
+
+        li {
+            padding: 0 !important;
+            margin-left: 0 !important;
+        }
+    }
+}
+
+.maccss-table-nowrap-ellipsis-cell {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+// ↑一覧
+
+// ↓一覧（複数列結合）
+.dataTables_scrollBody .macss-data-table thead.macss-multi-row-list-header {
+    background: none;
+}
+
+.dataTables_scrollBody .macss-data-table thead.macss-multi-row-list-header th.macss-table-proc-column {
+    background: none;
+}
+
+.DTFC_LeftBodyLiner .macss-multi-row-list-header {
+    background: none;
+}
+
+.DTFC_LeftBodyLiner .macss-multi-row-list-header th.macss-table-proc-column {
+    background: none;
+}
+// ↑一覧（複数列結合）
+
+.macss-form-table {
+    border-top: 2px solid $table_border_color;
+    border-bottom: 2px solid $table_border_color;
+
+    .macss-form-table-title {
+        width: 25%;
+        border-right: solid 1px #CCC;
+        background-color: $title_color;
+    }
+
+    .macss-form-table-contents {
+        width: 75%;
+    }
+}
+// 入力テーブル↓
+.macss-form-button-group-row {
+    padding: 0 0.5rem 0.5rem 0.5rem;
+
+    .btn {
+        @extend .macss-btn-main
+    }
+}
+
+label.required:after {
+    margin-left: 2.0em;
+    padding: 0.1rem 0.5rem 0.2rem 0.5rem;
+    background-color: #dc3545;
+    border-radius: 3px;
+    font-size: 0.7rem;
+    color: white;
+    content: "必須";
+}
+// ↑入力テーブル
+.macss-search-dialog-body {
+    min-height: 570px;
+}
+
+.macss-submenu li {
+    color: #2d8fdd;
+    border-left: solid 6px #2d8fdd;
+    background: #f0fcff; /*背景色*/
+    margin-bottom: 3px; /*下のバーとの余白*/
+    line-height: 1.5;
+    padding: 0.5em;
+    list-style-type: none !important; /*ポチ消す*/
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+.validation-summary-errors {
+    > ul {
+        display: none;
+    }
+}
+
+.input-validation-error {
+    border-color: #dc3545;
+}
+
+.macss-input-group-input {
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    padding: 0.375rem 0.75rem;
+}
+
+.macss-label-like-btn {
+    display: inline-block;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    padding: .25rem .75rem;
+    min-width: 150px;
+    margin-right: 2rem;
+}
+
+.macss-label-like-btn-primary {
+    @extend .macss-label-like-btn;
+    color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff;
+}
+
+.macss-label-like-btn-secondary {
+    @extend .macss-label-like-btn;
+    color: dimgray;
+    background-color: lightgray;
+    border-color: lightgray;
+}
+
+.macss-label-like-btn-sucess {
+    @extend .macss-label-like-btn;
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.macss-label-like-btn-warning {
+    @extend .macss-label-like-btn;
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+
+// ↓引当状態-------------------------
+.macss-label-like-btn-x {
+    display: inline-block;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    padding: .25rem .75rem;
+    min-width: 100px;
+    margin-right: 2rem;
+}
+
+// 出庫可能
+.macss-label-like-btn-shipped {
+    @extend .macss-label-like-btn-x;
+    color: white;
+    background-color: blue;
+    border-color: #c3e6cb;
+}
+// 一部不足
+.macss-label-like-btn-lacking {
+    @extend .macss-label-like-btn-x;
+    color: #856404;
+    background-color: yellow;
+    border-color: #c3e6cb;
+}
+// 在庫なし
+.macss-label-like-btn-out {
+    @extend .macss-label-like-btn-x;
+    color: white;
+    background-color: red;
+    border-color: #c3e6cb;
+}
+// ↑引当状態-------------------------
+
+// 結果画面↓
+.macss-result-input-group-value {
+    min-width: 80px !important;
+}
+// ↑結果画面
+
+// ヘッダーサブメニュー↓
+.macss-dropdown-menu ul {
+    background-color: white;
+}
+
+.macss-dropdown-menu > ul {
+    padding: 0px;
+}
+
+.macss-dropdown-menu > ul > li {
+    display: block;
+}
+
+.macss-dropdown-menu > ul > li {
+    display: block;
+    position: relative;
+}
+
+.macss-dropdown-menu > ul > li div {
+    display: none;
+    position: absolute;
+    top: -0.7rem;
+    left: 11rem;
+    min-width: 10rem;
+    padding: 0.5rem 0;
+    margin: 0.125rem 0 0;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+}
+
+.macss-dropdown-menu > ul > li:hover div {
+    display: block;
+}
+
+.macss-dropdown-menu > ul > li div:hover {
+    display: block;
+}
+
+.macss-dropdown-menu > ul > li ul {
+    padding: 0px;
+}
+
+.macss-dropdown-menu > ul > li ul li {
+    list-style-type: none;
+}
+// ↑ヘッダーサブメニュー
+
+// サブメニュー↓
+.macss-submenu-list {
+    display: table;
+    width: 100%;
+}
+
+.macss-submenu-list > li {
+    display: table-cell;
+}
+
+.macss-submenu-list ul > li {
+    color: #2d8fdd;
+    border-left: solid 6px #2d8fdd;
+    margin-bottom: 3px;
+    line-height: 1.5;
+    padding: 0.5em;
+    list-style-type: none !important;
+    display: block;
+    width: 370px;
+}
+
+.macss-submenu-list ul > li > a {
+    display: block;
+}
+
+.macss-submenu-list ul > li.empty {
+    border-left: none;
+}
+
+.macss-submenu-list ul > li.empty > p {
+}
+
+.macss-main-menu-subsystem-title .macss-main-menu-openclose {
+    text-decoration: underline;
+}
+// ↑サブメニュー
+
+// ダイアログ↓
+.modal-footer .row {
+    width: 100%;
+}
+
+.modal-footer button {
+    width: 7rem;
+}
+
+.modal-footer a.macss-btn {
+    width: 7rem;
+}
+// ↑ダイアログ
+
+// 共通↓
+.macss-val-ref {
+    padding: 0.375rem 0.75rem;
+}
+// ↑共通
+
+// アップロードボタンエリア↓
+.macss-upload-button-group-row {
+    padding: 0 0.5rem 0.5rem 0;
+
+    .btn {
+        @extend .macss-btn-main
+    }
+}
+// アップロードボタンエリア
+//↓保管料荷役料用--------------------------------
+.macss-form-table2t {
+    border-top: 2px solid $table_border_color;
+    border-bottom: 2px solid $table_border_color;
+
+    .macss-form-table-title2t {
+        width: 12%;
+        border-right: solid 1px #CCC;
+        background-color: $title_color;
+    }
+
+    .macss-form-table-contents2t {
+        width: 37%;
+    }
+}
+
+.macss-form-table2 {
+    border-top: 2px solid $table_border_color;
+    border-bottom: 2px solid $table_border_color;
+    /*margin-bottom: 0px;*/
+    margin-top: 5px;
+
+    .macss-form-table-title2 {
+        width: 12%;
+        border-right: solid 1px #CCC;
+        background-color: $title_color;
+    }
+
+    .macss-form-table-contents2 {
+        width: 37%;
+    }
+}
+
+.macss-form-table10h {
+    /*border-top: 2px solid $table_border_color;
+    border-bottom: 2px solid $table_border_color;*/
+    border-top: 2px solid $table_border_color;
+    border-bottom: 0px solid $table_border_color;
+    margin-bottom: 0px;
+
+    .macss-form-table-title10h {
+        width: 5%;
+        border-right: solid 1px #CCC;
+        background-color: $title_color;
+    }
+
+    .macss-form-table-contents10h {
+        width: 9%;
+        border-right: solid 1px #CCC;
+        background-color: $title_color;
+        text-align: center;
+    }
+
+    .macss-form-table-contents10hkazei {
+        width: 6%;
+        border-right: solid 1px #CCC;
+        background-color: $title_color;
+        text-align: center;
+    }
+
+    .macss-form-table-contents10hgenka {
+        width: 6%;
+        border-right: solid 1px #CCC;
+        background-color: $title_color;
+        text-align: center;
+    }
+
+    .macss-form-table-contents10hkeihi {
+        width: 12%;
+        border-right: solid 1px #CCC;
+        background-color: $title_color;
+        text-align: center;
+    }
+
+    .macss-form-table-contents10hclear {
+        width: 6%;
+        border-right: solid 1px #CCC;
+        background-color: $title_color;
+        text-align: center;
+    }
+}
+
+.macss-form-table10 {
+    border-top: 0px solid $table_border_color;
+    border-bottom: 2px solid $table_border_color;
+    margin-bottom: 1px;
+
+    .macss-form-table-title10 {
+        width: 5%;
+        border-right: solid 1px #CCC;
+        background-color: $title_color;
+    }
+
+    .macss-form-table-contents10 {
+        width: 9%;
+    }
+
+    .macss-form-table-contents10kazei {
+        width: 6%;
+    }
+
+    .macss-form-table-contents10genka {
+        width: 6%;
+    }
+
+    .macss-form-table-contents10keihi {
+        width: 12%;
+    }
+
+    .macss-form-table-contents10clear {
+        width: 6%;
+    }
+}
+
+.macss-form-card {
+    border-top: 2px solid $table_border_color;
+    border-bottom: 2px solid $table_border_color;
+    border-right: 0px;
+    border-left: 0px;
+}
+//↑保管料荷役料用--------------------------------
+
+//↓一覧テーブル--------------------------------
+.macss-list-table {
+    //タイトル列の表示を揃える
+    .macss-list-title {
+        border: 1px solid #ced4da;
+        background-color: #e9ecef;
+        border-radius: 0.25rem;
+        padding: 0.375rem 0.75rem;
+    }
+}
+//↑一覧テーブル--------------------------------
+
+//↓時刻コントロール--------------------------------
+.time-control {
+    width: 100px;
+    border: 1px solid #ced4da;
+    padding: 0.375rem 0.75rem;
+}
+
+.time-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+//↑時刻コントロール--------------------------------

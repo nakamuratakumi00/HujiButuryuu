@@ -1,0 +1,112 @@
+﻿@using Macss.Areas.Tass.ViewModels
+@model WShuukaTyuumonshoTorikomiData
+@using Macss.HtmlHelpers
+<style>
+
+    h1, .h1,
+    h2, .h2,
+    h3, .h3 {
+        margin-top: 2px;
+        margin-bottom: 0px;
+    }
+
+</style>
+
+<div class="row">
+
+    <div class="navbar2 navbar-default" style="padding-bottom:10px;">
+        <h2>@ViewBag.Title</h2>
+        <hr />
+
+        @using (Html.BeginForm("Index", "ShuukaTyuumonshoTorikomi", FormMethod.Post, htmlAttributes: new { id = "insert" }))
+        {
+
+            @Html.AntiForgeryToken()
+
+            <div class="row">
+                @Html.ValidationSummary(true, "", new { @id = "oputError" })
+                <br />
+            </div>
+
+            @Html.HiddenFor(model => model.Serch.Actcod)
+            @Html.HiddenFor(model => model.Serch.Ackymd)
+
+            <div class="row" style="margin: 0;">
+                <input type="button" class="btn btn-default" id="setData" style="width:50px; height:30px; padding:0; text-align: center;" value="取込" />
+                <a class="btn btn-default" style="width:50px; height:30px; padding:0; text-align: center; padding-top:4px;" href=@Url.Action("Index")>再表示</a>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12 nbase-bootstrap-table" style="height:350px">
+                    <table id="table"
+                           class="table"
+                           data-url="@Url.Action("Search")"
+                           data-method="POST"
+                           data-toggle="table"
+                           data-query-params="queryParams"
+                           data-id-table="advancedTable"
+                           data-show-columns="true"
+                           data-show-pagination-switch="true"
+                           data-page-list="[10, 25, 50, 1000]"
+                           data-show-multi-sort="true"
+                           data-click-to-select="true"
+                           data-toolbar="#toolbar"
+                           data-filter-show-clear="true"
+                           @*data-show-Search-Clear-Button="true"*@
+                           data-pagination="true">
+                        <colgroup>
+                            <col />
+                            <col />
+                            <col style="min-width: 10em" />
+                            <col style="min-width: 16em" />
+                            <col style="min-width: 16em" />
+                            <col />
+                            <col />
+                            <col style="min-width: 20em" />
+                        </colgroup>
+                        <thead>
+                            <tr id="data">
+                                @Html.ThFor(model => model.Information.Sykymd, htmlAttributes: new { data_sortable = "true", @class = "col-xs-1 col-ms-1 col-md-1 col-lg-1" })
+                                @Html.ThFor(model => model.Information.Syukno, htmlAttributes: new { data_sortable = "true", @class = "col-xs-1 col-ms-1 col-md-1 col-lg-1" })
+                                @Html.ThFor(model => model.Information.KeFsno, htmlAttributes: new { data_sortable = "true", @class = "col-xs-3 col-ms-3 col-md-3 col-lg-3" })
+                                @Html.ThFor(model => model.Information.Tdknam, htmlAttributes: new { data_sortable = "true", @class = "col-xs-3 col-ms-3 col-md-3 col-lg-3" })
+                                @Html.ThFor(model => model.Information.Dhinnam, htmlAttributes: new { data_sortable = "true", @class = "col-xs-1 col-ms-1 col-md-1 col-lg-1" })
+                                @Html.ThFor(model => model.Information.Sybcod, htmlAttributes: new { data_sortable = "true", @class = "col-xs-1 col-ms-1 col-md-1 col-lg-1" })
+                                @Html.ThFor(model => model.Information.Tokcod, htmlAttributes: new { data_sortable = "true", @class = "col-xs-1 col-ms-1 col-md-1 col-lg-1" })
+                                @Html.ThFor(model => model.Information.Toknam, htmlAttributes: new { data_sortable = "true", @class = "col-xs-1 col-ms-1 col-md-1 col-lg-1" })
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+@section Scripts {
+    @Html.Partial("_BootstrapFunction")
+    @Scripts.Render("~/bundles/my-bootstrap-export")
+
+    <script>
+
+        window.onload = function () {
+            $('#sidebar').toggleClass('active');
+        };
+
+        var $table = $('#table');
+
+        $('#setData').click(function () {
+            // データ取込
+            $('#insert').submit();
+        });
+
+        function queryParams(params) {
+            return JSON.stringify({
+                'Actcod': $('input[name="Serch.Actcod"]').val(),
+                'Ackymd': $('input[name="Serch.Ackymd"]').val(),
+            });
+        }
+
+    </script>
+}

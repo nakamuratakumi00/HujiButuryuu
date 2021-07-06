@@ -1,0 +1,638 @@
+﻿<html lang="ja">
+@*@model IEnumerable<Macss.Database.Entity.CargoData>*@
+
+@{
+    ViewBag.Title = "保管料荷役料";
+    ViewBag.PageMainTitle = "保管料荷役料一覧";
+}
+@section Scripts {
+    <script>
+        $(function () {
+
+            //左端3列を固定表示にする場合の記述（HTMLのthの記載時に下記の横幅と同じサイズを指定する事。指定しないと表示が崩れます。）
+            //targetsは位置情報です。0から始まります。
+            //「, 3」→左端3列を固定表示。
+            var dt = new Macss.DataTables.MacssDataTable("#SampleList", [{
+                "className": "macss-table-proc-column", "width": 180, "orderable": false, "targets": 0
+            }], 1);
+            dt.configure();
+
+            var dt1 = new Macss.DataTables.MacssDataTable("#SampleList1");
+            dt1.configure();
+
+            var cond = new Macss.Collapse.ConditionsPanel("#ConditionAccordion", "#CollapseShow", "#CollapseHidden");
+            cond.setCollapseEvent();
+
+            var sampleDatePicker = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker", "#SampleCalendar");
+            sampleDatePicker.configure();
+            var sampleDatePicker1 = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker1", "#SampleCalendar1");
+            sampleDatePicker1.configure();
+            var sampleDatePicker2 = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker2", "#SampleCalendar2");
+            sampleDatePicker2.configure();
+        });
+    </script>
+}
+
+@Html.Partial("../Shared/Dialog/_CsvDownload")
+
+@using (Html.BeginForm("Search", "Sample", null, FormMethod.Post))
+{
+
+    <div class="accordion" id="ConditionAccordion">
+        <div class="card">
+            <div class="card-header macss-search-config-collapse-header" id="headingOne">
+                <div class="mb-0">
+                    <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain" aria-expanded="true" aria-controls="ConditionMain">
+                        <div class="d-inline-block" style="color:#333">検索設定</div>
+                        <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="display:none;"></i>
+                        <i id="CollapseShow" class="fas fa-chevron-circle-down" aria-hidden="true" style="display:none;"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+                <div class="row mr-0 mb-1">
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">保管荷役No</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mr-0 mb-1">
+                    <div class="col-8">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">伝票日付</span>
+                            </div>
+                            <input type="text" id="SampleDTPicker1" class="form-control" />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar1"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                            <div class="input-group-append">
+                                <span class="input-group-text">～</span>
+                            </div>
+                            <input type="text" id="SampleDTPicker2" class="form-control" />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar2"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">得意先</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#DepartmentCodeSearchDialog">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mr-0 mb-1">
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">品名</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#DepartmentCodeSearchDialog">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">集約コード</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">倉庫</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#DepartmentCodeSearchDialog">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mr-0 mb-1">
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">PC部門</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#DepartmentCodeSearchDialog">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">表示データ</span>
+                            </div>
+                            <div class="macss-input-group-input form-control">
+                                <div class="form-check form-check-inline mr-4">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                                    <label class="form-check-label" for="inlineCheckbox6">削除済データを含む</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mr-0 mb-1">
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition3">作成者名</span>
+                            </div>
+                            <input class="form-control text-box single-line" data-val="true" data-val-length-max="20" id="bumon_cd" name="bumon_cd" type="text">
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">作成日時</span>
+                            </div>
+                            <input type="text" id="SampleDTPicker1" class="form-control">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar1"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                            <input class="time-control" id="TimeExample3" type="text" maxlength="5">
+                            <div class="input-group-append">
+                                <span class="input-group-text">～</span>
+                            </div>
+                            <input type="text" id="SampleDTPicker1" class="form-control">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar2"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                            <input class="time-control" id="TimeExample2" type="text" maxlength="5">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mr-0 mb-1">
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition3">更新者名</span>
+                            </div>
+                            <input class="form-control text-box single-line" data-val="true" data-val-length-max="20" id="bumon_cd" name="bumon_cd" type="text">
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">更新日時</span>
+                            </div>
+                            <input type="text" id="SampleDTPicker1" class="form-control">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar1"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                            <input class="time-control" id="TimeExample3" type="text" maxlength="5">
+                            <div class="input-group-append">
+                                <span class="input-group-text">～</span>
+                            </div>
+                            <input type="text" id="SampleDTPicker2" class="form-control">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar2"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                            <input class="time-control" id="TimeExample4" type="text" maxlength="5">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mr-0 mt-3 d-none">
+                    <div class="col-1">
+                        <label class="col-form-label" for="inputGroupSelect">並び替え</label>
+                    </div>
+                    <div class="col-3">
+                        <div class="input-group mb-3">
+                            <select class="custom-select form-control" id="inputGroupSelect11"></select>
+                            <div class="input-group-append">
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-outline-info active">
+                                        <input type="radio" name="options" id="asc1" autocomplete="off" checked>
+                                        昇順
+                                    </label>
+                                    <label class="btn btn-outline-info">
+                                        <input type="radio" name="options" id="desc1" autocomplete="off">
+                                        降順
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="input-group mb-3">
+                            <select class="custom-select form-control" id="inputGroupSelect12"></select>
+                            <div class="input-group-append">
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-outline-info active">
+                                        <input type="radio" name="options" id="asc2" autocomplete="off" checked>
+                                        昇順
+                                    </label>
+                                    <label class="btn btn-outline-info">
+                                        <input type="radio" name="options" id="desc2" autocomplete="off">
+                                        降順
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="input-group mb-3">
+                            <select class="custom-select form-control" id="inputGroupSelect13"></select>
+                            <div class="input-group-append">
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-outline-info active">
+                                        <input type="radio" name="options" id="asc3" autocomplete="off" checked>
+                                        昇順
+                                    </label>
+                                    <label class="btn btn-outline-info">
+                                        <input type="radio" name="options" id="desc3" autocomplete="off">
+                                        降順
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid pt-4 pb-3 pl-0 clearfix">
+                    <div class="float-left">
+                        <button type="reset" class="btn btn-secondary btn-lg macss-btn-main">@MacssWeb.Resources.ControlText.ConditionClear</button>
+                    </div>
+                    <div class="float-right">
+                        <button type="submit" class="btn btn-primary btn-lg macss-btn-main">@MacssWeb.Resources.ControlText.Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="row mt-3 mb-4">
+    <div class="col-6">
+        <a class="btn btn-primary macss-btn-sub" href="@Url.Action("Create", "Cargo")" role="button">@MacssWeb.Resources.ControlText.Create</a>
+    </div>
+    <div class="col-6 text-right">
+        <div class="dropdown">
+            <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#CsvDownloadDialog">CSVダウンロード</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<table id="SampleList" class="table table-striped table-hover macss-data-table">
+    <thead class="macss-data-table-header">
+        <tr>
+            <th style="width: 180px;"></th>
+            <th>
+                保管荷役No
+            </th>
+            <th>
+                枝番
+            </th>
+            <th>
+                削除
+            </th>
+            <th>
+                伝票日付
+            </th>
+            <th>
+                得意先コード
+            </th>
+            <th>
+                得意先名　　　
+            </th>
+            <th>
+                品名コード
+            </th>
+            <th>
+                品名　　　　　
+            </th>
+            <th>
+                ソート文字列
+            </th>
+            <th>
+                集約コード
+            </th>
+            <th>
+                倉庫コード
+            </th>
+            <th>
+                倉庫名
+            </th>
+            <th>
+                規格
+            </th>
+            <th>
+                単位コード
+            </th>
+            <th>
+                単位名
+            </th>
+            <th>
+                PC部門コード
+            </th>
+            <th>
+                PC部門名
+            </th>
+            <th>
+                処理状況
+            </th>
+            <th>
+                保管料　数量
+            </th>
+            <th>
+                保管料　単価
+            </th>
+            <th>
+                保管料　金額
+            </th>
+            <th>
+                保管料　請求パターン
+            </th>
+            <th>
+                保管料　明細コード
+            </th>
+            <th>
+                保管料　課税区分
+            </th>
+            <th>
+                保管料　区分コード
+            </th>
+            <th>
+                保管料　原価区分
+            </th>
+            <th>
+                保管料　経費負担No
+            </th>
+            <th>
+                保管料　担当者名
+            </th>
+            <th>
+                荷役料　数量
+            </th>
+            <th>
+                荷役料　単価
+            </th>
+            <th>
+                荷役料　金額
+            </th>
+            <th>
+                荷役料　請求パターン
+            </th>
+            <th>
+                荷役料　明細コード
+            </th>
+            <th>
+                荷役料　課税区分
+            </th>
+            <th>
+                荷役料　区分コード
+            </th>
+            <th>
+                荷役料　原価区分
+            </th>
+            <th>
+                荷役料　経費負担No
+            </th>
+            <th>
+                荷役料　担当者名
+            </th>
+            <th>
+                その他　数量
+            </th>
+            <th>
+                その他　単価
+            </th>
+            <th>
+                その他　金額
+            </th>
+            <th>
+                その他　請求パターン
+            </th>
+            <th>
+                その他　明細コード
+            </th>
+            <th>
+                その他　課税区分
+            </th>
+            <th>
+                その他　区分コード
+            </th>
+            <th>
+                その他　原価区分
+            </th>
+            <th>
+                その他　経費負担No
+            </th>
+            <th>
+                その他　担当者名
+            </th>
+            <th>
+                請求区分
+            </th>
+            <th>
+                請求日
+            </th>
+            <th>
+                請求明細作成済フラグ
+            </th>
+            <th>
+                作成者名
+            </th>
+            <th>
+                作成日時　　　　
+            </th>
+            <th>
+                更新者名
+            </th>
+            <th>
+                更新日時　　　　
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="white-space:nowrap;">
+                <a href="@Url.Action("Edit")" title="編集"><i class="fas fa-pencil-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                <a href="@Url.Action("Details")" title="詳細"><i class="far fa-file-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                <a href="@Url.Action("DeleteConfirm")" title="削除"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+            </td>
+            <td>
+                1234567890
+            </td>
+            <td>
+                1
+            </td>
+            <td></td>
+            <td>
+                2021/01/18
+            </td>
+            <td>
+                0077991
+            </td>
+            <td>
+                一般顧客その他
+            </td>
+            <td>
+                10003
+            </td>
+            <td>
+                ＭＬＨ８０９６Ｖ
+            </td>
+            <td>
+                MLH8096V
+            </td>
+            <td>
+                123456789
+            </td>
+            <td>
+                11
+            </td>
+            <td>
+                庄内１F
+            </td>
+            <td>
+                12345678
+            </td>
+            <td>
+                KO
+            </td>
+            <td>
+                個
+            </td>
+            <td>
+                8040
+            </td>
+            <td>
+                B9
+            </td>
+            <td>
+                修正追加
+            </td>
+            <td>
+                1.00
+            </td>
+            <td>
+                3500.00
+            </td>
+            <td>
+                3500
+            </td>
+            <td>
+                1003
+            </td>
+            <td>
+                1120
+            </td>
+            <td>
+                課税
+            </td>
+            <td>
+                T
+            </td>
+            <td>
+                原価
+            </td>
+            <td>
+                12345678901234567890
+            </td>
+            <td>
+                高山
+            </td>
+            <td>
+                1.00
+            </td>
+            <td>
+                3500.00
+            </td>
+            <td>
+                3500
+            </td>
+            <td>
+                1003
+            </td>
+            <td>
+                1120
+            </td>
+            <td>
+                課税
+            </td>
+            <td>
+                T
+            </td>
+            <td>
+                原価
+            </td>
+            <td>
+                12345678901234567890
+            </td>
+            <td>
+                高山
+            </td>
+            <td>
+                1.00
+            </td>
+            <td>
+                3500.00
+            </td>
+            <td>
+                3500
+            </td>
+            <td>
+                1003
+            </td>
+            <td>
+                1120
+            </td>
+            <td>
+                課税
+            </td>
+            <td>
+                T
+            </td>
+            <td>
+                原価
+            </td>
+            <td>
+                12345678901234567890
+            </td>
+            <td>
+                高山
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>2021/02/15 13:27:11</td>
+            <td></td>
+            <td>2021/02/15 13:27:11</td>
+        </tr>
+    </tbody>
+ </thead>
+ </table>
+

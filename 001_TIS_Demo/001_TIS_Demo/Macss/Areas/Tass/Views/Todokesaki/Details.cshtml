@@ -1,0 +1,824 @@
+﻿@using Macss.Areas.Tass.ViewModels
+@model TodokesakiViewModel
+
+@{
+    ViewBag.Title = ViewBag.Title;
+}
+
+@section Heads {
+    <link href="/Content/details.css" rel="stylesheet" />
+}
+
+<style>
+
+    h1, .h1,
+    h2, .h2,
+    h3, .h3 {
+        margin-top: 2px;
+        margin-bottom: 0px;
+    }
+
+    td.SDEK {
+        text-align: center;
+        width: 35px;
+        height: 35px;
+    }
+</style>
+
+@{
+    ViewBag.Title = ViewBag.TitleName;
+}
+
+<div class="row">
+    <div class="navbar2 navbar-default" style="padding-bottom:10px;">
+
+        <h2>@ViewBag.Title</h2>
+        <hr />
+
+        @using (Html.BeginForm("Details", "Todokesaki", FormMethod.Post, htmlAttributes: new { id = "upDate" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                @if (ViewBag.Mode != null)
+                {
+                    <div class="form-group" style=" height: 0;">
+                        <div class="col-sm-10">
+                        </div>
+                        <div class="col-sm-2">
+                            <a class="btn btn-default" style="width:45px; height:30px; padding: 0px; text-align: center; padding-top: 3px;" href=@Url.Action("Index")>戻る</a>
+                        </div>
+                    </div>
+                }
+                    <div class="form-group">
+                        @(ViewBag.Delflg == 1 && ViewBag.Mode != null ?
+                                @Html.ValidationSummary(true, "", new { @class = "validation-summary-success" }) :
+                                @Html.ValidationSummary(true, "", new { @id = "oputError" })
+                         )
+                    </div>
+
+
+                <div class="row">
+                    @Html.LabelFor(model => model.Tdkcod, htmlAttributes: new { @class = "col-sm-2 control-label required-item label_large", @id = "lblTdkcod" })
+
+                    <div class="col-sm-2" style="width:150px">
+                        @if (ViewBag.Mode == null)
+                        {
+                            @Html.EditorFor(model => model.Tdkcod, new { htmlAttributes = new { @class = "form-control", style = "ime-mode: inactive", @maxlength = "15" } })
+                        }
+                        else
+                        {
+                            @Html.EditorFor(model => model.Tdkcod, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                        }
+                        @Html.ValidationMessageFor(model => model.Tdkcod, "", new { @class = "text-danger" })
+                    </div>
+
+                    @if (ViewBag.Mode == null)
+                    {
+                        <div class="col-sm-3" style="width:170px">
+                            <input type="button" class="btn btn-default" id="getnumber" value="採番" style="font-size:95%; height:22px; width:50px; padding:1px 2px" /><br />
+                            <small>※自動採番を行う場合には<br />「採番」ボタンを押す</small>
+                            @Html.EditorFor(model => model.NumberingFlg, new { htmlAttributes = new { @class = "form-control", style = "display:none" } })
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-sm-3" style="width:170px; height:25px"></div>
+                    }
+
+                    @Html.LabelFor(model => model.Ktdkcd, htmlAttributes: new { @class = "col-sm-2 control-labelR label_large", @id = "lblKtdkcd" })
+                    <div class="col-sm-3" style="width:150px">
+                        @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                        {
+                            @Html.EditorFor(model => model.Ktdkcd, new { htmlAttributes = new { @class = "form-control", style = "ime-mode: inactive", @maxlength = "15" } })
+                        }
+                        else
+                        {
+                            @Html.EditorFor(model => model.Ktdkcd, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                        }
+                        @Html.ValidationMessageFor(model => model.Ktdkcd, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row" style="line-height: 2">
+                    @Html.LabelFor(model => model.Tdknam, htmlAttributes: new { @class = "col-sm-2 control-label required-item label_large", @id = "lblTdknam" })
+                    <div class="col-sm-10 text_jp_large">
+                        @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                        {
+                            @Html.EditorFor(model => model.Tdknam, new { htmlAttributes = new { @class = "form-control", style = "min-width: 400px; ime-mode: active", @maxlength = "20" } })
+                        }
+                        else
+                        {
+                            @Html.EditorFor(model => model.Tdknam, new { htmlAttributes = new { @class = "form-control", style = "min-width: 400px", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                        }
+                        @Html.ValidationMessageFor(model => model.Tdknam, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row" style="line-height: 2">
+                    @Html.LabelFor(model => model.Tdknms, htmlAttributes: new { @class = "col-sm-2 control-label label_large", @id = "lblTdknms" })
+                    <div class="col-sm-10 text_jp_large">
+                        @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                        {
+                            @Html.EditorFor(model => model.Tdknms, new { htmlAttributes = new { @class = "form-control", style = "min-width: 400px; ime-mode: active", @maxlength = "20" } })
+                        }
+                        else
+                        {
+                            @Html.EditorFor(model => model.Tdknms, new { htmlAttributes = new { @class = "form-control", style = "min-width: 400px", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                        }
+                        @Html.ValidationMessageFor(model => model.Tdknms, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row">
+                    @Html.LabelFor(model => model.Tdknmk, htmlAttributes: new { @class = "col-sm-2 control-label required-item label_large", @id = "lblTdknmk" })
+                    <div class="col-sm-10 text_jp_large">
+                        @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                        {
+                            @Html.EditorFor(model => model.Tdknmk, new { htmlAttributes = new { @class = "form-control", style = "min-width: 500px; ime-mode: inactive", @maxlength = "80" } })
+                        }
+                        else
+                        {
+                            @Html.EditorFor(model => model.Tdknmk, new { htmlAttributes = new { @class = "form-control", style = "min-width: 500px", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                        }
+                        <small>※注）「社名」と「支店名」の間は１字スペースを空ける</small><br />
+                        <small>※注）「カブ」「ユウ」はつけない</small><br />
+                        @Html.ValidationMessageFor(model => model.Tdknmk, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row" style="line-height: 2">
+                    @Html.LabelFor(model => model.Tdbnam, htmlAttributes: new { @class = "col-sm-2 control-label label_large", @id = "lblTdbnam" })
+                    <div class="col-sm-10 text_jp_large">
+                        @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                        {
+                            @Html.EditorFor(model => model.Tdbnam, new { htmlAttributes = new { @class = "form-control", style = "min-width: 400px; ime-mode: active", @maxlength = "20" } })
+                        }
+                        else
+                        {
+                            @Html.EditorFor(model => model.Tdbnam, new { htmlAttributes = new { @class = "form-control", style = "min-width: 400px", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                        }
+                        @Html.ValidationMessageFor(model => model.Tdbnam, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row" style="line-height: 2">
+                    @Html.LabelFor(model => model.Tdktan, htmlAttributes: new { @class = "col-sm-2 control-label label_large", @id = "lblTdktan" })
+                    <div class="col-sm-10 text_jp_large">
+                        @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                        {
+                            @Html.EditorFor(model => model.Tdktan, new { htmlAttributes = new { @class = "form-control", style = "min-width: 400px; ime-mode: active", @maxlength = "20" } })
+                        }
+                        else
+                        {
+                            @Html.EditorFor(model => model.Tdktan, new { htmlAttributes = new { @class = "form-control", style = "min-width: 400px", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                        }
+                        @Html.ValidationMessageFor(model => model.Tdktan, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row">
+                    @Html.LabelFor(model => model.Yubinn, htmlAttributes: new { @class = "col-sm-2 control-label label_large", @id = "lblYubinn" })
+                    <div class="col-sm-2 text_cd_middle">
+                        <div valign="middle" style="display:flex">
+                            @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                            {
+                                @Html.EditorFor(model => model.Yubinn, new { htmlAttributes = new { @class = "form-control", style = "min-width: 50px; ime-mode: inactive", @maxlength = "7", onChange = "onChangeTdkyub(this.value)" } })
+                                @Html.Partial("YubinbangoCodeHelp", new CodeHelpViewModels.YubinbangoViewData())
+                            }
+                            else
+                            {
+                                @Html.EditorFor(model => model.Yubinn, new { htmlAttributes = new { @class = "form-control", style = "min-width: 50px", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                            }
+                        </div>
+                        <small>※注）ハイフン無し</small><br />
+                        @Html.ValidationMessageFor(model => model.Yubinn, "", new { @class = "text-danger" })
+                    </div>
+
+                    @Html.LabelFor(model => model.Tdktel, htmlAttributes: new { @class = "col-sm-1 control-labelR label_middle", @id = "lblTdktel", style = "width: 70px" })
+                    <div class="col-sm-2 text_cd_middle" style="padding-left:0px;">
+                        @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                        {
+                            @Html.EditorFor(model => model.Tdktel, new { htmlAttributes = new { @class = "form-control", style = "min-width: 100px; ime-mode: inactive", @maxlength = "20" } })
+                        }
+                        else
+                        {
+                            @Html.EditorFor(model => model.Tdktel, new { htmlAttributes = new { @class = "form-control", style = "width: 130px", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                        }
+                        <small>※注）ハイフン付きで入力</small><br />
+                        @Html.ValidationMessageFor(model => model.Tdktel, "", new { @class = "text-danger" })
+                    </div>
+
+                    @Html.LabelFor(model => model.Faxno, htmlAttributes: new { @class = "col-sm-1 control-labelR label_middle", @id = "lblFaxno", style = "width: 73px; padding-left:0px;" })
+                    <div class="col-sm-2" style="width:146px; padding-left:0px;">
+                        @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                        {
+                            @Html.EditorFor(model => model.Faxno, new { htmlAttributes = new { @class = "form-control", style = "min-width: 100px; ime-mode: inactive", @maxlength = "20" } })
+                        }
+                        else
+                        {
+                            @Html.EditorFor(model => model.Faxno, new { htmlAttributes = new { @class = "form-control", style = "width: 130px", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                        }
+                        <small>※注）ハイフン付きで入力</small><br />
+                        @Html.ValidationMessageFor(model => model.Faxno, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row">
+                    @Html.LabelFor(model => model.Jyusyo, htmlAttributes: new { @class = "col-sm-2 control-label required-item label_large", @id = "lblJyusyo" })
+                    <div class="col-sm-10 text_jp_large">
+                        @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                        {
+                            @Html.EditorFor(model => model.Jyusyo, new { htmlAttributes = new { @class = "form-control", style = "min-width: 500px; ime-mode: active", @maxlength = "60" } })
+                        }
+                        else
+                        {
+                            @Html.EditorFor(model => model.Jyusyo, new { htmlAttributes = new { @class = "form-control", style = "min-width: 500px", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                        }
+                        <small>※注）都道府県名から入力</small><br />
+                        @Html.ValidationMessageFor(model => model.Jyusyo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row" style="height: 75px">
+                    <label class="col-sm-2 control-label label_large">使用区分</label>
+                    <div class="col-sm-10 text_jp_large">
+                        <table border="1" style="border: solid 0.5px">
+                            <tr>
+                                <td class="SDEK">
+                                    H
+                                </td>
+                                <td class="SDEK">
+                                    i
+                                </td>
+                                <td class="SDEK">
+                                    M
+                                </td>
+                                <td class="SDEK">
+                                    P
+                                </td>
+                                <td class="SDEK">
+                                    集
+                                </td>
+                                <td class="SDEK">
+                                    構
+                                </td>
+                                <td class="SDEK">
+                                    Y
+                                </td>
+                                <td class="SDEK">
+                                    半
+                                </td>
+                                <td class="SDEK">
+                                    長
+                                </td>
+                                <td class="SDEK">
+                                    在
+                                </td>
+                                <td class="SDEK">
+                                    需
+                                </td>
+                                <td class="SDEK">
+                                    顧
+                                </td>
+                                <td class="SDEK">
+                                    得
+                                </td>
+                                <td class="SDEK">
+                                    ブ
+                                </td>
+                                <td class="SDEK">
+                                    基
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="SDEK">
+                                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                                    {
+                                        @Html.EditorFor(model => model.Sdek01, new { htmlAttributes = new { @class = "form-control", maxlength = 1, onChange = "onChangeSdek01(this.value)", style = "width: 37px; height: 35px; ime-mode: inactive" } })
+                                    }
+                                    else
+                                    {
+                                        @Html.EditorFor(model => model.Sdek01, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on", style = "width: 37px; height: 35px" } })
+                                    }
+                                </td>
+                                <td class="SDEK">
+                                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                                    {
+                                        @Html.EditorFor(model => model.Sdek02, new { htmlAttributes = new { @class = "form-control", maxlength = 1, onChange = "onChangeSdek02(this.value)", style = "width: 37px; height: 35px; ime-mode: inactive" } })
+                                    }
+                                    else
+                                    {
+                                        @Html.EditorFor(model => model.Sdek02, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on", style = "width: 37px; height: 35px" } })
+                                    }
+                                </td>
+                                <td class="SDEK">
+                                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                                    {
+                                        @Html.EditorFor(model => model.Sdek03, new { htmlAttributes = new { @class = "form-control", maxlength = 1, onChange = "onChangeSdek03(this.value)", style = "width: 37px; height: 35px; ime-mode: inactive" } })
+                                    }
+                                    else
+                                    {
+                                        @Html.EditorFor(model => model.Sdek03, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on", style = "width: 37px; height: 35px" } })
+                                    }
+                                </td>
+                                <td class="SDEK">
+                                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                                    {
+                                        @Html.EditorFor(model => model.Sdek04, new { htmlAttributes = new { @class = "form-control", maxlength = 1, onChange = "onChangeSdek04(this.value)", style = "width: 37px; height: 35px; ime-mode: inactive" } })
+                                    }
+                                    else
+                                    {
+                                        @Html.EditorFor(model => model.Sdek04, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on", style = "width: 37px; height: 35px" } })
+                                    }
+                                </td>
+                                <td class="SDEK">
+                                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                                    {
+                                        @Html.EditorFor(model => model.Sdek05, new { htmlAttributes = new { @class = "form-control", maxlength = 1, onChange = "onChangeSdek05(this.value)", style = "width: 37px; height: 35px; ime-mode: inactive" } })
+                                    }
+                                    else
+                                    {
+                                        @Html.EditorFor(model => model.Sdek05, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on", style = "width: 37px; height: 35px" } })
+                                    }
+                                </td>
+                                <td class="SDEK">
+                                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                                    {
+                                        @Html.EditorFor(model => model.Sdek06, new { htmlAttributes = new { @class = "form-control", maxlength = 1, onChange = "onChangeSdek06(this.value)", style = "width: 37px; height: 35px; ime-mode: inactive" } })
+                                    }
+                                    else
+                                    {
+                                        @Html.EditorFor(model => model.Sdek06, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on", style = "width: 37px; height: 35px" } })
+                                    }
+                                </td>
+                                <td class="SDEK">
+                                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                                    {
+                                        @Html.EditorFor(model => model.Sdek07, new { htmlAttributes = new { @class = "form-control", maxlength = 1, onChange = "onChangeSdek07(this.value)", style = "width: 37px; height: 35px; ime-mode: inactive" } })
+                                    }
+                                    else
+                                    {
+                                        @Html.EditorFor(model => model.Sdek07, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on", style = "width: 37px; height: 35px" } })
+                                    }
+                                </td>
+                                <td class="SDEK">
+                                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                                    {
+                                        @Html.EditorFor(model => model.Sdek08, new { htmlAttributes = new { @class = "form-control", maxlength = 1, onChange = "onChangeSdek08(this.value)", style = "width: 37px; height: 35px; ime-mode: inactive" } })
+                                    }
+                                    else
+                                    {
+                                        @Html.EditorFor(model => model.Sdek08, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on", style = "width: 37px; height: 35px" } })
+                                    }
+                                </td>
+                                <td class="SDEK">
+                                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                                    {
+                                        @Html.EditorFor(model => model.Sdek09, new { htmlAttributes = new { @class = "form-control", maxlength = 1, onChange = "onChangeSdek09(this.value)", style = "width: 37px; height: 35px; ime-mode: inactive" } })
+                                    }
+                                    else
+                                    {
+                                        @Html.EditorFor(model => model.Sdek09, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on", style = "width: 37px; height: 35px" } })
+                                    }
+                                </td>
+                                <td class="SDEK">
+                                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                                    {
+                                        @Html.EditorFor(model => model.Sdek10, new { htmlAttributes = new { @class = "form-control", maxlength = 1, onChange = "onChangeSdek10(this.value)", style = "width: 37px; height: 35px; ime-mode: inactive" } })
+                                    }
+                                    else
+                                    {
+                                        @Html.EditorFor(model => model.Sdek10, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on", style = "width: 37px; height: 35px" } })
+                                    }
+                                </td>
+                                <td class="SDEK">
+                                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                                    {
+                                        @Html.EditorFor(model => model.Sdek11, new { htmlAttributes = new { @class = "form-control", maxlength = 1, onChange = "onChangeSdek11(this.value)", style = "width: 37px; height: 35px; ime-mode: inactive" } })
+                                    }
+                                    else
+                                    {
+                                        @Html.EditorFor(model => model.Sdek11, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on", style = "width: 37px; height: 35px" } })
+                                    }
+                                </td>
+                                <td class="SDEK">
+                                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                                    {
+                                        @Html.EditorFor(model => model.Sdek12, new { htmlAttributes = new { @class = "form-control", maxlength = 1, onChange = "onChangeSdek12(this.value)", style = "width: 37px; height: 35px; ime-mode: inactive" } })
+                                    }
+                                    else
+                                    {
+                                        @Html.EditorFor(model => model.Sdek12, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on", style = "width: 37px; height: 35px" } })
+                                    }
+                                </td>
+                                <td class="SDEK">
+                                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                                    {
+                                        @Html.EditorFor(model => model.Sdek13, new { htmlAttributes = new { @class = "form-control", maxlength = 1, onChange = "onChangeSdek13(this.value)", style = "width: 37px; height: 35px; ime-mode: inactive" } })
+                                    }
+                                    else
+                                    {
+                                        @Html.EditorFor(model => model.Sdek13, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on", style = "width: 37px; height: 35px" } })
+                                    }
+                                </td>
+                                <td class="SDEK">
+                                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                                    {
+                                        @Html.EditorFor(model => model.Sdek14, new { htmlAttributes = new { @class = "form-control", maxlength = 1, onChange = "onChangeSdek14(this.value)", style = "width: 37px; height: 35px; ime-mode: inactive" } })
+                                    }
+                                    else
+                                    {
+                                        @Html.EditorFor(model => model.Sdek14, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on", style = "width: 37px; height: 35px" } })
+                                    }
+                                </td>
+                                <td class="SDEK">
+                                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                                    {
+                                        @Html.EditorFor(model => model.Sdek15, new { htmlAttributes = new { @class = "form-control", maxlength = 1, onChange = "onChangeSdek15(this.value)", style = "width: 37px; height: 35px; ime-mode: inactive" } })
+                                    }
+                                    else
+                                    {
+                                        @Html.EditorFor(model => model.Sdek15, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on", style = "width: 37px; height: 35px" } })
+                                    }
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2 control-label label_large"></div>
+                    <div class="col-sm-10 text_jp_large">
+                        @Html.ValidationMessageFor(model => model.Sdek01, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.Sdek02, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.Sdek03, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.Sdek04, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.Sdek05, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.Sdek06, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.Sdek07, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.Sdek08, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.Sdek09, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.Sdek10, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.Sdek11, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.Sdek12, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.Sdek13, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.Sdek14, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.Sdek15, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row" style="line-height: 2">
+                    @Html.LabelFor(model => model.Tkjiko, htmlAttributes: new { @class = "col-sm-2 control-label label_large", @id = "lblTkjiko" })
+                    <div class="col-sm-10 text_jp_large">
+                        @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                        {
+                            @Html.EditorFor(model => model.Tkjiko, new { htmlAttributes = new { @class = "form-control", style = "min-width: 400px; ime-mode: active", @maxlength = "40" } })
+                        }
+                        else
+                        {
+                            @Html.EditorFor(model => model.Tkjiko, new { htmlAttributes = new { @class = "form-control", style = "min-width: 400px", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                        }
+                        @Html.ValidationMessageFor(model => model.Tkjiko, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row" style="line-height: 2">
+                    @Html.LabelFor(model => model.Kitdcd, htmlAttributes: new { @class = "col-sm-2 control-label label_large", @id = "lblKitdcd" })
+                    <div class="col-sm-10 text_jp_middle">
+                        @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                        {
+                            @Html.EditorFor(model => model.Kitdcd, new { htmlAttributes = new { @class = "form-control", style = "min-width: 250px; ime-mode: inactive", @maxlength = "15" } })
+                        }
+                        else
+                        {
+                            @Html.EditorFor(model => model.Kitdcd, new { htmlAttributes = new { @class = "form-control", style = "min-width: 250px", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                        }
+                        @Html.ValidationMessageFor(model => model.Kitdcd, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-sm-1" style="width: 40px"></div>
+                    @Html.LabelFor(model => model.Dtmoto, htmlAttributes: new { @class = "col-sm-2 control-label label_large", @id = "lblDtmoto" })
+                    <div class="col-sm-1 text_cd_small">
+                        @Html.EditorFor(model => model.Dtmoto, new { htmlAttributes = new { @class = "form-control", style = "width: 40px", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                    </div>
+                </div>
+
+                <div class="row" style="line-height: 2">
+                    @Html.LabelFor(model => model.Crtymd, htmlAttributes: new { @class = "col-sm-2 control-label label_large" })
+                    <div class="col-sm-2 text_cd_middle">
+                        @Html.EditorFor(model => model.Crtymd, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                    </div>
+                    <div class="col-sm-1" style="width: 140px"></div>
+                    @Html.LabelFor(model => model.Updymd, htmlAttributes: new { @class = "col-sm-2 control-label label_large", @id = "lblDtmoto", @style = "margin-left:10px;" })
+                    <div class="col-sm-2 text_cd_middle">
+                        @Html.EditorFor(model => model.Updymd, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                    </div>
+                </div>
+
+                @Html.HiddenFor(model => model.Mode)
+
+                <div class="row" style="line-height: 2; text-align: center;">
+                    @if (ViewBag.Mode == null)
+                    {
+                        <input type="button" class="btn btn-default" style="width:45px; height:30px; padding: 0px; text-align: center" id="btnUpdate" value="登録" />
+                    }
+                    @if (ViewBag.Mode == "1")
+                    {
+                        <a class="btn btn-default" style="width:45px; height:30px; padding: 0px; text-align: center; padding-top: 3px;" href=@Url.Action("Index")>戻る</a>
+                    }
+                    @if (ViewBag.Mode == "2")
+                    {
+                        <input type="button" class="btn btn-default" style="width:45px; height:30px; padding: 0px; text-align: center" id="btnUpdate" value="更新" />
+                    }
+                    @if (ViewBag.Mode == "3")
+                    {
+                        <input type="button" class="btn btn-default" style="width:45px; height:30px; padding: 0px; text-align: center" id="btnUpdate" value="削除" />
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts  {
+    @Html.Partial("_BootstrapFunction")
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        // 採番済み 表示切替
+        addOnload(function () {
+            if ($('input[name="NumberingFlg"]').val() == 1) {
+                $('input[name="Tdkcod"]').attr('readonly', true);
+                $('input[name="Tdkcod"]').attr('tabindex', '-1');
+                $('input[name="Tdkcod"]').attr('unselectable', 'on');
+                $('#getnumber').attr('disabled', true);
+                $('#getnumber').attr('tabindex', '-1');
+                $('#getnumber').attr('unselectable', 'on');
+            };
+
+            $('#sidebar').toggleClass('active');
+        });
+
+        // 採番
+        $(function () {
+            $('#getnumber').click(function (e) {
+
+                if ($('input[name="Tdkcod"]').val() != "") {
+                    alert("届先コードが入力済みです。　");
+                    return;
+                }
+
+                $.ajax({
+                    url: '@Url.Action("GetTdkcod")',
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                }).done(function (result) {
+                    if (result.succsess == 1) {
+                        //成功したとき
+                        $('input[name="Tdkcod"]').val(result.Tdkcod);
+                        $('input[name="Tdkcod"]').attr('readonly', true);
+                        $('input[name="Tdkcod"]').attr('tabindex', '-1');
+                        $('input[name="Tdkcod"]').attr('unselectable', 'on');
+                        $('#getnumber').attr('disabled', true);
+                        $('#getnumber').attr('tabindex', '-1');
+                        $('#getnumber').attr('unselectable', 'on');
+                        $('input[name="NumberingFlg"]').val(1);
+                    } else {
+                        $('input[name="Tdkcod"]').val("");
+                        $('input[name="NumberingFlg"]').val(0);
+                    }
+                    $('input[name="Tdkcod"]').valid();
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    //例外の場合、エラー画面に飛ばす
+                    window.location.href = '/Error/Index'
+                }).always(function () {
+                });
+            });
+        });
+
+        // 郵便番号コード 変更
+        function onChangeTdkyub(value) {
+            var postData = {
+                param: value
+            };
+            $.ajax({
+                url: '@Url.Action("GetJyusyo")',
+                type: 'POST',
+                dataType: 'json',
+                data: JSON.stringify(postData),
+                contentType: 'application/json',
+            }).done(function (result) {
+                if ($('input[name="Jyusyo"]').val() == "") {
+                    $('input[name="Jyusyo"]').val(result.Jyusyo);
+                }
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                //例外の場合、エラー画面に飛ばす
+                window.location.href = '/Error/Index'
+            }).always(function () {
+            });
+        };
+
+        // 郵便番号コード コードヘルプ
+        $(function () {
+            $('#YubinbangoTable').on('click-row.bs.table', function (e, row, $element) {
+                $('.success').removeClass('success');
+                $($element).addClass('success');
+            });
+        });
+        $('#YubinbangoSelect').on('click', function (e) {
+            var index = $('.success').attr('data-index');
+            if (index) {
+                var row = $('.success').parents('table:first').bootstrapTable('getData')[index];
+                $('input[name="Yubinn"]').val(row.@nameof(CodeHelpViewModels.YubinbangoInformation.Yubinn));
+                if ($('input[name="Jyusyo"]').val() == "") {
+                    $('input[name="Jyusyo"]').val(row.@nameof(CodeHelpViewModels.YubinbangoInformation.Jyusy1) + row.@nameof(CodeHelpViewModels.YubinbangoInformation.Jyusy2));
+                }
+            }
+        });
+        $('#YubinbangoSerch').on('click', function (e) {
+            YubinbangoTableBbootstrapTableRefresh();
+        });
+        function YubinbangoQueryParams(params) {
+            return JSON.stringify({
+                'Jyusy1': $('input[name="Serch.Jyusy1"]').val(),
+                'Jyusy2': $('input[name="Serch.Jyusy2"]').val(),
+                'Yubinn': $('input[name="Serch.Yubinn"]').val()
+            });
+        }
+        function YubinbangoTableBbootstrapTableRefresh() {
+            $.ajax({
+                url: '@Url.Action("YubinbangoSerch", "CodeHelp")',
+                type: 'POST',
+                dataType: 'json',
+                data: YubinbangoQueryParams(0),
+                contentType: 'application/json',
+            }).done(function (result) {
+                if (result.succsess == 1) {
+                    $('#YubinbangoTable').bootstrapTable('load', result.data);
+                }
+                else {
+                    $('#YubinbangoTable').bootstrapTable('removeAll');
+                    var tbl = document.getElementById("YubinbangoTable");
+                    var tr = tbl.rows[1];
+                    var td = tr.cells[0];
+                    if (result.succsess == 2) {
+                        td.innerHTML = "検索結果がありません。";
+                    } else {
+                        td.innerHTML = "検索結果が多すぎます。検索条件を絞り込んでください。";
+                    }
+                }
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                //例外の場合、エラー画面に飛ばす
+                window.location.href = '/Error/Index'
+            }).always(function () {
+            });
+        }
+
+        $('#YubinbangoModal').on('hide.bs.modal', function () {
+            YubinbangoTableClear();
+            $('#YubinbangoTable').bootstrapTable('destroy').bootstrapTable();
+        });
+
+        function YubinbangoTableClear() {
+            $('input[name="Serch.Jyusy1"]').val("");
+            $('input[name="Serch.Jyusy2"]').val("");
+            $('input[name="Serch.Yubinn"]').val("");
+            $('#YubinbangoTable').bootstrapTable('removeAll');
+        }
+
+        // 操作ボタン
+        $(function () {
+            $('#btnUpdate').click(function (e) {
+
+                var mode = "@ViewBag.Mode";
+                var msg = "";
+                if (mode == "") {
+                    msg = "@Resources.Message.CQ004";
+                } else if (mode == "2") {
+                    msg = "@Resources.Message.CQ005";
+                } else if (mode == "3") {
+                    msg = "@Resources.Message.CQ006";
+                }
+
+                if (window.confirm(msg)) {
+                    //$('#btnUpdate').prop('disabled', true);
+                    $('#upDate').submit();
+                }
+            });
+        });
+
+        // 複数window.onload対応
+        function addOnload(func) {
+            try {
+                window.addEventListener("load", func, false);
+            } catch (e) {
+                // IE用
+                window.attachEvent("onload", func);
+            }
+        }
+
+    function onChangeSdek01(value) {
+        if (!$('input[name="Sdek01"]').valid()) {
+            document.getElementById("Sdek01").style.background = "#ffb3b3";
+        } else {
+            document.getElementById("Sdek01").style.background = "#ffffff";
+        }
+    }
+    function onChangeSdek02(value) {
+        if (!$('input[name="Sdek02"]').valid()) {
+            document.getElementById("Sdek02").style.background = "#ffb3b3";
+        } else {
+            document.getElementById("Sdek02").style.background = "#ffffff";
+        }
+    }
+    function onChangeSdek03(value) {
+        if (!$('input[name="Sdek03"]').valid()) {
+            document.getElementById("Sdek03").style.background = "#ffb3b3";
+        } else {
+            document.getElementById("Sdek03").style.background = "#ffffff";
+        }
+    }
+    function onChangeSdek04(value) {
+        if (!$('input[name="Sdek04"]').valid()) {
+            document.getElementById("Sdek04").style.background = "#ffb3b3";
+        } else {
+            document.getElementById("Sdek04").style.background = "#ffffff";
+        }
+    }
+    function onChangeSdek05(value) {
+        if (!$('input[name="Sdek05"]').valid()) {
+            document.getElementById("Sdek05").style.background = "#ffb3b3";
+        } else {
+            document.getElementById("Sdek05").style.background = "#ffffff";
+        }
+    }
+    function onChangeSdek06(value) {
+        if (!$('input[name="Sdek06"]').valid()) {
+            document.getElementById("Sdek06").style.background = "#ffb3b3";
+        } else {
+            document.getElementById("Sdek06").style.background = "#ffffff";
+        }
+    }
+    function onChangeSdek07(value) {
+        if (!$('input[name="Sdek07"]').valid()) {
+            document.getElementById("Sdek07").style.background = "#ffb3b3";
+        } else {
+            document.getElementById("Sdek07").style.background = "#ffffff";
+        }
+    }
+    function onChangeSdek08(value) {
+        if (!$('input[name="Sdek08"]').valid()) {
+            document.getElementById("Sdek08").style.background = "#ffb3b3";
+        } else {
+            document.getElementById("Sdek08").style.background = "#ffffff";
+        }
+    }
+    function onChangeSdek09(value) {
+        if (!$('input[name="Sdek09"]').valid()) {
+            document.getElementById("Sdek09").style.background = "#ffb3b3";
+        } else {
+            document.getElementById("Sdek09").style.background = "#ffffff";
+        }
+    }
+    function onChangeSdek10(value) {
+        if (!$('input[name="Sdek10"]').valid()) {
+            document.getElementById("Sdek10").style.background = "#ffb3b3";
+        } else {
+            document.getElementById("Sdek10").style.background = "#ffffff";
+        }
+    }
+    function onChangeSdek11(value) {
+        if (!$('input[name="Sdek11"]').valid()) {
+            document.getElementById("Sdek11").style.background = "#ffb3b3";
+        } else {
+            document.getElementById("Sdek11").style.background = "#ffffff";
+        }
+    }
+    function onChangeSdek12(value) {
+        if (!$('input[name="Sdek12"]').valid()) {
+            document.getElementById("Sdek12").style.background = "#ffb3b3";
+        } else {
+            document.getElementById("Sdek12").style.background = "#ffffff";
+        }
+    }
+    function onChangeSdek13(value) {
+        if (!$('input[name="Sdek13"]').valid()) {
+            document.getElementById("Sdek13").style.background = "#ffb3b3";
+        } else {
+            document.getElementById("Sdek13").style.background = "#ffffff";
+        }
+    }
+    function onChangeSdek14(value) {
+        if (!$('input[name="Sdek14"]').valid()) {
+            document.getElementById("Sdek14").style.background = "#ffb3b3";
+        } else {
+            document.getElementById("Sdek14").style.background = "#ffffff";
+        }
+    }
+    function onChangeSdek15(value) {
+        if (!$('input[name="Sdek15"]').valid()) {
+            document.getElementById("Sdek15").style.background = "#ffb3b3";
+        } else {
+            document.getElementById("Sdek15").style.background = "#ffffff";
+        }
+    }
+
+    </script>
+}

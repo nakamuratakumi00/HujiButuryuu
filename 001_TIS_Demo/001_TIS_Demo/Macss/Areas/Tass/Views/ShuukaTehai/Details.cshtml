@@ -1,0 +1,386 @@
+﻿@using Macss.Areas.Tass.ViewModels
+@model ShuukaTehaiViewModels
+@using Macss.HtmlHelpers
+
+<style>
+
+    h1, .h1,
+    h2, .h2,
+    h3, .h3 {
+        margin-top: 2px;
+        margin-bottom: 0px;
+    }
+
+</style>
+
+@{
+    ViewBag.Title = ViewBag.TitleName;
+}
+
+@section Heads {
+    <link href="/Content/details.css" rel="stylesheet" />
+}
+<div class="row">
+    <div class="navbar2 navbar-default" style="padding-bottom:3px;">
+        <h2>
+            @(ViewBag.Title = ViewBag.Title)
+        </h2>
+
+        @using (Html.BeginForm("Index", "ShuukaTehai", FormMethod.Post, htmlAttributes: new { id = "index" }))
+        {
+            @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <hr />
+
+            <div class="form-group" style=" height: 0;">
+                <div class="col-sm-10">
+                </div>
+                <div class="col-sm-2">
+                    <a class="btn btn-default" style="width:45px; height:30px; padding: 0px; text-align: center; padding-top: 3px;" href=@Url.Action("Index")>戻る</a>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @(ViewBag.Delflg == 1 ?
+                    @Html.ValidationSummary(true, "", new { @class = "validation-summary-success" }) :
+                    @Html.ValidationSummary(true, "", new { @id = "oputError" })
+                )
+            </div>
+
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Syukno, htmlAttributes: new { @class = "col-sm-2 control-label label_large" })
+                <div class="col-sm-2 text_cd_large">
+                    @Html.EditorFor(model => model.Syukno, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+                @Html.LabelFor(model => model.Syutuf, htmlAttributes: new { @class = "col-sm-2 control-labelR", style = "width:70px" })
+                <div class="col-sm-3 text_cd_large">
+                    @Html.EditorFor(model => model.Syutuf, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+                @Html.LabelFor(model => model.Denkbn, htmlAttributes: new { @class = "col-sm-2 control-labelR", style = "width:70px" })
+                <div class="col-sm-2 text_cd_small">
+                    @Html.EditorFor(model => model.Denkbn, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+
+            </div>
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Sykymd, htmlAttributes: new { @class = "col-sm-2 control-label label_large" })
+                <div class="col-sm-3" style="width:110px">
+                    @Html.EditorFor(model => model.Sykymd, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+                @Html.LabelFor(model => model.Fsykno, htmlAttributes: new { @class = "col-sm-2 control-labelR", style = "width:85px; padding:0px" })
+                <div class="col-sm-3" style="width:180px">
+                    @Html.EditorFor(model => model.Fsykno, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+                @Html.LabelFor(model => model.Tocymd, htmlAttributes: new { @class = "col-sm-2 control-labelR", style = "width:35px; padding:0px" })
+                <div class="col-sm-2 text_cd_middle">
+                    @Html.EditorFor(model => model.Tocymd, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Ufutan, htmlAttributes: new { @class = "col-sm-2 control-label label_large" })
+                <div class="col-sm-3" style="width:100px">
+                    @Html.EditorFor(model => model.Ufutan, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+                @Html.LabelFor(model => model.Keifno, htmlAttributes: new { @class = "col-sm-2 control-labelR label_large" })
+                <div class="col-sm-3" style="width:300px">
+                    @Html.EditorFor(model => model.Keifno, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Tokcod, htmlAttributes: new { @class = "col-sm-2 control-label label_large" })
+                <div class="col-sm-3" style="width:100px">
+                    @Html.EditorFor(model => model.Tokcod, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+                <div class="col-sm-3" style="width:450px">
+                    @Html.EditorFor(model => model.Tokcnm, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Unscod, htmlAttributes: new { @class = "col-sm-2 control-label label_large" })
+                <div class="col-sm-3" style="width:100px">
+                    @Html.EditorFor(model => model.Unscod, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+                <div class="col-sm-3" style="width:450px">
+                    @Html.EditorFor(model => model.Unscnm, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+            </div>
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Unscrs, htmlAttributes: new { @class = "col-sm-2 control-label label_large", style = "width:100px" })
+                <div class="col-sm-2 text_cd_small">
+                    @Html.EditorFor(model => model.Unscrs, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+                @Html.LabelFor(model => model.Unskbn, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:55px; margin:0px; padding:0px" })
+                <div class="col-sm-1" style="width:5px; margin:0px; padding:0px"></div>
+                <div class="col-sm-2" style="width:100px; margin:0px; padding:0px">
+                    @Html.EditorFor(model => model.Unskbn, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+                <div class="col-sm-2" style="width:340px">
+                    @Html.EditorFor(model => model.Unskbnnm, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+            </div>
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Sircod, htmlAttributes: new { @class = "col-sm-2 control-label label_large" })
+                <div class="col-sm-3" style="width:100px">
+                    @Html.EditorFor(model => model.Sircod, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+                <div class="col-sm-3" style="width:450px">
+                    @Html.EditorFor(model => model.Sircnm, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Sybcod, htmlAttributes: new { @class = "col-sm-2 control-label label_large" })
+                <div class="col-sm-3" style="width:100px">
+                    @Html.EditorFor(model => model.Sybcod, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+                <div class="col-sm-3" style="width:450px">
+                    @Html.EditorFor(model => model.Sybcnm, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Tancod, htmlAttributes: new { @class = "col-sm-2 control-label label_large" })
+                <div class="col-sm-3" style="width:100px">
+                    @Html.EditorFor(model => model.Tancod, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+                <div class="col-sm-3" style="width:250px">
+                    @Html.EditorFor(model => model.Tannam, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+                @Html.LabelFor(model => model.Kisyua, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:30px; margin:0px; padding:0px" })
+                <div class="col-sm-3 text_cd_small">
+                    @Html.EditorFor(model => model.Kisyua, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+                @Html.LabelFor(model => model.Kisyub, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:30px; margin:0px; padding:0px" })
+                <div class="col-sm-3" style="width:90px">
+                    @Html.EditorFor(model => model.Kisyub, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+
+                @Html.LabelFor(model => model.Pccod, htmlAttributes: new { @class = "col-sm-2 control-label label_large" })
+                <div class="col-sm-2" style="width:100px">
+                    @Html.EditorFor(model => model.Pccod, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", style = "width:100px", tabindex = "-1", unselectable = "on" } })
+                </div>
+                @Html.LabelFor(model => model.Mehkbn, htmlAttributes: new { @class = "col-sm-2 control-labelR", style = "width:140px" })
+                <div class="col-sm-2 text_cd_small">
+                    @Html.EditorFor(model => model.Mehkbn, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+                @Html.LabelFor(model => model.Ninusi, htmlAttributes: new { @class = "col-sm-2 control-labelR", style = "width:90px; padding-right: 6px; " })
+                <div class="col-sm-3" style="width:100px">
+                    @Html.EditorFor(model => model.Ninusi, new { htmlAttributes = new { @class = "form-control text_cd_small", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+            </div>
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Tensir, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:130px" })
+                <div class="col-sm-3" style="width:145px">
+                    @Html.EditorFor(model => model.Tensir, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+                @Html.LabelFor(model => model.Ecoflg, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:65px;" })
+                <div class="col-sm-3 text_cd_small">
+                    @Html.EditorFor(model => model.Ecoflg, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                <h6>【届先情報】</h6>
+            </div>
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Tdkcod, htmlAttributes: new { @class = "col-sm-2 control-label label_large" })
+                <div class="col-sm-3 text_cd_large">
+                    @Html.EditorFor(model => model.Tdkcod, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+            </div>
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Tdkyub, htmlAttributes: new { @class = "col-sm-2 control-label label_large" })
+                <div class="col-sm-3" style="width:100px">
+                    @Html.EditorFor(model => model.Tdkyub, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+                @Html.LabelFor(model => model.Tdktel, htmlAttributes: new { @class = "col-sm-2 control-labelR label_large" })
+                <div class="col-sm-3 text_cd_large">
+                    @Html.EditorFor(model => model.Tdktel, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+                @Html.LabelFor(model => model.Jiscod, htmlAttributes: new { @class = "col-sm-2 control-labelR label_large" })
+                <div class="col-sm-2" style="width:100px">
+                    @Html.EditorFor(model => model.Jiscod, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:3">
+                @Html.LabelFor(model => model.Tdkjyu, htmlAttributes: new { @class = "col-sm-2 control-label label_large" })
+                <div class="col-sm-3 text_jp_large">
+                    @*@Html.EditorFor(model => model.Tdkjyu, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })*@
+                    @Html.TextAreaFor(model => model.Tdkjyu, 2, 50, htmlAttributes: new { @class = "form-control", @disabled = "disabled", style = "ime-mode: active; overflow: hidden; cursor: auto; word-break: keep-all;" })
+                </div>
+            </div>
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Tdknam, htmlAttributes: new { @class = "col-sm-2 control-label label_large" })
+                <div class="col-sm-3 text_jp_large">
+                    @Html.EditorFor(model => model.Tdknam, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Tdsnam, htmlAttributes: new { @class = "col-sm-2 control-label label_large" })
+                <div class="col-sm-3 text_jp_large">
+                    @Html.EditorFor(model => model.Tdsnam, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Tdbnam, htmlAttributes: new { @class = "col-sm-2 control-label label_large" })
+                <div class="col-sm-3 text_jp_large">
+                    @Html.EditorFor(model => model.Tdbnam, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Tdktan, htmlAttributes: new { @class = "col-sm-2 control-label label_large" })
+                <div class="col-sm-3 text_jp_large">
+                    @Html.EditorFor(model => model.Tdktan, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Hincod, htmlAttributes: new { @class = "col-sm-2 control-label label_large" })
+                <div class="col-sm-3 text_cd_large">
+                    @Html.EditorFor(model => model.Hincod, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+                <div class="col-sm-3" style="width:410px">
+                    @Html.EditorFor(model => model.Hinnam, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Syuksu, htmlAttributes: new { @class = "col-sm-2 control-label label_large" })
+                <div class="col-sm-3" style="width:100px">
+                    @Html.EditorFor(model => model.SyuksuS, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+                @Html.LabelFor(model => model.Yusono, htmlAttributes: new { @class = "col-sm-2 control-label label_large" })
+                <div class="col-sm-3 text_cd_middle">
+                    @Html.EditorFor(model => model.Yusono, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Tkjiko1, htmlAttributes: new { @class = "col-sm-2 control-label label_large" })
+                <div class="col-sm-3 text_jp_large">
+                    @Html.EditorFor(model => model.Tkjiko1, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+            </div>
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Tkjiko2, htmlAttributes: new { @class = "col-sm-2 control-label label_large" })
+                <div class="col-sm-3 text_jp_large">
+                    @Html.EditorFor(model => model.Tkjiko2, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+            </div>
+            <div class="row" style="line-height:2">
+                <br />
+                <h6>【詰合せ情報】</h6>
+            </div>
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Daihno, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:130px" })
+                <div class="col-sm-3" style="width:140px">
+                    @Html.EditorFor(model => model.Daihno, new { htmlAttributes = new { @class = "form-control", style = "width:140px", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+                <div class="col-sm-1" style="width:30px"></div>
+                @Html.LabelFor(model => model.Sgenno, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:100px" })
+                <div class="col-sm-2" style="width:140px">
+                    @Html.EditorFor(model => model.Sgenno, new { htmlAttributes = new { @class = "form-control", style = "width:140px", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Sgenn2, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:130px" })
+                <div class="col-sm-2" style="width:140px">
+                    @Html.EditorFor(model => model.Sgenn2, new { htmlAttributes = new { @class = "form-control", style = "width:140px", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+                <div class="col-sm-1" style="width:30px"></div>
+                @Html.LabelFor(model => model.Stoucd, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:100px" })
+                <div class="col-sm-2" style="width:100px">
+                    @Html.EditorFor(model => model.Stoucd, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Sgen35, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:130px" })
+                <div class="col-sm-2" style="width:140px">
+                    @Html.EditorFor(model => model.Sgen35, new { htmlAttributes = new { @class = "form-control", style = "width:140px", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+                <div class="col-sm-1" style="width:30px"></div>
+                @Html.LabelFor(model => model.Hatcod, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:100px" })
+                <div class="col-sm-2" style="width:100px">
+                    @Html.EditorFor(model => model.Hatcod, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Hososu, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:130px" })
+                <div class="col-sm-3" style="width:100px">
+                    @Html.EditorFor(model => model.HososuS, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+                <div class="col-sm-1" style="width:70px"></div>
+                @Html.LabelFor(model => model.Jyuryo, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:100px" })
+                <div class="col-sm-3" style="width:100px">
+                    @Html.EditorFor(model => model.JyuryoS, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+                @Html.LabelFor(model => model.Taksiz, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:60px" })
+                <div class="col-sm-2" style="width:70px">
+                    @Html.EditorFor(model => model.Taksiz, new { htmlAttributes = new { @class = "form-control", style = "width:30px", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                <br />
+                <h6>【詰合せ出荷情報】　：　詰合せ代表出荷Noが存在する場合に表示</h6>
+            </div>
+            <div class="row">
+                <div class="col-sm-2" style="width:50px"></div>
+                <div class="col-sm-10">
+                    <table id="table" border="1" cellpadding="10">
+                        <tbody id="tbody">
+                            @foreach (SyuknoData dtl in ViewBag.Meisai)
+                            {
+                                <tr style="height:22px">
+                                    <td>@Html.EditorFor(model => dtl.Syukno1, new { htmlAttributes = new { id = "Syukno1", @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on", style = "width:100px; height:24px" } })</td>
+                                    <td>@Html.EditorFor(model => dtl.Syukno2, new { htmlAttributes = new { id = "Syukno2", @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on", style = "width:100px; height:24px" } })</td>
+                                    <td>@Html.EditorFor(model => dtl.Syukno3, new { htmlAttributes = new { id = "Syukno3", @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on", style = "width:100px; height:24px" } })</td>
+                                    <td>@Html.EditorFor(model => dtl.Syukno4, new { htmlAttributes = new { id = "Syukno4", @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on", style = "width:100px; height:24px" } })</td>
+                                    <td>@Html.EditorFor(model => dtl.Syukno5, new { htmlAttributes = new { id = "Syukno5", @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on", style = "width:100px; height:24px" } })</td>
+                                    <td>@Html.EditorFor(model => dtl.Syukno6, new { htmlAttributes = new { id = "Syukno6", @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on", style = "width:100px; height:24px" } })</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12 text-center">
+                    <br />
+                    <a class="btn btn-default" href=@Url.Action("Index")>戻る</a>
+                </div>
+            </div>
+
+        </div>
+        }
+    </div>
+</div>
+
+@section Scripts  {
+    @Html.Partial("_BootstrapFunction")
+    @Scripts.Render("~/bundles/my-bootstrap-export")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Styles.Render("~/Content/bootstrap-datepicker")
+    @Scripts.Render("~/bundles/bootstrap-datepicker")
+
+    <script>
+
+        window.onload = function () {
+            $('#sidebar').toggleClass('active');
+        };
+
+    </script>
+}

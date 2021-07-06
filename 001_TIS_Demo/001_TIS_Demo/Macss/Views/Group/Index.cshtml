@@ -1,0 +1,125 @@
+﻿@using Macss.ViewModels
+@model GroupViewModel
+
+@section Heads {
+    <style>
+        input {
+            max-width: 100%;
+        }
+    </style>
+}
+
+@{
+    ViewBag.Title = ViewBag.Title;
+} 
+
+<div class="row">
+    <div class="navbar navbar-default">
+        <h2>@ViewBag.Title</h2>
+        <hr />
+        <p>
+            @Html.ActionLink("新規", "Details", FormMethod.Post, htmlAttributes: new { type = "submit", @class = "btn btn-default" })
+            <input type="submit" value="編集" class="btn btn-default" id="edit" />
+            <input type="submit" value="削除" class="btn btn-default" id="delete" />
+        </p>
+        <table id="table"
+               class="table"
+               data-url="@Url.Action("All")"
+               data-toggle="table"
+               data-method="POST"
+               data-filter-control="true"
+               data-id-table="advancedTable"
+               data-show-columns="true"
+               data-show-pagination-switch="true"
+               data-page-list="[10, 25, 50, 1000]"
+
+               data-show-export="true"
+               data-export-types="['excel','csv']"
+               data-show-multi-sort="true"
+               data-click-to-select="true"
+               data-toolbar="#toolbar"
+               data-filter-show-clear="true"
+               data-pagination="true">
+            <thead>
+                <tr id="data">
+                    @Html.ThFor(model => model.GroupCd, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                    @Html.ThFor(model => model.GroupName, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                    @Html.ThFor(model => model.UpperClassInformation, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+@section Scripts  {
+    @Html.Partial("_BootstrapFunction")
+    @Scripts.Render("~/bundles/table-export")
+    <script>
+        var $table = $('#table');
+
+        $(function () {
+            $table.on('click-row.bs.table', function (e, row, $element) {
+                $('.success').removeClass('success');
+                $($element).addClass('success');
+            });
+            //一覧ダブルクリック時
+            $('#table').on('dblclick', function (e) {
+                var index = $('.success').attr('data-index');
+                var row = $('.success').parents('table:first').bootstrapTable('getData')[index];
+                goEdit(row);
+            });
+            //編集押下時
+            $('#edit').on('click', function (e) {
+                var index = $('.success').attr('data-index');
+                if (index) {
+                    var row = $('.success').parents('table:first').bootstrapTable('getData')[index];
+                    goEdit(row);
+                } else {
+                    alert("@String.Format(Resources.Message.CE039,"グループ")");
+                }
+            });
+            //削除押下時
+			$('#delete').on('click', function (e) {
+                var index = $('.success').attr('data-index');
+                if (index) {
+                    if (window.confirm("@Resources.Message.CQ006")) {
+                        var row = $('.success').parents('table:first').bootstrapTable('getData')[index];
+                        var postData = {
+                            cd: row.@nameof(GroupViewModel.GroupCd)
+                        };
+                        $.ajax({
+                            url: '@Url.Action("Delete")',
+                            type: 'POST',
+                            data: JSON.stringify(postData),
+                            dataType: 'json',
+                            contentType: 'application/json',
+                        }).done(function (result) {
+                            if (result.succsess == 1) {
+                                //削除が成功したとき
+                                alert(result.errMsg);
+                                window.location.href = '@Url.Action("Index")';
+                            } else {
+                                //削除失敗時
+                                alert(result.errMsg);
+                                return false;
+                            }
+                        }).fail(function (jqXHR, textStatus, errorThrown) {
+                            //例外の場合、エラー画面に飛ばす
+                            window.location.href = '/Error/Index'
+                        }).always(function () {
+                        });
+                    } else {
+                        return false;
+                    }
+                } else {
+                    alert("@String.Format(Resources.Message.CE039,"グループ")");
+                }
+            });
+        });
+
+        function goEdit(row) {
+            window.location.href = '@Url.Action("Details")?id=' + row.@nameof(GroupViewModel.GroupCd);
+        }
+
+    </script>
+}

@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "請求仕入 - AIMS";
+    ViewBag.ScreenId = "";
+    ViewBag.PageMainTitle = "ESP本社得意先マスタアップロード";
+    ViewBag.Caption = "データのアップロードを行います。";
+    //ViewBag.UploadFileAccept = new List<string>() { ".csv, .txt" };
+    ViewBag.UploadFileAccept = new List<string>() { ".csv" };
+}
+
+
+    @using (Html.BeginForm("UploadConfirm03", "D011", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.Partial("_SimpleUpload03")
+}

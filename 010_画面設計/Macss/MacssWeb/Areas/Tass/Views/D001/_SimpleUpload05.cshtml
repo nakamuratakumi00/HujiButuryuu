@@ -1,0 +1,200 @@
+﻿@functions {
+    public string GetAccept(List<string> accepts, string separator = ", ")
+    {
+        if (accepts == null || accepts.Count <= 0)
+        {
+            return String.Empty;
+        }
+
+        return String.Join(separator, accepts);
+    }
+
+    public string GetUploadFileCaption(List<string> accepts)
+    {
+        var ext = GetAccept(accepts, "、");
+
+        return String.Format("拡張子が、{0}で{1}以下のファイルを選択してください。", ext, MacssWeb.Common.Config.UploadMaxFileSizeText);
+    }
+}
+
+@Html.Partial("../Shared/Dialog/_TokuisakiCodeSearch")
+@Html.Partial("../Shared/Dialog/_UnsohohoCodeSearch")
+@Html.Partial("../Shared/Dialog/_UnsocorseCodeSearch")
+
+@Html.AntiForgeryToken()
+
+<!--テスト値-->
+@{ var testVal = string.Empty; }
+
+<table class="table macss-form-table">
+    <colgroup>
+        <col class="macss-form-table-title" />
+        <col class="macss-form-table-contents" />
+    </colgroup>
+    <tr id="TorokuTaisyoField">
+        <th scope="row">
+            <label class="control-label required">登録対象（得意先）</label>
+        </th>
+        <td>
+            <div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="input-group">
+                            <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="@testVal">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#TokuisakiCodeSearchDialog">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="macss-val-ref col-6">
+                        <span id="TokuisakiName" class="align-middle">@testVal</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <small class="form-text text-muted">
+                    70921：日本ＡＴＭ㈱　きらぼし銀行
+                </small>
+            </div>
+        </td>
+    </tr>
+    <tr id="SyukkaDateField">
+        <th scope="row">
+            <label class="control-label ">出荷日</label>
+        </th>
+        <td>
+            <div class="input-group">
+                <input class="form-control text-box single-line" id="syukka_date" name="IDName" type="text" value="@testVal">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="SyukkaDateCalendar"><i class="fa fa-calendar-alt"></i></button>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr id="UnsohohoCodeField">
+        <th scope="row">
+            <label class="control-label ">運送方法</label>
+        </th>
+        <td>
+            <div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="input-group">
+                            <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="@testVal">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr id="UnsocorseCodeField">
+        <th scope="row">
+            <label class="control-label">運送コース</label>
+        </th>
+        <td>
+            <div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="input-group">
+                            <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="@testVal">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr id="PasswordField">
+        <th scope="row">
+            <label class="control-label ">パスワード</label>
+        </th>
+        <td>
+            <div>
+                <div class="row">
+                    <div class="input-group col-4">
+                        <input class="form-control text-box single-line" id="IDName" maxlength="2" name="IDName" type="text" value="">
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+
+
+<div class="container-fluid">
+    <div>
+        <p>
+            @ViewBag.Caption
+        </p>
+    </div>
+    <div>
+        <div>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="customFile" name="postedFile" accept="@GetAccept(ViewBag.UploadFileAccept)">
+                <label class="custom-file-label" for="customFile" data-browse="参 照">ファイル選択...</label>
+            </div>
+            <small class="form-text text-muted">
+                @GetUploadFileCaption(ViewBag.UploadFileAccept)
+            </small>
+            <div id="UploadErrorMessageArea" style="display:none">
+                <span id="UploadErrorMessage" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="mt-4">
+        <div>
+            <div class="macss-form-button-group-row pr-0">
+                <div class="text-right">
+                    <button type="button" id="UploadExec" class="btn btn-primary">@MacssWeb.Resources.ControlText.UploadConfirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        var updateDatePicker = new Macss.DatetimePicker.MacssDtPicker("#syukka_date", "#SyukkaDateCalendar");
+        updateDatePicker.configure();
+
+
+        var fu = new Macss.FileUpload.MacssFileUpload();
+        fu.configure();
+
+        $('#UploadExec').on('click', function () {
+
+            var form = $(this).parents('form');
+            $("#UploadErrorMessageArea").hide();
+            var accepts = [];
+
+            @foreach (var item in ViewBag.UploadFileAccept)
+            {
+                @:accepts.push("@item");
+            }
+
+            var ret = false;
+
+            ret = fu.acceptExt(accepts);
+
+            if (ret == false) {
+                $("#UploadErrorMessage").text("@MacssWeb.Resources.Validation.NotAllowedFileExtension");
+                $("#UploadErrorMessageArea").show();
+                return false;
+            }
+
+            ret = fu.withinRangeOfFileSize(@MacssWeb.Common.Config.UploadMaxFileSize);
+
+            if (ret == false) {
+                $("#UploadErrorMessage").text("@MacssWeb.Resources.Validation.OverFileSize");
+                $("#UploadErrorMessageArea").show();
+                return false;
+            }
+
+            form.submit();
+        });
+
+
+    })
+</script>
+

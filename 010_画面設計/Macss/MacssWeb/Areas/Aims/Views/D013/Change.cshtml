@@ -1,0 +1,102 @@
+﻿@{
+    ViewBag.ScreenId = "";
+    ViewBag.PageMainTitle = "［請求明細］　PCコード一括変更";
+    ViewBag.Caption = "データのアップロードを行います。";
+    <!--ViewBag.Caption = "包装・出荷実績データを作成します。よろしいですか？";-->
+}
+
+@using (Html.BeginForm("ChangeConfirm", "D013", FormMethod.Post))
+{
+
+    @Html.AntiForgeryToken()
+
+    <div class="container-fluid">
+       
+        <div class="row mr-0 mb-1">
+            <div class="col-4">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <!--2つのスタイルシートを利用-->
+                        <label class="input-group-text control-label required" for="account_id;">請求No</label>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <!--2つのスタイルシートを利用-->
+                        <label class="input-group-text control-label required" for="account_id;">PCコード</label>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                    <input type="text" class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                    <input type="text" class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                    <small class="form-text text-muted">
+                          左端項目から順番に部門コード、事業区分、顧客区分を編集してください。
+                    </small>
+                    <small class="form-text text-muted">
+                          ※顧客区分は任意項目です。
+                    </small>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <!--2つのスタイルシートを利用-->
+                        <label class="input-group-text control-label required" for="account_id;">課税区分</label>
+                    </div>
+                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                        <option value="01"></option>                                        
+                    </select>
+                </div>
+            </div>                        
+        </div>        
+        <div>
+            <p>【変更後】</p>
+        </div>
+        <div class="row mr-0 mb-1">            
+            <div class="col-4">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <!--2つのスタイルシートを利用-->
+                        <label class="input-group-text control-label required" for="account_id;">PCコード</label>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                    <input type="text" class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                    <input type="text" class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                    <small class="form-text text-muted">
+                          左端項目から順番に部門コード、事業区分、顧客区分を編集してください。
+                    </small>
+                    <small class="form-text text-muted">
+                          ※変更前PCコードで顧客区分を入力した場合は顧客区分を必ず入力してください。
+                    </small>
+                </div>
+            </div>                                    
+        </div>
+     
+        <div class="mt-4">
+            <div>
+                <div class="macss-upload-button-group-row pr-0 row">
+                    <div class="col-8">
+                        <!--<a class="btn btn-secondary" href="@Url.Action("Index")" role="button">@MacssWeb.Resources.ControlText.BackToList</a>-->
+                    </div>
+                    <div class="col-4 text-right">
+                        <button type="button" id="Confirm" class="btn btn-primary">@MacssWeb.Resources.ControlText.Confirm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<script>
+    $(function () {
+        $('#Confirm').on('click', function () {
+            var form = $(this).parents('form');
+            form.submit();
+        });
+
+
+    })
+</script>

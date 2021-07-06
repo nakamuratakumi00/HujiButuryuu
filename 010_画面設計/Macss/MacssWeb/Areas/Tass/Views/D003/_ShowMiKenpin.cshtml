@@ -1,0 +1,144 @@
+﻿@Html.AntiForgeryToken()
+
+@if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+{
+    <div class="alert alert-info">
+        <span>@ViewBag.ConfirmMessage</span>
+    </div>
+}
+
+@{ var transAction = ViewContext.Controller.ValueProvider.GetValue("action").RawValue; }
+
+@{ var showAction = string.Empty; }
+@{ var setConfirmStyle = string.Empty; }
+@if (ViewBag.InputFlg != null && ViewBag.InputFlg == true)
+{
+    showAction = "EditConfirm";
+}
+else
+{
+    showAction = "Details";
+}
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="row justify-content-between macss-form-button-group-row">
+        @if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+        {
+            <div class="col-4">
+                <button type="submit" class="btn btn-secondary" name="cmdTopBack" value="@((int)MacssWeb.Common.ButtonValues.Back)">@MacssWeb.Resources.ControlText.Back</button>
+            </div>
+        }
+        else
+        {
+            <div class="col-4">
+                <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.Back</a>
+            </div>
+        }
+    </div>
+</div>
+
+@* 基本項目 *@
+<div class="accordion mb-1" id="ConditionAccordion1">
+    <div class="card">
+        <div class="card-header macss-search-config-collapse-header" id="headingOne1">
+            <div class="mb-0">
+                <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain1" aria-expanded="true" aria-controls="ConditionMain">
+                    <div class="d-inline-block" style="color:#333">出荷現品 基本項目</div>
+                    <i id="CollapseHidden1" class="fas fa-chevron-circle-up" aria-hidden="true" style="display:none;"></i>
+                    <i id="CollapseShow1" class="fas fa-chevron-circle-down" aria-hidden="true" style="display:none;"></i>
+                </button>
+            </div>
+        </div>
+        <div id="ConditionMain1" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne1" data-parent="#ConditionAccordion1">
+            <table class="table macss-form-table ml-3">
+                <colgroup>
+                    <col class="macss-form-table-title" />
+                    <col class="macss-form-table-contents" />
+                </colgroup>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">出荷No</label>
+                    </th>
+                    <td>
+                        <div>1234560001</div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">品名</label>
+                    </th>
+                    <td>
+                        <div>
+                            ESS0546 ２ＲＩ１００Ｇ－１６０
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label ">出荷数</label>
+                    </th>
+                    <td>
+                        <div>500</div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">顧客品番</label>
+                    </th>
+                    <td>
+                        <div>Ａ５０Ｌ－２００１－０４３１３</div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">顧客品番有無</label>
+                    </th>
+                    <td>
+                        <div>有</div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4"></div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <button type="submit" class="btn btn-secondary" name="cmdBtmBack" value="@((int)MacssWeb.Common.ButtonValues.Back)">@MacssWeb.Resources.ControlText.Back</button>
+    </div>
+    <div class="col-4 text-right">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDialog">@ViewBag.ButtonText</button>
+    </div>
+</div>
+
+<div class="modal" id="ConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @ViewBag.ConfirmDialogText
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" name="cmdBtmExec" value="@((int)MacssWeb.Common.ButtonValues.Exec)">@MacssWeb.Resources.ControlText.Yes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        var dt = new Macss.DataTables.MacssSimpleTable("#SampleList");
+        dt.configure();
+
+        var cond = new Macss.Collapse.ConditionsPanel("#ConditionAccordion1", "#CollapseShow1", "#CollapseHidden1");
+        cond.setCollapseEvent();
+    });
+</script>

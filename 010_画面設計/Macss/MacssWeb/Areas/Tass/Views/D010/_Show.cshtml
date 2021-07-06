@@ -1,0 +1,342 @@
+﻿@Html.AntiForgeryToken()
+
+@if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+{
+    <div class="alert alert-info">
+        <span>@ViewBag.ConfirmMessage</span>
+    </div>
+}
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="row justify-content-between macss-form-button-group-row">
+        @if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+        {
+            <div class="col-4">
+                <button type="submit" class="btn btn-secondary" name="cmdTopBack" value="@((int)MacssWeb.Common.ButtonValues.Back)">@MacssWeb.Resources.ControlText.Back</button>
+            </div>
+        }
+        else
+        {
+            <div class="col-4">
+                <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.Back</a>
+            </div>
+        }
+    </div>
+</div>
+
+
+<table class="table macss-form-table2">
+    <colgroup>
+        <col class="macss-form-table-title2" />
+        <col class="macss-form-table-contents2" />
+        <col class="macss-form-table-title2" />
+        <col class="macss-form-table-contents2" />
+    </colgroup>
+    <tr>
+        <th scope="row">
+            <label class="control-label">出荷No</label>
+        </th>
+        <td colspan="3">
+            <div>
+                <div>05260</div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">出荷日</label>
+        </th>
+        <td>
+            <div>
+                <div>2021/03/02</div>
+            </div>
+        </td>
+        <th scope="row">
+            <label class="control-label">手配No</label>
+        </th>
+        <td>
+            <div>
+                <div>Q8623800</div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">出荷場所</label>
+        </th>
+        <td>
+            <div>
+                <div>S2 ＦＢ）丸子出張所</div>
+            </div>
+        </td>
+        <th scope="row">
+            <label class="control-label">オリジナル出荷No</label>
+        </th>
+        <td>
+            <div>
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">運送方法</label>
+        </th>
+        <td>
+            <div>
+                <div>31 ヤマト運輸</div>
+            </div>
+        </td>
+        <th scope="row">
+            <label class="control-label">運送コース</label>
+        </th>
+        <td>
+            <div>
+                <div>M Ｍコース【四日市定期便】</div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">仕入先</label>
+        </th>      
+        <td colspan="3">
+            <div>
+                <div>77571 小鈴産業（株）</div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">運送区分</label>
+        </th>
+        <td>
+            <div>
+                <div>2100 路線便　　　　傭車・路線便全般</div>
+            </div>
+        </td>
+        <th scope="row">
+            <label class="control-label">得意先</label>
+        </th>
+        <td>
+            <div>
+                <div>17601 ＦＥ）半導体営業　（松本・ＤＳ）</div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">届先会社名</label>
+        </th>
+        <td>
+            <div>
+                <div>㈱エイシーエスエヌ</div>
+            </div>
+        </td>
+        <th scope="row">
+            <label class="control-label">届先住所</label>
+        </th>
+        <td>
+            <div>
+                <div>東京都千代田区神田小川町６－１２－１　アンリビル３Ｆ</div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">品名コード</label>
+        </th>
+        <td>
+            <div>
+
+            </div>
+        </td>
+        <th scope="row">
+            <label class="control-label">品名</label>
+        </th>
+        <td>
+            <div>
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">機種コードA</label>
+        </th>
+        <td>
+            <div>
+
+            </div>
+        </td>
+        <th scope="row">
+            <label class="control-label">包装数</label>
+        </th>
+        <td>
+            <div>
+                <div>3</div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">重量</label>
+        </th>
+        <td>
+            <div>
+                <div>3.00</div>
+            </div>
+        </td>
+        <th scope="row">
+            <label class="control-label">詰合せ代表出荷No</label>
+        </th>
+        <td>
+            <div>
+                <div>05260</div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">出荷括りNo</label>
+        </th>
+        <td>
+            <div>
+
+            </div>
+        </td>
+        <th scope="row">
+            <label class="control-label">出荷数</label>
+        </th>
+        <td>
+            <div>
+                <div>1</div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">ベースNo</label>
+        </th>
+        <td>
+            <div>
+
+            </div>
+        </td>
+        <th scope="row">
+            <label class="control-label">出荷指示番号</label>
+        </th>
+        <td>
+            <div>
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">運送会社名</label>
+        </th>
+        <td>
+            <div>
+
+            </div>
+        </td>
+        <th scope="row">
+            <label class="control-label">車両番号</label>
+        </th>
+        <td>
+            <div>
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">ドライバー名</label>
+        </th>
+        <td>
+            <div>
+
+            </div>
+        </td>
+        <th scope="row">
+            <label class="control-label">ドライバー連絡用電話番号</label>
+        </th>
+        <td>
+            <div>
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">仕入先原票No</label>
+        </th>
+        <td colspan="3">
+            <div>
+                <div class="col-4">
+                    <select class="custom-select form-control" id="IDListBox" size="10" multiple>
+                        <option value="0">158444511481</option>
+                        <option value="1">158444511492</option>
+                        <option value="2">158444511503</option>
+                        <option value="3">158444511504</option>
+                        <option value="4">158444511505</option>
+                        <option value="5">158444511506</option>
+                        <option value="6">158444511507</option>
+                        <option value="7">158444511508</option>
+                        <option value="8">158444511509</option>
+                        <option value="9">158444511510</option>
+                        <option value="10">158444511511</option>
+                        <option value="11">158444511512</option>
+                        <option value="12">158444511513</option>
+                        <option value="13">158444511514</option>
+                        <option value="14">158444511515</option>
+                        <option value="15">158444511516</option>
+                    </select>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    @if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+    {
+        <div class="col-4">
+            <button type="submit" class="btn btn-secondary" name="cmdBtmBack" value="@((int)MacssWeb.Common.ButtonValues.Back)">@MacssWeb.Resources.ControlText.Back</button>
+        </div>
+        <div class="col-4 text-right">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDialog">@ViewBag.ButtonText</button>
+        </div>
+    }
+    else
+    {
+        <div class="col-4">
+            <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.Back</a>
+        </div>
+        <div class="col-8 text-right">
+            <a role="button" class="btn btn-primary" href="@Url.Action("Edit", new { id = @"01736" })">@MacssWeb.Resources.ControlText.Edit</a>
+            <a role="button" class="btn btn-danger" href="@Url.Action("DeleteConfirm", new { id = @"01746" })">@MacssWeb.Resources.ControlText.Delete</a>
+        </div>
+    }
+</div>
+
+<div class="modal" id="ConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @ViewBag.ConfirmDialogText
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" name="cmdBtmExec" value="@((int)MacssWeb.Common.ButtonValues.Exec)">@MacssWeb.Resources.ControlText.Yes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>

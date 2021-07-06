@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "サンプル";
+    ViewBag.ScreenId = "SMPL-D001";
+    ViewBag.PageMainTitle = "データアップロードサンプル";
+    ViewBag.ScreenId = "SMPL-D001";
+    ViewBag.Caption = "データのアップロードを行います。";
+    //ViewBag.UploadFileAccept = new List<string>() { ".csv, .txt" };
+    ViewBag.UploadFileAccept = new List<string>() { ".csv" };
+}
+
+
+    @using (Html.BeginForm("UploadConfirm", "Sample", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.Partial("_SimpleUpload")
+}

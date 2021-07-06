@@ -1,0 +1,181 @@
+﻿@model MacssWeb.Areas.Tass.Models.TMSFixedDataListViewModel
+
+@{
+    ViewBag.Title = MacssWeb.Resources.Tass.TMSFixedDataMainTitle;
+    ViewBag.PageMainTitle = String.Format("{0}{1}", MacssWeb.Resources.Tass.TMSFixedDataUploadMainTitle, "確認");
+    ViewBag.ScreenId = "TASS-D025-06";
+    ViewBag.DisplayDataType = "Upload";
+}
+@section Scripts {
+    @Html.Partial("_TMSFixedDataListScript")
+}
+
+<div class="alert alert-info">
+    <span>@ViewBag.ConfirmMessage</span>
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("Upload")">@MacssWeb.Resources.ControlText.BackToUpload</a>
+    </div>
+    <div class="col-4 text-right">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDialog">@MacssWeb.Resources.ControlText.UploadExec</button>
+    </div>
+</div>
+
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-8">
+            <div class="input-group mr-2 mb-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" style="width:210px;">作業依頼データファイル</span>
+                </div>
+                <span class="form-control"></span>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="input-group mr-2 mb-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" style="width:108px;">件数</span>
+                </div>
+                <span class="form-control text-right">@ViewBag.UploadFileContentsCount1</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="input-group mr-2 mb-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" style="width:210px;">請求データファイル</span>
+                </div>
+                <span class="form-control"></span>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="input-group mr-2 mb-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" style="width:108px;">件数</span>
+                </div>
+                <span class="form-control text-right">@ViewBag.UploadFileContentsCount2</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="input-group mr-2 mb-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" style="width:210px;">支払データファイル1</span>
+                </div>
+                <span class="form-control"></span>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="input-group mr-2 mb-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" style="width:108px;">件数</span>
+                </div>
+                <span class="form-control text-right">@ViewBag.UploadFileContentsCount3</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="input-group mr-2 mb-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" style="width:210px;">支払データファイル2</span>
+                </div>
+                <span class="form-control"></span>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="input-group mr-2 mb-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" style="width:108px;">件数</span>
+                </div>
+                <span class="form-control text-right">@ViewBag.UploadFileContentsCount3</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*<div class="container-fluid mt-4">
+    <div class="macss-label-like-btn-primary">@ViewBag.NewCountText</div>
+    <div class="macss-label-like-btn-sucess">@ViewBag.UpdCountText</div>
+    <div class="macss-label-like-btn-warning">@ViewBag.DelCountText</div>
+</div>*@
+
+@*<ul class="nav nav-tabs mt-4" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="RequestTableTab" data-toggle="tab" href="#ReqData" role="tab"
+           aria-controls="item1" aria-selected="true">
+            作業依頼
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="BillingTableTab" data-toggle="tab" href="#BilData" role="tab"
+           aria-controls="item2" aria-selected="false">
+            請求
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="PaymentTableTab" data-toggle="tab" data-target="#PayData" role="tab"
+           aria-controls="item3" aria-selected="false">
+            支払
+        </a>
+    </li>
+</ul>
+<div id="TMSFixedDataPane">
+    <div id="ReqData" role="tabpanel" aria-labelledby="RequestTableTab">
+        @Html.Partial("_TMSFixedDataRequestList", Model.TMSFixedDataRequests)
+    </div>
+    <div id="BilData" role="tabpanel" aria-labelledby="BillingTableTab">
+        @Html.Partial("_TMSFixedDataBillingList", Model.TMSFixedDataBillings)
+    </div>
+    <div id="PayData" role="tabpanel" aria-labelledby="PaymentTableTab">
+        @Html.Partial("_TMSFixedDataPaymentList", Model.TMSFixedDataPayments)
+    </div>
+</div>*@
+
+@*<div class="tab-content">
+        <div class="tab-pane fade show active" id="ReqUpload" role="tabpanel" aria-labelledby="RequestTableTab">
+            @Html.Partial("_TMSFixedDataRequestList", Model.TMSFixedDataRequests)
+        </div>
+        <div class="tab-pane fade show active" id="BilUpload" role="tabpanel" aria-labelledby="BillingTableTab">
+            @Html.Partial("_TMSFixedDataBillingList", Model.TMSFixedDataBillings)
+        </div>
+        <div class="tab-pane fade" id="PayUpload" role="tabpanel" aria-labelledby="PaymentTableTab">
+            @Html.Partial("_TMSFixedDataPaymentList", Model.TMSFixedDataBillings)
+        </div>
+    </div>*@
+
+
+<div class="modal" id="ConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    @MacssWeb.Resources.Messages.UploadReconfirm
+                </p>
+                <p>
+                    アップロードデータの取込処理を実行後、TMS確定データ作成画面へ遷移します。
+                </p>
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("UploadResult", "TMSFixedData", null, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="UploadFileName" name="uploadFileName" value="@ViewBag.UploadFileName" />
+                    <button type="submit" class="btn btn-primary">@MacssWeb.Resources.ControlText.Yes</button>
+                }
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>

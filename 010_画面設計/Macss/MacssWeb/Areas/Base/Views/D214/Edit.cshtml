@@ -1,0 +1,589 @@
+﻿@model Macss.Database.Entity.AccountMaster
+@{
+    ViewBag.Title = "請求先統合更新";
+    ViewBag.PageMainTitle = "請求先統合更新";
+
+    ViewBag.ConfirmMessage = MacssWeb.Resources.Messages.DeleteConfirm;
+    ViewBag.ButtonText = MacssWeb.Resources.ControlText.DeleteExec;
+    ViewBag.ConfirmDialogText = MacssWeb.Resources.Messages.DeleteReconfirm;
+
+}
+@section Scripts {
+    <script>
+        $(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#SampleList");
+            dt.configure();
+
+            //MacssDataTable（dataTables.fixedColumns.js）に表示する列が15件以上あると計算間違いで最左端列にスクロールバーが表示されるため、非表示にする
+            $('.DTFC_LeftBodyLiner').css('overflow-y', 'hidden');
+
+        });</script>
+}
+
+@*@Html.Partial("../Shared/Dialog/_SoukoCodeSearch")*@
+@*@Html.Partial("../Shared/Dialog/_StockCreate")
+    @Html.Partial("../Shared/Dialog/_StockEdit")
+    @Html.Partial("../Shared/Dialog/_TokuisakiCodeSearch")
+    @Html.Partial("../Shared/Dialog/_RevertBeforeDeletionDialog")*@
+
+@Html.Partial("../Shared/Dialog/_D214Create")
+@Html.Partial("../Shared/Dialog/_D214Edit")
+
+
+@using (Html.BeginForm("EditConfirm", "StockCreate", null, FormMethod.Post))
+{
+    <div class="row justify-content-between macss-form-button-group-row">
+        <div class="col-4">
+            <a class="btn btn-secondary" data-toggle="modal" data-target="#TransitionConfirmDialog" role="button">@MacssWeb.Resources.ControlText.BackToList</a>
+        </div>
+        <div class="col-4 text-right">
+            <a class="btn btn-primary" href="@Url.Action("EditConfirm")" role="button">@MacssWeb.Resources.ControlText.InputConfirm</a>
+        </div>
+    </div>
+    <div class="accordion" id="ConditionAccordion">
+        <div class="card">
+            <div class="card-header macss-search-config-collapse-header" id="headingOne">
+                <div class="mb-0">
+                    <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain" aria-expanded="true" aria-controls="ConditionMain">
+                        <div class="d-inline-block" style="color:#333"></div>
+                        <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="color: rgb(120, 188, 255);"></i>
+                        <i id="CollapseShow" class="fas fa-chevron-circle-down" aria-hidden="true" style="color: rgb(120, 188, 255); display: none;"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+                <table class="table macss-form-table2">
+                    <colgroup>
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">請求先コード</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label required" for="account_id">請求先名称</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">末締手番区分</label>
+                            </th>
+                            <td colspan="3">
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="01"></option>
+                                        <option value="02">１手番対象</option>
+                                        <option value="03">２手番対象又は20日締対象</option>
+                                        <option value="04">1：Fe工場(発注システム用にデータを引き渡す）</option>
+                                        <option value="05">3：Fe工場向け伝送無し、又は１手番の顧客</option>
+                                        <option value="06">4：Fe工場向け伝送無しで、且つ原価区分必要顧客</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">請求総括表発行区分</label>
+                            </th>
+                            <td colspan="3">
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="01"></option>
+                                        <option value="02">発行対象外</option>
+                                        <option value="03">発行部数(1)</option>
+                                        <option value="04">発行部数(2)</option>
+                                        <option value="05">発行部数(3)</option>
+                                        <option value="06">発行部数(4)</option>
+                                        <option value="07">発行部数(5)</option>
+                                        <option value="08">発行部数(6)</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">請求書統合区分</label>
+                            </th>
+                            <td colspan="3">
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="01"></option>
+                                        <option value="02">括りなし(請求先コード単位)</option>
+                                        <option value="03">1：DHLサプライチェーン（長野以外）(60071)</option>
+                                        <option value="04">2：阿部電材(71001)</option>
+                                        <option value="05">3：武蔵野通工(76741)</option>
+                                        <option value="06">4：DHLサプライチェーン（長野分）(61016)</option>
+                                        <option value="07">5：富士通エフサス（長野分）(60236)</option>
+                                        <option value="08">6：信州名鉄運輸（長野分）(70056)</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">売上総括大分類発行区分</label>
+                            </th>
+                            <td colspan="3">
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="01"></option>
+                                        <option value="02">発行対象外</option>
+                                        <option value="03">2：信州富士電機部品(44311)</option>
+                                        <option value="04">6：FE)食品流通事業部(三重)</option>
+                                        <option value="05">A：信州富士電機生産(41831)</option>
+                                        <option value="06">B：FE)食品流通事業部(大崎)(21311)</option>
+                                        <option value="07">C：FE)食品流通事業部(八丁堀)(24311)</option>
+                                        <option value="08">D：FMC メーター(11101)</option>
+                                        <option value="09">E：FE半導体営業(17001)</option>
+                                        <option value="10">F：FE工場(17071)</option>
+                                        <option value="11">G：FPS(17081)</option>
+                                        <option value="12">H：FMC SW電源(19101)</option>>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">売上総括控発行区分</label>
+                            </th>
+                            <td colspan="3">
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="01"></option>
+                                        <option value="02">発行対象外</option>
+                                        <option value="03">1：控１部発行</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">売上伝票発行区分</label>
+                            </th>
+                            <td colspan="3">
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="01"></option>
+                                        <option value="02">発行しない</option>
+                                        <option value="03">1：発行する</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">売上伝票並順</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">FB本社伝送止め</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                        <label class="form-check-label" for="inlineRadio1">伝送する</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                        <label class="form-check-label" for="inlineRadio2">伝送しない</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">データ引渡区分</label>
+                            </th>
+                            <td colspan="3">
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="01"></option>
+                                        <option value="02">2：FE)食品流通事業部(大崎)へのデータ引渡</option>
+                                        <option value="03">3：FPS)大町経理課へのデータ引渡</option>
+                                        <option value="04">4：富士電機ｴﾌﾃｯｸ様へのデータ引渡</option>
+                                        <option value="05">5：FE)食品流通事業部(三重)へのデータ引渡</option>
+                                        <option value="06">6：信州富士電機･経理課へのデータ引渡</option>
+                                        <option value="07">8：FPS)大町へのデータ引渡</option>
+                                        <option value="08">9：FE)営業へのデータ引渡</option>
+                                        <option value="09">A：FE)工場へのデータ引渡</option>
+                                        <option value="10">B：新光商事へのデータ引渡</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">帳票種類選択区分</label>
+                            </th>
+                            <td colspan="3">
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="01"></option>
+                                        <option value="02">FDFE以外</option>
+                                        <option value="03">1:FDFE仕様</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">ESP仕入データ連携</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                        <label class="form-check-label" for="inlineRadio1">ESP仕入データ連携対象外</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                        <label class="form-check-label" for="inlineRadio2">ESP仕入データ連携対象</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">ESP仕入データ連携止め</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                        <label class="form-check-label" for="inlineRadio1">ESPへ仕入データを引き渡す</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                        <label class="form-check-label" for="inlineRadio2">ESPへ仕入データを引き渡さない</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">顧客請求日取得区分</label>
+                            </th>
+                            <td colspan="3">
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="01"></option>
+                                        <option value="02">通常</option>
+                                        <option value="03">1：1ヶ月先</option>
+                                        <option value="04">2：2ヶ月先</option>
+                                        <option value="05">3：フリー日付1</option>
+                                        <option value="06">4：フリー日付2</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">顧客請求期間取得区分</label>
+                            </th>
+                            <td colspan="3">
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="01"></option>
+                                        <option value="02">通常</option>
+                                        <option value="03">1：1ヶ月先</option>
+                                        <option value="04">2：2ヶ月先</option>
+                                        <option value="05">3：フリー日付1</option>
+                                        <option value="06">4：フリー日付2</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">顧客請求月度取得区分</label>
+                            </th>
+                            <td colspan="3">
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="01"></option>
+                                        <option value="02">通常</option>
+                                        <option value="03">1：1ヶ月先</option>
+                                        <option value="04">2：2ヶ月先</option>
+                                        <option value="05">3：フリー日付1</option>
+                                        <option value="06">4：フリー日付2</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">社内請求日取得区分</label>
+                            </th>
+                            <td colspan="3">
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="01"></option>
+                                        <option value="02">通常</option>
+                                        <option value="03">1：1ヶ月先</option>
+                                        <option value="04">2：2ヶ月先</option>
+                                        <option value="05">3：フリー日付1</option>
+                                        <option value="06">4：フリー日付2</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">社内請求期間取得区分</label>
+                            </th>
+                            <td colspan="3">
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="01"></option>
+                                        <option value="02">通常</option>
+                                        <option value="03">1：1ヶ月先</option>
+                                        <option value="04">2：2ヶ月先</option>
+                                        <option value="05">3：フリー日付1</option>
+                                        <option value="06">4：フリー日付2</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">社内請求月度取得区分</label>
+                            </th>
+                            <td colspan="3">
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="01"></option>
+                                        <option value="02">通常</option>
+                                        <option value="03">1：1ヶ月先</option>
+                                        <option value="04">2：2ヶ月先</option>
+                                        <option value="05">3：フリー日付1</option>
+                                        <option value="06">4：フリー日付2</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">製造番号編集区分</label>
+                            </th>
+                            <td colspan="3">
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="01"></option>
+                                        <option value="02">対象外</option>
+                                        <option value="03">1：原価を対象(製造番号3:3 = "301"又は"005"限定)</option>
+                                        <option value="04">2：経費を対象(製造番号1:2="A27"限定)</option>
+                                        <option value="05">A：経費と原価両方を対象</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">Fe松本経理用出力対象</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                        <label class="form-check-label" for="inlineRadio1">対象外</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                        <label class="form-check-label" for="inlineRadio2">作成対象</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">FEP半用出力対象</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                        <label class="form-check-label" for="inlineRadio1">対象外</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                        <label class="form-check-label" for="inlineRadio2">作成対象</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">確定後差戻可否</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                        <label class="form-check-label" for="inlineRadio1">差戻不可</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                        <label class="form-check-label" for="inlineRadio2">差戻可</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+<br>
+@using (Html.BeginForm("CreateConfirm", "StockCreate", null, FormMethod.Post))
+{
+    <div class="accordion mb-4" id="ConditionAccordion4">
+        <div class="card">
+            <div class="card-header macss-search-config-collapse-header" id="headingOne4">
+                <div class="mb-0">
+                    <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain4" aria-expanded="true" aria-controls="ConditionMain4">
+                        <div class="d-inline-block" style="color:#333">請求先統合帳票部数情報入力エリア</div>
+                        <i id="CollapseHidden4" class="fas fa-chevron-circle-up" aria-hidden="true" style="color: rgb(120, 188, 255);"></i>
+                        <i id="CollapseShow4" class="fas fa-chevron-circle-down" aria-hidden="true" style="display:none;"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="ConditionMain4" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion4">
+                <table class="table macss-form-table2">
+                    <colgroup>
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                    </colgroup>
+                    <tr>
+                        <th scope="row">
+                            <label class="control-label" for="account_id">帳票ID</label>
+                        </th>
+                        <td>
+                            <div>
+                                <div class="input-group">
+                                    <input type="text" id="SampleDTPicker1" class="form-control">
+                                </div>
+                                <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                            </div>
+                        </td>
+                        <th scope="row">
+                            <label class="control-label" for="account_id">部数</label>
+                        </th>
+                        <td>
+                            <div>
+                                <div class="input-group">
+                                    <input type="text" id="SampleDTPicker1" class="form-control">
+                                </div>
+                                <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="container-fluid pt-4 pb-3 pl-0 clearfix">
+                <div class="float-right">
+                    <button type="submit" class="btn btn-primary" data-toggle="modal">明細更新</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<table id="SampleList" class="table table-striped table-hover macss-data-table">
+    <thead class="macss-data-table-header">
+        <!-- thの文字数で列の幅が決まってしまうため、必要に応じて全角スペースを入れて列の幅を調整する必要がある-->
+        <tr>
+            <th style="width: 80px;">　　　</th>
+            <th>帳票ID</th>
+            <th>部数</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="white-space:nowrap;">
+                <div class="macss-icon-container">
+                    <div class="macss-icon-item">
+                        <a class="Edit01" data-toggle="modal" data-target="#D214EditDialog" " title="編集" data-setval="01"><i class="fas fa-pencil-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                        <a href="@Url.Action("DeleteConfirm")" title="削除"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<div class="mt-4"></div>
+<div class="row justify-content-between macss-form-button-group-row mt-4">
+    <div class="col-4">
+        <a class="btn btn-secondary" data-toggle="modal" data-target="#TransitionConfirmDialog" role="button">@MacssWeb.Resources.ControlText.BackToList</a>
+    </div>
+    <div class="col-4 text-right">
+        <a class="btn btn-primary" href="@Url.Action("EditConfirm")" role="button">@MacssWeb.Resources.ControlText.InputConfirm</a>
+    </div>
+</div>
+<script>
+    function setDepartmentCode(code, value) {
+        $("#bumon_cd").val(code);
+        $("#DepartmentName").text(value);
+    }
+    $(function () {
+        var createDatePicker = new Macss.DatetimePicker.MacssDtPicker("#create_date", "#CreateDateCalendar");
+        createDatePicker.configure();
+        var updateDatePicker = new Macss.DatetimePicker.MacssDtPicker("#update_date", "#UpdateDateCalendar");
+        updateDatePicker.configure();
+    });</script></form>
+
+</div>
+
+
+
+<div class="modal" id="TransitionConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.TransitionConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @MacssWeb.Resources.Messages.TransitionConfirm
+                <br>
+                @MacssWeb.Resources.Messages.Confirm
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary macss-btn" href="@Url.Action("Index")" role="button">@MacssWeb.Resources.ControlText.Yes</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>

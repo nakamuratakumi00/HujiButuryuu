@@ -1,0 +1,336 @@
+﻿@model Macss.Database.Entity.AccountMaster
+
+@Html.AntiForgeryToken()
+
+@Html.Partial("../Shared/Dialog/_DepartmentCodeSearch")
+
+<div>
+    @Html.ValidationSummary(false, "入力エラーがあります。", new { @class = "alert alert-danger" })
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#TransitionConfirmDialog">@MacssWeb.Resources.ControlText.BackToList</button>
+    </div>
+    <div class="col-4 text-right">
+        <button type="submit" class="btn btn-primary">@MacssWeb.Resources.ControlText.InputConfirm</button>
+    </div>
+</div>
+<table class="table macss-form-table">
+    <colgroup>
+        <col class="macss-form-table-title" />
+        <col class="macss-form-table-contents" />
+    </colgroup>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.account_id, htmlAttributes: new { @class = "control-label required" })
+        </th>
+        <td>
+            <div>
+                @Html.EditorFor(model => model.account_id, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.account_id, "", new { @class = "text-danger" })
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.account_name, htmlAttributes: new { @class = "control-label required" })
+        </th>
+        <td>
+            <div>
+                @Html.EditorFor(model => model.account_name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.account_name, "", new { @class = "text-danger" })
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.account_name_kana, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.EditorFor(model => model.account_name_kana, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.account_name_kana, "", new { @class = "text-danger" })
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.account_password, htmlAttributes: new { @class = "control-label required" })
+        </th>
+        <td>
+            <div>
+                @Html.EditorFor(model => model.account_password, new { htmlAttributes = new { @class = "form-control" } })
+                <small class="form-text text-muted">
+                    8文字以上12文字以下の英数字を入力してください。
+                </small>
+                @Html.ValidationMessageFor(model => model.account_password, "", new { @class = "text-danger" })
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.group_cd, htmlAttributes: new { @class = "control-label required" })
+        </th>
+        <td>
+            <div>
+                @Html.EditorFor(model => model.group_cd, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.group_cd, "", new { @class = "text-danger" })
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.login_count, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.EditorFor(model => model.login_count, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.login_count, "", new { @class = "text-danger" })
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.login_failure_count, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.EditorFor(model => model.login_failure_count, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.login_failure_count, "", new { @class = "text-danger" })
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.last_login_date, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.EditorFor(model => model.last_login_date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.last_login_date, "", new { @class = "text-danger" })
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.delete_flg, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @*@Html.EditorFor(model => model.delete_flg, new { htmlAttributes = new { @class = "form-control" } })*@
+                <!--
+                <label>
+                    @Html.CheckBoxFor(model => model.DeleteFlgBool, new { htmlAttributes = new { @class = "form-control" } })
+                    <span>削除</span>
+                </label>
+                -->
+
+                @{ var testVal = string.Empty; }
+                @if (Model != null && Model.DeleteFlgBool == true)
+                {
+                    testVal = "checked";
+                }
+                <div class="btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-outline-primary">
+                        <input type="checkbox" id="DeleteFlgBool" name="DeleteFlgBool" class="form-control" value="true" @testVal> <span>削除</span>
+                    </label>
+                </div>
+
+
+                @Html.ValidationMessageFor(model => model.delete_flg, "", new { @class = "text-danger" })
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label" for="delete_flg">サンプルタイプ</label>
+        </th>
+        <td>
+            <div>
+                <!--下記はサンプル確認用のテスト値です-->
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-outline-primary">
+                        <input type="radio" name="SampleType" id="btnradio1" value="1" checked> 選択肢1
+                    </label>
+                    <label class="btn btn-outline-primary">
+                        <input type="radio" name="SampleType" id="btnradio2" value="2"> 選択肢2
+                    </label>
+                    <label class="btn btn-outline-primary">
+                        <input type="radio" name="SampleType" id="btnradio3" value="3"> 選択肢3
+                    </label>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.create_id, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.EditorFor(model => model.create_id, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.create_id, "", new { @class = "text-danger" })
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.create_date, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                <div class="input-group">
+                    @Html.EditorFor(model => model.create_date, new { htmlAttributes = new { @class = "form-control" } })
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="CreateDateCalendar"><i class="fa fa-calendar-alt"></i></button>
+                    </div>
+                </div>
+
+                @Html.ValidationMessageFor(model => model.create_date, "", new { @class = "text-danger" })
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.update_id, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.EditorFor(model => model.update_id, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.update_id, "", new { @class = "text-danger" })
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.update_date, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                <div class="input-group">
+                    @Html.EditorFor(model => model.update_date, new { htmlAttributes = new { @class = "form-control" } })
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="UpdateDateCalendar"><i class="fa fa-calendar-alt"></i></button>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.update_date, "", new { @class = "text-danger" })
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.bumon_cd, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.bumon_cd, new { htmlAttributes = new { @class = "form-control" } })
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#DepartmentCodeSearchDialog">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <span id="DepartmentName" class="align-middle"></span>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.bumon_cd, "", new { @class = "text-danger" })
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.basyo_cd, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.EditorFor(model => model.basyo_cd, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.basyo_cd, "", new { @class = "text-danger" })
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.account_password_date, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.EditorFor(model => model.account_password_date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.account_password_date, "", new { @class = "text-danger" })
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.sdek12, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.EditorFor(model => model.sdek12, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.sdek12, "", new { @class = "text-danger" })
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.ctlfl1, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.EditorFor(model => model.ctlfl1, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ctlfl1, "", new { @class = "text-danger" })
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#TransitionConfirmDialog">@MacssWeb.Resources.ControlText.BackToList</button>
+    </div>
+    <div class="col-4 text-right">
+        <button type="submit" class="btn btn-primary">@MacssWeb.Resources.ControlText.InputConfirm</button>
+    </div>
+</div>
+
+<div class="modal" id="TransitionConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.TransitionConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @MacssWeb.Resources.Messages.TransitionConfirm
+                <br>
+                @MacssWeb.Resources.Messages.Confirm
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary macss-btn" href="@Url.Action("Index")" role="button">@MacssWeb.Resources.ControlText.Yes</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function setDepartmentCode(code, value){
+        $("#bumon_cd").val(code);
+        $("#DepartmentName").text(value);
+    }
+    $(function () {
+        var createDatePicker = new Macss.DatetimePicker.MacssDtPicker("#create_date", "#CreateDateCalendar");
+        createDatePicker.configure();
+        var updateDatePicker = new Macss.DatetimePicker.MacssDtPicker("#update_date", "#UpdateDateCalendar");
+        updateDatePicker.configure();
+
+    });
+
+</script>

@@ -1,0 +1,136 @@
+﻿<div class="modal" id="PurchasingDialog" tabindex="-1" role="dialog" aria-labelledby="SalesCostDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="SalesCostDialogTitle">登録仕入明細登録</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @*            <div class="accordion" id="ConditionAccordion">*@
+            <div class="modal-body">
+                <table class="table macss-form-table2">
+                    <colgroup>
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">No</label>
+                            </th>
+                            <td>
+                                <div>
+@*                                    <input class="form-control text-box single-line" id="Shelf number" name="IDName" type="text" value="">*@
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">PCコード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div>
+                                                <input class="form-control text-box single-line" id="Shelf number" name="IDName" type="text" value="">
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div>
+                                                <input class="form-control text-box single-line" id="Shelf number" name="IDName" type="text" value="">
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div>
+                                                <input class="form-control text-box single-line" id="Shelf number" name="IDName" type="text" value="">
+                                            </div>
+                                        </div>
+                                        <small class="form-text text-muted">
+                                            　左端項目から順番に部門コード、事業区分、顧客区分を編集してください。
+                                        </small>
+                                    </div>
+                                </div>                                                               
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label required" for="account_id">課税区分</label>
+                            </th>
+                            <td>
+                                @*<div>
+                                    <input class="form-control text-box single-line" id="Shelf number" name="IDName" type="text" value="">
+                                </div>*@
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value=""></option>
+                                        <option value="">課税</option>
+                                        <option value="">非課税</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">税抜内訳金額</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <input class="form-control text-box single-line" id="Shelf number" name="IDName" type="text" value="">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label required" for="account_id">勘定コード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <input class="form-control text-box single-line" id="Shelf number" name="IDName" type="text" value="">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">得意先</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="input-group">
+                                                <input class="form-control text-box single-line" data-val="true" data-val-length="フィールド 部門コード は最大長が 4 の文字列である必要があります。" data-val-length-max="4" data-val-required="部門コード フィールドが必要です。" id="bumon_cd" name="bumon_cd" type="text" value="">
+                                                <div class="input-group-append">
+                                                    <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#TokuisakiCodeSearchDialog">
+                                                        <i class="fas fa-search"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <span id="DepartmentName" class="align-middle"></span>
+                                        </div>
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="bumon_cd" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>                        
+                    </tbody>
+                </table>
+                <div class="row justify-content-between macss-form-button-group-row">
+                    <div class="col-4">
+                        <a class="btn btn-secondary" data-dismiss="modal" role="button">キャンセル</a>
+                    </div>
+                    <div class="col-8 text-right">
+                        <button type="submit" class="btn btn-primary" data-dismiss="modal">追加</button>
+                    </div>
+                    <!--<div class="col-8 text-right">
+                        <button type="submit" class="btn btn-primary" data-dismiss="modal">登録</button>
+                    </div>-->
+                </div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>

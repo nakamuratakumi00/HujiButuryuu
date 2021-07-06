@@ -1,0 +1,249 @@
+﻿@model Macss.Database.Entity.AccountMaster
+@{
+    ViewBag.Title = "ユーザーデータ詳細確認";
+    ViewBag.PageMainTitle = "ユーザーデータ詳細確認";
+    ViewBag.ConfirmMessage = MacssWeb.Resources.Messages.DeleteConfirm;
+    ViewBag.ButtonText = MacssWeb.Resources.ControlText.DeleteExec;
+    ViewBag.ConfirmDialogText = MacssWeb.Resources.Messages.DeleteReconfirm;
+}
+@section Scripts {
+    <script>$(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#SampleList");
+            dt.configure();
+
+            //MacssDataTable（dataTables.fixedColumns.js）に表示する列が15件以上あると計算間違いで最左端列にスクロールバーが表示されるため、非表示にする
+            $('.DTFC_LeftBodyLiner').css('overflow-y', 'hidden');
+
+        });</script>
+}
+@using (Html.BeginForm("Details", "D218", null, FormMethod.Post))
+{
+    <div class="row justify-content-between macss-form-button-group-row">
+        <div class="col-4">
+            <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.Back</a>
+        </div>
+    </div>
+    <div class="accordion" id="ConditionAccordion">
+        <div class="card">
+            <div class="card-header macss-search-config-collapse-header" id="headingOne">
+                <div class="mb-0">
+                    <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain" aria-expanded="true" aria-controls="ConditionMain">
+                        <div class="d-inline-block" style="color:#333"></div>
+                        <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="color: rgb(120, 188, 255);"></i>
+                        <i id="CollapseShow" class="fas fa-chevron-circle-down" aria-hidden="true" style="color: rgb(120, 188, 255); display: none;"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+                <table class="table macss-form-table2">
+                    <colgroup>
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">ユーザーID</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">ユーザー名</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">ユーザー名カナ</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">パスワード</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">社外/社内</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">PC部門コード</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">PC部門コード切替日</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">切替後PC部門コード</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">出荷場所コード</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">デフォルト作業場所コード</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">最終ログイン日時</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">ログイン失敗回数</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">ロックアウト</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">ロックアウト日時</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">パスワード有効期限</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">パスワード変更日時</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">最終使用機能ID</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">最終使用機能日時</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">届先マスター　使用伝票区分_顧</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">品名マスター　抽出区分</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">印影</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <img src="data:image/png;base64,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"><br>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">削除</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="mt-4">
+</div>
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.Back</a>
+    </div>
+    <div class="col-4 text-right">
+        <a role="button" class="btn btn-primary" href="@Url.Action("Edit")">@MacssWeb.Resources.ControlText.Edit</a>
+    </div>
+</div>

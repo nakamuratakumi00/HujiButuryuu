@@ -1,0 +1,177 @@
+﻿@model IEnumerable<MacssWeb.Models.AccountMasterUpload>
+@{
+    ViewBag.Title = "請求先統合マスターメンテナンス（一括）取込結果";
+    ViewBag.PageMainTitle = "請求先統合マスターメンテナンス（一括）取込結果";
+}
+@section Scripts {
+    <script>$(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#UploadConfirmList");
+            dt.setScrollY("600px");
+            dt.configure();
+
+            $('[data-toggle="popover"]').popover();
+
+        });</script>
+}
+
+<div class="alert @ViewBag.AlertType">
+    <span>マスターメンテナンスを完了しましたが、以下のデータはエラーのため取込できませんでした。</span>
+</div>
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+    </div>
+    <div class="col-4 text-right">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">再アップロード</a>
+    </div>
+</div>
+<div class="container-fluid mt-4">
+    <div class="form-inline">
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">ファイル</span>
+            </div>
+            <span class="form-control">@ViewBag.UploadFileName</span>
+        </div>
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">取込件数</span>
+            </div>
+            <span class="form-control">@ViewBag.UploadedCount</span>
+        </div>
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">エラー件数</span>
+            </div>
+            <span class="form-control">@ViewBag.ErrorCount</span>
+        </div>
+    </div>
+    <div class="text-right">
+        <div class="dropdown">
+            <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#CsvDownloadDialog">CSVダウンロード</a>
+            </div>
+        </div>
+    </div>
+</div>
+<table id="UploadConfirmList" class="table table-striped table-hover macss-data-table">
+    <thead class="macss-data-table-header">
+        <tr>
+            <th>
+                No
+            </th>
+            <th>
+                エラー
+            </th>
+            <th>
+                更新区分
+            </th>
+            <th>
+                請求先コード
+            </th>
+            <th>
+                請求先名称
+            </th>
+            <th>
+                末締手番区分
+            </th>
+            <th>
+                請求総括表発行区分
+            </th>
+            <th>
+                請求書統合区分
+            </th>
+            <th>
+                売上総括大分類発行区分
+            </th>
+            <th>
+                売上総括控発行区分
+            </th>
+            <th>
+                売上伝票発行区分
+            </th>
+            <th>
+                売上伝票並順
+            </th>
+            <th>
+                FB本社伝送止め
+            </th>
+            <th>
+                データ引渡区分
+            </th>
+            <th>
+                帳票種類選択区分
+            </th>
+            <th>
+                ESP仕入データ連携
+            </th>
+            <th>
+                ESP仕入データ連携止め
+            </th>
+            <th>
+                顧客請求日取得区分
+            </th>
+            <th>
+                顧客請求期間取得区分
+            </th>
+            <th>
+                社内請求日取得区分
+            </th>
+            <th>
+                社内請求期間取得区分
+            </th>
+            <th>
+                社内請求月度取得区分
+            </th>
+            <th>
+                製造番号編集区分
+            </th>
+            <th>
+                Fe松本経理用出力対象
+            </th>
+            <th>
+                FEP汎用出力対象
+            </th>
+            <th>
+                帳票ID
+            </th>
+            <th>
+                部数
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>

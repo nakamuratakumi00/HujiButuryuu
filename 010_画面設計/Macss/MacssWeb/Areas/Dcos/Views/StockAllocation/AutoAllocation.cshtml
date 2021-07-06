@@ -1,0 +1,104 @@
+﻿
+<html lang="ja">
+@{
+    ViewBag.PageMainTitle = "在庫引当自動引当指示";
+}
+
+@using (Html.BeginForm("Search", "Stock", null, FormMethod.Post))
+{
+
+    <div class="accordion" id="ConditionAccordion">
+        <div class="card row mr-0 mb-4">
+            <div class="card-header macss-search-config-collapse-header" id="headingOne">
+                <div class="mb-0">
+                    <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain" aria-expanded="true" aria-controls="ConditionMain">
+                        <div class="d-inline-block" style="color:#333"></div>
+                        <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="display:none;"></i>
+                        <i id="CollapseShow" class="fas fa-chevron-circle-down" aria-hidden="true" style="display:none;"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" data-parent="#ConditionAccordion">
+                <div class="row mr-0 mb-4">
+                    <div class="col-4">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">得意先</span>
+                            </div>
+                            <input type="text" class="form-control">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#DepartmentCodeSearchDialog">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">倉庫</span>
+                            </div>
+                            <input type="text" class="form-control">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#DepartmentCodeSearchDialog">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">品名</span>
+                            </div>
+                            <input type="text" class="form-control">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#DepartmentCodeSearchDialog">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mr-0 mb-3">
+                    <div class="col-4">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">オリジナル出庫指示No</span>
+                            </div>
+                            <input type="text" class="form-control" value="">
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="input-group mb-0">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">出荷日</span>
+                            </div>
+                            <input type="text" id="SampleDTPicker11" class="form-control" />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar11"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                            <div class="input-group-append">
+                                <span class="input-group-text">～</span>
+                            </div>
+                            <input type="text" id="SampleDTPicker12" class="form-control" />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar12"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+
+    <div class="row justify-content-between macss-form-button-group-row">
+        <div class="col-4">
+            <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">一覧へ戻る</a>
+        </div>
+        <div class="col-4 text-right">
+            <a role="button" class="btn btn-primary" href="@Url.Action("AutoAllocationConfirm")">確認</a>
+        </div>
+    </div>

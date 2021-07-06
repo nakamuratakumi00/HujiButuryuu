@@ -1,0 +1,14 @@
+﻿<html lang="ja">
+@{
+    ViewBag.Title = "得意先在庫データ照合";
+    ViewBag.PageMainTitle = "得意先在庫データ照合アップロード";
+
+    ViewBag.Caption = "データのアップロードを行います。";
+    ViewBag.UploadFileAccept = new List<string>() { ".csv" };
+}
+
+
+@using (Html.BeginForm("UploadConfirm", "Customer", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.Partial("_SimpleUpload")
+}

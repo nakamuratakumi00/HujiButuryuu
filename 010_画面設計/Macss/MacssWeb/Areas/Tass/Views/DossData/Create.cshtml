@@ -1,0 +1,20 @@
+﻿@model Macss.Database.Entity.DummyDossData
+
+@{
+    ViewBag.Title = MacssWeb.Resources.Tass.DossDataMainTitle;
+    ViewBag.PageMainTitle = MacssWeb.Resources.Tass.DossDataCreateMainTitle;
+    ViewBag.ScreenId = "TASS-D006-04";
+}
+
+@using (Html.BeginForm("CreateConfirm", null, FormMethod.Post))
+{
+
+    @Html.Hidden("preAction", MacssWeb.Common.Actions.Create);
+
+    @Html.Partial("_Form", Model)
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

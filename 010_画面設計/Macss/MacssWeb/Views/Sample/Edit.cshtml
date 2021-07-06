@@ -1,0 +1,19 @@
+﻿@model Macss.Database.Entity.AccountMaster
+
+@{
+    ViewBag.Title = "サンプル";
+    ViewBag.PageMainTitle = "編集サンプル";
+    ViewBag.ScreenId = "SMPL-D001";
+}
+
+@using (Html.BeginForm("EditConfirm", "Sample", null, FormMethod.Post))
+{
+
+    @Html.Partial("_Form", Model)
+
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

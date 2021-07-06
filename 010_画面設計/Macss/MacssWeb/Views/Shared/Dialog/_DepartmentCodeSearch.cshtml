@@ -1,0 +1,144 @@
+﻿
+<div class="modal" id="DepartmentCodeSearchDialog" tabindex="-1" role="dialog" aria-labelledby="DepartmentCodeSearchDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="DepartmentCodeSearchDialogTitle">@MacssWeb.Resources.Title.DepartmentCodeSearchDialog</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body macss-search-dialog-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="Condition1">コード</span>
+                                </div>
+                                <input type="text" id="CondDepartmentCode" class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="Condition1">名称</span>
+                                </div>
+                                <input type="text" id="CondDepartmentName" class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                            </div>
+                        </div>
+                        <div class="col-3 text-right">
+                            <button type="button" class="btn btn-primary macss-btn-sub" onclick="searchDeparatments($('#CondDepartmentCode').val(), $('#CondDepartmentName').val())">
+                                @MacssWeb.Resources.ControlText.Search
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div id="SearchWait" style="display:none;">
+                    <div class="d-flex align-items-center">
+                        <strong>検索中...</strong>
+                        <div class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
+                    </div>
+                </div>
+                <table id="DepartmentSearchList" class="table table-striped table-hover macss-dialog-data-table" style="display:none;">
+                    <thead class="macss-data-table-header">
+                        <tr>
+                            <th></th>
+                            <th>
+                                コード
+                            </th>
+                            <th>
+                                名称
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @*@foreach (var item in ViewBag.Departments)
+        {
+            <tr>
+                <td style="white-space:nowrap;">
+                    <button type="button" class="btn btn-outline-secondary btn-sm" onclick="setDepartmentCode('@item.BMNCOD', '@item.BASYO');$('#DepartmentCodeSearchDialog').modal('hide')">@MacssWeb.Resources.ControlText.Select</button>
+                </td>
+                <td>
+                    @item.BMNCOD
+                </td>
+                <td>
+                    @item.BASYO
+                </td>
+            </tr>
+        }*@
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary macss-btn-sub" data-dismiss="modal">@MacssWeb.Resources.ControlText.Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let DepartmentsSearchTable;
+    var colDef =
+        [
+            { "targets": 0, "orderable": false },
+            { "targets": 0, "width": "3vw" },
+            { "targets": 1, "width": "8vw" },
+            { "targets": 2, "width": "22vw" }
+        ];
+    $(function () {
+        DepartmentsSearchTable = new Macss.DataTables.MacssSearchDialogTable("#DepartmentSearchList", colDef);
+        //dt.configure();
+        $('#DepartmentCodeSearchDialog').on('shown.bs.modal', function (e) {
+            //dt.configure(colDef);
+        })
+    });
+
+    function searchDeparatments(cd, nm) {
+
+        $("#SearchWait").show();
+        DepartmentsSearchTable.init();
+        $("#DepartmentSearchList").hide();
+
+        var param = JSON.stringify({
+            code: cd,
+            name: nm
+        });
+
+        $.ajax({
+            url: '@Url.Action("SearchDepartments", "Search")',
+            type: "POST",
+            data: param,
+            contentType: 'application/json'
+        }).done(function (data, status, xhr) {
+            // 正常
+            //$('#DepartmentSearchList tbody').empty();
+            var tableBody = "";
+            for (var key in data) {
+
+                var cd = data[key]["BMNCOD"];
+                var nm = data[key]["BASYO"];
+                var selectEvent = "setDepartmentCode('" + data[key]['BMNCOD'] + "', '" + data[key]['BASYO'] + "');$('#DepartmentCodeSearchDialog').modal('hide')";
+                tableBody = tableBody +
+                    '<tr>' +
+                    '<td style="white-space:nowrap;">' +
+                    '<button type="button" class="btn btn-outline-secondary btn-sm" onclick="' + selectEvent + '">@MacssWeb.Resources.ControlText.Select</button>' +
+                    '</td>' +
+                    '<td>' + cd + '</td>' +
+                    '<td>' + nm + '</td>' +
+                    '</tr>';
+                
+            }
+            $('#DepartmentSearchList tbody').html(tableBody);
+            $("#SearchWait").hide();
+            $("#DepartmentSearchList").show();
+            DepartmentsSearchTable.refresh();
+
+        }).fail(function (xhr, status, error) {
+            // 異常
+            alert(error);
+        }).always(function (data, status, xhr) {
+            // 常に
+        });
+    };
+
+</script>

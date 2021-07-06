@@ -1,0 +1,523 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CE001" xml:space="preserve">
+    <value>システムエラーが発生しました。管理者にお問い合わせください。</value>
+  </data>
+  <data name="CE002" xml:space="preserve">
+    <value>{0}の出力に失敗しました。</value>
+    <comment>帳票、Excel、CSV等の出力処理失敗時のエラー</comment>
+  </data>
+  <data name="CE003" xml:space="preserve">
+    <value>データベース接続に失敗しました。</value>
+  </data>
+  <data name="CE004" xml:space="preserve">
+    <value>データベースへの接続情報がありません。</value>
+  </data>
+  <data name="CE005" xml:space="preserve">
+    <value>{0}の登録に失敗しました。</value>
+  </data>
+  <data name="CE006" xml:space="preserve">
+    <value>{0}の更新に失敗しました。</value>
+  </data>
+  <data name="CE007" xml:space="preserve">
+    <value>{0}の削除に失敗しました。</value>
+  </data>
+  <data name="CE008" xml:space="preserve">
+    <value>処理の呼出しに失敗しました。|{0}</value>
+  </data>
+  <data name="CE009" xml:space="preserve">
+    <value>{0}の取込に失敗しました。</value>
+  </data>
+  <data name="CE010" xml:space="preserve">
+    <value>{0}処理に失敗しました。</value>
+  </data>
+  <data name="CE011" xml:space="preserve">
+    <value>{0}データ{1}に失敗しました。</value>
+  </data>
+  <data name="CE012" xml:space="preserve">
+    <value>{0}処理中にエラーが発生しました。{1}</value>
+  </data>
+  <data name="CE013" xml:space="preserve">
+    <value>システムエラーが発生しました。管理者にお問合せください。</value>
+  </data>
+  <data name="CE014" xml:space="preserve">
+    <value>現在、システムが大変混み合っております。ご迷惑をお掛けいたしますが、しばらく時間をおいてからアクセスしてください。</value>
+  </data>
+  <data name="CE015" xml:space="preserve">
+    <value>不正な値が送信されました。入力値を確認してください。</value>
+  </data>
+  <data name="CE016" xml:space="preserve">
+    <value>セッション情報の有効期限が切れました。再度、処理をやり直してください。</value>
+  </data>
+  <data name="CE017" xml:space="preserve">
+    <value>タイムアウトしました。再度ログインを行ってください。</value>
+  </data>
+  <data name="CE018" xml:space="preserve">
+    <value>他の端末で更新されました。再度検索し、更新処理を行ってください。</value>
+  </data>
+  <data name="CE019" xml:space="preserve">
+    <value>対象のデータがありません。</value>
+  </data>
+  <data name="CE020" xml:space="preserve">
+    <value>データ件数が{0}件を超えています。検索条件を指定して、再度処理を行ってください。</value>
+  </data>
+  <data name="CE021" xml:space="preserve">
+    <value>表示対象となるデータが存在しません。情報が削除された可能性があります。&lt;br/&gt;再度、TOP画面よりやり直してください。</value>
+  </data>
+  <data name="CE022" xml:space="preserve">
+    <value>権限がありません。</value>
+  </data>
+  <data name="CE023" xml:space="preserve">
+    <value>この機能は現在利用できません。</value>
+  </data>
+  <data name="CE024" xml:space="preserve">
+    <value>ログインできません。ユーザＩＤまたはパスワードに誤りがあります。</value>
+  </data>
+  <data name="CE025" xml:space="preserve">
+    <value>ログインされていません。ログイン画面より再度、ログインしてください。</value>
+  </data>
+  <data name="CE026" xml:space="preserve">
+    <value>旧パスワードに誤りがあるため、パスワードの変更ができません。</value>
+  </data>
+  <data name="CE027" xml:space="preserve">
+    <value>新パスワードが一致しません。</value>
+  </data>
+  <data name="CE028" xml:space="preserve">
+    <value>パスワードとパスワード（再入力）が一致しません。</value>
+  </data>
+  <data name="CE029" xml:space="preserve">
+    <value>アカウントロックされているためログインできません。管理者へお問合せください。</value>
+  </data>
+  <data name="CE030" xml:space="preserve">
+    <value>{0}は{1}文字以内で入力してください。</value>
+  </data>
+  <data name="CE031" xml:space="preserve">
+    <value>{0}を入力してください。</value>
+  </data>
+  <data name="CE032" xml:space="preserve">
+    <value>{0}は{1}文字以上{2}以内で入力してください。</value>
+  </data>
+  <data name="CE033" xml:space="preserve">
+    <value>{0}に{1}できません。</value>
+  </data>
+  <data name="CE034" xml:space="preserve">
+    <value>{0}に誤りがあります。</value>
+  </data>
+  <data name="CE035" xml:space="preserve">
+    <value>{0}が一致しません。</value>
+  </data>
+  <data name="CE036" xml:space="preserve">
+    <value>{0}が設定されていません。{1}してください。</value>
+  </data>
+  <data name="CE037" xml:space="preserve">
+    <value>{0}に存在しない{1}が設定されています。</value>
+  </data>
+  <data name="CE038" xml:space="preserve">
+    <value>{0}の中で１つのみ{1}を設定してください。</value>
+  </data>
+  <data name="CE039" xml:space="preserve">
+    <value>{0}が選択されていません。</value>
+  </data>
+  <data name="CE040" xml:space="preserve">
+    <value>{0}は{1}から{2}の範囲内で入力してください。</value>
+  </data>
+  <data name="CE041" xml:space="preserve">
+    <value>{0}が存在します。{1}できません。</value>
+  </data>
+  <data name="CE042" xml:space="preserve">
+    <value>{0}に{1}はできません。</value>
+  </data>
+  <data name="CE043" xml:space="preserve">
+    <value>{0}：　半角数字を入力してください。</value>
+  </data>
+  <data name="CE044" xml:space="preserve">
+    <value>{0}：　日付の入力に誤りがあります。</value>
+  </data>
+  <data name="CE045" xml:space="preserve">
+    <value>{0}：　必須項目を入力してください。</value>
+  </data>
+  <data name="CE046" xml:space="preserve">
+    <value>桁数オーバーです。（{0}文字以内で入力してください。）【{1}】</value>
+  </data>
+  <data name="CE047" xml:space="preserve">
+    <value>範囲外の値が指定されました。（{0}から{1}の数値を指定してください。）【{2}】</value>
+  </data>
+  <data name="CE048" xml:space="preserve">
+    <value>{0}：　ひらがなのみで入力してください。</value>
+  </data>
+  <data name="CE049" xml:space="preserve">
+    <value>フォーマットが正しくありません。</value>
+  </data>
+  <data name="CE050" xml:space="preserve">
+    <value>{0}に{1}が紐付いているため削除できません。</value>
+  </data>
+  <data name="CE051" xml:space="preserve">
+    <value>{0}：　入力形式が正しくありません。</value>
+  </data>
+  <data name="CE052" xml:space="preserve">
+    <value>{0}：　{1}文字以内で入力してください。</value>
+  </data>
+  <data name="CE053" xml:space="preserve">
+    <value>{0}：　取込項目がありません。</value>
+  </data>
+  <data name="CE054" xml:space="preserve">
+    <value>ファイルを選択してください。</value>
+  </data>
+  <data name="CE055" xml:space="preserve">
+    <value>{0}は必須です。</value>
+  </data>
+  <data name="CE056" xml:space="preserve">
+    <value>{1}文字以内で入力してください。</value>
+  </data>
+  <data name="CE057" xml:space="preserve">
+    <value>{0}が重複しています。</value>
+  </data>
+  <data name="CE058" xml:space="preserve">
+    <value>{0}が存在するため、{1}できません。</value>
+  </data>
+  <data name="CE059" xml:space="preserve">
+    <value>更新対象データは存在しません。</value>
+  </data>
+  <data name="CE060" xml:space="preserve">
+    <value>登録対象データは既に存在します。</value>
+  </data>
+  <data name="CE061" xml:space="preserve">
+    <value>{0}：　半角英数字を入力してください。</value>
+  </data>
+  <data name="CE062" xml:space="preserve">
+    <value>{0}：　半角数字（ハイフン付き）を入力してください。</value>
+  </data>
+  <data name="CE063" xml:space="preserve">
+    <value>{0}：　半角カナを入力してください。</value>
+  </data>
+  <data name="CE064" xml:space="preserve">
+    <value>{0}：　半角文字を入力してください。</value>
+  </data>
+  <data name="CE065" xml:space="preserve">
+    <value>削除対象データは存在しません。</value>
+  </data>
+  <data name="CE066" xml:space="preserve">
+    <value>{0}：　入力してください。</value>
+  </data>
+  <data name="CE067" xml:space="preserve">
+    <value>{0}：　マスタに存在しない{1}が設定されています。</value>
+  </data>
+  <data name="CE068" xml:space="preserve">
+    <value>{0}：　{1}してください。</value>
+  </data>
+  <data name="CE069" xml:space="preserve">
+    <value>{0}：　{1}。</value>
+  </data>
+  <data name="CE070" xml:space="preserve">
+    <value>{0}：　誤りがあります。</value>
+  </data>
+  <data name="CE071" xml:space="preserve">
+    <value>{0}：　{1}文字以上{2}以内で入力してください。</value>
+  </data>
+  <data name="CE072" xml:space="preserve">
+    <value>{0}：　半角英数字を入力してください。(半角小文字英字不可)</value>
+  </data>
+  <data name="CE073" xml:space="preserve">
+    <value>{0}：　データベースと型が異なります。</value>
+  </data>
+  <data name="CE074" xml:space="preserve">
+    <value>{1}文字で入力してください。</value>
+  </data>
+  <data name="CE075" xml:space="preserve">
+    <value>検索結果がありません。</value>
+  </data>
+  <data name="CE100" xml:space="preserve">
+    <value>前月分のデータが退避されていません。</value>
+  </data>
+  <data name="CE101" xml:space="preserve">
+    <value>末締処理が実行中です</value>
+  </data>
+  <data name="CE102" xml:space="preserve">
+    <value>退避済のため実行できません</value>
+  </data>
+  <data name="CE103" xml:space="preserve">
+    <value>該当ファイルがありません</value>
+  </data>
+  <data name="CE104" xml:space="preserve">
+    <value>ファイルの退避に失敗しました。</value>
+  </data>
+  <data name="CE105" xml:space="preserve">
+    <value>品番コード{0}：　製品マスタに重複するデータが存在します。</value>
+  </data>
+  <data name="CE106" xml:space="preserve">
+    <value>締処理実行中のため退避処理は行えません</value>
+  </data>
+  <data name="CE107" xml:space="preserve">
+    <value>退避処理完了済です</value>
+  </data>
+  <data name="CE108" xml:space="preserve">
+    <value>締処理が異常終了しています</value>
+  </data>
+  <data name="CE109" xml:space="preserve">
+    <value>{0}：　全角文字を入力してください。</value>
+  </data>
+  <data name="CE110" xml:space="preserve">
+    <value>全角文字を入力。</value>
+  </data>
+  <data name="CE111" xml:space="preserve">
+    <value>半角文字を入力。(小文字英字不可)</value>
+  </data>
+  <data name="CE112" xml:space="preserve">
+    <value>半角カナを入力。</value>
+  </data>
+  <data name="CE113" xml:space="preserve">
+    <value>半角文字を入力。</value>
+  </data>
+  <data name="CE114" xml:space="preserve">
+    <value>半角数字を入力。(ﾊｲﾌﾝ,ｶｯｺ可)</value>
+  </data>
+  <data name="CE115" xml:space="preserve">
+    <value>半角数字を入力。</value>
+  </data>
+  <data name="CE116" xml:space="preserve">
+    <value>半角英数字を入力。(半角小文字英字不可)</value>
+  </data>
+  <data name="CE117" xml:space="preserve">
+    <value>現在と同じパスワードには変更できません。</value>
+  </data>
+  <data name="CE118" xml:space="preserve">
+    <value>【Ｈ】半角文字を入力。(小文字英字不可)　</value>
+  </data>
+  <data name="CE119" xml:space="preserve">
+    <value>【ｉ】半角文字を入力。(小文字英字不可)　</value>
+  </data>
+  <data name="CE120" xml:space="preserve">
+    <value>【Ｍ】半角文字を入力。(小文字英字不可)　</value>
+  </data>
+  <data name="CE121" xml:space="preserve">
+    <value>【Ｐ】半角文字を入力。(小文字英字不可)　</value>
+  </data>
+  <data name="CE122" xml:space="preserve">
+    <value>【集】半角文字を入力。(小文字英字不可)　</value>
+  </data>
+  <data name="CE123" xml:space="preserve">
+    <value>【構】半角文字を入力。(小文字英字不可)　</value>
+  </data>
+  <data name="CE124" xml:space="preserve">
+    <value>【Ｙ】半角文字を入力。(小文字英字不可)　</value>
+  </data>
+  <data name="CE125" xml:space="preserve">
+    <value>【半】半角文字を入力。(小文字英字不可)　</value>
+  </data>
+  <data name="CE126" xml:space="preserve">
+    <value>【長】半角文字を入力。(小文字英字不可)　</value>
+  </data>
+  <data name="CE127" xml:space="preserve">
+    <value>【在】半角文字を入力。(小文字英字不可)　</value>
+  </data>
+  <data name="CE128" xml:space="preserve">
+    <value>【需】半角文字を入力。(小文字英字不可)　</value>
+  </data>
+  <data name="CE129" xml:space="preserve">
+    <value>【顧】半角文字を入力。(小文字英字不可)　</value>
+  </data>
+  <data name="CE130" xml:space="preserve">
+    <value>【得】半角文字を入力。(小文字英字不可)　</value>
+  </data>
+  <data name="CE131" xml:space="preserve">
+    <value>【ブ】半角文字を入力。(小文字英字不可)　</value>
+  </data>
+  <data name="CE132" xml:space="preserve">
+    <value>【基】半角文字を入力。(小文字英字不可)　</value>
+  </data>
+  <data name="CE133" xml:space="preserve">
+    <value>　全角文字を入力。</value>
+  </data>
+  <data name="CI001" xml:space="preserve">
+    <value>処理が正常に終了しました。</value>
+  </data>
+  <data name="CI002" xml:space="preserve">
+    <value>更新が完了しました。</value>
+  </data>
+  <data name="CI003" xml:space="preserve">
+    <value>登録が完了しました。</value>
+  </data>
+  <data name="CI004" xml:space="preserve">
+    <value>削除が完了しました。</value>
+  </data>
+  <data name="CI005" xml:space="preserve">
+    <value>{0}処理を中止しました。</value>
+  </data>
+  <data name="CI006" xml:space="preserve">
+    <value>{0}処理が終了しました。</value>
+  </data>
+  <data name="CI007" xml:space="preserve">
+    <value>退避処理が完了しました。</value>
+  </data>
+  <data name="CQ001" xml:space="preserve">
+    <value>終了します。よろしいですか？</value>
+  </data>
+  <data name="CQ002" xml:space="preserve">
+    <value>実行します。よろしいですか？</value>
+  </data>
+  <data name="CQ003" xml:space="preserve">
+    <value>印刷します。よろしいですか？</value>
+  </data>
+  <data name="CQ004" xml:space="preserve">
+    <value>登録します。よろしいですか？</value>
+  </data>
+  <data name="CQ005" xml:space="preserve">
+    <value>更新します。よろしいですか？</value>
+  </data>
+  <data name="CQ006" xml:space="preserve">
+    <value>削除します。よろしいですか？</value>
+  </data>
+  <data name="CQ007" xml:space="preserve">
+    <value>既に{0}が存在します。上書きしてよろしいですか？</value>
+  </data>
+  <data name="CQ008" xml:space="preserve">
+    <value>{0}を作成します。よろしいですか？</value>
+  </data>
+  <data name="CQ009" xml:space="preserve">
+    <value>クリアします。入力された内容がクリアされます。よろしいですか？</value>
+  </data>
+  <data name="CQ010" xml:space="preserve">
+    <value>キャンセルします。入力された内容がクリアされます。よろしいですか？</value>
+  </data>
+  <data name="CQ011" xml:space="preserve">
+    <value>入力内容は破棄されます。よろしいですか？</value>
+  </data>
+  <data name="CQ012" xml:space="preserve">
+    <value>終了します。登録／更新していない内容は破棄されます。よろしいですか？</value>
+  </data>
+  <data name="CQ013" xml:space="preserve">
+    <value>入力内容を保存しますか？</value>
+  </data>
+  <data name="CQ014" xml:space="preserve">
+    <value>画面を移動します。内容が破棄される場合もあります。よろしいですか？</value>
+  </data>
+  <data name="ME001" xml:space="preserve">
+    <value>アカウントがロックされています。管理者にお問い合わせください。</value>
+  </data>
+  <data name="ME002" xml:space="preserve">
+    <value>一致するユーザーが見つかりません。</value>
+  </data>
+  <data name="ME003" xml:space="preserve">
+    <value>新規パスワードと確認用パスワードが異なります。</value>
+  </data>
+  <data name="MW001" xml:space="preserve">
+    <value>パスワードの有効期限が切れています。パスワードの変更をお願いします。</value>
+  </data>
+</root>

@@ -1,0 +1,263 @@
+﻿
+@model Macss.Database.Entity.AccountMaster
+
+@Html.AntiForgeryToken()
+
+@if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+{
+    <div class="alert alert-info">
+        <span>@ViewBag.ConfirmMessage</span>
+    </div>
+}
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="row justify-content-between macss-form-button-group-row">
+        @if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+        {
+            <div class="col-4">
+                <button type="submit" class="btn btn-secondary" name="cmdTopBack" value="@((int)MacssWeb.Common.ButtonValues.Back)">@MacssWeb.Resources.ControlText.Back</button>
+            </div>
+        }
+        else
+        {
+            <div class="col-4">
+                <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.Back</a>
+            </div>
+        }
+    </div>
+</div>
+<table class="table macss-form-table">
+    <colgroup>
+        <col class="macss-form-table-title" />
+        <col class="macss-form-table-contents" />
+    </colgroup>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.account_id, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.DisplayFor(model => model.account_id, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.account_id)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.account_name, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.DisplayFor(model => model.account_name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.account_name)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.account_name_kana, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.DisplayFor(model => model.account_name_kana, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.account_name_kana)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.group_cd, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.DisplayFor(model => model.group_cd, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.group_cd)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.login_count, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.DisplayFor(model => model.login_count, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.login_count)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.login_failure_count, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.DisplayFor(model => model.login_failure_count, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.login_failure_count)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.last_login_date, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.DisplayFor(model => model.last_login_date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.last_login_date)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.delete_flg, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.DisplayFor(model => model.delete_flg, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.delete_flg)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.create_id, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.DisplayFor(model => model.create_id, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.create_id)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.create_date, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.DisplayFor(model => model.create_date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.create_date)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.update_id, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.DisplayFor(model => model.update_id, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.update_id)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.update_date, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.DisplayFor(model => model.update_date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.update_date)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.bumon_cd, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.DisplayFor(model => model.bumon_cd, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.bumon_cd)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.basyo_cd, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.DisplayFor(model => model.basyo_cd, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.basyo_cd)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.account_password_date, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.DisplayFor(model => model.account_password_date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.account_password_date)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.sdek12, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.DisplayFor(model => model.sdek12, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.sdek12)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.ctlfl1, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.DisplayFor(model => model.ctlfl1, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.ctlfl1)
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    @if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+    {
+        <div class="col-4">
+            <button type="submit" class="btn btn-secondary" name="cmdBtmBack" value="@((int)MacssWeb.Common.ButtonValues.Back)">@MacssWeb.Resources.ControlText.Back</button>
+        </div>
+        <div class="col-4 text-right">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDialog">@ViewBag.ButtonText</button>
+        </div>
+    }
+    else
+    {
+        <div class="col-4">
+            <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.Back</a>
+        </div>
+        <div class="col-4 text-right">
+            <a role="button" class="btn btn-primary" href="@Url.Action("Edit", new { id = Model.account_id })">@MacssWeb.Resources.ControlText.Edit</a>
+            <a role="button" class="btn btn-danger" href="@Url.Action("DeleteConfirm", new { id = Model.account_id })">@MacssWeb.Resources.ControlText.Delete</a>
+        </div>
+    }
+</div>
+
+<div class="modal" id="ConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @ViewBag.ConfirmDialogText
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.Cancel</button>
+                <button type="submit" class="btn btn-primary" name="cmdBtmExec" value="@((int)MacssWeb.Common.ButtonValues.Exec)">@ViewBag.ButtonText</button>
+            </div>
+        </div>
+    </div>
+</div>

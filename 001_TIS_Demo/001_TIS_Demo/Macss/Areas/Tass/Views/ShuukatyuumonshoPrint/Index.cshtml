@@ -1,0 +1,503 @@
+﻿@using Macss.Areas.Tass.ViewModels
+@model ShuukaTyuumonshoPrintViewData
+@using Macss.HtmlHelpers
+<style>
+
+    h1, .h1,
+    h2, .h2,
+    h3, .h3 {
+        margin-top: 2px;
+        margin-bottom: 0px;
+    }
+
+    #tbl-bdr table, #tbl-bdr td, #tbl-bdr th {
+        border-collapse: collapse;
+        border: 1px solid #dcdcdc;
+    }
+
+    #TyuumonshoTable td {
+        word-break: break-all;
+    }
+
+</style>
+
+@{
+    ViewBag.Title = ViewBag.Title;
+}
+
+<div class="row">
+    <div class="navbar2 navbar-default">
+        <h2>@ViewBag.Title</h2>
+        <hr />
+
+        <div class="row">
+            <div class="col-sm-10">
+                <div class="validation-summary-errors " style="display: none" id="error"><ul><li></li></ul></div>
+            </div>
+            <div class="col-sm-10">
+                <div class="row" style="line-height:2">
+                    @Html.LabelFor(model => model.Serch.Jokyo, htmlAttributes: new { @class = "control-label col-sm-2", style = "width: 100px" })
+                    <div class="col-sm-2" style="width:80px; padding-left:0px">
+                        @Html.RadioButtonFor(model => model.Serch.Hkukbn, "0", new { htmlAttributes = new { @class = "form-control" }, @checked = "checked" })
+                        未発行
+                    </div>
+                    <div class="col-sm-2">
+                        @Html.RadioButtonFor(model => model.Serch.Hkukbn, "1", new { htmlAttributes = new { @class = "form-control" } })
+                        発行済
+                    </div>
+                </div>
+
+                <div class="row" style="line-height:2">
+                    @Html.LabelFor(model => model.Serch.Sybcod, htmlAttributes: new { @class = "control-label col-sm-1", style = "width:100px; padding-right:0px" })
+                    <div class="col-sm-2" style="width:70px; display:inline-flex; padding-left:0px">
+                        @Html.EditorFor(model => model.Serch.Sybcod, new { htmlAttributes = new { @class = "form-control", @maxlength = "20", style = "ime-mode: inactive" } })
+                        @Html.Partial("ShukkabashoCodeHelp", new CodeHelpViewModels.ShukkabashoViewData())
+                        @Html.ValidationMessageFor(model => model.Serch.Sybcod, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-sm-1" style="width:120px;"></div>
+                    @Html.LabelFor(model => model.Serch.Tannam, htmlAttributes: new { @class = "control-label col-sm-2", style = "width:90px; padding-right:0px" })
+                    <div class="col-sm-2" style="width:170px; padding-left:0px">
+                        @Html.EditorFor(model => model.Serch.Tannam, new { htmlAttributes = new { @class = "form-control", @maxlength = "20", style = "ime-mode: active" } })
+                        @Html.ValidationMessageFor(model => model.Serch.Tannam, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row" style="line-height:2">
+                    @Html.LabelFor(model => model.DateFrom, htmlAttributes: new { @class = "control-label col-sm-2", style = "width:100px; padding-right:0px" })
+                    <div class="col-sm-4 text_jp_small" style="display:inline-flex; padding-left:0px">
+                        @Html.TextBoxFor(model => model.DateFrom, htmlAttributes: new { @class = "form-control datearea-form date", style = "ime-mode: inactive" })
+                        <b class="side-comment" style="padding-left:5px; padding-right:5px">～</b>
+                        @Html.TextBoxFor(model => model.DateTo, htmlAttributes: new { @class = "form-control datearea-form date", style = "ime-mode: inactive" })
+                    </div>
+                </div>
+
+                <div class="row" style="line-height:2">
+                    @Html.LabelFor(model => model.Serch.Syukno, htmlAttributes: new { @class = "control-label col-sm-2 label_large" })
+                    <div class="col-sm-2 text_cd_middle" style="padding-left:0px">
+                        @Html.EditorFor(model => model.Serch.Syukno, new { htmlAttributes = new { @class = "form-control", style = "ime-mode: inactive" } })
+                        <small style="font-size:80%">※↑ハイフンなしで入力</small>
+                        @Html.ValidationMessageFor(model => model.Serch.Syukno, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-sm-1" style="width:50px;"></div>
+                    @Html.LabelFor(model => model.Serch.Tokcod, htmlAttributes: new { @class = "control-label col-sm-2", style = "width:90px; padding-right:0px" })
+                    <div class="col-sm-2 text_cd_middle" style="display:inline-flex; padding-left:0px">
+                        @Html.EditorFor(model => model.Serch.Tokcod, new { htmlAttributes = new { @class = "form-control", @maxlength = "90", style = "ime-mode: inactive; width:60px;" } })
+                        @Html.ValidationMessageFor(model => model.Serch.Tokcod, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row" style="line-height:2">
+                    @Html.LabelFor(model => model.Serch.PrintFrom, htmlAttributes: new { @class = "control-label col-sm-2 label_large" })
+                    <div class="col-sm-4 text_jp_small" style="display:inline-flex; padding-left:0px">
+                        @Html.TextBoxFor(model => model.Serch.PrintFrom, htmlAttributes: new { @class = "form-control datearea-form date", style = "ime-mode: inactive" })
+                        <b class="side-comment" style="padding-left:5px; padding-right:5px">～</b>
+                        @Html.TextBoxFor(model => model.Serch.PrintTo, htmlAttributes: new { @class = "form-control datearea-form date", style = "ime-mode: inactive" })
+                    </div>
+                    @*<div class="col-sm-1" style="width:5px;"></div>*@
+                    @Html.LabelFor(model => model.Serch.UserName, htmlAttributes: new { @class = "control-label col-sm-2", style = "width:80px; padding:0px" })
+                    <div class="col-sm-2" style="width:170px; display:inline-flex; padding-left:0px">
+                        @Html.EditorFor(model => model.Serch.UserName, new { htmlAttributes = new { @class = "form-control", @maxlength = "40", style = "ime-mode: active" } })
+                        @Html.ValidationMessageFor(model => model.Serch.UserName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div id="tbl-bdr">
+                    <table>
+                        <tr>
+                            <td width="20px">列</td>
+                            <td width="70px">項目名</td>
+                            <td width="20px">S</td>
+                        </tr>
+                        <tr bgcolor="#d9edf7">
+                            <td>1</td>
+                            <td>発行</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>最終発行日時</td>
+                            <td></td>
+                        </tr>
+                        <tr bgcolor="#d9edf7">
+                            <td>3</td>
+                            <td>発行者</td>
+                            <td></td>
+                        </tr>
+                        <tr bgcolor="#d9edf7">
+                            <td>4</td>
+                            <td>出荷日</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>場所</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>出荷No</td>
+                            <td>1↑</td>
+                        </tr>
+                        <tr bgcolor="#d9edf7">
+                            <td>8</td>
+                            <td>届先名</td>
+                            <td></td>
+                        </tr>
+                        <tr bgcolor="#d9edf7">
+                            <td>9</td>
+                            <td>品名</td>
+                            <td></td>
+                        </tr>
+                        <tr bgcolor="#d9edf7">
+                            <td>10</td>
+                            <td>得意先C</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>11</td>
+                            <td>得意先名</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>12</td>
+                            <td>登録担当者</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+                <br />
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-sm-11 nbase-bootstrap-table" style="height:350px">
+                <table id="TyuumonshoTable"
+                       class="table table-condensed"
+                       data-method="POST"
+                       data-toggle="table"
+                       data-query-params="TyuumonshoQueryParams"
+                       data-id-table="advancedTable"
+                       data-page-list="[10, 25, 50, 1000]"
+                       data-click-to-select="true"
+                       data-toolbar="#toolbar"
+                       data-filter-show-clear="true"
+                       data-pagination="true">
+                    <colgroup>
+                        <col />
+                        <col />
+                        <col />
+                        <col />
+                        <col style="min-width: 7em"/>
+                        <col />
+                        <col />
+                        <col id="idTnam" style="min-width: 15em"/>
+                        <col style="min-width: 15em" />
+                        <col />
+                        <col style="min-width: 15em" />
+                        <col />
+                    </colgroup>
+                    <thead>
+                        <tr id="data" style="padding: 5px;">
+                            <th data-field="Ckprint" class="test" data-checkbox="true" type="checkbox"></th>
+                            @Html.ThFor(model => model.Information.Hstatus, htmlAttributes: new { data_sortable = "true", @class = "info", style = "padding: 5px;" })
+                            @Html.ThFor(model => model.Information.Hstatus, htmlAttributes: new { data_sortable = "true", @class = "hstatus hide" })
+                            @Html.ThFor(model => model.Information.Hkuymd, htmlAttributes: new { data_sortable = "true" })
+                            @Html.ThFor(model => model.Information.Hknam, htmlAttributes: new { data_sortable = "true", @class = "info" })
+                            @Html.ThFor(model => model.Information.Syukdt, htmlAttributes: new { data_sortable = "true", @class = "info" })
+                            @Html.ThFor(model => model.Information.Sybcod, htmlAttributes: new { data_sortable = "true" })
+                            @Html.ThFor(model => model.Information.Syukno, htmlAttributes: new { data_sortable = "true", @class = "syukno" })
+                            @Html.ThFor(model => model.Information.Cdate, htmlAttributes: new { data_sortable = "true", @class = "cdate hide" })
+                            @Html.ThFor(model => model.Information.Todonam, htmlAttributes: new { data_sortable = "true", @class = "info" })
+                            @Html.ThFor(model => model.Information.Dhinnam, htmlAttributes: new { data_sortable = "true", @class = "info" })
+                            @Html.ThFor(model => model.Information.Tokcod, htmlAttributes: new { data_sortable = "true", @class = "info" })
+                            @Html.ThFor(model => model.Information.Tornam, htmlAttributes: new { data_sortable = "true" })
+                            @Html.ThFor(model => model.Information.Updcod, htmlAttributes: new { data_sortable = "true" })
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div>
+                <div class="col-sm-1">
+                    <br />
+                    <button name="Search" id="Search" class="btn btn-primary" style="width:45px; height:30px; padding: 0px; text-align: center">検索</button><br />
+                    <br />
+                    <button name="Print" id="Print" class="btn btn-default" style="width:45px; height:30px; padding: 0px; text-align: center">印刷</button><br />
+                </div>
+            </div>
+        </div>
+        <br />
+    </div>
+
+    </div>
+
+@section Scripts  {
+                            @Styles.Render("~/Content/bootstrap-datepicker")
+    @Scripts.Render("~/bundles/bootstrap-datepicker")
+    @Html.Partial("_BootstrapFunction")
+    @Scripts.Render("~/bundles/my-bootstrap-export")
+    <script>
+
+        window.onload = function () {
+            $('#sidebar').toggleClass('active');
+                            };
+
+        $(function () {
+            $('#TyuumonshoTable').on('click-row.bs.table', function (e, row, $element) {
+                $('.success').removeClass('success');
+                $($element).addClass('success');
+                                });
+                            });
+
+        $(function () {
+            $('.date').datepicker({
+                                format: "yyyy/mm/dd",
+                language: "ja",
+                autoclose: true, //日付選択で自動的にカレンダーを閉じる
+                orientation: 'bottom left'
+            });
+                            });
+
+    //検索
+        $('#Search').on('click', function (e) {
+
+            var DateFrom = $('input[name="DateFrom"]').val();
+            var DateTo = $('input[name="DateTo"]').val();
+            if (DateFrom != "" && DateTo != "") {
+                if (DateFrom > DateTo) {
+                    document.getElementById("error").innerHTML = "<ul><li>出荷日が不正です</li></ul>";
+                    document.getElementById("error").style.display = "";
+                    $('#TyuumonshoTable').bootstrapTable('removeAll');
+                    return;
+                }
+            }
+
+            var PrintFrom = $('input[name="Serch.PrintFrom"]').val();
+            var PrintTo = $('input[name="Serch.PrintTo"]').val();
+            if (PrintFrom != "" && PrintTo != "") {
+                if (PrintFrom > PrintTo) {
+                    document.getElementById("error").innerHTML = "<ul><li>発行日が不正です</li></ul>";
+                    document.getElementById("error").style.display = "";
+                    $('#TyuumonshoTable').bootstrapTable('removeAll');
+                    return;
+                }
+            }
+
+            document.getElementById("error").style.display = "none";
+
+                                TableBootstrapTableRefresh();
+
+                            });
+
+                            //TODO:検索結果処理追加
+                            function TableBootstrapTableRefresh() {
+                                var $table = $('#TyuumonshoTable')
+                                var temp = $table.css('display')
+                        
+        $('#TyuumonshoTable').bootstrapTable('removeAll');
+                                var tbl = document.getElementById("TyuumonshoTable");
+                                var tr = tbl.rows[1];
+                                var td = tr.cells[0];
+                                td.innerHTML = "検索中です。";
+
+        $.ajax({
+                                url: '@Url.Action("Search")',
+            type: 'POST',
+            dataType: 'json',
+            data: TyuumonshoQueryParams(0),
+            contentType: 'application/json',
+        }).done(function (result) {
+                                    if (result.succsess == 1) {
+                $('#TyuumonshoTable').bootstrapTable('load', result.data);
+                                    }
+                                    else {
+                $('#TyuumonshoTable').bootstrapTable('removeAll');
+                                        var tbl = document.getElementById("TyuumonshoTable");
+                                        var tr = tbl.rows[1];
+                                        var td = tr.cells[0];
+                                        td.innerHTML = "検索結果がありません。";
+                                    }
+                                }).fail(function (jqXHR, textStatus, errorThrown) {
+                                    //例外の場合、エラー画面に飛ばす
+                                    window.location.href = '/Error/Index'
+                                }).always(function () {
+                                });
+                            }
+
+
+    @*function TableBootstrapTableRefresh() {
+        var $table = $('#TyuumonshoTable')
+        var temp = $table.css('display')
+        $table.bootstrapTable('refresh', { url: "@Url.Action("Search")" });
+        setTimeout(function () {
+            $table.css({ display: 'none' })
+            setTimeout(function () {
+                $table.css({ display: temp })
+            }, 100)
+        }, 100)
+    }*@
+
+    //印刷
+    $('#Print').on('click', function (e) {
+
+        var arrNo = [];
+        var arrDt = [];
+        var arrHs = [];
+        $('#TyuumonshoTable tbody tr').each(function (index, htmlEl) {
+
+            var $row = $(htmlEl)
+            var $ceckbox = $row.find('.test > input')
+
+            //if ($ceckbox.prop('checked')) {
+            if ($row.find('input[type="checkbox"]').is(':checked')) {
+
+                //var syukno = $row.find('.syukno').text()
+                //var cdate = $row.find('.cdate').text()
+                //var hstatus = $row.find('.hstatus').text()
+                var syukno = $row.find('.syukno').html()
+                var cdate = $row.find('.cdate').html()
+                var hstatus = $row.find('.hstatus').html()
+
+                if (syukno != null) arrNo.push(syukno)
+                if (cdate != null) arrDt.push(cdate)
+                if (hstatus != null) arrHs.push(hstatus)
+            }
+
+        });
+
+        if (arrNo.length == 0) {
+            alert("印刷対象を選択してください　　");
+            return;
+        }
+
+        var mi = false;
+        var zumi = false;
+        for (var i = 0; i < arrHs.length; i++) {
+            if (arrHs[i] == "未") {
+                mi = true;
+            } else {
+                zumi = true;
+            }
+        }
+
+        if (mi) {
+                if (!window.confirm('印刷してもよろしいですか？  ')) {
+                    return;
+                }
+        } else {
+            if (!window.confirm('再発行します。よろしいですか？   ')) {
+                return;
+            }
+        }
+
+        if (arrNo.length != 0 ) {
+            var syuknos = arrNo.join(',')
+            var cdates = arrDt.join(',')
+
+            var postData = {
+                syukNo: syuknos,
+                cdate: cdates
+            };
+            $.ajax({
+                url: '@Url.Action("Check")',
+                type: 'POST',
+                dataType: 'json',
+                data: JSON.stringify(postData),
+                contentType: 'application/json',
+            }).done(function (result) {
+
+                if (result.succsess == 1) {
+                    document.getElementById("error").style.display = "none";
+                    window.open('@Url.Action("UPDPrint")?syukNo=' + syuknos + '&cdate=' + cdates, '_blank', 'width=900, height=600,resizable=1');
+                }
+                else {
+                    document.getElementById("error").innerHTML = result.msg;
+                    document.getElementById("error").style.display = "";
+                }
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                //例外の場合、エラー画面に飛ばす
+                window.location.href = '/Error/Index'
+            }).always(function () {
+            });
+
+        }
+        else {
+            alert("印刷対象を選択してください");
+        }
+    });
+
+    // 出荷場所 コードヘルプ
+    $(function () {
+        $('#ShukkabashoTable').on('click-row.bs.table', function (e, row, $element) {
+            $('.success').removeClass('success');
+            $($element).addClass('success');
+        });
+    });
+    $('#ShukkabashoSelect').on('click', function (e) {
+        var index = $('.success').attr('data-index');
+        if (index) {
+            var row = $('.success').parents('table:first').bootstrapTable('getData')[index];
+            $('input[name="Serch.Sybcod"]').val(row.@nameof(CodeHelpViewModels.ShukkabashoInformation.SybcodCh));
+        }
+    });
+    $('#shukkabashoSearch').on('click', function (e) {
+        ShukkabashoTableBootstrapTableRefresh();
+    });
+    function shukkabashoQueryParams(params) {
+        return JSON.stringify({
+            'Sybcod': $('input[name="Serch.SybcodCh"]').val(),
+            'Sybnam': $('input[name="Serch.SybnamCh"]').val()
+        });
+    }
+    function ShukkabashoTableBootstrapTableRefresh() {
+        var $table = $('#ShukkabashoTable')
+        var temp = $table.css('display')
+        $table.bootstrapTable('refresh', { url: "@Url.Action("ShukkabashoSearch", "CodeHelp")" });
+        setTimeout(function () {
+            $table.css({ display: 'none' })
+            setTimeout(function () {
+                $table.css({ display: temp })
+            }, 100)
+        }, 100)
+    }
+
+    $('#ShukkabashoModal').on('hide.bs.modal', function () {
+        ShukkabashoTableClear();
+        $('#ShukkabashoTable').bootstrapTable('destroy').bootstrapTable();
+    });
+
+    function ShukkabashoTableClear() {
+        $('input[name="Serch.SybcodCh"]').val("");
+        $('input[name="Serch.SybnamCh"]').val("");
+        $('#ShukkabashoTable').bootstrapTable('removeAll');
+    }
+
+    // 複数window.onload対応
+    function addOnload(func) {
+        try {
+            window.addEventListener("load", func, false);
+        } catch (e) {
+            // IE用 
+            window.attachEvent("onload", func);
+        }
+    }
+
+
+    function TyuumonshoQueryParams(params) {
+            return JSON.stringify({
+                'Hkukbn': $('input[name="Serch.Hkukbn"]:checked').val(),
+                'Sybcod': $('input[name="Serch.Sybcod"]').val(),
+                'Tannam': $('input[name="Serch.Tannam"]').val(),
+                'DateFrom': $('input[name="DateFrom"]').val(),
+                'DateTo': $('input[name="DateTo"]').val(),
+                'Syukno': $('input[name="Serch.Syukno"]').val(),
+                'Tokcod': $('input[name="Serch.Tokcod"]').val(),
+                'PrintFrom': $('input[name="Serch.PrintFrom"]').val(),
+                'PrintTo': $('input[name="Serch.PrintTo"]').val(),
+                'UserName': $('input[name="Serch.UserName"]').val()
+            });
+        }
+
+    </script>
+}
+

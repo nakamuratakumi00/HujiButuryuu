@@ -1,0 +1,100 @@
+﻿
+@using Macss.Areas.Tass.ViewModels
+@model CodeHelpViewModels.TyuumonshoPatternViewData
+@using Macss.HtmlHelpers
+
+
+<button type="button" class="btn btn-default" id="patternCodeHelp" data-toggle="modal" data-target="#TyuumonshoPatternModal" style="height:22px; width:30px; padding:4px" disabled="disabled" >
+    *
+</button>
+
+<!-- コードヘルプ -->
+<div class="modal fade bs-example-modal-lg" data-backdrop="static" id="TyuumonshoPatternModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">コードヘルプ - パターンマスタ</h4>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-sm-12 nbase-bootstrap-table" style="height:350px">
+                        <table id="PatternTable"
+                               class="table"
+                               data-query-params="PatternQueryParams"
+                               data-toggle="table"
+                               data-method="POST"
+                               data-filter-control="true"
+                               data-id-table="advancedTable"
+                               data-page-list="[10, 25, 50, 1000]"
+                               data-pagination="true">
+                            <colgroup>
+                                <col />
+                                <col style="min-width: 15em" />
+                                <col style="min-width: 10em" />
+                                <col style="min-width: 10em" />
+                                <col style="min-width: 20em" />
+                                <col />
+                                <col />
+                                <col />
+                                <col style="min-width: 20em" />
+                                <col style="min-width: 20em" />
+                                <col style="min-width: 20em" />
+                                <col style="min-width: 20em" />
+                                <col style="min-width: 15em" />
+                                <col style="min-width: 20em" />
+                                <col style="min-width: 20em" />
+                                <col style="min-width: 20em" />
+                                <col style="min-width: 20em" />
+                                <col style="min-width: 20em" />
+                                <col style="min-width: 20em" />
+                            </colgroup>
+                            <thead>
+                                <tr id="data">
+                                    @Html.ThFor(model => model.Information.Inscod, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                                    @Html.ThFor(model => model.Information.Htynam, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                                    @Html.ThFor(model => model.Information.Ktykho, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                                    @Html.ThFor(model => model.Information.Tannam, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                                    @Html.ThFor(model => model.Information.Basyo, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                                    @Html.ThFor(model => model.Information.Keifno, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                                    @Html.ThFor(model => model.Information.Tokcod, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                                    @Html.ThFor(model => model.Information.Sybcod, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                                    @Html.ThFor(model => model.Information.Jdkjyu, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                                    @Html.ThFor(model => model.Information.Tdknam, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                                    @Html.ThFor(model => model.Information.Tdsnam, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                                    @Html.ThFor(model => model.Information.Tdbnam, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                                    @Html.ThFor(model => model.Information.Tdktan, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                                    @Html.ThFor(model => model.Information.Hinnm1, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                                    @Html.ThFor(model => model.Information.Hinnm2, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                                    @Html.ThFor(model => model.Information.Hinnm3, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                                    @Html.ThFor(model => model.Information.Hinnm4, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                                    @Html.ThFor(model => model.Information.Hinnm5, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-sm-9" style="width:700px"></div>
+                    <div class="col-sm-1"><input type="button" name="PatternSelect" id="PatternSelect" class="btn btn-default" data-dismiss="modal" style="width:50px; height: 30px; padding:0; text-align: center;" value="選択" /></div>
+                    <div class="col-sm-1" style="width:10px"></div>
+                    <div class="col-sm-1"><input type="button" name="close" id="PatternClose" class="btn btn-default" data-dismiss="modal" style="width:50px; height: 30px; padding:0; text-align: center;" value="閉じる" /></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts  {
+    @Html.Partial("_BootstrapFunction")
+    @Scripts.Render("~/bundles/my-bootstrap-export")
+
+    <script>
+
+
+    </script>
+}
+

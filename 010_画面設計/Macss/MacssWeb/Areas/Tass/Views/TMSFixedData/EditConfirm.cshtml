@@ -1,0 +1,17 @@
+﻿@model Macss.Database.Entity.DummyTMSFixedDataRequest
+
+@{
+    ViewBag.Title = MacssWeb.Resources.Tass.TMSFixedDataMainTitle;
+    ViewBag.PageMainTitle = MacssWeb.Resources.Tass.TMSFixedDataEditMainTitle;
+    ViewBag.PageMainTitle = String.Format("{0}{1}", MacssWeb.Resources.Tass.TMSFixedDataEditMainTitle, "入力確認");
+    ViewBag.ScreenId = "TASS-D025-04";
+    ViewBag.ConfirmMessage = MacssWeb.Resources.Messages.EditConfirm;
+    ViewBag.ButtonText = MacssWeb.Resources.ControlText.EditExec;
+    ViewBag.ConfirmDialogText = MacssWeb.Resources.Messages.EditReconfirm;
+}
+
+@using (Html.BeginForm("Edit", "TMSFixedData", null, FormMethod.Post))
+{
+
+    @Html.Partial("_Show", Model)
+}

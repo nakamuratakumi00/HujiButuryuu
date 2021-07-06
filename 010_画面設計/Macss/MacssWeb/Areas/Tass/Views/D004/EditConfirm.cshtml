@@ -1,0 +1,18 @@
+﻿<!-- ■更新確認画面呼び出し部 -->
+@model Macss.Database.Entity.AccountMaster
+
+@{
+    // タイトル等キャプションをセット
+    ViewBag.Title = "運送業務 - TASS";
+    ViewBag.PageMainTitle = "荷札情報更新確認";
+    ViewBag.ScreenId = "";
+    ViewBag.ConfirmMessage = MacssWeb.Resources.Messages.EditConfirm;
+    ViewBag.ButtonText = MacssWeb.Resources.ControlText.EditExec;
+    ViewBag.ConfirmDialogText = MacssWeb.Resources.Messages.EditReconfirm;
+}
+
+@using (Html.BeginForm("Edit", "D004", null, FormMethod.Post))
+{
+    // 詳細・確認系フォームをセット
+    @Html.Partial("_Show", Model)
+}

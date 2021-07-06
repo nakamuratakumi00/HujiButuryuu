@@ -1,0 +1,775 @@
+﻿@model Macss.Database.Entity.AccountMaster
+@{
+    ViewBag.Title = "運送方法登録";
+    ViewBag.PageMainTitle = "運送方法登録";
+    ViewBag.ConfirmMessage = MacssWeb.Resources.Messages.DeleteConfirm;
+    ViewBag.ButtonText = MacssWeb.Resources.ControlText.DeleteExec;
+    ViewBag.ConfirmDialogText = MacssWeb.Resources.Messages.DeleteReconfirm;
+}
+@section Scripts {
+    <script>
+        $(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#SampleList");
+            dt.configure();
+
+            //MacssDataTable（dataTables.fixedColumns.js）に表示する列が15件以上あると計算間違いで最左端列にスクロールバーが表示されるため、非表示にする
+            $('.DTFC_LeftBodyLiner').css('overflow-y', 'hidden');
+
+        });</script>
+}
+
+@using (Html.BeginForm("CreateConfirm", "StockCreate", null, FormMethod.Post))
+{
+    <div class="row justify-content-between macss-form-button-group-row">
+        <div class="col-4">
+            <a class="btn btn-secondary" data-toggle="modal" data-target="#TransitionConfirmDialog" role="button">@MacssWeb.Resources.ControlText.BackToList</a>
+        </div>
+        <div class="col-4 text-right">
+            <a class="btn btn-primary" href="@Url.Action("CreateConfirm")" role="button">@MacssWeb.Resources.ControlText.InputConfirm</a>
+        </div>
+    </div>
+    <div class="accordion" id="ConditionAccordion">
+        <div class="card">
+            <div class="card-header macss-search-config-collapse-header" id="headingOne">
+                <div class="mb-0">
+                    <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain" aria-expanded="true" aria-controls="ConditionMain">
+                        <div class="d-inline-block" style="color:#333"></div>
+                        <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="color: rgb(120, 188, 255);"></i>
+                        <i id="CollapseShow" class="fas fa-chevron-circle-down" aria-hidden="true" style="color: rgb(120, 188, 255); display: none;"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+                <table class="table macss-form-table2">
+                    <colgroup>
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label required">運送方法コード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label required">運送方法略名</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label required">運送方法名</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">基幹ルートコード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">取引先コード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label"></label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">使用不可開始日</label>
+                            </th>
+                            <td>
+                                <div class="input-group">
+                                    <input type="text" id="SampleDTPicker1" class="form-control">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button" id="SampleCalendar1"><i class="fa fa-calendar-alt"></i></button>
+                                    </div>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">使用不可理由</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table> 
+                <table class="table macss-form-table2">
+                    <colgroup>
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                    </colgroup>
+                    <tbody>                                                                            
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">運送区分コード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">運送依頼区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">入力不可</option>
+                                        <option value="2">1：入力可（FE松本マスター有・FE松本関係使用可)</option>
+                                        <option value="3">2：条件付き入力可</option>
+                                        <option value="4">A：入力可（FE松本マスター無・FE松本関係使用不可）</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>    
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">括り出荷対象区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">0：対象外</option>
+                                        <option value="2">1：対象</option>
+                                        <option value="3">3：条件付対象</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">仕入先コード設定区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">0：当該マスターより強制設定</option>
+                                        <option value="2">1：入力優先</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">運送区分設定区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">0：当該マスターより強制設定</option>
+                                        <option value="2">1：入力優先</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">運送区分編集区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">0：対象外</option>
+                                        <option value="2">1：包装数１ヶのみ可</option>
+                                        <option value="3">2：包装数複数個可</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">サイズチェック区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">0：対象外</option>
+                                        <option value="1">1：「A～F」可</option>
+                                        <option value="1">2：「A～D」可</option>
+                                        <option value="1">3：「A～E」可</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">運送コースチェック区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">0：対象外</option>
+                                        <option value="2">1：必須</option>
+                                        <option value="3">2：空白可</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">数量ZERO許容</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                        <label class="form-check-label" for="inlineRadio1">ZEROエラー</label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                        <label class="form-check-label" for="inlineRadio2">ZERO可</label>
+                                    </div>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">タイムサービス可否</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                        <label class="form-check-label" for="inlineRadio1">「出荷手配エントリの特記事項コード＝901」不可</label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                        <label class="form-check-label" for="inlineRadio2">「出荷手配エントリの特記事項コード＝901」可</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">出荷検品届先チェック区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">0：通常チェック</option>
+                                        <option value="2">1：運送方法が同じならチェック対象外</option>
+                                        <option value="3">2：運送方法と運送コースが同じならチェック対象外</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">輸出明細書算定方式印刷区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">0：タイトル輸送明細書＆算定方式内容印刷無</option>
+                                        <option value="2">1：タイトル輸送明細書（兼輸送依頼書）＆算定方式内容印刷</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">運賃着払可否</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                        <label class="form-check-label" for="inlineRadio1">着払不可</label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                        <label class="form-check-label" for="inlineRadio2">着払可</label>
+                                    </div>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label"></label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div></div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>    
+                </table>
+                <table class="table macss-form-table2">
+                    <colgroup>
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                    </colgroup>
+                    <tbody>                                                    
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">東海西濃運輸送信対象</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                        <label class="form-check-label" for="inlineRadio1">伝送対象外</label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                        <label class="form-check-label" for="inlineRadio2">伝送対象</label>
+                                    </div>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">信州名鉄運輸送信対象</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                        <label class="form-check-label" for="inlineRadio1">伝送対象外</label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                        <label class="form-check-label" for="inlineRadio2">伝送対象</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">北陸名鉄運輸送状発行対象</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                        <label class="form-check-label" for="inlineRadio1">対象外</label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                        <label class="form-check-label" for="inlineRadio2">対象</label>
+                                    </div>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">近鉄ロジスティクス送状発行対象</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                        <label class="form-check-label" for="inlineRadio1">対象外</label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                        <label class="form-check-label" for="inlineRadio2">対象</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">運送会社原票No発番</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                        <label class="form-check-label" for="inlineRadio1">発番無</label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                        <label class="form-check-label" for="inlineRadio2">発番有</label>
+                                    </div>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">郵便番号・JISコードエラー区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">設定無し</option>
+                                        <option value="2">チェック不要</option>
+                                        <option value="3">1：JISマスター使用</option>
+                                        <option value="4">2：郵便番号マスター使用</option>
+                                        <option value="5">3：設定内容チェック用</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">送状発行単位区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">0：包装数分発行</option>
+                                        <option value="2">2：出荷Noひとつにつき1枚</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">北陸名鉄航空便送状発行区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">0：発行無</option>
+                                        <option value="2">1：発行路線便・荷送人コード783-53-6143</option>
+                                        <option value="3">2：発行宅配便・荷送人ｺｰﾄﾞ783-53-6132</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">全社基幹配送便対象区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">0：対象外</option>
+                                        <option value="2">1：対象(荷札発行エントリで郵便番号&JISコード&仕分コード&基幹届先コード&基幹ルートコード&基幹車両コード必須）</option>
+                                        <option value="3">2：対象(荷札発行エントリで郵便番号&JISコード&基幹届先コード&基幹ルートコード&基幹車両コード必須&仕分コード任意) </option>
+                                        <option value="4">3：条件付対象(荷札発行エントリで郵便番号&JISコードﾞ&仕分コード&基幹届先コード&基幹ルートコード&基幹車両コード必須）</option>
+                                        <option value="5">4：条件付対象(荷札発行エントリで郵便番号&JISコード&基幹届先コード&基幹ルートコード&基幹車両コード必須&仕分コード任意) </option>
+                                    </select>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">基幹配送便対象区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">0：対象外</option>
+                                        <option value="1">1:対象(荷札発行エントリで郵便番号マスター&JISコード&仕分コード必須)</option>
+                                        <option value="1">2:対象(荷札発行エントリで郵便番号マスター&JISコード&仕分コード任意)</option>
+                                        <option value="1">3:条件付対象(荷札発行エントリで郵便番号マスター&JISコード&仕分コード必須)</option>
+                                        <option value="1">4:条件付対象(荷札発行エントリで郵便番号マスター&JISコード&仕分コード任意)</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>                        
+                    </tbody>    
+                </table>
+                <table class="table macss-form-table2">
+                    <colgroup>
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                    </colgroup>
+                    <tbody>                                                    
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">仕分コード取得区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">02：運送方法コード："12"&"23"</option>
+                                        <option value="2">03：運送方法コード"11"&"24"</option>
+                                        <option value="3">04：運送方法コード"15"</option>
+                                        <option value="4">05：運送方法コード"19"&"39"</option>
+                                        <option value="5">07：運送方法コード"26"</option>
+                                        <option value="6">02：運送方法コード"25"</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">運送方法設定区分_包装費用</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">運送方法設定区分_営業在庫用</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">運送方法設定区分_到着便用</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">運送方法設定区分_半導体輸出用</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">仕入先原票No取得用運送方法コード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">全社基幹配送便括り運送方法コード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label"></label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                    </tbody>    
+                </table>
+                <table class="table macss-form-table2">
+                    <colgroup>
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                    </colgroup>
+                    <tbody>                                                   
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">輸送明細書制御区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">0：運賃負担計無＆着払計元払計無</option>
+                                        <option value="1">1：運賃負担計有＆着払計元払計有</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">郵便番号取得不可エラー</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                        <label class="form-check-label" for="inlineRadio1">エラー対象外</label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                        <label class="form-check-label" for="inlineRadio2">エラー</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">運賃未計上リスト対象有無区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">対象</option>
+                                        <option value="2">1：対象外</option>
+                                        <option value="3">2：条件付対象外</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">製品出荷包装費請求データ自動作成対象</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                        <label class="form-check-label" for="inlineRadio1">対象外</label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                        <label class="form-check-label" for="inlineRadio2">対象</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>                           
+                            <th scope="row">
+                                <label class="control-label">全社基幹配送便連携データ括り区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">1：圧縮（運送方法+運送コース+届先住所）</option>
+                                        <option value="2">2：明細</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">基幹配送便データ括り区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">1：圧縮（運送方法+運送コース+届先住所）</option>
+                                        <option value="2">2：明細</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>                                                                                                                       
+                    </tbody>    
+                </table>                     
+            </div>
+        </div>
+    </div>
+}
+
+<div class="mt-4"></div>
+<div class="row justify-content-between macss-form-button-group-row mt-4">
+    <div class="col-4">
+        <a class="btn btn-secondary" data-toggle="modal" data-target="#TransitionConfirmDialog" role="button">@MacssWeb.Resources.ControlText.BackToList</a>
+    </div>
+    <div class="col-4 text-right">
+        <a class="btn btn-primary" href="@Url.Action("CreateConfirm")" role="button">@MacssWeb.Resources.ControlText.InputConfirm</a>
+    </div>
+</div>
+<script>
+    function setDepartmentCode(code, value) {
+        $("#bumon_cd").val(code);
+        $("#DepartmentName").text(value);
+    }
+    $(function () {
+        var createDatePicker = new Macss.DatetimePicker.MacssDtPicker("#create_date", "#CreateDateCalendar");
+        createDatePicker.configure();
+        var updateDatePicker = new Macss.DatetimePicker.MacssDtPicker("#update_date", "#UpdateDateCalendar");
+        updateDatePicker.configure();
+    });</script></form>
+
+</div>
+
+
+
+<div class="modal" id="TransitionConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.TransitionConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @MacssWeb.Resources.Messages.TransitionConfirm
+                <br>
+                @MacssWeb.Resources.Messages.Confirm
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary macss-btn" href="@Url.Action("Index")" role="button">@MacssWeb.Resources.ControlText.Yes</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>

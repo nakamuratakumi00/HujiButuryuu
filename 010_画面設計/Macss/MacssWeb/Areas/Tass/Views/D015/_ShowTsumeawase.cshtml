@@ -1,0 +1,144 @@
+﻿@Html.AntiForgeryToken()
+
+@if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+{
+    <div class="alert alert-info">
+        <span>@ViewBag.ConfirmMessage</span>
+    </div>
+}
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="row justify-content-between macss-form-button-group-row">
+        <div class="col-4">
+            <a role="button" class="btn btn-secondary" href="@Url.Action(ViewBag.TransAction, new { id = @"01736",mode=ViewBag.PrevMode,process="Back" })">@MacssWeb.Resources.ControlText.Back</a>
+        </div>
+    </div>
+</div>
+
+<table class="table macss-form-table2">
+    <colgroup>
+        <col class="macss-form-table-title2" />
+        <col class="macss-form-table-contents2" />
+        <col class="macss-form-table-title2" />
+        <col class="macss-form-table-contents2" />
+    </colgroup>
+    <tr>
+        <th scope="row">
+            @Html.Label("詰合せ代表出荷No", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                1002600
+            </div>
+        </td>
+        <th scope="row">
+            @Html.Label("運送方法", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                11 路線便　信川名鉄運輸㈱
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("得意先", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                17601 ＦＥ）半導体営業　（松本・ＤＳ）
+            </div>
+        </td>
+        <th scope="row">
+            @Html.Label("運送コース", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                F Ｆコース（ＦＦＪ定期）
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("出荷日", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                2020/01/04
+            </div>
+        </td>
+        <th scope="row">
+            @Html.Label("包装数（個）", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                1
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("サイズ", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                C
+            </div>
+        </td>
+        <th scope="row">
+            @Html.Label("包装済総重量（kg）", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                20.00
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("特別指定", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                901
+                <!--輸送作業伝票Noの先頭から3文字目までを編集-->
+            </div>
+        </td>
+        <th scope="row">
+            @Html.Label("出荷場所", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                A1 士川電機メーター㈱
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">詰合せ出荷No</label>
+        </th>
+        <td colspan="3">
+            <div>
+                <div class="col-4">
+                    <select class="custom-select form-control ctrl-item ctrl-item01" id="IDListBox" size="10" multiple>
+                        <option value="0">1104993</option>
+                        <option value="1">1156381</option>
+                        <option value="2">1156390</option>
+                    </select>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a role="button" class="btn btn-secondary" href="@Url.Action(ViewBag.TransAction, new { id = @"01736",mode=ViewBag.PrevMode,process="Back" })">@MacssWeb.Resources.ControlText.Back</a>
+    </div>
+    <div class="col-8 text-right">
+        @if (ViewBag.DeleteFlg != null || ViewBag.DeleteFlg == true)
+        {
+            <a role="button" class="btn btn-danger" href="@Url.Action("Edit", new { id = @"01736",mode=ViewBag.PrevMode,process="Delete" })">@MacssWeb.Resources.ControlText.Delete</a>
+        }
+    </div>
+</div>

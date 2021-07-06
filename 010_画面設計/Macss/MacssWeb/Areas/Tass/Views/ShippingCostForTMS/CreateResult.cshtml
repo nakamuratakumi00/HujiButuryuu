@@ -1,0 +1,191 @@
+﻿@model IEnumerable<Macss.Database.Entity.DummyShippingCost>
+
+@{
+    ViewBag.Title = MacssWeb.Resources.Tass.ShippingCostForTMSMainTitle;
+    ViewBag.PageMainTitle = String.Format("{0}{1}", MacssWeb.Resources.Tass.ShippingCostForTMSCreateMainTitle, "完了");
+    ViewBag.ScreenId = "TASS-D024-02";
+}
+@section Scripts {
+    <script>
+
+        $(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#ErrorList", null, 2);
+            dt.setScrollY("600px");
+            dt.configure();
+
+            $('[data-toggle="popover"]').popover();
+
+        });
+    </script>
+}
+
+<div class="alert alert-info">
+    <span>TMS用運賃データを作成しました。</span>
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-12 text-right">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("Index","HOME")">サブメニューへ</a>
+    </div>
+</div>
+
+<table class="table macss-form-table">
+    <colgroup>
+        <col class="macss-form-table-title" />
+        <col class="macss-form-table-contents" />
+    </colgroup>
+    <tr>
+        <th>
+            仕入先
+        </th>
+        <td>
+            全て
+        </td>
+    </tr>
+    <tr>
+        <th>
+            作成期間
+        </th>
+        <td>
+            <div class="row">
+                <div class="col-4">
+                    <label>
+                        2021/04/01　～　2021/04/30
+                    </label>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th>
+            作成件数
+        </th>
+        <td>
+            <div class="row">
+                <div class="col-4">
+                    <label>
+                        100件
+                    </label>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+@*<div class="container-fluid mt-4">
+    <div class="form-inline">
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">エラー件数</span>
+            </div>
+            <span class="form-control">@ViewBag.ErrorCount</span>
+        </div>
+    </div>
+    <div class="col-12 text-right">
+        <div class="dropdown">
+            <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#CsvDownloadDialog">CSVダウンロード</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<table id="ErrorList" class="table table-striped table-hover macss-data-table">
+    <thead class="macss-data-table-header">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Supplier)
+            </th>
+            <th style="background-color: #76d2ed;">
+                @Html.DisplayNameFor(model => model.ErrorMessage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShipmentNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransportationCategory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShipmentYMD)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SupplierSlipNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Client)
+            </th>
+            <th style="min-width:200px;">
+                @Html.DisplayNameFor(model => model.DeliveryAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PackingQuantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Weight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShipingCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OutLocation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegistrationUser)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="white-space:nowrap;">
+                    @Html.DisplayFor(modelItem => item.Supplier)
+                </td>
+                <td>
+                    <a tabindex="0" class="btn btn-sm btn-danger" role="button" data-toggle="popover"
+                       data-trigger="focus" title="エラー詳細"
+                       data-content="@item.ErrorMessage">詳細</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShipmentNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TransportationCategory)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShipmentYMD)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SupplierSlipNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Client)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeliveryAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PackingQuantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Weight)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShipingCost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OutLocation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegistrationUser)
+                </td>
+            </tr>
+            break;
+        }
+    </tbody>
+</table>*@

@@ -1,0 +1,15 @@
+@model Macss.Database.Entity.ApprovalData
+
+@{
+    ViewBag.Title = "承認";
+    ViewBag.ScreenId = "BASE-D007-03";
+    ViewBag.PageMainTitle = "承認 確認(取戻)";
+}
+
+@Html.Partial("_FormApprovalConfirm", Model)
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

@@ -1,0 +1,18 @@
+﻿<html lang="ja">
+@*@model IEnumerable<Macss.Database.Entity.CargoData>*@
+
+
+@{
+    ViewBag.Title = "保管料荷役料";
+    ViewBag.PageMainTitle = "保管料荷役料更新";
+    ViewBag.hokan_niyaku_no = true;
+    ViewBag.Edit = true;
+    ViewBag.Create = false;
+    ViewBag.hokan_spot = false;
+}
+
+@using (Html.BeginForm("EditConfirm", "Cargo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.Partial("_Form")
+}
+

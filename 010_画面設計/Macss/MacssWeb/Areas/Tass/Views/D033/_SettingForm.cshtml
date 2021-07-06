@@ -1,0 +1,2019 @@
+﻿@model Macss.Database.Entity.AccountMaster
+
+@Html.AntiForgeryToken()
+
+@Html.Partial("../Shared/Dialog/_DenpyoKbnCodeSearch")
+@Html.Partial("../Shared/Dialog/_TokuisakiCodeSearch")
+
+@Html.Partial("../Shared/Dialog/_UnsohohoCodeSearch")
+@Html.Partial("../Shared/Dialog/_UnsocorseCodeSearch")
+@Html.Partial("../Shared/Dialog/_ShiiresakiCodeSearch")
+@Html.Partial("../Shared/Dialog/_SyukkaBashoCodeSearch")
+@Html.Partial("../Shared/Dialog/_UnsokbnCodeSearch")
+@Html.Partial("../Shared/Dialog/_KisyuACodeSearch")
+@Html.Partial("../Shared/Dialog/_TantoshaCodeSearch")
+@Html.Partial("../Shared/Dialog/_TodokesakiCodeSearch")
+@Html.Partial("../Shared/Dialog/_HinmeiCodeSearch")
+@Html.Partial("../Shared/Dialog/_YubinNoSearch")
+@Html.Partial("../Shared/Dialog/_SaisyuJuyoCodeSearch")
+@Html.Partial("../Shared/Dialog/_OkyakusamaCodeSearch")
+
+<!--テスト値-->
+@{ var testVal = string.Empty; }
+
+<div>
+    @Html.ValidationSummary(false, "入力エラーがあります。", new { @class = "alert alert-danger" })
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a class="btn btn-secondary" href="@Url.Action("Index")" role="button">@MacssWeb.Resources.ControlText.Back</a>
+    </div>
+</div>
+<table class="table macss-form-table">
+    <colgroup>
+        <col class="macss-form-table-title" />
+        <col class="macss-form-table-contents" />
+    </colgroup>
+    <tr>
+        <th scope="row">
+            <label class="control-label required">出力パターン</label>
+        </th>
+        <td>
+            <div>
+                <div class="form-check-inline">
+                    <input type="radio" name="options" id="asc1" autocomplete="off" checked>
+                    <label class="form-check-label" style="width:138px;">新規登録</label>
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="パターン１">
+                </div>
+            </div>
+            <div>
+                <div class="form-check-inline">
+                    <input type="radio" name="options" id="desc1" autocomplete="off">
+                    <label class="form-check-label" style="width:160px;">変更</label>
+                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                        <option value="1">パターン１</option>
+                        <option value="2">パターン２</option>
+                    </select>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div class="accordion mb-4" id="ConditionAccordion1">
+    <div class="card">
+        <div class="card-header macss-search-config-collapse-header" id="headingOne1">
+            <div class="mb-0">
+                <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain1" aria-expanded="true" aria-controls="ConditionMain1">
+                    <div class="d-inline-block" style="color:#333">出力条件</div>
+                    <i id="CollapseHidden1" class="fas fa-chevron-circle-up" aria-hidden="true" style="color: rgb(120, 188, 255);"></i>
+                    <i id="CollapseShow1" class="fas fa-chevron-circle-down" aria-hidden="true" style="display:none;"></i>
+                </button>
+            </div>
+        </div>
+        <div id="ConditionMain1" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion1">
+            <table class="table macss-form-table">
+                <colgroup>
+                    <col class="macss-form-table-title" />
+                    <col class="macss-form-table-contents" />
+                </colgroup>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">社内計上有無</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1" checked="checked">
+                            <label class="form-check-label" for="inlineCheckbox6">計上前　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1" checked="checked">
+                            <label class="form-check-label" for="inlineCheckbox6">計上済</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">出力対象</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1" checked="checked">
+                            <label class="form-check-label" for="inlineCheckbox6">運賃　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1" checked="checked">
+                            <label class="form-check-label" for="inlineCheckbox6">包装費</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">期間指定</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="radio" id="inlineCheckbox6" checked="checked">
+                            <label class="form-check-label" for="inlineCheckbox6">出荷日　</label>
+                            <input class="form-check-input" type="radio" id="inlineCheckbox6">
+                            <label class="form-check-label" for="inlineCheckbox6">請求月度</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">出荷日</label>
+                    </th>
+                    <td>
+                        <div class="input-group">
+                            <input type="text" id="SampleDTPicker1" class="form-control" />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar1"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                            <span class="input-group-text">～</span>
+                            <input type="text" id="SampleDTPicker2" class="form-control" />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar2"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">請求月度</label>
+                    </th>
+                    <td>
+                        <div class="input-group">
+                            <input class="form-control text-box single-line" id="syukka_date" name="IDName" type="text" value="@testVal">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SyukkaDateCalendar"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+
+                        </div>
+
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">PC顧客区分コード</label>
+                    </th>
+                    <td>
+                        <input type="text" class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">得意先コード</label>
+                    </th>
+                    <td>
+                        <input type="text" class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                    </td>
+                </tr>
+
+
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="accordion mb-4" id="ConditionAccordion2">
+    <div class="card">
+        <div class="card-header macss-search-config-collapse-header" id="headingOne2">
+            <div class="mb-0">
+                <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain2" aria-expanded="true" aria-controls="ConditionMain2">
+                    <div class="d-inline-block" style="color:#333">表示項目(運賃・包装費)</div>
+                    <i id="CollapseHidden1" class="fas fa-chevron-circle-up" aria-hidden="true" style="color: rgb(120, 188, 255);"></i>
+                    <i id="CollapseShow1" class="fas fa-chevron-circle-down" aria-hidden="true" style="display:none;"></i>
+                </button>
+            </div>
+        </div>
+        <div id="ConditionMain2" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion2">
+            <table class="table macss-form-table">
+                <colgroup>
+                    <col class="macss-form-table-title" />
+                    <col class="macss-form-table-contents" />
+                </colgroup>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">請求月度</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">出荷No</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">オリジナル出荷No</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">得意先コード</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">出荷日</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">経費負担No</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">ベースNo</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">出荷指示番号</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">機種コードA</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">機種コードB</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">伝票区分コード</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">担当者名</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">届先コード</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">編集届先名</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">届先住所</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">届先郵便番号</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">届先電話番号</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">県コード</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">品名コード</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">品名</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">顧客品番</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">出荷数</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">包装数</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="accordion mb-4" id="ConditionAccordion3">
+    <div class="card">
+        <div class="card-header macss-search-config-collapse-header" id="headingOne3">
+            <div class="mb-0">
+                <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain3" aria-expanded="true" aria-controls="ConditionMain3">
+                    <div class="d-inline-block" style="color:#333">表示項目(運賃)</div>
+                    <i id="CollapseHidden1" class="fas fa-chevron-circle-up" aria-hidden="true" style="color: rgb(120, 188, 255);"></i>
+                    <i id="CollapseShow1" class="fas fa-chevron-circle-down" aria-hidden="true" style="display:none;"></i>
+                </button>
+            </div>
+        </div>
+        <div id="ConditionMain3" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion3">
+            <table class="table macss-form-table">
+                <colgroup>
+                    <col class="macss-form-table-title" />
+                    <col class="macss-form-table-contents" />
+                </colgroup>
+                <th scope="row">
+                    <label class="control-label">通番</label>
+                </th>
+                <td>
+                    <div class="form-check form-check-inline mr-4">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                        <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                        <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                    </div>
+                </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">削除フラグ</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">請求先コード</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">請求先名称</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">請求先コード大分類</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">到着日</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">運賃負担区分</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">運送方法コード</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">運送コースコード</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">仕入先コード</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">仕入先名</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">運送区分コード</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">運送場所コード</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">特記事項</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">輸送作業伝票No</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">詰合代表出荷No</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">出荷括りNo</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">包装完了時間</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">請求明細書発行区分</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">請求明細書作成済みフラグ</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">PC部門コード</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">PC事業区分コード</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">PC顧客区分コード</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">受付No</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">集貨場所社名</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">車種軽</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">車種1トン</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">車種2トン</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">車種4トン</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">車種11トン</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">車種コンテナ</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">車種その他</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">作成元区分</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">差異OKフラグ</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">包装済総重量</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">サイズ</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">TMS請求用距離</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">TMS仕入用距離</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">仕分コード</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">仕入包装数</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">運送会社仕入用距離</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">運賃発生元</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">仕入重量</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">仕入運賃基準</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">仕入運賃明細コード2</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">仕入運賃2</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">仕入運賃明細コード3</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">仕入運賃3</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">仕入運賃合計</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">売上運賃基準</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">売上運賃明細コード2</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">売上運賃2</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">売上運賃明細コード3</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">売上運賃3</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">売上運賃合計</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">仕入先原票No</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="accordion mb-4" id="ConditionAccordion4">
+    <div class="card">
+        <div class="card-header macss-search-config-collapse-header" id="headingOne4">
+            <div class="mb-0">
+                <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain4" aria-expanded="true" aria-controls="ConditionMain4">
+                    <div class="d-inline-block" style="color:#333">表示項目(包装費)</div>
+                    <i id="CollapseHidden1" class="fas fa-chevron-circle-up" aria-hidden="true" style="color: rgb(120, 188, 255);"></i>
+                    <i id="CollapseShow1" class="fas fa-chevron-circle-down" aria-hidden="true" style="display:none;"></i>
+                </button>
+            </div>
+        </div>
+        <div id="ConditionMain4" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion4">
+            <table class="table macss-form-table">
+                <colgroup>
+                    <col class="macss-form-table-title" />
+                    <col class="macss-form-table-contents" />
+                </colgroup>
+
+                <th scope="row">
+                    <label class="control-label">通番</label>
+                </th>
+                <td>
+                    <div class="form-check form-check-inline mr-4">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                        <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                        <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                    </div>
+                </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">削除フラグ</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">請求先コード</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">請求先名称</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">請求先コード大分類</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">請求明細書作成済みフラグ</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">レコード区分</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">物流単価区分</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">単価区分</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">振分区分</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">包装品名カナ</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">仕向先箱名</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">包装用PC部門コード</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">包装用PC事業区分コード</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">包装用PC顧客区分コード</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">包装用出荷場所コード</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">集約コード</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">単価コード</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">分数1</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">分数2</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">分数3</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">分数4</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">仕入単価1</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">仕入単価2</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">仕入単価3</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">仕入単価4</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">仕入包装費1</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">仕入包装費2</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">仕入包装費3</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">仕入包装費4</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">仕入包装費5</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">仕入包装費6</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">仕入資材コード</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">仕入資材数量</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">仕入資材請求額</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">仕入小計</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">単価1</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">単価2</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">単価3</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">単価4</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">包装費1</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">包装費2</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">包装費3</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">包装費4</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">包装費5</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">包装費6</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">資材コード</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">資材数量</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">資材請求額</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">ダンボール</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">ダンボール数量</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">ダンボール金額</label>
+                    </th>
+                    <td>
+                        <div class="form-check form-check-inline mr-4">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">画面　</label>
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">CSV</label>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a class="btn btn-secondary" href="@Url.Action("Index")" role="button">@MacssWeb.Resources.ControlText.Back</a>
+    </div>
+    <div class="col-8 text-right">
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#DeleteConfirmDialog">@MacssWeb.Resources.ControlText.Delete</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#CreateConfirmDialog">@MacssWeb.Resources.ControlText.CreateExec</button>
+    </div>
+</div>
+
+<div class="modal" id="DeleteConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                選択中のパターンを削除します。よろしいですか？
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" name="cmdBtmExec" value="@((int)MacssWeb.Common.ButtonValues.Back)">@MacssWeb.Resources.ControlText.Yes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="CreateConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.TransitionConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                指定されたパターンを登録します。よろしいですか？
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" name="cmdBtmExec" value="@((int)MacssWeb.Common.ButtonValues.Exec)">@MacssWeb.Resources.ControlText.Yes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function setDepartmentCode(code, value) {
+        $("#bumon_cd").val(code);
+        $("#DepartmentName").text(value);
+    }
+    $(function () {
+        var createDatePicker = new Macss.DatetimePicker.MacssDtPicker("#totyaku_date", "#TotyakuDateCalendar");
+        createDatePicker.configure();
+        var updateDatePicker = new Macss.DatetimePicker.MacssDtPicker("#syukka_date", "#SyukkaDateCalendar");
+        updateDatePicker.configure();
+
+        var cond1 = new Macss.Collapse.ConditionsPanel("#ConditionAccordion1", "#CollapseShow1", "#CollapseHidden1");
+        cond1.setCollapseEvent();
+        var cond2 = new Macss.Collapse.ConditionsPanel("#ConditionAccordion2", "#CollapseShow2", "#CollapseHidden2");
+        cond2.setCollapseEvent();
+        var cond3 = new Macss.Collapse.ConditionsPanel("#ConditionAccordion3", "#CollapseShow3", "#CollapseHidden3");
+        cond3.setCollapseEvent();
+        var cond4 = new Macss.Collapse.ConditionsPanel("#ConditionAccordion4", "#CollapseShow4", "#CollapseHidden4");
+        cond4.setCollapseEvent();
+    });
+</script>

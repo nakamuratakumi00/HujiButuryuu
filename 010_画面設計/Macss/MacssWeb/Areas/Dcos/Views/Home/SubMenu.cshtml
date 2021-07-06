@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "保管業務";
+    ViewBag.PageMainTitle = "保管業務-DCOS";
+}
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <ul class="macss-submenu">
+                <li>
+                    @Html.ActionLink("入出庫実績一覧", "Index", "D001", new { area = "Dcos" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("入庫実績登録", "Create", "D001", new { area = "Dcos" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("入庫実績アップロード", "Upload", "D001", new { area = "Dcos" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("請求金額算出可否チェック", "Check", "D001", new { area = "Dcos" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("出庫指示一覧", "Index", "D002", new { area = "Dcos" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("出庫指示登録", "Create", "D002", new { area = "Dcos" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("出庫指示アップロード", "Upload", "D002", new { area = "Dcos" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("在庫引当一覧", "index", "StockAllocation", new { area = "Dcos" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("在庫データ一覧", "Index", "Stock", new { area = "Dcos" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("在庫報告書作成", "Report", "Stock", new { area = "Dcos" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("TASSデータ連携取込選択", "Index", "D006", new { area = "Dcos" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("TASSデータ連携エラー一覧", "List", "D006", new { area = "Dcos" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("得意先在庫データ照合", "Index", "Customer", new { area = "Dcos" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("保管料荷役料一覧", "List", "Cargo", new { area = "Dcos" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("保管料荷役料登録", "Create", "Cargo", new { area = "Dcos" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("保管料荷役料明細書(確認用)作成", "Exec", "Cargo", new { area = "Dcos" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("請求データ作成", "BillingExec", "Billing", new { area = "Dcos" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("倉庫・保存期限一括変更", "Index", "D011", new { area = "Dcos" }, null)
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

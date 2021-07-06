@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "サンプル";
+    ViewBag.PageMainTitle = "Fe製品出荷実績データ照合";
+    ViewBag.Caption = "出荷データと照合を行う、出荷実績回収データのアップロードを行います。";
+    //ViewBag.UploadFileAccept = new List<string>() { ".csv, .txt" };
+    ViewBag.UploadFileAccept = new List<string>() { ".csv" };
+}
+
+
+    @using (Html.BeginForm("UploadConfirm", "D011", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.Partial("_SimpleUpload")
+}

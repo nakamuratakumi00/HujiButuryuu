@@ -1,0 +1,179 @@
+﻿@{
+    ViewBag.Title = "請求仕入 - AIMS";
+    ViewBag.ScreenId = "";
+    ViewBag.PageMainTitle = "営業費用データ作成";
+    ViewBag.Caption = "";
+}
+
+
+@using (Html.BeginForm("MakeConfirm", "D005", FormMethod.Post))
+{
+
+    @Html.AntiForgeryToken()
+
+    <div class="container-fluid">
+        <div>
+            <p>
+                @ViewBag.Caption
+            </p>
+        </div>
+
+        <div class="row mr-3 mb-4">
+            <div class="col-12">
+                <div class="accordion" id="ConditionAccordion">
+                    <div class="card  mr-4 ml-4">
+                        <div class="card-header macss-search-config-collapse-header" id="headingOne">
+                            <div class="mb-0">
+                                <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain" aria-expanded="true" aria-controls="ConditionMain">
+                                    <div class="d-inline-block" style="color:#333">営業費用データステータス</div>
+                                </button>
+                            </div>
+                        </div>
+                        <div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+                            <div class="row mr-0 mb-1">
+                                <div class="col-4">
+                                    運送業務-TASS 1手番 完了 100件
+                                </div>
+                            </div>
+                            <div class="row mr-0 mb-1">
+                                <div class="col-4">
+                                    運送業務-TASS 2手番 完了 100件
+                                </div>
+                            </div>
+                            <div class="row mr-0 mb-1">
+                                <div class="col-4">
+                                    運送業務-TASS 20日締日 完了 100件
+                                </div>
+                            </div>
+                            <div class="row mr-0 mb-1">
+                                <div class="col-4">
+                                    包装商品販売-PATS 1手番 完了 100件
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mr-0 mb-1">
+            <div class="col-12">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="Condition1">作成データ</span>
+                    </div>
+                    <select class="custom-select form-control" id="Condition3">
+                        <option value="1"></option>
+                        <option value="2">リハーサル</option>
+                        <option value="3">本番</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="Condition1">サブシステム</span>
+                    </div>
+                    <div class="macss-input-group-input form-control-plaintext">
+                        <div class="form-check-inline ml-4 mr-5">
+                            <input class="form-check-input" type="checkbox" name="" id="" value="" checked>
+                            <label class="form-check-label" for="">AIMS</label>
+                        </div>
+                        <div class="form-check-inline mr-5">
+                            <input class="form-check-input" type="checkbox" name="" id="" value="" checked>
+                            <label class="form-check-label" for="">TASS</label>
+                        </div>
+                        <div class="form-check-inline mr-5">
+                            <input class="form-check-input" type="checkbox" name="" id="" value="" checked>
+                            <label class="form-check-label" for="">PATS</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="Condition1">仕入先</span>
+                    </div>
+                    <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" data-val-required="部門コード フィールドが必要です。" id="bumon_cd" name="bumon_cd" type="text">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#DepartmentCodeSearchDialog">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <div>
+            <div class="macss-form-button-group-row pr-0">
+                <div class="text-right">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#CordConfirmDialog">PCコード設定</button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#CostConfirmDialog">作成</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="modal" id="CordConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="CordConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="CordConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                PCコード設定処理をします。よろしいですか？
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("MakeCodeResult", "D005", null, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="UploadFileName" name="uploadFileName" value="@ViewBag.UploadFileName" />
+                    <button type="submit" class="btn btn-primary">はい</button>
+                }
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="CostConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="CostConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="CostConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                営業費用データを作成します。よろしいですか？
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("MakeCostResult", "D005", null, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="UploadFileName" name="uploadFileName" value="@ViewBag.UploadFileName" />
+                    <button type="submit" class="btn btn-primary">はい</button>
+                }
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $('#Confirm').on('click', function () {
+            var form = $(this).parents('form');
+            form.submit();
+        });
+
+
+    })
+</script>

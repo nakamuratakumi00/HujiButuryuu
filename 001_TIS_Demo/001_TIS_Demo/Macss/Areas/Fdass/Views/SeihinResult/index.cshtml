@@ -1,0 +1,82 @@
+﻿@using Macss.Areas.Fdass.ViewModels
+@model SeihinResultVierModel
+<style>
+    h1, .h1,
+    h2, .h2,
+    h3, .h3 {
+        margin-top: 2px;
+        margin-bottom: 0px;
+    }
+</style>
+
+@section Heads {
+    <link href="/Content/details.css" rel="stylesheet" />
+    @*<link href="/Content/reset.css" rel="stylesheet" />*@
+}
+
+<div class="row">
+    <div class="navbar2 navbar-default" style="padding-bottom:10px;">
+        @{
+            ViewBag.Title = ViewBag.Title;
+        }
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-inline">
+                <h2>@ViewBag.Title</h2>
+                <hr />
+            </div>
+            <div class="form-horizontal">
+                <div class="row">
+                    @Html.LabelFor(model => model.DateFrom, htmlAttributes: new { @class = "control-labelR col-md-2", @id = "lbDate", style = "white-space:nowrap" })
+                    <div class="col-md-5 text_jp_middle" style="display:inline-flex">
+                        @Html.EditorFor(model => model.DateFrom, new { htmlAttributes = new { @class = "form-control ; date ", @id = "dateFrom" , style = "ime-mode: inactive" } })
+
+                        <b class="side-comment" style="padding-left:5px; padding-right:5px; margin-top:-5px;">～</b>
+                        @Html.EditorFor(model => model.DateTo, new { htmlAttributes = new { @class = "form-control ; date ", @id = "dateTo" , style = "ime-mode: inactive" } })
+                    </div>
+                    <input type="submit" name="btnPrint" id="btnPrint" value="印刷" class="btn btn-default" style="width:45px; height: 30px; margin-left:2rem; padding: 0; text-align: center" />
+                </div>
+            </div>
+        }
+
+
+    </div>
+
+</div>
+
+@section Scripts  {
+    @Styles.Render("~/Content/bootstrap-datepicker")
+    @Scripts.Render("~/bundles/bootstrap-datepicker")
+<script>
+
+        window.onload = function () {
+            $('#sidebar').toggleClass('active');
+        };
+
+        $(function () {
+            $('.date').datepicker({
+                format: "yyyy/mm/dd",
+                language: "ja",
+                autoclose: true, //日付選択で自動的にカレンダーを閉じる
+                orientation: 'bottom left'
+            });
+        });
+
+        // 印刷クリック時
+        $(function () {
+            $('#btnPrint').click(function () {
+             //   $(this).resetValidation();
+                //window.open('@Url.Action("TankaAutoSetList")', '_blank', 'width=700, height=700');
+                //$('#btnPrint').submit();
+                var dtFrom =$("#dateFrom").val();
+                var dtTo = $("#dateTo").val();
+                window.open('@Url.Action("TankaAutoSetList")?DTFROM=' + dtFrom + '&DTTO=' + dtTo, '_blank', 'width=900, height=600, resizable=1');
+
+            });
+        });
+
+</script>
+}
+

@@ -1,0 +1,147 @@
+﻿@using Macss.Areas.Fdass.ViewModels
+@model EstimatesViewModel
+
+<style>
+    h1, .h1,
+    h2, .h2,
+    h3, .h3 {
+        margin-top: 2px;
+        margin-bottom: 0px;
+    }
+</style>
+@{
+    ViewBag.Title = ViewBag.Title;
+}
+
+@section Heads {
+    <link href="/Content/details.css" rel="stylesheet" />
+    @*<link href="/Content/reset.css" rel="stylesheet" />*@
+}
+
+<div class="row">
+    <div class="navbar2 navbar-default" style="padding-bottom: 10px;">
+        @using (Html.BeginForm("", "Estimates/EdtMitumoriExcelTable", FormMethod.Post, new { enctype = "multipart/form-data", id = "EstimatesForm" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-inline">
+                <h2>@ViewBag.Title</h2>
+                <hr />
+            </div>
+            <div class="form-horizontal">
+                <div class="row">
+                    @Html.LabelFor(model => model.Seicod, htmlAttributes: new { @class = "col-sm-2 control-labelR", @id = "lbseikyuId", style = "white-space:nowrap; margin-left:10px;" })
+                    <div class="col-sm-3" style="width:160px; display:inline-flex">
+                        @Html.EditorFor(model => model.Seicod, new { htmlAttributes = new { @class = "form-control text_cd_middle", @id = "seikyuId", @maxlength = "9", style = "ime-mode: inactive" } })
+                        @Html.ValidationMessageFor(model => model.Seicod, "", new { @class = "text-danger" })
+                        @Html.ValidationSummary("マスタに存在しません。", new { @class = "text-danger", @id = "oputError1", style = "display:none" })
+                        @Html.ValidationSummary("コードを入力してください。", new { @class = "text-danger", @id = "oputError2", style = "display:none" })
+
+                    </div>
+                    <div class="col-sm-3" style="width:200px;" >
+                        @Html.EditorFor(model => model.Seinam, new { htmlAttributes = new { @class = "form-control text_jp_middle", @readonly = "readonly", @id = "seikyuName" } })
+                    </div>
+                    <div class="col-sm-1">
+                        <input type="submit" style="width: 45px; height:30px; padding: 0; text-align: center; margin-left:100px;" name="btnEstimates" id='btnEstimates' value="Excel" class="btn btn-default ml-2" onclick="return checkForm();" />
+                    </div>
+                </div>
+            </div>
+                }
+
+            </div>
+
+        </div>
+
+
+@section Scripts  {
+    @Styles.Render("~/Content/bootstrap-datepicker")
+    @Scripts.Render("~/bundles/bootstrap-datepicker")
+
+    <script>
+
+
+        //初期はExcelボタン押下不可
+        window.onload = function () {
+            $('#btnEstimates').prop('disabled', true);
+            $('#oputError1').hide();
+            $('#oputError2').hide();
+
+            $('#sidebar').toggleClass('active');
+    };
+
+        // seikyuIdフォーカスアウト時
+        $(function () {
+            $('#seikyuId').change(function () {
+
+                var postData = {
+                    id: $('input[name="Seicod"]').val()
+                };
+
+                 $.ajax({
+                    url: '@Url.Action("GetTorName")',
+                    type: 'POST',
+                    data: JSON.stringify(postData),
+                    dataType: 'json',
+                    contentType: 'application/json',
+
+                 }).done(function (result) {
+                     if (result.succsess == 1) {
+                         //成功したとき
+                         $("#seikyuName").val(result.torNam);
+                         $('#btnEstimates').prop('disabled', false);
+                         $('#oputError1').hide();
+                         $('#oputError2').hide();
+
+                     } else {
+                         $("#seikyuName").val("");
+                         $('#btnEstimates').prop('disabled', true);
+
+                         if (postData.id != "") {
+                             $('#oputError1').show();
+                             $('#oputError2').hide();
+                         }
+                         else {
+                             $('#oputError2').show();
+                             $('#oputError1').hide();
+                         }
+                         $('#seikyuId').eq(0).focus();
+                     }
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                        //例外の場合、エラー画面に飛ばす
+                        window.location.href = '/Error/Index'
+                     }).always(function () {
+                     });
+
+            });
+         });
+
+        function checkForm() {
+
+            if ($('input[name="Seicod"]').val() == "") {
+                $('#oputError2').show();
+                $('#oputError1').hide();
+                return false;
+            }
+            return window.confirm('ダウンロードしてもよろしいですか？');
+
+        }
+
+        // ExcelBtnクリック時
+        $(function () {
+            $('#btnEstimates').click(function () {
+
+                // ボタンの属性設定
+                $('<input>').attr({
+                    type: 'hidden',
+                    id: 'btnEstimates',
+                    name: 'btnEstimates',
+                    value: '出力'
+                }).appendTo('.btnEstimates');
+                $('#btnEstimates').submit();
+
+            });
+        });
+
+
+    </script>
+}

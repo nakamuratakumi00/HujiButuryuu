@@ -1,0 +1,97 @@
+﻿@Html.AntiForgeryToken()
+
+<div class="alert alert-info">
+    <span>@ViewBag.ConfirmMessage</span>
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        @if (ViewBag.ResultExec != null && ViewBag.ResultExec == true)
+        {
+            <a role="button" class="btn btn-secondary" href="@Url.Action("Index", "Home")">@MacssWeb.Resources.ControlText.BackToSubMenu</a>
+        }
+        else
+        {
+            <button type="submit" class="btn btn-secondary" name="cmdBtmBack" value="@((int)MacssWeb.Common.ButtonValues.Back)">@MacssWeb.Resources.ControlText.Back</button>
+        }
+    </div>
+</div>
+
+<table class="table macss-form-table">
+    <colgroup>
+        <col class="macss-form-table-title" />
+        <col class="macss-form-table-contents" />
+    </colgroup>
+    @if (ViewBag.ResultExec == null || ViewBag.ResultExec == false)
+    {
+        <tr>
+            <th scope="row">
+                <label class="control-label ">年月</label>
+            </th>
+            <td>
+                <div>
+                    <label class="control-label">@DateTime.Now.ToString(@"yyyy年MM月")</label>
+                </div>
+            </td>
+        </tr>
+    }
+    <tr>
+        <th scope="row">
+            <label class="control-label ">請求データ</label>
+        </th>
+        <td>
+            <div>
+                <label class="control-label">9999件</label>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label ">仕入データ</label>
+        </th>
+        <td>
+            <div>
+                <label class="control-label">9999件</label>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        @if (ViewBag.ResultExec != null && ViewBag.ResultExec == true)
+        {
+            <a role="button" class="btn btn-secondary" href="@Url.Action("Index", "Home")">@MacssWeb.Resources.ControlText.BackToSubMenu</a>
+        }
+        else
+        {
+            <button type="submit" class="btn btn-secondary" name="cmdBtmBack" value="@((int)MacssWeb.Common.ButtonValues.Back)">@MacssWeb.Resources.ControlText.Back</button>
+        }
+    </div>
+    @if (ViewBag.ResultExec == null || ViewBag.ResultExec == false)
+    {
+        <div class="col-4 text-right">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDialog">@ViewBag.ButtonText</button>
+        </div>
+    }
+</div>
+
+<div class="modal" id="ConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @ViewBag.ConfirmDialogText
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" name="cmdBtmExec" value="@((int)MacssWeb.Common.ButtonValues.Exec)">@MacssWeb.Resources.ControlText.Yes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>

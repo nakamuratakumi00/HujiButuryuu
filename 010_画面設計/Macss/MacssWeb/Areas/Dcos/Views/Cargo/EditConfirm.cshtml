@@ -1,0 +1,19 @@
+﻿<html lang="ja">
+@*@model IEnumerable<Macss.Database.Entity.CargoData>*@
+@{
+    ViewBag.Title = "保管料荷役料";
+    ViewBag.PageMainTitle = "保管料荷役料更新確認";
+    ViewBag.ConfirmMessage = MacssWeb.Resources.Messages.EditConfirm;
+    ViewBag.ButtonText = MacssWeb.Resources.ControlText.EditExec;
+    ViewBag.ConfirmDialogText = MacssWeb.Resources.Messages.EditReconfirm;
+    ViewBag.hokan_niyaku_no = true;
+    ViewBag.Edit = true;
+    ViewBag.Create = false;
+    ViewBag.hokan_spot = false;
+    ViewBag.is_deleted = true;
+    }
+@using (Html.BeginForm("Edit", "Cargo", null, FormMethod.Post))
+{
+
+    @Html.Partial("_Show")
+}

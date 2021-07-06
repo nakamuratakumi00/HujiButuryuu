@@ -1,0 +1,29 @@
+﻿@model Macss.Database.Entity.AccountMaster
+
+@{
+    ViewBag.Title = "運送業務 - TASS";
+    ViewBag.PageMainTitle = "出荷検品詳細確認　【外装検品】";
+    ViewBag.ScreenId = "";
+    ViewBag.OnlyShow = true;
+}
+
+@Html.Partial("_Show")
+
+@section Scripts {
+    <script>
+        $(function () {
+
+            var dt = new Macss.DataTables.MacssSimpleTable("#SampleList");
+            dt.configure();
+
+            var dt2 = new Macss.DataTables.MacssSimpleTable("#SampleList2");
+            dt2.configure();
+
+            var cond = new Macss.Collapse.ConditionsPanel("#ConditionAccordion", "#CollapseShow", "#CollapseHidden");
+            cond.setCollapseEvent();
+
+            //MacssDataTable（dataTables.fixedColumns.js）に表示する列が15件以上あると計算間違いで最左端列にスクロールバーが表示されるため、非表示にする
+            $('.DTFC_LeftBodyLiner').css('overflow-y', 'hidden');
+        });
+    </script>
+}

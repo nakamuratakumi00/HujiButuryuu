@@ -1,0 +1,635 @@
+﻿<html lang="ja">
+@model IEnumerable<Macss.Database.Entity.AccountMaster>
+
+@{
+    ViewBag.Title = "入出庫実績照会";
+    ViewBag.ScreenId = "";
+    ViewBag.PageMainTitle = "入出庫実績照会";
+}
+@section Scripts {
+    <script>
+        $(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#SampleList");
+            dt.configure();
+
+            var cond = new Macss.Collapse.ConditionsPanel("#ConditionAccordion", "#CollapseShow", "#CollapseHidden");
+            cond.setCollapseEvent();
+
+            var sampleDatePicker = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker", "#SampleCalendar");
+            sampleDatePicker.configure();
+            var sampleDatePicker1 = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker1", "#SampleCalendar1");
+            sampleDatePicker1.configure();
+            var sampleDatePicker2 = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker2", "#SampleCalendar2");
+            sampleDatePicker2.configure();
+
+
+
+            //MacssDataTable（dataTables.fixedColumns.js）に表示する列が15件以上あると計算間違いで最左端列にスクロールバーが表示されるため、非表示にする
+            $('.DTFC_LeftBodyLiner').css('overflow-y', 'hidden');
+
+        });
+    </script>
+}
+
+
+@Html.Partial("../Shared/Dialog/_ListSetting")
+@Html.Partial("../Shared/Dialog/_CsvDownload")
+
+@using (Html.BeginForm("Search", "D004", null, FormMethod.Post))
+{
+
+    <div class="accordion" id="ConditionAccordion">
+        <div class="card">
+            <div class="card-header macss-search-config-collapse-header" id="headingOne">
+                <div class="mb-0">
+                    <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain" aria-expanded="true" aria-controls="ConditionMain">
+                        <div class="d-inline-block" style="color:#333">検索設定</div>
+                        <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="display:none;"></i>
+                        <i id="CollapseShow" class="fas fa-chevron-circle-down" aria-hidden="true" style="display:none;"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+                <div class="row mr-0 mb-1">
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">対象データ</span>
+                            </div>
+                            <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                <option value="0"></option>
+                                <option value="1">入庫実績</option>
+                                <option value="2">出庫実績</option>
+                                <option value="3">TASS連携データ</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mr-0 mb-1">
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">入出庫No</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">入出庫No枝番</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mr-0 mb-1">
+                    <div class="col-8">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">入出庫日</span>
+                            </div>
+                            <input type="text" id="SampleDTPicker1" class="form-control">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar1"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                            <div class="input-group-append">
+                                <span class="input-group-text">～</span>
+                            </div>
+                            <input type="text" id="SampleDTPicker2" class="form-control" value="2021/01/29">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar2"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition3">得意先</span>
+                            </div>
+                            <input class="form-control text-box single-line" data-val="true" data-val-length="フィールド 部門コード は最大長が 4 の文字列である必要があります。" data-val-length-max="4" data-val-required="部門コード フィールドが必要です。" id="bumon_cd" name="bumon_cd" type="text">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#DepartmentCodeSearchDialog">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mr-0 mb-1">
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition3">倉庫</span>
+                            </div>
+                            <input class="form-control text-box single-line" data-val="true" data-val-length="フィールド 部門コード は最大長が 4 の文字列である必要があります。" data-val-length-max="4" data-val-required="部門コード フィールドが必要です。" id="bumon_cd" name="bumon_cd" type="text">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#DepartmentCodeSearchDialog">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition3">品名</span>
+                            </div>
+                            <input class="form-control text-box single-line" data-val="true" data-val-length="フィールド 部門コード は最大長が 4 の文字列である必要があります。" data-val-length-max="4" data-val-required="部門コード フィールドが必要です。" id="bumon_cd" name="bumon_cd" type="text">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#DepartmentCodeSearchDialog">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">ロットNo</span>
+                                <div class="form-check form-check-inline input-group-text mr-0">
+                                    <input class="form-check-input" type="checkbox">
+                                    <label class="form-check-label" for="inlineCheckbox1">空白のもののみ対象</label>
+                                </div>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mr-0 mb-1">
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">棚番</span>
+                                <div class="form-check form-check-inline input-group-text mr-0">
+                                    <input class="form-check-input" type="checkbox">
+                                    <label class="form-check-label" for="inlineCheckbox1">空白のもののみ対象</label>
+                                </div>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">保存期限</span>
+                            </div>
+                            <input type="text" id="SampleDTPicker1" class="form-control">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar1"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                            <div class="input-group-append">
+                                <span class="input-group-text">～</span>
+                            </div>
+                            <input type="text" id="SampleDTPicker2" class="form-control">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar2"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mr-0 mb-1">
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">在庫数</span>
+                            </div>
+                            <div class="macss-input-group-input form-control">
+                                <div class="form-check form-check-inline mr-4">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                                    <label class="form-check-label" for="inlineCheckbox6">算出する</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">表示データ</span>
+                            </div>
+                            <div class="macss-input-group-input form-control">
+                                <div class="form-check form-check-inline mr-4">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                                    <label class="form-check-label" for="inlineCheckbox6">削除済データを含む</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mr-0 mb-1">
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition3">作成者名</span>
+                            </div>
+                            <input class="form-control text-box single-line" data-val="true" data-val-length-max="20" id="bumon_cd" name="bumon_cd" type="text">
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">作成日時</span>
+                            </div>
+                            <input type="text" id="SampleDTPicker1" class="form-control">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar1"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                            <input class="time-control" id="TimeExample3" type="text" maxlength="5">
+                            <div class="input-group-append">
+                                <span class="input-group-text">～</span>
+                            </div>
+                            <input type="text" id="SampleDTPicker1" class="form-control">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar2"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                            <input class="time-control" id="TimeExample2" type="text" maxlength="5">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mr-0 mb-1">
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition3">更新者名</span>
+                            </div>
+                            <input class="form-control text-box single-line" data-val="true" data-val-length-max="20" id="bumon_cd" name="bumon_cd" type="text">
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">更新日時</span>
+                            </div>
+                            <input type="text" id="SampleDTPicker1" class="form-control">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar1"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                            <input class="time-control" id="TimeExample3" type="text" maxlength="5">
+                            <div class="input-group-append">
+                                <span class="input-group-text">～</span>
+                            </div>
+                            <input type="text" id="SampleDTPicker2" class="form-control">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar2"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                            <input class="time-control" id="TimeExample4" type="text" maxlength="5">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-fluid pt-4 pb-3 pl-0 clearfix">
+                    <div class="float-left">
+                        <button type="reset" class="btn btn-secondary btn-lg macss-btn-main">@MacssWeb.Resources.ControlText.ConditionClear</button>
+                    </div>
+                    <div class="float-right">
+                        <button type="submit" class="btn btn-primary btn-lg macss-btn-main">@MacssWeb.Resources.ControlText.Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="row mt-3 mb-4">
+    <div class="col-6">
+    </div>
+    <div class="col-6 text-right">
+        <div class="dropdown">
+            <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#CsvDownloadDialog">CSVダウンロード</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table id="SampleList" class="table table-striped table-hover macss-data-table">
+    <thead class="macss-data-table-header">
+        <!-- thの文字数で列の幅が決まってしまうため、必要に応じて全角スペースを入れて列の幅を調整する必要がある-->
+        <tr>
+            <th></th>
+            <th>
+                削除
+            </th>
+            <th>
+                入出庫No　
+            </th>
+            <th>
+                入出庫No枝番
+            </th>
+            <th>
+                伝票区分
+            </th>
+            <th>
+                入出庫日
+            </th>
+            <th>
+                得意先コード
+            </th>
+            <th>
+                得意先名　　　　
+            </th>
+            <th>
+                倉庫コード
+            </th>
+            <th>
+                倉庫名　　　　　　
+            </th>
+            <th>
+                品名コード
+            </th>
+            <th>
+                品名　　　　　　　　　
+            </th>
+            <th>
+                単位　
+            </th>
+            <th>
+                規格　　
+            </th>
+            <th>
+                PC部門　　　
+            </th>
+            <th>
+                PC部門名　　　　
+            </th>
+            <th>
+                入出庫数
+            </th>
+            <th>
+                在庫数
+            </th>
+            <th>
+                ロットNo　　
+            </th>
+            <th>
+                棚番　
+            </th>
+            <th>
+                保存期限
+            </th>
+            <th>
+                備考　　　　　
+            </th>
+            <th>
+                伝票No　
+            </th>
+            <th>
+                帳票ID　
+            </th>
+            <th>
+                見出し　　
+            </th>
+            <th>
+                配布先　
+            </th>
+            <th>
+                作成者
+            </th>
+            <th>
+                作成日時　　　　
+            </th>
+            <th>
+                更新者
+            </th>
+            <th>
+                更新日時　　　　
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="white-space:nowrap;">
+                前月残在庫数
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                2020/12
+            </td>
+            <td>
+                71281
+            </td>
+            <td>
+                共信商事（株）
+            </td>
+            <td>
+                20
+            </td>
+            <td>
+                松本物流センター
+            </td>
+            <td>
+                0900103
+            </td>
+            <td>
+                M－5251
+            </td>
+            <td>
+                cs
+            </td>
+            <td>
+                WSA8A72A
+            </td>
+            <td>
+                8041　
+            </td>
+            <td>
+                庄内物流センター
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                50
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+
+
+
+
+        <tr>
+            <td style="white-space:nowrap;">
+                <a href="@Url.Action("Edit", new { id = @"0173146" })" title="編集"><i class="fas fa-pencil-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                <a href="@Url.Action("Details", new { id = @"0173146" })" title="詳細"><i class="far fa-file-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                <a href="@Url.Action("DeleteConfirm", new { id = @"0173146" })" title="削除"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                016892
+            </td>
+            <td>
+                1
+            </td>
+            <td>
+                59 出庫
+            </td>
+            <td>
+                2021/01/29
+            </td>
+            <td>
+                71281
+            </td>
+            <td>
+                共信商事（株）
+            </td>
+            <td>
+                20
+            </td>
+            <td>
+                松本物流センター
+            </td>
+            <td>
+                0900103
+            </td>
+            <td>
+                M－5251
+            </td>
+            <td>
+                cs
+            </td>
+            <td>
+                WSA8A72A
+            </td>
+            <td>
+                8041　
+            </td>
+            <td>
+                庄内物流センター
+            </td>
+            <td>
+                40
+            </td>
+            <td>
+                10
+            </td>
+            <td>
+                0000001
+            </td>
+            <td>
+                LCMO780
+            </td>
+            <td>
+                2021/01/29
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>0173146</td>
+            <td>2021/02/15 13:27:11</td>
+            <td>0173850</td>
+            <td>2021/02/15 13:27:11</td>
+        </tr>
+        <tr>
+            <td style="white-space:nowrap;">
+                @*                <a href="@Url.Action("Edit", new { id = @"0173146" })" title="編集"><i class="fas fa-pencil-alt" style="color:#007bff" aria-hidden="true"></i></a>*@
+                <a href="@Url.Action("Edit", new { id = @"0173146" })" title="編集">　</a>
+                <a href="@Url.Action("DetailsReceipt", new { id = @"0173146" })" title="詳細"><i class="far fa-file-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                <a disabled href="@Url.Action("DeleteConfirm", new { id = @"0173146" })" title="削除">　</a>
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                016892
+            </td>
+            <td>
+                1
+            </td>
+            <td>
+                43 入庫
+            </td>
+            <td>
+                2021/01/29
+            </td>
+            <td>
+                71281
+            </td>
+            <td>
+                共信商事（株）
+            </td>
+            <td>
+                20
+            </td>
+            <td>
+                松本物流センター
+            </td>
+            <td>
+                0900103
+            </td>
+            <td>
+                M－5251
+            </td>
+            <td>
+                cs
+            </td>
+            <td>
+                WSA8A72A
+            </td>
+            <td>
+                8041　
+            </td>
+            <td>
+                庄内物流センター
+            </td>
+            <td>
+                20
+            </td>
+            <td>
+                30
+            </td>
+            <td>
+                0000001
+            </td>
+            <td>
+                LCMO780
+            </td>
+            <td>
+                2021/01/29
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>0173146</td>
+            <td>2021/02/15 13:27:11</td>
+            <td>0173850</td>
+            <td>2021/02/15 13:27:11</td>
+        </tr>
+    </tbody>
+</table>

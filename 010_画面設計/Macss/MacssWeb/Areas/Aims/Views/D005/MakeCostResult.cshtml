@@ -1,0 +1,102 @@
+﻿@model IEnumerable<MacssWeb.Models.AccountMasterUpload>
+
+@{
+    ViewBag.Title = "請求仕入 - AIMS";
+    ViewBag.ScreenId = "";
+    ViewBag.PageMainTitle = "営業費用データ作成結果";
+}
+@section Scripts {
+    <script>
+
+        $(function () {
+            new Macss.DataTables.MacssSimpleTable("#MakeConfirmList").configure();
+            $('[data-toggle="popover"]').popover();
+        });
+    </script>
+
+}
+
+
+<div class="alert @ViewBag.AlertType">
+    <span>@ViewBag.ResultMessage</span>
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+    </div>
+    <div class="col-4 text-right">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#CordConfirmDialog">PCコード設定</button>
+        <!--<a role="button" class="btn btn-secondary" href="@Url.Action("Index", "Home")">@MacssWeb.Resources.ControlText.BackToSubMenu</a>-->
+    </div>
+</div>
+
+<div class="row mt-2 mb-2">
+    <div class="col-12 text-right">
+        <div class="dropdown">
+            <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#CsvDownloadDialog">CSVダウンロード</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table id="MakeConfirmList" class="table table-striped table-hover macss-data-table" style="width:100%">
+    <thead class="macss-data-table-header">
+        <!-- thの文字数で列の幅が決まってしまうため、必要に応じて全角スペースを入れて列の幅を調整する必要がある-->
+        <tr>
+            <th>サブシステム区分</th>
+            <th>営業費用件数</th>
+            <th>営業費用金額</th>
+            <th>エラー件数</th>
+            <th>エラー金額</th>
+            <th>作成日時</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>01：運送業務</td>
+            <td style="text-align:right">100</td>
+            <td style="text-align:right">100,000</td>
+            <td style="text-align:right">1</td>
+            <td style="text-align:right">1,000</td>
+            <td>YYYY/MM/DD hh:mm:ss</td>
+        </tr>
+        <tr>
+            <td>02：包装商品販売</td>
+            <td style="text-align:right">100</td>
+            <td style="text-align:right">100,000</td>
+            <td style="text-align:right">1</td>
+            <td style="text-align:right">1,000</td>
+            <td>YYYY/MM/DD hh:mm:ss</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="modal" id="CordConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="CordConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="CordConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                PCコード設定処理をします。よろしいですか？
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("MakeCodeResult", "D005", null, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="UploadFileName" name="uploadFileName" value="@ViewBag.UploadFileName" />
+                    <button type="submit" class="btn btn-primary">はい</button>
+                }
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>

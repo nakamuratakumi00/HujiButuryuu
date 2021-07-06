@@ -1,0 +1,90 @@
+﻿@* 内示・発注明細登録ダイアログ *@
+<div class="modal" id="D001_03_EditDialog" tabindex="-1" role="dialog" aria-labelledby="D001_03_EditDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="D001_03_EditDialogTitle">内示・発注明細登録</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="accordion" id="ConditionAccordion">
+                <table class="table macss-form-table2">
+                    <colgroup>
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                    </colgroup>
+                    @* 納期 必須 *@
+                    <tr>
+                        <th scope="row">
+                            <label class="control-label required">納期</label>
+                        </th>
+                        <td>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="input-group">
+                                        <input type="text" id="date1" class="form-control" />
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary" type="button" id="Calendar1"><i class="fa fa-calendar-alt"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    @* 注文数 必須 *@
+                    <tr>
+                        <th scope="row">
+                            <label class="control-label required">注文数</label>
+                        </th>
+                        <td>
+                            <div>
+                                <input class="form-control" type="text" value="123456789">
+                            </div>
+                        </td>
+                    </tr>
+                    @* 注文金額 表示 *@
+                    <tr>
+                        <th scope="row">
+                            <label class="control-label">注文金額</label>
+                        </th>
+                        <td>
+                            123,456,789
+                        </td>
+                    </tr>
+                    @* 特記事項 入力 *@
+                    <tr>
+                        <th scope="row">
+                            <label class="control-label">特記事項</label>
+                        </th>
+                        <td>
+                            <div>
+                                <input class="form-control" type="text" value="１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer"></div>
+            <div class="row justify-content-between macss-form-button-group-row">
+                <div class="col-4">
+                    <a class="btn btn-secondary" data-dismiss="modal" role="button">キャンセル</a>
+                </div>
+                <div class="col-8 text-right">
+                    <a class="btn btn-primary" data-dismiss="modal" role="button">更新</a>
+                    <a class="btn btn-danger" data-dismiss="modal" role="button">削除</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(function () {
+            var date1 = new Macss.DatetimePicker.MacssDtPicker("#date1", "#Calendar1");
+            date1.configure();
+            var date2 = new Macss.DatetimePicker.MacssDtPicker("#date2", "#Calendar2");
+            date2.configure();
+        });
+    </script>
+</div>
+

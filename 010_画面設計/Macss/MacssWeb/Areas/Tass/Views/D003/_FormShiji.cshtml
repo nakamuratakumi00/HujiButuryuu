@@ -1,0 +1,296 @@
+﻿@model Macss.Database.Entity.AccountMaster
+
+<!--D003-->
+
+@Html.AntiForgeryToken()
+
+@Html.Partial("../Shared/Dialog/_DenpyoKbnCodeSearch")
+@Html.Partial("../Shared/Dialog/_TokuisakiCodeSearch")
+
+@Html.Partial("../Shared/Dialog/_UnsohohoCodeSearch")
+@Html.Partial("../Shared/Dialog/_UnsocorseCodeSearch")
+@Html.Partial("../Shared/Dialog/_ShiiresakiCodeSearch")
+@Html.Partial("../Shared/Dialog/_SyukkaBashoCodeSearch")
+@Html.Partial("../Shared/Dialog/_UnsokbnCodeSearch")
+@Html.Partial("../Shared/Dialog/_KisyuACodeSearch")
+@Html.Partial("../Shared/Dialog/_TantoshaCodeSearch")
+@Html.Partial("../Shared/Dialog/_TodokesakiCodeSearch")
+@Html.Partial("../Shared/Dialog/_HinmeiCodeSearch")
+@Html.Partial("../Shared/Dialog/_YubinNoSearch")
+@Html.Partial("../Shared/Dialog/_SaisyuJuyoCodeSearch")
+@Html.Partial("../Shared/Dialog/_OkyakusamaCodeSearch")
+@Html.Partial("../Shared/Dialog/_RevertBeforeDeletionDialog")
+
+<!--テスト値-->
+@{ var testVal = string.Empty; }
+@{ var processVal = string.Empty; }
+@{ processVal = "Edit"; }
+
+<div>
+    @Html.ValidationSummary(false, "入力エラーがあります。", new { @class = "alert alert-danger" })
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#TransitionConfirmDialog">@MacssWeb.Resources.ControlText.BackToList</button>
+    </div>
+    <div class="col-4 text-right">
+        <button type="submit" class="btn btn-primary ctrl-item">@MacssWeb.Resources.ControlText.InputConfirm</button>
+    </div>
+</div>
+
+@* 明細入力項目 *@
+<div class="accordion mt-3" id="ConditionAccordion1">
+    <div class="card">
+        <div class="card-header macss-search-config-collapse-header" id="headingOne1">
+            <div class="mb-0">
+                <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain1" aria-expanded="true" aria-controls="DetailMain">
+                    <div class="d-inline-block" style="color:#333">出荷現品 明細入力項目</div>
+                    <i id="CollapseHidden1" class="fas fa-chevron-circle-up" aria-hidden="true" style="color: rgb(120, 188, 255);"></i>
+                    <i id="CollapseShow1" class="fas fa-chevron-circle-down" aria-hidden="true" style="color: rgb(120, 188, 255); display: none;"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="ConditionMain1" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne1" data-parent="#ConditionAccordion1">
+            <table class="table macss-form-table2">
+                <colgroup>
+                    <col class="macss-form-table-title2">
+                    <col class="macss-form-table-contents2">
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <th scope="row">
+                            <label class="control-label required" for="account_id">出荷No</label>
+                        </th>
+                        <td>
+                            <div>
+                                <input class="form-control text-box single-line" id="LotNo" name="IDName" type="text" value="">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            <label class="control-label required">品名コード</label>
+                        </th>
+                        <td>
+                            <div>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="input-group">
+                                            <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                                            <div class="input-group-append">
+                                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#HinmeiCodeSearchDialog">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="macss-val-ref col-6">
+                                        <span id="HinmeiCodeName" class="align-middle"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            <label class="control-label required" for="account_id">出荷数</label>
+                        </th>
+                        <td>
+                            <div>
+                                <input class="form-control text-box single-line" id="LotNo" name="IDName" type="text" value="">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            <label class="control-label" for="account_id">顧客品番</label>
+                        </th>
+                        <td>
+                            <div>
+                                <input class="form-control text-box single-line" id="LotNo" name="IDName" type="text" value="">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            <label class="control-label">顧客品番有無</label>
+                        </th>
+                        <td>
+                            <div>
+                                <select class="custom-select form-control" id="Condition3">
+                                    <option value="" selected></option>
+                                    <option value="0">無</option>
+                                    <option value="1">有</option>
+                                </select>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-4">
+                    <a class="btn btn-secondary macss-btn-sub" role="button">キャンセル</a>
+                    <a id="addDetail" class="btn btn-primary macss-btn-sub" role="button">追加</a>
+                    <a id="editDetail" class="btn btn-primary macss-btn-sub" role="button" style="display:none;">更新</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* 明細 *@
+<div class="accordion mt-3 mb-3" id="ConditionAccordion2">
+    <div class="card">
+        <div class="card-header macss-search-config-collapse-header" id="headingOne2">
+            <div class="mb-0">
+                <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain2" aria-expanded="true" aria-controls="ConditionMain3">
+                    <div class="d-inline-block" style="color:#333">出荷現品 明細項目</div>
+                    <i id="CollapseHidden2" class="fas fa-chevron-circle-up" aria-hidden="true" style="color: rgb(120, 188, 255);"></i>
+                    <i id="CollapseShow2" class="fas fa-chevron-circle-down" aria-hidden="true" style="color: rgb(120, 188, 255); display: none;"></i>
+                </button>
+            </div>
+        </div>
+        <div id="ConditionMain2" class="container-fluid mb-3 pr-1 collapse show" aria-labelledby="headingOne2" data-parent="#ConditionAccordion2">
+            <table id="SampleList" class="table table-striped table-hover macss-data-table">
+                <thead class="macss-data-table-header">
+                    <!-- thの文字数で列の幅が決まってしまうため、必要に応じて全角スペースを入れて列の幅を調整する必要がある-->
+                    <tr>
+                        <th>　</th>
+                        <th>出荷No</th>
+                        <th>品名コード</th>
+                        <th>出荷数</th>
+                        <th>顧客品番　　　　　</th>
+                        <th>顧客品番有無</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="white-space:nowrap;">
+                            <div class="macss-icon-container">
+                                <div class="macss-icon-item">
+                                    <a class="Edit01" data-toggle="modal" data-target="#ZaikoEditDialog" title="編集" data-setval="01"><i class="fas fa-pencil-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                </div>
+                                <div class="macss-icon-item">
+                                    <a data-toggle="modal" data-target="#DeleteDialog" title="削除"><i class="fas fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </td>
+                        <td>61283</td>
+                        <td>0120107929</td>
+                        <td class="text-right">500</td>
+                        <td>MS906C3-TE241LSC</td>
+                        <td>有</td>
+                    </tr>
+                    <tr>
+                        <td style="white-space:nowrap;">
+                            <div class="macss-icon-container">
+                                <div class="macss-icon-item">
+                                    <a class="Edit01" data-toggle="modal" data-target="#ZaikoEditDialog" title="編集" data-setval="01"><i class="fas fa-pencil-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                </div>
+                                <div class="macss-icon-item">
+                                    <a data-toggle="modal" data-target="#DeleteDialog" title="削除"><i class="fas fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </td>
+                        <td>21282</td>
+                        <td>0120107929</td>
+                        <td class="text-right">100</td>
+                        <td>MS906C3-TE241LSC</td>
+                        <td>有</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4"></div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#TransitionConfirmDialog">@MacssWeb.Resources.ControlText.BackToList</button>
+    </div>
+    <div class="col-8 text-right">
+        <button type="submit" class="btn btn-primary ctrl-item">@MacssWeb.Resources.ControlText.InputConfirm</button>
+    </div>
+</div>
+
+<div class="modal" id="TransitionConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.TransitionConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @MacssWeb.Resources.Messages.TransitionConfirm
+                <br>
+                @MacssWeb.Resources.Messages.Confirm
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary macss-btn" href="@Url.Action("Index")" role="button">@MacssWeb.Resources.ControlText.Yes</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>
+@if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+{
+    <div id="create" style="display:none">1</div>
+}
+else
+{
+    <div id="create" style="display:none">0</div>
+}
+
+@* 明細削除確認ダイアログ *@
+<div class="modal" id="DeleteDialog" tabindex="-1" role="dialog" aria-labelledby="DeleteDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="D021DeleteDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                明細を削除します。よろしいですか？
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("Create", "D021", null, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-primary">@MacssWeb.Resources.ControlText.Yes</button>
+                }
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function setDepartmentCode(code, value) {
+        $("#bumon_cd").val(code);
+        $("#DepartmentName").text(value);
+    }
+    $(function () {
+        var dt = new Macss.DataTables.MacssDataTable("#SampleList");
+        dt.configure();
+
+        var cond = new Macss.Collapse.ConditionsPanel("#ConditionAccordion1", "#CollapseShow1", "#CollapseHidden1");
+        cond.setCollapseEvent();
+        var cond = new Macss.Collapse.ConditionsPanel("#ConditionAccordion2", "#CollapseShow2", "#CollapseHidden2");
+        cond.setCollapseEvent();
+
+        var createDatePicker = new Macss.DatetimePicker.MacssDtPicker("#totyaku_date", "#TotyakuDateCalendar");
+        createDatePicker.configure();
+        var updateDatePicker = new Macss.DatetimePicker.MacssDtPicker("#syukka_date", "#SyukkaDateCalendar");
+        updateDatePicker.configure();
+        
+    });
+
+</script>

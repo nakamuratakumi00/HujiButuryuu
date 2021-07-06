@@ -1,0 +1,46 @@
+﻿<html lang="ja">
+@{
+    ViewBag.Title = "請求データ";
+    ViewBag.PageMainTitle = "請求データ";
+}
+
+@Html.AntiForgeryToken()
+
+<table class="table macss-form-table">
+    <colgroup>
+        <col class="macss-form-table-title" />
+        <col class="macss-form-table-contents" />
+    </colgroup>
+    <tr>
+        <th scope="row">
+            <label class="control-label">年月</label>
+        </th>
+        <td>
+            <label class="control-label">2020/12</label>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">作成データ</label>
+        </th>
+        <td>
+            <div class="form-control">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio1" value="option1" checked="checked">
+                    <label class="form-check-label" for="inlineRadio1">リハーサル</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio2" value="option2">
+                    <label class="form-check-label" for="inlineRadio2">本番</label>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a role="button" class="btn btn-primary">実行</a>
+    </div>
+</div>
+

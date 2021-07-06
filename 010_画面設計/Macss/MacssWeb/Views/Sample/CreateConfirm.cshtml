@@ -1,0 +1,16 @@
+﻿@model Macss.Database.Entity.AccountMaster
+
+@{
+    ViewBag.Title = "サンプル";
+    ViewBag.PageMainTitle = "新規作成確認サンプル";
+    ViewBag.ScreenId = "SMPL-D001";
+    ViewBag.ConfirmMessage = MacssWeb.Resources.Messages.CreateConfirm;
+    ViewBag.ButtonText = MacssWeb.Resources.ControlText.CreateExec;
+    ViewBag.ConfirmDialogText = MacssWeb.Resources.Messages.CreateReconfirm;
+}
+
+@using (Html.BeginForm("Create", "Sample", null, FormMethod.Post))
+{
+
+    @Html.Partial("_Show", Model)
+}

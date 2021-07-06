@@ -1,0 +1,464 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ActiveReportsLayout Version="3.2" PrintWidth="16836.48" DocumentName="ARNet Document" ScriptLang="C#" MasterReport="0">
+  <StyleSheet>
+    <Style Name="Normal" Value="font-family: Arial; font-style: normal; text-decoration: none; font-weight: normal; font-size: 10pt; color: Black; ddo-char-set: 186" />
+    <Style Name="Heading1" Value="font-size: 16pt; font-weight: bold" />
+    <Style Name="Heading2" Value="font-family: Times New Roman; font-size: 14pt; font-weight: bold; font-style: italic" />
+    <Style Name="Heading3" Value="font-size: 13pt; font-weight: bold" />
+  </StyleSheet>
+  <Sections>
+    <Section Type="PageHeader" Name="PageHeader" Height="0" BackColor="16777215" />
+    <Section Type="Detail" Name="Detail" Height="11887.8" BackColor="16777215">
+      <Control Type="AR.Shape" Name="Shape34" Left="8943.843" Top="6901.919" Width="7695.36" Height="3725.28" BackColor="16777215" RoundingRadius="10" />
+      <Control Type="AR.Label" Name="Label179" DataField="Tdknam3" Left="9842.4" Top="8904.961" Width="5362.56" Height="230.4" Caption="NNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 10pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label274" Left="13762.08" Top="8946.721" Width="702.7198" Height="205.92" Caption="振替No" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" />
+      <Control Type="AR.Label" Name="Label271" Left="5001.121" Top="8988.48" Width="663.84" Height="205.92" Caption="振替No" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" />
+      <Control Type="AR.Shape" Name="Shape33" Left="8968.32" Top="789.1201" Width="7695.36" Height="3761.28" BackColor="16777215" RoundingRadius="10" />
+      <Control Type="AR.Label" Name="Label127" DataField="Tdknam3" Left="9842.4" Top="2782.081" Width="5362.56" Height="230.4" Caption="NNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 10pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label273" Left="13762.08" Top="2809.44" Width="702.7198" Height="205.92" Caption="振替No" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" />
+      <Control Type="AR.Shape" Name="Shape2" Left="194.3993" Top="692.6401" Width="7695.36" Height="3991.68" BackColor="16777215" RoundingRadius="10" />
+      <Control Type="AR.Label" Name="Label233" DataField="Tdknam3" Left="1054.08" Top="2913.12" Width="5362.56" Height="230.4" Caption="NNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 10pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label269" Left="5012.64" Top="2934.72" Width="727.1998" Height="205.92" Caption="振替No" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" />
+      <Control Type="AR.Shape" Name="Shape29" Left="13785.12" Top="2793.6" Width="2880" Height="215.0398" BackColor="16777215" RoundingRadius="10" />
+      <Control Type="AR.Shape" Name="Shape7" Left="5034.24" Top="2934.72" Width="2851.2" Height="215.0398" BackColor="16777215" RoundingRadius="10" />
+      <Control Type="AR.Label" Name="Label65" DataField="Tdknam3" Left="1042.561" Top="8933.761" Width="5362.56" Height="230.4" Caption="NNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 10pt; ddo-char-set: 1" />
+      <Control Type="AR.Shape" Name="Shape4" Left="156.9607" Top="6700.32" Width="7721.28" Height="3990.24" BackColor="16777215" RoundingRadius="10" />
+      <Control Type="AR.Shape" Name="Shape17" Left="5022.721" Top="8976.96" Width="2851.2" Height="214.56" BackColor="16777215" RoundingRadius="10" />
+      <Control Type="AR.Shape" Name="Shape37" Left="13785.12" Top="8935.2" Width="2851.2" Height="215.0398" BackColor="16777215" RoundingRadius="10" />
+      <Control Type="AR.Label" Name="Label206" Left="192.96" Top="704.16" Width="1162.08" Height="646.56" Caption="発送元&#xD;&#xA;(会社名)" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" />
+      <Control Type="AR.Label" Name="Label217" Left="187.2" Top="1568.16" Width="1051.2" Height="205.92" Caption="経費負担No" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" />
+      <Control Type="AR.Label" Name="Label215" Left="187.2" Top="1350.72" Width="1175.04" Height="217.44" Caption="現品保管場所" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" />
+      <Control Type="AR.Label" Name="Label89" DataField="Edaban" Left="16225.92" Top="855.3602" Width="469.4389" Height="195.84" Caption="-XX/XX" Style="font-size: 6pt; ddo-char-set: 0" />
+      <Control Type="AR.Label" Name="Label272" DataField="Fsykno" Left="14329.44" Top="2790.72" Width="2309.76" Height="257.76" Caption="XXXXXXXXXXXXXXXXXXXXXXXXXXXXX" Style="font-size: 9pt; ddo-char-set: 0; ddo-shrink-to-fit: true" />
+      <Control Type="AR.Label" Name="Label126" DataField="Tdknam2" Left="9842.4" Top="2553.12" Width="6949.439" Height="230.4" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 10pt; ddo-char-set: 1" />
+      <Control Type="AR.Shape" Name="Shape58" Left="8942.4" Top="7548.48" Width="5297.762" Height="214.5602" BackColor="16777215" RoundingRadius="10" />
+      <Control Type="AR.Label" Name="Label71" DataField="Tkjiko2" Left="1028.161" Top="10884.96" Width="4080.96" Height="217.44" Caption="NNNNNNNNNNNNNNNNNNNN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label253" DataField="Unscrs" Left="2131.199" Top="5397.12" Width="299.5199" Height="217.44" Caption="XX" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label29" DataField="Hincod5" Left="187.2007" Top="10393.92" Width="1483.2" Height="249.1198" Caption="XXXXXXXXXX" Style="color: Black; font-size: 9pt; vertical-align: middle; ddo-char-set: 1; ddo-shrink-to-fit: true" />
+      <Control Type="AR.Label" Name="Label69" Left="155.5207" Top="10690.56" Width="1033.92" Height="217.4401" Caption="特記事項" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" />
+      <Control Type="AR.Label" Name="Label75" Left="155.5207" Top="11340" Width="779.0406" Height="217.4401" Caption="運送方法" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label70" DataField="Tkjiko1" Left="1028.161" Top="10667.52" Width="4080.96" Height="217.4401" Caption="NNNNNNNNNNNNNNNNNNNN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Shape" Name="Shape23" Left="156.9607" Top="7368.48" Width="5353.92" Height="216" BackColor="16777215" RoundingRadius="10" />
+      <Control Type="AR.Label" Name="Label72" DataField="Keifno" Left="1388.161" Top="7564.32" Width="4173.12" Height="217.44" Caption="XXXXXXXXXXXXXXXXXXXXXXXXXXXXX" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label236" Left="8942.4" Top="7552.8" Width="1003.679" Height="217.44" Caption="経費負担No" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" />
+      <Control Type="AR.Label" Name="Label243" Left="13739.04" Top="7771.681" Width="1006.56" Height="217.44" Caption="お届先コード" Style="font-size: 8pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label275" DataField="Fsykno" Left="14317.92" Top="8935.2" Width="2298.241" Height="257.76" Caption="XXXXXXXXXXXXXXXXXXXXXXXXXXXXX" Style="font-size: 9pt; ddo-char-set: 0; ddo-shrink-to-fit: true" />
+      <Control Type="AR.Label" Name="Label268" DataField="Fsykno" Left="5569.92" Top="2926.08" Width="2279.52" Height="257.7598" Caption="XXXXXXXXXXXXXXXXXXXXXXXXXXXXX" Style="font-size: 9pt; ddo-char-set: 0; ddo-shrink-to-fit: true" />
+      <Control Type="AR.Line" Name="Line39" X1="8971.201" Y1="1627.2" X2="14734.08" Y2="1627.2" />
+      <Control Type="AR.Shape" Name="Shape25" Left="156.9609" Top="7574.402" Width="5353.92" Height="216" BackColor="16777215" RoundingRadius="10" />
+      <Control Type="AR.Label" Name="Label53" DataField="Basyo" Left="1372.321" Top="7356.959" Width="4142.88" Height="217.44" Caption="NNNNNNNNNNNNNNNNNNNN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Shape" Name="Shape30" Left="194.4" Top="1350.72" Width="5328" Height="214.56" BackColor="16777215" RoundingRadius="10" />
+      <Control Type="AR.Shape" Name="Shape32" Left="194.4" Top="1555.2" Width="5328" Height="241.92" BackColor="16777215" RoundingRadius="10" />
+      <Control Type="AR.Label" Name="Label270" DataField="Fsykno" Left="5569.921" Top="8974.08" Width="2302.559" Height="257.76" Caption="XXXXXXXXXXXXXXXXXXXXXXXXXXXXX" Style="font-size: 9pt; ddo-char-set: 0; ddo-shrink-to-fit: true" />
+      <Control Type="AR.Label" Name="Label125" DataField="Tdknam1" Left="9842.4" Top="2318.4" Width="6949.439" Height="230.4" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 10pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label138" DataField="Unscod" Left="9885.599" Top="4741.92" Width="299.52" Height="217.44" Caption="XX" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label139" Left="10193.76" Top="4741.92" Width="552.9604" Height="217.4401" Caption="コース" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label115" DataField="Keifno" Left="10002.24" Top="1421.28" Width="4298.401" Height="217.44" Caption="XXXXXXXXXXXXXXXXXXXXXXXXXXXXX" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label112" Left="8988.48" Top="1438.56" Width="1013.76" Height="217.44" Caption="経費負担No" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" />
+      <Control Type="AR.Label" Name="Label255" DataField="Tokcod" Left="951.8394" Top="5159.52" Width="1101.6" Height="217.44" Caption="XXXXXXXXX" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label221" DataField="Keifno" Left="1399.68" Top="1555.2" Width="4112.64" Height="217.44" Caption="XXXXXXXXXXXXXXXXXXXXXXXXXXXXX" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label218" DataField="Basyo" Left="1388.16" Top="1350.72" Width="4138.56" Height="217.44" Caption="NNNNNNNNNNNNNNNNNNNN" Style="color: Black; font-size: 9pt; ddo-char-set: 1; ddo-shrink-to-fit: none" />
+      <Control Type="AR.Label" Name="Label55" DataField="Ufutanmei" Left="5070.241" Top="7145.281" Width="491.04" Height="217.44" Caption="NN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label220" DataField="Ufutanmei" Left="5047.2" Top="1118.88" Width="495.3599" Height="217.44" Caption="NN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label189" DataField="Sykymd" Left="15050.88" Top="7529.759" Width="1530.72" Height="217.44" Caption="YYMMDD" Style="font-size: 10pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label114" DataField="Ufutanmei" Left="13900.32" Top="1209.6" Width="466.5595" Height="217.44" Caption="NN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Shape" Name="Shape15" Left="5512.32" Top="1350.72" Width="2377.44" Height="446.4" BackColor="16777215" RoundingRadius="10" />
+      <Control Type="AR.Shape" Name="Shape50" Left="13484.16" Top="4547.521" Width="3179.52" Height="921.5991" BackColor="16777215" RoundingRadius="10" />
+      <Control Type="AR.Label" Name="Label8" Left="5526.72" Top="698.4" Width="688.3196" Height="240.48" Caption="出荷No" Style="background-color: Black; color: White; font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label22" DataField="Hsatukai" Left="192.96" Top="155.52" Width="5703.84" Height="226.08" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label199" Left="2920.32" Top="381.6" Width="2265.12" Height="300.96" Caption="①出荷注文書" Style="font-size: 11pt; font-weight: bold; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label203" DataField="Edaban" Left="7427.52" Top="758.88" Width="460.7996" Height="161.28" Caption="-XX/XX" Style="font-size: 6pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label237" Left="180" Top="3143.52" Width="1048.32" Height="246.2401" Caption="品名コード" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" />
+      <Control Type="AR.Label" Name="Label239" DataField="Hincod1" Left="198.72" Top="3389.76" Width="1483.2" Height="249.1198" Caption="XXXXXXXXXX" Style="color: Black; font-size: 9pt; vertical-align: middle; ddo-char-set: 1; ddo-shrink-to-fit: true" />
+      <Control Type="AR.Label" Name="Label7" DataField="Hincod5" Left="198.72" Top="4397.76" Width="1483.2" Height="286.5595" Caption="XXXXXXXXXX" Style="color: Black; font-size: 9pt; vertical-align: middle; ddo-char-set: 1; ddo-shrink-to-fit: true" />
+      <Control Type="AR.Label" Name="Label11" DataField="Hincod4" Left="198.72" Top="4137.12" Width="1483.2" Height="249.1198" Caption="XXXXXXXXXX" Style="color: Black; font-size: 9pt; vertical-align: middle; ddo-char-set: 1; ddo-shrink-to-fit: true" />
+      <Control Type="AR.Label" Name="Label12" DataField="Hincod3" Left="198.72" Top="3888.001" Width="1483.2" Height="249.1198" Caption="XXXXXXXXXX" Style="color: Black; font-size: 9pt; vertical-align: middle; ddo-char-set: 1; ddo-shrink-to-fit: true" />
+      <Control Type="AR.Label" Name="Label13" DataField="Hincod2" Left="198.72" Top="3638.88" Width="1483.2" Height="249.1198" Caption="XXXXXXXXXX" Style="color: Black; font-size: 9pt; vertical-align: middle; ddo-char-set: 1; ddo-shrink-to-fit: true" />
+      <Control Type="AR.Field" Name="TextBox18" DataField="Syuksu1" Left="6446.88" Top="3421.44" Width="1360.8" Height="217.44" Text="ZZ,ZZZ,ZZ9" OutputFormat="#,##0" Style="font-size: 9pt; text-align: right; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label244" DataField="Hinnam1" Left="1661.76" Top="3421.44" Width="5244.48" Height="217.44" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 9pt; ddo-char-set: 0" />
+      <Control Type="AR.Label" Name="Label14" DataField="Hinnam4" Left="1661.76" Top="4168.8" Width="5244.48" Height="217.44" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label15" DataField="Hinnam3" Left="1661.76" Top="3919.68" Width="5244.48" Height="217.44" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label16" DataField="Hinnam2" Left="1661.76" Top="3670.56" Width="5244.48" Height="217.44" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label17" DataField="Hinnam5" Left="1661.76" Top="4417.92" Width="5244.48" Height="217.44" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Field" Name="TextBox2" DataField="Syuksu5" Left="6446.88" Top="4417.92" Width="1360.8" Height="217.44" Text="ZZ,ZZZ,ZZ9" OutputFormat="#,##0" Style="font-size: 9pt; text-align: right; ddo-char-set: 1" />
+      <Control Type="AR.Field" Name="TextBox3" DataField="Syuksu4" Left="6446.88" Top="4168.8" Width="1360.8" Height="217.44" Text="ZZ,ZZZ,ZZ9" OutputFormat="#,##0" Style="font-size: 9pt; text-align: right; ddo-char-set: 1" />
+      <Control Type="AR.Field" Name="TextBox4" DataField="Syuksu3" Left="6446.88" Top="3919.68" Width="1360.8" Height="217.44" Text="ZZ,ZZZ,ZZ9" OutputFormat="#,##0" Style="font-size: 9pt; text-align: right; ddo-char-set: 1" />
+      <Control Type="AR.Field" Name="TextBox5" DataField="Syuksu2" Left="6446.88" Top="3670.56" Width="1360.8" Height="217.44" Text="ZZ,ZZZ,ZZ9" OutputFormat="#,##0" Style="font-size: 9pt; text-align: right; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label35" Left="1638.72" Top="3143.52" Width="2288.16" Height="240.48" Caption="品名・型式・寸法・図番" Style="background-color: Black; color: White; font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label4" Left="6364.799" Top="3149.28" Width="803.5204" Height="240.48" Caption="出荷数" Style="background-color: Black; color: White; font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label207" DataField="Htynam" Left="1054.08" Top="692.64" Width="4406.4" Height="217.44" Caption="NNNNNNNNNNNNNNNNNNNN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label208" DataField="Htytel" Left="1915.2" Top="1114.56" Width="2400.48" Height="217.44" Caption="XXXXXXXXXXXXXXXXXX" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label209" DataField="Htykah" Left="1915.2" Top="914.4" Width="1810.08" Height="217.44" Caption="NNNNNNNN" Style="color: Black; font-size: 9pt; ddo-char-set: 1; ddo-shrink-to-fit: true" />
+      <Control Type="AR.Label" Name="Label210" Left="1054.08" Top="914.4" Width="884.1598" Height="217.44" Caption="課補・係長" Style="font-size: 8pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label211" Left="3474.72" Top="914.4" Width="643.6801" Height="217.44" Caption="担当者" Style="font-size: 8pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label213" Left="1054.08" Top="1137.6" Width="884.1598" Height="217.44" Caption="電話番号" Style="font-size: 8pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label18" DataField="Tannam" Left="4073.76" Top="914.4" Width="1694.874" Height="217.44" Caption="NNNNNNNN" Style="color: Black; font-size: 9pt; ddo-char-set: 1; ddo-shrink-to-fit: true" />
+      <Control Type="AR.Label" Name="Label216" Left="4118.4" Top="1131.84" Width="820.8002" Height="217.44" Caption="運賃負担" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" />
+      <Control Type="AR.Label" Name="Label219" DataField="Ufutan" Left="4888.8" Top="1118.88" Width="224.64" Height="217.44" Caption="X" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label223" Left="194.4" Top="1807.2" Width="637.92" Height="576" Caption="お届先&#xD;&#xA;(住所)" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" />
+      <Control Type="AR.Label" Name="Label224" Left="194.4" Top="2442.24" Width="815.0403" Height="660.9602" Caption="(届先名)" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" />
+      <Control Type="AR.Label" Name="Label226" Left="2053.44" Top="1807.2" Width="420.48" Height="217.44" Caption="TEL" Style="font-size: 8pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label227" Left="4978.08" Top="1807.2" Width="1006.56" Height="217.44" Caption="お届先コード" Style="font-size: 8pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label228" DataField="Tdkjyu1" Left="1054.08" Top="1992.96" Width="6749.28" Height="230.4" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 10pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label229" DataField="Tdkjyu2" Left="1054.08" Top="2223.36" Width="6730.561" Height="230.4" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 10pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label230" DataField="Tdktel" Left="2473.92" Top="1807.2" Width="2504.16" Height="217.44" Caption="XXXXXXXXXXXXXXXXXXXX" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label231" DataField="Tdknam1" Left="1054.08" Top="2449.44" Width="6933.6" Height="230.4" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 10pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label232" DataField="Tdknam2" Left="1054.08" Top="2672.64" Width="6949.439" Height="230.4" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 10pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label234" DataField="Tdkcod" Left="5984.64" Top="1807.2" Width="1890.72" Height="217.44" Caption="XXXXXXXXXXXXXXX" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label225" DataField="Tdkyub" Left="1042.56" Top="1807.2" Width="1010.88" Height="217.44" Caption="999-9999" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label262" Left="832.32" Top="1807.2" Width="244.8" Height="217.44" Caption="〒" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label257" Left="194.4" Top="4684.32" Width="1033.92" Height="217.4401" Caption="特記事項" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" />
+      <Control Type="AR.Label" Name="Label258" DataField="Tkjiko1" Left="1039.68" Top="4724.64" Width="4266.72" Height="217.4401" Caption="NNNNNNNNNNNNNNNNNNNN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label259" DataField="Tkjiko2" Left="1039.68" Top="4950.721" Width="4266.72" Height="217.44" Caption="NNNNNNNNNNNNNNNNNNNN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label201" Left="6827.04" Top="5582.88" Width="996.48" Height="254.88" Caption="TASS_LA1D001a&#xD;&#xA;" Style="font-size: 6pt; vertical-align: middle; ddo-char-set: 0" />
+      <Control Type="AR.Label" Name="Label249" Left="198.72" Top="5152.321" Width="594.7204" Height="244.7991" Caption="得意先" Style="background-color: Black; color: White; font-size: 8pt; ddo-char-set: 1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label250" Left="194.4" Top="5397.12" Width="779.0406" Height="217.4401" Caption="運送方法" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label251" DataField="Unscod" Left="1095.84" Top="5397.12" Width="315.359" Height="217.44" Caption="XX" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label252" Left="1419.839" Top="5397.12" Width="552.9603" Height="217.4401" Caption="コース" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label254" Left="2458.08" Top="5159.52" Width="779.04" Height="217.44" Caption="出荷場所" Style="font-size: 8pt; ddo-char-set: 1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label256" DataField="Sybcod" Left="3301.92" Top="5168.16" Width="299.52" Height="217.44" Caption="XX" Style="font-size: 8pt; ddo-char-set: 1" />
+      <Control Type="AR.ReportInfo" Name="ReportInfo6" Left="2419.2" Top="5376.96" Width="1563.841" Height="226.0802" FormatString="{RunDateTime:yyyy/MM/dd HH:mm:ss}" Style="font-size: 8pt; text-align: right; ddo-char-set: 1" />
+      <Control Type="AR.ReportInfo" Name="ReportInfo7" Left="3961.44" Top="5374.08" Width="720" Height="217.4399" FormatString="{PageNumber} / {PageCount}" Style="font-size: 8pt; text-align: right; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label214" Left="5572.799" Top="1360.8" Width="643.68" Height="217.44" Caption="出荷日" Style="font-size: 8pt; ddo-char-set: 1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label222" DataField="Sykymd" Left="6137.279" Top="1504.8" Width="1388.16" Height="263.5203" Caption="YYYY-MM-DD" Style="font-size: 10pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label266" DataField="Denf" Left="7889.759" Top="1120.32" Width="168.4795" Height="224.6399" Caption="X" Style="font-size: 8pt; ddo-char-set: 1" />
+      <Control Type="AR.Line" Name="Line4" X1="1088.64" Y1="902.8799" X2="5541.12" Y2="902.8799" LineStyle="3" />
+      <Control Type="AR.Line" Name="Line11" X1="1080" Y1="1114.56" X2="5541.12" Y2="1114.56" LineStyle="3" />
+      <Control Type="AR.Line" Name="Line13" X1="3474.72" Y1="897.1199" X2="3474.72" Y2="1114.56" LineStyle="3" />
+      <Control Type="AR.Line" Name="Line14" X1="1054.08" Y1="2440.8" X2="7889.16" Y2="2449.44" LineStyle="3" />
+      <Control Type="AR.Line" Name="Line15" X1="198.72" Y1="3638.88" X2="7875.36" Y2="3638.88" LineStyle="3" />
+      <Control Type="AR.Line" Name="Line16" X1="198.72" Y1="3899.52" X2="7875.36" Y2="3899.52" LineStyle="3" />
+      <Control Type="AR.Line" Name="Line18" X1="198.72" Y1="4160.16" X2="7895.52" Y2="4160.16" LineStyle="3" />
+      <Control Type="AR.Line" Name="Line19" X1="198.72" Y1="4420.8" X2="7889.762" Y2="4420.8" LineStyle="3" />
+      <Control Type="AR.Label" Name="Label5" Left="5515.201" Top="6724.8" Width="688.32" Height="230.4" Caption="出荷No" Style="background-color: Black; color: White; font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label6" DataField="Hsatukai" Left="154.0807" Top="6173.28" Width="5703.84" Height="226.08" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label9" Left="2845.441" Top="6399.359" Width="2265.12" Height="300.96" Caption="②出荷注文書(控)" Style="font-size: 11pt; font-weight: bold; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label10" DataField="Edaban" Left="7392.96" Top="6757.92" Width="491.0401" Height="195.84" Caption="-XX/XX" Style="font-size: 6pt; ddo-char-set: 0" />
+      <Control Type="AR.Label" Name="Label27" Left="141.1207" Top="9194.4" Width="1048.32" Height="246.2401" Caption="品名コード" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" />
+      <Control Type="AR.Label" Name="Label28" DataField="Hincod1" Left="187.2007" Top="9397.44" Width="1483.2" Height="249.1198" Caption="XXXXXXXXXX" Style="color: Black; font-size: 9pt; vertical-align: middle; ddo-char-set: 1; ddo-shrink-to-fit: true" />
+      <Control Type="AR.Label" Name="Label30" DataField="Hincod4" Left="187.2007" Top="10144.8" Width="1483.2" Height="249.1198" Caption="XXXXXXXXXX" Style="color: Black; font-size: 9pt; vertical-align: middle; ddo-char-set: 1; ddo-shrink-to-fit: true" />
+      <Control Type="AR.Label" Name="Label31" DataField="Hincod3" Left="187.2007" Top="9895.681" Width="1483.2" Height="249.1198" Caption="XXXXXXXXXX" Style="color: Black; font-size: 9pt; vertical-align: middle; ddo-char-set: 1; ddo-shrink-to-fit: true" />
+      <Control Type="AR.Label" Name="Label32" DataField="Hincod2" Left="187.2007" Top="9646.562" Width="1483.2" Height="249.1198" Caption="XXXXXXXXXX" Style="color: Black; font-size: 9pt; vertical-align: middle; ddo-char-set: 1; ddo-shrink-to-fit: true" />
+      <Control Type="AR.Field" Name="TextBox6" DataField="Syuksu1" Left="6408" Top="9429.12" Width="1360.8" Height="217.44" Text="ZZ,ZZZ,ZZ9" OutputFormat="#,##0" Style="font-size: 9pt; text-align: right; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label33" DataField="Hinnam1" Left="1638.721" Top="9429.12" Width="5244.48" Height="217.44" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label34" DataField="Hinnam4" Left="1638.721" Top="10176.48" Width="5244.48" Height="217.44" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label36" DataField="Hinnam3" Left="1638.721" Top="9927.36" Width="5244.48" Height="217.44" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label37" DataField="Hinnam2" Left="1638.721" Top="9678.24" Width="5244.48" Height="217.44" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label38" DataField="Hinnam5" Left="1638.721" Top="10425.6" Width="5244.48" Height="217.44" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Field" Name="TextBox7" DataField="Syuksu5" Left="6408" Top="10425.6" Width="1360.8" Height="217.44" Text="ZZ,ZZZ,ZZ9" OutputFormat="#,##0" Style="font-size: 9pt; text-align: right; ddo-char-set: 1" />
+      <Control Type="AR.Field" Name="TextBox8" DataField="Syuksu4" Left="6408" Top="10176.48" Width="1360.8" Height="217.44" Text="ZZ,ZZZ,ZZ9" OutputFormat="#,##0" Style="font-size: 9pt; text-align: right; ddo-char-set: 1" />
+      <Control Type="AR.Field" Name="TextBox9" DataField="Syuksu3" Left="6408" Top="9927.36" Width="1360.8" Height="217.44" Text="ZZ,ZZZ,ZZ9" OutputFormat="#,##0" Style="font-size: 9pt; text-align: right; ddo-char-set: 1" />
+      <Control Type="AR.Field" Name="TextBox10" DataField="Syuksu2" Left="6408" Top="9678.24" Width="1360.8" Height="217.44" Text="ZZ,ZZZ,ZZ9" OutputFormat="#,##0" Style="font-size: 9pt; text-align: right; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label39" DataField="Syukno" Left="6240.961" Top="6707.52" Width="1200.96" Height="233.2797" Caption="XXX-XXXXX" Style="font-size: 10.2pt; ddo-char-set: 0" />
+      <Control Type="AR.Label" Name="Label40" Left="1625.761" Top="9205.921" Width="2288.16" Height="240.48" Caption="品名・型式・寸法・図番" Style="background-color: Black; color: White; font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label41" Left="6350.4" Top="9188.641" Width="803.5204" Height="240.48" Caption="出荷数" Style="background-color: Black; color: White; font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label42" Left="154.0807" Top="6711.84" Width="1162.08" Height="646.56" Caption="発送元&#xD;&#xA;(会社名)" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" />
+      <Control Type="AR.Label" Name="Label43" DataField="Htynam" Left="1042.561" Top="6700.32" Width="4406.4" Height="217.44" Caption="NNNNNNNNNNNNNNNNNNNN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label44" DataField="Htytel" Left="1903.681" Top="7145.281" Width="2400.48" Height="217.44" Caption="XXXXXXXXXXXXXXXXXX" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label45" DataField="Htykah" Left="1903.681" Top="6924.96" Width="1810.08" Height="217.44" Caption="NNNNNNNN" Style="color: Black; font-size: 9pt; ddo-char-set: 1; ddo-shrink-to-fit: true" />
+      <Control Type="AR.Label" Name="Label46" Left="1042.561" Top="6927.84" Width="884.1598" Height="217.44" Caption="課補・係長" Style="font-size: 8pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label47" Left="3463.201" Top="6927.84" Width="643.6801" Height="217.44" Caption="担当者" Style="font-size: 8pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label48" Left="1042.561" Top="7158.24" Width="884.1598" Height="217.44" Caption="電話番号" Style="font-size: 8pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label49" DataField="Tannam" Left="4062.241" Top="6923.52" Width="1694.88" Height="217.44" Caption="NNNNNNNN" Style="color: Black; font-size: 9pt; ddo-char-set: 1; ddo-shrink-to-fit: true" />
+      <Control Type="AR.Label" Name="Label50" Left="175.6807" Top="7368.48" Width="1349.28" Height="217.44" Caption="現品保管場所" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" />
+      <Control Type="AR.Label" Name="Label51" Left="4118.4" Top="7158.24" Width="820.8002" Height="217.44" Caption="運賃負担" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" />
+      <Control Type="AR.Label" Name="Label52" Left="175.6807" Top="7583.041" Width="1382.4" Height="217.44" Caption="経費負担No" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" />
+      <Control Type="AR.Label" Name="Label54" DataField="Ufutan" Left="4901.76" Top="7145.281" Width="224.64" Height="217.44" Caption="X" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label56" Left="182.8807" Top="7799.04" Width="815.0402" Height="450.7199" Caption="お届先&#xD;&#xA;(住所)" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" />
+      <Control Type="AR.Label" Name="Label57" Left="182.8807" Top="8449.92" Width="815.0402" Height="660.9602" Caption="(届先名)" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" />
+      <Control Type="AR.Label" Name="Label58" Left="2014.561" Top="7799.04" Width="420.48" Height="217.44" Caption="TEL" Style="font-size: 8pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label59" Left="4939.201" Top="7799.04" Width="1006.56" Height="217.44" Caption="お届先コード" Style="font-size: 8pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label62" DataField="Tdktel" Left="2435.041" Top="7799.04" Width="2504.16" Height="217.44" Caption="XXXXXXXXXXXXXXXXXXXX" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label66" DataField="Tdkcod" Left="5945.76" Top="7799.04" Width="1890.72" Height="217.44" Caption="XXXXXXXXXXXXXXX" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label67" DataField="Tdkyub" Left="1003.681" Top="7799.04" Width="1010.88" Height="217.44" Caption="999-9999" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label68" Left="820.8008" Top="7799.04" Width="313.92" Height="217.44" Caption="〒" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label73" Left="6785.281" Top="11545.92" Width="1026.72" Height="217.44" Caption="TASS_LA1D001a&#xD;&#xA;" Style="font-size: 6pt; vertical-align: middle; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label74" Left="161.2807" Top="11095.2" Width="594.7196" Height="228.9606" Caption="得意先" Style="background-color: Black; color: White; font-size: 8pt; ddo-char-set: 1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label76" DataField="Unscod" Left="1072.802" Top="11345.76" Width="299.52" Height="217.44" Caption="XX" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label77" Left="1380.961" Top="11340" Width="552.9604" Height="217.4401" Caption="コース" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label78" DataField="Unscrs" Left="2092.321" Top="11340" Width="299.52" Height="217.44" Caption="XX" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label79" Left="2419.199" Top="11102.4" Width="779.04" Height="217.44" Caption="出荷場所" Style="font-size: 8pt; ddo-char-set: 1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label80" DataField="Tokcod" Left="912.96" Top="11102.4" Width="1101.6" Height="217.44" Caption="XXXXXXXXX" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label81" DataField="Sybcod" Left="3290.4" Top="11111.04" Width="299.52" Height="217.44" Caption="XX" Style="font-size: 8pt; ddo-char-set: 1" />
+      <Control Type="AR.ReportInfo" Name="ReportInfo1" Left="2391.84" Top="11319.84" Width="1563.841" Height="226.0802" FormatString="{RunDateTime:yyyy/MM/dd HH:mm:ss}" Style="font-size: 8pt; text-align: right; ddo-char-set: 1" />
+      <Control Type="AR.ReportInfo" Name="ReportInfo2" Left="3926.881" Top="11316.96" Width="720" Height="217.4399" FormatString="{PageNumber} / {PageCount}" Style="font-size: 8pt; text-align: right; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label82" Left="5571.361" Top="7367.04" Width="643.68" Height="217.44" Caption="出荷日" Style="font-size: 8pt; ddo-char-set: 1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label83" DataField="Sykymd" Left="6125.76" Top="7483.682" Width="1327.68" Height="263.5203" Caption="YYYY-MM-DD" Style="font-size: 10pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label84" DataField="Denf" Left="7878.241" Top="7128" Width="168.4795" Height="224.6399" Caption="X" Style="font-size: 8pt; ddo-char-set: 1" />
+      <Control Type="AR.Line" Name="Line2" X1="1084.321" Y1="6910.561" X2="5529.601" Y2="6910.561" LineStyle="3" />
+      <Control Type="AR.Line" Name="Line3" X1="1075.681" Y1="7139.521" X2="5529.601" Y2="7139.521" LineStyle="3" />
+      <Control Type="AR.Line" Name="Line5" X1="3463.201" Y1="6916.321" X2="3463.201" Y2="7133.761" LineStyle="3" />
+      <Control Type="AR.Line" Name="Line6" X1="1042.561" Y1="8449.92" X2="7869.601" Y2="8449.921" LineStyle="3" />
+      <Control Type="AR.Line" Name="Line7" X1="156.9607" Y1="9658.08" X2="7836.48" Y2="9658.08" LineStyle="3" />
+      <Control Type="AR.Line" Name="Line8" X1="156.9607" Y1="9907.201" X2="7850.879" Y2="9907.201" LineStyle="3" />
+      <Control Type="AR.Line" Name="Line9" X1="156.9607" Y1="10144.8" X2="7836.48" Y2="10156.32" LineStyle="3" />
+      <Control Type="AR.Line" Name="Line10" X1="156.9607" Y1="10405.44" X2="7850.879" Y2="10405.44" LineStyle="3" />
+      <Control Type="AR.Label" Name="Label264" Left="4682.88" Top="10667.52" Width="552.9605" Height="224.6399" Caption="荷姿" Style="font-size: 8pt; ddo-char-set: 1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label265" Left="4682.88" Top="11095.2" Width="636.4807" Height="224.6399" Caption="包装数" Style="font-size: 8pt; ddo-char-set: 1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label85" Left="6353.28" Top="10667.52" Width="552.9605" Height="224.6399" Caption="備考" Style="font-size: 8pt; ddo-char-set: 1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label86" Left="14300.64" Top="804.96" Width="688.3196" Height="233.28" Caption="出荷No" Style="background-color: Black; color: White; font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label90" Left="8953.921" Top="2996.64" Width="1048.32" Height="246.2401" Caption="品名コード" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" />
+      <Control Type="AR.Label" Name="Label91" DataField="Hincod1" Left="8961.121" Top="3234.24" Width="1483.2" Height="249.1198" Caption="XXXXXXXXXX" Style="color: Black; font-size: 9pt; vertical-align: middle; ddo-char-set: 1; ddo-shrink-to-fit: true" />
+      <Control Type="AR.Label" Name="Label92" DataField="Hincod5" Left="8975.521" Top="4269.6" Width="1483.2" Height="249.1198" Caption="XXXXXXXXXX" Style="color: Black; font-size: 9pt; vertical-align: middle; ddo-char-set: 1; ddo-shrink-to-fit: true" />
+      <Control Type="AR.Label" Name="Label93" DataField="Hincod4" Left="8961.12" Top="4004.64" Width="1483.2" Height="249.1198" Caption="XXXXXXXXXX" Style="color: Black; font-size: 9pt; vertical-align: middle; ddo-char-set: 1; ddo-shrink-to-fit: true" />
+      <Control Type="AR.Label" Name="Label94" DataField="Hincod3" Left="8961.12" Top="3732.48" Width="1483.2" Height="249.1198" Caption="XXXXXXXXXX" Style="color: Black; font-size: 9pt; vertical-align: middle; ddo-char-set: 1; ddo-shrink-to-fit: true" />
+      <Control Type="AR.Label" Name="Label95" DataField="Hincod2" Left="8961.12" Top="3483.36" Width="1483.2" Height="249.1198" Caption="XXXXXXXXXX" Style="color: Black; font-size: 9pt; vertical-align: middle; ddo-char-set: 1; ddo-shrink-to-fit: true" />
+      <Control Type="AR.Field" Name="TextBox11" DataField="Syuksu1" Left="15220.79" Top="3237.12" Width="1360.8" Height="217.44" Text="ZZ,ZZZ,ZZ9" OutputFormat="#,##0" Style="font-size: 9pt; text-align: right; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label96" DataField="Hinnam1" Left="10424.16" Top="3234.24" Width="5244.48" Height="217.44" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label97" DataField="Hinnam4" Left="10424.16" Top="4036.32" Width="5244.48" Height="217.44" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label98" DataField="Hinnam3" Left="10424.16" Top="3764.16" Width="5244.48" Height="217.44" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label99" DataField="Hinnam2" Left="10424.16" Top="3515.04" Width="5244.48" Height="217.44" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label100" DataField="Hinnam5" Left="10424.16" Top="4273.92" Width="5244.48" Height="217.44" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Field" Name="TextBox12" DataField="Syuksu5" Left="15220.79" Top="4262.4" Width="1360.8" Height="217.44" Text="ZZ,ZZZ,ZZ9" OutputFormat="#,##0" Style="font-size: 9pt; text-align: right; ddo-char-set: 1" />
+      <Control Type="AR.Field" Name="TextBox13" DataField="Syuksu4" Left="15220.79" Top="4013.28" Width="1360.8" Height="217.44" Text="ZZ,ZZZ,ZZ9" OutputFormat="#,##0" Style="font-size: 9pt; text-align: right; ddo-char-set: 1" />
+      <Control Type="AR.Field" Name="TextBox14" DataField="Syuksu3" Left="15220.79" Top="3764.16" Width="1360.8" Height="217.44" Text="ZZ,ZZZ,ZZ9" OutputFormat="#,##0" Style="font-size: 9pt; text-align: right; ddo-char-set: 1" />
+      <Control Type="AR.Field" Name="TextBox15" DataField="Syuksu2" Left="15220.79" Top="3515.04" Width="1360.8" Height="217.44" Text="ZZ,ZZZ,ZZ9" OutputFormat="#,##0" Style="font-size: 9pt; text-align: right; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label102" Left="10401.12" Top="3002.4" Width="2288.16" Height="240.48" Caption="品名・型式・寸法・図番" Style="background-color: Black; color: White; font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label103" Left="15138.72" Top="3003.84" Width="803.5204" Height="240.48" Caption="出荷数" Style="background-color: Black; color: White; font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label104" Left="8966.88" Top="797.76" Width="1162.08" Height="646.56" Caption="依頼元&#xD;&#xA;(会社名)" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" />
+      <Control Type="AR.Label" Name="Label105" DataField="Htynam" Left="9874.08" Top="786.2402" Width="4406.4" Height="217.44" Caption="NNNNNNNNNNNNNNNNNNNN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label106" DataField="Htytel" Left="10735.2" Top="1208.16" Width="2400.48" Height="217.44" Caption="XXXXXXXXXXXXXXXXXX" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label107" DataField="Htykah" Left="10677.6" Top="1002.24" Width="1810.08" Height="217.44" Caption="NNNNNNNN" Style="color: Black; font-size: 9pt; ddo-char-set: 1; ddo-shrink-to-fit: true" />
+      <Control Type="AR.Label" Name="Label108" Left="9862.562" Top="1008" Width="884.1598" Height="217.44" Caption="課補・係長" Style="font-size: 8pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label109" Left="12237.12" Top="1008" Width="643.6801" Height="217.44" Caption="担当者" Style="font-size: 8pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label110" Left="9862.562" Top="1219.68" Width="884.1598" Height="217.44" Caption="電話番号" Style="font-size: 8pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label111" DataField="Tannam" Left="12788.64" Top="1002.24" Width="1694.88" Height="217.44" Caption="NNNNNNNN" Style="color: Black; font-size: 9pt; ddo-char-set: 1; ddo-shrink-to-fit: true" />
+      <Control Type="AR.Label" Name="Label118" Left="8965.44" Top="1671.84" Width="815.0402" Height="450.7199" Caption="お届先&#xD;&#xA;(住所)" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" />
+      <Control Type="AR.Label" Name="Label119" Left="8965.439" Top="2318.4" Width="815.0402" Height="637.9205" Caption="(届先名)" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" />
+      <Control Type="AR.Label" Name="Label135" Left="15638.4" Top="5472" Width="1022.4" Height="254.88" Caption="TASS_LA1D001a&#xD;&#xA;" Style="font-size: 6pt; vertical-align: middle; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label137" Left="8946.721" Top="4741.92" Width="779.0406" Height="217.4401" Caption="運送方法" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label140" DataField="Unscrs" Left="10905.12" Top="4741.92" Width="299.52" Height="217.44" Caption="XX" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label141" Left="11232" Top="4538.881" Width="779.04" Height="217.44" Caption="出荷場所" Style="font-size: 8pt; ddo-char-set: 1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label142" DataField="Tokcod" Left="9725.758" Top="4538.881" Width="1101.6" Height="217.44" Caption="XXXXXXXXX" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label143" DataField="Sybcod" Left="12051.36" Top="4547.521" Width="299.52" Height="217.44" Caption="XX" Style="font-size: 8pt; ddo-char-set: 1" />
+      <Control Type="AR.ReportInfo" Name="ReportInfo3" Left="11204.64" Top="4756.319" Width="1563.841" Height="226.0802" FormatString="{RunDateTime:yyyy/MM/dd HH:mm:ss}" Style="font-size: 8pt; text-align: right; ddo-char-set: 1" />
+      <Control Type="AR.ReportInfo" Name="ReportInfo4" Left="12758.4" Top="4753.44" Width="720" Height="217.4399" FormatString="{PageNumber} / {PageCount}" Style="font-size: 8pt; text-align: right; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label144" Left="14407.2" Top="1402.56" Width="643.68" Height="217.44" Caption="出荷日" Style="font-size: 8pt; ddo-char-set: 1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label145" DataField="Sykymd" Left="15050.88" Top="1398.24" Width="1530.72" Height="217.44" Caption="YYYY-MM-DD" Style="font-size: 10pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label146" DataField="Denf" Left="16691.03" Top="1213.92" Width="168.4795" Height="224.6399" Caption="X" Style="font-size: 8pt; ddo-char-set: 1" />
+      <Control Type="AR.Line" Name="Line12" X1="9885.599" Y1="996.4801" X2="14369.16" Y2="996.4801" LineStyle="3" />
+      <Control Type="AR.Line" Name="Line17" X1="9874.08" Y1="1208.16" X2="14300.04" Y2="1208.16" LineStyle="3" />
+      <Control Type="AR.Line" Name="Line20" X1="12237.12" Y1="990.72" X2="12237.12" Y2="1208.16" LineStyle="3" />
+      <Control Type="AR.Line" Name="Line21" X1="9842.4" Y1="2309.76" X2="16663.08" Y2="2318.4" LineStyle="3" />
+      <Control Type="AR.Line" Name="Line22" X1="8966.88" Y1="3732.482" X2="16649.27" Y2="3732.482" LineStyle="3" />
+      <Control Type="AR.Line" Name="Line23" X1="8968.321" Y1="3993.12" X2="16649.28" Y2="3993.12" LineStyle="3" />
+      <Control Type="AR.Line" Name="Line24" X1="8994.239" Y1="3463.2" X2="16649.28" Y2="3463.2" LineStyle="3" />
+      <Control Type="AR.Line" Name="Line25" X1="8966.88" Y1="4262.4" X2="16649.28" Y2="4262.4" LineStyle="3" />
+      <Control Type="AR.Label" Name="Label147" Left="13495.67" Top="4531.682" Width="552.9605" Height="224.6399" Caption="荷姿" Style="font-size: 8pt; ddo-char-set: 1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label148" Left="13508.64" Top="4968" Width="600.4791" Height="224.6399" Caption="包装数" Style="font-size: 8pt; ddo-char-set: 1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label87" Left="10036.8" Top="50.40017" Width="2236.321" Height="286.5603" Caption="③御届伝票兼現品票" Style="font-size: 11pt; font-weight: bold; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label245" Left="8968.321" Top="590.4009" Width="2629.44" Height="195.84" Caption="※ご注文品下記の通りお届けします。" Style="font-family: HGP明朝B; font-size: 7pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label190" DataField="hsjyusyo" Left="13134.24" Top="496.8002" Width="2747.522" Height="217.44" Caption="NNNNNNNNNNNNNNNNNNNN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label151" Left="12362.4" Top="61.92017" Width="866.8804" Height="217.44" Caption="発送扱者" Style="font-size: 8pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label152" Left="13119.83" Top="313.9202" Width="220.3212" Height="217.44" Caption="〒" Style="font-size: 8pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label153" DataField="hsyubno" Left="13364.63" Top="302.4002" Width="858.2414" Height="217.44" Caption="XXXXXXX" Style="font-size: 8pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label154" Left="14280.47" Top="302.4002" Width="298.081" Height="217.44" Caption="℡" Style="font-size: 8pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label155" DataField="hstel" Left="14496.48" Top="290.8802" Width="1820.16" Height="217.44" Caption="XXXXXXXXXXXXXXXX" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label157" DataField="Hsatukai" Left="13112.64" Top="50.40017" Width="3630.241" Height="217.44" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label88" Left="12941.28" Top="1221.12" Width="820.8002" Height="217.44" Caption="運賃負担" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" />
+      <Control Type="AR.Label" Name="Label113" DataField="Ufutan" Left="13721.76" Top="1209.6" Width="224.64" Height="217.44" Caption="X" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label116" Left="10838.88" Top="1656" Width="420.48" Height="217.44" Caption="TEL" Style="font-size: 8pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label117" Left="13763.52" Top="1667.52" Width="1006.56" Height="217.44" Caption="お届先コード" Style="font-size: 8pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label120" DataField="Tdktel" Left="11259.36" Top="1656" Width="2504.16" Height="217.44" Caption="XXXXXXXXXXXXXXXXXXXX" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label121" DataField="Tdkcod" Left="14770.08" Top="1656" Width="1890.72" Height="217.44" Caption="XXXXXXXXXXXXXXX" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label124" DataField="Tdkyub" Left="9828" Top="1656" Width="1010.88" Height="217.44" Caption="999-9999" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label128" Left="9617.759" Top="1667.52" Width="254.8802" Height="217.44" Caption="〒" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label129" Left="8976.962" Top="4547.521" Width="779.04" Height="217.44" Caption="得意先" Style="font-size: 8pt; ddo-char-set: 1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label130" Left="14240.16" Top="6917.761" Width="724.319" Height="240.48" Caption="出荷No" Style="background-color: Black; color: White; font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label131" DataField="Edaban" Left="16188.48" Top="6965.281" Width="478.081" Height="195.84" Caption="-XX/XX" Style="font-size: 6pt; ddo-char-set: 0" />
+      <Control Type="AR.Label" Name="Label132" Left="8929.441" Top="9158.4" Width="1048.32" Height="246.2401" Caption="品名コード" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" />
+      <Control Type="AR.Label" Name="Label133" DataField="Hincod1" Left="8961.121" Top="9364.32" Width="1483.2" Height="249.1198" Caption="XXXXXXXXXX" Style="color: Black; font-size: 9pt; vertical-align: middle; ddo-char-set: 1; ddo-shrink-to-fit: true" />
+      <Control Type="AR.Label" Name="Label134" DataField="Hincod5" Left="8961.121" Top="10360.8" Width="1483.2" Height="249.1198" Caption="XXXXXXXXXX" Style="color: Black; font-size: 9pt; vertical-align: middle; ddo-char-set: 1; ddo-shrink-to-fit: true" />
+      <Control Type="AR.Label" Name="Label136" DataField="Hincod4" Left="8961.121" Top="10111.68" Width="1483.2" Height="249.1198" Caption="XXXXXXXXXX" Style="color: Black; font-size: 9pt; vertical-align: middle; ddo-char-set: 1; ddo-shrink-to-fit: true" />
+      <Control Type="AR.Label" Name="Label149" DataField="Hincod3" Left="8961.121" Top="9848.16" Width="1483.2" Height="249.1198" Caption="XXXXXXXXXX" Style="color: Black; font-size: 9pt; vertical-align: middle; ddo-char-set: 1; ddo-shrink-to-fit: true" />
+      <Control Type="AR.Label" Name="Label150" DataField="Hincod2" Left="8961.121" Top="9613.44" Width="1483.2" Height="249.1198" Caption="XXXXXXXXXX" Style="color: Black; font-size: 9pt; vertical-align: middle; ddo-char-set: 1; ddo-shrink-to-fit: true" />
+      <Control Type="AR.Field" Name="TextBox16" DataField="Syuksu1" Left="15196.32" Top="9381.601" Width="1360.8" Height="217.44" Text="ZZ,ZZZ,ZZ9" OutputFormat="#,##0" Style="font-size: 9pt; text-align: right; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label156" DataField="Hinnam1" Left="10424.16" Top="9393.12" Width="5244.48" Height="217.44" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label158" DataField="Hinnam4" Left="10424.16" Top="10143.36" Width="5244.48" Height="217.44" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label159" DataField="Hinnam3" Left="10424.16" Top="9879.841" Width="5244.48" Height="217.44" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label160" DataField="Hinnam2" Left="10424.16" Top="9630.72" Width="5244.48" Height="217.44" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label161" DataField="Hinnam5" Left="10424.16" Top="10392.48" Width="5244.48" Height="217.44" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Field" Name="TextBox17" DataField="Syuksu5" Left="15196.32" Top="10392.48" Width="1360.8" Height="217.44" Text="ZZ,ZZZ,ZZ9" OutputFormat="#,##0" Style="font-size: 9pt; text-align: right; ddo-char-set: 1" />
+      <Control Type="AR.Field" Name="TextBox19" DataField="Syuksu4" Left="15196.32" Top="10144.8" Width="1360.8" Height="217.44" Text="ZZ,ZZZ,ZZ9" OutputFormat="#,##0" Style="font-size: 9pt; text-align: right; ddo-char-set: 1" />
+      <Control Type="AR.Field" Name="TextBox20" DataField="Syuksu3" Left="15196.32" Top="9879.841" Width="1360.8" Height="217.44" Text="ZZ,ZZZ,ZZ9" OutputFormat="#,##0" Style="font-size: 9pt; text-align: right; ddo-char-set: 1" />
+      <Control Type="AR.Field" Name="TextBox21" DataField="Syuksu2" Left="15196.32" Top="9630.72" Width="1360.8" Height="217.44" Text="ZZ,ZZZ,ZZ9" OutputFormat="#,##0" Style="font-size: 9pt; text-align: right; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label163" Left="10399.68" Top="9141.121" Width="2288.16" Height="240.48" Caption="品名・型式・寸法・図番" Style="background-color: Black; color: White; font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label164" Left="15114.24" Top="9141.121" Width="803.5204" Height="240.48" Caption="出荷数" Style="background-color: Black; color: White; font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label165" Left="8942.4" Top="6913.44" Width="1162.08" Height="646.56" Caption="依頼元&#xD;&#xA;(会社名)" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" />
+      <Control Type="AR.Label" Name="Label166" DataField="Htynam" Left="9874.08" Top="6901.919" Width="4406.4" Height="217.44" Caption="NNNNNNNNNNNNNNNNNNNN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label167" DataField="Htytel" Left="10723.68" Top="7323.84" Width="2400.48" Height="217.44" Caption="XXXXXXXXXXXXXXXXXX" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label168" DataField="Htykah" Left="10700.64" Top="7117.92" Width="1810.08" Height="217.44" Caption="NNNNNNNN" Style="color: Black; font-size: 9pt; ddo-char-set: 1; ddo-shrink-to-fit: true" />
+      <Control Type="AR.Label" Name="Label169" Left="9862.563" Top="7112.161" Width="884.1598" Height="217.44" Caption="課補・係長" Style="font-size: 8pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label170" Left="12237.12" Top="7123.682" Width="643.6807" Height="217.44" Caption="担当者" Style="font-size: 8pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label171" Left="9862.563" Top="7323.84" Width="884.1598" Height="217.44" Caption="電話番号" Style="font-size: 8pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label172" DataField="Tannam" Left="12788.64" Top="7117.92" Width="1694.88" Height="217.44" Caption="NNNNNNNN" Style="color: Black; font-size: 9pt; ddo-char-set: 1; ddo-shrink-to-fit: true" />
+      <Control Type="AR.Label" Name="Label173" Left="8965.44" Top="7776" Width="815.0402" Height="450.7199" Caption="お届先&#xD;&#xA;(住所)" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" />
+      <Control Type="AR.Label" Name="Label174" Left="8965.44" Top="8434.08" Width="815.0402" Height="637.9205" Caption="(届先名)" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" />
+      <Control Type="AR.Label" Name="Label180" Left="15562.08" Top="11508.48" Width="1062.721" Height="254.88" Caption="TASS_LA1D001a&#xD;&#xA;" Style="font-size: 6pt; vertical-align: middle; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label181" Left="8922.242" Top="10844.64" Width="779.0406" Height="217.4401" Caption="運送方法" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label182" DataField="Unscod" Left="9861.121" Top="10844.64" Width="299.52" Height="217.44" Caption="XX" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label183" Left="10169.28" Top="10844.64" Width="552.9604" Height="217.4401" Caption="コース" Style="font-size: 8pt; ddo-char-set: 1" PaddingLeft="1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label184" DataField="Unscrs" Left="10880.64" Top="10844.64" Width="299.52" Height="217.44" Caption="XX" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label185" Left="11207.52" Top="10618.56" Width="779.04" Height="217.44" Caption="出荷場所" Style="font-size: 8pt; ddo-char-set: 1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label186" DataField="Tokcod" Left="9701.28" Top="10618.56" Width="1101.6" Height="217.44" Caption="XXXXXXXXX" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label187" DataField="Sybcod" Left="12051.36" Top="10627.2" Width="299.52" Height="217.44" Caption="XX" Style="font-size: 8pt; ddo-char-set: 1" />
+      <Control Type="AR.ReportInfo" Name="ReportInfo5" Left="11180.16" Top="10836" Width="1563.841" Height="226.0802" FormatString="{RunDateTime:yyyy/MM/dd HH:mm:ss}" Style="font-size: 8pt; text-align: right; ddo-char-set: 1" />
+      <Control Type="AR.ReportInfo" Name="ReportInfo8" Left="12735.36" Top="10821.6" Width="720" Height="217.4399" FormatString="{PageNumber} / {PageCount}" Style="font-size: 8pt; text-align: right; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label188" Left="14407.2" Top="7534.081" Width="643.68" Height="217.44" Caption="出荷日" Style="font-size: 8pt; ddo-char-set: 1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label191" DataField="Denf" Left="16668" Top="7329.6" Width="168.4795" Height="224.6399" Caption="X" Style="font-size: 8pt; ddo-char-set: 1" />
+      <Control Type="AR.Line" Name="Line26" X1="9895.682" Y1="7112.16" X2="14379.24" Y2="7112.16" LineStyle="3" />
+      <Control Type="AR.Line" Name="Line27" X1="9887.041" Y1="7323.84" X2="14240.16" Y2="7323.84" LineStyle="3" />
+      <Control Type="AR.Line" Name="Line28" X1="12214.08" Y1="7106.4" X2="12214.08" Y2="7323.84" LineStyle="3" />
+      <Control Type="AR.Line" Name="Line29" X1="9842.4" Y1="8432.642" X2="16638.6" Y2="8441.281" LineStyle="3" />
+      <Control Type="AR.Line" Name="Line30" X1="8942.4" Y1="9862.562" X2="16624.8" Y2="9862.562" LineStyle="3" />
+      <Control Type="AR.Line" Name="Line31" X1="8943.843" Y1="10111.68" X2="16632" Y2="10111.68" LineStyle="3" />
+      <Control Type="AR.Line" Name="Line32" X1="8969.76" Y1="9610.562" X2="16632" Y2="9610.562" LineStyle="3" />
+      <Control Type="AR.Line" Name="Line33" X1="8942.4" Y1="10360.8" X2="16632" Y2="10360.8" LineStyle="3" />
+      <Control Type="AR.Label" Name="Label192" Left="13482.72" Top="10622.88" Width="552.9605" Height="224.6399" Caption="荷姿" Style="font-size: 8pt; ddo-char-set: 1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label193" Left="13508.64" Top="11060.64" Width="624.9594" Height="224.6399" Caption="包装数" Style="font-size: 8pt; ddo-char-set: 1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label194" Left="10722.24" Top="6166.08" Width="1560.96" Height="286.5603" Caption="④物品受領書" Style="font-size: 11pt; font-weight: bold; vertical-align: bottom; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label196" DataField="hsjyusyo" Left="13134.24" Top="6600.96" Width="3297.613" Height="217.44" Caption="NNNNNNNNNNNNNNNNNNNN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label197" Left="12362.4" Top="6166.08" Width="866.8804" Height="217.44" Caption="発送扱者" Style="font-size: 8pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label198" Left="13119.83" Top="6383.52" Width="220.3212" Height="217.44" Caption="〒" Style="font-size: 8pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label200" DataField="hsyubno" Left="13364.63" Top="6383.52" Width="969.1209" Height="217.44" Caption="XXXXXXX" Style="font-size: 8pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label202" Left="14280.47" Top="6383.52" Width="403.1996" Height="217.44" Caption="℡" Style="font-size: 8pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label205" DataField="hstel" Left="14496.48" Top="6383.52" Width="1887.841" Height="217.44" Caption="XXXXXXXXXXXXXXXXXXXX" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label212" DataField="Hsatukai" Left="13112.64" Top="6166.08" Width="3443.041" Height="217.44" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label241" DataField="Keifno" Left="9937.442" Top="7541.281" Width="3692.161" Height="217.44" Caption="XXXXXXXXXXXXXXXXXXXXXXXXXXXXX" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label242" Left="10814.4" Top="7771.681" Width="420.48" Height="217.44" Caption="TEL" Style="font-size: 8pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label246" DataField="Tdktel" Left="11234.88" Top="7771.681" Width="2504.16" Height="217.44" Caption="XXXXXXXXXXXXXXXXXXXX" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label247" DataField="Tdkcod" Left="14745.59" Top="7771.681" Width="1890.72" Height="217.44" Caption="XXXXXXXXXXXXXXX" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label248" DataField="Tdkyub" Left="9803.522" Top="7771.681" Width="1010.88" Height="217.44" Caption="999-9999" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label260" Left="9604.802" Top="7783.2" Width="313.92" Height="217.44" Caption="〒" Style="font-size: 9pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label261" Left="8929.441" Top="10627.2" Width="779.04" Height="217.44" Caption="得意先" Style="font-size: 8pt; ddo-char-set: 1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label195" Left="15235.2" Top="10648.8" Width="299.5189" Height="201.5995" Caption="年" Style="font-size: 8pt; text-align: center; ddo-char-set: 1" />
+      <Control Type="AR.Shape" Name="Shape57" Left="15420.96" Top="10825.92" Width="601.9203" Height="542.8798" BackColor="16777215" LineStyle="3" LineWeight="0.2" Shape="1" RoundingRadius="10" />
+      <Control Type="AR.Label" Name="Label235" Left="15580.79" Top="11003.04" Width="260.6409" Height="201.5995" Caption="印" Style="color: DimGray; font-size: 8pt; text-align: center; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label238" Left="15600.96" Top="10648.8" Width="364.321" Height="201.5995" Caption="　月　" Style="font-size: 8pt; text-align: center; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label240" Left="16060.32" Top="10648.8" Width="308.1603" Height="201.5995" Caption="日" Style="font-size: 8pt; text-align: center; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label263" Left="8929.443" Top="11259.36" Width="4515.841" Height="421.9201" Caption="※お手数ながらご確認後、発送扱者へ返送下さい。&#xD;&#xA;尚、２週間以内にご返送なき場合は受領と見なします。" Style="font-family: HGP明朝B; font-size: 7pt; ddo-char-set: 128" />
+      <Control Type="AR.Label" Name="Label60" DataField="Tdkjyu1" Left="1042.561" Top="7989.121" Width="6749.28" Height="230.4" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 10pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label61" DataField="Tdkjyu2" Left="1042.561" Top="8219.521" Width="6933.6" Height="230.4" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 10pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label63" DataField="Tdknam1" Left="1042.561" Top="8461.439" Width="6949.439" Height="230.4" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 10pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label64" DataField="Tdknam2" Left="1042.561" Top="8691.84" Width="6933.6" Height="230.4" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 10pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label122" DataField="Tdkjyu1" Left="9842.4" Top="1861.92" Width="6749.28" Height="230.4" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 10pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label123" DataField="Tdkjyu2" Left="9842.4" Top="2092.32" Width="6749.28" Height="230.4" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 10pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label175" DataField="Tdkjyu1" Left="9842.4" Top="7983.359" Width="6749.28" Height="230.4" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 10pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label176" DataField="Tdkjyu2" Left="9842.4" Top="8202.241" Width="6749.28" Height="230.4" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 10pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label177" DataField="Tdknam1" Left="9842.4" Top="8449.921" Width="6949.439" Height="230.4" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 10pt; ddo-char-set: 1" />
+      <Control Type="AR.Label" Name="Label178" DataField="Tdknam2" Left="9842.4" Top="8674.562" Width="6949.439" Height="230.4" Caption="NNNNNNNNNNNNNNNNNNNNNNNNNNNNNN" Style="font-size: 10pt; ddo-char-set: 1" />
+      <Control Type="AR.Barcode" Name="Barcode1" DataField="Bacode" Left="5662.081" Top="6992.64" Width="2102.4" Height="326.88" BarStyle="6" Text="Barcode1" Checksum="0" Font="Courier New" FontSize="7" QRCode="EncodingCodePage=932" MicroQRCode="EncodingCodePage=932" PDF417="EncodingCodePage=932" MicroPDF417="EncodingCodePage=932" CODE128="0;0;0" DataMatrix="EncodingCodePage=932" SupplementDataField="Bacode" />
+      <Control Type="AR.Label" Name="Label204" DataField="Syukno" Left="6271.2" Top="711.36" Width="1247.041" Height="267.8401" Caption="XXX-XXXXX" Style="font-size: 10pt; ddo-char-set: 1" />
+      <Control Type="AR.Barcode" Name="Barcode4" DataField="Bacode" Left="5673.6" Top="967.6801" Width="2102.4" Height="326.88" BarStyle="6" Text="Barcode1" Checksum="0" Font="Courier New" FontSize="7" QRCode="EncodingCodePage=932" MicroQRCode="EncodingCodePage=932" PDF417="EncodingCodePage=932" MicroPDF417="EncodingCodePage=932" CODE128="0;0;0" DataMatrix="EncodingCodePage=932" SupplementDataField="Bacode" />
+      <Control Type="AR.Label" Name="Label101" DataField="Syukno" Left="15022.08" Top="804.96" Width="1239.84" Height="224.64" Caption="XXX-XXXXX" Style="font-size: 10.2pt; ddo-char-set: 0" />
+      <Control Type="AR.Barcode" Name="Barcode2" DataField="Bacode" Left="14441.76" Top="1061.28" Width="2102.4" Height="326.88" BarStyle="6" Text="Barcode1" Checksum="0" Font="Courier New" FontSize="7" QRCode="EncodingCodePage=932" MicroQRCode="EncodingCodePage=932" PDF417="EncodingCodePage=932" MicroPDF417="EncodingCodePage=932" CODE128="0;0;0" DataMatrix="EncodingCodePage=932" SupplementDataField="Bacode" />
+      <Control Type="AR.Label" Name="Label162" DataField="Syukno" Left="15022.08" Top="6917.761" Width="1274.4" Height="224.6403" Caption="XXX-XXXXX" Style="font-size: 10.2pt; ddo-char-set: 0" />
+      <Control Type="AR.Barcode" Name="Barcode3" DataField="Bacode" Left="14407.2" Top="7176.96" Width="2102.4" Height="326.88" BarStyle="6" Text="Barcode1" Checksum="0" Font="Courier New" FontSize="7" QRCode="EncodingCodePage=932" MicroQRCode="EncodingCodePage=932" PDF417="EncodingCodePage=932" MicroPDF417="EncodingCodePage=932" CODE128="0;0;0" DataMatrix="EncodingCodePage=932" SupplementDataField="Bacode" />
+      <Control Type="AR.Label" Name="Label267" Left="14856.48" Top="11285.28" Width="1700.64" Height="180.0006" Caption="上記に受け取りました" Style="font-size: 6pt; text-align: center; vertical-align: middle; ddo-char-set: 1" />
+      <Control Type="AR.Line" Name="Line35" X1="192.96" Y1="5385.6" X2="4691.52" Y2="5385.6" />
+      <Control Type="AR.Line" Name="Line36" X1="194.688" Y1="5152.321" X2="6356.16" Y2="5152.32" />
+      <Control Type="AR.Line" Name="Line37" X1="4697.28" Y1="4723.2" X2="4697.28" Y2="5379.841" />
+      <Control Type="AR.Line" Name="Line38" X1="198.72" Y1="4672.8" X2="198.72" Y2="5385.6" />
+      <Control Type="AR.Line" Name="Line41" X1="8975.52" Y1="1425.6" X2="14745.59" Y2="1425.6" />
+      <Control Type="AR.Line" Name="Line42" X1="11232" Y1="4550.4" X2="11232" Y2="4959.36" />
+      <Control Type="AR.Line" Name="Line43" X1="10188" Y1="4766.4" X2="10188" Y2="4959.36" />
+      <Control Type="AR.Line" Name="Line44" X1="13497.12" Y1="4970.88" X2="15141.6" Y2="4970.879" />
+      <Control Type="AR.Line" Name="Line45" X1="16632" Y1="9145.44" X2="8943.841" Y2="9145.44" />
+      <Control Type="AR.Line" Name="Line46" X1="13485.59" Y1="11520" X2="16636.32" Y2="11520" />
+      <Control Type="AR.Line" Name="Line47" X1="13479.83" Y1="10621.44" X2="13479.83" Y2="11520" />
+      <Control Type="AR.Line" Name="Line48" X1="8945.281" Y1="10837.44" X2="13482.72" Y2="10837.44" />
+      <Control Type="AR.Line" Name="Line49" X1="8949.602" Y1="10609.92" X2="8949.602" Y2="11067.84" />
+      <Control Type="AR.Line" Name="Line50" X1="8942.4" Y1="11062.08" X2="11213.28" Y2="11062.08" />
+      <Control Type="AR.Line" Name="Line51" X1="11207.52" Y1="11064.96" X2="11207.52" Y2="10619.04" />
+      <Control Type="AR.Line" Name="Line52" X1="10162.08" Y1="10836" X2="10162.08" Y2="11060.64" />
+      <Control Type="AR.Line" Name="Line53" X1="13492.8" Y1="11059.2" X2="14803.2" Y2="11059.2" />
+      <Control Type="AR.Line" Name="Line54" X1="6344.64" Y1="10690.56" X2="6344.64" Y2="11574.72" />
+      <Control Type="AR.Line" Name="Line56" X1="2440.8" Y1="5150.88" X2="2439.36" Y2="5385.6" />
+      <Control Type="AR.Line" Name="Line58" X1="10401.12" Y1="9145.44" X2="10401.12" Y2="10620" />
+      <Control Type="AR.Line" Name="Line59" X1="4141.44" Y1="1120.32" X2="4141.44" Y2="1346.4" LineStyle="3" />
+      <Control Type="AR.Line" Name="Line60" X1="4141.44" Y1="7140.96" X2="4141.44" Y2="7367.04" LineStyle="3" />
+      <Control Type="AR.Line" Name="Line40" X1="12941.28" Y1="1209.6" X2="12941.28" Y2="1427.04" LineStyle="3" />
+      <Control Type="AR.Line" Name="Line62" X1="1419.84" Y1="5400" X2="1419.84" Y2="5614.56" />
+      <Control Type="AR.Line" Name="Line64" X1="156.9607" Y1="9188.641" X2="1823.041" Y2="9188.641" />
+      <Control Type="AR.Line" Name="Line61" X1="1376.641" Y1="11327.04" X2="1376.641" Y2="11557.44" />
+      <Control Type="AR.Line" Name="Line57" X1="6344.641" Y1="9194.4" X2="6344.641" Y2="10679.04" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line63" X1="4665.601" Y1="11557.44" X2="7850.881" Y2="11557.44" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line65" X1="7863.841" Y1="9191.521" X2="7863.841" Y2="11573.28" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line66" X1="1627.201" Y1="9198.72" X2="7850.881" Y2="9198.72" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line67" X1="1625.761" Y1="10671.84" X2="7850.881" Y2="10671.84" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line68" X1="4680" Y1="10690.56" X2="4680" Y2="11564.64" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line69" X1="1638.721" Y1="9184.32" X2="1638.721" Y2="10690.56" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line70" X1="7863.841" Y1="6701.76" X2="7863.841" Y2="7374.24" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line71" X1="5515.201" Y1="6701.76" X2="5515.201" Y2="7377.12" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line72" X1="5500.801" Y1="6714.72" X2="7878.241" Y2="6714.72" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line73" X1="5500.801" Y1="7361.281" X2="7878.241" Y2="7361.281" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line74" X1="7875.36" Y1="698.4" X2="7875.36" Y2="1356.48" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line75" X1="5526.72" Y1="698.4" X2="5526.72" Y2="1365.12" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line76" X1="5512.32" Y1="707.04" X2="7889.759" Y2="707.04" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line77" X1="5512.32" Y1="1350.72" X2="7889.759" Y2="1350.72" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line78" X1="1638.72" Y1="3150.72" X2="7889.759" Y2="3150.72" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line34" X1="6356.16" Y1="3150.72" X2="6356.16" Y2="4672.8" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line79" X1="1638.72" Y1="3143.52" X2="1638.72" Y2="4659.84" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line80" X1="2430.72" Y1="5385.6" X2="2430.72" Y2="5605.921" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line81" X1="207.36" Y1="5376.96" X2="207.36" Y2="5630.4" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line82" X1="198.72" Y1="5614.56" X2="2446.56" Y2="5614.56" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line83" X1="198.72" Y1="5397.12" X2="2446.56" Y2="5397.12" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line84" X1="16650.72" Y1="799.2" X2="16650.72" Y2="1627.2" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line85" X1="14300.64" Y1="799.2" X2="14300.64" Y2="1627.2" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line86" X1="14287.68" Y1="803.52" X2="16665.12" Y2="803.52" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line87" X1="14287.68" Y1="1429.92" X2="16665.12" Y2="1429.92" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line88" X1="10399.68" Y1="3000.96" X2="10399.68" Y2="4531.68" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line89" X1="15138.72" Y1="2999.52" X2="15138.72" Y2="4531.68" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line90" X1="161.2807" Y1="10684.8" X2="161.2807" Y2="11557.44" />
+      <Control Type="AR.Line" Name="Line91" X1="156.9607" Y1="11557.44" X2="2419.201" Y2="11557.44" />
+      <Control Type="AR.Line" Name="Line92" X1="2419.201" Y1="11096.64" X2="2419.201" Y2="11564.64" />
+      <Control Type="AR.Line" Name="Line93" X1="1624.32" Y1="4672.8" X2="7875.359" Y2="4672.8" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line94" X1="194.4" Y1="3140.64" X2="1638.72" Y2="3140.64" />
+      <Control Type="AR.Line" Name="Line95" X1="14287.68" Y1="1615.68" X2="16665.12" Y2="1615.68" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line96" X1="16649.28" Y1="2999.52" X2="16649.28" Y2="4531.68" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line97" X1="10404" Y1="3015.36" X2="16655.04" Y2="3015.36" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line98" X1="10386.72" Y1="4531.68" X2="16655.04" Y2="4531.68" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line99" X1="16619.04" Y1="6900.479" X2="16619.04" Y2="7740" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line100" X1="14240.16" Y1="6900.479" X2="14240.16" Y2="7763.041" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line101" X1="14240.16" Y1="6914.88" X2="16619.76" Y2="6914.88" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line102" X1="14240.16" Y1="7542.721" X2="16624.8" Y2="7542.721" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line103" X1="14240.16" Y1="7747.2" X2="16632" Y2="7747.2" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line104" X1="7875.36" Y1="3150.72" X2="7875.361" Y2="5582.88" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line105" X1="156.9607" Y1="11319.84" X2="4665.601" Y2="11319.84" />
+      <Control Type="AR.Line" Name="Line106" X1="8974.08" Y1="4515.84" X2="8971.202" Y2="4965.121" />
+      <Control Type="AR.Line" Name="Line107" X1="8971.202" Y1="4760.641" X2="13485.6" Y2="4760.641" />
+      <Control Type="AR.Line" Name="Line108" X1="8971.201" Y1="4959.36" X2="11232" Y2="4959.36" />
+      <Control Type="AR.Line" Name="Line109" X1="156.9607" Y1="11095.2" X2="6344.64" Y2="11095.2" />
+      <Control Type="AR.Line" Name="Line110" X1="15141.6" Y1="4538.881" X2="15141.6" Y2="5469.12" />
+      <Control Type="AR.Line" Name="Line111" X1="14804.64" Y1="11520" X2="14804.64" Y2="10621.44" />
+      <Control Type="AR.Line" Name="Line112" X1="16633.44" Y1="11520" X2="16633.44" Y2="10621.44" />
+      <Control Type="AR.Line" Name="Line113" X1="15114.24" Y1="9145.44" X2="15114.24" Y2="10620" />
+      <Control Type="AR.Line" Name="Line55" X1="8975.52" Y1="3006.72" X2="10409.76" Y2="3006.72" />
+      <Control Type="AR.Line" Name="Line114" X1="5508.001" Y1="7784.64" X2="7869.601" Y2="7784.64" />
+      <Control Type="AR.Line" Name="Line115" X1="4697.28" Y1="4672.8" X2="4697.28" Y2="5582.881" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line116" X1="4681.44" Y1="5582.88" X2="7891.2" Y2="5582.88" LineWeight="3" />
+      <Control Type="AR.Line" Name="Line118" X1="6356.16" Y1="4672.8" X2="6356.16" Y2="5603.041" />
+      <Control Type="AR.Label" Name="Label276" Left="4697.28" Top="4659.84" Width="552.9605" Height="224.6399" Caption="荷姿" Style="font-size: 8pt; ddo-char-set: 1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label277" Left="4697.28" Top="5123.52" Width="636.4807" Height="224.6399" Caption="包装数" Style="font-size: 8pt; ddo-char-set: 1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label278" Left="15138.72" Top="4550.401" Width="552.9605" Height="224.6399" Caption="備考" Style="font-size: 8pt; ddo-char-set: 1" PaddingTop="1" />
+      <Control Type="AR.Label" Name="Label279" Left="6364.8" Top="4675.68" Width="552.9605" Height="224.6399" Caption="備考" Style="font-size: 8pt; ddo-char-set: 1" PaddingTop="1" />
+    </Section>
+    <Section Type="PageFooter" Name="PageFooter" Height="0" BackColor="16777215" />
+  </Sections>
+  <ReportComponentTray />
+  <Script><![CDATA[public void Detail_Format()
+{
+	
+}
+
+
+public void ActiveReport_ReportStart()
+{
+	
+}
+
+
+]]></Script>
+  <PageSettings LeftMargin="0" RightMargin="0" TopMargin="0" BottomMargin="0" PaperSize="9" PaperWidth="11906" PaperHeight="16838" PaperName="" Orientation="2" />
+  <Parameters />
+</ActiveReportsLayout>

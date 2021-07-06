@@ -1,0 +1,1131 @@
+﻿@Html.AntiForgeryToken()
+
+@{
+    ViewBag.Title = "操作手引書";
+    ViewBag.PageMainTitle = "操作手引書";
+}
+@using (Html.BeginForm("Search", "Sample", null, FormMethod.Post))
+{
+
+    <div class="accordion" id="ConditionAccordion">
+        <div id="ConditionMain" class="container-fluid mt-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+            <div class="col-4">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="Condition1">セクション</span>
+                    </div>
+                    <div class="macss-input-group-input form-control">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked="checked">
+                            <label class="form-check-label" for="inlineRadio1">社内用</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                            <label class="form-check-label" for="inlineRadio2">社外用</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        $(function () {
+
+            for (var i = 1; i <= 11; i++) {
+                var acc = "#MenuAccordionTass" + i;
+                var shw = "#MenuShowTass" + i;
+                var hdn = "#MenuHiddenTass" + i;
+
+                var cond = new Macss.Collapse.MenuBar(acc, shw, hdn);
+                cond.setCollapseEvent();
+            }
+
+            for (var i = 2; i <= 6; i++) {
+                var acc = "#MenuAccordion" + i;
+                var shw = "#MenuShow" + i;
+                var hdn = "#MenuHidden" + i;
+
+                var cond = new Macss.Collapse.MenuBar(acc, shw, hdn);
+                cond.setCollapseEvent();
+            }
+        });
+    </script>
+}
+@section Css {
+    <style type="text/css">
+        <!--
+        .macss-submenu-list-manual li {
+            /*color: #2d8fdd;
+            border-left: solid 6px #2d8fdd;
+            background: #f0fcff;
+            margin-bottom: 3px;
+            line-height: 1.5;
+            padding: 0.5em;
+            list-style-type: none !important;*/
+            padding-left: 10px;
+            list-style-type: none !important;
+        }
+
+            .macss-submenu-list-manual li:nth-child(odd) {
+                background-color: #cbcaca;
+            }
+
+        .macss-main-menu-subsystem-title .macss-main-menu-openclose {
+            text-decoration: underline;
+        }
+        -->
+    </style>
+}
+
+<div class="row mt-3 mb-4">
+    <div class="col-6">
+        <button type="submit" role="button" class="btn btn-primary macss-btn-sub" data-toggle="modal" data-target="#ManualtCreateDialog">追加</button>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        @*<div class="row justify-content-start">*@
+        <div class="col-5">
+            <div class="col-12">
+
+                <div id="MenuAccordionTass1" class="accordion macss-main-menu-subsystem">
+                    <div class="macss-main-menu-subsystem-title">
+                        <div class="row justify-content-between">
+                            <div class="col-10">
+                                <a class="macss-main-menu-openclose" href="javascript:void(0);" onClick="document.getElementById('MenuBtnTass1').click();">運送業務-TASS (出荷・荷札・検品)</a>
+                            </div>
+                            <div class="col-2 text-right">
+                                <button id="MenuBtnTass1" class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse"
+                                        data-target="#MenuCollapseTass1" aria-expanded="true" aria-controls="MenuCollapseTass1">
+                                    <i id="MenuHiddenTass1" class="far fa-caret-square-up" aria-hidden="true" style="display:none;"></i>
+                                    <i id="MenuShowTass1" class="far fa-caret-square-down" aria-hidden="true" style="display:none;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="MenuCollapseTass1" class="macss-main-menu-subsystem-item collapse" data-parent="#MenuAccordionTass1">
+                        <ul class="list-unstyled components macss-submenu-list-manual">
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>出荷指示データ取込.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>出荷手配登録.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>出荷手配データアップロード.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>出荷手配一覧.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>出荷現品情報登録.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>出荷現品情報一覧.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>固定出荷注文書登録.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>固定出荷注文書一覧.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>荷札情報登録.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>荷札情報一覧.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>出荷検品登録.pdf</label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="MenuAccordionTass2" class="accordion macss-main-menu-subsystem">
+                    <div class="macss-main-menu-subsystem-title">
+                        <div class="row justify-content-between">
+                            <div class="col-10">
+                                <a class="macss-main-menu-openclose" href="javascript:void(0);" onClick="document.getElementById('MenuBtnTass2').click();">運送業務-TASS (データ連携)</a>
+                            </div>
+                            <div class="col-2 text-right">
+                                <button id="MenuBtnTass2" class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse"
+                                        data-target="#MenuCollapseTass2" aria-expanded="true" aria-controls="MenuCollapseTass2">
+                                    <i id="MenuHiddenTass2" class="far fa-caret-square-up" aria-hidden="true" style="display:none;"></i>
+                                    <i id="MenuShowTass2" class="far fa-caret-square-down" aria-hidden="true" style="display:none;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="MenuCollapseTass2" class="macss-main-menu-subsystem-item collapse" data-parent="#MenuAccordionTass2">
+                        <ul class="list-unstyled components macss-submenu-list-manual">
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>DOSS連携データ作成.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>DOSS連携データ一覧.pdf</label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="MenuAccordionTass3" class="accordion macss-main-menu-subsystem">
+                    <div class="macss-main-menu-subsystem-title">
+                        <div class="row justify-content-between">
+                            <div class="col-10">
+                                <a class="macss-main-menu-openclose" href="javascript:void(0);" onClick="document.getElementById('MenuBtnTass3').click();">運送業務-TASS (半導体輸出)</a>
+                            </div>
+                            <div class="col-2 text-right">
+                                <button id="MenuBtnTass3" class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse"
+                                        data-target="#MenuCollapseTass3" aria-expanded="true" aria-controls="MenuCollapseTass3">
+                                    <i id="MenuHiddenTass3" class="far fa-caret-square-up" aria-hidden="true" style="display:none;"></i>
+                                    <i id="MenuShowTass3" class="far fa-caret-square-down" aria-hidden="true" style="display:none;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="MenuCollapseTass3" class="macss-main-menu-subsystem-item collapse" data-parent="#MenuAccordionTass3">
+                        <ul class="list-unstyled components macss-submenu-list-manual">
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>半導体輸出出荷データ作成.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>半導体輸出出荷データ一覧.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>半導体輸出梱包データアップロード.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>半導体輸出梱包実績一覧.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>半導体輸出梱包実績データ作成.pdf</label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="MenuAccordionTass4" class="accordion macss-main-menu-subsystem">
+                    <div class="macss-main-menu-subsystem-title">
+                        <div class="row justify-content-between">
+                            <div class="col-10">
+                                <a class="macss-main-menu-openclose" href="javascript:void(0);" onClick="document.getElementById('MenuBtnTass4').click();">運送業務-TASS (輸送明細・送り状)</a>
+                            </div>
+                            <div class="col-2 text-right">
+                                <button id="MenuBtnTass4" class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse"
+                                        data-target="#MenuCollapseTass4" aria-expanded="true" aria-controls="MenuCollapseTass4">
+                                    <i id="MenuHiddenTass4" class="far fa-caret-square-up" aria-hidden="true" style="display:none;"></i>
+                                    <i id="MenuShowTass4" class="far fa-caret-square-down" aria-hidden="true" style="display:none;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="MenuCollapseTass4" class="macss-main-menu-subsystem-item collapse" data-parent="#MenuAccordionTass4">
+                        <ul class="list-unstyled components macss-submenu-list-manual">
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>輸送明細一覧.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>運送委託実績一覧.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>送状情報一覧.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>顧客提供用送状情報登録.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>顧客提供用送状情報一覧.pdf</label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="MenuAccordionTass5" class="accordion macss-main-menu-subsystem">
+                    <div class="macss-main-menu-subsystem-title">
+                        <div class="row justify-content-between">
+                            <div class="col-10">
+                                <a class="macss-main-menu-openclose" href="javascript:void(0);" onClick="document.getElementById('MenuBtnTass5').click();">運送業務-TASS (運送会社)</a>
+                            </div>
+                            <div class="col-2 text-right">
+                                <button id="MenuBtnTass5" class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse"
+                                        data-target="#MenuCollapseTass5" aria-expanded="true" aria-controls="MenuCollapseTass5">
+                                    <i id="MenuHiddenTass5" class="far fa-caret-square-up" aria-hidden="true" style="display:none;"></i>
+                                    <i id="MenuShowTass5" class="far fa-caret-square-down" aria-hidden="true" style="display:none;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="MenuCollapseTass5" class="macss-main-menu-subsystem-item collapse" data-parent="#MenuAccordionTass5">
+                        <ul class="list-unstyled components macss-submenu-list-manual">
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>....pdf</label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="MenuAccordionTass6" class="accordion macss-main-menu-subsystem">
+                    <div class="macss-main-menu-subsystem-title">
+                        <div class="row justify-content-between">
+                            <div class="col-10">
+                                <a class="macss-main-menu-openclose" href="javascript:void(0);" onClick="document.getElementById('MenuBtnTass6').click();">運送業務-TASS (出荷実績・到着便)</a>
+                            </div>
+                            <div class="col-2 text-right">
+                                <button id="MenuBtnTass6" class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse"
+                                        data-target="#MenuCollapseTass6" aria-expanded="true" aria-controls="MenuCollapseTass6">
+                                    <i id="MenuHiddenTass6" class="far fa-caret-square-up" aria-hidden="true" style="display:none;"></i>
+                                    <i id="MenuShowTass6" class="far fa-caret-square-down" aria-hidden="true" style="display:none;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="MenuCollapseTass6" class="macss-main-menu-subsystem-item collapse" data-parent="#MenuAccordionTass6">
+                        <ul class="list-unstyled components macss-submenu-list-manual">
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>....pdf</label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="MenuAccordionTass7" class="accordion macss-main-menu-subsystem">
+                    <div class="macss-main-menu-subsystem-title">
+                        <div class="row justify-content-between">
+                            <div class="col-10">
+                                <a class="macss-main-menu-openclose" href="javascript:void(0);" onClick="document.getElementById('MenuBtnTass7').click();">運送業務-TASS (運賃・特殊運賃)</a>
+                            </div>
+                            <div class="col-2 text-right">
+                                <button id="MenuBtnTass7" class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse"
+                                        data-target="#MenuCollapseTass7" aria-expanded="true" aria-controls="MenuCollapseTass7">
+                                    <i id="MenuHiddenTass7" class="far fa-caret-square-up" aria-hidden="true" style="display:none;"></i>
+                                    <i id="MenuShowTass7" class="far fa-caret-square-down" aria-hidden="true" style="display:none;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="MenuCollapseTass7" class="macss-main-menu-subsystem-item collapse" data-parent="#MenuAccordionTass7">
+                        <ul class="list-unstyled components macss-submenu-list-manual">
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>....pdf</label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="MenuAccordionTass8" class="accordion macss-main-menu-subsystem">
+                    <div class="macss-main-menu-subsystem-title">
+                        <div class="row justify-content-between">
+                            <div class="col-10">
+                                <a class="macss-main-menu-openclose" href="javascript:void(0);" onClick="document.getElementById('MenuBtnTass8').click();">運送業務-TASS (包装費)</a>
+                            </div>
+                            <div class="col-2 text-right">
+                                <button id="MenuBtnTass8" class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse"
+                                        data-target="#MenuCollapseTass8" aria-expanded="true" aria-controls="MenuCollapseTass8">
+                                    <i id="MenuHiddenTass8" class="far fa-caret-square-up" aria-hidden="true" style="display:none;"></i>
+                                    <i id="MenuShowTass8" class="far fa-caret-square-down" aria-hidden="true" style="display:none;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="MenuCollapseTass8" class="macss-main-menu-subsystem-item collapse" data-parent="#MenuAccordionTass8">
+                        <ul class="list-unstyled components macss-submenu-list-manual">
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>....pdf</label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="MenuAccordionTass9" class="accordion macss-main-menu-subsystem">
+                    <div class="macss-main-menu-subsystem-title">
+                        <div class="row justify-content-between">
+                            <div class="col-10">
+                                <a class="macss-main-menu-openclose" href="javascript:void(0);" onClick="document.getElementById('MenuBtnTass9').click();">運送業務-TASS (TMS)</a>
+                            </div>
+                            <div class="col-2 text-right">
+                                <button id="MenuBtnTass9" class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse"
+                                        data-target="#MenuCollapseTass9" aria-expanded="true" aria-controls="MenuCollapseTass9">
+                                    <i id="MenuHiddenTass9" class="far fa-caret-square-up" aria-hidden="true" style="display:none;"></i>
+                                    <i id="MenuShowTass9" class="far fa-caret-square-down" aria-hidden="true" style="display:none;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="MenuCollapseTass9" class="macss-main-menu-subsystem-item collapse" data-parent="#MenuAccordionTass9">
+                        <ul class="list-unstyled components macss-submenu-list-manual">
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>....pdf</label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="MenuAccordionTass10" class="accordion macss-main-menu-subsystem">
+                    <div class="macss-main-menu-subsystem-title">
+                        <div class="row justify-content-between">
+                            <div class="col-10">
+                                <a class="macss-main-menu-openclose" href="javascript:void(0);" onClick="document.getElementById('MenuBtnTass10').click();">運送業務-TASS (請求)</a>
+                            </div>
+                            <div class="col-2 text-right">
+                                <button id="MenuBtnTass10" class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse"
+                                        data-target="#MenuCollapseTass10" aria-expanded="true" aria-controls="MenuCollapseTass10">
+                                    <i id="MenuHiddenTass10" class="far fa-caret-square-up" aria-hidden="true" style="display:none;"></i>
+                                    <i id="MenuShowTass10" class="far fa-caret-square-down" aria-hidden="true" style="display:none;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="MenuCollapseTass10" class="macss-main-menu-subsystem-item collapse" data-parent="#MenuAccordionTass10">
+                        <ul class="list-unstyled components macss-submenu-list-manual">
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>....pdf</label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="MenuAccordionTass11" class="accordion macss-main-menu-subsystem">
+                    <div class="macss-main-menu-subsystem-title">
+                        <div class="row justify-content-between">
+                            <div class="col-10">
+                                <a class="macss-main-menu-openclose" href="javascript:void(0);" onClick="document.getElementById('MenuBtnTass11').click();">運送業務-TASS (月次)</a>
+                            </div>
+                            <div class="col-2 text-right">
+                                <button id="MenuBtnTass10" class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse"
+                                        data-target="#MenuCollapseTass11" aria-expanded="true" aria-controls="MenuCollapseTass11">
+                                    <i id="MenuHiddenTass11" class="far fa-caret-square-up" aria-hidden="true" style="display:none;"></i>
+                                    <i id="MenuShowTass11" class="far fa-caret-square-down" aria-hidden="true" style="display:none;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="MenuCollapseTass11" class="macss-main-menu-subsystem-item collapse" data-parent="#MenuAccordionTass11">
+                        <ul class="list-unstyled components macss-submenu-list-manual">
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>....pdf</label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="MenuAccordion2" class="accordion macss-main-menu-subsystem">
+                    <div class="macss-main-menu-subsystem-title">
+                        <div class="row justify-content-between">
+                            <div class="col-10">
+                                <a class="macss-main-menu-openclose" href="javascript:void(0);" onClick="document.getElementById('MenuBtn2').click();">Fe保管請求-FDASS</a>
+                            </div>
+                            <div class="col-2 text-right">
+                                <button id="MenuBtn2" class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse"
+                                        data-target="#MenuCollapse2" aria-expanded="true" aria-controls="MenuCollapse2">
+                                    <i id="MenuHidden2" class="far fa-caret-square-up" aria-hidden="true" style="display:none;"></i>
+                                    <i id="MenuShow2" class="far fa-caret-square-down" aria-hidden="true" style="display:none;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="MenuCollapse2" class="macss-main-menu-subsystem-item collapse" data-parent="#MenuAccordion2">
+                        <ul class="list-unstyled components macss-submenu-list-manual"></ul>
+                    </div>
+                </div>
+                <div id="MenuAccordion3" class="accordion macss-main-menu-subsystem">
+                    <div class="macss-main-menu-subsystem-title">
+                        <div class="row justify-content-between">
+                            <div class="col-10">
+                                <a class="macss-main-menu-openclose" href="javascript:void(0);" onClick="document.getElementById('MenuBtn3').click();">包装商品販売-PATS</a>
+                            </div>
+                            <div class="col-2 text-right">
+                                <button id="MenuBtn3" class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse"
+                                        data-target="#MenuCollapse3" aria-expanded="true" aria-controls="MenuCollapse3">
+                                    <i id="MenuHidden3" class="far fa-caret-square-up" aria-hidden="true" style="display:none;"></i>
+                                    <i id="MenuShow3" class="far fa-caret-square-down" aria-hidden="true" style="display:none;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="MenuCollapse3" class="macss-main-menu-subsystem-item collapse" data-parent="#MenuAccordion3">
+                        <ul class="list-unstyled components macss-submenu-list-manual">
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>受発注.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>検収.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>取引実績.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>在庫.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>請求・仕入データ作成・更新.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>月次データ集計.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>月次データ更新処理.pdf</label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="MenuAccordion4" class="accordion macss-main-menu-subsystem">
+                    <div class="macss-main-menu-subsystem-title">
+                        <div class="row justify-content-between">
+                            <div class="col-10">
+                                <a class="macss-main-menu-openclose" href="javascript:void(0);" onClick="document.getElementById('MenuBtn4').click();">保管業務-DCOS</a>
+                            </div>
+                            <div class="col-2 text-right">
+                                <button id="MenuBtn4" class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse"
+                                        data-target="#MenuCollapse4" aria-expanded="true" aria-controls="MenuCollapse4">
+                                    <i id="MenuHidden4" class="far fa-caret-square-up" aria-hidden="true" style="display:none;"></i>
+                                    <i id="MenuShow4" class="far fa-caret-square-down" aria-hidden="true" style="display:none;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="MenuCollapse4" class="macss-main-menu-subsystem-item collapse" data-parent="#MenuAccordion4">
+                        <ul class="list-unstyled components macss-submenu-list-manual">
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>入庫実績.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>出庫指示.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>在庫引当.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>入出庫実績照会.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>在庫データ.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>TASSデータ連携.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>得意先在庫データ照合.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>保管料荷役料.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>請求データ.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>月次データ更新.pdf</label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="MenuAccordion5" class="accordion macss-main-menu-subsystem">
+                    <div class="macss-main-menu-subsystem-title">
+                        <div class="row justify-content-between">
+                            <div class="col-10">
+                                <a class="macss-main-menu-openclose" href="javascript:void(0);" onClick="document.getElementById('MenuBtn5').click();">請求仕入-AIMS</a>
+                            </div>
+                            <div class="col-2 text-right">
+                                <button id="MenuBtn5" class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse"
+                                        data-target="#MenuCollapse5" aria-expanded="true" aria-controls="MenuCollapse5">
+                                    <i id="MenuHidden5" class="far fa-caret-square-up" aria-hidden="true" style="display:none;"></i>
+                                    <i id="MenuShow5" class="far fa-caret-square-down" aria-hidden="true" style="display:none;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="MenuCollapse5" class="macss-main-menu-subsystem-item collapse" data-parent="#MenuAccordion5">
+                        <ul class="list-unstyled components macss-submenu-list-manual">
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>請求明細.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>売上伝票.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>営業費用.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>月次売上データ作成.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>営業費用計上照合処理.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>請求売上・仕入確定.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>Fe注文データ作成.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>Fe請求データ作成.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>請求引渡しデータ作成.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>実績明細引渡しデータ作成.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>ESP連携処理.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>請求関連書類印刷.pdf</label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="MenuAccordion6" class="accordion macss-main-menu-subsystem">
+                    <div class="macss-main-menu-subsystem-title">
+                        <div class="row justify-content-between">
+                            <div class="col-10">
+                                <a class="macss-main-menu-openclose" href="javascript:void(0);" onClick="document.getElementById('MenuBtn6').click();">共通管理-BASE</a>
+                            </div>
+                            <div class="col-2 text-right">
+                                <button id="MenuBtn6" class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse"
+                                        data-target="#MenuCollapse6" aria-expanded="true" aria-controls="MenuCollapse6">
+                                    <i id="MenuHidden6" class="far fa-caret-square-up" aria-hidden="true" style="display:none;"></i>
+                                    <i id="MenuShow6" class="far fa-caret-square-down" aria-hidden="true" style="display:none;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="MenuCollapse6" class="macss-main-menu-subsystem-item collapse" data-parent="#MenuAccordion6">
+                        <ul class="list-unstyled components macss-submenu-list-manual">
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>エントリ一覧式（承認機能付）.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>エントリ一覧式.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>一括式（チェックあり）.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>汎用式（チェックなし）.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>操作手引書確認.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>保存データ.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>承認処理.pdf</label>
+                            </li>
+                            <li>
+                                <a title="ダウンロード" data-toggle="modal" data-target="#DownloadConfirmDialog"><i class="fas fa-file-download" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <a title="更新" data-toggle="modal" data-target="#ManualtEditDialog"><i class="fas fas fa-file-import" style="color:#007bff" aria-hidden="true"></i></a>
+                                <a title="削除" data-toggle="modal" data-target="#DeleteConfirmDialog"><i class="far fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                <label>　</label>
+                                <label>バッチ管理.pdf</label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="DownloadConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">ダウンロードします。よろしいですか?</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.Cancel</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">ダウンロード</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="ManualtCreateDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">追加</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table macss-form-table">
+                    <colgroup>
+                        <col class="macss-form-table-title" />
+                        <col class="macss-form-table-contents" />
+                    </colgroup>
+                    <tr>
+                        <th scope="row">
+                            <label class="control-label" for="inlineRadio2">サブシステム</label>
+                        </th>
+                        <td>
+                            <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                <option value="TASS">運送業務-TASS</option>
+                                <option value="PATS">Fe保管請求-FDASS</option>
+                                <option value="PATS">包装商品販売-PATS</option>
+                                <option value="DCOS">保管業務-DCOS</option>
+                                <option value="AIMS">請求仕入-AIMS</option>
+                                <option value="BASE">共通管理-BASE</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            <label class="control-label" for="inlineRadio2">追加先</label>
+                        </th>
+                        <td>
+                            <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                <option value=""></option>
+                                <option value="">出荷指示データ取込.pdf</option>
+                                <option value="">出荷手配.pdf</option>
+                                <option value="">出荷現品.pdf</option>
+                                <option value="">荷札.pdf</option>
+                                <option value="">出荷検品.pdf</option>
+                                <option value="">DOSSデータ連携.pdf</option>
+                                <option value="">半導体輸出出荷.pdf</option>
+                                <option value="">輸送明細.pdf</option>
+                                <option value="">送状.pdf</option>
+                                <option value="">顧客提供用送状.pdf</option>
+                                <option value="">Fe製品管理出荷実績照合.pdf</option>
+                                <option value="">運送会社用送状データ提供.pdf</option>
+                                <option value="">出荷検品データ提供.pdf</option>
+                                <option value="">FB本社WMS出荷実績.pdf</option>
+                                <option value="">出荷実績情報.pdf</option>
+                                <option value="">到着便実績.pdf</option>
+                                <option value="">既定出荷手配.pdf</option>
+                                <option value="">運賃実績明細.pdf</option>
+                                <option value="">包装費実績明細.pdf</option>
+                                <option value="">運送会社請求.pdf</option>
+                                <option value="">TMS用出荷実績.pdf</option>
+                                <option value="">TMS用運賃.pdf</option>
+                                <option value="">TMS確定データ.pdf</option>
+                                <option value="">固定出荷注文書.pdf</option>
+                                <option value="">請求仕入データ.pdf</option>
+                                <option value="">特殊運賃.pdf</option>
+                                <option value="">出荷実績請求.pdf</option>
+                                <option value="">請求未計上実績.pdf</option>
+                                <option value="">月次集計.pdf</option>
+                                <option value="">算定方式作業実績.pdf</option>
+                                <option value="">半導体輸出梱包実績.pdf</option>
+                                <option value="">運送委託実績.pdf</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            <label class="control-label" for="inlineRadio2">操作手引書</label>
+                        </th>
+                        <td>
+                            <div class="input-group mb-0">
+                                <input type="file" class="custom-file-input" id="customFile" name="postedFile">
+                                <label class="custom-file-label" for="customFile" data-browse="参 照">ファイル選択...</label>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <div class="row justify-content-between macss-form-button-group-row">
+                    <div class="col-4">
+                        <a class="btn btn-secondary" href="@Url.Action("Index")" role="button" data-dismiss="modal">戻る</a>
+                    </div>
+                    <div class="col-8 text-right">
+                        <button type="submit" class="btn btn-primary" data-dismiss="modal">追加</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="ManualtEditDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">更新</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table macss-form-table">
+                    <colgroup>
+                        <col class="macss-form-table-title" />
+                        <col class="macss-form-table-contents" />
+                    </colgroup>
+                    <tr>
+                        <th scope="row">
+                            <label class="control-label" for="inlineRadio2">操作手引書</label>
+                        </th>
+                        <td>
+                            <div class="input-group mb-0">
+                                <input type="file" class="custom-file-input" id="customFile" name="postedFile">
+                                <label class="custom-file-label" for="customFile" data-browse="参 照">ファイル選択...</label>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <div class="row justify-content-between macss-form-button-group-row">
+                    <div class="col-4">
+                        <a class="btn btn-secondary" href="@Url.Action("Index")" role="button" data-dismiss="modal">戻る</a>
+                    </div>
+                    <div class="col-8 text-right">
+                        <button type="submit" class="btn btn-primary" data-dismiss="modal">更新</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="DeleteConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">削除します。よろしいですか?</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.Cancel</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">削除</button>
+            </div>
+        </div>
+    </div>
+</div>
+

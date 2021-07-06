@@ -1,0 +1,118 @@
+﻿@using MacssWeb.Areas.Dcos.Helper
+@model IEnumerable<Macss.Database.Entity.DummyStock>
+
+<script>
+    $(function () {
+
+        var dt = new Macss.DataTables.MacssDataTable("#SampleList");
+        dt.configure();
+
+    });
+
+</script>
+
+<table id="SampleList" class="table table-striped table-hover macss-data-table" style="width:100%">
+    <thead class="macss-data-table-header">
+        <tr>
+            @*<th>
+            @Html.DisplayNameFor(model => model.InOutYMD)
+        </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.ClientCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WarehouseCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StockLimitYM)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RackNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LotNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PreviousMonthRemaining)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PresentMonthInQuantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PresentMonthOutQuantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PresentMonthRemaining)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                71281
+            </td>
+            <td>
+                1550001
+            </td>
+            <td>
+                16
+            </td>
+            <td>
+                2021/12
+            </td>
+            <td>
+                61
+            </td>
+            <td></td>
+            <td class="text-right">
+                84
+            </td>
+            <td class="text-right">
+                18
+            </td>
+            <td class="text-right">
+                102
+            </td>
+            <td class="text-right">
+                0
+            </td>
+        </tr>
+        @if (ViewBag.ScreenId == "DCOS-D011-04")
+        {
+            <tr>
+                <td>
+                    71281
+                </td>
+                <td>
+                    1550001
+                </td>
+                <td>
+                    99
+                </td>
+                <td>
+                    2030/12
+                </td>
+                <td>
+                    61
+                </td>
+                <td></td>
+                <td class="text-right">
+                    0
+                </td>
+                <td class="text-right">
+                    24
+                </td>
+                <td class="text-right">
+                    0
+                </td>
+                <td class="text-right">
+                    24
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>

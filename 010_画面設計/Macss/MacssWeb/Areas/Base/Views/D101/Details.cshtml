@@ -1,0 +1,337 @@
+﻿@model Macss.Database.Entity.AccountMaster
+@{
+    ViewBag.Title = "契約品名マスター詳細確認";
+    ViewBag.PageMainTitle = "契約品名マスター詳細確認";
+    ViewBag.ConfirmMessage = MacssWeb.Resources.Messages.DeleteConfirm;
+    ViewBag.ButtonText = MacssWeb.Resources.ControlText.DeleteExec;
+    ViewBag.ConfirmDialogText = MacssWeb.Resources.Messages.DeleteReconfirm;
+}
+@section Scripts {
+    <script>$(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#SampleList");
+            dt.configure();
+
+            //MacssDataTable（dataTables.fixedColumns.js）に表示する列が15件以上あると計算間違いで最左端列にスクロールバーが表示されるため、非表示にする
+            $('.DTFC_LeftBodyLiner').css('overflow-y', 'hidden');
+
+        });</script>
+}
+@using (Html.BeginForm("Details", "D101", null, FormMethod.Post))
+{
+    <div class="row justify-content-between macss-form-button-group-row">
+        <div class="col-4">
+            <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.Back</a>
+        </div>
+    </div>
+    <div class="accordion" id="ConditionAccordion">
+        <div class="card">
+            <div class="card-header macss-search-config-collapse-header" id="headingOne">
+                <div class="mb-0">
+                    <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain" aria-expanded="true" aria-controls="ConditionMain">
+                        <div class="d-inline-block" style="color:#333"></div>
+                        <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="color: rgb(120, 188, 255);"></i>
+                        <i id="CollapseShow" class="fas fa-chevron-circle-down" aria-hidden="true" style="color: rgb(120, 188, 255); display: none;"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+                <table class="table macss-form-table2">
+                    <colgroup>
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">得意先</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">品名コード</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">ソート順</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">品名</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">規格</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">単位コード</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">在庫報告書出力有無区分</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">売上計上区分</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">集約コード</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">倉庫コード</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">保管料計算方法</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">保管料請求パターン</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">荷役料計算方法</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">荷役料請求パターン</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">荷役料計算方法</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">その他計算方法</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">その他請求パターン</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">PC部門コード</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">切替後PC部門コード</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">PC部門コード切替日</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">請求担当者コード</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">責任者コード</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">請求有効期限</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">品名情報</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+<table id="SampleList" class="table table-striped table-hover macss-data-table">
+    <thead class="macss-data-table-header">
+        <!-- thの文字数で列の幅が決まってしまうため、必要に応じて全角スペースを入れて列の幅を調整する必要がある-->
+        <tr>
+            <th>
+                状態
+            </th>
+            <th>
+                適用開始日
+            </th>
+            <th>
+                適用終了日
+            </th>
+            <th>
+                見積ナンバー
+            </th>
+            <th>
+                保管数量
+            </th>
+            <th>
+                保管単価
+            </th>
+            <th>
+                保管金額
+            </th>
+            <th>
+                荷役数量
+            </th>
+            <th>
+                荷役単価
+            </th>
+            <th>
+                荷役出庫単価
+            </th>
+            <th>
+                荷役金額
+            </th>
+            <th>
+                その他数量
+            </th>
+            <th>
+                その他単価
+            </th>
+            <th>
+                その他金額
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="mt-4">
+</div>
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.Back</a>
+    </div>
+    <div class="col-4 text-right">
+        <a role="button" class="btn btn-primary" href="@Url.Action("Edit")">@MacssWeb.Resources.ControlText.Edit</a>
+    </div>
+</div>

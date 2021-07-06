@@ -1,0 +1,137 @@
+﻿@model MacssWeb.Areas.Dcos.ViewModels.D011UpdateViewModel
+
+@{
+    ViewBag.Title = MacssWeb.Resources.Dcos.D011MainTitle;
+    ViewBag.PageMainTitle = String.Format("{0} {1}", MacssWeb.Resources.Dcos.D011MainTitle, "実行結果");
+    ViewBag.ScreenId = "DCOS-D011-04";
+}
+
+
+<div class="alert alert-info">
+    <span>@ViewBag.ResultMessage</span>
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+    </div>
+    <div class="col-4 text-right">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("SubMenu", "Home")">サブメニューへ</a>
+    </div>
+</div>
+
+@*<div class="row justify-content-between macss-form-button-group-row">
+        <div class="col-12 text-right">
+            <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">条件設定へ戻る</a>
+        </div>
+    </div>*@
+
+@*<table class="table macss-form-table">
+        <colgroup>
+            <col class="macss-form-table-title" />
+            <col class="macss-form-table-contents" />
+        </colgroup>
+        <tr>
+            <th scope="row">
+                @Html.LabelFor(model => model.Client, htmlAttributes: new { @class = "control-label" })
+            </th>
+            <td>
+                <div class="row">
+                    <div class="col-2">
+                        @Html.DisplayFor(model => model.ClientCode, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.HiddenFor(model => model.ClientCode)
+                    </div>
+                    <div class="col-10">
+                        @Html.DisplayFor(model => model.ClientName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.HiddenFor(model => model.ClientName)
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                @Html.LabelFor(model => model.Product, htmlAttributes: new { @class = "control-label" })
+            </th>
+            <td>
+                <div class="row">
+                    <div class="col-2">
+                        @Html.DisplayFor(model => model.ProductCode, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.HiddenFor(model => model.ProductCode)
+                    </div>
+                    <div class="col-10">
+                        @Html.DisplayFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.HiddenFor(model => model.ProductName)
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                @Html.LabelFor(model => model.Warehouse, htmlAttributes: new { @class = "control-label" })
+            </th>
+            <td>
+                <div>
+                    <div class="row">
+                        <div class="col-2">
+                            @Html.DisplayFor(model => model.WarehouseCode, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.HiddenFor(model => model.WarehouseCode)
+                        </div>
+                        <div class="col-8">
+                            @Html.DisplayFor(model => model.WarehouseName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.HiddenFor(model => model.WarehouseName)
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                @Html.LabelFor(model => model.RackNumber, htmlAttributes: new { @class = "control-label" })
+            </th>
+            <td>
+                <div>
+                    @Html.DisplayFor(model => model.RackNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.RackNumber)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                @Html.LabelFor(model => model.LotNumber, htmlAttributes: new { @class = "control-label" })
+            </th>
+            <td>
+                <div>
+                    @Html.DisplayFor(model => model.LotNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.LotNumber)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                @Html.LabelFor(model => model.StockLimitYM, htmlAttributes: new { @class = "control-label" })
+            </th>
+            <td>
+                <div>
+                    @Html.DisplayFor(model => model.StockLimitYM, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.StockLimitYM)
+                </div>
+            </td>
+        </tr>
+    </table>*@
+
+<div class="row mt-3 mb-4">
+    <div class="col-6">
+    </div>
+    <div class="col-6 text-right">
+        <div class="dropdown">
+            <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#CsvDownloadDialog">CSVダウンロード</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*@Html.Partial("_Show", Model)*@
+@Html.Partial("_List", Model.Stocks)

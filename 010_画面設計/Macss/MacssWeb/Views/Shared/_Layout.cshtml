@@ -1,0 +1,462 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - @MacssWeb.Resources.Application.SystemName</title>
+    @Styles.Render("~/Content/css/bootstrap")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/css/fontawesome")
+    @Styles.Render("~/Content/css/datetimepicker")
+    @Styles.Render("~/Content/css/datatables")
+    @RenderSection("Css", false)
+    @Styles.Render("~/Content/css/macss")
+    @Styles.Render("~/Content/scss")
+    @RenderSection("CssExtended", false)
+    @Scripts.Render("~/bundles/jquery")
+</head>
+<body>
+    <nav class="navbar navbar-expand-md shared-nav-bar navbar-light fixed-top nav-top-fixed">
+        <a class="navbar-brand" href="@Url.Action("Index", "Home", new { area = "" })">
+            <img src="~/Images/main_logo.png" alt="FBロゴ" class="main-logo">
+            <span class="brand-text">@MacssWeb.Resources.Application.SystemName</span>
+        </a>
+        @*<div class="alert alert-danger col text-md-center">
+                <span class="h5">テスト環境</span>
+            </div>*@
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="ml-auto">
+                @using (Html.BeginForm("LogOut", "Account", FormMethod.Post, new { id = "logoutForm", @class = "form-inline" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <a href="@Url.Action("ChangePassword", "Account", new { area = "" })" class="macss-account-name" title="パスワード変更">
+                        <span>@String.Format("{0} さん", User.Identity.Name)</span>
+                    </a>
+                    <button class="btn btn-sm btn-secondary my-2 my-sm-0" type="submit">ログアウト</button>
+                }
+                <div class="text-right">
+                    <span>作業場所：XXXXXXXXXXXX</span>
+                </div>
+            </div>
+        }
+    </nav>
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <div class="shared-nav-bar-menu-row fixed-top nav-sub-fixed">
+            &nbsp;
+        </div>
+    }
+    else
+    {
+        <nav class="navbar navbar-expand-md collapsed-menu shared-nav-bar-menu-row navbar-light fixed-top nav-sub-fixed">
+            <button type="button" class="navbar-toggler justify-content-md-center macss-navbar-toggle"
+                    data-toggle="collapse" data-target="#shared_nav_manu"
+                    aria-controls="shared_nav_manu" aria-expanded="false" aria-label="ナビゲーショントグル">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            @{
+                var canUseTass = true;
+                var canUseFdass = true;
+                var canUsePats = true;
+                var canUseDcos = true;
+                var canUseAims = true;
+                var canUseBase = true;
+
+            }
+            <div class="collapse navbar-collapse justify-content-start shared-nav-bar-menu" id="shared_nav_manu">
+                <ul class="navbar-nav">
+                    @if (canUseTass)
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle nav-menu-item" href="@Url.Action("Index", "Home", new { area = "Tass" })"
+                               id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                @MacssWeb.Resources.Application.TassAbbrName
+                            </a>
+                            <div class="dropdown-menu macss-dropdown-menu" aria-labelledby="navbarDropdown">
+                                <ul>
+                                    <li>
+                                        <a class="dropdown-item" href="#">出荷指示データ取込</a>
+                                        <div>
+                                            <ul>
+                                                <li><a class="dropdown-item" href="@Url.Action("Upload01", "D001", new { area = "Tass" })">出荷案内書(Fe松本)データアップロード</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("Upload02", "D001", new { area = "Tass" })">出荷指示(半導体営業)データアップロード</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("Upload05", "D001", new { area = "Tass" })">出荷指示(ATMJ一斉)データアップロード</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("Upload06", "D001", new { area = "Tass" })">伝票(トピー)データアップロード</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">出荷・荷札・検品</a>
+                                        <div>
+                                            <ul>
+                                                <li><a class="dropdown-item" href="@Url.Action("Create", "D002", new { area = "Tass" })">出荷手配登録</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("Upload", "D002", new { area = "Tass" })">出荷手配データアップロード</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("Index", "D002", new { area = "Tass" })">出荷手配一覧</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("Create", "D003", new { area = "Tass" })">出荷現品情報登録（出荷指示）</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("CreateZaiko", "D003", new { area = "Tass" })">出荷現品情報登録（営業在庫）</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("Index", "D003", new { area = "Tass" })">出荷現品情報一覧</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("Create", "D026" , new { area="Tass" })">固定出荷注文書登録</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("Print", "D026" , new { area="Tass" })">固定出荷注文書印刷</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("Index", "D026", new { area = "Tass" })">固定出荷注文書一覧</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("Create", "D004", new { area = "Tass" })">荷札情報登録</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("Index", "D004", new { area = "Tass" })">荷札情報一覧</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("Create", "D005", new { area = "Tass" })">出荷検品登録</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("Upload", "D011", new { area = "Tass" })">Fe製品出荷実績データ照合</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">データ連携</a>
+                                        <div>
+                                            <ul>
+                                                <li><a class="dropdown-item" href="@Url.Action("Create", "DossData", new { area = "Tass" })">@MacssWeb.Resources.Tass.DossDataCreateMainTitle</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">半導体輸出</a>
+                                        <div>
+                                            <ul>
+                                                <li><a class="dropdown-item" href="@Url.Action("Make", "D007", new { area = "Tass" })">半導体輸出出荷データ作成</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("Index", "D007", new { area = "Tass" })">半導体輸出出荷データ一覧</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("Upload", "D035", new { area = "Tass" })">半導体輸出梱包実績データアップロード</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("Index", "D035", new { area = "Tass" })">半導体輸出梱包実績一覧</a></li>
+
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">輸送明細・送り状</a>
+                                        <div>
+                                            <ul>
+                                                <li><a class="dropdown-item" href="@Url.Action("Index", "D008", new { area = "Tass" })">輸送明細一覧</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("Index", "D036", new { area = "Tass" })">運送委託実績</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("Index", "D009", new { area = "Tass" })">送状情報一覧</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("Make", "D010", new { area = "Tass" })">顧客提供用送状Noデータ出力</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("Create", "D010", new { area = "Tass" })">顧客提供用送状登録</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("Index", "D010", new { area = "Tass" })">顧客提供用送状一覧</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">運送会社</a>
+                                        <div>
+                                            <ul>
+                                                <li><a class="dropdown-item" href="@Url.Action("Index", "D012", new { area = "Tass" })">運送会社用送状データ提供一覧</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("Index", "D022", new { area = "Tass" })">運送会社請求データ一覧</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">出荷検品データ提供・FB本社WMS出荷実績</a>
+                                        <div>
+                                            <ul>
+                                                <li><a class="dropdown-item" href="@Url.Action("Index", "D013", new { area = "Tass" })">出荷検品データ提供一覧</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("Index", "D014", new { area = "Tass" })">FB本社WMS出荷実績一覧</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">出荷実績・到着便</a>
+                                        <div>
+                                            <ul>
+                                                <li><a class="dropdown-item" href="@Url.Action("Create", "D015", new { area = "Tass" })">出荷実績登録</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("Index", "D015", new { area = "Tass" })">出荷実績一覧</a></li>
+                                                <li><a class="dropdown-item" href="#">到着便実績登録</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("Index", "D018", new { area = "Tass" })">到着便実績一覧</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("Create", "D019" , new { area="Tass" })">既定出荷手配登録</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("Summ", "D019" , new { area="Tass" })">既定出荷手配計上</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("Index", "D019", new { area = "Tass" })">既定出荷手配一覧</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">運賃・特殊運賃</a>
+                                        <div>
+                                            <ul>
+                                                <li><a class="dropdown-item" href="@Url.Action("Upload", "D030", new { area = "Tass" })">特殊運賃・包装費データアップロード</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">包装費</a>
+                                        <div>
+                                            <ul>
+                                                <li><a class="dropdown-item" href="@Url.Action("CreateNew", "D021", new { area = "Tass" })">包装費実績明細登録（国内梱包）</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("CreateNew", "D021", new { area = "Tass" })">包装費実績明細登録（輸出梱包）</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("CreateNewKobetsu", "D021", new { area = "Tass" })">包装費実績明細登録（国内梱包　個別単価）</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("CreateNewKobetsu", "D021", new { area = "Tass" })">包装費実績明細登録（輸出梱包　個別単価）</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">TMS</a>
+                                        <div>
+                                            <ul>
+                                                <li><a class="dropdown-item" href="@Url.Action("Create", "ShipmentResultsForTMS", new { area = "Tass" })">TMS用出荷実績データ作成</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("Create", "ShippingCostForTMS", new { area = "Tass" })">TMS用運賃データ作成</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("Index", "TMSFixedData", new { area = "Tass" })">@MacssWeb.Resources.Tass.TMSFixedDataListMainTitle</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("Upload", "TMSFixedData", new { area = "Tass" })">TMSデータアップロード</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">請求</a>
+                                        <div>
+                                            <ul>
+                                                <li><a class="dropdown-item" href="@Url.Action("RequestdataConfirm", "D029", new { area = "Tass" })">請求データ作成確認</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("PurchasingConfirm", "D029", new { area = "Tass" })">仕入データ作成確認</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("Index", "D031", new { area = "Tass" })">出荷実績請求一覧</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("Index", "D032", new { area = "Tass" })">未請求確認</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">月次</a>
+                                        <div>
+                                            <ul>
+                                                <li><a class="dropdown-item" href="@Url.Action("Index", "D033", new { area = "Tass" })">TASS全件データ一覧</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("Upload", "D034", new { area = "Tass" })">包装作業実績データアップロード</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("Index", "D034", new { area = "Tass" })">包装作業完了報告一覧</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("IndexGetsuji", "D034", new { area = "Tass" })">委託作業費月次一覧</a></li>
+                                                <li><a class="dropdown-item" href="@Url.Action("IndexSantei", "D034", new { area = "Tass" })">算定方式作業実績一覧</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    }
+                    @if (canUseFdass)
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle nav-menu-item" href="@Url.Action("Index", "Home", new { area = "Fdass" })"
+                               id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                @MacssWeb.Resources.Application.FdassAbbrName
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">末締処理</a>
+                                <a class="dropdown-item" href="#">見積書印刷</a>
+                            </div>
+                        </li>
+                    }
+                    @if (canUsePats)
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle nav-menu-item" href="@Url.Action("Index", "Home", new { area = "Pats" })"
+                               id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                @MacssWeb.Resources.Application.PatsAbbrName
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                @* 内示・発注 *@
+                                <a class="dropdown-item" href="@Url.Action("D001_01", "D001", new { area = "Pats" })">@MacssWeb.Resources.Pats.Ordering<span>一覧</span></a>
+                                <a class="dropdown-item" href="@Url.Action("D001_03", "D001", new { area = "Pats", naihatsu = "naiji" })">内示一括登録</a>
+                                <a class="dropdown-item" href="@Url.Action("D001_03", "D001", new { area = "Pats", naihatsu = "hachu" })">発注一括登録</a>
+                                <a class="dropdown-item" href="@Url.Action("D001_05", "D001", new { area = "Pats", naihatsu = "naiji" })">内示個別登録</a>
+                                <a class="dropdown-item" href="@Url.Action("D001_05", "D001", new { area = "Pats", naihatsu = "hachu" })">発注個別登録</a>
+                                <a class="dropdown-item" href="@Url.Action("D001_10", "D001", new { area = "Pats" })">内示・発注情報アップロード</a>
+                                @* 検収 *@
+                                <a class="dropdown-item" href="@Url.Action("D002_01", "D002", new { area = "Pats" })">@MacssWeb.Resources.Pats.Acceptance<span>一覧</span></a>
+                                <a class="dropdown-item" href="@Url.Action("D002_03", "D002", new { area = "Pats", kanbun = "kan" })">@MacssWeb.Resources.Pats.Acceptance<span>登録(完納)</span></a>
+                                <a class="dropdown-item" href="@Url.Action("D002_03", "D002", new { area = "Pats", kanbun = "bun" })">@MacssWeb.Resources.Pats.Acceptance<span>登録(分納)</span></a>
+                                @* 取引実績 *@
+                                <a class="dropdown-item" href="@Url.Action("D003_01", "D003", new { area = "Pats" })">@MacssWeb.Resources.Pats.Trading<span>一覧</span></a>
+                                <a class="dropdown-item" href="@Url.Action("D003_03", "D003", new { area = "Pats" })">売上データ登録</a>
+                                <a class="dropdown-item" href="@Url.Action("D003_05", "D003", new { area = "Pats" })">出庫実績登録</a>
+                                <a class="dropdown-item" href="@Url.Action("D003_10", "D003", new { area = "Pats" })">受入払出実績データアップロード</a>
+                                <a class="dropdown-item" href="@Url.Action("D003_13", "D003", new { area = "Pats" })">納品明細書出力</a>
+                                @* 在庫 *@
+                                <a class="dropdown-item" href="@Url.Action("D004_01", "D004", new { area = "Pats" })">@MacssWeb.Resources.Pats.Inventory<span>一覧</span></a>
+                                <a class="dropdown-item" href="@Url.Action("D004_03", "D004", new { area = "Pats" })">棚卸表作成</a>
+                                <a class="dropdown-item" href="@Url.Action("D004_05", "D004", new { area = "Pats" })">貯蔵品勘定決算書/在庫管理表出力</a>
+                                <a class="dropdown-item" href="@Url.Action("D004_07", "D004", new { area = "Pats" })">PC別払出表/PC別在庫表出力</a>
+                                @* 締処理 *@
+                                <a class="dropdown-item" href="@Url.Action("D005_01", "D005", new { area = "Pats" })">@MacssWeb.Resources.Pats.BillingPurchasing<span>データ作成</span></a>
+                                <a class="dropdown-item" href="@Url.Action("D006_01", "D006", new { area = "Pats" })">@MacssWeb.Resources.Pats.MonthlyData<span>作成</span></a>
+                            </div>
+                        </li>
+                    }
+                    @if (canUseDcos)
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle nav-menu-item" href="@Url.Action("Index", "Home", new { area = "Dcos" })"
+                               id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                @MacssWeb.Resources.Application.DcosAbbrName
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="@Url.Action("Index", "D001", new { area = "Dcos" })">入出庫実績一覧</a>
+                                <a class="dropdown-item" href="@Url.Action("Create", "D001", new { area = "Dcos" })">入庫実績登録</a>
+                                <a class="dropdown-item" href="@Url.Action("Upload", "D001", new { area = "Dcos" })">入庫実績アップロード</a>
+                                <a class="dropdown-item" href="@Url.Action("Check", "D001", new { area = "Dcos" })">請求金額算出可否チェック</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "D002", new { area = "Dcos" })">出庫指示一覧</a>
+                                <a class="dropdown-item" href="@Url.Action("Create", "D002", new { area = "Dcos" })">出庫指示登録</a>
+                                <a class="dropdown-item" href="@Url.Action("Upload", "D002", new { area = "Dcos" })">出庫指示アップロード</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "StockAllocation", new { area = "Dcos" })">在庫引当一覧</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "Stock", new { area = "Dcos" })">在庫データ一覧</a>
+                                <a class="dropdown-item" href="@Url.Action("Report", "Stock", new { area = "Dcos" })">在庫報告書作成</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "D006", new { area = "Dcos" })">TASSデータ連携取込選択</a>
+                                <a class="dropdown-item" href="@Url.Action("List", "D006", new { area = "Dcos" })">TASSデータ連携エラー一覧</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "Customer", new { area = "Dcos" })">得意先在庫データ照合</a>
+                                <a class="dropdown-item" href="@Url.Action("List", "Cargo", new { area = "Dcos" })">保管料荷役料一覧</a>
+                                <a class="dropdown-item" href="@Url.Action("Create", "Cargo", new { area = "Dcos" })">保管料荷役料登録</a>
+                                <a class="dropdown-item" href="@Url.Action("Exec", "Cargo", new { area = "Dcos" })">保管料荷役料明細書(確認用)作成</a>
+                                <a class="dropdown-item" href="@Url.Action("BillingExec", "Billing", new { area = "Dcos" })">請求データ作成</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "D011", new { area = "Dcos" })">倉庫・保存期限一括変更</a>
+                            </div>
+                        </li>
+                    }
+                    @if (canUseAims)
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle nav-menu-item" href="@Url.Action("Index", "Home", new { area = "Aims" })"
+                               id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                @MacssWeb.Resources.Application.AimsAbbrName
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="@Url.Action("Index", "D001", new { area = "Aims" })">@MacssWeb.Resources.Aims.RegistrationRequestDetail</a>
+                                <a class="dropdown-item" href="@Url.Action("Create", "D001", new { area = "Aims" })">@MacssWeb.Resources.Aims.RegistrationRequestDetailCreate</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "D002", new { area = "Aims" })">@MacssWeb.Resources.Aims.SalesSlip</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "D003", new { area = "Aims" })">@MacssWeb.Resources.Aims.RegistrationPurchasingDetail</a>
+                                <a class="dropdown-item" href="@Url.Action("Create", "D003", new { area = "Aims" })">@MacssWeb.Resources.Aims.RegistrationPurchasingDetailCreate</a>
+                                <a class="dropdown-item" href="@Url.Action("Make", "D004", new { area = "Aims" })">@MacssWeb.Resources.Aims.DetailedRecording</a>
+                                <a class="dropdown-item" href="@Url.Action("RecordSales", "D004", new { area = "Aims" })">@MacssWeb.Resources.Aims.SalesRecording</a>
+                                <a class="dropdown-item" href="@Url.Action("Make", "D005", new { area = "Aims" })">@MacssWeb.Resources.Aims.BusinessCostDataMake</a>
+                                <a class="dropdown-item" href="@Url.Action("Exec", "D006", new { area = "Aims" })">@MacssWeb.Resources.Aims.RequestSalesStockFixed</a>
+                                <a class="dropdown-item" href="@Url.Action("Make", "D007", new { area = "Aims" })">@MacssWeb.Resources.Aims.FeOrderDataMake</a>
+                                <a class="dropdown-item" href="@Url.Action("Make", "D008", new { area = "Aims" })">@MacssWeb.Resources.Aims.FeRequestDataMake</a>
+                                <a class="dropdown-item" href="@Url.Action("Make", "D009", new { area = "Aims" })">@MacssWeb.Resources.Aims.RequestTraditionDataMake</a>
+                                <a class="dropdown-item" href="@Url.Action("Upload01", "D011", new { area = "Aims" })">@MacssWeb.Resources.Aims.EspInvoiceitemMst</a>
+                                <a class="dropdown-item" href="@Url.Action("Upload02", "D011", new { area = "Aims" })">@MacssWeb.Resources.Aims.EspDataConvMst</a>
+                                <a class="dropdown-item" href="@Url.Action("Upload03", "D011", new { area = "Aims" })">@MacssWeb.Resources.Aims.EspCustomerMst</a>
+                                <a class="dropdown-item" href="@Url.Action("Upload04", "D011", new { area = "Aims" })">@MacssWeb.Resources.Aims.EspVendorMst</a>
+                                <a class="dropdown-item" href="@Url.Action("MakeSeikyu", "D011", new { area = "Aims" })">@MacssWeb.Resources.Aims.EpsRequestDataMake</a>
+                                <a class="dropdown-item" href="@Url.Action("MakeShiire", "D011", new { area = "Aims" })">@MacssWeb.Resources.Aims.EpsPurchasingDataMake</a>
+                                <a class="dropdown-item" href="@Url.Action("Print", "D012", new { area = "Aims" })">@MacssWeb.Resources.Aims.RequestDocumentPrint</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "D013", new { area = "Aims" })">@MacssWeb.Resources.Aims.RequestDetail</a>
+                                <a class="dropdown-item" href="@Url.Action("Change", "D013", new { area = "Aims" })">@MacssWeb.Resources.Aims.RequestDetailPcCode</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "D014", new { area = "Aims" })">@MacssWeb.Resources.Aims.BusinessCost</a>
+                                <a class="dropdown-item" href="@Url.Action("Change", "D014", new { area = "Aims" })">@MacssWeb.Resources.Aims.BusinessCostPcAccountingCode</a>
+                            </div>
+                        </li>
+                    }
+                    @if (canUseBase)
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle nav-menu-item" href="@Url.Action("Index", "Home", new { area = "Base" })"
+                               id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                @MacssWeb.Resources.Application.BaseAbbrName
+                            </a>
+                            <div class="dropdown-menu macss-dropdown-menu" aria-labelledby="navbarDropdown">
+                                <ul>
+                                    <li><a class="dropdown-item" href="@Url.Action("SubMenuD100", "Home", new { area = "Base" })">マスターメンテナンス(エントリ一覧式・承認有)</a></li>
+                                    <li><a class="dropdown-item" href="@Url.Action("SubMenuD200", "Home", new { area = "Base" })">マスターメンテナンス(エントリ一覧式・承認無)</a></li>
+                                    <li><a class="dropdown-item" href="@Url.Action("SubMenuD300", "Home", new { area = "Base" })">マスターメンテナンス(一括)</a></li>
+                                    <li><a class="dropdown-item" href="@Url.Action("SubMenuD400", "Home", new { area = "Base" })">マスターメンテナンス(汎用)</a></li>
+                                    <li><a class="dropdown-item" href="@Url.Action("ManualList", "Manual", new { area = "Base" })">操作手引書</a></li>
+                                    <li><a class="dropdown-item" href="@Url.Action("StorageList", "Storage", new { area = "Base" })">保存データ</a></li>
+                                    <li><a class="dropdown-item" href="@Url.Action("ApprovalList", "Approval", new { area = "Base" })">承認処理</a></li>
+                                    <li><a class="dropdown-item" href="@Url.Action("BatchList", "Batch", new { area = "Base" })">バッチ管理一覧</a></li>
+                                    <li><a class="dropdown-item" href="@Url.Action("Exec", "Batch", new { area = "Base" })">バッチ管理起動</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </nav>
+    }
+    <div id="ResultAlert" class="alert alert-dismissible fade show" role="alert" style="display:none">
+        <span id="AlertMessage"></span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="container-fluid body-content">
+        <div class="macss-screen-id-row">
+            @if (!String.IsNullOrWhiteSpace(ViewBag.ScreenId))
+            {
+                @*<span>@ViewBag.ScreenId</span>*@
+            }
+        </div>
+        <div class="row">
+            <div class="col-12 text-center mb-4">
+                <h2 class="page-title">@ViewBag.PageMainTitle</h2>
+            </div>
+        </div>
+        <div class="main-contents">
+            @RenderBody()
+        </div>
+        <hr />
+        <footer>
+            <div id="TopLinkBox">
+                <a id="TopLink" href="javascript:void(0)"><i class="fas fa-arrow-circle-up"></i></a>
+            </div>
+            <p class="version">Ver 1.0</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/datetimepicker")
+    @Scripts.Render("~/bundles/macss")
+    @Scripts.Render("~/bundles/datatables")
+    <script>
+        //バーコードリーダ取込「Enter」対応の関連
+        $('input[type="text"]').keypress(function (e) {
+            const KEY_ENTER = 13; //Enterキー
+            if (e.keyCode == KEY_ENTER) {
+                //新システム全体としてテキストボックスの「Enter」キー押下でFormのsubmitをできないようにする
+                return false;
+            }
+        });
+        //新システム全体としてテキストボックスの「Enter」キー押下でFormのsubmitをできないようにし、特定のテキストボックスのみ特殊な処理を記述します。
+        //TASS-D010の_Form.cshtml参考
+        //
+        //バーコードリーダ取込の「Enter」キー対応が入る画面は、別途、対象画面で下記のサンプルのようにスクリプトの記述が必要です。
+        //const KEY_ENTER = 13; //Enterキー
+        ////手入力のEnterキー、バーコードリーダのEnterキー対応
+        //$('#対象のコントロール').keypress(function (e) {
+        //    if (e.keyCode == KEY_ENTER) {
+        //        var inputVal = $('#対象のコントロール').val();
+        //        var checjVal = 対象のコントロールの値が正常の値の場合、正常の値を返却し、異常の値の場合、空を返却する。
+        //        if (checjVal.length > 0) {
+        //            //正常な値の場合の処理をする
+        //            //$('#対象のコントロール').val('');
+        //        }
+        //        else {
+        //            //異常な値の場合の処理をする
+        //            //メッセージ表示
+        //            //必要であればBeep音
+        //            //new Audio("data:audio/wav;base64,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").play();
+        //            //$('#対象のコントロール').val('');
+        //        }
+
+        //        //FormをSubmitさせない
+        //        return false;
+        //    }
+        //});
+    </script>
+    @RenderSection("Scripts", required: false)
+    <script>
+
+        function showResultAlert(alertType, msg, alertInfoFlg) {
+
+            $("#AlertMessage").text(msg);
+            $("#ResultAlert").addClass(alertType);
+            $("#ResultAlert").show();
+            if (alertInfoFlg != '1') {
+                setTimeout(function () {
+                    $('#ResultAlert').fadeOut(3000);
+                }, 6000);
+            }
+        }
+
+        $(function () {
+            if ('@(ViewBag.ShowAlert)' === '@true') {
+                showResultAlert('@(ViewBag.AlertType)', '@(ViewBag.AlertMessage)','@(ViewBag.AlertInfoFlg)');
+            }
+        })
+    </script>
+</body>
+</html>

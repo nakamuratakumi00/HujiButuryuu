@@ -1,0 +1,183 @@
+﻿@using Macss.ViewModels
+@model RoleViewModel
+
+@section Heads {
+    <link href="/Content/details.css" rel="stylesheet" />
+    <style>
+        select[multiple],
+        select[size] {
+            height: 200px;
+            max-width: 355px;
+        }
+        h1, .h1,
+        h2, .h2,
+        h3, .h3 {
+            margin-top: 2px;
+            margin-bottom: 0px;
+        }
+
+        .col-md-1 {
+            padding-right: 0px;
+            padding-left: 0px;
+        }
+    </style>
+}
+
+<div class="row">
+    <div class="navbar2 navbar-default"  style="padding-bottom:10px;">
+
+        <h2>
+            @(ViewBag.Mode == 0 ?
+                  ViewBag.Title = ViewBag.Title + "（新規）" :
+                  ViewBag.Title = ViewBag.Title + "（編集）"
+            )
+        </h2>
+
+        @using (Html.BeginForm("", "Role/Details", FormMethod.Post, htmlAttributes: new { id = "update" }))
+        {
+            <div>
+                @Html.HiddenFor(model => model.Mode, new { Value = ViewBag.Mode })
+            </div>
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                <hr />
+                <div>
+                    <input type="submit" id='btnUpdate' style="width:50px; height:30px; padding: 0px; text-align: center" value="登録" class="btn btn-default" />
+                </div>
+                <div>
+                    @Html.ValidationSummary(true, "", new { @class = "" })
+                </div>
+                <div class="row" style="line-height: 2">
+                     @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "col-md-2 control-label required-item", @id = "lblRoleCd" })
+                    <div class="col-md-4  text_jp_middle">
+                        @(ViewBag.Mode == 0 ?
+                        @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control", @maxlength = "32", style = "ime-mode: inactive"} }) :
+                        @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                        )
+                        @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row" style="line-height: 2">
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "col-md-2 control-label required-item", @id = "lblRoleName" })
+                    <div class="col-md-4 text_jp_middle">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @maxlength = "64", style = "ime-mode: active" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row" style="line-height: 2">
+                    @Html.LabelFor(model => model.RoleCmt, htmlAttributes: new { @class = "col-md-2 control-label" })
+                    <div class="col-md-8 text_jp_large">
+                        @Html.EditorFor(model => model.RoleCmt, new { htmlAttributes = new { @class = "form-control", style = "max-width: 600px; ime-mode: active", @maxlength = "256" } })
+                        @Html.ValidationMessageFor(model => model.RoleCmt, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row" style="line-height: 2">
+                    @Html.LabelFor(model => model.Menu, htmlAttributes: new { @class = "col-md-2 control-label required-item", @id = "lblMenuSet" })
+                    <div class="list-size" style="min-width: 250px;">
+                        <h6 class="small"><b>＜ロール設定メニュー＞</b></h6>
+                        @Html.ListBoxFor(model => model.SetMenu, (IEnumerable<SelectListItem>)ViewBag.SetMenu, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SetMenu, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-1">
+                        <h6 class="small">　</h6>
+                        <input type="button" name="add" value="<" class="btn btn-default" onClick="menu(1)" style="margin-top: 40px; margin-bottom: 40px;" /><br>
+                        <input type="button" name="delete" value=">" class="btn btn-default" onClick="menu(0)">
+                    </div>
+                    <div class="list-size" style="min-width: 250px;">
+                        <h6 class="small"><b>＜メニュー一覧＞</b></h6>
+                        @Html.ListBoxFor(model => model.Menu, (IEnumerable<SelectListItem>)ViewBag.AllMenu, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div id="linkBack">
+    @Html.ActionLink("Back to List", "Index")
+</div>
+<br />
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        window.onload = function () {
+
+            if ("@ViewBag.Message" != ""){
+                alert("@ViewBag.Message");
+                window.location.href = '@Url.Action("Details")?id=' + '@Model.Id';
+            }
+            $('#sidebar').toggleClass('active');
+    };
+    function menu(mode) {
+        // リストを取得
+        var allMenu = document.getElementById('Menu').options;
+        var setMenu = document.getElementById('SetMenu').options;
+        var setMenuValList = new Array();
+        for (var i = 0; i < setMenu.length; i++) {
+            setMenuValList.push(setMenu[i].text)
+        }
+        // del
+        if (mode == "0") {
+            var count = 0;
+            var options = [];
+            for (var i = 0; i < setMenu.length; i++) {
+                if (setMenu[i].selected == true) {
+                } else {
+                    var num = setMenu[i].value;
+                    var menuSelect = setMenu[i].text;
+                    options[count] = [menuSelect, num]
+                    count++;
+                }
+            }
+            sl = document.getElementById('SetMenu');
+            while (sl.lastChild) {
+                sl.removeChild(sl.lastChild);
+            }
+            for (var i = 0; i < count; i++) {
+                document.getElementById('SetMenu').options[i] = new Option(options[i][0], options[i][1]);
+            }
+        // add
+        } else {
+            var count = setMenu.length;
+            for (var i = 0; i < allMenu.length; i++) {
+                if (allMenu[i].selected == true) {
+                    var num = allMenu[i].value;
+                    var menuSelect = allMenu[i].text;
+                    // 設定ロールに存在していない場合のみ
+                    if (setMenuValList.indexOf(menuSelect) < 0) {
+                        document.getElementById('SetMenu').options[count] = new Option(menuSelect, num);
+                        count++;
+                    }
+                }
+            }
+        }
+    }
+    $(function () {
+        $('#btnUpdate').click(function () {
+
+            if (window.confirm("@Resources.Message.CQ004")) {
+                var setMenu = document.getElementById('SetMenu').options;
+                for (var i = 0; i < setMenu.length; i++) {
+                    setMenu[i].selected = true;
+                }
+                $('#update').submit();
+            }
+            else {
+                return false;
+            }
+        });
+    });
+        $(function () {
+        $('#linkBack').click(function () {
+
+            if (window.confirm("@Resources.Message.CQ011")) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        });
+    });
+    </script>
+}

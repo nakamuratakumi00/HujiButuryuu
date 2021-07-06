@@ -1,0 +1,157 @@
+﻿<html lang="ja">
+
+@Html.AntiForgeryToken()
+
+@if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+{
+    <div class="alert alert-info">
+        <span>@ViewBag.ConfirmMessage</span>
+    </div>
+}
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="row justify-content-between macss-form-button-group-row">
+        @if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+        {
+        <div class="col-4">
+            <a role="button" class="btn btn-secondary" href="@Url.Action("List")">@MacssWeb.Resources.ControlText.Back</a>
+        </div>
+        }
+        else
+        {
+            <div class="col-4">
+                <a role="button" class="btn btn-secondary" href="@Url.Action("List")">@MacssWeb.Resources.ControlText.Back</a>
+            </div>
+        }
+    </div>
+</div>
+<table class="table macss-form-table">
+    <colgroup>
+        <col class="macss-form-table-title" />
+        <col class="macss-form-table-contents" />
+    </colgroup>
+    <tr>
+        <th scope="row">
+            倉庫コード
+        </th>
+        <td></td>
+    </tr>
+    <tr>
+        <th scope="row">
+            得意先コード
+        </th>
+        <td></td>
+    </tr>
+    <tr>
+        <th scope="row">
+            出荷No　　　
+        </th>
+        <td>
+            <div>
+                123456789
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            出荷日　　　　
+        </th>
+        <td>
+            <div>
+                2021/02/02
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            得意先
+        </th>
+        <td>
+            <div>
+                0052111　ＧＥ富士電機メーター株
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            品名
+        </th>
+        <td>
+            <div>
+                123456789012345　ＡＰ－５０Ｆ，２２０，Ｍ
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            出荷数　　　　　　
+        </th>
+        <td>
+            <div>
+                32
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            エラー　　　　　　
+        </th>
+        <td>
+            <div>
+                引当分在庫なし
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    @if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+    {
+    <div class="col-4">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("List")">@MacssWeb.Resources.ControlText.Back</a>
+    </div>
+    <div class="col-4 text-right">
+        <a role="button" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDialog">@ViewBag.ButtonText</a>
+    </div>
+    }
+    else
+    {
+        <div class="col-4">
+            <a role="button" class="btn btn-secondary" href="@Url.Action("List")">戻る</a>
+        </div>
+        <div class="col-5 text-right">
+            <a role="button" class="btn btn-primary" href="@Url.Action("RecaptureConfirm")">再取込</a>
+            <a role="button" class="btn btn-danger" href="@Url.Action("DeleteConfirm")">@MacssWeb.Resources.ControlText.Delete</a>
+        </div>
+    }
+</div>
+
+<div class="modal" id="ConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @ViewBag.ConfirmDialogText
+                @*＊＊＊＊を実行します。よろしいですか？*@
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("List", "D006", null, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="UploadFileName" name="uploadFileName" value="@ViewBag.UploadFileName" />
+                    <button type="submit" class="btn btn-primary">@MacssWeb.Resources.ControlText.Yes</button>
+                }
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+                @*<button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.Cancel</button>
+        <button type="submit" class="btn btn-primary" name="cmdBtmExec" value="@((int)MacssWeb.Common.ButtonValues.Exec)">@ViewBag.ButtonText</button>*@
+                @*<button type="submit" class="btn btn-primary" name="cmdBtmExec" value="@((int)MacssWeb.Common.ButtonValues.Exec)">はい</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">いいえ</button>*@
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+﻿@*@model IEnumerable<MacssWeb.Models.AccountMasterUpload>
+
+@{
+    ViewBag.Title = "運送業務 - TASS";
+    ViewBag.ScreenId = "";
+    ViewBag.PageMainTitle = "顧客提供用送状データ作成完了";
+}
+@section Scripts {
+    <script>
+
+        $(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#MakeConfirmList");
+            dt.setScrollY("600px");
+            dt.configure();
+
+            $('[data-toggle="popover"]').popover();
+
+        });
+    </script>
+}
+
+<div class="alert @ViewBag.AlertType">
+    <span>@ViewBag.ResultMessage</span>
+</div>
+
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-12 text-right">
+        <a class="btn btn-secondary" href="@Url.Action("Index")" role="button">@MacssWeb.Resources.ControlText.BackToList</a>
+    </div>
+</div>
+
+<div class="container-fluid mt-4">
+    <div class="form-inline">
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">期間</span>
+            </div>
+            <span class="form-control">@DateTime.Now.ToString("yyyy年MM月01日") ～ @DateTime.Now.ToString("yyyy年MM月dd日")</span>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt-2">
+    <div class="form-inline">
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">作成件数</span>
+            </div>
+            <span class="form-control text-right">@ViewBag.MakeCount</span>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt-4">
+    <div class="form-inline">
+        <button id="outdata" type="button" class="btn btn-primary ">送状Noデータダウンロード</button>
+    </div>
+</div>*@

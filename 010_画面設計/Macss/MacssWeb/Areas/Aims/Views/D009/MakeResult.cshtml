@@ -1,0 +1,319 @@
+﻿@model IEnumerable<MacssWeb.Models.AccountMasterUpload>
+
+@{
+    ViewBag.Title = "請求仕入 - AIMS";
+    ViewBag.ScreenId = "";
+    ViewBag.PageMainTitle = "請求引渡しデータ作成完了";
+}
+@section Scripts {
+    <script>
+
+        $(function () {
+            var dt = new Macss.DataTables.MacssDataTable("#MakeConfirmList", [{
+                "className": "macss-table-proc-column", "width": 0, "orderable": true, "targets": 0
+            }, {
+                "className": "macss-table-proc-column", "width": 0, "orderable": true, "targets": 1
+            }, {
+                "className": "macss-table-proc-column", "width": 0, "orderable": false, "targets": 2
+            }], 3);
+            dt.configure();
+            $('[data-toggle="popover"]').popover();
+        });
+    </script>
+
+}
+
+<div class="alert @ViewBag.AlertType">
+    <span>@ViewBag.ResultMessage</span>
+</div>
+
+<div class="alert alert-info">
+    <span>@Html.Raw(@ViewBag.ResultInfoMessage)</span>
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+    </div>
+    <div class="col-4 text-right">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("Index", "Home")">@MacssWeb.Resources.ControlText.BackToSubMenu</a>
+    </div>
+</div>
+
+<div class="container-fluid mt-4">
+    <div class="col-4">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="Condition3">締日</span>
+            </div>
+            <div class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                20日締
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt-4">
+    <div class="form-inline">
+        <div class="col-4 mb-1">
+            <span class="input-group-text">LK733.CSV　Feパワーセミコンダクタ㈱(大町)様</span>
+        </div>
+        <div class="col-2">
+            <div class="input-group mb-1">
+                <div class="input-group-prepend" style="width:6rem;">
+                    <span class="input-group-text w-100">作成件数</span>
+                </div>
+                <span class="form-control text-right">@ViewBag.MakeCount</span>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="input-group mb-1">
+                <div class="input-group-prepend" style="width:8rem;">
+                    <span class="input-group-text w-100">作成合計金額</span>
+                </div>
+                <span class="form-control text-right">11,800 円</span>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="input-group mb-1">
+                <div class="input-group-prepend" style="width:7rem;">
+                    <span class="input-group-text w-100">エラー件数</span>
+                </div>
+                <span class="form-control text-right">@ViewBag.ErrorCount</span>
+            </div>
+        </div>        
+    </div>
+
+    <div class="form-inline">
+        <div class="col-4 mb-1">
+            <span class="input-group-text">LK788.CSV　Feパワーセミコンダクタ㈱様</span>
+        </div>
+        <div class="col-2">
+            <div class="input-group mb-1">
+                <div class="input-group-prepend" style="width:6rem;">
+                    <span class="input-group-text w-100">作成件数</span>
+                </div>
+                <span class="form-control text-right">3 件</span>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="input-group mb-1">
+                <div class="input-group-prepend" style="width:8rem;">
+                    <span class="input-group-text w-100">作成合計金額</span>
+                </div>
+                <span class="form-control text-right">17,500 円</span>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="input-group mb-1">
+                <div class="input-group-prepend" style="width:7rem;">
+                    <span class="input-group-text w-100">エラー件数</span>
+                </div>
+                <span class="form-control text-right">0 件</span>
+            </div>
+        </div>        
+    </div>
+
+    <div class="form-inline">
+        <div class="col-4 mb-1">
+            <span class="input-group-text">LK799.CSV　Fe半導体営業様</span>
+        </div>
+        <div class="col-2">
+            <div class="input-group mb-1">
+                <div class="input-group-prepend" style="width:6rem;">
+                    <span class="input-group-text w-100">作成件数</span>
+                </div>
+                <span class="form-control text-right">3 件</span>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="input-group mb-1">
+                <div class="input-group-prepend" style="width:8rem;">
+                    <span class="input-group-text w-100">作成合計金額</span>
+                </div>
+                <span class="form-control text-right">3,000 円</span>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="input-group mb-1">
+                <div class="input-group-prepend" style="width:7rem;">
+                    <span class="input-group-text w-100">エラー件数</span>
+                </div>
+                <span class="form-control text-right">0 件</span>
+            </div>
+        </div>        
+    </div>
+
+    <div class="form-inline">
+        <div class="col-4 mb-1">
+            <span class="input-group-text">LK7AA.CSV　Fe松本工場様</span>
+        </div>
+        <div class="col-2">
+            <div class="input-group mb-1">
+                <div class="input-group-prepend" style="width:6rem;">
+                    <span class="input-group-text w-100">作成件数</span>
+                </div>
+                <span class="form-control text-right">3 件</span>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="input-group mb-1">
+                <div class="input-group-prepend" style="width:8rem;">
+                    <span class="input-group-text w-100">作成合計金額</span>
+                </div>
+                <span class="form-control text-right">200 円</span>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="input-group mb-1">
+                <div class="input-group-prepend" style="width:7rem;">
+                    <span class="input-group-text w-100">エラー件数</span>
+                </div>
+                <span class="form-control text-right">0 件</span>
+            </div>
+        </div>        
+    </div>
+
+    <div class="form-inline">
+        <div class="col-4 mb-1">
+            <span class="input-group-text">LK7BB.CSV　新光商事様</span>
+        </div>
+        <div class="col-2">
+            <div class="input-group mb-1">
+                <div class="input-group-prepend" style="width:6rem;">
+                    <span class="input-group-text w-100">作成件数</span>
+                </div>
+                <span class="form-control text-right">3 件</span>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="input-group mb-1">
+                <div class="input-group-prepend" style="width:8rem;">
+                    <span class="input-group-text w-100">作成合計金額</span>
+                </div>
+                <span class="form-control text-right">2,700 円</span>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="input-group mb-1">
+                <div class="input-group-prepend" style="width:7rem;">
+                    <span class="input-group-text w-100">エラー件数</span>
+                </div>
+                <span class="form-control text-right">0 件</span>
+            </div>
+        </div>        
+    </div>
+</div>
+
+<div class="row mt-2 mb-2">
+    <div class="col-12 text-right">
+        <div class="dropdown">
+            <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#CsvDownloadDialog">CSVダウンロード</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table id="MakeConfirmList" class="table table-striped table-hover macss-data-table">
+    <thead class="macss-data-table-header">
+        <!-- thの文字数で列の幅が決まってしまうため、必要に応じて全角スペースを入れて列の幅を調整する必要がある-->
+        <tr>
+            <th>レコード区分</th>
+            <th>顧客</th>
+            <th>No</th>
+            <th>エラー</th>
+            <th>業務コード</th>
+            <th>原票No</th>
+            <th>金額</th>
+            <th>伝票日付</th>
+            <th>請求日　</th>
+            <th>得意先コード</th>
+            <th>得意先名　</th>
+            <th>請求先コード</th>
+            <th>請求先名　</th>
+            <th>品名　　　　　　　　　　　　　　　　</th>
+            <th>届先名　　　　　　　　　　　</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>3</td>
+            <td>
+                LK733.CSV　Feパワーセミコンダクタ㈱(大町)様
+            </td>
+            <td>
+                1
+            </td>
+            <td>
+                <a tabindex="0" class="btn btn-sm btn-danger" role="button" data-toggle="popover"
+                   data-trigger="focus" title="エラー詳細"
+                   data-content="該当する取引先マスタがありません。">詳細</a>
+            </td>
+            <td>4101</td>
+            <td>1234567890</td>
+            <td class="text-right">0</td>
+            <td>2021/02/03</td>
+            <td>2021/02/03</td>
+            <td>121926001</td>
+            <td>ダミー得意先</td>
+            <td>234596001</td>
+            <td>ダミー請求先</td>
+            <td>６ＭＢＩ８００ＸＲＶＦ０７５Ｖ－５０</td>
+            <td>ダミー届先</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>
+                LK733.CSV　Feパワーセミコンダクタ㈱(大町)様
+            </td>
+            <td>
+                1
+            </td>
+            <td>
+                <a tabindex="0" class="btn btn-sm btn-danger" role="button" data-toggle="popover"
+                   data-trigger="focus" title="エラー詳細"
+                   data-content="該当する取引先マスタがありません。">詳細</a>
+            </td>
+            <td>4101</td>
+            <td>1234567890</td>
+            <td class="text-right">1,000</td>
+            <td>2021/02/03</td>
+            <td>2021/02/03</td>
+            <td>121926001</td>
+            <td>ダミー得意先</td>
+            <td>234596001</td>
+            <td>ダミー請求先</td>
+            <td>６ＭＢＩ８００ＸＲＶＦ０７５Ｖ－５０</td>
+            <td>ダミー届先</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>
+                LK733.CSV　Feパワーセミコンダクタ㈱(大町)様
+            </td>
+            <td>
+                2
+            </td>
+            <td>
+                <a tabindex="0" class="btn btn-sm btn-danger" role="button" data-toggle="popover"
+                   data-trigger="focus" title="エラー詳細"
+                   data-content="該当する取引先マスタがありません。">詳細</a>
+            </td>
+            <td>4101</td>
+            <td>1234567890</td>
+            <td class="text-right">12,000</td>
+            <td>2021/02/03</td>
+            <td>2021/02/03</td>
+            <td>121926001</td>
+            <td>ダミー得意先</td>
+            <td>234596001</td>
+            <td>ダミー請求先</td>
+            <td>６ＭＢＩ８００ＸＲＶＦ０７５Ｖ－５０</td>
+            <td>ダミー届先</td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,21 @@
+﻿@using System.Web.Optimization
+@model Macss.Database.Entity.AccountMaster
+
+@{
+    ViewBag.Title = "運送業務 - TASS";
+    ViewBag.PageMainTitle = "TASS全件データ出力パターン登録";
+    ViewBag.ScreenId = "";
+
+    ViewBag.CreateExec = true;
+}
+
+@using (Html.BeginForm("Setting", "D033", null, FormMethod.Post))
+{
+    @Html.Hidden("preAction", MacssWeb.Common.Actions.Create);
+
+    @Html.Partial("_SettingForm", Model)
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

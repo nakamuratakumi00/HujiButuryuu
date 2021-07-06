@@ -1,0 +1,111 @@
+﻿@using Macss.Areas.Fdass.ViewModels
+@model BackUpViewModel
+
+@section Heads {
+    <link href="/Content/details.css" rel="stylesheet" />
+    @*<link href="/Content/reset.css" rel="stylesheet" />*@
+}
+
+<style>
+#loading {
+    display: table;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    opacity: 0.8;
+}
+
+    #loading .loadingMsg {
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
+        padding-top: 50px;
+        background: url("@Url.Content("~/Areas/Fdass/Img/gif-load.gif")") center center no-repeat;
+    }
+    h1, .h1,
+h2, .h2,
+h3, .h3 {
+    margin-top: 2px;
+    margin-bottom: 0px;
+}
+
+</style>
+
+@{
+    ViewBag.Title = ViewBag.Title;
+}
+<div class="row">
+    <div class="navbar2 navbar-default" style="padding-bottom:10px;">
+        <h2>@ViewBag.Title</h2>
+        <hr />
+        @Html.AntiForgeryToken()
+        @using (Html.BeginForm())
+        {
+            <div class="row">
+                <div id="ajax-result"></div>
+                @(ViewBag.Success == "1" ?
+                                        @Html.ValidationSummary(true, "", new { @class = "validation-summary-success" }) :
+                                        @Html.ValidationSummary(true, "", new { @class = "", id = "error" })
+                )
+            </div>            
+            <div class="row">
+                <div class="col-sm-2 label_large"></div>
+                <div class="col-sm-4" style="width:250px;"></div>
+                <div style="width: 80px"></div>
+                @Html.LabelFor(model => model.MatujimeKanri.Month, htmlAttributes: new { @class = "col-md-3 control-label", style = "width: 160px" })
+                @Html.DisplayFor(model => model.MatujimeKanri.Month)
+            </div>
+            <div class="row">
+                <div class="col-sm-2 label_large"></div>
+                <div class="col-sm-4" style="width:250px;"></div>
+                <div style="width: 80px"></div>
+                @Html.LabelFor(model => model.MatujimeKanri.EndTt, htmlAttributes: new { @class = "col-md-3 control-label", style = "width: 160px" })
+                @Html.DisplayFor(model => model.MatujimeKanri.EndTt)
+            </div>
+            <div class="row">
+                <div class="col-sm-2 label_large"></div>
+                <div class="col-sm-4" style="width:250px;"></div>
+                <div style="width: 80px"></div>
+                @Html.LabelFor(model => model.MatujimeKanri.Status, htmlAttributes: new { @class = "col-md-3 control-label", style = "width: 160px" })
+                @Html.DisplayFor(model => model.MatujimeKanri.Status)
+            </div>
+            <div class="row">
+                <div class="col-sm-2 label_large"></div>
+                <div class="col-sm-4" style="width:250px;"></div>
+                <div style="width: 80px"></div>
+                @Html.LabelFor(model => model.MatujimeKanri.CrtName, htmlAttributes: new { @class = "col-md-3 control-label", style = "width: 160px" })
+                @Html.DisplayFor(model => model.MatujimeKanri.CrtName)
+            </div>
+            if (ViewBag.Mode == "1")
+            {
+                <div class="row">
+                    <div class="col-md-2 label_large"></div>
+                    <div class="col-md-4 control-label" style="width: 100px">
+                        <button class="btn btn-default" style="width: 45px; height: 30px; padding: 0; text-align: center" id="run">実行</button>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+
+        window.onload = function () {
+            $('#sidebar').toggleClass('active');
+        };
+
+        $(function () {
+            $('#run').click(function () {
+                $('#error').hide();
+                $('#run').prop('disabled', true);
+                $('#run').submit();
+            });
+        });
+    </script>
+}
+

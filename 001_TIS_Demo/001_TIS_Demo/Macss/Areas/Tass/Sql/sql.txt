@@ -1,0 +1,731 @@
+﻿CREATE VIEW v_unsou_hinmei AS
+SELECT HINCOD  , HINNAM  , HINNMK  , TORCOD
+     , KISYUA  , KISYUB  , DTMOTO  , TKCOD
+     , SYUBTU  , CTLFL1  , KHINCD  , '0' AS DELFLG
+     , CRTCOD  , CRTYMD  , UPDCOD  , UPDYMD
+ FROM m_unsou_hinmei with ( nolock )
+UNION ALL 
+SELECT HINCOD  , HINNAM  , HINNMK  , TORCOD
+     , KISYUA  , KISYUB  , DTMOTO  , TKCOD
+     , SYUBTU  , CTLFL1  , KHINCD  , DELFLG
+     , CRTCOD  , CRTYMD  , UPDCOD  , UPDYMD
+ FROM m_unsou_hinmei_koyuu
+
+
+CREATE VIEW v_unsou_todokesaki AS
+SELECT TDKCOD , TDKNAM , TDKNMS , TDKNMK , TDBNAM , TDKTAN , JYUSYO , TDKTEL
+     , SDEK01 , SDEK02 , SDEK03 , SDEK04 , SDEK05 , SDEK06 , SDEK07 , SDEK08 , SDEK09 , SDEK10
+     , SDEK11 , SDEK12 , SDEK13 , SDEK14 , SDEK15 , TKJIKO , DTMOTO , YUBINN , FAXNO  , KTDKCD
+     , KITDCD , '0' AS DELFLG, CRTCOD , CRTYMD , UPDCOD , UPDYMD
+FROM m_unsou_todokesaki with ( nolock )
+UNION ALL 
+SELECT TDKCOD , TDKNAM , TDKNMS , TDKNMK , TDBNAM , TDKTAN , JYUSYO , TDKTEL
+     , SDEK01 , SDEK02 , SDEK03 , SDEK04 , SDEK05 , SDEK06 , SDEK07 , SDEK08 , SDEK09 , SDEK10
+     , SDEK11 , SDEK12 , SDEK13 , SDEK14 , SDEK15 , TKJIKO , DTMOTO , YUBINN , FAXNO  , KTDKCD
+     , KITDCD , DELFLG , CRTCOD , CRTYMD , UPDCOD , UPDYMD
+ FROM m_unsou_todokesaki_koyuu
+
+
+CREATE VIEW v_unsou_shuuka_tehai AS
+SELECT SYUKNO , DATAYM , SYKYMD   , KISYU  , KEIFNO , FSYKNO , TANCOD , TANNAM , TDKCOD , TDKJYU , 
+       TDKNAM , TDSNAM , TDBNAM   , TDKTAN , TDKTEL , TDKYUB , HINCOD , HINNAM , UNSCOD , UNSCRS , 
+       SIRCOD , SGENNO , UNSKBN   , SYBCOD , TOKCOD , SEICOD , DENKBN , DENMSU , TKJIKO , HOSOSU , 
+       NFDATE , DAIHNO , DAIHNOYM , JYURYO , HOSOS3 , JYURY3 , UFUTAN , YUSONO , CTLF19 , CTLF28 , 
+       CTLF29 , MEHKBN , JSKKBN   , TOCYMD , TAKSIZ , SEIKYU , GEPPOU , PCCOD  , SGENN2 , STOUCD , 
+       KENCOD , JISCOD , TENSIR   , HATCOD , SGEN35 , ECOFLG , SYUKSU , SYUTUF , DELFLG , CRTCOD ,  
+       CRTYMD , UPDCOD , UPDYMD
+FROM t_unsou_shuuka_tehai_all with ( nolock )
+UNION ALL
+SELECT SYUKNO , DATAYM , SYKYMD   , KISYU  , KEIFNO , FSYKNO , TANCOD , TANNAM , TDKCOD , TDKJYU , 
+       TDKNAM , TDSNAM , TDBNAM   , TDKTAN , TDKTEL , TDKYUB , HINCOD , HINNAM , UNSCOD , UNSCRS , 
+       SIRCOD , SGENNO , UNSKBN   , SYBCOD , TOKCOD , SEICOD , DENKBN , DENMSU , TKJIKO , HOSOSU , 
+       NFDATE , DAIHNO , DAIHNOYM , JYURYO , HOSOS3 , JYURY3 , UFUTAN , YUSONO , CTLF19 , CTLF28 , 
+       CTLF29 , MEHKBN , JSKKBN   , TOCYMD , TAKSIZ , SEIKYU , GEPPOU , PCCOD  , SGENN2 , STOUCD , 
+       KENCOD , JISCOD , TENSIR   , HATCOD , SGEN35 , ECOFLG , SYUKSU , SYUTUF , DELFLG , CRTCOD , 
+       CRTYMD , UPDCOD , UPDYMD
+FROM t_unsou_shuuka_jiseki1 with ( nolock )
+UNION ALL
+SELECT SYUKNO , DATAYM , SYKYMD   , KISYU  , KEIFNO , FSYKNO , TANCOD , TANNAM , TDKCOD , TDKJYU , 
+       TDKNAM , TDSNAM , TDBNAM   , TDKTAN , TDKTEL , TDKYUB , HINCOD , HINNAM , UNSCOD , UNSCRS , 
+       SIRCOD , SGENNO , UNSKBN   , SYBCOD , TOKCOD , SEICOD , DENKBN , DENMSU , TKJIKO , HOSOSU , 
+       NFDATE , DAIHNO , DAIHNOYM , JYURYO , HOSOS3 , JYURY3 , UFUTAN , YUSONO , CTLF19 , CTLF28 , 
+       CTLF29 , MEHKBN , JSKKBN   , TOCYMD , TAKSIZ , SEIKYU , GEPPOU , PCCOD  , SGENN2 , STOUCD , 
+       KENCOD , JISCOD , TENSIR   , HATCOD , SGEN35 , ECOFLG , SYUKSU , SYUTUF , DELFLG , CRTCOD , 
+       CRTYMD , UPDCOD , UPDYMD
+FROM t_unsou_shuuka_jiseki2
+
+
+CREATE VIEW v_unsou_shuukatehai AS
+SELECT SYUKNO  , CDATE  , SYKYMD  , KISYU  , KEIFNO  , FSYKNO
+     , TANCOD  , TANNAM , TDKCOD  , TDKYUB , TDKJYU  , TDKNAM
+     , TDSNAM  , TDBNAM , TDKTAN  , TDKTEL , HINCOD  , HINNAM
+     , UNSCOD  , UNSCRS , SIRCOD  , UNSKBN , SYBCOD  , TOKCOD
+     , SEICOD  , DENKBN , DENMSU  , TKJIKO , UFUTAN  , YUSONO
+     , DENF    , CTLF19 , MEHKBN  , PCCOD  , KENCOD  , SIKCOD
+     , TDBNJ1  , TDBNJ2 , TDBNJ3  , JISCOD , TENSIR  , SYUKSU
+     , MKCOD   , MKRIYU , YUBFLG  , CRTCOD , CRTYMD  , UPDCOD
+     , UPDYMD
+FROM
+	t_unsou_shuukatehai
+WHERE
+	SYKYMD >= DATEADD(MONTH, -1, CONVERT(DATE, GETDATE()))
+
+
+
+
+create TRIGGER trgTorihikisakiUpd
+ON m_torihikisaki
+AFTER INSERT
+AS
+BEGIN
+
+	update m_torihikisaki
+		set 
+			m_torihikisaki.TORCOD = RTRIM(inserted.TORCOD),
+			m_torihikisaki.TORNAM = RTRIM(inserted.TORNAM),
+			m_torihikisaki.TORNMK = RTRIM(inserted.TORNMK),
+			m_torihikisaki.BUKNAM = RTRIM(inserted.BUKNAM),
+			m_torihikisaki.TANNAM = RTRIM(inserted.TANNAM),
+			m_torihikisaki.TELNO  = RTRIM(inserted.TELNO),
+			m_torihikisaki.FAXNO  = RTRIM(inserted.FAXNO),
+			m_torihikisaki.YUBINN = RTRIM(inserted.YUBINN),
+			m_torihikisaki.JYSYO  = RTRIM(inserted.JYSYO),
+			m_torihikisaki.SIMDAY = RTRIM(inserted.SIMDAY),
+			m_torihikisaki.SECO01 = RTRIM(inserted.SECO01),
+			m_torihikisaki.SECO06 = RTRIM(inserted.SECO06),
+			m_torihikisaki.FBTCDM = RTRIM(inserted.FBTCDM),
+			m_torihikisaki.KISYUA = RTRIM(inserted.KISYUA),
+			m_torihikisaki.LSTFLG = RTRIM(inserted.LSTFLG),
+			m_torihikisaki.FBTCOD = RTRIM(inserted.FBTCOD),
+			m_torihikisaki.KOKCOD = RTRIM(inserted.KOKCOD),
+			m_torihikisaki.MEHK01 = RTRIM(inserted.MEHK01),
+			m_torihikisaki.FBTCDS = RTRIM(inserted.FBTCDS),
+			m_torihikisaki.CRTCOD = RTRIM(inserted.CRTCOD),
+			m_torihikisaki.CRTYMD = RTRIM(inserted.CRTYMD),
+			m_torihikisaki.UPDCOD = RTRIM(inserted.UPDCOD),
+			m_torihikisaki.UPDYMD = RTRIM(inserted.UPDYMD)
+	from inserted
+	where m_torihikisaki.TORCOD = inserted.TORCOD
+
+END
+
+
+create TRIGGER trgShukkabashoUpd
+ON m_shukkabasho
+AFTER INSERT
+AS
+BEGIN
+
+	update m_shukkabasho
+		set 
+			m_shukkabasho.SYBCOD = RTRIM(inserted.SYBCOD),
+			m_shukkabasho.SYBNAM = RTRIM(inserted.SYBNAM),
+			m_shukkabasho.JYSYO  = RTRIM(inserted.JYSYO),
+			m_shukkabasho.SCTL05 = RTRIM(inserted.SCTL05),
+			m_shukkabasho.SCTL07 = RTRIM(inserted.SCTL07),
+			m_shukkabasho.SCTL09 = RTRIM(inserted.SCTL09),
+			m_shukkabasho.SYBC15 = RTRIM(inserted.SYBC15),
+			m_shukkabasho.SYBN01 = RTRIM(inserted.SYBN01),
+			m_shukkabasho.SYBN02 = RTRIM(inserted.SYBN02),
+			m_shukkabasho.CRTCOD = RTRIM(inserted.CRTCOD),
+			m_shukkabasho.CRTYMD = RTRIM(inserted.CRTYMD),
+			m_shukkabasho.UPDCOD = RTRIM(inserted.UPDCOD),
+			m_shukkabasho.UPDYMD = RTRIM(inserted.UPDYMD)
+	from inserted
+	where m_shukkabasho.SYBCOD = inserted.SYBCOD
+
+END
+
+
+create TRIGGER trgCalendarUpd
+ON m_calendar
+AFTER INSERT
+AS
+BEGIN
+
+	update m_calendar
+		set 
+			m_calendar.SYBCOD = RTRIM(inserted.SYBCOD),
+			m_calendar.YYMMDD = RTRIM(inserted.YYMMDD),
+			m_calendar.CRTCOD = RTRIM(inserted.CRTCOD),
+			m_calendar.CRTYMD = RTRIM(inserted.CRTYMD),
+			m_calendar.UPDCOD = RTRIM(inserted.UPDCOD),
+			m_calendar.UPDYMD = RTRIM(inserted.UPDYMD)
+	from inserted
+	where m_calendar.SYBCOD = inserted.SYBCOD and m_calendar.YYMMDD = inserted.YYMMDD
+
+END
+
+
+create TRIGGER trgKishuUpd
+ON m_kishu
+AFTER INSERT
+AS
+BEGIN
+
+	update m_kishu
+		set 
+			m_kishu.KISYUA = RTRIM(inserted.KISYUA),
+			m_kishu.KISYB1 = RTRIM(inserted.KISYB1),
+			m_kishu.KISYB2 = RTRIM(inserted.KISYB2),
+			m_kishu.KISNAM = RTRIM(inserted.KISNAM),
+			m_kishu.CTLF03 = RTRIM(inserted.CTLF03),
+			m_kishu.CRTCOD = RTRIM(inserted.CRTCOD),
+			m_kishu.CRTYMD = RTRIM(inserted.CRTYMD),
+			m_kishu.UPDCOD = RTRIM(inserted.UPDCOD),
+			m_kishu.UPDYMD = RTRIM(inserted.UPDYMD)
+	from inserted
+	where m_kishu.KISYUA = inserted.KISYUA 
+			and m_kishu.KISYB1 = inserted.KISYB1
+			and m_kishu.KISYB2 = inserted.KISYB2
+
+END
+
+
+
+create TRIGGER trgSeikyusakiUpd
+ON m_seikyusaki
+AFTER INSERT
+AS
+BEGIN
+
+	update m_seikyusaki
+		set 
+			m_seikyusaki.SEICOD = RTRIM(inserted.SEICOD),
+			m_seikyusaki.SEINAM = RTRIM(inserted.SEINAM),
+			m_seikyusaki.BUKNAM = RTRIM(inserted.BUKNAM),
+			m_seikyusaki.TANNAM = RTRIM(inserted.TANNAM),
+			m_seikyusaki.TELNO = RTRIM(inserted.TELNO),
+			m_seikyusaki.YUBNO = RTRIM(inserted.YUBNO),
+			m_seikyusaki.JYSYO = RTRIM(inserted.JYSYO),
+			m_seikyusaki.LSTFLG = RTRIM(inserted.LSTFLG),
+			m_seikyusaki.CRTCOD = RTRIM(inserted.CRTCOD),
+			m_seikyusaki.CRTYMD = RTRIM(inserted.CRTYMD),
+			m_seikyusaki.UPDCOD = RTRIM(inserted.UPDCOD),
+			m_seikyusaki.UPDYMD = RTRIM(inserted.UPDYMD)
+	from inserted
+	where m_seikyusaki.SEICOD = inserted.SEICOD 
+
+END
+
+
+create TRIGGER trgTodokesakiUpd
+ON m_unsou_todokesaki
+AFTER INSERT
+AS
+BEGIN
+
+	update m_unsou_todokesaki
+		set 
+		m_unsou_todokesaki.TDKCOD = RTRIM(inserted.TDKCOD),
+		m_unsou_todokesaki.TDKNAM = RTRIM(inserted.TDKNAM),
+		m_unsou_todokesaki.TDKNMS = RTRIM(inserted.TDKNMS),
+		m_unsou_todokesaki.TDKNMK = RTRIM(inserted.TDKNMK),
+		m_unsou_todokesaki.TDBNAM = RTRIM(inserted.TDBNAM),
+		m_unsou_todokesaki.TDKTAN = RTRIM(inserted.TDKTAN),
+		m_unsou_todokesaki.JYUSYO = RTRIM(inserted.JYUSYO),
+		m_unsou_todokesaki.TDKTEL = RTRIM(inserted.TDKTEL),
+		m_unsou_todokesaki.SDEK01 = RTRIM(inserted.SDEK01),
+		m_unsou_todokesaki.SDEK02 = RTRIM(inserted.SDEK02),
+		m_unsou_todokesaki.SDEK03 = RTRIM(inserted.SDEK03),
+		m_unsou_todokesaki.SDEK04 = RTRIM(inserted.SDEK04),
+		m_unsou_todokesaki.SDEK05 = RTRIM(inserted.SDEK05),
+		m_unsou_todokesaki.SDEK06 = RTRIM(inserted.SDEK06),
+		m_unsou_todokesaki.SDEK07 = RTRIM(inserted.SDEK07),
+		m_unsou_todokesaki.SDEK08 = RTRIM(inserted.SDEK08),
+		m_unsou_todokesaki.SDEK09 = RTRIM(inserted.SDEK09),
+		m_unsou_todokesaki.SDEK10 = RTRIM(inserted.SDEK10),
+		m_unsou_todokesaki.SDEK11 = RTRIM(inserted.SDEK11),
+		m_unsou_todokesaki.SDEK12 = RTRIM(inserted.SDEK12),
+		m_unsou_todokesaki.SDEK13 = RTRIM(inserted.SDEK13),
+		m_unsou_todokesaki.SDEK14 = RTRIM(inserted.SDEK14),
+		m_unsou_todokesaki.SDEK15 = RTRIM(inserted.SDEK15),
+		m_unsou_todokesaki.TKJIKO = RTRIM(inserted.TKJIKO),
+		m_unsou_todokesaki.DTMOTO = RTRIM(inserted.DTMOTO),
+		m_unsou_todokesaki.YUBINN = RTRIM(inserted.YUBINN),
+		m_unsou_todokesaki.FAXNO = RTRIM(inserted.FAXNO),
+		m_unsou_todokesaki.KTDKCD = RTRIM(inserted.KTDKCD),
+		m_unsou_todokesaki.KITDCD = RTRIM(inserted.KITDCD),
+		m_unsou_todokesaki.CRTCOD = RTRIM(inserted.CRTCOD),
+		m_unsou_todokesaki.CRTYMD = RTRIM(inserted.CRTYMD),
+		m_unsou_todokesaki.UPDCOD = RTRIM(inserted.UPDCOD),
+		m_unsou_todokesaki.UPDYMD = RTRIM(inserted.UPDYMD)
+	from inserted
+	where m_unsou_todokesaki.TDKCOD = inserted.TDKCOD 
+
+END
+
+
+create TRIGGER trgHinmeiUpd
+ON m_unsou_hinmei
+AFTER INSERT
+AS
+BEGIN
+
+	update m_unsou_hinmei
+		set 
+			m_unsou_hinmei.HINCOD = RTRIM(inserted.HINCOD),
+			m_unsou_hinmei.HINNAM = RTRIM(inserted.HINNAM),
+			m_unsou_hinmei.HINNMK = RTRIM(inserted.HINNMK),
+			m_unsou_hinmei.TORCOD = RTRIM(inserted.TORCOD),
+			m_unsou_hinmei.KISYUA = RTRIM(inserted.KISYUA),
+			m_unsou_hinmei.KISYUB = RTRIM(inserted.KISYUB),
+			m_unsou_hinmei.DTMOTO = RTRIM(inserted.DTMOTO),
+			m_unsou_hinmei.TKCOD = RTRIM(inserted.TKCOD),
+			m_unsou_hinmei.SYUBTU = RTRIM(inserted.SYUBTU),
+			m_unsou_hinmei.CTLFL1 = RTRIM(inserted.CTLFL1),
+			m_unsou_hinmei.KHINCD = RTRIM(inserted.KHINCD),
+			m_unsou_hinmei.CRTCOD = RTRIM(inserted.CRTCOD),
+			m_unsou_hinmei.CRTYMD = RTRIM(inserted.CRTYMD),
+			m_unsou_hinmei.UPDCOD = RTRIM(inserted.UPDCOD),
+			m_unsou_hinmei.UPDYMD = RTRIM(inserted.UPDYMD)
+	from inserted
+	where m_unsou_hinmei.HINCOD = inserted.HINCOD 
+
+END
+
+
+create TRIGGER trgUnsoukousu
+ON m_unsou_unsoukousu
+AFTER INSERT
+AS
+BEGIN
+
+	update m_unsou_unsoukousu
+		set 
+			m_unsou_unsoukousu.UNSCRS = RTRIM(inserted.UNSCRS),
+			m_unsou_unsoukousu.CRSNAM = RTRIM(inserted.CRSNAM),
+			m_unsou_unsoukousu.CRTCOD = RTRIM(inserted.CRTCOD),
+			m_unsou_unsoukousu.CRTYMD = RTRIM(inserted.CRTYMD),
+			m_unsou_unsoukousu.UPDCOD = RTRIM(inserted.UPDCOD),
+			m_unsou_unsoukousu.UPDYMD = RTRIM(inserted.UPDYMD)
+	from inserted
+	where m_unsou_unsoukousu.UNSCRS = inserted.UNSCRS 
+
+END
+
+
+create TRIGGER trgUnsouhouhou
+ON m_unsou_unsouhouhou
+AFTER INSERT
+AS
+BEGIN
+
+	update m_unsou_unsouhouhou
+		set 
+			m_unsou_unsouhouhou.UNSCOD = RTRIM(inserted.UNSCOD),
+			m_unsou_unsouhouhou.UNSNAM = RTRIM(inserted.UNSNAM),
+			m_unsou_unsouhouhou.RYKNAM = RTRIM(inserted.RYKNAM),
+			m_unsou_unsouhouhou.TORCOD = RTRIM(inserted.TORCOD),
+			m_unsou_unsouhouhou.UNSKBN = RTRIM(inserted.UNSKBN),
+			m_unsou_unsouhouhou.SCTL02 = RTRIM(inserted.SCTL02),
+			m_unsou_unsouhouhou.SCTL03 = RTRIM(inserted.SCTL03),
+			m_unsou_unsouhouhou.SCTL06 = RTRIM(inserted.SCTL06),
+			m_unsou_unsouhouhou.SCTL08 = RTRIM(inserted.SCTL08),
+			m_unsou_unsouhouhou.PCTL05 = RTRIM(inserted.PCTL05),
+			m_unsou_unsouhouhou.CRTCOD = RTRIM(inserted.CRTCOD),
+			m_unsou_unsouhouhou.CRTYMD = RTRIM(inserted.CRTYMD),
+			m_unsou_unsouhouhou.UPDCOD = RTRIM(inserted.UPDCOD),
+			m_unsou_unsouhouhou.UPDYMD = RTRIM(inserted.UPDYMD)
+	from inserted
+	where m_unsou_unsouhouhou.UNSCOD = inserted.UNSCOD 
+
+END
+
+
+create TRIGGER trgUnsoukubun
+ON m_unsou_unsoukubun
+AFTER INSERT
+AS
+BEGIN
+
+	update m_unsou_unsoukubun
+		set 
+			m_unsou_unsoukubun.UNSKBN = RTRIM(inserted.UNSKBN),
+			m_unsou_unsoukubun.UNSNAM = RTRIM(inserted.UNSNAM),
+			m_unsou_unsoukubun.JGYKBN = RTRIM(inserted.JGYKBN),
+			m_unsou_unsoukubun.JGYKB2 = RTRIM(inserted.JGYKB2),
+			m_unsou_unsoukubun.CRTCOD = RTRIM(inserted.CRTCOD),
+			m_unsou_unsoukubun.CRTYMD = RTRIM(inserted.CRTYMD),
+			m_unsou_unsoukubun.UPDCOD = RTRIM(inserted.UPDCOD),
+			m_unsou_unsoukubun.UPDYMD = RTRIM(inserted.UPDYMD)
+	from inserted
+	where m_unsou_unsoukubun.UNSKBN = inserted.UNSKBN 
+
+END
+
+
+create TRIGGER trgJiscode
+ON m_unsou_jiscode
+AFTER INSERT
+AS
+BEGIN
+
+	update m_unsou_jiscode
+		set 
+			m_unsou_jiscode.JISCOD = RTRIM(inserted.JISCOD),
+			m_unsou_jiscode.JYUSY1 = RTRIM(inserted.JYUSY1),
+			m_unsou_jiscode.JYUSY2 = RTRIM(inserted.JYUSY2),
+			m_unsou_jiscode.JYUSY3 = RTRIM(inserted.JYUSY3),
+			m_unsou_jiscode.CRTCOD = RTRIM(inserted.CRTCOD),
+			m_unsou_jiscode.CRTYMD = RTRIM(inserted.CRTYMD),
+			m_unsou_jiscode.UPDCOD = RTRIM(inserted.UPDCOD),
+			m_unsou_jiscode.UPDYMD = RTRIM(inserted.UPDYMD)
+	from inserted
+	where m_unsou_jiscode.JISCOD = inserted.JISCOD 
+
+END
+
+
+create TRIGGER trgPostalcode
+ON m_unsou_postalcode
+AFTER INSERT
+AS
+BEGIN
+
+	update m_unsou_postalcode
+		set 
+			m_unsou_postalcode.YUBINN = RTRIM(inserted.YUBINN),
+			m_unsou_postalcode.JYUSY1 = RTRIM(inserted.JYUSY1),
+			m_unsou_postalcode.JYUSY2 = RTRIM(inserted.JYUSY2),
+			m_unsou_postalcode.JYUSY3 = RTRIM(inserted.JYUSY3),
+			m_unsou_postalcode.JYKANA = RTRIM(inserted.JYKANA),
+			m_unsou_postalcode.KENJY1 = RTRIM(inserted.KENJY1),
+			m_unsou_postalcode.KENJY2 = RTRIM(inserted.KENJY2),
+			m_unsou_postalcode.KENJY3 = RTRIM(inserted.KENJY3),
+			m_unsou_postalcode.JISCOD = RTRIM(inserted.JISCOD),
+			m_unsou_postalcode.CRTCOD = RTRIM(inserted.CRTCOD),
+			m_unsou_postalcode.CRTYMD = RTRIM(inserted.CRTYMD),
+			m_unsou_postalcode.UPDCOD = RTRIM(inserted.UPDCOD),
+			m_unsou_postalcode.UPDYMD = RTRIM(inserted.UPDYMD)
+	from inserted
+	where m_unsou_postalcode.YUBINN = inserted.YUBINN  AND 
+			m_unsou_postalcode.JYUSY1 = inserted.JYUSY1 AND 
+			m_unsou_postalcode.JYUSY2 = inserted.JYUSY2 AND 
+			m_unsou_postalcode.JYUSY3 = inserted.JYUSY3 AND 
+			m_unsou_postalcode.JYKANA = inserted.JYKANA AND 
+			m_unsou_postalcode.KENJY1 = inserted.KENJY1 AND 
+			m_unsou_postalcode.KENJY2 = inserted.KENJY2 AND 
+			m_unsou_postalcode.KENJY3 = inserted.KENJY3
+
+END
+
+
+create TRIGGER trgShuukaTyuumonshoTehaiK
+ON t_unsou_shuuka_tyuumonsho_tehai_k
+AFTER INSERT
+AS
+BEGIN
+
+	update t_unsou_shuuka_tyuumonsho_tehai_k
+		set 
+		t_unsou_shuuka_tyuumonsho_tehai_k.SYUKNO = RTRIM(inserted.SYUKNO),
+		t_unsou_shuuka_tyuumonsho_tehai_k.CDATE  = RTRIM(inserted.CDATE),
+		t_unsou_shuuka_tyuumonsho_tehai_k.SYKYMD = RTRIM(inserted.SYKYMD),
+		t_unsou_shuuka_tyuumonsho_tehai_k.KISYU  = RTRIM(inserted.KISYU),
+		t_unsou_shuuka_tyuumonsho_tehai_k.KEIFNO = RTRIM(inserted.KEIFNO),
+		t_unsou_shuuka_tyuumonsho_tehai_k.FSYKNO = RTRIM(inserted.FSYKNO),
+		t_unsou_shuuka_tyuumonsho_tehai_k.SYBCOD = RTRIM(inserted.SYBCOD),
+		t_unsou_shuuka_tyuumonsho_tehai_k.TOKCOD = RTRIM(inserted.TOKCOD),
+		t_unsou_shuuka_tyuumonsho_tehai_k.SEICOD = RTRIM(inserted.SEICOD),
+		t_unsou_shuuka_tyuumonsho_tehai_k.HTYNAM = RTRIM(inserted.HTYNAM),
+		t_unsou_shuuka_tyuumonsho_tehai_k.HTYKAH = RTRIM(inserted.HTYKAH),
+		t_unsou_shuuka_tyuumonsho_tehai_k.TANCOD = RTRIM(inserted.TANCOD),
+		t_unsou_shuuka_tyuumonsho_tehai_k.TANNAM = RTRIM(inserted.TANNAM),
+		t_unsou_shuuka_tyuumonsho_tehai_k.HTYTEL = RTRIM(inserted.HTYTEL),
+		t_unsou_shuuka_tyuumonsho_tehai_k.BASYO  = RTRIM(inserted.BASYO),
+		t_unsou_shuuka_tyuumonsho_tehai_k.TDKCOD = RTRIM(inserted.TDKCOD),
+		t_unsou_shuuka_tyuumonsho_tehai_k.TDKYUB = RTRIM(inserted.TDKYUB),
+		t_unsou_shuuka_tyuumonsho_tehai_k.TDKJYU = RTRIM(inserted.TDKJYU),
+		t_unsou_shuuka_tyuumonsho_tehai_k.TDKNAM = RTRIM(inserted.TDKNAM),
+		t_unsou_shuuka_tyuumonsho_tehai_k.TDSNAM = RTRIM(inserted.TDSNAM),
+		t_unsou_shuuka_tyuumonsho_tehai_k.TDBNAM = RTRIM(inserted.TDBNAM),
+		t_unsou_shuuka_tyuumonsho_tehai_k.TDKTAN = RTRIM(inserted.TDKTAN),
+		t_unsou_shuuka_tyuumonsho_tehai_k.TDKTEL = RTRIM(inserted.TDKTEL),
+		t_unsou_shuuka_tyuumonsho_tehai_k.DHINCOD = RTRIM(inserted.DHINCOD),
+		t_unsou_shuuka_tyuumonsho_tehai_k.DHINNAM = RTRIM(inserted.DHINNAM),
+		t_unsou_shuuka_tyuumonsho_tehai_k.DSYUKSU = RTRIM(inserted.DSYUKSU),
+		t_unsou_shuuka_tyuumonsho_tehai_k.TKJIKO = RTRIM(inserted.TKJIKO),
+		t_unsou_shuuka_tyuumonsho_tehai_k.COMENT = RTRIM(inserted.COMENT),
+		t_unsou_shuuka_tyuumonsho_tehai_k.UNSCOD = RTRIM(inserted.UNSCOD),
+		t_unsou_shuuka_tyuumonsho_tehai_k.UNSCRS = RTRIM(inserted.UNSCRS),
+		t_unsou_shuuka_tyuumonsho_tehai_k.SIRCOD = RTRIM(inserted.SIRCOD),
+		t_unsou_shuuka_tyuumonsho_tehai_k.UNSKBN = RTRIM(inserted.UNSKBN),
+		t_unsou_shuuka_tyuumonsho_tehai_k.DENKBN = RTRIM(inserted.DENKBN),
+		t_unsou_shuuka_tyuumonsho_tehai_k.DENMSU = RTRIM(inserted.DENMSU),
+		t_unsou_shuuka_tyuumonsho_tehai_k.UFUTAN = RTRIM(inserted.UFUTAN),
+		t_unsou_shuuka_tyuumonsho_tehai_k.YUSONO = RTRIM(inserted.YUSONO),
+		t_unsou_shuuka_tyuumonsho_tehai_k.PCCOD  = RTRIM(inserted.PCCOD),
+		t_unsou_shuuka_tyuumonsho_tehai_k.CRTCOD = RTRIM(inserted.CRTCOD),
+		t_unsou_shuuka_tyuumonsho_tehai_k.CRTYMD = RTRIM(inserted.CRTYMD),
+		t_unsou_shuuka_tyuumonsho_tehai_k.UPDCOD = RTRIM(inserted.UPDCOD),
+		t_unsou_shuuka_tyuumonsho_tehai_k.UPDYMD = RTRIM(inserted.UPDYMD)
+	from inserted
+	where t_unsou_shuuka_tyuumonsho_tehai_k.SYUKNO = inserted.SYUKNO AND
+			t_unsou_shuuka_tyuumonsho_tehai_k.CDATE = inserted.CDATE
+
+END
+
+
+
+
+create TRIGGER trgShuukaTyuumonshoTehaiMk
+ON t_unsou_shuuka_tyuumonsho_tehai_mk
+AFTER INSERT
+AS
+BEGIN
+
+	update t_unsou_shuuka_tyuumonsho_tehai_mk
+		set 
+			t_unsou_shuuka_tyuumonsho_tehai_mk.SYUKNO = RTRIM(inserted.SYUKNO),
+			t_unsou_shuuka_tyuumonsho_tehai_mk.CDATE  = RTRIM(inserted.CDATE),
+			t_unsou_shuuka_tyuumonsho_tehai_mk.RENBAN = RTRIM(inserted.RENBAN),
+			t_unsou_shuuka_tyuumonsho_tehai_mk.HINCOD = RTRIM(inserted.HINCOD),
+			t_unsou_shuuka_tyuumonsho_tehai_mk.HINNAM = RTRIM(inserted.HINNAM),
+			t_unsou_shuuka_tyuumonsho_tehai_mk.SYUKSU = RTRIM(inserted.SYUKSU),
+			t_unsou_shuuka_tyuumonsho_tehai_mk.CRTCOD = RTRIM(inserted.CRTCOD),
+			t_unsou_shuuka_tyuumonsho_tehai_mk.CRTYMD = RTRIM(inserted.CRTYMD),
+			t_unsou_shuuka_tyuumonsho_tehai_mk.UPDCOD = RTRIM(inserted.UPDCOD),
+			t_unsou_shuuka_tyuumonsho_tehai_mk.UPDYMD = RTRIM(inserted.UPDYMD)
+	from inserted
+	where t_unsou_shuuka_tyuumonsho_tehai_mk.SYUKNO = inserted.SYUKNO AND
+			t_unsou_shuuka_tyuumonsho_tehai_mk.CDATE = inserted.CDATE AND
+			t_unsou_shuuka_tyuumonsho_tehai_mk.RENBAN = inserted.RENBAN
+			
+END
+
+
+create TRIGGER trgShuukaTehaiAll
+ON t_unsou_shuuka_tehai_all
+AFTER INSERT
+AS
+BEGIN
+
+	update t_unsou_shuuka_tehai_all
+		set 
+			t_unsou_shuuka_tehai_all.SYUKNO = RTRIM(inserted.SYUKNO),
+			t_unsou_shuuka_tehai_all.DATAYM = RTRIM(inserted.DATAYM),
+			t_unsou_shuuka_tehai_all.SYKYMD = RTRIM(inserted.SYKYMD),
+			t_unsou_shuuka_tehai_all.KISYU = RTRIM(inserted.KISYU),
+			t_unsou_shuuka_tehai_all.KEIFNO = RTRIM(inserted.KEIFNO),
+			t_unsou_shuuka_tehai_all.FSYKNO = RTRIM(inserted.FSYKNO),
+			t_unsou_shuuka_tehai_all.TANCOD = RTRIM(inserted.TANCOD),
+			t_unsou_shuuka_tehai_all.TANNAM = RTRIM(inserted.TANNAM),
+			t_unsou_shuuka_tehai_all.TDKCOD = RTRIM(inserted.TDKCOD),
+			t_unsou_shuuka_tehai_all.TDKJYU = RTRIM(inserted.TDKJYU),
+			t_unsou_shuuka_tehai_all.TDKNAM = RTRIM(inserted.TDKNAM),
+			t_unsou_shuuka_tehai_all.TDSNAM = RTRIM(inserted.TDSNAM),
+			t_unsou_shuuka_tehai_all.TDBNAM = RTRIM(inserted.TDBNAM),
+			t_unsou_shuuka_tehai_all.TDKTAN = RTRIM(inserted.TDKTAN),
+			t_unsou_shuuka_tehai_all.TDKTEL = RTRIM(inserted.TDKTEL),
+			t_unsou_shuuka_tehai_all.TDKYUB = RTRIM(inserted.TDKYUB),
+			t_unsou_shuuka_tehai_all.HINCOD = RTRIM(inserted.HINCOD),
+			t_unsou_shuuka_tehai_all.HINNAM = RTRIM(inserted.HINNAM),
+			t_unsou_shuuka_tehai_all.UNSCOD = RTRIM(inserted.UNSCOD),
+			t_unsou_shuuka_tehai_all.UNSCRS = RTRIM(inserted.UNSCRS),
+			t_unsou_shuuka_tehai_all.SIRCOD = RTRIM(inserted.SIRCOD),
+			t_unsou_shuuka_tehai_all.SGENNO = RTRIM(inserted.SGENNO),
+			t_unsou_shuuka_tehai_all.UNSKBN = RTRIM(inserted.UNSKBN),
+			t_unsou_shuuka_tehai_all.SYBCOD = RTRIM(inserted.SYBCOD),
+			t_unsou_shuuka_tehai_all.TOKCOD = RTRIM(inserted.TOKCOD),
+			t_unsou_shuuka_tehai_all.SEICOD = RTRIM(inserted.SEICOD),
+			t_unsou_shuuka_tehai_all.DENKBN = RTRIM(inserted.DENKBN),
+			t_unsou_shuuka_tehai_all.DENMSU = RTRIM(inserted.DENMSU),
+			t_unsou_shuuka_tehai_all.TKJIKO = RTRIM(inserted.TKJIKO),
+			t_unsou_shuuka_tehai_all.HOSOSU = RTRIM(inserted.HOSOSU),
+			t_unsou_shuuka_tehai_all.NFDATE = RTRIM(inserted.NFDATE),
+			t_unsou_shuuka_tehai_all.DAIHNO = RTRIM(inserted.DAIHNO),
+			t_unsou_shuuka_tehai_all.DAIHNOYM = RTRIM(inserted.DAIHNOYM),
+			t_unsou_shuuka_tehai_all.JYURYO = RTRIM(inserted.JYURYO),
+			t_unsou_shuuka_tehai_all.HOSOS3 = RTRIM(inserted.HOSOS3),
+			t_unsou_shuuka_tehai_all.JYURY3 = RTRIM(inserted.JYURY3),
+			t_unsou_shuuka_tehai_all.UFUTAN = RTRIM(inserted.UFUTAN),
+			t_unsou_shuuka_tehai_all.YUSONO = RTRIM(inserted.YUSONO),
+			t_unsou_shuuka_tehai_all.CTLF19 = RTRIM(inserted.CTLF19),
+			t_unsou_shuuka_tehai_all.CTLF28 = RTRIM(inserted.CTLF28),
+			t_unsou_shuuka_tehai_all.CTLF29 = RTRIM(inserted.CTLF29),
+			t_unsou_shuuka_tehai_all.MEHKBN = RTRIM(inserted.MEHKBN),
+			t_unsou_shuuka_tehai_all.JSKKBN = RTRIM(inserted.JSKKBN),
+			t_unsou_shuuka_tehai_all.TOCYMD = RTRIM(inserted.TOCYMD),
+			t_unsou_shuuka_tehai_all.TAKSIZ = RTRIM(inserted.TAKSIZ),
+			t_unsou_shuuka_tehai_all.SEIKYU = RTRIM(inserted.SEIKYU),
+			t_unsou_shuuka_tehai_all.GEPPOU = RTRIM(inserted.GEPPOU),
+			t_unsou_shuuka_tehai_all.PCCOD = RTRIM(inserted.PCCOD),
+			t_unsou_shuuka_tehai_all.SGENN2 = RTRIM(inserted.SGENN2),
+			t_unsou_shuuka_tehai_all.STOUCD = RTRIM(inserted.STOUCD),
+			t_unsou_shuuka_tehai_all.KENCOD = RTRIM(inserted.KENCOD),
+			t_unsou_shuuka_tehai_all.JISCOD = RTRIM(inserted.JISCOD),
+			t_unsou_shuuka_tehai_all.TENSIR = RTRIM(inserted.TENSIR),
+			t_unsou_shuuka_tehai_all.HATCOD = RTRIM(inserted.HATCOD),
+			t_unsou_shuuka_tehai_all.SGEN35 = RTRIM(inserted.SGEN35),
+			t_unsou_shuuka_tehai_all.ECOFLG = RTRIM(inserted.ECOFLG),
+			t_unsou_shuuka_tehai_all.SYUKSU = RTRIM(inserted.SYUKSU),
+			t_unsou_shuuka_tehai_all.SYUTUF = RTRIM(inserted.SYUTUF),
+			t_unsou_shuuka_tehai_all.DELFLG = RTRIM(inserted.DELFLG),
+			t_unsou_shuuka_tehai_all.CRTCOD = RTRIM(inserted.CRTCOD),
+			t_unsou_shuuka_tehai_all.CRTYMD = RTRIM(inserted.CRTYMD),
+			t_unsou_shuuka_tehai_all.UPDCOD = RTRIM(inserted.UPDCOD),
+			t_unsou_shuuka_tehai_all.UPDYMD = RTRIM(inserted.UPDYMD)
+	from inserted
+	where t_unsou_shuuka_tehai_all.SYUKNO = inserted.SYUKNO AND
+			t_unsou_shuuka_tehai_all.DATAYM = inserted.DATAYM
+			
+END
+
+
+
+create TRIGGER trgShuukaJiseki1
+ON t_unsou_shuuka_jiseki1
+AFTER INSERT
+AS
+BEGIN
+
+	update t_unsou_shuuka_jiseki1
+		set 
+			t_unsou_shuuka_jiseki1.SYUKNO = RTRIM(inserted.SYUKNO),
+			t_unsou_shuuka_jiseki1.DATAYM = RTRIM(inserted.DATAYM),
+			t_unsou_shuuka_jiseki1.SYKYMD = RTRIM(inserted.SYKYMD),
+			t_unsou_shuuka_jiseki1.KISYU = RTRIM(inserted.KISYU),
+			t_unsou_shuuka_jiseki1.KEIFNO = RTRIM(inserted.KEIFNO),
+			t_unsou_shuuka_jiseki1.FSYKNO = RTRIM(inserted.FSYKNO),
+			t_unsou_shuuka_jiseki1.TANCOD = RTRIM(inserted.TANCOD),
+			t_unsou_shuuka_jiseki1.TANNAM = RTRIM(inserted.TANNAM),
+			t_unsou_shuuka_jiseki1.TDKCOD = RTRIM(inserted.TDKCOD),
+			t_unsou_shuuka_jiseki1.TDKJYU = RTRIM(inserted.TDKJYU),
+			t_unsou_shuuka_jiseki1.TDKNAM = RTRIM(inserted.TDKNAM),
+			t_unsou_shuuka_jiseki1.TDSNAM = RTRIM(inserted.TDSNAM),
+			t_unsou_shuuka_jiseki1.TDBNAM = RTRIM(inserted.TDBNAM),
+			t_unsou_shuuka_jiseki1.TDKTAN = RTRIM(inserted.TDKTAN),
+			t_unsou_shuuka_jiseki1.TDKTEL = RTRIM(inserted.TDKTEL),
+			t_unsou_shuuka_jiseki1.TDKYUB = RTRIM(inserted.TDKYUB),
+			t_unsou_shuuka_jiseki1.HINCOD = RTRIM(inserted.HINCOD),
+			t_unsou_shuuka_jiseki1.HINNAM = RTRIM(inserted.HINNAM),
+			t_unsou_shuuka_jiseki1.UNSCOD = RTRIM(inserted.UNSCOD),
+			t_unsou_shuuka_jiseki1.UNSCRS = RTRIM(inserted.UNSCRS),
+			t_unsou_shuuka_jiseki1.SIRCOD = RTRIM(inserted.SIRCOD),
+			t_unsou_shuuka_jiseki1.SGENNO = RTRIM(inserted.SGENNO),
+			t_unsou_shuuka_jiseki1.UNSKBN = RTRIM(inserted.UNSKBN),
+			t_unsou_shuuka_jiseki1.SYBCOD = RTRIM(inserted.SYBCOD),
+			t_unsou_shuuka_jiseki1.TOKCOD = RTRIM(inserted.TOKCOD),
+			t_unsou_shuuka_jiseki1.SEICOD = RTRIM(inserted.SEICOD),
+			t_unsou_shuuka_jiseki1.DENKBN = RTRIM(inserted.DENKBN),
+			t_unsou_shuuka_jiseki1.DENMSU = RTRIM(inserted.DENMSU),
+			t_unsou_shuuka_jiseki1.TKJIKO = RTRIM(inserted.TKJIKO),
+			t_unsou_shuuka_jiseki1.HOSOSU = RTRIM(inserted.HOSOSU),
+			t_unsou_shuuka_jiseki1.NFDATE = RTRIM(inserted.NFDATE),
+			t_unsou_shuuka_jiseki1.DAIHNO = RTRIM(inserted.DAIHNO),
+			t_unsou_shuuka_jiseki1.DAIHNOYM = RTRIM(inserted.DAIHNOYM),
+			t_unsou_shuuka_jiseki1.JYURYO = RTRIM(inserted.JYURYO),
+			t_unsou_shuuka_jiseki1.HOSOS3 = RTRIM(inserted.HOSOS3),
+			t_unsou_shuuka_jiseki1.JYURY3 = RTRIM(inserted.JYURY3),
+			t_unsou_shuuka_jiseki1.UFUTAN = RTRIM(inserted.UFUTAN),
+			t_unsou_shuuka_jiseki1.YUSONO = RTRIM(inserted.YUSONO),
+			t_unsou_shuuka_jiseki1.CTLF19 = RTRIM(inserted.CTLF19),
+			t_unsou_shuuka_jiseki1.CTLF28 = RTRIM(inserted.CTLF28),
+			t_unsou_shuuka_jiseki1.CTLF29 = RTRIM(inserted.CTLF29),
+			t_unsou_shuuka_jiseki1.MEHKBN = RTRIM(inserted.MEHKBN),
+			t_unsou_shuuka_jiseki1.JSKKBN = RTRIM(inserted.JSKKBN),
+			t_unsou_shuuka_jiseki1.TOCYMD = RTRIM(inserted.TOCYMD),
+			t_unsou_shuuka_jiseki1.TAKSIZ = RTRIM(inserted.TAKSIZ),
+			t_unsou_shuuka_jiseki1.SEIKYU = RTRIM(inserted.SEIKYU),
+			t_unsou_shuuka_jiseki1.GEPPOU = RTRIM(inserted.GEPPOU),
+			t_unsou_shuuka_jiseki1.PCCOD = RTRIM(inserted.PCCOD),
+			t_unsou_shuuka_jiseki1.SGENN2 = RTRIM(inserted.SGENN2),
+			t_unsou_shuuka_jiseki1.STOUCD = RTRIM(inserted.STOUCD),
+			t_unsou_shuuka_jiseki1.KENCOD = RTRIM(inserted.KENCOD),
+			t_unsou_shuuka_jiseki1.JISCOD = RTRIM(inserted.JISCOD),
+			t_unsou_shuuka_jiseki1.TENSIR = RTRIM(inserted.TENSIR),
+			t_unsou_shuuka_jiseki1.HATCOD = RTRIM(inserted.HATCOD),
+			t_unsou_shuuka_jiseki1.SGEN35 = RTRIM(inserted.SGEN35),
+			t_unsou_shuuka_jiseki1.ECOFLG = RTRIM(inserted.ECOFLG),
+			t_unsou_shuuka_jiseki1.SYUKSU = RTRIM(inserted.SYUKSU),
+			t_unsou_shuuka_jiseki1.SYUTUF = RTRIM(inserted.SYUTUF),
+			t_unsou_shuuka_jiseki1.DELFLG = RTRIM(inserted.DELFLG),
+			t_unsou_shuuka_jiseki1.CRTCOD = RTRIM(inserted.CRTCOD),
+			t_unsou_shuuka_jiseki1.CRTYMD = RTRIM(inserted.CRTYMD),
+			t_unsou_shuuka_jiseki1.UPDCOD = RTRIM(inserted.UPDCOD),
+			t_unsou_shuuka_jiseki1.UPDYMD = RTRIM(inserted.UPDYMD)
+	from inserted
+	where t_unsou_shuuka_jiseki1.SYUKNO = inserted.SYUKNO AND
+			t_unsou_shuuka_jiseki1.DATAYM = inserted.DATAYM
+			
+END
+
+
+
+create TRIGGER trgShuukaJiseki2
+ON t_unsou_shuuka_jiseki2
+AFTER INSERT
+AS
+BEGIN
+
+	update t_unsou_shuuka_jiseki2
+		set 
+			t_unsou_shuuka_jiseki2.SYUKNO = RTRIM(inserted.SYUKNO),
+			t_unsou_shuuka_jiseki2.DATAYM = RTRIM(inserted.DATAYM),
+			t_unsou_shuuka_jiseki2.SYKYMD = RTRIM(inserted.SYKYMD),
+			t_unsou_shuuka_jiseki2.KISYU = RTRIM(inserted.KISYU),
+			t_unsou_shuuka_jiseki2.KEIFNO = RTRIM(inserted.KEIFNO),
+			t_unsou_shuuka_jiseki2.FSYKNO = RTRIM(inserted.FSYKNO),
+			t_unsou_shuuka_jiseki2.TANCOD = RTRIM(inserted.TANCOD),
+			t_unsou_shuuka_jiseki2.TANNAM = RTRIM(inserted.TANNAM),
+			t_unsou_shuuka_jiseki2.TDKCOD = RTRIM(inserted.TDKCOD),
+			t_unsou_shuuka_jiseki2.TDKJYU = RTRIM(inserted.TDKJYU),
+			t_unsou_shuuka_jiseki2.TDKNAM = RTRIM(inserted.TDKNAM),
+			t_unsou_shuuka_jiseki2.TDSNAM = RTRIM(inserted.TDSNAM),
+			t_unsou_shuuka_jiseki2.TDBNAM = RTRIM(inserted.TDBNAM),
+			t_unsou_shuuka_jiseki2.TDKTAN = RTRIM(inserted.TDKTAN),
+			t_unsou_shuuka_jiseki2.TDKTEL = RTRIM(inserted.TDKTEL),
+			t_unsou_shuuka_jiseki2.TDKYUB = RTRIM(inserted.TDKYUB),
+			t_unsou_shuuka_jiseki2.HINCOD = RTRIM(inserted.HINCOD),
+			t_unsou_shuuka_jiseki2.HINNAM = RTRIM(inserted.HINNAM),
+			t_unsou_shuuka_jiseki2.UNSCOD = RTRIM(inserted.UNSCOD),
+			t_unsou_shuuka_jiseki2.UNSCRS = RTRIM(inserted.UNSCRS),
+			t_unsou_shuuka_jiseki2.SIRCOD = RTRIM(inserted.SIRCOD),
+			t_unsou_shuuka_jiseki2.SGENNO = RTRIM(inserted.SGENNO),
+			t_unsou_shuuka_jiseki2.UNSKBN = RTRIM(inserted.UNSKBN),
+			t_unsou_shuuka_jiseki2.SYBCOD = RTRIM(inserted.SYBCOD),
+			t_unsou_shuuka_jiseki2.TOKCOD = RTRIM(inserted.TOKCOD),
+			t_unsou_shuuka_jiseki2.SEICOD = RTRIM(inserted.SEICOD),
+			t_unsou_shuuka_jiseki2.DENKBN = RTRIM(inserted.DENKBN),
+			t_unsou_shuuka_jiseki2.DENMSU = RTRIM(inserted.DENMSU),
+			t_unsou_shuuka_jiseki2.TKJIKO = RTRIM(inserted.TKJIKO),
+			t_unsou_shuuka_jiseki2.HOSOSU = RTRIM(inserted.HOSOSU),
+			t_unsou_shuuka_jiseki2.NFDATE = RTRIM(inserted.NFDATE),
+			t_unsou_shuuka_jiseki2.DAIHNO = RTRIM(inserted.DAIHNO),
+			t_unsou_shuuka_jiseki2.DAIHNOYM = RTRIM(inserted.DAIHNOYM),
+			t_unsou_shuuka_jiseki2.JYURYO = RTRIM(inserted.JYURYO),
+			t_unsou_shuuka_jiseki2.HOSOS3 = RTRIM(inserted.HOSOS3),
+			t_unsou_shuuka_jiseki2.JYURY3 = RTRIM(inserted.JYURY3),
+			t_unsou_shuuka_jiseki2.UFUTAN = RTRIM(inserted.UFUTAN),
+			t_unsou_shuuka_jiseki2.YUSONO = RTRIM(inserted.YUSONO),
+			t_unsou_shuuka_jiseki2.CTLF19 = RTRIM(inserted.CTLF19),
+			t_unsou_shuuka_jiseki2.CTLF28 = RTRIM(inserted.CTLF28),
+			t_unsou_shuuka_jiseki2.CTLF29 = RTRIM(inserted.CTLF29),
+			t_unsou_shuuka_jiseki2.MEHKBN = RTRIM(inserted.MEHKBN),
+			t_unsou_shuuka_jiseki2.JSKKBN = RTRIM(inserted.JSKKBN),
+			t_unsou_shuuka_jiseki2.TOCYMD = RTRIM(inserted.TOCYMD),
+			t_unsou_shuuka_jiseki2.TAKSIZ = RTRIM(inserted.TAKSIZ),
+			t_unsou_shuuka_jiseki2.SEIKYU = RTRIM(inserted.SEIKYU),
+			t_unsou_shuuka_jiseki2.GEPPOU = RTRIM(inserted.GEPPOU),
+			t_unsou_shuuka_jiseki2.PCCOD = RTRIM(inserted.PCCOD),
+			t_unsou_shuuka_jiseki2.SGENN2 = RTRIM(inserted.SGENN2),
+			t_unsou_shuuka_jiseki2.STOUCD = RTRIM(inserted.STOUCD),
+			t_unsou_shuuka_jiseki2.KENCOD = RTRIM(inserted.KENCOD),
+			t_unsou_shuuka_jiseki2.JISCOD = RTRIM(inserted.JISCOD),
+			t_unsou_shuuka_jiseki2.TENSIR = RTRIM(inserted.TENSIR),
+			t_unsou_shuuka_jiseki2.HATCOD = RTRIM(inserted.HATCOD),
+			t_unsou_shuuka_jiseki2.SGEN35 = RTRIM(inserted.SGEN35),
+			t_unsou_shuuka_jiseki2.ECOFLG = RTRIM(inserted.ECOFLG),
+			t_unsou_shuuka_jiseki2.SYUKSU = RTRIM(inserted.SYUKSU),
+			t_unsou_shuuka_jiseki2.SYUTUF = RTRIM(inserted.SYUTUF),
+			t_unsou_shuuka_jiseki2.DELFLG = RTRIM(inserted.DELFLG),
+			t_unsou_shuuka_jiseki2.CRTCOD = RTRIM(inserted.CRTCOD),
+			t_unsou_shuuka_jiseki2.CRTYMD = RTRIM(inserted.CRTYMD),
+			t_unsou_shuuka_jiseki2.UPDCOD = RTRIM(inserted.UPDCOD),
+			t_unsou_shuuka_jiseki2.UPDYMD = RTRIM(inserted.UPDYMD)
+	from inserted
+	where t_unsou_shuuka_jiseki2.SYUKNO = inserted.SYUKNO AND
+			t_unsou_shuuka_jiseki2.DATAYM = inserted.DATAYM
+			
+END

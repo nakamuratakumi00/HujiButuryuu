@@ -1,0 +1,15 @@
+﻿@model Macss.Database.Entity.AccountMaster
+
+@{
+    ViewBag.PageMainTitle = "削除確認サンプル";
+    ViewBag.ScreenId = "SMPL-D001";
+    ViewBag.ConfirmMessage = MacssWeb.Resources.Messages.DeleteConfirm;
+    ViewBag.ButtonText = MacssWeb.Resources.ControlText.DeleteExec;
+    ViewBag.ConfirmDialogText = MacssWeb.Resources.Messages.DeleteReconfirm;
+}
+
+@using (Html.BeginForm("Delete", "Sample", null, FormMethod.Post))
+{
+
+    @Html.Partial("_Show", Model)
+}

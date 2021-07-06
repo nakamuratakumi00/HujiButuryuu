@@ -1,0 +1,325 @@
+﻿@* 内示・発注詳細確認共通 *@
+
+@Html.AntiForgeryToken()
+
+@if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+{
+    <div class="alert alert-info">
+        <span>@ViewBag.ConfirmMessage</span>
+    </div>
+}
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="row justify-content-between macss-form-button-group-row">
+        @if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+        {
+            <div class="col-4">
+                <button type="submit" class="btn btn-secondary" name="cmdTopBack" value="@((int)MacssWeb.Common.ButtonValues.Back)">@MacssWeb.Resources.ControlText.Back</button>
+            </div>
+        }
+        else
+        {
+            <div class="col-4">
+                <a role="button" class="btn btn-secondary" href="@Url.Action("D001_01")">@MacssWeb.Resources.ControlText.Back</a>
+            </div>
+        }
+    </div>
+</div>
+
+@* 確認項目 *@
+<table class="table macss-form-table">
+    <colgroup>
+        <col class="macss-form-table-title" />
+        <col class="macss-form-table-contents" />
+    </colgroup>
+    <tr>
+        <th scope="row">
+            削除
+        </th>
+        <td></td>
+    </tr>
+    <tr>
+        <th scope="row">
+            承認状態
+        </th>
+        <td>未申請</td>
+    </tr>
+    <tr>
+        <th scope="row">
+            内示発注区分
+        </th>
+        <td>0:内示</td>
+    </tr>
+    <tr>
+        <th scope="row">
+            注文No(内示No)
+        </th>
+        <td>
+            1234567890
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            注文日
+        </th>
+        <td>
+            YYYY/MM/DD
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            分納回数
+        </th>
+        <td>
+            12
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            内示書印刷日
+        </th>
+        <td>
+            YYYY/MM/DD
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            売上PC
+        </th>
+        <td>
+            123456789012 １２３４５６７８９０ １２３４５６７８９０ １２３４５６７８９０１２３４５６７８９０
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            品名
+        </th>
+        <td>
+            123456789012 １２３４５６７８９０１２３４５６７８９０
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            規格・寸法
+        </th>
+        <td>
+            １２３４５６７８９０１２３４５６７８９０
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            最新入荷日
+        </th>
+        <td>
+            YYYY/MM/DD
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            最新検収日
+        </th>
+        <td>
+            YYYY/MM/DD
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            納期
+        </th>
+        <td>
+            YYYY/MM/DD
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            注文数
+        </th>
+        <td>
+            123,456,789
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            元注文数
+        </th>
+        <td>
+            123,456,789
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            単位
+        </th>
+        <td>
+            AB １２３４５６７８９０
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            注文単価
+        </th>
+        <td>
+            12,345,678,901.12
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            注文金額
+        </th>
+        <td>
+            12,345,678,901
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            注文残数
+        </th>
+        <td>
+            123,456,789
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            在庫区分
+        </th>
+        <td>
+            12
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            倉庫
+        </th>
+        <td>
+            12 １２３４５６７８９０１２３４５
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            発注先
+        </th>
+        <td>
+            1234567 １２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            得意先
+        </th>
+        <td>
+            1234567 １２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            原価区分
+        </th>
+        <td>
+            1:原価
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            得意先注文日
+        </th>
+        <td>
+            YYYY/MM/DD
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            得意先注文番号
+        </th>
+        <td>
+            12345678901234567890
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            得意先製造番号
+        </th>
+        <td>
+            123456789012345678901234567890
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            売上単価
+        </th>
+        <td>
+            12,345,678,901.12
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            納入先
+        </th>
+        <td>
+            12345 １２３４５６７８９０１２３４５６７８９０１２３４５６７８９０
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            特記事項
+        </th>
+        <td>
+            １２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            打切り理由区分
+        </th>
+        <td>
+            1:材料不足
+        </td>
+    </tr>
+</table>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    @if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+    {
+        <div class="col-4">
+            <button type="submit" class="btn btn-secondary" name="cmdBtmBack" value="@((int)MacssWeb.Common.ButtonValues.Back)">@MacssWeb.Resources.ControlText.Back</button>
+        </div>
+        <div class="col-4 text-right">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDialog">@ViewBag.ButtonText</button>
+        </div>
+    }
+    else
+    {
+        <div class="col-4">
+            <a role="button" class="btn btn-secondary" href="@Url.Action("D001_01")">@MacssWeb.Resources.ControlText.Back</a>
+        </div>
+        <div class="col-5 text-right">
+            <a role="button" class="btn btn-primary" href="@Url.Action("D001_05")">内示引用登録</a>
+            <a role="button" class="btn btn-primary" href="@Url.Action("D001_07")">@MacssWeb.Resources.ControlText.Edit</a>
+            <a role="button" class="btn btn-danger" href="@Url.Action("D001_09")">@MacssWeb.Resources.ControlText.Delete</a>
+        </div>
+    }
+</div>
+
+<div class="modal" id="ConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @ViewBag.ConfirmDialogText
+                @*＊＊＊＊を実行します。よろしいですか？*@
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" name="cmdBtmExec" value="@((int)MacssWeb.Common.ButtonValues.Exec)">@MacssWeb.Resources.ControlText.Yes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+                @*<button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.Cancel</button>
+                    <button type="submit" class="btn btn-primary" name="cmdBtmExec" value="@((int)MacssWeb.Common.ButtonValues.Exec)">@ViewBag.ButtonText</button>*@
+                @*<button type="submit" class="btn btn-primary" name="cmdBtmExec" value="@((int)MacssWeb.Common.ButtonValues.Exec)">はい</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">いいえ</button>*@
+            </div>
+        </div>
+    </div>
+</div>

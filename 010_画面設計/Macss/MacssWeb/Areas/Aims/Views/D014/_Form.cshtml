@@ -1,0 +1,1278 @@
+﻿@model Macss.Database.Entity.AccountMaster
+
+@Html.AntiForgeryToken()
+
+@Html.Partial("../Shared/Dialog/_DenpyoKbnCodeSearch")
+@Html.Partial("../Shared/Dialog/_TokuisakiCodeSearch")
+
+@Html.Partial("../Shared/Dialog/_UnsohohoCodeSearch")
+@Html.Partial("../Shared/Dialog/_UnsocorseCodeSearch")
+@Html.Partial("../Shared/Dialog/_ShiiresakiCodeSearch")
+@Html.Partial("../Shared/Dialog/_SyukkaBashoCodeSearch")
+@Html.Partial("../Shared/Dialog/_UnsokbnCodeSearch")
+@Html.Partial("../Shared/Dialog/_KisyuACodeSearch")
+@Html.Partial("../Shared/Dialog/_TantoshaCodeSearch")
+@Html.Partial("../Shared/Dialog/_TodokesakiCodeSearch")
+@Html.Partial("../Shared/Dialog/_HinmeiCodeSearch")
+@Html.Partial("../Shared/Dialog/_YubinNoSearch")
+@Html.Partial("../Shared/Dialog/_SaisyuJuyoCodeSearch")
+@Html.Partial("../Shared/Dialog/_OkyakusamaCodeSearch")
+
+<!--テスト値-->
+@{ var testVal = string.Empty; }
+
+<div>
+    @Html.ValidationSummary(false, "入力エラーがあります。", new { @class = "alert alert-danger" })
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#TransitionConfirmDialog">@MacssWeb.Resources.ControlText.BackToList</button>
+    </div>
+    <div class="col-4 text-right">
+        <button type="submit" class="btn btn-primary">@MacssWeb.Resources.ControlText.InputConfirm</button>
+    </div>
+</div>
+<table class="table macss-form-table">
+    <colgroup>
+        <col class="macss-form-table-title" />
+        <col class="macss-form-table-contents" />
+    </colgroup>
+    <tr>
+        <th scope="row">
+            <label class="control-label required">出荷No</label>
+        </th>
+        <td>
+            @if ((ViewBag.CreateFlg == null || ViewBag.CreateFlg == false) && (ViewBag.CopyFlg == null || ViewBag.CopyFlg == false))
+            {
+                <div>
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="10-03481" disabled>
+                </div>
+            }
+            else
+            {
+                <div>
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                </div>
+            }
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label required">伝票区分</label>
+        </th>
+        <td>
+            <div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="input-group">
+                            @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                            {
+                                testVal = string.Empty;
+                            }
+                            else
+                            {
+                                testVal = "I";
+                            }
+                            <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="@testVal">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#DenpyoKbnCodeSearchDialog">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="macss-val-ref col-6">
+                        @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                        {
+                        }
+                        else
+                        {
+                            testVal = "出荷発注伝票";
+                            <span id="DenpyoKbnName" class="align-middle">@testVal</span>
+                        }
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label required">得意先</label>
+        </th>
+        <td>
+            <div>
+                <div class="row mb-2">
+                    <div class="col-4">
+                        <div class="input-group">
+                            @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                            {
+                                testVal = string.Empty;
+                            }
+                            else
+                            {
+                                testVal = "17601";
+                            }
+                            <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="@testVal">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#TokuisakiCodeSearchDialog">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="macss-val-ref col-6">
+                        @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                        {
+                        }
+                        else
+                        {
+                            testVal = "ＦＥ）半導体営業　（松本・ＤＳ）";
+                            <span id="TokuisakiName" class="align-middle">@testVal</span>
+                        }
+                    </div>
+                </div>
+                <div>
+                    <small class="form-text text-muted">
+                        得意先のスポットの場合、１桁のみ入力してください。
+                    </small>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">オリジナル出荷No</label>
+        </th>
+        <td>
+            <div>
+                <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">到着日</label>
+        </th>
+        <td>
+            <div>
+                <div class="input-group">
+                    <input class="form-control text-box single-line" id="totyaku_date" name="IDName" type="text" value="">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="TotyakuDateCalendar"><i class="fa fa-calendar-alt"></i></button>
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label required">出荷日</label>
+        </th>
+        <td>
+            <div class="input-group">
+                @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                {
+                    testVal = string.Empty;
+                }
+                else
+                {
+                    testVal = "2021/01/19";
+                }
+                <input class="form-control text-box single-line" id="syukka_date" name="IDName" type="text" value="@testVal">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="SyukkaDateCalendar"><i class="fa fa-calendar-alt"></i></button>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label required">運送方法</label>
+        </th>
+        <td>
+            <div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="input-group">
+                            @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                            {
+                                testVal = string.Empty;
+                            }
+                            else
+                            {
+                                testVal = "11";
+                            }
+                            <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="@testVal">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#UnsohohoCodeSearchDialog">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="macss-val-ref col-6">
+                        @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                        {
+                        }
+                        else
+                        {
+                            testVal = "路線便　信川名鉄運輸㈱";
+                            <span id="UnsohohoName" class="align-middle">@testVal</span>
+                        }
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">運送コース</label>
+        </th>
+        <td>
+            <div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="input-group">
+                            @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                            {
+                                testVal = string.Empty;
+                            }
+                            else
+                            {
+                                testVal = "F";
+                            }
+                            <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="@testVal">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#UnsocorseCodeSearchDialog">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="macss-val-ref col-6">
+                        @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                        {
+                        }
+                        else
+                        {
+                            testVal = "Ｆコース（ＦＦＪ定期）";
+                            <span id="UnsocorseName" class="align-middle">@testVal</span>
+                        }
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label required">仕入先</label>
+        </th>
+        <td>
+            <div>
+                <div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="input-group">
+                                @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                                {
+                                    testVal = string.Empty;
+                                }
+                                else
+                                {
+                                    testVal = "77571";
+                                }
+                                <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="@testVal">
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#ShiiresakiCodeSearchDialog">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="macss-val-ref col-6">
+                            @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                            {
+                            }
+                            else
+                            {
+                                testVal = "小鈴産業（株）";
+                                <span id="ShiiresakiName" class="align-middle">@testVal</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label required">出荷場所</label>
+        </th>
+        <td>
+            <div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="input-group">
+                            @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                            {
+                                testVal = string.Empty;
+                            }
+                            else
+                            {
+                                testVal = "A1";
+                            }
+                            <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="@testVal">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#SyukkaBashoCodeSearchDialog">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="macss-val-ref col-6">
+                        @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                        {
+                        }
+                        else
+                        {
+                            testVal = "士川電機メーター㈱";
+                            <span id="SyukkaBashoName" class="align-middle">@testVal</span>
+                        }
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label required">運送区分</label>
+        </th>
+        <td>
+            <div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="input-group">
+                            @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                            {
+                                testVal = string.Empty;
+                            }
+                            else
+                            {
+                                testVal = "1211";
+                            }
+                            <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="@testVal">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#UnsokbnCodeSearchDialog">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="macss-val-ref col-6">
+                        @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                        {
+                        }
+                        else
+                        {
+                            testVal = "自車定期便１　自車・車建・定期便";
+                            <span id="UnsokbnName" class="align-middle">@testVal</span>
+                        }
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label required">運賃負担区分</label>
+        </th>
+        <td>
+            <div>
+                <select class="custom-select form-control" id="Condition3">
+                    @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                    {
+                        <option value="" selected></option>
+                        <option value="0">着払</option>
+                        <option value="1">元払</option>
+                    }
+                    else
+                    {
+                        <option value=""></option>
+                        <option value="0">着払</option>
+                        <option value="1" selected>元払</option>
+                    }
+                </select>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">経費負担No</label>
+        </th>
+        <td>
+            <div>
+                <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">機種コード</label>
+        </th>
+        <td>
+            <div>
+                <div class="row mb-2">
+                    <div class="col-4">
+                        <div class="input-group">
+                            @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                            {
+                                testVal = string.Empty;
+                            }
+                            else
+                            {
+                                testVal = "SE";
+                            }
+                            <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="@testVal">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#KisyuACodeSearchDialog">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="macss-val-ref col-6">
+                        @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                        {
+                        }
+                        else
+                        {
+                            testVal = "感光体";
+                            <span id="KisyuAName" class="align-middle">@testVal</span>
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                    </div>
+                </div>
+                <div>
+                    <small class="form-text text-muted">
+                        1行目に機種コードA、2行目に機種コードBを編集してください。
+                    </small>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">担当者コード</label>
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                {
+                    testVal = string.Empty;
+                }
+                else
+                {
+                    testVal = "11111112";
+                }
+                <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="@testVal">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">担当者名</label>
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                {
+                    testVal = string.Empty;
+                }
+                else
+                {
+                    testVal = "富士　太郎";
+                }
+                <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="@testVal">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">届先郵便番号</label>
+        </th>
+        <td>
+            <div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="input-group">
+                            @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                            {
+                                testVal = string.Empty;
+                            }
+                            else
+                            {
+                                testVal = "1010052";
+                            }
+                            <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="@testVal">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#YubinNoSearchDialog">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="macss-val-ref col-6">
+                        @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                        {
+                        }
+                        else
+                        {
+                            testVal = "東京都千代田区神田小川町";
+                            <span id="YubinNoName" class="align-middle">@testVal</span>
+                        }
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">届先コード</label>
+        </th>
+        <td>
+            <div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="input-group">
+                            @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                            {
+                                testVal = string.Empty;
+                            }
+                            else
+                            {
+                                testVal = "AA005C";
+                            }
+                            <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="@testVal">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#TodokesakiCodeSearchDialog">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="macss-val-ref col-6">
+                        @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                        {
+                        }
+                        else
+                        {
+                            testVal = "㈱エイシーエスエヌ　東京営業所";
+                            <span id="TodokesakiCodeName" class="align-middle">@testVal</span>
+                        }
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label required">届先住所</label>
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                {
+                    testVal = string.Empty;
+                }
+                else
+                {
+                    testVal = "東京都千代田区神田小川町６－１２－１　アンリビル３Ｆ";
+                }
+                <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="@testVal">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label required">届先会社名</label>
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                {
+                    testVal = string.Empty;
+                }
+                else
+                {
+                    testVal = "㈱エイシーエスエヌ";
+                }
+                <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="@testVal">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">届先支店名</label>
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                {
+                    testVal = string.Empty;
+                }
+                else
+                {
+                    testVal = "東京営業所";
+                }
+                <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="@testVal">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">届先部課名</label>
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                {
+                    testVal = string.Empty;
+                }
+                else
+                {
+                    testVal = "システム本部";
+                }
+                <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="@testVal">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">届先担当者名</label>
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                {
+                    testVal = string.Empty;
+                }
+                else
+                {
+                    testVal = "田中部長代理";
+                }
+                <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="@testVal">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">届先電話番号</label>
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                {
+                    testVal = string.Empty;
+                }
+                else
+                {
+                    testVal = "03-3790-4912";
+                }
+                <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="@testVal">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">仕分コード</label>
+        </th>
+        <td>
+            <div>
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">品名コード</label>
+        </th>
+        <td>
+            <div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="input-group">
+                            @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                            {
+                                testVal = string.Empty;
+                            }
+                            else
+                            {
+                                testVal = "001002";
+                            }
+                            <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="@testVal">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#HinmeiCodeSearchDialog">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="macss-val-ref col-6">
+                        @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                        {
+                        }
+                        else
+                        {
+                            testVal = "電気部品";
+                            <span id="HinmeiCodeName" class="align-middle">@testVal</span>
+                        }
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label required">品名</label>
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                {
+                    testVal = string.Empty;
+                }
+                else
+                {
+                    testVal = "電気部品";
+                }
+                <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="@testVal">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">出荷数</label>
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                {
+                    testVal = string.Empty;
+                }
+                else
+                {
+                    testVal = "50";
+                }
+                <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="@testVal">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">荷札発行済</label>
+        </th>
+        <td>
+            <div>
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">包装済総重量</label>
+        </th>
+        <td>
+            <div>
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">包装数</label>
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                {
+                    testVal = string.Empty;
+                }
+                else
+                {
+                    testVal = "10";
+                }
+                <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="@testVal">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">特記事項</label>
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                {
+                    testVal = string.Empty;
+                }
+                else
+                {
+                    testVal = "タイムサービス";
+                }
+                <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="@testVal">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">特記事項2</label>
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                {
+                    testVal = string.Empty;
+                }
+                else
+                {
+                    testVal = "901";
+                }
+                <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="@testVal">
+                <div>
+                    <small class="form-text text-muted">
+                        ヤマト運輸㈱様のタイムサービスを使用する場合のみ「901」を必ず入力してください。
+                    </small>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label required">請求書形態区分</label>
+        </th>
+        <td>
+            <div>
+                <select class="custom-select form-control" id="Condition3">
+                    @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                    {
+                        <option value="" selected></option>
+                        <option value="0">請求書No.1</option>
+                        <option value="1">出力なし</option>
+                        <option value="2">請求書No.2(輸出課用)</option>
+                        <option value="3">31日１手番のみ発行なし＆１手番以外請求書No１</option>
+                    }
+                    else
+                    {
+                        <option value=""></option>
+                        <option value="0" selected>請求書No.1</option>
+                        <option value="1">出力なし</option>
+                        <option value="2">請求書No.2(輸出課用)</option>
+                        <option value="3">31日１手番のみ発行なし＆１手番以外請求書No１</option>
+                    }
+                </select>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label ">エネルギー対象外</label>
+        </th>
+        <td>
+            <div>
+                <select class="custom-select form-control" id="Condition3">
+                    @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                    {
+                        <option value="" selected></option>
+                        <option value="0">対象</option>
+                        <option value="1">対象外</option>
+                    }
+                    else
+                    {
+                        <option value=""></option>
+                        <option value="0">対象</option>
+                        <option value="1" selected>対象外</option>
+                    }
+                </select>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label ">PCコード</label>
+        </th>
+        <td>
+            <div>
+                <div class="row">
+                    <div class="col-8">
+                        <div class="input-group">
+                            <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                            <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                            <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <small class="form-text text-muted">
+                        左端項目から順番にPC部門コード、PC事業区分コード、PC顧客コードを編集してください。
+                    </small>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label ">詰合せ代表出荷No</label>
+        </th>
+        <td>
+            <div>
+                <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label ">振替得意先コード</label>
+        </th>
+        <td>
+            <div>
+                <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label ">出荷統合コード</label>
+        </th>
+        <td>
+            <div>
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label ">出荷括りNo</label>
+        </th>
+        <td>
+            <div>
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label ">代表括り先コード</label>
+        </th>
+        <td>
+            <div>
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label ">仕入先原票No2</label>
+        </th>
+        <td>
+            <div>
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label ">JISコード</label>
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                {
+                    testVal = string.Empty;
+                }
+                else
+                {
+                    testVal = "13101";
+                }
+                <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="@testVal">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label ">荷主</label>
+        </th>
+        <td>
+            <div>
+                <select class="custom-select form-control" id="Condition3">
+                    @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                    {
+                        <option value="" selected></option>
+                        <option value="ﾌ001G">ﾌ001G</option>
+                        <option value="ﾌ001X">ﾌ001X</option>
+                    }
+                    else
+                    {
+                        <option value=""></option>
+                        <option value="ﾌ001G">ﾌ001G</option>
+                        <option value="ﾌ001X" selected>ﾌ001X</option>
+                    }
+                </select>
+            </div>
+            <div>
+                <small class="form-text text-muted">
+                    ※荷主（荷札・荷送り元）変更の時、荷主がFD様の場合は「ﾌ001G」を編集、FE様の場合は「ﾌ001X」を編集してください。
+                </small>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label ">代引</label>
+        </th>
+        <td>
+            <div>
+                <select class="custom-select form-control" id="Condition3">
+                    @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                    {
+                        <option value="" selected></option>
+                        <option value="0">代引以外</option>
+                        <option value="1">代引</option>
+                    }
+                    else
+                    {
+                        <option value=""></option>
+                        <option value="0" selected>代引以外</option>
+                        <option value="1">代引</option>
+                    }
+                </select>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label ">最終需要家コード</label>
+        </th>
+        <td>
+            <div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="input-group">
+                            @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                            {
+                                testVal = string.Empty;
+                            }
+                            else
+                            {
+                                testVal = "AA005C";
+                            }
+                            <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="@testVal">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#SaisyuJuyoCodeSearchDialog">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="macss-val-ref col-6">
+                        @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                        {
+                        }
+                        else
+                        {
+                            testVal = "㈱エイシーエスエヌ";
+                            <span id="OkyakusamaCodeName" class="align-middle">@testVal</span>
+                        }
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label ">最終需要家名</label>
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                {
+                    testVal = string.Empty;
+                }
+                else
+                {
+                    testVal = "㈱エイシーエスエヌ";
+                }
+                <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="@testVal">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label ">お客様コード</label>
+        </th>
+        <td>
+            <div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="input-group">
+                            @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                            {
+                                testVal = string.Empty;
+                            }
+                            else
+                            {
+                                testVal = "AA005C";
+                            }
+                            <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="@testVal">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#OkyakusamaCodeSearchDialog">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="macss-val-ref col-6">
+                        @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                        {
+                        }
+                        else
+                        {
+                            testVal = "㈱エイシーエスエヌ";
+                            <span id="OkyakusamaCodeName" class="align-middle">@testVal</span>
+                        }
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label ">お客様名称</label>
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                {
+                    testVal = string.Empty;
+                }
+                else
+                {
+                    testVal = "㈱エイシーエスエヌ";
+                }
+                <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="@testVal">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label ">注文主名称カナ</label>
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true))
+                {
+                    testVal = string.Empty;
+                }
+                else
+                {
+                    testVal = "ﾀﾅｶﾃﾞﾊﾞｲｽ";
+                }
+                <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="@testVal">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label ">得意先名</label>
+        </th>
+        <td>
+            <div>
+                <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+            </div>
+            <div>
+                <small class="form-text text-muted">
+                    ※得意先のスポットの場合、入力してください。
+                </small>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label ">住所</label>
+        </th>
+        <td>
+            <div>
+                <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+            </div>
+            <div>
+                <small class="form-text text-muted">
+                    ※得意先のスポットの場合、入力してください。
+                </small>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label ">締日</label>
+        </th>
+        <td>
+            <div>
+                <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+            </div>
+            <div>
+                <small class="form-text text-muted">
+                    ※得意先のスポットの場合、入力してください。
+                </small>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#TransitionConfirmDialog">@MacssWeb.Resources.ControlText.BackToList</button>
+    </div>
+    <div class="col-8 text-right">
+        <button type="submit" class="btn btn-primary">@MacssWeb.Resources.ControlText.InputConfirm</button>
+    </div>
+</div>
+
+<div class="modal" id="TransitionConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.TransitionConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @MacssWeb.Resources.Messages.TransitionConfirm
+                <br>
+                @MacssWeb.Resources.Messages.Confirm
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary macss-btn" href="@Url.Action("Index")" role="button">@MacssWeb.Resources.ControlText.Yes</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function setDepartmentCode(code, value) {
+        $("#bumon_cd").val(code);
+        $("#DepartmentName").text(value);
+    }
+    $(function () {
+        var createDatePicker = new Macss.DatetimePicker.MacssDtPicker("#totyaku_date", "#TotyakuDateCalendar");
+        createDatePicker.configure();
+        var updateDatePicker = new Macss.DatetimePicker.MacssDtPicker("#syukka_date", "#SyukkaDateCalendar");
+        updateDatePicker.configure();
+    });
+
+</script>

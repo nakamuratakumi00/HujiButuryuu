@@ -1,0 +1,1136 @@
+﻿@model Macss.Database.Entity.AccountMaster
+@{
+    ViewBag.Title = "出荷場所登録";
+    ViewBag.PageMainTitle = "出荷場所登録";
+    ViewBag.ConfirmMessage = MacssWeb.Resources.Messages.DeleteConfirm;
+    ViewBag.ButtonText = MacssWeb.Resources.ControlText.DeleteExec;
+    ViewBag.ConfirmDialogText = MacssWeb.Resources.Messages.DeleteReconfirm;
+}
+@section Scripts {
+    <script>
+        $(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#SampleList");
+            dt.configure();
+
+            //MacssDataTable（dataTables.fixedColumns.js）に表示する列が15件以上あると計算間違いで最左端列にスクロールバーが表示されるため、非表示にする
+            $('.DTFC_LeftBodyLiner').css('overflow-y', 'hidden');
+
+        });</script>
+}
+
+@using (Html.BeginForm("CreateConfirm", "StockCreate", null, FormMethod.Post))
+{
+    <div class="row justify-content-between macss-form-button-group-row">
+        <div class="col-4">
+            <a class="btn btn-secondary" data-toggle="modal" data-target="#TransitionConfirmDialog" role="button">@MacssWeb.Resources.ControlText.BackToList</a>
+        </div>
+        <div class="col-4 text-right">
+            <a class="btn btn-primary" href="@Url.Action("CreateConfirm")" role="button">@MacssWeb.Resources.ControlText.InputConfirm</a>
+        </div>
+    </div>
+    <div class="accordion" id="ConditionAccordion">
+        <div class="card">
+            <div class="card-header macss-search-config-collapse-header" id="headingOne">
+                <div class="mb-0">
+                    <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain" aria-expanded="true" aria-controls="ConditionMain">
+                        <div class="d-inline-block" style="color:#333"></div>
+                        <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="color: rgb(120, 188, 255);"></i>
+                        <i id="CollapseShow" class="fas fa-chevron-circle-down" aria-hidden="true" style="color: rgb(120, 188, 255); display: none;"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+                <table class="table macss-form-table2">
+                    <colgroup>
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                    </colgroup>
+                    <tbody>
+                        <!--1行サンプル
+        <tr>
+        <th scope="row">
+        <label class="control-label">出荷No</label>
+        </th>
+        <td colspan="3">
+        <div>
+        <div>05260</div>
+        </div>
+        </td>
+        </tr>-->
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label required">出荷場所コード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label required">表示順</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label required">出荷場所名</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">住所</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">拠点コード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">利用者利用可否</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                        <label class="form-check-label" for="inlineRadio1">利用不可</label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                        <label class="form-check-label" for="inlineRadio2">利用可</label>
+                                    </div>
+                                </div>
+                            </td>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">使用不可開始日</label>
+                            </th>
+                            <td>
+                                <div class="input-group">
+                                    <input type="text" id="SampleDTPicker1" class="form-control">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button" id="SampleCalendar1"><i class="fa fa-calendar-alt"></i></button>
+                                    </div>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">使用不可理由</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        </tr>
+                    </tbody>    
+                </table> 
+                <table class="table macss-form-table2">
+                    <colgroup>
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                    </colgroup>
+                    <tbody>
+                        <!--1行サンプル
+                            <tr>
+                            <th scope="row">
+                            <label class="control-label">出荷No</label>
+                            </th>
+                            <td colspan="3">
+                            <div>
+                            <div>05260</div>
+                            </div>
+                            </td>
+                            </tr>-->                                                    
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">出荷検品判断区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">対象外</option>
+                                        <option value="2">1：検品対象&FDT送信有</option>
+                                        <option value="3">2：検品対象&FDT送信無</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">品名編集判断区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">対象外</option>
+                                        <option value="2">1：全て対象</option>
+                                        <option value="3">2：条件付（機種A指定）</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>    
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">荷札日付編集判断区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">オリジナル出荷No必須</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                        <label class="form-check-label" for="inlineRadio1">空白可</label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                        <label class="form-check-label" for="inlineRadio2">必須</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">運送区分編集判断区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">1:条件により路線便を宅配便に編集</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">括り出荷区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">括り対象外</option>
+                                        <option value="2">1：括り出荷対象</option>
+                                        <option value="3">3：条件付括り出荷対象</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">出荷検品試験年月チェック有効月</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">荷送り元編集区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">外装検品実施有無区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">内装検品のみ</option>
+                                        <option value="2">1：内装＋外装検品有</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">荷札登録エラー区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">ノーチェック</option>
+                                        <option value="2">エラー</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">出荷実績データ送信有無</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                        <label class="form-check-label" for="inlineRadio1">送信無</label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                        <label class="form-check-label" for="inlineRadio2">送信有</label>
+                                    </div>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">出荷手配特記事項編集区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">2：設定有・松本工場関係</option>
+                                        <option value="2">6：設定有・丸子関係</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>                                                
+                    </tbody>    
+                </table>
+                <table class="table macss-form-table2">
+                    <colgroup>
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                    </colgroup>
+                    <tbody>
+                        <!--1行サンプル
+                            <tr>
+                            <th scope="row">
+                            <label class="control-label">出荷No</label>
+                            </th>
+                            <td colspan="3">
+                            <div>
+                            <div>05260</div>
+                            </div>
+                            </td>
+                            </tr>-->                            
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">東海西濃運輸伝送対象区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">伝送対象外</option>
+                                        <option value="2">1：伝送対象</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">東海西濃運輸伝送区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">1：１回目は送信対象外</option>
+                                        <option value="2">2:2回目は送信対象外</option>
+                                        <option value="3">3：3回目は送信対象外</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">信州名鉄運輸伝送対象区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">伝送対象外</option>
+                                        <option value="2">1：伝送対象</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">信州名鉄運輸伝送区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">1：１回目は送信対象外</option>
+                                        <option value="2">2:2回目は送信対象外</option>
+                                        <option value="3">3：3回目は送信対象外</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">ヤマト運輸送状発行対象区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">作成対象外</option>
+                                        <option value="2">1:松本支店作成対象</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">運送会社原票No発番区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">発番無し</option>
+                                        <option value="2">1：発番有り</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">北陸名鉄運輸送状発行対象区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">送状発行対象外</option>
+                                        <option value="2">1：送状発行対象</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">基幹配送便対象区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">対象外</option>
+                                        <option value="2">1：対象</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">全社基幹配送便対象区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">対象外</option>
+                                        <option value="2">1：対象</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">荷札発行拠点チェック対象区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">1:代表出荷Noチェック対象・運賃チェック判断対象</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>                        
+                    </tbody>    
+                </table>
+                <table class="table macss-form-table2">
+                    <colgroup>
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                    </colgroup>
+                    <tbody>
+                        <!--1行サンプル
+                            <tr>
+                            <th scope="row">
+                            <label class="control-label">出荷No</label>
+                            </th>
+                            <td colspan="3">
+                            <div>
+                            <div>05260</div>
+                            </div>
+                            </td>
+                            </tr>-->                            
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">データ作成区分1</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">1：検品用に作成</option>
+                                        <option value="2">2：荷札品名ｶﾅ用に作成</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">データ作成区分2</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">1:営業在庫用に作成</option>
+
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">データ作成区分3</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">1：自動作成対象＆データ 自動削除対象</option>
+                                        <option value="2">2：条件付自動作成対象(機種A)＆ﾃﾞｰﾀ 自動削除対象</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">データ作成区分4</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">対象外（高圧SI棟出荷分）</option>
+                                        <option value="2">1：対象</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">データ作成区分5</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">対象外</option>
+                                        <option value="2">1：対象</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">データ作成区分6</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">対象外</option>
+                                        <option value="2">1：取込み対象(全対象)</option>
+                                        <option value="3">2：取込み対象(条件付対象)</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">データ作成区分7</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">対象外</option>
+                                        <option value="2">1：対象</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">データ作成区分8</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">作成対象外</option>
+                                        <option value="2">1：作成対象</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">処理制御区分1</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">実績消し込み対象外</option>
+                                        <option value="2">1:実績消し込み対象</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">処理制御区分2</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">未計上リスト対象外</option>
+                                        <option value="2">1:未計上リスト対象</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">処理制御区分3</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">未計上リスト対象外</option>
+                                        <option value="2">1:未計上リスト対象</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">処理制御区分4</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">1:対象/LUMB283</option>
+                                        <option value="2">2:条件付対象（条件はﾌﾟﾛｸﾞﾗﾑ指定）/LUMB283</option>
+                                        <option value="3">3:対象/LUMB284</option>
+                                        <option value="4">4:小計特別編集付対象（条件と編集内容はﾌﾟﾛｸﾞﾗﾑ指定）/LUMB283</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">処理制御区分5</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">画面OPEN有</option>
+                                        <option value="2">画面OPEN無/対象/LUMB285</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">SSE送状括り出荷場所コード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>                        
+                    </tbody>    
+                </table>
+                <table class="table macss-form-table2">
+                    <colgroup>
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                    </colgroup>
+                    <tbody>
+                        <!--1行サンプル
+                            <tr>
+                            <th scope="row">
+                            <label class="control-label">出荷No</label>
+                            </th>
+                            <td colspan="3">
+                            <div>
+                            <div>05260</div>
+                            </div>
+                            </td>
+                            </tr>-->                            
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">出荷検品試験年月チェック区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                                        <option value="0"></option>
+                                        <option value="1">チェック不要</option>
+                                        <option value="2">1:エラー</option>
+                                        <option value="3">2:警告</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">路線便運賃チェックリスト用出荷場所コード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">FRS新部品システム倉庫コード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">手配データ編集用出荷場所コード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">荷札発行チェック用出荷場所コード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">ヤマト送状用出荷場所コード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">出荷案内書用出荷場所コード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">出荷案内書編集用出荷場所コード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">東海西濃送状用出荷場所コード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">休日取得用出荷場所コード_TASS</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">休日取得用出荷場所コード_FDASS</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">TMS引渡データ編集用出荷場所コード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">日々管理括り編集用出荷場所コード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">検収明細用出荷場所コード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">送状データ絞込用出荷場所コード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">運送方法制御取得用出荷場所コード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>                        
+                    </tbody>    
+                </table>
+                <table class="table macss-form-table2">
+                    <colgroup>
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                    </colgroup>
+                    <tbody>
+                        <!--1行サンプル
+                            <tr>
+                            <th scope="row">
+                            <label class="control-label">出荷No</label>
+                            </th>
+                            <td colspan="3">
+                            <div>
+                            <div>05260</div>
+                            </div>
+                            </td>
+                            </tr>-->                                                    
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">出荷場所名3桁略称</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">出荷場所名6桁略称</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">出荷場所名10桁略称</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">表示用出荷場所名</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">支払明細書用出荷場所名</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">全社基幹配送用出荷場所名略称</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">出荷場所地区名</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">出荷場所県名</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>                           
+                            <th scope="row">
+                                <label class="control-label">全社基幹配送絞込コード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">基幹配送出荷場所コード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>                            
+                            <th scope="row">
+                                <label class="control-label">基幹配送ファイルID</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control">
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="create_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                             <th scope="row">
+                                <label class="control-label"></label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>                        
+                    </tbody>    
+                </table>                    
+            </div>
+        </div>
+    </div>
+}
+
+<div class="mt-4"></div>
+<div class="row justify-content-between macss-form-button-group-row mt-4">
+    <div class="col-4">
+        <a class="btn btn-secondary" data-toggle="modal" data-target="#TransitionConfirmDialog" role="button">@MacssWeb.Resources.ControlText.BackToList</a>
+    </div>
+    <div class="col-4 text-right">
+        <a class="btn btn-primary" href="@Url.Action("CreateConfirm")" role="button">@MacssWeb.Resources.ControlText.InputConfirm</a>
+    </div>
+</div>
+<script>
+    function setDepartmentCode(code, value) {
+        $("#bumon_cd").val(code);
+        $("#DepartmentName").text(value);
+    }
+    $(function () {
+        var createDatePicker = new Macss.DatetimePicker.MacssDtPicker("#create_date", "#CreateDateCalendar");
+        createDatePicker.configure();
+        var updateDatePicker = new Macss.DatetimePicker.MacssDtPicker("#update_date", "#UpdateDateCalendar");
+        updateDatePicker.configure();
+    });</script></form>
+
+</div>
+
+
+
+<div class="modal" id="TransitionConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.TransitionConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @MacssWeb.Resources.Messages.TransitionConfirm
+                <br>
+                @MacssWeb.Resources.Messages.Confirm
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary macss-btn" href="@Url.Action("Index")" role="button">@MacssWeb.Resources.ControlText.Yes</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>

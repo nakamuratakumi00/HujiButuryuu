@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "運送業務 - TASS";
+    ViewBag.ScreenId = "";
+    ViewBag.PageMainTitle = "顧客提供用送状Noデータ出力";
+    ViewBag.Caption = "顧客提供用送状Noデータの出力を行います。";
+}
+
+@using (Html.BeginForm("MakeConfirm", "D010", FormMethod.Post))
+{
+
+    @Html.AntiForgeryToken()
+
+<div class="container-fluid">
+    <div>
+        <p>
+            @ViewBag.Caption
+        </p>
+    </div>
+
+    <div class="row mr-0 mb-1">
+        <div class="col-3">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="Condition3">期間</span>
+                </div>
+                <div class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                    @DateTime.Now.ToString("yyyy年MM月01日") ～ @DateTime.Now.ToString("yyyy年MM月dd日")
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="Condition3">送状提供先コード</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <div>
+            <div class="macss-upload-button-group-row pr-0 row">
+                <div class="col-8">
+                    <a class="btn btn-secondary" href="@Url.Action("Index")" role="button">@MacssWeb.Resources.ControlText.BackToList</a>
+                </div>
+                <div class="col-4 text-right">
+                    <button type="button" id="Confirm" class="btn btn-primary">@MacssWeb.Resources.ControlText.Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+}
+
+
+<script>
+    $(function () {
+        $('#Confirm').on('click', function () {
+            var form = $(this).parents('form');
+            form.submit();
+        });
+
+
+    })
+</script>

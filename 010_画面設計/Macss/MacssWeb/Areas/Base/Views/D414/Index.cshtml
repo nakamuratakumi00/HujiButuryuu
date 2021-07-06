@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "運送コースマスターメンテナンス（汎用）";
+    ViewBag.PageMainTitle = "運送コースマスターメンテナンス（汎用）";
+    ViewBag.Caption = "指定されたExcelファイルでマスターメンテナンスを行います。";
+    //ViewBag.UploadFileAccept = new List<string>() { ".csv, .txt" };
+    ViewBag.UploadFileAccept = new List<string>() { ".xlsx" };
+}
+
+@using (Html.BeginForm("UploadConfirm", "D414", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.Partial("_SimpleUpload")
+}

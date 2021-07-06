@@ -1,0 +1,233 @@
+﻿@model IEnumerable<Macss.Database.Entity.AccountMaster>
+
+@{
+    ViewBag.Title = "運送業務 - TASS";
+    ViewBag.ScreenId = "TASS-D034-08";
+    ViewBag.PageMainTitle = "委託作業費月次一覧";
+}
+@section Scripts {
+    <script>
+        $(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#SampleList");
+            dt.configure();
+
+            var cond = new Macss.Collapse.ConditionsPanel("#ConditionAccordion", "#CollapseShow", "#CollapseHidden");
+            cond.setCollapseEvent();
+
+            var sampleDatePicker = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker", "#SampleCalendar");
+            sampleDatePicker.configure();
+            var sampleDatePicker1 = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker1", "#SampleCalendar1");
+            sampleDatePicker1.configure();
+            var sampleDatePicker2 = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker2", "#SampleCalendar2");
+            sampleDatePicker2.configure();
+
+            var sampleDatePicker3 = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker3", "#SampleCalendar3");
+            sampleDatePicker3.configure();
+            var sampleDatePicker4 = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker4", "#SampleCalendar4");
+            sampleDatePicker4.configure();
+
+
+            //MacssDataTable（dataTables.fixedColumns.js）に表示する列が15件以上あると計算間違いで最左端列にスクロールバーが表示されるため、非表示にする
+            $('.DTFC_LeftBodyLiner').css('overflow-y', 'hidden');
+        });
+    </script>
+}
+
+@using (Html.BeginForm("Search", "D034", null, FormMethod.Post))
+{
+
+    @*<div class="alert @ViewBag.AlertType">
+    <span>データが出力されました。</span>
+    </div>*@
+
+    <div class="accordion" id="ConditionAccordion">
+        <div class="card">
+            <div class="card-header macss-search-config-collapse-header" id="headingOne">
+                <div class="mb-0">
+                    <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain" aria-expanded="true" aria-controls="ConditionMain">
+                        <div class="d-inline-block" style="color:#333">検索設定</div>
+                        <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="display:none;"></i>
+                        <i id="CollapseShow" class="fas fa-chevron-circle-down" aria-hidden="true" style="display:none;"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+                <div class="row mr-0 mb-1">
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">対象年月</span>
+                            </div>
+                            <input type="text" id="SampleDTPicker1" class="form-control" value="2021年3月">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar1"><i class="fa fa-calendar-alt"></i></button>
+                            </div>                                                       
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition3">仕入先コード</span>
+                            </div>
+                            <input class="form-control text-box single-line" data-val="true" data-val-length="フィールド 部門コード は最大長が 4 の文字列である必要があります。" data-val-length-max="4" data-val-required="部門コード フィールドが必要です。" id="bumon_cd" name="bumon_cd" type="text">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#DepartmentCodeSearchDialog">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition3">出荷場所コード</span>
+                            </div>
+                            <input class="form-control text-box single-line" data-val="true" data-val-length="フィールド 部門コード は最大長が 4 の文字列である必要があります。" data-val-length-max="4" data-val-required="部門コード フィールドが必要です。" id="bumon_cd" name="bumon_cd" type="text">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#DepartmentCodeSearchDialog">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>                                                                                  
+                </div>
+                                                
+                <div class="container-fluid pt-4 pb-3 pl-0 clearfix">
+                    <div class="float-left">
+                        <button type="reset" class="btn btn-secondary btn-lg macss-btn-main">@MacssWeb.Resources.ControlText.ConditionClear</button>
+                    </div>
+                    <div class="float-right">
+                        <button type="submit" class="btn btn-primary btn-lg macss-btn-main">@MacssWeb.Resources.ControlText.Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="row mt-3 mb-4">
+    <div class="col-6"></div>
+    <div class="col-6 text-right">
+        <div class="dropdown">
+            <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#CsvDownloadDialog">CSVダウンロード</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table id="SampleList" class="table table-striped table-hover macss-data-table">
+    <thead class="macss-data-table-header">
+        <!-- thの文字数で列の幅が決まってしまうため、必要に応じて全角スペースを入れて列の幅を調整する必要がある-->
+        <tr>
+            <th>請求年月</th>
+            <th>仕入先コード</th>
+            <th>仕入先名称</th>
+            <th>出荷No</th>
+            <th>出荷日</th>
+            <th>オリジナル出荷No</th>
+            <th>経費負担No</th>
+            <th>品名</th>
+            <th>得意先コード</th>
+            <th>包装数</th>
+            <th>包装費</th>
+            <th>資材請求額</th>
+            <th>合計</th>
+            <th>出荷場所コード</th>
+            <th>出荷場所名</th>
+            <th>伝票区分</th>
+            <th>伝票枚数</th>
+            <th>単価コード</th>
+            <th>物流単価区分</th>
+            <th>単価区分</th>
+            <th>単価1</th>
+            <th>単価2</th>
+            <th>単価3</th>
+            <th>単価4</th>
+            <th>データ作成日時</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
+@*<div class="row mt-4">
+    <div class="col-5"></div>
+    <div class="col-7">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">仕入用照会データ</span>
+                            </div>
+                           <div class="macss-input-group-input form-control">
+                               <div class="form-check form-check-inline">
+                                   <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                   <label class="form-check-label" for="inlineRadio1">包装費・運賃明細</label>
+                               </div>
+                               <div class="form-check form-check-inline">
+                                   <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                   <label class="form-check-label" for="inlineRadio2">包装費売上集計(個別単価分)</label>
+                               </div>
+                               <div class="form-check form-check-inline">
+                                   <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                                   <label class="form-check-label" for="inlineRadio3">包装費得意先別売上集計(月報)</label>
+                               </div>
+                               <div class="form-check form-check-inline">
+                                   <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option4">
+                                   <label class="form-check-label" for="inlineRadio4">包装費実績(月報)</label>
+                               </div>
+                            </div>
+                        </div>
+                    </div>    
+</div>
+
+<div class="row mt-4">
+    <div class="col-12 text-right">
+        <button id="outdata" type="button" class="btn btn-primary macss-btn-sub" data-toggle="modal" data-target="#ConfirmDialog1">データ出力</button>
+    </div>
+</div>*@
+
+<script>
+    function setDepartmentCode(code, value) {
+        $("#bumon_cd").val(code);
+        $("#DepartmentName").text(value);
+    }
+    $(function () {
+        var createDatePicker = new Macss.DatetimePicker.MacssDtPicker("#totyaku_date", "#TotyakuDateCalendar");
+        createDatePicker.configure();
+        var updateDatePicker = new Macss.DatetimePicker.MacssDtPicker("#syukka_date", "#SyukkaDateCalendar");
+        updateDatePicker.configure();
+    });
+
+</script>

@@ -1,0 +1,252 @@
+﻿@Html.AntiForgeryToken()
+
+@if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+{
+    <div class="alert alert-info">
+        <span>@ViewBag.ConfirmMessage</span>
+    </div>
+}
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="row justify-content-between macss-form-button-group-row">
+        @if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+        {
+            <div class="col-4">
+                <button type="submit" class="btn btn-secondary" name="cmdTopBack" value="@((int)MacssWeb.Common.ButtonValues.Back)">@MacssWeb.Resources.ControlText.Back</button>
+            </div>
+        }
+        else
+        {
+            <div class="col-4">
+                <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.Back</a>
+            </div>
+        }
+    </div>
+</div>
+<table class="table macss-form-table2">
+    <colgroup>
+        <col class="macss-form-table-title2" />
+        <col class="macss-form-table-contents2" />
+        <col class="macss-form-table-title2" />
+        <col class="macss-form-table-contents2" />
+    </colgroup>
+    <!--1行サンプル<tr>
+        <th scope="row">
+            <label class="control-label">出荷No</label>
+        </th>
+        <td colspan="3">
+            <div>
+                <div>05260</div>
+            </div>
+        </td>
+    </tr>-->
+    <tr>
+        <th scope="row">
+            <label class="control-label">データ入力元</label>
+        </th>
+        <td>
+            <div>
+                <div></div>
+            </div>
+        </td>
+        <th scope="row">
+            <label class="control-label">業務名</label>
+        </th>
+        <td>
+            <div>
+                <div></div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">参照No</label>
+        </th>
+        <td>
+            <div>
+                <div></div>
+            </div>
+        </td>
+        <th scope="row">
+            <label class="control-label">伝票No</label>
+        </th>
+        <td>
+            <div></div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">営業費用パターン</label>
+        </th>
+        <td>
+            <div></div>
+        </td>
+        <th scope="row">
+            <label class="control-label">年月度</label>
+        </th>
+        <td>
+            <div></div>
+        </td>
+    </tr>    
+    <tr>
+        <th scope="row">
+            <label class="control-label">原票No</label>
+        </th>
+        <td>
+            <div></div>
+        </td>
+        <th scope="row">
+            <label class="control-label">仕入先</label>
+        </th>
+        <td>
+            <div></div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">社内伝票</label>
+        </th>
+        <td>
+            <div></div>
+        </td>
+        <th scope="row">
+            <label class="control-label">伝票日付</label>
+        </th>
+        <td>
+            <div></div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">FB本社仕入先</label>
+        </th>
+        <td>
+            <div></div>
+        </td>
+        <th scope="row">
+            <label class="control-label">事業所</label>
+        </th>
+        <td>
+            <div></div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">月報フラグ</label>
+        </th>
+        <td>
+            <div></div>
+        </td>
+        <th scope="row">
+            <label class="control-label">処理日</label>
+        </th>
+        <td>
+            <div></div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">期間(社内用)</label>
+        </th>
+        <td>
+            <div></div>
+        </td>
+        <th scope="row">
+            <label class="control-label">伝送月度</label>
+        </th>
+        <td>
+            <div></div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">項目1</label>
+        </th>
+        <td>
+            <div></div>
+        </td>
+        <th scope="row">
+            <label class="control-label">確定日(社内用)</label>
+        </th>
+        <td>
+            <div></div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">項目2</label>
+        </th>
+        <td>
+            <div></div>
+        </td>
+        <th scope="row">
+            <label class="control-label">月度(社内用)</label>
+        </th>
+        <td>
+            <div></div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label class="control-label">摘要1</label>
+        </th>
+        <td>
+           <div></div>
+        </td>
+        <th scope="row">
+            <label class="control-label">摘要2</label>
+        </th>
+        <td>
+            <div></div>
+        </td>
+    </tr>        
+</table>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    @if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+    {
+        <div class="col-4">
+            <button type="submit" class="btn btn-secondary" name="cmdBtmBack" value="@((int)MacssWeb.Common.ButtonValues.Back)">@MacssWeb.Resources.ControlText.Back</button>
+        </div>
+        <div class="col-4 text-right">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDialog">@ViewBag.ButtonText</button>
+        </div>
+    }
+    else
+    {
+        <div class="col-4">
+            <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.Back</a>
+        </div>
+        <div class="col-8 text-right">
+            @if (ViewBag.myId == null || ViewBag.myId != "0173147")
+            {
+                <a role="button" class="btn btn-primary" href="@Url.Action("Edit", new { id = @"0173146" })">@MacssWeb.Resources.ControlText.Edit</a>
+            }
+            <!--<a role="button" class="btn btn-primary" href="@Url.Action("Copy", new { id = @"0173146" })">@MacssWeb.Resources.ControlText.Copy</a>-->
+            @if (ViewBag.myId == null || ViewBag.myId != "0173147")
+            {
+                <a role="button" class="btn btn-danger" href="@Url.Action("DeleteConfirm", new { id = @"0173146" })">@MacssWeb.Resources.ControlText.Delete</a>
+            }
+        </div>
+    }
+</div>
+
+<div class="modal" id="ConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @ViewBag.ConfirmDialogText
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" name="cmdBtmExec" value="@((int)MacssWeb.Common.ButtonValues.Exec)">@MacssWeb.Resources.ControlText.Yes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>

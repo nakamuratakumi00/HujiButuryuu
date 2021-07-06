@@ -1,0 +1,20 @@
+﻿@using System.Web.Optimization
+@model Macss.Database.Entity.AccountMaster
+
+@{
+    ViewBag.Title = "運送業務 - TASS";
+    ViewBag.PageMainTitle = "出荷現品情報出荷No振替";
+    ViewBag.ScreenId = "";
+}
+
+@using (Html.BeginForm("TransferConfirm", "D003", null, FormMethod.Post))
+{
+
+    @Html.Partial("_TransferForm", Model)
+
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

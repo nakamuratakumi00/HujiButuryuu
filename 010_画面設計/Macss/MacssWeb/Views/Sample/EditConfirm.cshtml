@@ -1,0 +1,15 @@
+﻿@model Macss.Database.Entity.AccountMaster
+
+@{
+    ViewBag.PageMainTitle = "編集確認サンプル";
+    ViewBag.ScreenId = "SMPL-D001";
+    ViewBag.ConfirmMessage = MacssWeb.Resources.Messages.EditConfirm;
+    ViewBag.ButtonText = MacssWeb.Resources.ControlText.EditExec;
+    ViewBag.ConfirmDialogText = MacssWeb.Resources.Messages.EditReconfirm;
+}
+
+@using (Html.BeginForm("Edit", "Sample", null, FormMethod.Post))
+{
+
+    @Html.Partial("_Show", Model)
+}

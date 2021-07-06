@@ -1,0 +1,101 @@
+﻿@using MacssWeb.Areas.Tass.Helper
+@model Macss.Database.Entity.DummyDossData
+
+@Html.AntiForgeryToken()
+
+<div class="alert alert-info">
+    <span>@ViewBag.ConfirmMessage</span>
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="row justify-content-between macss-form-button-group-row">
+        <div class="col-4">
+            @*            <button type="submit" class="btn btn-secondary" name="cmdTopBack" value="@((int)MacssWeb.Common.ButtonValues.Back)">@MacssWeb.Resources.ControlText.Back</button>*@
+            <a class="btn btn-secondary" href="@Url.Action("Create")" role="button">戻る</a>
+        </div>
+    </div>
+    <div class="col-4 text-right">
+        <a class="btn btn-primary" href="@Url.Action("CreateResult")" role="button">作成</a>
+    </div>
+</div>
+<table class="table macss-form-table">
+    <colgroup>
+        <col class="macss-form-table-title" />
+        <col class="macss-form-table-contents" />
+    </colgroup>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.OutYMD, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.OutYMD, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.OutYMD)
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.Route, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.Route, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.Route)
+        </td>
+    </tr>
+    @*<tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.Location)
+        </td>
+    </tr>*@
+    @*<tr>
+        <th>
+            @Html.LabelFor(model => model.TargetDossData, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.TargetDossData, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.DossDataAll)
+            @Html.HiddenFor(model => model.DossDataKitaKanto)
+        </td>
+    </tr>*@
+    @*<tr>
+        <th>
+            @Html.LabelFor(model => model.CreateType, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.CreateType, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.CreateType)
+        </td>
+    </tr>*@
+</table>
+
+@*<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <button type="submit" class="btn btn-secondary" name="cmdBtmBack" value="@((int)MacssWeb.Common.ButtonValues.Back)">@MacssWeb.Resources.ControlText.Back</button>
+    </div>
+    <div class="col-4 text-right">
+        <a class="btn btn-primary" href="@Url.Action("CreateResult")" role="button">実行</a>
+    </div>
+</div>*@
+
+<div class="modal" id="ConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Doss連携データ作成を実行します。よろしいですか？
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.Cancel</button>
+                <button type="submit" class="btn btn-primary" name="cmdBtmExec" value="@((int)MacssWeb.Common.ButtonValues.Exec)">実行</button>
+            </div>
+        </div>
+    </div>
+</div>

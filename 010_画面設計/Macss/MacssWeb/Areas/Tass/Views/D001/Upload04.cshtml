@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "運送業務 - TASS";
+    ViewBag.ScreenId = "";
+    ViewBag.PageMainTitle = "出荷案内書(食品流通新部品)データアップロード";
+    ViewBag.Caption = "データのアップロードを行います。";
+    //ViewBag.UploadFileAccept = new List<string>() { ".csv, .txt" };
+    ViewBag.UploadFileAccept = new List<string>() { ".txt" };
+}
+
+
+    @using (Html.BeginForm("UploadConfirm04", "D001", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.Partial("_SimpleUpload04")
+}

@@ -1,0 +1,128 @@
+﻿@model IEnumerable<MacssWeb.Models.AccountMasterUpload>
+
+@{
+    ViewBag.Title = "";
+    ViewBag.ScreenId = "";
+    ViewBag.PageMainTitle = "請求明細PCコード一括変更結果";
+}
+@section Scripts {
+    <script>
+
+        $(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#UploadConfirmList");
+            dt.setScrollY("600px");
+            dt.configure();
+
+            $('[data-toggle="popover"]').popover();
+
+        });
+    </script>
+}
+
+<div class="alert @ViewBag.AlertType">
+    <span>@ViewBag.ResultMessage</span>
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-12 text-right">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("Index", "Home")">サブメニューへ戻る</a>
+    </div>
+</div>
+
+<div class="container-fluid mt-2">
+    <div class="form-inline">
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">対象件数</span>
+            </div>
+            <span class="form-control text-right">@ViewBag.MakeCount</span>
+        </div>
+        <!--
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">エラー件数</span>
+            </div>
+            <span class="form-control text-right">@ViewBag.ErrorCount</span>
+        </div>
+            -->
+    </div>
+</div>
+
+<div class="row mt-2 mb-2">
+    <div class="col-12 text-right">
+        <div class="dropdown">
+            <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#CsvDownloadDialog">CSVダウンロード</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table id="UploadConfirmList" class="table table-striped table-hover macss-data-table">
+    <thead class="macss-data-table-header">
+        <!-- thの文字数で列の幅が決まってしまうため、必要に応じて全角スペースを入れて列の幅を調整する必要がある-->
+        <tr>
+            <th>請求No</th>
+            <th>変更前部門コード</th>
+            <th>変更後部門コード</th>
+            <th>変更前事業区分コード</th>
+            <th>変更後事業区分コード</th>
+            <th>変更前顧客区分コード</th>
+            <th>変更後顧客区分コード</th>
+            <th>FB本社得意先コード</th>
+            <th>課税区分</th>
+            <th>請求金額</th>
+            <th>業務コード</th>
+            <th>業務名</th>
+            <th>伝票No</th>
+            <th>項番</th>
+            <th>請求先コード</th>
+            <th>請求先名</th>
+            <th>得意先コード</th>
+            <th>得意先名</th>
+            <th>伝票日付</th>
+            <th>原票No</th>
+            <th>明細コード</th>
+            <th>明細名</th>
+            <th>確定日</th>
+            <th>請求日</th>
+            <th>請求フラグ</th>
+            <th>月報フラグ</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>　</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>

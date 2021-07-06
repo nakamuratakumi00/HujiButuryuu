@@ -1,0 +1,35 @@
+﻿<script>
+    function hideTable() {
+        $("#ReqData").hide();
+        $("#BilData").hide();
+        $("#PayData").hide();
+    }
+    $(function () {
+
+        $('[data-toggle="popover"]').popover();
+
+        $("#TMSFixedDataPane").hide();
+        hideTable();
+        $("#ReqData").show();
+        $("#TMSFixedDataPane").show();
+
+        $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+            //e.target // newly activated tab
+            //e.relatedTarget // previous active tab
+            var tabId = $(event.target).attr("id");
+            if (tabId == "RequestTableTab") {
+                hideTable();
+                $("#ReqData").show();
+            }
+            if (tabId == "BillingTableTab") {
+                hideTable();
+                $("#BilData").show();
+            }
+            if (tabId == "PaymentTableTab") {
+                hideTable();
+                $("#PayData").show();
+            }
+        })
+    });
+</script>
+

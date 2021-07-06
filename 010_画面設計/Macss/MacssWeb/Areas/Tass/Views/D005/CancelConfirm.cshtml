@@ -1,0 +1,35 @@
+﻿@model Macss.Database.Entity.AccountMaster
+
+@{
+    ViewBag.Title = "運送業務 - TASS";
+    ViewBag.PageMainTitle = "出荷検品取消確認";
+    ViewBag.ScreenId = "";
+    ViewBag.ConfirmMessage = "以下を取消します。よろしいですか？";
+    ViewBag.ButtonText = "取消";
+    ViewBag.ConfirmDialogText = "取消処理を実行します。よろしいですか？";
+
+    ViewBag.CancelExec = true;
+}
+
+@using (Html.BeginForm("Cancel", "D005", null, FormMethod.Post))
+{
+    @Html.Partial("_Show")
+}
+
+@section Scripts {
+    <script>
+        $(function () {
+            var dt = new Macss.DataTables.MacssSimpleTable("#SampleList");
+            dt.configure();
+
+            var dt2 = new Macss.DataTables.MacssSimpleTable("#SampleList2");
+            dt2.configure();
+
+            var cond = new Macss.Collapse.ConditionsPanel("#ConditionAccordion", "#CollapseShow", "#CollapseHidden");
+            cond.setCollapseEvent();
+
+            //MacssDataTable（dataTables.fixedColumns.js）に表示する列が15件以上あると計算間違いで最左端列にスクロールバーが表示されるため、非表示にする
+            $('.DTFC_LeftBodyLiner').css('overflow-y', 'hidden');
+        });
+    </script>
+}

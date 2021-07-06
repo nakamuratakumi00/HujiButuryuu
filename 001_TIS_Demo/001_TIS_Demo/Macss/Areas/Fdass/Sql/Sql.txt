@@ -1,0 +1,537 @@
+﻿CREATE VIEW v_hokan_nyuushuuko AS
+SELECT 
+	DC01.KISYUA,																	-- 機種A
+	DC01.KISYUB,																	-- 機種B
+	MC70.KISNAM,																	-- 機種名
+	DC01.HOKCOD,																	-- 保管場所
+	DC01.HINCOD,																	-- 品番コード
+	CASE 
+		WHEN MC70.HOKFLG2 = 'C' OR MC70.NIEFLG2 = 'C' THEN MC72.HINNMK
+		ELSE ''
+	END HINNMK,																		-- 品名型式
+	SUM(CASE WHEN DC01.ZANSUU < 0 THEN 0 ELSE DC01.ZANSUU END) ZANSUU,				-- 前月残数
+	SUM(CASE WHEN DC01.ZANKIN < 0 THEN 0 ELSE DC01.ZANKIN END) ZANKIN,				-- 前月残金額
+	SUM(CASE WHEN DC01.SIKSUU < 0 THEN 0 ELSE DC01.SIKSUU END) -
+										  ISNULL(SUM(DC03_2.SIKSUU), 0) SIKSUU,		-- 仕込倉入数 - 仕込倉入数(伝票件数)
+	SUM(CASE WHEN DC01.SIKKIN < 0 THEN 0 ELSE DC01.SIKKIN END) -
+							CASE
+								WHEN MX06.FPTANK IS NOT NULL AND SUM(DC03_2.SIKSUU) IS NOT NULL THEN SUM(DC03_2.SIKSUU) * MX06.FPTANK
+								ELSE 0
+							END 							   SIKKIN,				-- 仕込倉入金額
+	SUM(CASE WHEN DC01.KAISUU < 0 THEN 0 ELSE DC01.KAISUU END) KAISUU,				-- 改造倉入数
+	SUM(CASE WHEN DC01.KAIKIN < 0 THEN 0 ELSE DC01.KAIKIN END) KAIKIN,				-- 改造倉入金額
+	ISNULL(SUM(DC03_1.SYKSUU), 0) AS DSYKSUU,										-- 出庫数     (伝票件数)
+	CASE
+		WHEN MX06.FPTANK IS NOT NULL AND SUM(DC03_1.SYKSUU) IS NOT NULL THEN SUM(DC03_1.SYKSUU) * MX06.FPTANK
+		ELSE 0
+	END SYKKIN,																		-- 出庫金額
+	DC01.DKBN,																		-- 区分
+	CASE
+		WHEN MC73.SEICOD IS NOT NULL THEN MC73.CHGCOD
+		ELSE DC01.SEIKYU
+	END SEIKYU,																		-- 物流請求№
+	MC70.HOKFLG1,																	-- 保管請求用フラグ１
+	MC70.HOKFLG2,																	-- 保管請求用フラグ２
+	MC70.HOKFLG3,																	-- 保管請求用フラグ３
+	MC70.HOKFLG4,																	-- 保管請求用フラグ４
+	MC70.HOKFLG5,																	-- 保管請求用フラグ５
+	MC70.HNEBIR,																	-- 保管値引率
+	CASE 
+		WHEN MC70.HOKFLG2 = 'A' THEN MC70.HOKANT
+		WHEN MC70.HOKFLG2 = 'C' THEN MC72.HOKANT
+		ELSE 0	
+	END HOKANT,																		-- 保管単価
+	CASE 
+		WHEN MC70.HOKFLG2 = 'A' AND ISNULL(MC70.HOKANT, 0) = 0 THEN 'N'
+		WHEN MC71_B1.SIKCOD  IS NOT NULL THEN 'N'
+		WHEN MC71_B2.SIKCOD  IS NOT NULL THEN 'N'
+		WHEN MC71_KB1.SIKCOD IS NOT NULL THEN 'N'
+		ELSE 'Y'	
+	END HOKANS,																		-- 保管請求対象
+	MC70.NIEFLG1,																	-- 荷役請求用フラグ１
+	MC70.NIEFLG2,																	-- 荷役請求用フラグ２
+	MC70.NIEFLG3,																	-- 荷役請求用フラグ３
+	MC70.NIEFLG4,																	-- 荷役請求用フラグ４
+	MC70.NIEFLG5,																	-- 荷役請求用フラグ５
+	MC70.NNEBIR,																	-- 荷役値引率
+	CASE 
+		WHEN MC70.NIEFLG2 = 'A' THEN MC70.NIEANT
+		WHEN MC70.NIEFLG2 = 'C' THEN MC72.NIEKIT
+		ELSE 0	
+	END NIEKIT,																		-- 荷役単価
+	CASE 
+		WHEN MC70.NIEFLG2 = 'A' AND ISNULL(MC70.NIEANT, 0) = 0 THEN 'N'
+		WHEN MC71_B3.SIKCOD  IS NOT NULL THEN 'N'
+		WHEN MC71_B4.SIKCOD  IS NOT NULL THEN 'N'
+		WHEN MC71_KB2.SIKCOD IS NOT NULL THEN 'N'
+		ELSE 'Y'	
+	END NIEKIS,																		-- 荷役請求対象
+	CASE 
+		WHEN BUMN.BASYO IS NOT NULL THEN BUMN.BMNCOD
+		ELSE '8027'	
+	END 
+	+ '3102' +
+	CASE 
+		WHEN MX00.KOKCOD IS NOT NULL THEN MX00.KOKCOD
+		ELSE '    '	
+	END PCHOK,																		-- PCコード保管
+	CASE 
+		WHEN BUMN.BASYO IS NOT NULL THEN BUMN.BMNCOD
+		ELSE '8027'	
+	END 
+	+ '3201' +
+	CASE 
+		WHEN MX00.KOKCOD IS NOT NULL THEN MX00.KOKCOD
+		ELSE '    '	
+	END PCNIE																		-- PCコード荷役
+FROM
+	t_hokan_nyuushuuko                    DC01
+	INNER JOIN m_hokan_keiyaku            MC70 ON DC01.KISYUA = MC70.KISYUA
+	LEFT  JOIN m_hokan_tanka              MC72 ON DC01.HINCOD = MC72.HINCOD
+	LEFT  JOIN m_hokan_seihin             MX06 ON DC01.HINCOD = MX06.HINCOD
+	LEFT  JOIN m_hokan_seikyuusaki_change MC73 ON DC01.SEIKYU = MC73.SEICOD AND DC01.KISYUA = MC73.KISYUA
+	LEFT  JOIN m_hokan_bumon              BUMN ON DC01.KISYUA = BUMN.KISYUA AND DC01.HOKCOD = BUMN.BASYO
+ 	LEFT  JOIN m_torihikisaki             MX00 ON MX00.TORCOD = (CASE
+																	WHEN MC73.SEICOD IS NOT NULL THEN MC73.CHGCOD
+																	ELSE DC01.SEIKYU
+																	END)
+	LEFT  JOIN m_hokan_jouken             MC71_B1  ON MC71_B1.JYOKEN  = DC01.HOKCOD AND MC71_B1.SIKCOD = 'HOKCOD'
+	LEFT  JOIN m_hokan_jouken             MC71_B2  ON MC71_B2.JYOKEN  = SUBSTRING(DC01.HOKCOD, 1, 1) AND MC71_B2.SIKCOD = 'HOKCOD2'
+	LEFT  JOIN m_hokan_jouken             MC71_B3  ON MC71_B3.JYOKEN  = DC01.HOKCOD AND MC71_B3.SIKCOD = 'NIECOD'
+	LEFT  JOIN m_hokan_jouken             MC71_B4  ON MC71_B4.JYOKEN  = SUBSTRING(DC01.HOKCOD, 1, 1) AND MC71_B4.SIKCOD = 'NIECOD2'
+	LEFT  JOIN m_hokan_jouken             MC71_KB1 ON MC71_KB1.JYOKEN = SUBSTRING(DC01.KISYUB, 1, 2) AND MC71_KB1.SIKCOD = 'HOKAN'
+	LEFT  JOIN m_hokan_jouken             MC71_KB2 ON MC71_KB2.JYOKEN = SUBSTRING(DC01.KISYUB, 1, 2) AND MC71_KB2.SIKCOD = 'NIEKI'
+	LEFT  JOIN ( SELECT 
+					K.HINCOD,
+					J1.SIKCOD AS J1_SIKCOD,
+					J2.SIKCOD AS J2_SIKCOD,
+					SUM(K.NSKOSU) AS SYKSUU
+				 FROM 
+				 	t_hokan_denpyokensu K
+					LEFT JOIN m_hokan_jouken J1 ON (J1.SIKCOD = 'NIECOD'  AND J1.JYOKEN = K.BASYO)
+					LEFT JOIN m_hokan_jouken J2 ON (J2.SIKCOD = 'NIECOD2' AND J2.JYOKEN = SUBSTRING(K.BASYO, 1,1))
+				 WHERE 
+				 	K.DENKUB IN ('54', '56', '57', '58', '59') AND
+					ISNULL(K.NSKOSU, 0) > 0 AND
+					(J1.SIKCOD IS NULL AND J2.SIKCOD IS NULL)
+				 GROUP BY K.HINCOD, J1.SIKCOD, J2.SIKCOD ) DC03_1 ON  DC03_1.HINCOD = DC01.HINCOD		-- 出庫数
+	LEFT  JOIN ( SELECT 
+					K.HINCOD,
+					J1.SIKCOD AS J1_SIKCOD,
+					J2.SIKCOD AS J2_SIKCOD,
+					SUM(K.NSKOSU) AS SIKSUU
+				 FROM 
+				 	t_hokan_denpyokensu K
+					LEFT JOIN m_hokan_jouken J1 ON (J1.SIKCOD = 'NIECOD'  AND J1.JYOKEN = K.BASYO)
+					LEFT JOIN m_hokan_jouken J2 ON (J2.SIKCOD = 'NIECOD2' AND J2.JYOKEN = SUBSTRING(K.BASYO, 1,1))
+				 WHERE 
+				 	K.DENKUB = '59' AND
+					ISNULL(K.NSKOSU, 0) < 0 AND
+					(J1.SIKCOD IS NULL AND J2.SIKCOD IS NULL)
+				 GROUP BY K.HINCOD, J1.SIKCOD, J2.SIKCOD ) DC03_2 ON  DC03_2.HINCOD = DC01.HINCOD		-- 仕込倉入数
+
+WHERE
+	-- 前月残数、仕込倉入数、改造倉入数、 出庫数がすべてゼロ
+	(DC01.ZANSUU <> 0 OR DC01.SIKSUU <> 0 OR DC01.KAISUU <> 0 OR DC01.SYKSUU <> 0) AND
+	-- 通貨のカストマ品は除外
+	(MC70.HOKFLG4  <> 'Y' OR (MX06.HINNMK IS NULL OR SUBSTRING(MX06.HINNMK, 1,3) <> 'Z41')) AND
+	-- SGの内製基板(EDG)は除外
+	(DC01.KISYUA <> 'SG' OR SUBSTRING(DC01.HINCOD, 1, 3) <> 'EDG') AND
+	-- 請求対象判定
+	(MC70.SEITAI <> 'N') AND
+	-- 保管請求対象外判定
+	( ((MC70.HOKFLG2 <> 'A' OR ISNULL(MC70.HOKANT, 0) <> 0) OR
+	    MC71_B1.SIKCOD IS NULL OR
+	    MC71_B2.SIKCOD IS NULL OR
+	    MC71_KB1.SIKCOD IS NULL) AND
+	-- 荷役請求対象外判定
+	  ((MC70.NIEFLG2 <> 'A' OR ISNULL(MC70.NIEANT, 0) <> 0) OR
+	   MC71_B3.SIKCOD IS NULL OR
+	   MC71_B4.SIKCOD IS NULL OR
+	   MC71_KB2.SIKCOD IS NULL ) ) AND
+	-- 請求対象外の機種コードB(先頭2桁)判定
+	(MC71_KB1.SIKCOD IS NULL AND MC71_KB2.SIKCOD IS NULL) AND
+	(MC70.HOKFLG2 <> 'C' AND MC70.NIEFLG2 <> 'C')
+GROUP BY DC01.KISYUA, DC01.KISYUB, MC70.KISNAM, DC01.HOKCOD, DC01.HINCOD, MC70.HOKFLG2, MC70.NIEFLG2, 
+	MC72.HINNMK, MX06.FPTANK, MC70.HOKANT, MC72.HOKANT, DC01.DKBN, MC73.SEICOD, MC73.CHGCOD, DC01.SEIKYU,
+	MC70.HOKFLG1, MC70.HOKFLG2, MC70.HOKFLG3, MC70.HOKFLG4, MC70.HOKFLG5, MC70.HNEBIR,
+	MC70.NIEFLG1, MC70.NIEFLG2, MC70.NIEFLG3, MC70.NIEFLG4, MC70.NIEFLG5, MC70.NNEBIR,
+	MC70.NIEANT, MC72.NIEKIT, BUMN.BASYO, BUMN.BMNCOD, MX00.KOKCOD,
+	MC71_B1.SIKCOD, MC71_B2.SIKCOD, MC71_KB1.SIKCOD,
+	MC71_B3.SIKCOD, MC71_B4.SIKCOD, MC71_KB2.SIKCOD
+UNION ALL
+SELECT 
+	DC01.KISYUA,																	-- 機種A
+	DC01.KISYUB,																	-- 機種B
+	MC70.KISNAM,																	-- 機種名
+	DC01.HOKCOD,																	-- 保管場所
+	DC01.HINCOD,																	-- 品番コード
+	CASE 
+		WHEN MC70.HOKFLG2 = 'C' OR MC70.NIEFLG2 = 'C' THEN MC72.HINNMK
+		ELSE ''
+	END HINNMK,																		-- 品名型式
+	SUM(CASE WHEN DC01.ZANSUU < 0 THEN 0 ELSE DC01.ZANSUU END) ZANSUU,				-- 前月残数
+	SUM(CASE WHEN DC01.ZANKIN < 0 THEN 0 ELSE DC01.ZANKIN END) ZANKIN,				-- 前月残金額
+	SUM(CASE WHEN DC01.SIKSUU < 0 THEN 0 ELSE DC01.SIKSUU END) -
+										  ISNULL(SUM(DC03_2.SIKSUU), 0) SIKSUU,		-- 仕込倉入数 - 仕込倉入数(伝票件数)
+	SUM(CASE WHEN DC01.SIKKIN < 0 THEN 0 ELSE DC01.SIKKIN END) -
+							CASE
+								WHEN MX06.FPTANK IS NOT NULL AND SUM(DC03_2.SIKSUU) IS NOT NULL THEN SUM(DC03_2.SIKSUU) * MX06.FPTANK
+								ELSE 0
+							END 							   SIKKIN,				-- 仕込倉入金額
+	SUM(CASE WHEN DC01.KAISUU < 0 THEN 0 ELSE DC01.KAISUU END) KAISUU,				-- 改造倉入数
+	SUM(CASE WHEN DC01.KAIKIN < 0 THEN 0 ELSE DC01.KAIKIN END) KAIKIN,				-- 改造倉入金額
+	ISNULL(SUM(DC03_1.SYKSUU), 0) AS DSYKSUU,										-- 出庫数     (伝票件数)
+	CASE
+		WHEN MX06.FPTANK IS NOT NULL AND SUM(DC03_1.SYKSUU) IS NOT NULL THEN SUM(DC03_1.SYKSUU) * MX06.FPTANK
+		ELSE 0
+	END SYKKIN,																		-- 出庫金額
+	DC01.DKBN,																		-- 区分
+	CASE
+		WHEN MC73.SEICOD IS NOT NULL THEN MC73.CHGCOD
+		ELSE DC01.SEIKYU
+	END SEIKYU,																		-- 物流請求№
+	MC70.HOKFLG1,																	-- 保管請求用フラグ１
+	MC70.HOKFLG2,																	-- 保管請求用フラグ２
+	MC70.HOKFLG3,																	-- 保管請求用フラグ３
+	MC70.HOKFLG4,																	-- 保管請求用フラグ４
+	MC70.HOKFLG5,																	-- 保管請求用フラグ５
+	MC70.HNEBIR,																	-- 保管値引率
+	CASE 
+		WHEN MC70.HOKFLG2 = 'A' THEN MC70.HOKANT
+		WHEN MC70.HOKFLG2 = 'C' THEN MC72.HOKANT
+		ELSE 0	
+	END HOKANT,																		-- 保管単価
+	CASE 
+		WHEN MC70.HOKFLG2 = 'A' AND ISNULL(MC70.HOKANT, 0) = 0 THEN 'N'
+		WHEN MC71_B1.SIKCOD  IS NOT NULL THEN 'N'
+		WHEN MC71_B2.SIKCOD  IS NOT NULL THEN 'N'
+		WHEN MC71_KB1.SIKCOD IS NOT NULL THEN 'N'
+		ELSE 'Y'	
+	END HOKANS,																		-- 保管請求対象
+	MC70.NIEFLG1,																	-- 荷役請求用フラグ１
+	MC70.NIEFLG2,																	-- 荷役請求用フラグ２
+	MC70.NIEFLG3,																	-- 荷役請求用フラグ３
+	MC70.NIEFLG4,																	-- 荷役請求用フラグ４
+	MC70.NIEFLG5,																	-- 荷役請求用フラグ５
+	MC70.NNEBIR,																	-- 荷役値引率
+	CASE 
+		WHEN MC70.NIEFLG2 = 'A' THEN MC70.NIEANT
+		WHEN MC70.NIEFLG2 = 'C' THEN MC72.NIEKIT
+		ELSE 0	
+	END NIEKIT,																		-- 荷役単価
+	CASE 
+		WHEN MC70.NIEFLG2 = 'A' AND ISNULL(MC70.NIEANT, 0) = 0 THEN 'N'
+		WHEN MC71_B3.SIKCOD  IS NOT NULL THEN 'N'
+		WHEN MC71_B4.SIKCOD  IS NOT NULL THEN 'N'
+		WHEN MC71_KB2.SIKCOD IS NOT NULL THEN 'N'
+		ELSE 'Y'	
+	END NIEKIS,																		-- 荷役請求対象
+	CASE 
+		WHEN BUMN.BASYO IS NOT NULL THEN BUMN.BMNCOD
+		ELSE '8027'	
+	END
+	+ '3102' +
+	CASE 
+		WHEN MX00.KOKCOD IS NOT NULL THEN MX00.KOKCOD
+		ELSE '    '	
+	END PCHOK,																		-- PCコード保管
+	CASE 
+		WHEN BUMN.BASYO IS NOT NULL THEN BUMN.BMNCOD
+		ELSE '8027'	
+	END 
+	+ '3201' +
+	CASE 
+		WHEN MX00.KOKCOD IS NOT NULL THEN MX00.KOKCOD
+		ELSE '    '	
+	END PCNIE																		-- PCコード荷役
+FROM
+	t_hokan_nyuushuuko                    DC01
+	INNER JOIN m_hokan_keiyaku            MC70 ON DC01.KISYUA = MC70.KISYUA
+	INNER JOIN m_hokan_tanka              MC72 ON DC01.HINCOD = MC72.HINCOD
+	LEFT  JOIN m_hokan_seihin             MX06 ON DC01.HINCOD = MX06.HINCOD
+	LEFT  JOIN m_hokan_seikyuusaki_change MC73 ON DC01.SEIKYU = MC73.SEICOD AND DC01.KISYUA = MC73.KISYUA
+	LEFT  JOIN m_hokan_bumon              BUMN ON DC01.KISYUA = BUMN.KISYUA AND DC01.HOKCOD = BUMN.BASYO
+ 	LEFT  JOIN m_torihikisaki             MX00 ON MX00.TORCOD = (CASE
+																	WHEN MC73.SEICOD IS NOT NULL THEN MC73.CHGCOD
+																	ELSE DC01.SEIKYU
+																	END)
+	LEFT  JOIN m_hokan_jouken             MC71_B1  ON MC71_B1.JYOKEN  = DC01.HOKCOD AND MC71_B1.SIKCOD = 'HOKCOD'
+	LEFT  JOIN m_hokan_jouken             MC71_B2  ON MC71_B2.JYOKEN  = SUBSTRING(DC01.HOKCOD, 1, 1) AND MC71_B2.SIKCOD = 'HOKCOD2'
+	LEFT  JOIN m_hokan_jouken             MC71_B3  ON MC71_B3.JYOKEN  = DC01.HOKCOD AND MC71_B3.SIKCOD = 'NIECOD'
+	LEFT  JOIN m_hokan_jouken             MC71_B4  ON MC71_B4.JYOKEN  = SUBSTRING(DC01.HOKCOD, 1, 1) AND MC71_B4.SIKCOD = 'NIECOD2'
+	LEFT  JOIN m_hokan_jouken             MC71_KB1 ON MC71_KB1.JYOKEN = SUBSTRING(DC01.KISYUB, 1, 2) AND MC71_KB1.SIKCOD = 'HOKAN'
+	LEFT  JOIN m_hokan_jouken             MC71_KB2 ON MC71_KB2.JYOKEN = SUBSTRING(DC01.KISYUB, 1, 2) AND MC71_KB2.SIKCOD = 'NIEKI'
+	LEFT  JOIN ( SELECT 
+					K.HINCOD,
+					J1.SIKCOD AS J1_SIKCOD,
+					J2.SIKCOD AS J2_SIKCOD,
+					SUM(K.NSKOSU) AS SYKSUU
+				 FROM 
+				 	t_hokan_denpyokensu K
+					LEFT JOIN m_hokan_jouken J1 ON (J1.SIKCOD = 'NIECOD'  AND J1.JYOKEN = K.BASYO)
+					LEFT JOIN m_hokan_jouken J2 ON (J2.SIKCOD = 'NIECOD2' AND J2.JYOKEN = SUBSTRING(K.BASYO, 1,1))
+				 WHERE 
+				 	K.DENKUB IN ('54', '56', '57', '58', '59') AND
+					ISNULL(K.NSKOSU, 0) > 0 AND
+					(J1.SIKCOD IS NULL AND J2.SIKCOD IS NULL)
+				 GROUP BY K.HINCOD, J1.SIKCOD, J2.SIKCOD ) DC03_1 ON  DC03_1.HINCOD = DC01.HINCOD		-- 出庫数
+	LEFT  JOIN ( SELECT 
+					K.HINCOD,
+					J1.SIKCOD AS J1_SIKCOD,
+					J2.SIKCOD AS J2_SIKCOD,
+					SUM(K.NSKOSU) AS SIKSUU
+				 FROM 
+				 	t_hokan_denpyokensu K
+					LEFT JOIN m_hokan_jouken J1 ON (J1.SIKCOD = 'NIECOD'  AND J1.JYOKEN = K.BASYO)
+					LEFT JOIN m_hokan_jouken J2 ON (J2.SIKCOD = 'NIECOD2' AND J2.JYOKEN = SUBSTRING(K.BASYO, 1,1))
+				 WHERE 
+				 	K.DENKUB = '59' AND
+					ISNULL(K.NSKOSU, 0) < 0 AND
+					(J1.SIKCOD IS NULL AND J2.SIKCOD IS NULL)
+				 GROUP BY K.HINCOD, J1.SIKCOD, J2.SIKCOD ) DC03_2 ON  DC03_2.HINCOD = DC01.HINCOD		-- 仕込倉入数
+
+WHERE
+	-- 前月残数、仕込倉入数、改造倉入数、 出庫数がすべてゼロ
+	(DC01.ZANSUU <> 0 OR DC01.SIKSUU <> 0 OR DC01.KAISUU <> 0 OR DC01.SYKSUU <> 0) AND
+	-- 通貨のカストマ品は除外
+	(MC70.HOKFLG4  <> 'Y' OR (MX06.HINNMK IS NULL OR SUBSTRING(MX06.HINNMK, 1,3) <> 'Z41')) AND
+	-- SGの内製基板(EDG)は除外
+	(DC01.KISYUA <> 'SG' OR SUBSTRING(DC01.HINCOD, 1, 3) <> 'EDG') AND
+	-- 請求対象判定
+	(MC70.SEITAI <> 'N') AND
+	-- 保管請求対象外判定
+	( ((MC70.HOKFLG2 <> 'A' OR ISNULL(MC70.HOKANT, 0) <> 0) OR
+	    MC71_B1.SIKCOD IS NULL OR
+	    MC71_B2.SIKCOD IS NULL OR
+	    MC71_KB1.SIKCOD IS NULL) AND
+	-- 荷役請求対象外判定
+	  ((MC70.NIEFLG2 <> 'A' OR ISNULL(MC70.NIEANT, 0) <> 0) OR
+	   MC71_B3.SIKCOD IS NULL OR
+	   MC71_B4.SIKCOD IS NULL OR
+	   MC71_KB2.SIKCOD IS NULL ) ) AND
+	-- 請求対象外の機種コードB(先頭2桁)判定
+	(MC71_KB1.SIKCOD IS NULL AND MC71_KB2.SIKCOD IS NULL) AND
+	(MC70.HOKFLG2 = 'C' OR MC70.NIEFLG2 = 'C')
+GROUP BY DC01.KISYUA, DC01.KISYUB, MC70.KISNAM, DC01.HOKCOD, DC01.HINCOD, MC70.HOKFLG2, MC70.NIEFLG2, 
+	MC72.HINNMK, MX06.FPTANK, MC70.HOKANT, MC72.HOKANT, DC01.DKBN, MC73.SEICOD, MC73.CHGCOD, DC01.SEIKYU,
+	MC70.HOKFLG1, MC70.HOKFLG2, MC70.HOKFLG3, MC70.HOKFLG4, MC70.HOKFLG5, MC70.HNEBIR,
+	MC70.NIEFLG1, MC70.NIEFLG2, MC70.NIEFLG3, MC70.NIEFLG4, MC70.NIEFLG5, MC70.NNEBIR,
+	MC70.NIEANT, MC72.NIEKIT, BUMN.BASYO, BUMN.BMNCOD, MX00.KOKCOD,
+	MC71_B1.SIKCOD, MC71_B2.SIKCOD, MC71_KB1.SIKCOD,
+	MC71_B3.SIKCOD, MC71_B4.SIKCOD, MC71_KB2.SIKCOD
+UNION ALL
+SELECT 
+	DC03.KISYUA,																	-- 機種A
+	DC03.KISYUB,																	-- 機種B
+	MC70.KISNAM,																	-- 機種名
+	DC03.BASYO,																		-- 保管場所
+	DC03.HINCOD,																	-- 品番コード
+	'',																				-- 品名型式
+	0,																				-- 前月残数
+	0,																				-- 前月残金額
+	SUM(CASE 
+		WHEN DC03.DENKUB = '43' AND DC03.NSKOSU > 0 THEN DC03.NSKOSU
+		ELSE 0
+	END) -
+	SUM(CASE 
+		WHEN DC03.DENKUB = '59' AND DC03.NSKOSU < 0 THEN DC03.NSKOSU
+		ELSE 0
+	END) SIKSUU,																	-- 仕込倉入数
+	0,																				-- 仕込倉入金額
+	SUM(CASE 
+		WHEN DC03.DENKUB = '47' AND DC03.NSKOSU > 0 THEN DC03.NSKOSU
+		ELSE 0
+	END) KAISUU,																	-- 改造倉入数
+	0,																				-- 改造倉入金額
+	SUM(CASE 
+		WHEN DC03.DENKUB = '59' AND DC03.DENKUB = '54' AND DC03.DENKUB = '56' AND DC03.DENKUB = '57' AND DC03.DENKUB = '58' AND DC03.NSKOSU > 0 THEN DC03.NSKOSU
+		ELSE 0
+	END) SYKSUU,																	-- 入出庫数
+	0,																				-- 出庫金額
+	'',																				-- 区分
+	CASE
+		WHEN MC73.SEICOD IS NOT NULL THEN MC73.CHGCOD
+		ELSE DC03.SEIKYU
+	END SEIKYU,																		-- 物流請求№
+	MC70.HOKFLG1,																	-- 保管請求用フラグ１
+	MC70.HOKFLG2,																	-- 保管請求用フラグ２
+	MC70.HOKFLG3,																	-- 保管請求用フラグ３
+	MC70.HOKFLG4,																	-- 保管請求用フラグ４
+	MC70.HOKFLG5,																	-- 保管請求用フラグ５
+	MC70.HNEBIR,																	-- 保管値引率
+	0,																				-- 保管単価
+	CASE
+		WHEN MC70.SEITAI <> 'N' THEN 'N'
+	END HOKANS,																		-- 保管請求対象
+	MC70.NIEFLG1,																	-- 荷役請求用フラグ１
+	MC70.NIEFLG2,																	-- 荷役請求用フラグ２
+	MC70.NIEFLG3,																	-- 荷役請求用フラグ３
+	MC70.NIEFLG4,																	-- 荷役請求用フラグ４
+	MC70.NIEFLG5,																	-- 荷役請求用フラグ５
+	MC70.NNEBIR,																	-- 荷役値引率
+	MC70.NIEANT,																	-- 荷役単価
+	CASE
+		WHEN MC71_B1.SIKCOD IS NOT NULL THEN 'N'
+		WHEN MC71_B2.SIKCOD IS NOT NULL THEN 'N'
+		WHEN MC71_KB.SIKCOD IS NOT NULL THEN 'N'
+	END NIEKIS,																		-- 荷役請求対象
+	CASE 
+		WHEN BUMN.BASYO IS NOT NULL THEN BUMN.BMNCOD
+		ELSE '8027'	
+	END
+	+ '3102' +
+	CASE 
+		WHEN MX00.KOKCOD IS NOT NULL THEN MX00.KOKCOD
+		ELSE '    '	
+	END PCHOK,																		-- PCコード保管
+	CASE 
+		WHEN BUMN.BASYO IS NOT NULL THEN BUMN.BMNCOD
+		ELSE '8027'	
+	END 
+	+ '3201' +
+	CASE 
+		WHEN MX00.KOKCOD IS NOT NULL THEN MX00.KOKCOD
+		ELSE '    '	
+	END PCNIE																		-- PCコード荷役
+FROM
+	t_hokan_denpyokensu                   DC03
+	INNER JOIN m_hokan_keiyaku            MC70 ON DC03.KISYUA = MC70.KISYUA
+	INNER JOIN m_hokan_seihin             MX06 ON DC03.HINCOD = MX06.HINCOD
+	LEFT  JOIN m_hokan_seikyuusaki_change MC73 ON DC03.SEIKYU = MC73.SEICOD AND DC03.KISYUA = MC73.KISYUA
+	LEFT  JOIN m_hokan_bumon              BUMN ON DC03.KISYUA = BUMN.KISYUA AND DC03.BASYO = BUMN.BASYO
+	LEFT  JOIN m_torihikisaki             MX00 ON MX00.TORCOD = (CASE
+																	WHEN MC73.SEICOD IS NOT NULL THEN MC73.CHGCOD
+																	ELSE DC03.SEIKYU
+																	END)
+	LEFT  JOIN m_hokan_jouken             MC71_B1 ON (MC71_B1.SIKCOD = 'NIECOD'  AND MC71_B1.JYOKEN = DC03.BASYO)
+	LEFT  JOIN m_hokan_jouken             MC71_B2 ON (MC71_B2.SIKCOD = 'NIECOD2' AND MC71_B2.JYOKEN = SUBSTRING(DC03.BASYO, 1, 1))
+	LEFT  JOIN m_hokan_jouken             MC71_KB ON (MC71_KB.SIKCOD = 'NIEKI'   AND MC71_KB.JYOKEN = SUBSTRING(DC03.KISYUB, 1, 2))
+WHERE
+	-- 伝票件数がゼロ以下は除外
+	DC03.DENSUU > 0 AND
+	-- 伝票№が"66"(不良)は除外
+	DC03.DENKUB <> '66' AND
+	-- 通貨のカストマ品以外は除外
+	(SUBSTRING(DC03.HINCOD, 1, 1) = 'X' OR
+	 MX06.HINNMK IS NULL OR SUBSTRING(MX06.HINNMK, 1,3) = 'Z41') AND
+	-- 請求対象チェック
+	MC70.NIEFLG3 = 'N' AND			-- 入出庫数による荷役料を請求する機種のみ
+	ISNULL(MC70.NIEANT, 0) <> 0 AND			-- 荷役単価 <> ゼロ
+	MC70.SEITAI <> 'N' AND		-- 請求対象 <> N
+	-- 請求対象外の場所判定
+	(MC71_B1.SIKCOD IS NULL OR MC71_B2.SIKCOD IS NULL) AND
+	-- 請求対象外の機種コードB(先頭2桁)判定
+	MC71_KB.SIKCOD IS NULL
+GROUP BY DC03.KISYUA, DC03.KISYUB, MC70.KISNAM, DC03.BASYO, DC03.HINCOD, DC03.SEIKYU, MC73.SEICOD, MC73.CHGCOD,
+			MC70.HOKFLG1, MC70.HOKFLG2, MC70.HOKFLG3, MC70.HOKFLG4, MC70.HOKFLG5, MC70.HNEBIR,
+			MC70.NIEFLG1, MC70.NIEFLG2, MC70.NIEFLG3, MC70.NIEFLG4, MC70.NIEFLG5, MC70.NNEBIR, MC70.NIEANT,
+			BUMN.BASYO, BUMN.BMNCOD, MX00.KOKCOD,MC70.SEITAI, MC71_B1.SIKCOD, MC71_B2.SIKCOD, MC71_KB.SIKCOD
+
+
+
+CREATE VIEW v_hokan_denpyokensu AS
+SELECT
+	DC03.KISYUA,																	-- 機種A
+	DC03.KISYUB,																	-- 機種B
+	MC70.KISNAM,																	-- 機種名
+	DC03.BASYO,																		-- 回収場所
+	DC03.HINCOD,																	-- 品番コード
+	DC03.INPYMD,																	-- インプット日
+	CASE 
+		WHEN MCAL.SYBCOD IS NOT NULL AND ISNULL(MC70.NIEKYT, 0) >= 0 THEN 'Y'
+		ELSE 'N'
+	END KYUJIT,																		-- 休日識別
+	DC03.DENKUB,																	-- 伝票№
+	DC03.DENSUU,																	-- 伝票件数
+	CASE
+		WHEN MC73.SEICOD IS NOT NULL THEN MC73.CHGCOD
+		ELSE DC03.SEIKYU
+	END SEIKYU,																		-- 物流請求№
+	MC70.HOKFLG1,																	-- 保管請求用フラグ１
+	MC70.HOKFLG2,																	-- 保管請求用フラグ２
+	MC70.HOKFLG3,																	-- 保管請求用フラグ３
+	MC70.HOKFLG4,																	-- 保管請求用フラグ４
+	MC70.HOKFLG5,																	-- 保管請求用フラグ５
+	CASE
+		WHEN MC70.HOKFLG2 = 'A' AND ISNULL(MC70.HOKANT, 0) = 0 THEN 'N'
+		WHEN MC71_B2.SIKCOD  IS NOT NULL THEN 'N'
+		WHEN MC71_B3.SIKCOD  IS NOT NULL THEN 'N'
+		WHEN MC71_KB1.SIKCOD IS NOT NULL THEN 'N'
+	END HOKANS,																		-- 保管請求対象
+	MC70.NIEFLG1,																	-- 荷役請求用フラグ１
+	MC70.NIEFLG2,																	-- 荷役請求用フラグ２
+	MC70.NIEFLG3,																	-- 荷役請求用フラグ３
+	MC70.NIEFLG4,																	-- 荷役請求用フラグ４
+	MC70.NIEFLG5,																	-- 荷役請求用フラグ５
+	MC70.NNEBIR,																	-- 荷役値引率
+	MC70.NIEANT,																	-- 荷役単価
+	MC70.NIEKYT,																	-- 荷役単価（休日用）
+	CASE
+		WHEN MC70.NIEFLG2 = 'A' AND ISNULL(MC70.NIEANT, 0) = 0 AND ISNULL(MC70.NIEKYT, 0) = 0 THEN 'N'
+		WHEN MC71_B4.SIKCOD  IS NOT NULL THEN 'N'
+		WHEN MC71_B5.SIKCOD  IS NOT NULL THEN 'N'
+		WHEN MC71_KB2.SIKCOD IS NOT NULL THEN 'N'
+		ELSE 'Y'
+	END NIEKIS,																		-- 荷役請求対象
+	CASE 
+		WHEN BUMN.BASYO IS NOT NULL THEN BUMN.BMNCOD
+		ELSE '8027'	
+	END 
+	+ '3201' +
+	CASE 
+		WHEN MX00.KOKCOD IS NOT NULL THEN MX00.KOKCOD
+		ELSE '    '	
+	END PCNIE																		-- PCコード荷役
+FROM
+	t_hokan_denpyokensu                   DC03
+	INNER JOIN m_hokan_keiyaku            MC70 ON DC03.KISYUA = MC70.KISYUA
+	LEFT  JOIN m_hokan_seikyuusaki_change MC73 ON DC03.SEIKYU = MC73.SEICOD AND DC03.KISYUA = MC73.KISYUA
+	LEFT  JOIN m_hokan_jouken             MC71_B1  ON (MC71_B1.SIKCOD  = 'DENPNO'  AND MC71_B1.JYOKEN = DC03.DENKUB)
+	LEFT  JOIN m_hokan_jouken             MC71_B2  ON (MC71_B2.SIKCOD  = 'HOKCOD'  AND MC71_B2.JYOKEN = DC03.BASYO)
+	LEFT  JOIN m_hokan_jouken             MC71_B3  ON (MC71_B3.SIKCOD  = 'HOKCOD2' AND MC71_B3.JYOKEN = SUBSTRING(DC03.BASYO, 1, 1))
+	LEFT  JOIN m_hokan_jouken             MC71_B4  ON (MC71_B4.SIKCOD  = 'NIECOD'  AND MC71_B4.JYOKEN = DC03.BASYO)
+	LEFT  JOIN m_hokan_jouken             MC71_B5  ON (MC71_B5.SIKCOD  = 'NIECOD2' AND MC71_B5.JYOKEN = SUBSTRING(DC03.BASYO, 1, 1))
+	LEFT  JOIN m_hokan_jouken             MC71_KB1 ON (MC71_KB1.SIKCOD = 'HOKAN' AND MC71_B5.JYOKEN = SUBSTRING(DC03.KISYUB, 1, 2))
+	LEFT  JOIN m_hokan_jouken             MC71_KB2 ON (MC71_KB2.SIKCOD = 'NIEKI' AND MC71_B5.JYOKEN = SUBSTRING(DC03.KISYUB, 1, 2))
+	LEFT  JOIN m_hokan_bumon              BUMN ON DC03.KISYUA = BUMN.KISYUA AND DC03.BASYO = BUMN.BASYO
+	LEFT  JOIN m_torihikisaki             MX00 ON MX00.TORCOD = (CASE
+																	WHEN MC73.SEICOD IS NOT NULL THEN MC73.CHGCOD
+																	ELSE DC03.SEIKYU
+																	END)
+	LEFT  JOIN m_shukkabasho              BASH ON DC03.BASYO = BASH.SYBCOD
+ 	LEFT  JOIN m_calendar                 MCAL ON DC03.INPYMD = MCAL.YYMMDD AND MCAL.SYBCOD = (CASE
+																								WHEN BASH.SYBCOD IS NOT NULL THEN BASH.SYBC15
+																								ELSE DC03.BASYO
+																								END)
+WHERE
+	DC03.DENSUU > 0 AND
+	-- SGの内製基板(EDG)
+	(DC03.KISYUA <> 'SG' OR SUBSTRING(DC03.HINCOD, 1, 3) <> 'EDG') AND
+	(DC03.DENKUB = '59' OR ISNULL(DC03.NSKOSU, 0) > 0) AND
+	MC70.SEITAI = 'Y' AND
+	-- 請求対象判定
+	((MC70.HOKFLG2 = 'A' AND ISNULL(MC70.HOKANT, 0) <> 0) OR (MC70.NIEFLG2 = 'A' AND ISNULL(MC70.NIEANT, 0) <> 0)) AND
+	-- 伝票件数荷役料請求対象伝票の場所判定
+	MC71_B1.SIKCOD IS NOT NULL AND
+	-- 請求対象外の場所判定
+	((MC71_B2.SIKCOD IS NULL OR MC71_B3.SIKCOD IS NULL) AND
+	 (MC71_B3.SIKCOD IS NULL OR MC71_B4.SIKCOD IS NULL)) AND
+	-- 請求対象外の機種コードB(先頭2桁)判定
+	(MC71_KB1.SIKCOD IS NULL OR MC71_KB2.SIKCOD IS NULL)
+
+
+CREATE VIEW v_hokan_tanka AS
+SELECT LEFT(CONVERT(VARCHAR, SYSDATETIME(), 112), 6) AS MONTH
+     , HINCOD , SYBCOD  , HINNMK  , KISYUA  , KISYUB  , TFULAG  , FRIKAE
+     , JYUKAR , SYUJYR  , FPTANK  , HOKANT  , HOKYMD  , HOKTAN  , NIEKIT , NIEYMD
+     , NIETAN , OSYBCOD , OHINNMK , OKISYUA , OKISYUB , OFRIKAE , OFPTNK , OHOKAT
+     , ONIEKT , CRTCOD  , CRTYMD  , UPDCOD  , UPDYMD
+FROM m_hokan_tanka
+UNION ALL 
+SELECT MONTH
+     , HINCOD , SYBCOD  , HINNMK  , KISYUA  , KISYUB  , TFULAG  , FRIKAE
+     , JYUKAR , SYUJYR  , FPTANK  , HOKANT  , HOKYMD  , HOKTAN  , NIEKIT , NIEYMD
+     , NIETAN , OSYBCOD , OHINNMK , OKISYUA , OKISYUB , OFRIKAE , OFPTNK , OHOKAT
+     , ONIEKT , CRTCOD  , CRTYMD  , UPDCOD  , UPDYMD
+ FROM m_hokan_rireki_tanka

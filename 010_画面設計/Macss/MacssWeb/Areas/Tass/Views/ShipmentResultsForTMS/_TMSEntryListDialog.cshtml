@@ -1,0 +1,54 @@
+﻿
+@using MacssWeb.Areas.Tass.Helper
+
+<div class="modal" id="TMSEntryListDialog" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">TMS登録用リスト印刷設定</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">種別</span>
+                                </div>
+                                <select class="custom-select form-control">
+                                    @foreach (var item in ShipmentResultsForTMSHelper.TMSEntrySelectList)
+                                    {
+                                        var sel = item.Selected ? "selected" : String.Empty;
+
+                                        <option value="@item.Value" @sel>@item.Text</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="form-check" style="padding-left:2rem;">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" checked>
+                                <label class="form-check-label" for="inlineCheckbox1">TMS引渡データを同時に出力する</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="justify-content:unset">
+                <div class="container-fluid row pl-0 pr-0">
+                    <div class="col-6">
+                        <button type="button" class="btn btn-secondary macss-btn-sub" data-dismiss="modal">@MacssWeb.Resources.ControlText.Cancel</button>
+                    </div>
+                    <div class="col-6 text-right">
+                        <button type="button" class="btn btn-primary macss-btn-sub" data-dismiss="modal">印刷</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

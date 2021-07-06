@@ -1,0 +1,228 @@
+﻿<html lang="ja">
+</html>
+@{
+    ViewBag.PageMainTitle = "売上計上処理結果(末締1手番)";
+}
+@section Scripts {
+    <script>
+        $(function () {
+            $('[data-toggle="popover"]').popover();
+
+            new Macss.DataTables.MacssSimpleTable("#ResultList").configure();
+            var dt = new Macss.DataTables.MacssDataTable("#SampleList");
+            dt.configure();
+
+        });</script>
+}
+
+<div class="alert @ViewBag.AlertType">
+    <span>@ViewBag.ResultMessage</span>
+</div>
+<div class="row justify-content-end macss-form-button-group-row">
+    <div class="col-4 text-right">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("Index", "Home")">サブメニューへ戻る</a>
+    </div>
+</div>
+
+<div class="container-fluid mt-1">
+    <div class="form-inline">
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">処理日時</span>
+            </div>
+            <span class="form-control">2021/03/03 15:30</span>
+        </div>
+    </div>
+    <table id="ResultList" class="table table-striped table-hover macss-data-table"style="width:40%">
+        <thead class="macss-data-table-header">
+            <tr>
+                <th>処理　　　　　　　　　　</th>
+                <th>対象件数</th>
+                <th>処理件数</th>
+                <th>エラー件数</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>PCコード設定処理</td>
+                <td style="text-align:right">100</td>
+                <td style="text-align:right"> 99</td>
+                <td style="text-align:right">  1</td>
+            </tr>
+            <tr>
+                <td>配賦処理</td>
+                <td style="text-align:right">100</td>
+                <td style="text-align:right"> 99</td>
+                <td style="text-align:right">  1</td>
+            </tr>
+            <tr>
+                <td>売上伝票データ作成</td>
+                <td style="text-align:right">100</td>
+                <td style="text-align:right"> 99</td>
+                <td style="text-align:right">  1</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<div class="container-fluid mt-1">
+    <div class="form-inline">
+        <div class="col-12 text-right">
+            <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#CsvDownloadDialog">CSVダウンロード</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table id="SampleList" class="table table-striped table-hover macss-data-table" style="width:100%">
+    <thead class="macss-data-table-header">
+        <!-- thの文字数で列の幅が決まってしまうため、必要に応じて全角スペースを入れて列の幅を調整する必要がある-->
+        <tr>
+            <th>
+                処理　　　　　　　
+            </th>
+            <th>
+                処理区分
+            </th>
+            <th>
+                エラー詳細
+            </th>
+            <th>
+                業務コード
+            </th>
+            <th>
+                業務名
+            </th>
+            <th>
+                伝票No
+            </th>
+            <th>
+                伝票日付
+            </th>
+            <th>
+                請求先コード
+            </th>
+            <th>
+                得意先コード
+            </th>
+            <th>
+                得意先名
+            </th>
+            <th>
+                原票No
+            </th>
+            <th>
+                課税区分
+            </th>
+            <th>
+                請求金額
+            </th>
+            <th>
+                設定前PCコード
+            </th>
+            <th>
+                設定後PCコード
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                PCコード設定処理
+            </td>
+            <td>
+                変更
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                PCコード設定処理
+            </td>
+            <td>
+                エラー
+            </td>
+            <td>
+                <a tabindex="0" class="btn btn-sm btn-danger" role="button" data-toggle="popover"
+                   data-trigger="focus" title="エラー詳細"
+                   data-content="">詳細</a>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                配賦処理
+            </td>
+            <td>
+                エラー
+            </td>
+            <td>
+                <a tabindex="0" class="btn btn-sm btn-danger" role="button" data-toggle="popover"
+                   data-trigger="focus" title="エラー詳細"
+                   data-content="">詳細</a>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>
+                配賦処理
+            </td>
+            <td>
+                追加
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>

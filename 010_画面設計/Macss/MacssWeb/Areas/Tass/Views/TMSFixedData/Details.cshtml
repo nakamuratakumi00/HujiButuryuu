@@ -1,0 +1,10 @@
+﻿@model Macss.Database.Entity.DummyTMSFixedDataRequest
+
+@{
+    ViewBag.OnlyShow = true;
+    ViewBag.Title = MacssWeb.Resources.Tass.TMSFixedDataMainTitle;
+    ViewBag.PageMainTitle = MacssWeb.Resources.Tass.TMSFixedDataDetailMainTitle;
+    ViewBag.ScreenId = "TASS-D025-02";
+}
+
+@Html.Partial("_Show", Model)

@@ -1,0 +1,564 @@
+﻿<html lang="ja">
+@model Macss.Database.Entity.AccountMaster
+@Html.AntiForgeryToken()
+@section Scripts {
+    <script>
+        $(function () {
+
+            //左端3列を固定表示にする場合の記述（HTMLのthの記載時に下記の横幅と同じサイズを指定する事。指定しないと表示が崩れます。）
+            //targetsは位置情報です。0から始まります。
+            //「, 3」→左端3列を固定表示。
+            var dt = new Macss.DataTables.MacssDataTable("#SampleList", [{
+                "className": "macss-table-proc-column", "width": 180, "orderable": false, "targets": 0
+            }], 1);
+            dt.configure();
+
+            var dt1 = new Macss.DataTables.MacssDataTable("#SampleList1");
+            dt1.configure();
+
+            var cond = new Macss.Collapse.ConditionsPanel("#ConditionAccordion", "#CollapseShow", "#CollapseHidden");
+            cond.setCollapseEvent();
+
+            var sampleDatePicker = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker", "#SampleCalendar");
+            sampleDatePicker.configure();
+            var sampleDatePicker1 = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker1", "#SampleCalendar1");
+            sampleDatePicker1.configure();
+            var sampleDatePicker2 = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker2", "#SampleCalendar2");
+            sampleDatePicker2.configure();
+        });
+    </script>
+}
+@Html.Partial("../Shared/Dialog/_CsvDownload")
+<div>
+    @Html.ValidationSummary(false, "入力エラーがあります。", new { @class = "alert alert-danger" })
+</div>
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#TransitionConfirmDialog">@MacssWeb.Resources.ControlText.BackToList</button>
+    </div>
+    <div class="col-4 text-right">
+        <button type="submit" class="btn btn-primary">@MacssWeb.Resources.ControlText.InputConfirm</button>
+    </div>
+</div>
+<table class="table macss-form-table2t">
+    <colgroup>
+        <col class="macss-form-table-title2t" />
+        <col class="macss-form-table-contents2t" />
+        <col class="macss-form-table-title2t" />
+        <col class="macss-form-table-contents2t" />
+    </colgroup>
+    <tr>
+        @if (ViewBag.hokan_niyaku_no == true)
+        {
+        <tr>
+            <th scope="row">
+                <label for="textBox">保管荷役No</label>
+            </th>
+            <td>
+                <div>
+                    1234567890
+                </div>
+            </td>
+            <th scope="row">
+            </th>
+            <td>
+                <div>
+                </div>
+            </td>
+        </tr>
+    }
+        <th scope="row">
+            <label class="required" for="textBox">伝票日付</label>
+        </th>
+        <td>
+            <div>
+                <div class="input-group">
+                    @Html.EditorFor(model => model.update_date, new { htmlAttributes = new { @class = "form-control" } })
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="UpdateDateCalendar"><i class="fa fa-calendar-alt"></i></button>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.update_date, "", new { @class = "text-danger" })
+            </div>
+        </td>
+        <th scope="row">
+            <label class="required" for="textBox">得意先</label>
+        </th>
+        <td>
+            <div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.bumon_cd, new { htmlAttributes = new { @class = "form-control" } })
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#DepartmentCodeSearchDialog">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <span id="DepartmentName" class="align-middle"></span>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.bumon_cd, "", new { @class = "text-danger" })
+            </div>
+            @if (ViewBag.hokan_spot == true)
+            {
+                <div>
+                    <small class="form-text text-muted">
+                        スポットの場合、１桁のみ入力してください。
+                    </small>
+                </div>
+            }
+        </td>
+        </tr>
+    </table>
+@using (Html.BeginForm("Search", "Sample", null, FormMethod.Post))
+{
+    for (int j = 0; j < 3; j++)
+    {
+
+        <div class="accordion" id="ConditionAccordion">
+            <div class="card mb-3">
+                <div class="card-header macss-search-config-collapse-header" id="headingOne">
+                    <div class="mb-0">
+                        <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain" aria-expanded="true" aria-controls="ConditionMain">
+                            <div class="d-inline-block" style="color:#333">@String.Format("枝番" + (j + 1))</div>
+                            @*<i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="display:none;"></i>
+                                <i id="CollapseShow" class="fas fa-chevron-circle-down" aria-hidden="true" style="display:none;"></i>*@
+                            <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="color:#007bff;"></i>
+                        </button>
+                        <span id="DepartmentName" class="align-middle">　</span>
+                        @if (ViewBag.hokan_niyaku_no == true)
+                        {
+                            if (j == 0 || j == 2)
+                            {
+                                <i title="削除" class="fas fa-trash-alt" aria-hidden="true" style="color:#007bff;"></i>
+                            }
+                            else if (j == 1)
+                            {
+                                <i title="削除前に戻す" class="fas fa-reply" aria-hidden="true" style="color:#007bff;"></i>
+                                <span id="DepartmentName" class="align-middle">　</span>
+                                <span class="btn-sm State01" style="background-color:mistyrose;color:black">削除</span>
+                            }
+                        }
+                    </div>
+                </div>
+                <div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+                    <div class="row ml-3 mr-2 mb-2">
+                        <table class="table macss-form-table2">
+                            <colgroup>
+                                <col class="macss-form-table-title2" />
+                                <col class="macss-form-table-contents2" />
+                                <col class="macss-form-table-title2" />
+                                <col class="macss-form-table-contents2" />
+                            </colgroup>
+                            <tr>
+                                @if (ViewBag.Edit == true)
+                                {
+                                <tr>
+                                    <th scope="row">
+                                        削除
+                                    </th>
+                                    <td></td>
+                                    <th scope="row">
+                                    </th>
+                                    <td></td>
+                                </tr>
+                            }
+                                <th scope="row">
+                                    品名コード
+                                </th>
+                                <td>
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <div class="input-group">
+                                                    @Html.EditorFor(model => model.bumon_cd, new { htmlAttributes = new { @class = "form-control" } })
+                                                    <div class="input-group-append">
+                                                        <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#DepartmentCodeSearchDialog">
+                                                            <i class="fas fa-search"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <span id="DepartmentName" class="align-middle"></span>
+                                            </div>
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.bumon_cd, "", new { @class = "text-danger" })
+                                    </div>
+                                </td>
+                                <th scope="row">
+                                    品名
+                                </th>
+                                <td>
+                                    <div>
+                                        @Html.EditorFor(model => model.group_cd, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.group_cd, "", new { @class = "text-danger" })
+                                    </div>
+                                </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        ソート文字列
+                                    </th>
+                                    <td>
+                                        <div>
+                                            @Html.EditorFor(model => model.group_cd, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.group_cd, "", new { @class = "text-danger" })
+                                        </div>
+                                    </td>
+                                    <th scope="row">
+                                        <label class="required" for="textBox">倉庫</label>
+                                    </th>
+                                    <td>
+                                        <div>
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <div class="input-group">
+                                                        @Html.EditorFor(model => model.bumon_cd, new { htmlAttributes = new { @class = "form-control" } })
+                                                        <div class="input-group-append">
+                                                            <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#DepartmentCodeSearchDialog">
+                                                                <i class="fas fa-search"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <span id="DepartmentName" class="align-middle"></span>
+                                                </div>
+                                            </div>
+                                            @Html.ValidationMessageFor(model => model.bumon_cd, "", new { @class = "text-danger" })
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        集約コード
+                                    </th>
+                                    <td>
+                                        <div>
+                                            @Html.EditorFor(model => model.group_cd, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.group_cd, "", new { @class = "text-danger" })
+                                        </div>
+                                    </td>
+                                    <th scope="row">
+                                        規格
+                                    </th>
+                                    <td>
+                                        <div>
+                                            @Html.EditorFor(model => model.group_cd, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.group_cd, "", new { @class = "text-danger" })
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        単位
+                                    </th>
+                                    <td>
+                                        <div>
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <div class="input-group">
+                                                        @Html.EditorFor(model => model.bumon_cd, new { htmlAttributes = new { @class = "form-control" } })
+                                                        <div class="input-group-append">
+                                                            <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#DepartmentCodeSearchDialog">
+                                                                <i class="fas fa-search"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <span id="DepartmentName" class="align-middle"></span>
+                                                </div>
+                                            </div>
+                                            @Html.ValidationMessageFor(model => model.bumon_cd, "", new { @class = "text-danger" })
+                                        </div>
+                                    </td>
+                                    <th scope="row">
+                                        <label class="control-label" for="inlineRadio2">PC部門</label>
+                                    </th>
+                                    <td>
+                                        <div>
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <div class="input-group mb-0">
+                                                        <input type="text" id="SampleDTPicker" class="form-control" />
+                                                        <div class="input-group-append">
+                                                            <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#DepartmentCodeSearchDialog">
+                                                                <i class="fas fa-search"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="table macss-form-table10h">
+                                <colgroup>
+                                    <col class="macss-form-table-title10h" />
+                                    <col class="macss-form-table-contents10h" />
+                                    <col class="macss-form-table-contents10h" />
+                                    <col class="macss-form-table-contents10h" />
+                                    <col class="macss-form-table-contents10h" />
+                                    <col class="macss-form-table-contents10h" />
+                                    <col class="macss-form-table-contents10hkazei" />
+                                    <col class="macss-form-table-contents10h" />
+                                    <col class="macss-form-table-contents10hgenka" />
+                                    <col class="macss-form-table-contents10hkeihi" />
+                                    <col class="macss-form-table-contents10h" />
+                                    <col class="macss-form-table-contents10hclear" />
+                                </colgroup>
+                                <tr>
+                                    <th scope="row">
+                                        <label class="control-label" for="inlineRadio2"></label>
+                                    </th>
+                                    <td>
+                                        <div style="text-align:center;font-weight:bold;background-color:#c8edf7">数量</div>
+                                    </td>
+                                    <td>
+                                        <div style="text-align:center;font-weight:bold;background-color:#c8edf7">単価</div>
+                                    </td>
+                                    <td>
+                                        <div style="text-align:center;font-weight:bold;background-color:#c8edf7">金額</div>
+                                    </td>
+                                    <td>
+                                        <div style="text-align:center;font-weight:bold;background-color:#c8edf7">請求パターン</div>
+                                    </td>
+                                    <td>
+                                        <div style="text-align:center;font-weight:bold;background-color:#c8edf7">明細コード</div>
+                                    </td>
+                                    <td>
+                                        <div style="text-align:center;font-weight:bold;background-color:#c8edf7">課税区分</div>
+                                    </td>
+                                    <td>
+                                        <div style="text-align:center;font-weight:bold;background-color:#c8edf7">区分コード</div>
+                                    </td>
+                                    <td>
+                                        <div style="text-align:center;font-weight:bold;background-color:#c8edf7">原価区分</div>
+                                    </td>
+                                    <td>
+                                        <div style="text-align:center;font-weight:bold;background-color:#c8edf7">経費負担No</div>
+                                    </td>
+                                    <td>
+                                        <div style="text-align:center;font-weight:bold;background-color:#c8edf7">担当者名</div>
+                                    </td>
+                                    <td>
+                                        <div style="text-align:center;font-weight:bold;background-color:#c8edf7"></div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="table macss-form-table10">
+                                <colgroup>
+                                    <col class="macss-form-table-title10" />
+                                    <col class="macss-form-table-contents10" />
+                                    <col class="macss-form-table-contents10" />
+                                    <col class="macss-form-table-contents10" />
+                                    <col class="macss-form-table-contents10" />
+                                    <col class="macss-form-table-contents10" />
+                                    <col class="macss-form-table-contents10kazei" />
+                                    <col class="macss-form-table-contents10" />
+                                    <col class="macss-form-table-contents10genka" />
+                                    <col class="macss-form-table-contents10keihi" />
+                                    <col class="macss-form-table-contents10" />
+                                    <col class="macss-form-table-contents10clear" />
+                                </colgroup>
+                                @for (int i = 0; i < 3; i++)
+                                {
+                                    <tr>
+                                        <th scope="row">
+                                            @if (i == 0)
+                                            {
+                                                <label class="control-label" for="inlineRadio2">保管料</label>
+                                            }
+                                            else if (i == 1)
+                                            {
+                                                <label class="control-label" for="inlineRadio2">荷役料</label>
+                                            }
+                                            else if (i == 2)
+                                            {
+                                                <label class="control-label" for="inlineRadio2">その他</label>
+                                            }
+                                        </th>
+                                        <td>
+                                            <div>
+                                                <input type="text" id="SampleDTPicker" class="form-control" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <input type="text" id="SampleDTPicker" class="form-control" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <input type="text" id="SampleDTPicker" class="form-control" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <input type="text" id="SampleDTPicker" class="form-control" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <input type="text" id="SampleDTPicker" class="form-control" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <input type="text" id="SampleDTPicker" class="form-control" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <input type="text" id="SampleDTPicker" class="form-control" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <input type="text" id="SampleDTPicker" class="form-control" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <input type="text" id="SampleDTPicker" class="form-control" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <input type="text" id="SampleDTPicker" class="form-control" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <button type="reset" class="btn btn-secondary">クリア</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+@if (ViewBag.hokan_spot == true)
+{
+    <div class="accordion" id="ConditionAccordion">
+        <div class="card mb-3">
+            <div class="card-header macss-search-config-collapse-header" id="headingOne">
+                <div class="mb-0">
+                    <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain" aria-expanded="true" aria-controls="ConditionMain">
+                        <div class="d-inline-block" style="color:#333">スポット発番用エリア</div>
+                        <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="color:#007bff;"></i>
+                    </button>
+                    <span id="DepartmentName" class="align-middle">　</span>
+                </div>
+            </div>
+            <div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+                <div class="row ml-3 mr-2 mb-2">
+                    <div>
+                        <small class="form-text text-muted">
+                            ※スポットの場合、入力してください。
+                        </small>
+                    </div>
+                </div>
+                <div class="row ml-3 mr-2 mb-2">
+                    <table class="table macss-form-table2t">
+                        <colgroup>
+                            <col class="macss-form-table-title2t" />
+                            <col class="macss-form-table-contents2t" />
+                            <col class="macss-form-table-title2t" />
+                            <col class="macss-form-table-contents2t" />
+                        </colgroup>
+                        <tr>
+                            <th scope="row">
+                                <label class="" for="textBox">得意先名</label>
+                            </th>
+                            <td>
+                                <div>
+                                    @Html.EditorFor(model => model.update_date, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="" for="textBox">住所</label>
+                            </th>
+                            <td>
+                                <div>
+                                    @Html.EditorFor(model => model.update_date, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label for="textBox">締日</label>
+                            </th>
+                            <td>
+                                <div>
+                                    @Html.EditorFor(model => model.update_date, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </td>
+                            <th scope="row">
+                            </th>
+                            <td>
+                                <div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#TransitionConfirmDialog">@MacssWeb.Resources.ControlText.BackToList</button>
+    </div>
+    <div class="col-4 text-right">
+        <a class="btn btn-primary" role="button">@MacssWeb.Resources.ControlText.InputConfirm</a>
+    </div>
+</div>
+<div class="modal" id="TransitionConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.TransitionConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @MacssWeb.Resources.Messages.TransitionConfirm
+                <br>
+                @MacssWeb.Resources.Messages.Confirm
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary macss-btn" href="@Url.Action("List")" role="button">@MacssWeb.Resources.ControlText.Yes</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function setDepartmentCode(code, value) {
+        $("#bumon_cd").val(code);
+        $("#DepartmentName").text(value);
+    }
+    $(function () {
+        var createDatePicker = new Macss.DatetimePicker.MacssDtPicker("#create_date", "#CreateDateCalendar");
+        createDatePicker.configure();
+        var updateDatePicker = new Macss.DatetimePicker.MacssDtPicker("#update_date", "#UpdateDateCalendar");
+        updateDatePicker.configure();
+    });
+
+</script>

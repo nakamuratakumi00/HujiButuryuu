@@ -1,0 +1,178 @@
+﻿@model IEnumerable<Macss.Database.Entity.AccountMaster>
+
+@{
+    ViewBag.Title = "請求仕入 - AIMS";
+    ViewBag.ScreenId = "";
+    ViewBag.PageMainTitle = "ESP仕入引渡しデータ集計結果";
+}
+@section Scripts {
+    <script>
+        $(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#SampleList", [{
+                "className": "macss-table-proc-column", "width": 90, "orderable": true, "targets": 0
+            }]);
+            dt.configure();
+
+            var dtSum = new Macss.DataTables.MacssSimpleTable("#SumSampleList");
+            dtSum.configure();
+
+            var cond = new Macss.Collapse.ConditionsPanel("#ConditionAccordion", "#CollapseShow", "#CollapseHidden");
+            cond.setCollapseEvent();
+
+            var sampleDatePicker = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker", "#SampleCalendar");
+            sampleDatePicker.configure();
+            var sampleDatePicker1 = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker1", "#SampleCalendar1");
+            sampleDatePicker1.configure();
+            var sampleDatePicker2 = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker2", "#SampleCalendar2");
+            sampleDatePicker2.configure();
+
+
+            $('[data-toggle="popover"]').popover();
+
+            //MacssDataTable（dataTables.fixedColumns.js）に表示する列が15件以上あると計算間違いで最左端列にスクロールバーが表示されるため、非表示にする
+            $('.DTFC_LeftBodyLiner').css('overflow-y', 'hidden');
+
+        });
+    </script>
+}
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-12 text-right">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("Index", "Home")">@MacssWeb.Resources.ControlText.BackToSubMenu</a>
+    </div>
+</div>
+
+<div class="container-fluid mt-4">
+    <div class="form-inline">
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">対象</span>
+            </div>
+            <span class="form-control">リハーサル用</span>
+        </div>
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">年月度</span>
+            </div>
+            <span class="form-control">@System.DateTime.Now.ToString("yyyy年M月度")</span>
+        </div>
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">期間</span>
+            </div>
+            <span class="form-control">2021/02/01 ～ 2021/02/28</span>
+        </div>
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">集計完了日時</span>
+            </div>
+            <span class="form-control">@System.DateTime.Now.ToString("yyyy/MM/dd HH:mm")</span>
+        </div>
+    </div>
+</div>
+
+<div id="SyukeiArea" class=" mt-4">
+    <div style="padding-left:15px;">
+        <label>合計</label>
+        <table id="SumSampleList" class="table table-striped table-hover macss-data-table">
+            <thead class="macss-data-table-header">
+                <!-- thの文字数で列の幅が決まってしまうため、必要に応じて全角スペースを入れて列の幅を調整する必要がある-->
+                <tr>
+                    <th colspan="2">営業費用データ</th>
+                    <th colspan="2">ESP引渡しデータ</th>
+                    <th rowspan="2" class="valign-middle">差額（① - ②）</th>
+                </tr>
+                <tr>
+                    <th>件数</th>
+                    <th>①税抜金額</th>
+                    <th>件数</th>
+                    <th>②税抜金額</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-right">6</td>
+                    <td class="text-right">4,017,003</td>
+                    <td class="text-right">1</td>
+                    <td class="text-right">88,450</td>
+                    <td class="text-right">3,928,553</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row mb-2">
+        <div class="col-12 text-right">
+            <div class="dropdown">
+                <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#CsvDownloadDialog">CSVダウンロード</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table id="SampleList" class="table table-striped table-hover macss-data-table">
+        <thead class="macss-data-table-header macss-multi-row-list-header">
+            <!-- thの文字数で列の幅が決まってしまうため、必要に応じて全角スペースを入れて列の幅を調整する必要がある-->
+            <tr>
+                <th rowspan="2" class="valign-middle">
+                    FB本社仕入先コード
+                </th>
+                <th rowspan="2" class="valign-middle">
+                    仕入先コード
+                </th>
+                <th rowspan="2" class="valign-middle">
+                    仕入先名　　　　　　　　　　　
+                </th>
+                <th colspan="2">営業費用データ</th>
+                <th colspan="2">ESP引渡しデータ</th>
+                <th rowspan="2" class="valign-middle">差額（① - ②）</th>
+            </tr>
+            <tr>
+                <th>件数</th>
+                <th>①税抜金額</th>
+                <th>件数</th>
+                <th>②税抜金額</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    A11131A41
+                </td>
+                <td>
+                    76511
+                </td>
+                <td>
+                    青山運輸倉庫（株）
+                </td>
+                <td class="text-right">1</td>
+                <td class="text-right">60,000</td>
+                <td class="text-right">0</td>
+                <td class="text-right">0</td>
+                <td class="text-right">60,000</td>
+            </tr>
+            <tr>
+                <td>
+                    A1612A41
+                </td>
+                <td>
+                    70021
+                </td>
+                <td>
+                    アーク引越センター長野（株）
+                </td>
+                <td class="text-right">5</td>
+                <td class="text-right">3,417,003</td>
+                <td class="text-right">1</td>
+                <td class="text-right">88,450</td>
+                <td class="text-right">3,328,553</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

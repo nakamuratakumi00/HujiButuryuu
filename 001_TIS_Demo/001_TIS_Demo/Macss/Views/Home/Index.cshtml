@@ -1,0 +1,152 @@
+﻿@using Macss.ViewModels
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row">
+    @{ string menuID = "MainMenu"; bool isLevel1 = false;}
+
+
+    @if (ViewBag.Information != "")
+    {
+        <nav class="navbar navbar-default menu-header-adj">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <h3 class="h-adj">お知らせ</h3>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="menu-frame">
+                    <h5>@Html.Raw(@ViewBag.Information)</h5>
+                </div>
+            </div>
+        </nav>
+    }
+
+
+    @foreach (MenuViewModels row in ViewBag.Menu)
+    {
+
+        if (row.ParentId == "MAIN")
+        {
+            if (row.IsChild)
+            {
+                @: <nav class="navbar navbar-default menu-header-adj">
+                    @:  <div class="container-fluid">
+                        @:   <div class="navbar-header">
+                            @:    <h3 class="h-adj">@row.MenuName</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        }
+                        else
+                        {
+
+                            @: <nav class="navbar navbar-default menu-header-adj">
+                                @:  <div class="container-fluid">
+                                    @:   <div class="navbar-header">
+                                        @:    <h2 class="h-adj">@Html.ActionLink(row.MenuName, row.ActionName, row.ControllerName, null, new { @class = "MainMenuLink" })</h2>
+                                    @: </div></div></nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                }
+                                isLevel1 = false;
+                                continue;
+                            }
+                            if (row.level == 1)
+                            {
+                                if (!isLevel1)
+                                {
+                                    @:    <div class="menu-frame">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    }
+                                    else
+                                    {
+                                    @:    </div>
+                                    @:    <div class="menu-frame" style="margin-top:5px">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    }
+                                    isLevel1 = true;
+                                }
+                                if (row.IsChild)
+                                {
+                                    @:     <a class="@menuID@row.level">@row.MenuName</a><br>
+                                }
+                                else
+                                {
+                                    @:     <a class="@menuID@row.level"></a>@Html.ActionLink(row.MenuName, row.ActionName, row.ControllerName, null, new { @class = "MainMenuLink" })<br>
+                                }
+                                if (row.IsLast)
+                                {
+                                @:</div></div></div></nav>
+                            }
+                        }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+    window.onload = function () {
+        if ("@ViewBag.Message" != ""){
+            alert("@ViewBag.Message");
+        }
+    };
+    </script>
+    }

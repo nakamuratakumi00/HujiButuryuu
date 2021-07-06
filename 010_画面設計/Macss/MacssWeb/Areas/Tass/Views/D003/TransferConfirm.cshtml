@@ -1,0 +1,16 @@
+﻿@model Macss.Database.Entity.AccountMaster
+
+@{
+    ViewBag.Title = "運送業務 - TASS";
+    ViewBag.PageMainTitle = "出荷現品情報出荷No振替確認";
+    ViewBag.ScreenId = "";
+    ViewBag.ConfirmMessage = "以下の内容で出荷Noを振り替えます。よろしいですか？";
+    ViewBag.ButtonText = "振替";
+    ViewBag.ConfirmDialogText = "振替処理を実行します。よろしいですか？";
+}
+
+@using (Html.BeginForm("Transfer", "D003", null, FormMethod.Post))
+{
+
+    @Html.Partial("_TransferShow", Model)
+}

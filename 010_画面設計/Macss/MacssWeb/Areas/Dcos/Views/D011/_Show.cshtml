@@ -1,0 +1,94 @@
+﻿@model MacssWeb.Areas.Dcos.ViewModels.D011UpdateViewModel
+
+<table class="table macss-form-table">
+    <colgroup>
+        <col class="macss-form-table-title" />
+        <col class="macss-form-table-contents" />
+    </colgroup>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.Client, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div class="row">
+                <div class="col-2">
+                    @Html.DisplayFor(model => model.ClientCode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.ClientCode)
+                </div>
+                <div class="col-10">
+                    @Html.DisplayFor(model => model.ClientName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.ClientName)
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.Product, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div class="row">
+                <div class="col-2">
+                    @Html.DisplayFor(model => model.ProductCode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.ProductCode)
+                </div>
+                <div class="col-10">
+                    @Html.DisplayFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.ProductName)
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.Warehouse, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                <div class="row">
+                    <div class="col-2">
+                        @Html.DisplayFor(model => model.WarehouseCode, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.HiddenFor(model => model.WarehouseCode)
+                    </div>
+                    <div class="col-8">
+                        @Html.DisplayFor(model => model.WarehouseName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.HiddenFor(model => model.WarehouseName)
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.RackNumber, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.DisplayFor(model => model.RackNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.RackNumber)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.LotNumber, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.DisplayFor(model => model.LotNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.LotNumber)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.StockLimitYM, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.DisplayFor(model => model.StockLimitYM, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.StockLimitYM)
+            </div>
+        </td>
+    </tr>
+</table>

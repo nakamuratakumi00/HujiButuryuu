@@ -1,0 +1,44 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@RenderSection("Css", required: false)
+@RenderSection("CssExtended", required: false)
+<style type="text/css">
+    <!--
+    .macss-val-ref {
+        padding: 0.375rem 0.75rem;
+    }
+    label.cond-required:after {
+        margin-left: 2.0em;
+        padding: 0.1rem 0.5rem 0.2rem 0.5rem;
+        background-color: #d48c00;
+        border-radius: 3px;
+        font-size: 0.7rem;
+        color: white;
+        content: "条件必須";
+    }
+    div.cond-required:after {
+        padding: 0.1rem 0.5rem 0.2rem 0.5rem;
+        background-color: #d48c00;
+        border-radius: 3px;
+        font-size: 0.7rem;
+        color: white;
+        content: "条件必須";
+    }
+    .modal-footer .row {
+        width: 100%;
+    }
+    .modal-footer button {
+        width: 7rem;
+    }
+    -->
+</style>
+<!--Home/indexに@section Css の記述あり-->
+@RenderSection("Css", false)
+
+<!--<h1>TASS</h1>-->
+<div>
+    @RenderBody()
+</div>
+@RenderSection("Scripts", required: false)

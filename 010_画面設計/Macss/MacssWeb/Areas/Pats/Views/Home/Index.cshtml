@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = @MacssWeb.Resources.Application.PatsJpName;
+    ViewBag.PageMainTitle = @MacssWeb.Resources.Application.PatsJpName + "-" +
+                            @MacssWeb.Resources.Application.PatsAbbrName;
+}
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <ul class="macss-submenu">
+                @* 内示・発注 *@
+                <li>
+                    @Html.ActionLink(MacssWeb.Resources.Pats.Ordering + "一覧", "D001_01", "D001")
+                </li>
+                <li>
+                    @Html.ActionLink("内示一括登録", "D001_03", "D001", new { naihatsu = "naiji" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("発注一括登録", "D001_03", "D001", new { naihatsu = "hachu" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("内示個別登録", "D001_05", "D001", new { naihatsu = "naiji" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("発注個別登録", "D001_05", "D001", new { naihatsu = "hachu" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("内示・発注情報アップロード", "D001_10", "D001")
+                </li>
+                @* 検収 *@
+                <li>
+                    @Html.ActionLink(MacssWeb.Resources.Pats.Acceptance + "一覧", "D002_01", "D002")
+                </li>
+                <li>
+                    @Html.ActionLink(MacssWeb.Resources.Pats.Acceptance + "登録(完納)", "D002_03", "D002", new { kanbun = "kan" }, null)
+                </li>
+                <li>
+                    @Html.ActionLink(MacssWeb.Resources.Pats.Acceptance + "登録(分納)", "D002_03", "D002", new { kanbun = "bun" }, null)
+                </li>
+                @* 取引実績 *@
+                <li>
+                    @Html.ActionLink(MacssWeb.Resources.Pats.Trading + "一覧", "D003_01", "D003")
+                </li>
+                <li>
+                    @Html.ActionLink("売上データ登録", "D003_03", "D003")
+                </li>
+                <li>
+                    @Html.ActionLink("出庫実績登録", "D003_05", "D003")
+                </li>
+                <li>
+                    @Html.ActionLink("受入払出実績データアップロード", "D003_10", "D003")
+                </li>
+                <li>
+                    @Html.ActionLink("納品明細書出力", "D003_13", "D003")
+                </li>
+                @* 在庫 *@
+                <li>
+                    @Html.ActionLink(MacssWeb.Resources.Pats.Inventory + "一覧", "D004_01", "D004")
+                </li>
+                <li>
+                    @Html.ActionLink("棚卸表作成", "D004_03", "D004")
+                </li>
+                <li>
+                    @Html.ActionLink("貯蔵品勘定決算書/在庫管理表出力", "D004_05", "D004")
+                </li>
+                <li>
+                    @Html.ActionLink("PC別払出表/PC別在庫表出力", "D004_07", "D004")
+                </li>
+                @* 締処理 *@
+                <li>
+                    @Html.ActionLink(MacssWeb.Resources.Pats.BillingPurchasing + "データ作成", "D005_01", "D005")
+                </li>
+                <li>
+                    @Html.ActionLink(MacssWeb.Resources.Pats.MonthlyData + "作成", "D006_01", "D006")
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

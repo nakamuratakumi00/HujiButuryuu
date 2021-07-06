@@ -1,0 +1,81 @@
+﻿@model Macss.ViewModels.LoginViewModel
+<style>
+    h1, .h1,
+    h2, .h2,
+    h3, .h3 {
+        margin-top: 2px;
+        margin-bottom: 0px;
+    }
+</style>
+
+@section Heads {
+    <link href="/Content/details.css" rel="stylesheet" />
+}
+
+@{
+    ViewBag.Title = "Login";
+}
+
+@{
+    var textAll = string.Empty;
+    try
+    {
+        textAll = File.ReadAllText(Server.MapPath("~/information.txt"));
+    } catch (Exception ex)
+    {
+    }
+}
+
+<div class="row">
+    <div class="navbar navbar-default">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h2>@ViewBag.Title</h2>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row" style="line-height: 2">
+                @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-labelR col-md-2" })
+                <div class="col-md-10 text_280">
+                    @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control", style = "ime-mode: inactive" } })
+                    @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row" style="line-height: 2">
+                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-labelR col-md-2" })
+                <div class="col-md-10 text_280">
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", style = "ime-mode: inactive" } })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row" style="line-height: 2">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" style="width:45px; height:30px; padding:0; text-align: center;" value="login" class="btn btn-default" />
+                </div>
+            </div>
+
+            @if (textAll != "")
+            {
+                <br />
+                <br />
+                <div class="row" style="line-height: 2">
+                    <div class="col-md-1" style="width:50px"></div>
+                    <div class="col-md-10">
+                        <div class="menu-frame" style="width:500px">
+                            @Html.Raw(textAll)
+                        </div>
+                    </div>
+                </div>
+                    }
+                </div>
+        }
+
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

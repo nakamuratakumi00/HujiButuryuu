@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ActiveReportsLayout Version="3.2" PrintWidth="14981.65" DocumentName="ARNet Document" ScriptLang="C#" MasterReport="0">
+  <StyleSheet>
+    <Style Name="Normal" Value="font-family: Arial; font-style: normal; text-decoration: none; font-weight: normal; font-size: 10pt; color: Black" />
+    <Style Name="Heading1" Value="font-size: 16pt; font-weight: bold" />
+    <Style Name="Heading2" Value="font-family: Times New Roman; font-size: 14pt; font-weight: bold; font-style: italic" />
+    <Style Name="Heading3" Value="font-size: 13pt; font-weight: bold" />
+  </StyleSheet>
+  <Sections>
+    <Section Type="PageHeader" Name="PageHeader" Height="1856.16" BackColor="16777215" CanGrow="0">
+      <Control Type="AR.ReportInfo" Name="Date" Left="12212.64" Top="131.04" Width="1634.041" Height="255" FormatString="{RunDateTime:yyyy/MM/dd HH:mm:ss}" Style="font-size: 8.25pt; text-align: right; ddo-char-set: 0" />
+      <Control Type="AR.ReportInfo" Name="ReportInfo1" Left="13847.04" Top="131.04" Width="1123.2" Height="209.64" FormatString="{PageNumber} / {PageCount}" Style="font-size: 8.25pt; text-align: right; ddo-char-set: 0" />
+      <Control Type="AR.Label" Name="Title" Left="5742.722" Top="475.2" Width="3661.32" Height="345.6001" Caption="Fe保管請求請求先別集計表" Style="font-size: 14.25pt; ddo-char-set: 0" />
+      <Control Type="AR.Label" Name="Label2" Left="14306.41" Top="1018.08" Width="465.1199" Height="244.8" Caption="月度" Style="font-size: 9pt; ddo-char-set: 0" />
+      <Control Type="AR.Field" Name="Nen" Left="12912.48" Top="1018.08" Width="570" Height="225" Text="YYYY" Style="font-size: 9pt; ddo-char-set: 0" />
+      <Control Type="AR.Label" Name="Label12" Left="13501.44" Top="1018.08" Width="345.0002" Height="230.4" Caption="年" Style="font-size: 9pt; ddo-char-set: 0" />
+      <Control Type="AR.Field" Name="Tuki" Left="13919.05" Top="1018.08" Width="406.0799" Height="225" Text="MM" Style="font-size: 9pt; ddo-char-set: 0" />
+      <Control Type="AR.Label" Name="Label19" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="0.002231598" Top="1285.92" Width="1440" Height="570.24" Caption="&#xD;&#xA;請　求　先" Style="font-size: 8.25pt; font-weight: normal; text-align: center; text-decoration: none" PaddingTop="7" />
+      <Control Type="AR.Label" Name="Label21" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="2160.001" Top="1285.92" Width="2448" Height="570.24" Caption="&#xD;&#xA;機　種　名　　　" Style="font-size: 8.25pt; text-align: center" PaddingTop="7" />
+      <Control Type="AR.Label" Name="Label22" BorderLeftStyle="1" BorderTopStyle="1" BorderBottomStyle="2" Left="4608.001" Top="1285.92" Width="1728" Height="285.12" Caption="値引き前保管料" Style="font-size: 8.25pt; text-align: center" PaddingTop="2" />
+      <Control Type="AR.Label" Name="Label23" BorderLeftStyle="1" BorderBottomStyle="1" Left="4608.001" Top="1571.04" Width="1728" Height="285.12" Caption="値引き前荷役料" Style="font-size: 8.25pt; text-align: center" PaddingTop="2" />
+      <Control Type="AR.Label" Name="Label24" BorderLeftStyle="2" BorderTopStyle="1" BorderBottomStyle="1" Left="6330.241" Top="1285.92" Width="1728" Height="570.24" Caption="&#xD;&#xA;値引き前合計" Style="font-size: 8.25pt; text-align: center" PaddingTop="7" />
+      <Control Type="AR.Label" Name="Label25" BorderLeftStyle="1" BorderTopStyle="1" Left="8058.241" Top="1285.92" Width="1728" Height="285.12" Caption="保管料値引き" Style="font-size: 8.25pt; text-align: center" PaddingTop="2" />
+      <Control Type="AR.Label" Name="Label26" BorderLeftStyle="1" BorderTopStyle="2" BorderBottomStyle="1" Left="8058.241" Top="1571.04" Width="1728" Height="285.12" Caption="荷役料値引き" Style="font-size: 8.25pt; text-align: center" PaddingTop="2" />
+      <Control Type="AR.Label" Name="Label27" BorderLeftStyle="2" BorderTopStyle="1" BorderBottomStyle="1" Left="9786.241" Top="1285.92" Width="1728" Height="570.24" Caption="&#xD;&#xA;値引き合計" Style="font-size: 8.25pt; text-align: center" PaddingTop="7" />
+      <Control Type="AR.Label" Name="Label28" BorderLeftStyle="1" BorderTopStyle="1" Left="11514.24" Top="1285.92" Width="1728" Height="285.12" Caption="保　管　料" Style="font-size: 8.25pt; text-align: center" PaddingTop="2" />
+      <Control Type="AR.Label" Name="Label29" BorderLeftStyle="1" BorderTopStyle="2" BorderBottomStyle="1" Left="11514.24" Top="1571.04" Width="1728" Height="285.12" Caption="荷　役　料" Style="font-size: 8.25pt; text-align: center" PaddingTop="2" />
+      <Control Type="AR.Label" Name="Label30" BorderLeftStyle="2" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="13242.24" Top="1285.92" Width="1728" Height="570.24" Caption="&#xD;&#xA;合　　　　計" Style="font-size: 8.25pt; text-align: center" PaddingTop="7" />
+      <Control Type="AR.Label" Name="Label7" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="1440.002" Top="1285.92" Width="720" Height="570.24" Caption="&#xD;&#xA;機種Ａ" Style="font-size: 8.25pt; font-weight: normal; text-align: center; text-decoration: none" PaddingTop="7" />
+      <Control Type="AR.Label" Name="Label8" Left="12746.88" Top="1018.08" Width="165.6003" Height="224.64" Caption="（" Style="font-size: 9pt; ddo-char-set: 0" />
+      <Control Type="AR.Label" Name="Label9" Left="14771.52" Top="1018.08" Width="165.6003" Height="224.64" Caption="）" Style="font-size: 9pt; ddo-char-set: 0" />
+      <Control Type="AR.Label" Name="Label16" Left="96.48004" Top="86.4" Width="1557.721" Height="254.88" Caption="FDASS_LB1M001a" Style="font-size: 8.25pt; vertical-align: middle" />
+    </Section>
+    <Section Type="Detail" Name="Detail" Height="525.24" RepeatToFill="1" BackColor="16777215">
+      <Control Type="AR.Label" Name="Kisnam" DataField="Kisnam" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="2160.001" Top="0" Width="2448" Height="570.2401" Caption="&#xD;&#xA;ＮＮＮＮＮＮＮＮＮＮＮＮＮＮＮ" Style="font-size: 8.25pt; vertical-align: middle" PaddingTop="7" />
+      <Control Type="AR.Label" Name="Kisyua" DataField="Kisyua" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="1440.001" Top="0" Width="720.0001" Height="570.2401" Caption="&#xD;&#xA;ＮＮ" Style="font-size: 8.25pt; text-align: center; vertical-align: middle" PaddingTop="7" />
+      <Control Type="AR.Field" Name="beNEBIKISUM" DataField="beNEBIKISUM" BorderLeftStyle="2" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="6330.241" Top="0" Width="1728" Height="570.2401" Text="&#xD;&#xA;ZZZ,ZZZ,ZZ9" OutputFormat="#,##0" Style="font-size: 8.25pt; text-align: right" PaddingTop="7" PaddingRight="2" />
+      <Control Type="AR.Label" Name="Seicod" DataField="Seicod" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="0.001029968" Top="0" Width="1440" Height="570.24" Caption="&#xD;&#xA;XXXXXXXX" Style="font-size: 8.25pt; font-weight: normal; text-align: center; text-decoration: none" PaddingTop="7" />
+      <Control Type="AR.Field" Name="afNEBIKISUM" DataField="afNEBIKISUM" BorderLeftStyle="2" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="9786.241" Top="0" Width="1728" Height="570.2401" Text="&#xD;&#xA;ZZZ,ZZZ,ZZ9" OutputFormat="#,##0" Style="font-size: 8.25pt; text-align: right" PaddingTop="7" PaddingRight="2" />
+      <Control Type="AR.Field" Name="goukei" DataField="goukei" BorderLeftStyle="2" BorderTopStyle="1" BorderRightStyle="1" BorderBottomStyle="1" Left="13242.24" Top="0" Width="1728" Height="570.2401" Text="&#xD;&#xA;ZZZ,ZZZ,ZZ9" OutputFormat="#,##0" Style="font-size: 8.25pt; text-align: right" PaddingTop="7" PaddingRight="2" />
+      <Control Type="AR.Field" Name="TextBox2" DataField="HOKANSUM" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="2" BorderBottomStyle="2" Left="4608" Top="0" Width="1728" Height="285.12" Text="ZZZ,ZZZ,ZZ9" OutputFormat="#,##0" Style="font-size: 8.25pt; text-align: right" PaddingTop="2" PaddingRight="2" />
+      <Control Type="AR.Field" Name="TextBox3" DataField="NIYAKUSUM" BorderLeftStyle="1" BorderRightStyle="2" BorderBottomStyle="1" Left="4608" Top="285.12" Width="1728" Height="285.12" Text="ZZZ,ZZZ,ZZ9" OutputFormat="#,##0" Style="font-size: 8.25pt; text-align: right" PaddingTop="2" PaddingRight="2" />
+      <Control Type="AR.Field" Name="TextBox4" DataField="Hokannbk" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="2" BorderBottomStyle="2" Left="8058.24" Top="0" Width="1728" Height="285.12" Text="ZZZ,ZZZ,ZZ9" OutputFormat="#,##0" Style="font-size: 8.25pt; text-align: right" PaddingTop="2" PaddingRight="2" />
+      <Control Type="AR.Field" Name="TextBox5" DataField="Niekinbk" BorderLeftStyle="1" BorderRightStyle="2" BorderBottomStyle="1" Left="8058.24" Top="285.12" Width="1728" Height="285.12" Text="ZZZ,ZZZ,ZZ9" OutputFormat="#,##0" Style="font-size: 8.25pt; text-align: right" PaddingTop="2" PaddingRight="2" />
+      <Control Type="AR.Field" Name="TextBox15" DataField="Hokank" BorderLeftStyle="1" BorderTopStyle="1" BorderRightStyle="2" BorderBottomStyle="2" Left="11514.24" Top="0" Width="1728" Height="285.12" Text="ZZZ,ZZZ,ZZ9" OutputFormat="#,##0" Style="font-size: 8.25pt; text-align: right" PaddingTop="2" PaddingRight="2" />
+      <Control Type="AR.Field" Name="TextBox16" DataField="Niekik" BorderLeftStyle="1" BorderRightStyle="2" BorderBottomStyle="1" Left="11514.24" Top="285.12" Width="1728" Height="285.12" Text="ZZZ,ZZZ,ZZ9" OutputFormat="#,##0" Style="font-size: 8.25pt; text-align: right" PaddingTop="2" PaddingRight="2" />
+    </Section>
+    <Section Type="PageFooter" Name="PageFooter" Visible="0" Height="0" BackColor="16777215" />
+  </Sections>
+  <ReportComponentTray />
+  <Script><![CDATA[
+bool color = true;
+private int RowNumber = 0;
+
+
+public void Detail_Format()
+{
+	RowNumber++;
+
+	
+	if(color)
+	{
+
+		this.Detail.BackColor = System.Drawing.Color.LightGray;
+		color = false;
+	}
+	else
+	{
+
+		
+		this.Detail.BackColor = System.Drawing.Color.Transparent;
+
+		color = true;
+	}
+}
+
+
+
+
+]]></Script>
+  <PageSettings LeftMargin="792" RightMargin="792" TopMargin="792" BottomMargin="0" Orientation="2" />
+  <Parameters />
+</ActiveReportsLayout>

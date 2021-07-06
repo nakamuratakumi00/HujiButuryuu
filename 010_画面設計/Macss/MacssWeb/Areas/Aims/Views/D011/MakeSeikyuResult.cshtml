@@ -1,0 +1,221 @@
+﻿@model IEnumerable<MacssWeb.Models.AccountMasterUpload>
+
+@{
+    ViewBag.Title = "請求仕入 - AIMS";
+    ViewBag.ScreenId = "";
+    ViewBag.PageMainTitle = "ESP請求引渡しデータ作成完了";
+}
+@section Scripts {
+    <script>
+
+        $(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#MakeConfirmList");
+            dt.setScrollY("600px");
+            dt.configure();
+
+            $('[data-toggle="popover"]').popover();
+
+        });
+    </script>
+}
+
+<div class="alert @ViewBag.AlertType">
+    <span>@ViewBag.ResultMessage</span>
+</div>
+
+<div class="alert alert-info">
+    <span>@Html.Raw(@ViewBag.ResultInfoMessage)</span>
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-12 text-right">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("Index", "Home")">@MacssWeb.Resources.ControlText.BackToSubMenu</a>
+    </div>
+</div>
+
+<div class="container-fluid mt-2">
+    <button type="button" id="Confirm" class="btn btn-primary macss-btn-sub" data-toggle="modal" data-target="#ConfirmDialog">集計照合</button>
+</div>
+
+<div class="container-fluid mt-3">    
+    <div class="form-inline">
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">作成完了日時</span>
+            </div>
+            <span class="form-control">@System.DateTime.Now.ToString("yyyy/MM/dd HH:mm")</span>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="form-inline">
+        <table class="macss-list-table">
+            <tr>
+                <td>
+                    <div class="input-group mr-2 mb-1 macss-list-title">
+                        ESPマスタ登録用データ[リハーサル用]
+                    </div>
+                </td>
+                <td>
+                    <div class="input-group mr-2 mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">作成件数</span>
+                        </div>
+                        <span class="form-control">1 件</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="input-group mr-2 mb-1 macss-list-title">
+                        @ViewBag.MakeName01
+                    </div>
+                </td>
+                <td>
+                    <div class="input-group mr-2 mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">作成件数</span>
+                        </div>
+                        <span class="form-control">@ViewBag.MakeCount01</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-group mr-2 mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">エラー件数</span>
+                        </div>
+                        <span class="form-control">@ViewBag.ErrorCount01</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="input-group mr-2 mb-1 macss-list-title">
+                        @ViewBag.MakeName02
+                    </div>
+                </td>
+                <td>
+                    <div class="input-group mr-2 mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">作成件数</span>
+                        </div>
+                        <span class="form-control">@ViewBag.MakeCount02</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-group mr-2 mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">エラー件数</span>
+                        </div>
+                        <span class="form-control">@ViewBag.ErrorCount02</span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="row mt-2 mb-2">
+    <div class="col-12 text-right">
+        <div class="dropdown">
+            <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#CsvDownloadDialog">CSVダウンロード</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table id="MakeConfirmList" class="table table-striped table-hover macss-data-table">
+    <thead class="macss-data-table-header">
+        <!-- thの文字数で列の幅が決まってしまうため、必要に応じて全角スペースを入れて列の幅を調整する必要がある-->
+        <tr>
+            <th>行No</th>
+            <th>エラー　</th>
+            <th>対象　　　</th>
+            <th>作成元　　　　</th>
+            <th>業務コード</th>
+            <th>伝票No</th>
+            <th>伝票No項番</th>
+            <th>請求No</th>
+            <th>請求No項番</th>
+            <th>原票No</th>
+            <th>伝票日付</th>
+            <th>請求先コード</th>
+            <th>得意先コード</th>
+            <th>FB本社得意先コード</th>
+            <th>PCコード</th>
+            <th>適用開始日</th>
+            <th>適用終了日</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                1
+            </td>
+            <td>
+                <a tabindex="0" class="btn btn-sm btn-danger" role="button" data-toggle="popover"
+                   data-trigger="focus" title="エラー詳細"
+                   data-content="ESP請求項目設定・未登録">詳細</a>
+            </td>
+            <td>リハーサル用</td>
+            <td>請求明細データ</td>
+            <td>1010</td>
+            <td>03795908</td>
+            <td>00</td>
+            <td></td>
+            <td></td>
+            <td>1273280</td>
+            <td>2021/01/14</td>
+            <td>41961</td>
+            <td>41961</td>
+            <td>C24480</td>
+            <td>804510011058</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+<div class="modal" id="ConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                集計照合処理を実行します。よろしいですか？
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("SumSeikyu", "D011", null, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-primary">@MacssWeb.Resources.ControlText.Yes</button>
+                }
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('#Confirm').on('click', function () {
+            var form = $(this).parents('form');
+            form.submit();
+        });
+
+
+    })
+</script>

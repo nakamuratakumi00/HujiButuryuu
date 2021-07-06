@@ -1,0 +1,1085 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>GrapeCity.ActiveReports.Export.Html.v12</name>
+  </assembly>
+  <members>
+    <member name="T:GrapeCity.ActiveReports.Export.Html.Page.IHtmlRenderingExtensionContext">
+      <summary>コントロールのレンダラー間でデータを共有するために使用するのコンテキストを指定します。</summary>
+    </member>
+    <member name="T:GrapeCity.ActiveReports.Export.Html.Page.ILinkProvider">
+      <summary>HTML表示拡張機能用のカスタムリンクプロバイダを作成するためのインタフェース。</summary>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.IHtmlRenderingExtensionContext.GetLPath(GrapeCity.ActiveReports.Extensibility.Layout.ILayoutArea)">
+      <summary>提供したの文字列表現を取得します。</summary>
+      <returns>提供したへのパスを表す文字列値。</returns>
+      <param name="layoutArea">LPATH文字列を作成するための。</param>
+    </member>
+    <member name="P:GrapeCity.ActiveReports.Export.Html.Page.IHtmlRenderingExtensionContext.BodyWriter">
+      <summary>Htmlの本体セクションに使用する <span style="TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; DISPLAY: inline !important; FONT: 11px Verdana, Arial, Helvetica, sans-serif; WHITE-SPACE: normal; FLOAT: none; LETTER-SPACING: normal; COLOR: rgb(0,0,0); WORD-SPACING: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px"><font size="2">XhtmlTextWriter</font></span>を取得します。</summary>
+    </member>
+    <member name="P:GrapeCity.ActiveReports.Export.Html.Page.IHtmlRenderingExtensionContext.BookmarkDictionary">
+      <summary>レポートのブックマークを含むIMetadataDictionaryを返します。</summary>
+    </member>
+    <member name="P:GrapeCity.ActiveReports.Export.Html.Page.IHtmlRenderingExtensionContext.Settings">
+      <summary>ポートをレンダリングするときに使用するISettingsを取得します。これは<see cref="GrapeCity.ActiveReports.Export.Html.v11~GrapeCity.ActiveReports.Export.Html.Page.HtmlRenderingExtension.html">HtmlRenderingExtension</see>クラスの設定へ指します。</summary>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.ILinkProvider.BookmarkLink(GrapeCity.ActiveReports.Extensibility.Rendering.Components.IMetadataDictionaryEntry,GrapeCity.ActiveReports.Export.Html.Page.IHtmlRenderingExtensionContext)">
+      <summary>見出しマップのリンクとして使用する文字列値を返します。</summary>
+      <returns>hrefの値として使用する文字列値。</returns>
+      <param name="dictionaryEntry">リンクを作成するブックマークリンクエントリのIMetadataDictionaryEntry。</param>
+      <param name="context">レンダリングのための共有情報を含むIHtmlRenderingExtensionContext。</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.ILinkProvider.BookmarkLinkTarget(System.String,GrapeCity.ActiveReports.Export.Html.Page.IHtmlRenderingExtensionContext)">
+      <summary>Bookmarklinkターゲットとして使用する文字列値を返します。</summary>
+      <returns>hrefの値のターゲットとして使用する文字列値。</returns>
+      <param name="targetName">Bookmarklinkターゲットのベース名を表す文字列値。</param>
+      <param name="context">レンダリングのための共有情報を含むIHtmlRenderingExtensionContext 。</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.ILinkProvider.DocumentMapLink(GrapeCity.ActiveReports.Extensibility.Rendering.Components.IMetadataDictionaryEntry,GrapeCity.ActiveReports.Export.Html.Page.IHtmlRenderingExtensionContext)">
+      <summary>見出しマップのリンクとして使用する文字列値を返します。</summary>
+      <returns>hrefの値として使用する文字列値。</returns>
+      <param name="dictionaryEntry">リンクを作成する見出しマップノードのIMetadataDictionaryEntry。</param>
+      <param name="context">レンダリングのための共有情報を含むIHtmlRenderingExtensionContext 。</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.ILinkProvider.DocumentMapTarget(System.String,GrapeCity.ActiveReports.Export.Html.Page.IHtmlRenderingExtensionContext)">
+      <summary>見出しマップのターゲットとして使用する文字列値を返します。</summary>
+      <returns>hrefの値のターゲットとして使用する文字列値。</returns>
+      <param name="targetName">見出しマップのターゲットのベース名を表す文字列値。</param>
+      <param name="context">レンダリングのための共有情報を含むIHtmlRenderingExtensionContext。</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.ILinkProvider.DrillthroughLink(GrapeCity.ActiveReports.Extensibility.Rendering.Components.IAction,GrapeCity.ActiveReports.Export.Html.Page.IHtmlRenderingExtensionContext)">
+      <summary>Drillthroughリンクとして使用する文字列値を返します。</summary>
+      <returns>hrefの値として使用する文字列値</returns>
+      <param name="action">ドリルスルーリンクの値を取得するIAction。</param>
+      <param name="context">レンダリングのための共有情報を含むIHtmlRenderingExtensionContext。</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.ILinkProvider.FindLink(GrapeCity.ActiveReports.Extensibility.Layout.ILayoutArea,GrapeCity.ActiveReports.Export.Html.Page.IHtmlRenderingExtensionContext,System.String)">
+      <summary>一致するターゲット用のリンクとして使用する文字列値を返します。</summary>
+      <returns>検索した検索項目にナビゲートするために使用する文字列値。</returns>
+      <param name="layoutArea">見つかった文字列に対して使用するILayoutArea。</param>
+      <param name="context">情報を渡すために使用されるIHtmlRenderingExtensionContext。</param>
+      <param name="searchString">検索する文字列。</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.ILinkProvider.Hyperlink(GrapeCity.ActiveReports.Extensibility.Rendering.Components.IAction,GrapeCity.ActiveReports.Export.Html.Page.IHtmlRenderingExtensionContext)">
+      <summary>ハイパーリンクとして使用する文字列値を返します。</summary>
+      <returns>hrefの値として使用する文字列値</returns>
+      <param name="action">ハイパーリンクの値を取得するIAction。</param>
+      <param name="context">レンダリングのための共有情報を含むIHtmlRenderingExtensionContext。</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.ILinkProvider.SortingToggleImageLink(GrapeCity.ActiveReports.Extensibility.Layout.ILayoutArea,GrapeCity.ActiveReports.Export.Html.Page.IHtmlRenderingExtensionContext)">
+      <summary>切り替えイメージをソートするリンクとして使用する文字列値を返します。</summary>
+      <returns>srcの値として使用する文字列値</returns>
+      <param name="layoutArea">切り替えるアイテムに対するILayoutArea。</param>
+      <param name="context">情報を渡すために使用される IHtmlRenderingExtensionContext。</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.ILinkProvider.SortingToggleLink(GrapeCity.ActiveReports.Extensibility.Layout.ILayoutArea,GrapeCity.ActiveReports.Export.Html.Page.IHtmlRenderingExtensionContext)">
+      <summary>切り替えをソートするリンクとして使用する文字列値を返します。</summary>
+      <returns>hrefの値として使用する文字列値</returns>
+      <param name="layoutArea">切り替えるアイテムに対するILayoutArea。</param>
+      <param name="context">情報を渡すために使用されるIHtmlRenderingExtensionContext。</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.ILinkProvider.VisibilityToggleImageLink(GrapeCity.ActiveReports.Extensibility.Layout.ILayoutArea,GrapeCity.ActiveReports.Export.Html.Page.IHtmlRenderingExtensionContext)">
+      <summary>表示切り替えイメージにリンクとして使用する文字列値を返します。</summary>
+      <returns>srcの値として使用する文字列値</returns>
+      <param name="layoutArea">切り替えるアイテムに対するILayoutArea。</param>
+      <param name="context">情報を渡すために使用されるIHtmlRenderingExtensionContext。</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.ILinkProvider.VisibilityToggleLink(GrapeCity.ActiveReports.Extensibility.Layout.ILayoutArea,GrapeCity.ActiveReports.Export.Html.Page.IHtmlRenderingExtensionContext)">
+      <summary>表示切り替えに対するリンクとして使用する文字列値を返します。<br></br></summary>
+      <returns>hrefの値として使用する文字列値</returns>
+      <param name="layoutArea">切り替えるアイテムに対するILayoutArea。</param>
+      <param name="context">情報を渡すために使用されるIHtmlRenderingExtensionContext。</param>
+    </member>
+    <member name="T:GrapeCity.ActiveReports.Export.Html.Page.RenderMode">
+      <summary>HTML描画モードを指定します。</summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.RenderMode.Galley">
+      <summary>レポートが、一つのページヘッダ、一つのページフッタ（存在する場合）、および一つの大きなセクションにレポートの本文を持って、HTMLで描画されることを示します。</summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.RenderMode.Paginated">
+      <summary>レポートが、各ページに対してページヘッダとページフッタを持ってHTMLで描画され、それらの位置がレポートのページの高さによって決定されることを示します。</summary>
+    </member>
+    <member name="T:GrapeCity.ActiveReports.Export.Html.Page.HtmlRenderingExtension">
+      <summary>レポートをHTML形式に描画する描画拡張機能を表します。</summary>
+    </member>
+    <member name="T:GrapeCity.ActiveReports.Export.Html.Page.Settings">
+      <summary>HTML描画拡張機能を設定します。</summary>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.HtmlRenderingExtension.#ctor">
+      <summary>HtmlRenderingExtensionクラスの新しいインスタンスを初期化します。</summary>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.HtmlRenderingExtension.Dispose">
+      <summary>クラスの廃棄ロジックを実装します。</summary>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.HtmlRenderingExtension.GetSupportedSettings">
+      <summary>HtmlRenderingExtensionの設定を返します。</summary>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.HtmlRenderingExtension.GetSupportedSettings(System.Boolean)">
+      <summary>HtmlRenderingExtensionの設定を返します。</summary>
+      <param name="fpl">HTML描画設定を返します。</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.Settings.#ctor">
+      <summary>Settingsクラスの新しいインスタンスを初期化します。</summary>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.Settings.ApplySettings(System.Collections.Specialized.NameValueCollection)">
+      <summary>NameValueCollectionの設定を適用します。</summary>
+      <param name="settings">描画拡張機能のための設定を含む</param>
+    </member>
+    <member name="P:GrapeCity.ActiveReports.Export.Html.Page.Settings.Fragment">
+      <summary>すべてのHTMLテキストか、Bodyタグ内のコンテンツのみが返されるかを取得または設定します。Bodyタグ内のコンテンツの場合はTrue、それ以外の場合はFalse。デフォルト値はFalseです。</summary>
+    </member>
+    <member name="P:GrapeCity.ActiveReports.Export.Html.Page.Settings.JavaScript">
+      <summary>HTMLテキストにJavaScriptが含まれるかどうかを取得または設定します。JaveScriptが使用される場合はTrue、それ以外の場合はFalse。デフォルト値はTrueです。</summary>
+    </member>
+    <member name="P:GrapeCity.ActiveReports.Export.Html.Page.Settings.LinkTarget">
+      <summary>レポート内に含まれるハイパーリンクのターゲットを取得または設定します。 デフォルトでは値が設定されていません。</summary>
+    </member>
+    <member name="P:GrapeCity.ActiveReports.Export.Html.Page.Settings.MhtOutput">
+      <summary>レポートをMHT形式で出力するかを取得または設定します。Trueの場合、レポートをMHT形式で出力します。それ以外の場合は、False。デフォルト値はFalseです。</summary>
+    </member>
+    <member name="P:GrapeCity.ActiveReports.Export.Html.Page.Settings.Mode">
+      <summary>Htmlに描画するときに使用するモードを取得または設定します。</summary>
+    </member>
+    <member name="P:GrapeCity.ActiveReports.Export.Html.Page.Settings.OutputTOC">
+      <summary>レポートの目次を出力するかどうかを指定します。</summary>
+    </member>
+    <member name="P:GrapeCity.ActiveReports.Export.Html.Page.Settings.StyleStream">
+      <summary>CSSスタイル情報はHTMLファイル、または、別のストリームに含まれるかどうかを取得または設定します。Trueの場合、CSSスタイル情報は独自のストリームに含まれることを示し、それ以外の場合はFalse。デフォルト値はTrueです。</summary>
+    </member>
+    <member name="T:GrapeCity.ActiveReports.Export.Html.Section.BookmarkStyle">
+      <summary>HtmlExport.BookmarkStyleプロパティの各値です。</summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Section.BookmarkStyle.None">
+      <summary>ブックマークページは作成されません。</summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Section.BookmarkStyle.Html">
+      <summary>ActiveReportsのドキュメントに元々ブックマークが含まれている場合は、ドキュメントの各ページへのブックマークリンクを含むHTMLページが作成されます。</summary>
+    </member>
+    <member name="T:GrapeCity.ActiveReports.Export.Html.Section.HtmlCharacterSet">
+      <summary>HtmlExport.CharacterSetプロパティの各値です。</summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Section.HtmlCharacterSet.Big5">
+      <summary>"Chinese for Taiwan Multi-byte set" です。文字セット名は "Big5" です。</summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Section.HtmlCharacterSet.EucJp">
+      <summary>"Extended UNIX Code Packed Format for Japanese" です。文字セット名は "EUC-JP" です。</summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Section.HtmlCharacterSet.HzGb2312">
+      <summary>RFC1842およびRFC1843によって定義されている "ASCII Printable Characters-BasCharacters Character Encoding" です。文字セット名は "HZ-GB-2312" です。</summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Section.HtmlCharacterSet.Ibm850">
+      <summary>"IBM850" です。文字セット名は "IBM850" です。</summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Section.HtmlCharacterSet.Iso2022Jp">
+      <summary>RFC1468で定義されている "Japanese Character Encoding for Internet Messages" です。文字セット名は "ISO-2022-JP" です。</summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Section.HtmlCharacterSet.Iso2022Kr">
+      <summary>RFC1557で定義されている "Korean Character Encoding for Internet Messages" です。文字セット名は "ISO-2022-KR" です。</summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Section.HtmlCharacterSet.Iso8859_1">
+      <summary>"Latin alphabet No. 1" です。文字セット名は "ISO-8859-1" です。</summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Section.HtmlCharacterSet.Iso8859_2">
+      <summary>"Latin alphabet No. 2" です。文字セット名は "ISO-8859-2" です。</summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Section.HtmlCharacterSet.Iso8859_5">
+      <summary>"Latin/Cyrillic alphabet" です。文字セット名は "ISO-8859-5" です。</summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Section.HtmlCharacterSet.Iso8859_6">
+      <summary>"Latin/Arabic alphabet" です。文字セット名は "ISO-8859-6" です。</summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Section.HtmlCharacterSet.Koi8r">
+      <summary>"Russian Net Character Set" です。文字セット名は "KOI8-R" です。</summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Section.HtmlCharacterSet.Ksc5601">
+      <summary>"Unified Hangeul"（韓国語）です。文字セット名は "KSC5601" です。</summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Section.HtmlCharacterSet.ShiftJis">
+      <summary>文字セット名は "shift-jis" ですjisjis "SjisjisIS"（日本語）です。</summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Section.HtmlCharacterSet.UnicodeUtf16">
+      <summary>RFC2781で定義されている、リトルエンディアンのUTF-16エンコードのユニコード文字セットです。</summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Section.HtmlCharacterSet.UnicodeUtf8">
+      <summary>RFC3629で定義されている、UTF-8エンコードのユニコード文字セットです。</summary>
+    </member>
+    <member name="T:GrapeCity.ActiveReports.Export.Html.Section.HtmlOutputType">
+      <summary>ドキュメントのエクスポートに使用する、HTML出力の種類です。OutputTypeで使用されます。</summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Section.HtmlOutputType.DynamicHtml">
+      <summary>インラインスタイルを使用したHTMLをエクスポート</summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Section.HtmlOutputType.LegacyHtml">
+      <summary>w3c HTML 3.2勧告に準拠したHTMLをエクスポート</summary>
+    </member>
+    <member name="T:GrapeCity.ActiveReports.Export.Html.Section.HtmlExport">
+      <summary>ActiveReportsのHtmlExportのメインクラスです。</summary>
+    </member>
+    <member name="T:GrapeCity.ActiveReports.Export.Html.Section.OutputHtmlFiles">
+      <summary>OutputHtmlFilesは、HtmlExportオブジェクトのファイルへの出力を命令するIHandleHtmlOutputの実装です。</summary>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Section.HtmlExport.#ctor">
+      <summary>HtmlExportクラスの新しいインスタンスを初期化します。</summary>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Section.HtmlExport.AddMetadata(System.String,System.String)">
+      <summary>HTMLメータ要素として書き込まれる指定したメタデータプロパティを追加します。</summary>
+      <param name="name">プロパティ名</param>
+      <param name="value">プロパティ値</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Section.HtmlExport.Export(GrapeCity.ActiveReports.Document.PageDocument,System.String)">
+      <summary>指定したドキュメントをHTMLにエクスポートします。</summary>
+      <param name="document">エクスポートするActiveReportsのPageDocumentオブジェクト。</param>
+      <param name="filePath">メインのHTMLファイルを保存するファイル名とパス。 複数のファイル名が生成される場合（画像、目次ページなど）、この引数の値は、他のファイル名のプレフィックスとして使用されます。</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Section.HtmlExport.Export(GrapeCity.ActiveReports.Document.PageDocument,System.String,System.String)">
+      <summary>指定したページドキュメントをHTMLにエクスポートします。</summary>
+      <param name="document">エクスポートする。</param>
+      <param name="filePath">メインのHTMLファイルを保存するファイル名とパス。 複数のファイル名が生成される場合（画像、目次ページなど）、この引数の値は、他のファイル名のプレフィックスとして使用されます。</param>
+      <param name="pageRange">カンマで区切られたエクスポートするページ番号の範囲。 各カンマの間には1つのページ番号、または範囲の開始ページ番号と終了ページ番号の間にハイフンがあるページの範囲を持つことができます。</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Section.HtmlExport.Export(GrapeCity.ActiveReports.Document.PageDocument,System.IO.Stream)">
+      <summary>指定したPagedocumentを、HTMLと単一のファイル内のすべての画像を含むMIME MHTフォーマット(インターネット・エクスプローラーから保存されるように)のHTMLにエクスポートします。</summary>
+      <param name="document">エクスポートするPageDocument。</param>
+      <param name="stream">MHTファイルを保存する。</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Section.HtmlExport.Export(GrapeCity.ActiveReports.Document.PageDocument,System.IO.Stream,System.String)">
+      <summary>指定したを、HTMLと単一のファイル内のすべての画像を含むMIME MHTフォーマット(インターネット・エクスプローラーから保存されるように)のHTMLにエクスポートします。</summary>
+      <param name="document">エクスポートする。</param>
+      <param name="stream">MHTファイルを保存する。</param>
+      <param name="pageRange">カンマで区切られたエクスポートするページ番号の範囲。各カンマの間には1つのページ番号、または範囲の開始ページ番号と終了ページ番号の間にハイフンがあるページの範囲を持つことができます。</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Section.HtmlExport.Export(GrapeCity.ActiveReports.Document.PageDocument,GrapeCity.ActiveReports.Export.Html.IOutputHtml,System.String)">
+      <summary>HTMLページ、画像、ブックマークページなどをすべて含む出力をHtmlExportがどのように格納するかを制御する高度な機能を提供します。</summary>
+      <param name="document">HTMLにエクスポートするActiveReportsのPageDocumentオブジェクト。</param>
+      <param name="outputHandler">すべてのHTML出力を受け取るの実装。</param>
+      <param name="pageRange">カンマで区切られたエクスポートするページ番号の範囲。各カンマの間には1つのページ番号、または範囲の開始ページ番号と終了ページ番号の間にハイフンがあるページの範囲を持つことができます。</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Section.HtmlExport.Export(GrapeCity.ActiveReports.Extensibility.Rendering.Components.IReport,System.String,System.String)">
+      <summary>指定したIReportをファイルにエクスポートします。</summary>
+      <param name="report">エクスポートするためのIReportインスタンス。</param>
+      <param name="filePath">エクスポートするためのパス</param>
+      <param name="pageRange">カンマで区切られたエクスポートするためのページ番号の範囲。各カンマの間には単一のページ番号、または範囲の開始ページ番号と終了ページ番号の間にハイフンがあるページの範囲を指定することができます。</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Section.HtmlExport.Export(GrapeCity.ActiveReports.Extensibility.Rendering.Components.IReport,System.String)">
+      <summary>指定したIReportをファイルにエクスポートします。</summary>
+      <param name="report">エクスポートするためのIReportインスタンス。</param>
+      <param name="filePath">エクスポートするためのパス</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Section.HtmlExport.Export(GrapeCity.ActiveReports.Extensibility.Rendering.Components.IReport,System.IO.Stream)">
+      <summary>指定したIReportをストリームにエクスポートします。</summary>
+      <param name="report">エクスポートするためのIReportインスタンス。</param>
+      <param name="outputStream">出力ストリーム。</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Section.HtmlExport.Export(GrapeCity.ActiveReports.Extensibility.Rendering.Components.IReport,System.IO.Stream,System.String)">
+      <summary>指定したIReportをストリームにエクスポートします。</summary>
+      <param name="report">エクスポートするためのIReportインスタンス。</param>
+      <param name="outputStream">出力ストリーム。</param>
+      <param name="pageRange">カンマで区切られたエクスポートするためのページ番号の範囲。各カンマの間には単一のページ番号、または範囲の開始ページ番号と終了ページ番号の間にハイフンがあるページの範囲を指定することができます。</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Section.HtmlExport.Export(GrapeCity.ActiveReports.Document.SectionDocument,System.String)">
+      <summary>指定したドキュメントをHTMLにエクスポートします。</summary>
+      <param name="document">エクスポートするActiveReportsのDocumentオブジェクト。</param>
+      <param name="filePath">メインのHTMLファイルを保存するファイル名とパス。複数のファイル名が生成される場合（画像、目次ページなど）、この引数の値は、他のファイル名のプレフィックスとして使用されます。</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Section.HtmlExport.Export(GrapeCity.ActiveReports.Document.SectionDocument,System.String,System.String)">
+      <summary>指定したドキュメントをHTMLにエクスポートします。</summary>
+      <param name="document">エクスポートするActiveReportsのDocumentオブジェクト。</param>
+      <param name="filePath">メインのHTMLファイルを保存するファイル名とパス。複数のファイル名が生成される場合（画像、目次ページなど）、この引数の値は、他のファイル名のプレフィックスとして使用されます。</param>
+      <param name="pagesRange">エクスポートするページを、カンマで区切って指定するか、2-8のように開始ページと終了ページを指定します。</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Section.HtmlExport.Export(GrapeCity.ActiveReports.Document.SectionDocument,System.IO.Stream,System.String)">
+      <summary>指定したGrapeCity.ActiveReports.Document.Documentを、MIME MHTフォーマット(インターネット·エクスプローラーから保存されるように)のHTMLにエクスポートします。</summary>
+      <param name="document">エクスポートするActiveReportsのDocumentオブジェクト。</param>
+      <param name="outputStream">MHTファイルを保存するSystem.IO.Stream。</param>
+      <param name="pagesRange">エクスポートするページを、カンマで区切って指定するか、2-8のように開始ページと終了ページを指定します。</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Section.HtmlExport.Export(GrapeCity.ActiveReports.Document.SectionDocument,GrapeCity.ActiveReports.Export.Html.IOutputHtml,System.String)">
+      <summary>HTMLページ、画像、ブックマークページなどをすべて含む出力をHtmlExportがどのように格納するかを制御する高度な機能を提供します。</summary>
+      <param name="document">エクスポートするActiveReportsのDocumentオブジェクト。</param>
+      <param name="outputHandler">すべてのHTML出力を受け取るIOutputHtmlの実装。</param>
+      <param name="pageRange">エクスポートするページを、カンマで区切って指定するか、2-8のように開始ページと終了ページを指定します。</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Section.HtmlExport.Export(GrapeCity.ActiveReports.Document.SectionDocument,System.IO.Stream)">
+      <summary>指定したGrapeCity.ActiveReports.Document.Documentを、MIME MHTフォーマット(インターネット·エクスプローラーから保存されるように)のHTMLにエクスポートします。</summary>
+      <param name="document">エクスポートするActiveReportsのDocumentオブジェクト。</param>
+      <param name="outputStream">MHTファイルを保存するSystem.IO.Stream。</param>
+    </member>
+    <member name="P:GrapeCity.ActiveReports.Export.Html.Section.HtmlExport.BookmarkStyle">
+      <summary>ActiveReportsドキュメントにブックマークが含まれる場合に、ブックマークのページが作成されるかどうかを設定するか返します。</summary>
+    </member>
+    <member name="P:GrapeCity.ActiveReports.Export.Html.Section.HtmlExport.CharacterSet">
+      <summary>出力後のHTMLページで使用される文字セットのエンコーディングを設定または取得します。</summary>
+    </member>
+    <member name="P:GrapeCity.ActiveReports.Export.Html.Section.HtmlExport.CreateFramesetPage">
+      <summary>HTMLページをフレームセット内に表示するかどうかを表す値を設定または取得します。フレームセットでは、ブックマークのエントリは左に、レポートドキュメントの内容は右に表示されます。出力されるファイル名では、指定したファイル名に ".frame.html" という拡張子が付けられます。</summary>
+    </member>
+    <member name="P:GrapeCity.ActiveReports.Export.Html.Section.HtmlExport.IncludeHtmlHeader">
+      <summary>出力後のHTMLファイルに、HTML、HEAD、BODY要素などの通常のページヘッダを含むかどうかを表す値を設定または取得します。</summary>
+    </member>
+    <member name="P:GrapeCity.ActiveReports.Export.Html.Section.HtmlExport.IncludePageMargins">
+      <summary>Pageの余白が出力に含まれるかどうかを設定するか返します。</summary>
+    </member>
+    <member name="P:GrapeCity.ActiveReports.Export.Html.Section.HtmlExport.MultiPage">
+      <summary>このドキュメントに対して複数のHTMLページが生成されるかどうかを設定するか返します。</summary>
+    </member>
+    <member name="P:GrapeCity.ActiveReports.Export.Html.Section.HtmlExport.OutputType">
+      <summary>ドキュメントのエクスポートに使用する、HTML出力の種類を設定または取得します。</summary>
+    </member>
+    <member name="P:GrapeCity.ActiveReports.Export.Html.Section.HtmlExport.Pagination">
+      <summary>エクスポートされたHTMLドキュメントでページネーションを使用するかどうかを取得または設定します。</summary>
+    </member>
+    <member name="P:GrapeCity.ActiveReports.Export.Html.Section.HtmlExport.RemoveVerticalSpace">
+      <summary>完全に空の垂直方向の余白がある場合に、それを出力から削除するかどうかを設定するか返します。</summary>
+    </member>
+    <member name="P:GrapeCity.ActiveReports.Export.Html.Section.HtmlExport.Title">
+      <summary>HTMLページの先頭で使用されるタイトルです。</summary>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Section.OutputHtmlFiles.#ctor(System.String,GrapeCity.ActiveReports.Export.Html.Section.HtmlExport)">
+      <summary>指定したfilePathをベースHTMLページとして、OutputHtmlFilesのインスタンスを初期化します。</summary>
+      <param name="filePath">メイン／開始HTMLページへのファイルパス。他のファイル名（リンクされた画像やTOCページなど）は、このファイルパスをプレフィックスとして使用します。</param>
+      <param name="htmlExport">このオブジェクトが処理している親のHtmlExportオブジェクト。</param>
+    </member>
+    <member name="T:GrapeCity.ActiveReports.Export.Html.Section.HtmlExportException">
+      <summary>
+            ActiveReports HTMLエクスポートアセンブリでエラーが発生するときに例外がスローされます。
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Section.OutputHtmlFiles.htmlExport">
+      <summary>
+            ファイル出力を要求するHtmlExportインスタンス。  
+            HtmlExportのプロパティ設定を確認するために使用することができます。
+            </summary>
+    </member>
+    <member name="P:GrapeCity.ActiveReports.Export.Html.Page.IHtmlRenderingExtensionContext.HeadWriter">
+      <summary>
+            Htmlの見出しセクションに使用するXHTMLWriterを取得します。
+            </summary>
+    </member>
+    <member name="P:GrapeCity.ActiveReports.Export.Html.Page.IHtmlRenderingExtensionContext.PageWriter">
+      <summary>
+            Htmlページに使用するXHTMLWriterを取得します。
+            </summary>
+    </member>
+    <member name="P:GrapeCity.ActiveReports.Export.Html.Page.IHtmlRenderingExtensionContext.LinkProvider">
+      <summary>
+            htmlレンダリング拡張のLinkProviderを取得します。
+            </summary>
+    </member>
+    <member name="T:GrapeCity.ActiveReports.Export.Html.Page.IInteractivityRenderer">
+      <summary>
+            内部使用のみ。
+            </summary>
+    </member>
+    <member name="T:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterTag">
+      <summary>
+            内部使用のみ。
+            </summary>
+    </member>
+    <member name="T:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterAttribute">
+      <summary>
+            内部使用のみ。
+            </summary>
+    </member>
+    <member name="T:GrapeCity.ActiveReports.Export.Html.Page.Tools.XhtmlTextWriter">
+      <summary>
+This class enhances the HtmlTextWriter to allow for rendering of xhtml. It also has several helper members that are used to simplify coding of members that use this class.
+</summary>
+            /// <summary>
+            内部使用のみ。
+            </summary></member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.Tools.XhtmlTextWriter.WriteCustomDivTag(System.String,System.String)">
+      <summary>
+Writes a custom div tag with the attribute and value specified.
+</summary>
+      <param name="attributeName">The name of the attribute to set</param>
+      <param name="attributeValue">The value to set the attribute to</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.Tools.XhtmlTextWriter.WriteCustomDivTag(System.Collections.Specialized.NameValueCollection)">
+      <summary>
+					 Writes a custom div tag with the attributes and values specified in the <see cref="T:System.Collections.Specialized.NameValueCollection"></see>.
+				</summary>
+      <param name="attributes">a <see cref="T:System.Collections.Specialized.NameValueCollection"></see> containing the attributes and values to write in the div tag</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.Tools.XhtmlTextWriter.WriteAnchorTag(System.String,System.String,System.String)">
+      <summary>
+Writes an achor tag to the writer
+</summary>
+      <param name="href">The href value to use in the anchor</param>
+      <param name="target">the target to set for the anchor</param>
+      <param name="value">the value to wrap the anchor around</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.Tools.XhtmlTextWriter.WriteAnchorTag(System.String,System.String,System.String,System.String)">
+      <summary>
+Writes an achor tag to the writer
+</summary>
+      <param name="href">The href value to use in the anchor</param>
+      <param name="target">the target to set for the anchor</param>
+      <param name="value">the value to wrap the anchor around</param>
+      <param name="className">the class to associate with the anchor</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.Tools.XhtmlTextWriter.WriteAnchorTag(System.String,System.String)">
+      <summary>
+Writes an achor tag to the writer
+</summary>
+      <param name="id">The id value to use in the anchor</param>
+      <param name="value">the value to wrap the anchor around</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.Tools.XhtmlTextWriter.HtmlEncode(System.String)">
+      <summary>
+            Encodes the specified string to be suitable for puttin into an HTML document. 
+            So that unicode characters and characters like &gt;, &lt;, and " are properly displayed in HTML browsers.
+            </summary>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.HtmlRenderingExtension.Render(GrapeCity.ActiveReports.Extensibility.Rendering.Components.IReport,GrapeCity.ActiveReports.Extensibility.Rendering.IO.StreamProvider)">
+      <summary>
+            指定されたレポートをレンダリングします。
+            </summary>
+      <param name="report">レポート。</param>
+      <param name="streams">ストリーム。</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.HtmlRenderingExtension.Render(GrapeCity.ActiveReports.Extensibility.Rendering.Components.IReport,GrapeCity.ActiveReports.Extensibility.Rendering.IO.StreamProvider,System.Collections.Specialized.NameValueCollection)">
+      <summary>
+            指定されたレポートをレンダリングします。
+            </summary>
+      <param name="report">レポート。</param>
+      <param name="streams">ストリームプロバイダー。</param>
+      <param name="settings">設定。</param>
+    </member>
+    <member name="P:GrapeCity.ActiveReports.Export.Html.Page.HtmlRenderingExtension.LayoutMetadata">
+      <summary>
+            内部使用のみ。
+            </summary>
+    </member>
+    <member name="T:GrapeCity.ActiveReports.Export.Html.Page.RenderingEngine">
+      <summary>
+            描画拡張機能では、プレーンHTMLまたはSVGコンテンツを使用します。
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.RenderingEngine.Html">
+      <summary>
+            プレーンのHTML／CSS出力。
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.RenderingEngine.Mixed">
+      <summary>
+            外観を向上させるためのHTML／SVG出力。
+            </summary>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.Settings.op_Implicit(GrapeCity.ActiveReports.Export.Html.Page.Settings)~System.Collections.Specialized.NameValueCollection">
+      <summary>
+        <see cref="T:GrapeCity.ActiveReports.Export.Html.Page.Settings">
+        </see> から <see cref="T:System.Collections.Specialized.NameValueCollection"></see>への暗黙的な変換を行います。
+            </summary>
+      <param name="settings">レンダリング拡張の設定。</param>
+      <returns>変換の結果。</returns>
+    </member>
+    <member name="P:GrapeCity.ActiveReports.Export.Html.Page.Settings.RenderingEngine">
+      <summary>
+            SVGを内部で使用するかどうかを示します。
+            </summary>
+    </member>
+    <member name="T:GrapeCity.ActiveReports.Rendering.Text.IFormattingService">
+      <summary>
+            Providers functionality for values converting and formatting according to the current language. 内部使用のみ。
+            </summary>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Rendering.Text.IFormattingService.Format(System.Object,GrapeCity.ActiveReports.Extensibility.Rendering.Components.IStyle)">
+      <summary>
+            Returns a string representation of the specified value using <see cref="T:GrapeCity.ActiveReports.Extensibility.Rendering.Components.IStyle"></see> 
+            and according to the language settings defined in the report or current server language.
+            </summary>
+      <remarks>
+            According to RDL specs. report item language takes precedence over report language
+            and everything fallbacks on a default (server -- whatever it is) language. 
+            </remarks>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Rendering.Text.IFormattingService.Format(System.Object,System.String)">
+      <summary>
+            Returns a string representation of the specified value consistent with the current report language settings
+            and using the specified format string.
+            </summary>
+    </member>
+    <member name="T:GrapeCity.ActiveReports.Export.Svg.Page.SvgRenderingExtension">
+      <summary>
+        <see cref="T:GrapeCity.ActiveReports.Extensibility.Rendering.IRenderingExtension">
+        </see> implementation used to create a SVG image. 内部使用のみ。
+            </summary>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Svg.Page.SvgRenderingExtension.#ctor">
+      <summary>
+        <see cref="T:GrapeCity.ActiveReports.Export.Svg.Page.SvgRenderingExtension">
+        </see> クラスの新しいインスタンスを初期化します。
+            </summary>
+    </member>
+    <member name="T:GrapeCity.ActiveReports.Export.Svg.Page.RenderMode">
+      <summary>
+            Current render mode. 内部使用のみ。
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Svg.Page.RenderMode.Galley">
+      <summary>
+            Continuous.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Svg.Page.RenderMode.Paginated">
+      <summary>
+            Paginated.
+            </summary>
+    </member>
+    <member name="T:GrapeCity.ActiveReports.Export.Svg.Page.Settings">
+      <summary>
+            SVG settings. 内部使用のみ。
+            </summary>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Svg.Page.Settings.#ctor">
+      <summary>
+            Initializes a new instance of the <see cref="T:GrapeCity.ActiveReports.Export.Svg.Page.Settings"></see> class.
+            </summary>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Svg.Page.Settings.#ctor(System.Collections.Specialized.NameValueCollection)">
+      <summary>
+            Initializes a new instance of the <see cref="T:GrapeCity.ActiveReports.Export.Svg.Page.Settings"></see> class.
+            </summary>
+    </member>
+    <member name="P:GrapeCity.ActiveReports.Export.Svg.Page.Settings.RenderMode">
+      <summary>
+            Paginated or galley mode.
+            </summary>
+    </member>
+    <member name="P:GrapeCity.ActiveReports.Export.Svg.Page.Settings.StartPage">
+      <summary>
+            Start page number.
+            </summary>
+    </member>
+    <member name="P:GrapeCity.ActiveReports.Export.Svg.Page.Settings.EndPage">
+      <summary>
+            End page number.
+            </summary>
+    </member>
+    <member name="P:GrapeCity.ActiveReports.Export.Svg.Page.Settings.AllowHyperlinks">
+      <summary>
+            Allows built-in hyperlinks.
+            </summary>
+    </member>
+    <member name="P:GrapeCity.ActiveReports.Export.Svg.Page.Settings.EmbedImages">
+      <summary>
+            Embed images.
+            </summary>
+    </member>
+    <member name="P:GrapeCity.ActiveReports.Export.Svg.Page.Settings.CompressAttributes">
+      <summary>
+            Compress attributes to optimize XML size.
+            </summary>
+    </member>
+    <member name="P:GrapeCity.ActiveReports.Export.Svg.Page.Settings.SeparatePages">
+      <summary>
+            Separate every page to files.
+            </summary>
+    </member>
+    <member name="P:GrapeCity.ActiveReports.Export.Svg.Page.Settings.Title">
+      <summary>
+            SVG document title.
+            </summary>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.IInteractivityRenderer.RenderToggleItem(GrapeCity.ActiveReports.Extensibility.Layout.ILayoutArea,GrapeCity.ActiveReports.Export.Html.Page.IHtmlRenderingExtensionContext)">
+      <summary>
+            Render toggle item. For internal use only.
+            </summary>
+      <param name="layoutArea">
+      </param>
+      <param name="context">
+      </param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.IInteractivityRenderer.RenderSortingItem(GrapeCity.ActiveReports.Extensibility.Layout.ILayoutArea,GrapeCity.ActiveReports.Export.Html.Page.IHtmlRenderingExtensionContext)">
+      <summary>
+            Render sorting item. For internal use only.
+            </summary>
+      <param name="layoutArea">
+      </param>
+      <param name="context">
+      </param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.IInteractivityRenderer.RenderHyperLink(System.String,GrapeCity.ActiveReports.Extensibility.Rendering.Components.IReportItem,GrapeCity.ActiveReports.Export.Html.Page.IHtmlRenderingExtensionContext,System.Boolean)">
+      <summary>
+            Render hyperlink. For internal use only.
+            </summary>
+      <param name="text">
+      </param>
+      <param name="owner">
+      </param>
+      <param name="renderingContext">
+      </param>
+      <param name="hasBookmark">
+      </param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.IInteractivityRenderer.RenderBookmarkLink(System.String,GrapeCity.ActiveReports.Extensibility.Rendering.Components.IReportItem,GrapeCity.ActiveReports.Export.Html.Page.IHtmlRenderingExtensionContext,System.Boolean)">
+      <summary>
+            Render bookmark link. For internal use only.
+            </summary>
+      <param name="text">
+      </param>
+      <param name="owner">
+      </param>
+      <param name="renderingContext">
+      </param>
+      <param name="hasBookmark">
+      </param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.IInteractivityRenderer.RenderDrillthroughLink(System.String,GrapeCity.ActiveReports.Extensibility.Rendering.Components.IReportItem,GrapeCity.ActiveReports.Export.Html.Page.IHtmlRenderingExtensionContext,System.Boolean)">
+      <summary>
+            Render drillthrough link. For internal use only.
+            </summary>
+      <param name="text">
+      </param>
+      <param name="owner">
+      </param>
+      <param name="renderingContext">
+      </param>
+      <param name="hasBookmark">
+      </param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.IInteractivityRenderer.RenderData(GrapeCity.ActiveReports.Export.Html.Page.IHtmlRenderingExtensionContext,System.String,GrapeCity.ActiveReports.Extensibility.Rendering.Components.ActionType)">
+      <summary>
+            Render data. For internal use only.
+            </summary>
+      <param name="context">
+      </param>
+      <param name="data">
+      </param>
+      <param name="actionType">
+      </param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.IInteractivityRenderer.RenderImageLink(System.String,GrapeCity.ActiveReports.Extensibility.Rendering.Components.IReportItem,GrapeCity.ActiveReports.Export.Html.Page.IHtmlRenderingExtensionContext,System.Boolean,GrapeCity.ActiveReports.Export.Html.Page.Tools.XhtmlTextWriter.WriteLinkEntry)">
+      <summary>
+            Render image link. For internal use only.
+            </summary>
+      <param name="link">
+      </param>
+      <param name="owner">
+      </param>
+      <param name="renderingContext">
+      </param>
+      <param name="hasBookmark">
+      </param>
+      <param name="imageRenderingFunc">
+      </param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.IInteractivityRenderer.RenderTocLink(GrapeCity.ActiveReports.Export.Html.Page.IHtmlRenderingExtensionContext,System.String,System.String,GrapeCity.ActiveReports.Export.Html.Page.Tools.XhtmlTextWriter.WriteLinkEntry)">
+      <summary>
+            Render toc link. For internal use only.
+            </summary>
+      <param name="context">
+      </param>
+      <param name="link">
+      </param>
+      <param name="className">
+      </param>
+      <param name="action">
+      </param>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.XhtmlTextWriter.StyleFormat">
+      <summary>
+            The format of string data representation. For internal use only.
+            </summary>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.Tools.XhtmlTextWriter.AddAttribute(System.String,System.String)">
+      <summary>
+            Writes out the attribute with the specified local name and value. For internal use only.
+            </summary>
+      <param name="name">The local name of the attribute.</param>
+      <param name="value">The value of the attribute.</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.Tools.XhtmlTextWriter.RenderBeginTag(System.String)">
+      <summary>
+            Writes out a start tag with the specified local name. For internal use only.
+            </summary>
+      <param name="tag">The local name of the element.</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.Tools.XhtmlTextWriter.RenderEndTag">
+      <summary>
+            Closes one element and pops the corresponding namespace scope. For internal use only.
+            </summary>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.Tools.XhtmlTextWriter.RenderEndTag(System.String)">
+      <summary>
+            Closes one element and pops the corresponding namespace scope. For internal use only.
+            </summary>
+      <param name="tag">
+      </param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.Tools.XhtmlTextWriter.Write(System.Char)">
+      <summary>
+            Writes raw markup manually from a char. For internal use only.
+            </summary>
+      <param name="c">Char to write.</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.Tools.XhtmlTextWriter.Write(System.String)">
+      <summary>
+            Writes raw markup manually from a string. For internal use only.
+            </summary>
+      <param name="str">String containing the text to write.</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.Tools.XhtmlTextWriter.WriteLine">
+      <summary>
+            Writes the empty string. For internal use only.
+            </summary>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.Tools.XhtmlTextWriter.WriteLine(System.String)">
+      <summary>
+            Writes raw markup manually from a string and line terminator. For internal use only.
+            </summary>
+      <param name="str">String containing the text to write.</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.Tools.XhtmlTextWriter.WriteEndTag(System.String)">
+      <summary>
+            Writes an element with the specified local name. For internal use only.
+            </summary>
+      <param name="br">The local name of the element.</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.Tools.XhtmlTextWriter.AddStyleAttribute(System.String,System.String)">
+      <summary>
+            Writes out the attribute with the specified local name and value. For internal use only.
+            </summary>
+      <param name="name">The local name of the attribute.</param>
+      <param name="value">The value of the attribute.</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.Tools.XhtmlTextWriter.AddStyleValue(System.String,System.String)">
+      <summary>
+            Writes a value of specified style. For internal use only.
+            </summary>
+      <param name="name">The local name of style</param>
+      <param name="value">The value of style</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.Tools.XhtmlTextWriter.BeginStyleAttribute">
+      <summary>
+            Writes the start of an style attribute. For internal use only.
+            </summary>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.Tools.XhtmlTextWriter.EndStyleAttribute">
+      <summary>
+            Writes the end of an style attribute. For internal use only.
+            </summary>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.Tools.XhtmlTextWriter.WriteCustomTag(System.String,System.Collections.Specialized.NameValueCollection)">
+      <summary>
+            Writes a custom div tag with the attributes and values specified in the <see cref="T:System.Collections.Specialized.NameValueCollection"></see>. For internal use only.
+            </summary>
+      <param name="tag">The custom tag.</param>
+      <param name="attributes">A <see cref="T:System.Collections.Specialized.NameValueCollection"></see> containing the attributes and values to write in the div tag.</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.Tools.XhtmlTextWriter.WriteCustomTag(System.String,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.String}})">
+      <summary>
+            Writes a custom div tag with the attributes and values specified in the KeyValuePair collection. For internal use only.
+            </summary>
+      <param name="tag">The custom tag.</param>
+      <param name="attributes">&gt;A KeyValuePair collection containing the attributes and values to write in the div tag.</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.Tools.XhtmlTextWriter.WriteAnchorTag(System.String,System.String,System.String,GrapeCity.ActiveReports.Export.Html.Page.Tools.XhtmlTextWriter.WriteLinkEntry)">
+      <summary>
+            Writes an achor tag to the writer. For internal use only.
+            </summary>
+      <param name="href">The href value to use in the anchor.</param>
+      <param name="target">The target to set for the anchor.</param>
+      <param name="className">The class to associate with the anchor.</param>
+      <param name="func">Action to be run.</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.Tools.XhtmlTextWriter.WriteDataAttributes(System.String,System.String)">
+      <summary>
+            Writes an attribute to the tag. For internal use only.
+            </summary>
+      <param name="data">Data containing the value of attribute.</param>
+      <param name="className">The class attribute.</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.Tools.XhtmlTextWriter.WriteAnchorTagWithData(System.String,System.String,GrapeCity.ActiveReports.Export.Html.Page.Tools.XhtmlTextWriter.WriteLinkEntry)">
+      <summary>
+            Writes an achor tag with data attribute to the writer. For internal use only.
+            </summary>
+      <param name="data">Data containing the value of attribute.</param>
+      <param name="className">The class attribute.</param>
+      <param name="func">Action to be run.</param>
+    </member>
+    <member name="M:GrapeCity.ActiveReports.Export.Html.Page.Tools.XhtmlTextWriter.WriteAnchorTagRaw(System.String,System.String)">
+      <summary>
+            Writes an achor tag to the writer. For internal use only.
+            </summary>
+      <param name="id">The value of id attribute.</param>
+      <param name="value">The text of function to be run.</param>
+    </member>
+    <member name="P:GrapeCity.ActiveReports.Export.Html.Page.Tools.XhtmlTextWriter.NewLine">
+      <summary>
+            Gets string for end of line. For internal use only.
+            </summary>
+    </member>
+    <member name="P:GrapeCity.ActiveReports.Export.Html.Page.Tools.XhtmlTextWriter.Indent">
+      <summary>
+            Gets or sets how many IndentChars to write for each level in the hierarchy. For internal use only.
+            </summary>
+    </member>
+    <member name="T:GrapeCity.ActiveReports.Export.Html.Page.Tools.XhtmlTextWriter.WriteLinkEntry">
+      <summary>
+            実行されるアクション。
+            </summary>
+    </member>
+    <member name="P:GrapeCity.ActiveReports.Export.Html.Page.HtmlRenderingExtension.LayoutTree">
+      <summary>
+            レイアウトツリーを取得または設定します。
+            </summary>
+    </member>
+    <member name="E:GrapeCity.ActiveReports.Export.Html.Page.HtmlRenderingExtension.PageReady">
+      <summary>
+            PageReadyイベントです。
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterTag.A">
+      <summary>
+            String representation for html tag 'A'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterTag.Area">
+      <summary>
+            String representation for html tag 'Area'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterTag.Body">
+      <summary>
+            String representation for html tag 'Body'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterTag.Br">
+      <summary>
+            String representation for html tag 'Br'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterTag.Col">
+      <summary>
+            String representation for html tag 'Col'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterTag.Div">
+      <summary>
+            String representation for html tag 'Div'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterTag.Head">
+      <summary>
+            String representation for html tag 'Head'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterTag.Html">
+      <summary>
+            String representation for html tag 'Html'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterTag.Img">
+      <summary>
+            String representation for html tag 'Img'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterTag.Li">
+      <summary>
+            String representation for html tag 'Li'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterTag.Map">
+      <summary>
+            String representation for html tag 'Map'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterTag.P">
+      <summary>
+            String representation for html tag 'P'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterTag.Style">
+      <summary>
+            String representation for html tag 'Style'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterTag.Span">
+      <summary>
+            String representation for html tag 'Span'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterTag.Table">
+      <summary>
+            String representation for html tag 'Table'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterTag.Title">
+      <summary>
+            String representation for html tag 'Title'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterTag.Td">
+      <summary>
+            String representation for html tag 'Td'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterTag.Th">
+      <summary>
+            String representation for html tag 'Th'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterTag.Tr">
+      <summary>
+            String representation for html tag 'Tr'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterTag.Ul">
+      <summary>
+            String representation for html tag 'Ul'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterTag.thead">
+      <summary>
+            String representation for html tag 'THead'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterTag.Frameset">
+      <summary>
+            String representation for html tag 'Frameset'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterTag.Frame">
+      <summary>
+            String representation for html tag 'Frame'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterTag.Noframes">
+      <summary>
+            String representation for html tag 'Noframes'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterTag.Meta">
+      <summary>
+            String representation for html tag 'Meta'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterAttribute.Alt">
+      <summary>
+            String representation for html attribute 'Alt'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterAttribute.Class">
+      <summary>
+            String representation for html attribute 'Class'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterAttribute.Colspan">
+      <summary>
+            String representation for html attribute 'Colspan'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterAttribute.Coords">
+      <summary>
+            String representation for html attribute 'Coords'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterAttribute.Rowspan">
+      <summary>
+            String representation for html attribute 'Rowspan'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterAttribute.Height">
+      <summary>
+            String representation for html attribute 'Height'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterAttribute.Href">
+      <summary>
+            String representation for html attribute 'Href'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterAttribute.Id">
+      <summary>
+            String representation for html attribute 'Id'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterAttribute.Name">
+      <summary>
+            String representation for html attribute 'Name'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterAttribute.Onclick">
+      <summary>
+            String representation for html attribute 'Onclick'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterAttribute.Shape">
+      <summary>
+            String representation for html attribute 'Shape'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterAttribute.Src">
+      <summary>
+            String representation for html attribute 'Src'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterAttribute.Style">
+      <summary>
+            String representation for html attribute 'Style'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterAttribute.Title">
+      <summary>
+            String representation for html attribute 'Title'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterAttribute.Width">
+      <summary>
+            String representation for html attribute 'Width'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterAttribute.Usemap">
+      <summary>
+            String representation for html attribute 'Usemap'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterAttribute.Data">
+      <summary>
+            String representation for html attribute 'Data'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterAttribute.Target">
+      <summary>
+            String representation for html attribute 'Target'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterAttribute.Cols">
+      <summary>
+            String representation for html attribute 'Cols'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterAttribute.Valign">
+      <summary>
+            String representation for html attribute 'VAlign'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterAttribute.Bgcolor">
+      <summary>
+            String representation for html attribute 'BGColor'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterAttribute.Align">
+      <summary>
+            String representation for html attribute 'Align'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterAttribute.Cellpadding">
+      <summary>
+            String representation for html attribute 'Cellpading'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterAttribute.Cellspacing">
+      <summary>
+            String representation for html attribute 'Cellspacing'. For internal use only.
+            </summary>
+    </member>
+    <member name="F:GrapeCity.ActiveReports.Export.Html.Page.Tools.HtmlTextWriterAttribute.Border">
+      <summary>
+            String representation for html attribute 'Border'. For internal use only.
+            </summary>
+    </member>
+  </members>
+</doc>

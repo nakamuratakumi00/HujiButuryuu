@@ -1,0 +1,97 @@
+﻿@{
+    ViewBag.Title = "請求仕入 - AIMS";
+    ViewBag.ScreenId = "";
+    ViewBag.PageMainTitle = "ESP請求引渡しデータ作成";
+    ViewBag.Caption = "ESP請求引渡しデータの作成を行います。";
+}
+
+
+@using (Html.BeginForm("MakeSeikyuConfirm", "D011", FormMethod.Post))
+{
+
+    @Html.AntiForgeryToken()
+
+<div class="container-fluid">
+    <div>
+        <p>
+            @ViewBag.Caption
+        </p>
+    </div>
+
+
+    <div class="row mr-0 mb-1">
+        <div class="col-3">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="Condition1">年月</span>
+                </div>
+                <div id="targetDate" class="form-control"></div>
+                <!--
+            <select class="custom-select form-control" id="Condition2" aria-describedby="Condition2">
+                <option value="@DateTime.Now.AddMonths(-2).ToString("yyyy年M月")">@DateTime.Now.AddMonths(-2).ToString("yyyy年M月")</option>
+                <option value="@DateTime.Now.AddMonths(-1).ToString("yyyy年M月")">@DateTime.Now.AddMonths(-1).ToString("yyyy年M月")</option>
+                <option value="@DateTime.Now.ToString("yyyy年M月")" selected>@DateTime.Now.ToString("yyyy年M月")</option>
+            </select>
+                -->
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="Condition3">対象</span>
+                </div>
+                <select class="custom-select form-control" id="target1" aria-describedby="Condition3">
+                    <option value=""></option>
+                    <option value="1">リハーサル用</option>
+                    <option value="2">決算用</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <div>
+            <div class="macss-upload-button-group-row pr-0 row">
+                <div class="col-12 text-right">
+                    <button type="button" id="Confirm" class="btn btn-primary">@MacssWeb.Resources.ControlText.Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+}
+
+<script>
+    $(function () {
+        $('#Confirm').on('click', function () {
+            var form = $(this).parents('form');
+            form.submit();
+        });
+        
+        $('#target1').change(function () {
+            var val = $('option:selected').val();
+            var today = new Date();
+            var last_month = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+            var select_day = 20;
+
+            if (val == '1') {
+                $('#targetDate').html(today.getFullYear() + '年' + (today.getMonth() + 1) + '月');
+            }
+            else if (val == '2') {
+                if (parseInt(today.getDate()) < select_day) {
+                    //前月
+                    $('#targetDate').html(last_month.getFullYear() + '年' + (last_month.getMonth() + 1) + '月');
+                }
+                else
+                {
+                    $('#targetDate').html(today.getFullYear() + '年' + (today.getMonth() + 1) + '月');
+                }                
+            }
+            else
+            {
+                $('#targetDate').html('');
+            }
+        })
+
+    })
+</script>

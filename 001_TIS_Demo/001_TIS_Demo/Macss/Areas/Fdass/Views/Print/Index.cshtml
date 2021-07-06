@@ -1,0 +1,201 @@
+﻿@using Macss.Areas.Fdass.ViewModels
+@model PrintViewModel
+@using Macss.HtmlHelpers
+<style>
+    h1, .h1,
+    h2, .h2,
+    h3, .h3 {
+        margin-top: 2px;
+        margin-bottom: 0px;
+    }
+</style>
+@{
+    ViewBag.Title = ViewBag.Title;
+}
+
+@section Heads {
+    <link href="/Content/details.css" rel="stylesheet" />
+    @*<link href="/Content/reset.css" rel="stylesheet" />*@
+}
+
+<div class="row">
+    <div class="navbar2 navbar-default" style="padding-bottom:10px;">
+        <h2>@ViewBag.Title</h2>
+        <hr />
+        <div class="row">
+            <div class="control-label col-md-2 label_large" style="font-size:medium">帳票出力</div>
+        </div>
+        <div class="row" style="line-height:2; margin-top:5px;">
+            <div class="control-label col-sm-2 " style="width: 290px"><エラーリスト></div>
+            <div class="col-sm-1" style="margin-left:43px;"></div>
+            <div class="col-sm-5">
+                @Html.LabelFor(model => model.Month, htmlAttributes: new { @class = "col-md-3 control-label label_large" })
+                @Html.DisplayFor(model => model.Month)
+            </div>
+        </div>
+
+        <div class="row" style="line-height:2">
+            <div class="col-sm-2" style="width:290px">
+                @Html.CheckBoxFor(model => model.PcCodeErrorList, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.LabelFor(model => model.PcCodeErrorList, new { htmlAttributes = new { @for = "ckBox1" } })
+            </div>
+            <div class="col-sm-1" style="margin-left:43px;"></div>
+            <div class="col-sm-5">
+                @Html.LabelFor(model => model.StartTt, htmlAttributes: new { @class = "col-md-3 control-label label_large" })
+                @Html.DisplayFor(model => model.StartTt)
+            </div>
+        </div>
+
+        <div class="row" style="line-height:2">
+            <div class="col-sm-2" style="width:290px">
+                @Html.CheckBoxFor(model => model.KisyuMoreList, new { htmlAttributes = new { @class = "form-control ", @name = "ckBox2" } })
+                @Html.LabelFor(model => model.KisyuMoreList)
+            </div>
+            <div class="col-sm-1" style="margin-left:43px;"></div>
+            <div class="col-sm-5">
+                @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "col-md-3 control-label label_large" })
+                @Html.DisplayFor(model => model.Status)
+            </div>
+        </div>
+
+        <div class="row" style="line-height:2">
+            <div class="col-sm-2" style="width:290px">
+                @Html.CheckBoxFor(model => model.NyuSyukoKurikosiList, new { htmlAttributes = new { @class = "form-control " } })
+                @Html.LabelFor(model => model.NyuSyukoKurikosiList)
+            </div>
+            <div class="col-sm-1" style="margin-left:43px;"></div>
+            <div class="col-sm-5">
+                @Html.LabelFor(model => model.CrtName, htmlAttributes: new { @class = "col-md-3 control-label label_large" })
+                @Html.DisplayFor(model => model.CrtName)
+            </div>
+        </div>
+        <div class="row" style="line-height:2">
+            <div class="col-sm-2" style="width:290px">
+            </div>
+            <div class="col-sm-4"></div>
+            <input type="button" value="出力" class="btn btn-default" style="width: 45px; height: 30px; padding: 0; text-align: center" id="btnPdf" />
+        </div>
+
+        <div class="row" style="line-height:2; margin-top:5px;">
+            <div class="control-label col-sm-2 " style="width: 120px"><結果帳票></div>
+        </div>
+
+        <div class="row" style="line-height:2">
+            <div class="col-sm-2" style="width:290px">
+                @Html.CheckBoxFor(model => model.SekiyusakiShukeiList, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.LabelFor(model => model.SekiyusakiShukeiList)
+            </div>
+        </div>
+
+        <div class="row" style="line-height:2">
+            <div class="col-sm-2" style="width:290px">
+                @Html.CheckBoxFor(model => model.SoukoHinCodList, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.LabelFor(model => model.SoukoHinCodList)
+            </div>
+        </div>
+
+        <div class="row" style="line-height:2">
+            <div class="col-sm-2" style="width:290px">
+                @Html.CheckBoxFor(model => model.SoukoKisyuAList, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.LabelFor(model => model.SoukoKisyuAList)
+            </div>
+        </div>
+
+        <div class="row" style="line-height:2">
+            <div class="col-sm-2" style="width:290px">
+                @Html.CheckBoxFor(model => model.SoukoSiyouryoList, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.LabelFor(model => model.SoukoSiyouryoList)
+            </div>
+        </div>
+
+        <div class="row" style="line-height:2; margin-top:30px;">
+            <div class="control-label col-sm-2 " style="width: 120px"><拠点別Excel></div>
+        </div>
+
+        <div class="row" style="line-height:2">
+            <div class="col-sm-2" style="width:290px">
+                @Html.CheckBoxFor(model => model.KyotenbetuList, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.LabelFor(model => model.KyotenbetuList)
+            </div>
+            <div class="col-sm-4"></div>
+            <input type="button" value="Excel" class="btn btn-default" style="width: 45px; height: 30px; padding: 0; text-align: center" id="btnExcel" />
+        </div>
+
+        <div class="row" style="line-height:2">
+            <div class="col-sm-2" style="width:290px">
+                @Html.CheckBoxFor(model => model.FPSKyotenbetuList, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.LabelFor(model => model.FPSKyotenbetuList)
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts  {
+    @Styles.Render("~/Content/bootstrap-datepicker")
+    @Scripts.Render("~/bundles/bootstrap-datepicker")
+
+    <script>
+
+        window.onload = function () {
+            $('#sidebar').toggleClass('active');
+        };
+
+        $(function () {
+            $('#btnPdf').click(function () {
+                if ($('#PcCodeErrorList').prop('checked') || $('#KisyuMoreList').prop('checked') || $('#NyuSyukoKurikosiList').prop('checked')
+                    || $('#SekiyusakiShukeiList').prop('checked') || $('#SoukoHinCodList').prop('checked') || $('#SoukoKisyuAList').prop('checked') || $('#SoukoSiyouryoList').prop('checked')) {
+                    if ($('#PcCodeErrorList').prop('checked')) {
+                        window.open('@Url.Action("PcCodeErrorListPrint")', '_blank', 'width=700, height=700, resizable=1');
+
+                    }
+                    if ($('#KisyuMoreList').prop('checked')) {
+                        window.open('@Url.Action("KisyuMoreList")', '_blank', 'width=700, height=700, resizable=1');
+                    }
+                    if ($('#NyuSyukoKurikosiList').prop('checked')) {
+                        window.open('@Url.Action("NyuSyukoKurikosiList")', '_blank', 'width=900, height=600, resizable=1');
+                    }
+                    if ($('#SekiyusakiShukeiList').prop('checked')) {
+                        window.open('@Url.Action("SekiyusakiShukeiList")', '_blank', 'width=900, height=600, resizable=1');
+                    }
+                    if ($('#SoukoHinCodList').prop('checked')) {
+                        window.open('@Url.Action("SoukoHinCodList")', '_blank', 'width=900, height=600, resizable=1');
+                    }
+                    if ($('#SoukoKisyuAList').prop('checked')) {
+                        window.open('@Url.Action("SoukoKisyuAList")', '_blank', 'width=900, height=600, resizable=1');
+                    }
+                    if ($('#SoukoSiyouryoList').prop('checked')) {
+                        window.open('@Url.Action("SoukoSiyouryoList")', '_blank', 'width=900, height=600, resizable=1');
+                    }
+                }
+                else {
+                    alert("対象の帳票を選択してください");
+                }
+            });
+        });
+
+        $(function () {
+            $('#btnExcel').click(function () {
+                if ($('#KyotenbetuList').prop('checked') || $('#FPSKyotenbetuList').prop('checked')) {
+                    if (window.confirm('ダウンロードしてもよろしいですか？')) {
+
+                        if ($('#KyotenbetuList').prop('checked')) {
+                            window.open('@Url.Action("KyotenExcel")', '_blank', 'width=900, height=600, resizable=1');
+                        }
+                        if ($('#FPSKyotenbetuList').prop('checked')) {
+                            window.open('@Url.Action("FpsKyotenExcel")', '_blank', 'width=900, height=600, resizable=1');
+                        }
+                    }
+                    
+                }
+                else {
+                    alert("対象のExcel帳票を選択してください");
+                }
+
+            });
+        });
+
+
+    </script>
+}
+

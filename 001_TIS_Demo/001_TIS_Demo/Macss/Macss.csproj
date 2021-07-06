@@ -1,0 +1,920 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.9.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.9.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D7ECD06D-20FC-4283-A67A-D0151ECBDA51}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Macss</RootNamespace>
+    <AssemblyName>Macss</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>default</LangVersion>
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
+    <TypeScriptModuleKind />
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="ClosedXML, Version=0.93.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.93.1\lib\net46\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.7.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.7.2\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.0.3.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelNumberFormat.1.0.3\lib\net20\ExcelNumberFormat.dll</HintPath>
+    </Reference>
+    <Reference Include="FastMember.Signed, Version=1.3.0.0, Culture=neutral, PublicKeyToken=9e8f22703bef9a29, processorArchitecture=MSIL">
+      <HintPath>..\packages\FastMember.Signed.1.3.0\lib\net45\FastMember.Signed.dll</HintPath>
+    </Reference>
+    <Reference Include="GrapeCity.ActiveReports.Chart.v12, Version=12.0.12525.1, Culture=neutral, PublicKeyToken=cc4967777c49a3ff" />
+    <Reference Include="GrapeCity.ActiveReports.Diagnostics.v12, Version=12.0.12525.1, Culture=neutral, PublicKeyToken=cc4967777c49a3ff" />
+    <Reference Include="GrapeCity.ActiveReports.Document.v12, Version=12.0.12525.1, Culture=neutral, PublicKeyToken=cc4967777c49a3ff" />
+    <Reference Include="GrapeCity.ActiveReports.Export.Pdf.v12, Version=12.0.12525.1, Culture=neutral, PublicKeyToken=cc4967777c49a3ff, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files (x86)\ActiveReportsNET12\Bin\v12.0.12525.1\GrapeCity.ActiveReports.Export.Pdf.v12.dll</HintPath>
+    </Reference>
+    <Reference Include="GrapeCity.ActiveReports.Extensibility.v12, Version=12.0.12525.1, Culture=neutral, PublicKeyToken=cc4967777c49a3ff" />
+    <Reference Include="GrapeCity.ActiveReports.v12, Version=12.0.12525.1, Culture=neutral, PublicKeyToken=cc4967777c49a3ff" />
+    <Reference Include="GrapeCity.ActiveReports.Web.v12, Version=12.0.12525.1, Culture=neutral, PublicKeyToken=cc4967777c49a3ff, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files (x86)\ActiveReportsNET12\Bin\v12.0.12525.1\GrapeCity.ActiveReports.Web.v12.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.7.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.7.2\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.7.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.7.2\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.7.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.7.2\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.7.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.7.2\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.7.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.7.2\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.7.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.7.2\lib\net46\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.2\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.2\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.TelemetryCorrelation, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.3\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.0.0\lib\net451\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.0.0\lib\net451\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.0.0\lib\net451\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.0.0\lib\net451\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.4.0.0\lib\net451\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.4.0.0\lib\net451\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.4.0.0\lib\net451\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.0.0\lib\net451\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.4.0.0\lib\net451\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.5.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.0.1\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Packaging, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Packaging.4.0.0\lib\net46\System.IO.Packaging.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.6\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.6\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_GlobalResources\Message.Designer.cs">
+      <DependentUpon>Message.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Fdass\Common\DataUtil.cs" />
+    <Compile Include="Areas\Fdass\Controllers\BackUpController.cs" />
+    <Compile Include="Areas\Fdass\Controllers\EstimatesController.cs" />
+    <Compile Include="Areas\Fdass\Controllers\PrintController.cs" />
+    <Compile Include="Areas\Fdass\Controllers\SeihinCaptureController.cs" />
+    <Compile Include="Areas\Fdass\Controllers\SeihinResultController.cs" />
+    <Compile Include="Areas\Fdass\Controllers\TightenController.cs" />
+    <Compile Include="Areas\Fdass\FdassAreaRegistration.cs" />
+    <Compile Include="Areas\Fdass\Models\MHokanBumon.cs" />
+    <Compile Include="Areas\Fdass\Models\MHokanJouken.cs" />
+    <Compile Include="Areas\Fdass\Models\MHokanRirekiBumon.cs" />
+    <Compile Include="Areas\Fdass\Models\MHokanRirekiJouken.cs" />
+    <Compile Include="Areas\Fdass\Models\MHokanRirekiKeiyaku.cs" />
+    <Compile Include="Areas\Fdass\Models\MHokanRirekiSeikyuusakiChange.cs" />
+    <Compile Include="Areas\Fdass\Models\MHokanRirekiTanka.cs" />
+    <Compile Include="Areas\Fdass\Models\MHokanSeihin.cs" />
+    <Compile Include="Areas\Fdass\Models\MHokanSeikyuusakiChange.cs" />
+    <Compile Include="Areas\Fdass\Models\MHokanTanka.cs" />
+    <Compile Include="Areas\Fdass\Models\THokanDenpyokensu.cs" />
+    <Compile Include="Areas\Fdass\Models\THokanDenpyokensuKurikosi.cs" />
+    <Compile Include="Areas\Fdass\Models\THokanNyuushuuko.cs" />
+    <Compile Include="Areas\Fdass\Models\THokanNyuushuukoKurikosi.cs" />
+    <Compile Include="Areas\Fdass\Models\THokanRirekiDenpyokensu.cs" />
+    <Compile Include="Areas\Fdass\Models\THokanRirekiDenpyokensuKurikosi.cs" />
+    <Compile Include="Areas\Fdass\Models\THokanRirekiNyuushuuko.cs" />
+    <Compile Include="Areas\Fdass\Models\THokanRirekiNyuushuukoKurikosi.cs" />
+    <Compile Include="Areas\Fdass\Models\THokanRirekiSeikyu.cs" />
+    <Compile Include="Areas\Fdass\Models\THokanRirekiSeikyuB.cs" />
+    <Compile Include="Areas\Fdass\Models\THokanRirekiSeikyuKyoten.cs" />
+    <Compile Include="Areas\Fdass\Models\THokanSeikyuB.cs" />
+    <Compile Include="Areas\Fdass\Models\THokanSeikyuKyoten.cs" />
+    <Compile Include="Areas\Fdass\Models\VHokanDenpyokensu.cs" />
+    <Compile Include="Areas\Fdass\Models\VHokanNyuushuuko.cs" />
+    <Compile Include="Areas\Fdass\Models\v_hokan_denpyokensu.cs" />
+    <Compile Include="Areas\Fdass\Models\v_hokan_nyuushuuko.cs" />
+    <Compile Include="Areas\Fdass\Models\WHokanDenpyokensu.cs" />
+    <Compile Include="Areas\Fdass\Models\WHokanNyuushuuko.cs" />
+    <Compile Include="Areas\Fdass\Models\WHokanSeihin.cs" />
+    <Compile Include="Areas\Fdass\Repositories\BackUpRepository.cs" />
+    <Compile Include="Areas\Fdass\Repositories\EstimatesRepository.cs" />
+    <Compile Include="Areas\Fdass\Repositories\IBackUpRepository.cs" />
+    <Compile Include="Areas\Fdass\Repositories\IEstimatesRepository.cs" />
+    <Compile Include="Areas\Fdass\Repositories\IMatujimeKanriRepository.cs" />
+    <Compile Include="Areas\Fdass\Repositories\ISeihinCaptureRepository.cs" />
+    <Compile Include="Areas\Fdass\Repositories\ISeihinResultRepository.cs" />
+    <Compile Include="Areas\Fdass\Repositories\ITightenRepository.cs" />
+    <Compile Include="Areas\Fdass\Repositories\MatujimeKanriRepository.cs" />
+    <Compile Include="Areas\Fdass\Repositories\SeihinCaptureRepository.cs" />
+    <Compile Include="Areas\Fdass\Repositories\SeihinResultRepository.cs" />
+    <Compile Include="Areas\Fdass\Repositories\TightenRepository.cs" />
+    <Compile Include="Areas\Fdass\ViewModels\BackUpViewModel.cs" />
+    <Compile Include="Areas\Fdass\ViewModels\EstimatesViewModel.cs" />
+    <Compile Include="Areas\Fdass\ViewModels\MatujimeKanriViewModel.cs" />
+    <Compile Include="Areas\Fdass\ViewModels\SeihinCaptureViewModel.cs" />
+    <Compile Include="Areas\Fdass\ViewModels\SeihinResultVierModel.cs" />
+    <Compile Include="Areas\Fdass\ViewModels\TightenViewModel.cs" />
+    <Compile Include="Areas\Tass\Common\DataUtil.cs" />
+    <Compile Include="Areas\Tass\Controllers\CodeHelpController.cs" />
+    <Compile Include="Areas\Tass\Controllers\HinmeiController.cs" />
+    <Compile Include="Areas\Tass\Controllers\MaintHinmeiController.cs" />
+    <Compile Include="Areas\Tass\Controllers\MaintTodokesakiController.cs" />
+    <Compile Include="Areas\Tass\Controllers\MaintTyuumonshoPatternController.cs" />
+    <Compile Include="Areas\Tass\Controllers\ShuukaRuisekiController.cs" />
+    <Compile Include="Areas\Tass\Controllers\ShuukaTehaiController.cs" />
+    <Compile Include="Areas\Tass\Controllers\ShuukaTyuumonshoEntryController.cs" />
+    <Compile Include="Areas\Tass\Controllers\ShuukaTyuumonshoPrintController.cs" />
+    <Compile Include="Areas\Tass\Controllers\ShuukaTyuumonshoTorikomiController.cs" />
+    <Compile Include="Areas\Tass\Controllers\TodokesakiController.cs" />
+    <Compile Include="Areas\Tass\Models\MUnsouHinmei.cs" />
+    <Compile Include="Areas\Tass\Models\MUnsouHinmeiKoyuu.cs" />
+    <Compile Include="Areas\Tass\Models\MUnsouJiscode.cs" />
+    <Compile Include="Areas\Tass\Models\MUnsouPostalcode.cs" />
+    <Compile Include="Areas\Tass\Models\MUnsouShuukaTyuumonshoPattern.cs" />
+    <Compile Include="Areas\Tass\Models\MUnsouTodokesaki.cs" />
+    <Compile Include="Areas\Tass\Models\MUnsouTodokesakiKoyuu.cs" />
+    <Compile Include="Areas\Tass\Models\MUnsouUnsouhouhou.cs" />
+    <Compile Include="Areas\Tass\Models\MUnsouUnsoukousu.cs" />
+    <Compile Include="Areas\Tass\Models\MUnsouUnsoukubun.cs" />
+    <Compile Include="Areas\Tass\Models\TUnsouShuukaJiseki1.cs" />
+    <Compile Include="Areas\Tass\Models\TUnsouRirekiShuukaJiseki.cs" />
+    <Compile Include="Areas\Tass\Models\TUnsouShuukaJiseki2.cs" />
+    <Compile Include="Areas\Tass\Models\TUnsouShuukatehai.cs" />
+    <Compile Include="Areas\Tass\Models\TUnsouShuukaTehaiAll.cs" />
+    <Compile Include="Areas\Tass\Models\TUnsouShuukaTyuumonshoTehai.cs" />
+    <Compile Include="Areas\Tass\Models\VUnsouHinmei.cs" />
+    <Compile Include="Areas\Tass\Models\VUnsouShuukaTehai.cs" />
+    <Compile Include="Areas\Tass\Models\v_unsou_hinmei.cs" />
+    <Compile Include="Areas\Tass\Models\v_unsou_shuuka_tehai.cs" />
+    <Compile Include="Areas\Tass\Models\WUnsouShuukaTyuumonshoTehaiMeisaiKouho.cs" />
+    <Compile Include="Areas\Tass\Models\WUnsouShuukaTyuumonshoTehaiKouho.cs" />
+    <Compile Include="Areas\Tass\Models\TUnsouShuukaTyuumonshoTehaiKouho.cs" />
+    <Compile Include="Areas\Tass\Models\TUnsouShuukaTyuumonshoTehaiMeisai.cs" />
+    <Compile Include="Areas\Tass\Models\TUnsouShuukaTyuumonshoTehaiMeisaiKouho.cs" />
+    <Compile Include="Areas\Tass\Models\VUnsouTodokesaki.cs" />
+    <Compile Include="Areas\Tass\Models\v_unsou_todokesaki.cs" />
+    <Compile Include="Areas\Tass\Repositories\CodeHelpRepositorie.cs" />
+    <Compile Include="Areas\Tass\Repositories\HinmeiRepositorie.cs" />
+    <Compile Include="Areas\Tass\Repositories\ICodeHelpRepositorie.cs" />
+    <Compile Include="Areas\Tass\Repositories\IHinmeiRepositorie.cs" />
+    <Compile Include="Areas\Tass\Repositories\IShuukaRuisekiRepositorie.cs" />
+    <Compile Include="Areas\Tass\Repositories\IShuukaTehaiRepositorie.cs" />
+    <Compile Include="Areas\Tass\Repositories\IShuukaTyuumonshoEntryRepositorie.cs" />
+    <Compile Include="Areas\Tass\Repositories\IShuukaTyuumonshoPrintRepositorie.cs" />
+    <Compile Include="Areas\Tass\Repositories\IShuukaTyuumonshoTorikomiRepositorie.cs" />
+    <Compile Include="Areas\Tass\Repositories\ITodokesakiRepositorie.cs" />
+    <Compile Include="Areas\Tass\Repositories\ShuukaRuisekiRepositorie.cs" />
+    <Compile Include="Areas\Tass\Repositories\ShuukaTehaiRepositorie.cs" />
+    <Compile Include="Areas\Tass\Repositories\ShuukaTyuumonshoEntryRepositorie.cs" />
+    <Compile Include="Areas\Tass\Repositories\ShuukaTyuumonshoPrintRepositorie.cs" />
+    <Compile Include="Areas\Tass\Repositories\ShuukaTyuumonshoTorikomiRepositorie.cs" />
+    <Compile Include="Areas\Tass\Repositories\TodokesakiRepositorie.cs" />
+    <Compile Include="Areas\Tass\TassAreaRegistration.cs" />
+    <Compile Include="Areas\Tass\ViewModels\CodeHelpViewModels.cs" />
+    <Compile Include="Areas\Tass\ViewModels\HinmeiViewModels.cs" />
+    <Compile Include="Areas\Tass\ViewModels\MaintHinmeiViewModels.cs" />
+    <Compile Include="Areas\Tass\ViewModels\MaintTodokesakiViewModels.cs" />
+    <Compile Include="Areas\Tass\ViewModels\MaintTyuumonshoPatternViewModesl.cs" />
+    <Compile Include="Areas\Tass\ViewModels\ShuukaRuisekiViewModels.cs" />
+    <Compile Include="Areas\Tass\ViewModels\ShuukaTehaiViewModels.cs" />
+    <Compile Include="Areas\Tass\ViewModels\ShuukaTyuumonshoEntryViewModels.cs" />
+    <Compile Include="Areas\Tass\ViewModels\ShuukaTyuumonshoPrintViewModels.cs" />
+    <Compile Include="Areas\Tass\ViewModels\ShuukaTyuumonshoTorikomiViewModels.cs" />
+    <Compile Include="Areas\Tass\ViewModels\TodokesakiViewModels.cs" />
+    <Compile Include="Attributes\ActionFilter\AuthorityActionFilter.cs" />
+    <Compile Include="Attributes\ActionFilter\StartActionFilter.cs" />
+    <Compile Include="Attributes\Custom\DefaultValueSqlServerMigrationSqlGenerator.cs" />
+    <Compile Include="Attributes\Validation\ListRequiredAttribute.cs" />
+    <Compile Include="Attributes\Validation\TwoByteCharacterAttribute.cs" />
+    <Compile Include="Controllers\ControlController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\GroupController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\LogController.cs" />
+    <Compile Include="Controllers\MaintenanceController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\SessionExtensions.cs" />
+    <Compile Include="Controllers\UseStatusController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="HtmlHelpers\BootstrapTableHelper.cs" />
+    <Compile Include="Migrations\201903130615147_create_table9.cs" />
+    <Compile Include="Migrations\201903130615147_create_table9.Designer.cs">
+      <DependentUpon>201903130615147_create_table9.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903130917199_create_table10.cs" />
+    <Compile Include="Migrations\201903130917199_create_table10.Designer.cs">
+      <DependentUpon>201903130917199_create_table10.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903130924159_create_table11.cs" />
+    <Compile Include="Migrations\201903130924159_create_table11.Designer.cs">
+      <DependentUpon>201903130924159_create_table11.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903140942171_create_table12.cs" />
+    <Compile Include="Migrations\201903140942171_create_table12.Designer.cs">
+      <DependentUpon>201903140942171_create_table12.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903141212119_create_table13.cs" />
+    <Compile Include="Migrations\201903141212119_create_table13.Designer.cs">
+      <DependentUpon>201903141212119_create_table13.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903210009269_create_table.cs" />
+    <Compile Include="Migrations\201903210009269_create_table.Designer.cs">
+      <DependentUpon>201903210009269_create_table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904110123566_create_table1.cs" />
+    <Compile Include="Migrations\201904110123566_create_table1.Designer.cs">
+      <DependentUpon>201904110123566_create_table1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904110159097_create_table2.cs" />
+    <Compile Include="Migrations\201904110159097_create_table2.Designer.cs">
+      <DependentUpon>201904110159097_create_table2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904190659422_create_table3.cs" />
+    <Compile Include="Migrations\201904190659422_create_table3.Designer.cs">
+      <DependentUpon>201904190659422_create_table3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905090528314_create_table4.cs" />
+    <Compile Include="Migrations\201905090528314_create_table4.Designer.cs">
+      <DependentUpon>201905090528314_create_table4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905170408066_create_table5.cs" />
+    <Compile Include="Migrations\201905170408066_create_table5.Designer.cs">
+      <DependentUpon>201905170408066_create_table5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905200450119_create_table6.cs" />
+    <Compile Include="Migrations\201905200450119_create_table6.Designer.cs">
+      <DependentUpon>201905200450119_create_table6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905300648476_create_table7.cs" />
+    <Compile Include="Migrations\201905300648476_create_table7.Designer.cs">
+      <DependentUpon>201905300648476_create_table7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905300653351_create_table8.cs" />
+    <Compile Include="Migrations\201905300653351_create_table8.Designer.cs">
+      <DependentUpon>201905300653351_create_table8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905301014558_create_table14.cs" />
+    <Compile Include="Migrations\201905301014558_create_table14.Designer.cs">
+      <DependentUpon>201905301014558_create_table14.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906130429440_create_table15.cs" />
+    <Compile Include="Migrations\201906130429440_create_table15.Designer.cs">
+      <DependentUpon>201906130429440_create_table15.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906130806515_create_table16.cs" />
+    <Compile Include="Migrations\201906130806515_create_table16.Designer.cs">
+      <DependentUpon>201906130806515_create_table16.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906140014578_create_table17.cs" />
+    <Compile Include="Migrations\201906140014578_create_table17.Designer.cs">
+      <DependentUpon>201906140014578_create_table17.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906260454451_create_table18.cs" />
+    <Compile Include="Migrations\201906260454451_create_table18.Designer.cs">
+      <DependentUpon>201906260454451_create_table18.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906260525401_create_table19.cs" />
+    <Compile Include="Migrations\201906260525401_create_table19.Designer.cs">
+      <DependentUpon>201906260525401_create_table19.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907090011579_create_table20.cs" />
+    <Compile Include="Migrations\201907090011579_create_table20.Designer.cs">
+      <DependentUpon>201907090011579_create_table20.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907170416530_create_table21.cs" />
+    <Compile Include="Migrations\201907170416530_create_table21.Designer.cs">
+      <DependentUpon>201907170416530_create_table21.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907170652083_create_table22.cs" />
+    <Compile Include="Migrations\201907170652083_create_table22.Designer.cs">
+      <DependentUpon>201907170652083_create_table22.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909130558381_create_table23.cs" />
+    <Compile Include="Migrations\201909130558381_create_table23.Designer.cs">
+      <DependentUpon>201909130558381_create_table23.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ApplicationRole.cs" />
+    <Compile Include="Models\CustomAttributes.cs" />
+    <Compile Include="Areas\Fdass\Models\MHokanKeiyaku.cs" />
+    <Compile Include="Areas\Fdass\Models\THokanMatujimeKanri.cs" />
+    <Compile Include="Models\MAccountRole.cs" />
+    <Compile Include="Models\MCalendar.cs" />
+    <Compile Include="Models\MControl.cs" />
+    <Compile Include="Models\MGroup.cs" />
+    <Compile Include="Models\MKishu.cs" />
+    <Compile Include="Models\MMenu.cs" />
+    <Compile Include="Models\MMenuRole.cs" />
+    <Compile Include="Models\VTableLock.cs" />
+    <Compile Include="Models\MRole.cs" />
+    <Compile Include="Models\MSeikyusaki.cs" />
+    <Compile Include="Models\MShukkabasho.cs" />
+    <Compile Include="Models\MTorihikisaki.cs" />
+    <Compile Include="Models\Service\LogService.cs" />
+    <Compile Include="Models\Service\GroupService.cs" />
+    <Compile Include="Models\Service\ExportService.cs" />
+    <Compile Include="Models\Service\MaintenanceService.cs" />
+    <Compile Include="Areas\Fdass\Models\THokanSeikyu.cs" />
+    <Compile Include="Models\Service\UseStatusService.cs" />
+    <Compile Include="Models\TLogHistory.cs" />
+    <Compile Include="Models\TPasswordHistory.cs" />
+    <Compile Include="Models\TUseStatus.cs" />
+    <Compile Include="Models\v_table_lock.cs" />
+    <Compile Include="Properties\Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Repositories\AccountRepository.cs" />
+    <Compile Include="Repositories\ControlRepository.cs" />
+    <Compile Include="Areas\Fdass\Repositories\IPrintRepository.cs" />
+    <Compile Include="Areas\Fdass\Repositories\PrintRepository.cs" />
+    <Compile Include="Repositories\ITableLockRepository.cs" />
+    <Compile Include="Repositories\TableLockRepository.cs" />
+    <Compile Include="Repositories\GroupRepository.cs" />
+    <Compile Include="Repositories\IAccountRepository.cs" />
+    <Compile Include="Repositories\IControlRepository.cs" />
+    <Compile Include="Repositories\IMaintenanceRepository.cs" />
+    <Compile Include="Repositories\ILogRepository.cs" />
+    <Compile Include="Repositories\IMenuRepository.cs" />
+    <Compile Include="Repositories\IGroupRepository.cs" />
+    <Compile Include="Repositories\IMShukkabashoRepository.cs" />
+    <Compile Include="Repositories\IRoleRepository.cs" />
+    <Compile Include="Repositories\IUseStatusRepository.cs" />
+    <Compile Include="Repositories\MaintenanceRepository.cs" />
+    <Compile Include="Repositories\LogRepository.cs" />
+    <Compile Include="Repositories\MenuRepository.cs" />
+    <Compile Include="Repositories\MShukkabashoRepository.cs" />
+    <Compile Include="Repositories\RoleRepository.cs" />
+    <Compile Include="Repositories\UseStatusRepository.cs" />
+    <Compile Include="ViewModels\ControlViewModels.cs" />
+    <Compile Include="ViewModels\LogViewModels.cs" />
+    <Compile Include="ViewModels\MaintenanceViewModels.cs" />
+    <Compile Include="Areas\Fdass\ViewModels\PrintViewModel.cs" />
+    <Compile Include="ViewModels\RoleViewModels.cs" />
+    <Compile Include="ViewModels\AccountViewModels.cs" />
+    <Compile Include="ViewModels\GroupViewModels.cs" />
+    <Compile Include="ViewModels\MenuViewModels.cs" />
+    <Compile Include="ViewModels\LoginViewModels.cs" />
+    <Compile Include="Models\ApplicationDB.cs" />
+    <Compile Include="Models\MAccount.cs" />
+    <Compile Include="Models\Service\MenuService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\UserStore.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\UseStatusViewModels.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\Database.mdf" />
+    <Content Include="App_Data\Database_log.ldf">
+      <DependentUpon>Database.mdf</DependentUpon>
+    </Content>
+    <Content Include="Areas\Fdass\Img\gif-load.gif" />
+    <Content Include="Areas\Fdass\Sql\Sql.txt" />
+    <Content Include="Areas\Tass\Sql\sql.txt" />
+    <Content Include="Areas\Tass\Sql\照合順序_DB再作成.txt" />
+    <Content Include="Content\bootstrap-table-ja-JP.js" />
+    <Content Include="Content\bootstrap-table.css" />
+    <Content Include="Content\bootstrap-table.es5.js">
+      <DependentUpon>bootstrap-table.js</DependentUpon>
+    </Content>
+    <Content Include="Content\bootstrap-table.es5.min.js">
+      <DependentUpon>bootstrap-table.es5.js</DependentUpon>
+    </Content>
+    <Content Include="Content\bootstrap-table.js" />
+    <Content Include="Content\bootstrap-table.min.css" />
+    <Content Include="Content\bootstrap-table.min.js">
+      <DependentUpon>bootstrap-table.js</DependentUpon>
+    </Content>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\details.css" />
+    <Content Include="Content\extensions\export\bootstrap-table-export.js" />
+    <Content Include="Content\extensions\export\bootstrap-table-export.min.js">
+      <DependentUpon>bootstrap-table-export.js</DependentUpon>
+    </Content>
+    <Content Include="Content\extensions\filter-control\bootstrap-table-filter-control.css" />
+    <Content Include="Content\extensions\filter-control\bootstrap-table-filter-control.js" />
+    <Content Include="Content\extensions\filter-control\bootstrap-table-filter-control.min.js">
+      <DependentUpon>bootstrap-table-filter-control.js</DependentUpon>
+    </Content>
+    <Content Include="Content\extensions\multiple-sort\bootstrap-table-multiple-sort.js" />
+    <Content Include="Content\extensions\multiple-sort\bootstrap-table-multiple-sort.min.js">
+      <DependentUpon>bootstrap-table-multiple-sort.js</DependentUpon>
+    </Content>
+    <Content Include="Content\macss.css" />
+    <Content Include="Content\menu.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="information.txt" />
+    <Content Include="Plugins\bootstrap-table\dist\extensions\export\bootstrap-table-export.js" />
+    <Content Include="Plugins\bootstrap-table\dist\extensions\export\bootstrap-table-export.min.js" />
+    <Content Include="Plugins\libs\js-xlsx\xlsx.core.min.js" />
+    <Content Include="Plugins\my-bootstrap-table-export.js" />
+    <Content Include="Plugins\bootstrap-table\dist\extensions\export\tableExport.js" />
+    <Content Include="Plugins\datetime-picker\css\bootstrap-datepicker.css" />
+    <Content Include="Plugins\datetime-picker\js\bootstrap-datepicker.js" />
+    <Content Include="Plugins\datetime-picker\locales\bootstrap-datepicker.ja.min.js" />
+    <Content Include="Plugins\tableExport.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="log4net.config" />
+    <Content Include="Areas\Fdass\Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\Fdass\Views\Print\Index.cshtml" />
+    <Content Include="Areas\Fdass\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Fdass\Report\TankaAutoSetList.rpx">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="Areas\Fdass\Excel\EstimatesHinCod.xlsx" />
+    <Content Include="Areas\Fdass\Excel\EstimatesKisyuA.xlsx" />
+    <Content Include="Areas\Tass\Views\web.config" />
+    <Content Include="Areas\Tass\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Tass\Views\MaintHinmei\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\MaintTodokesaki\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\Todokesaki\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\Todokesaki\Details.cshtml" />
+    <Content Include="Areas\Tass\Views\ShuukaTyuumonshoTorikomi\Index.cshtml" />
+    <Content Include="Areas\Fdass\Excel\DepositSaveData.xlsx" />
+    <Content Include="Areas\Fdass\Views\Estimates\Index.cshtml" />
+    <Content Include="Areas\Fdass\Views\SeihinCapture\Index.cshtml" />
+    <Content Include="Areas\Fdass\Views\Tighten\index.cshtml" />
+    <Content Include="Areas\Fdass\Excel\FPSDepositSaveData.xlsx" />
+    <Content Include="Areas\Fdass\Report\DepositSaveRequestModelCKList.rpx" />
+    <Content Include="Areas\Fdass\Report\DepositSaveRequestSumList.rpx" />
+    <Content Include="Areas\Fdass\Report\InAutBroughtForwardList.rpx" />
+    <Content Include="Areas\Fdass\Report\KisyuMoreList.rpx" />
+    <Content Include="Areas\Fdass\Report\NyuSyukoKurikosiList.rpx" />
+    <Content Include="Areas\Fdass\Report\SekiyusakiShukeiList.rpx" />
+    <Content Include="Areas\Fdass\Report\SoukoHinCodList.rpx" />
+    <Content Include="Areas\Fdass\Report\SoukoKisyuAList.rpx" />
+    <Content Include="Areas\Fdass\Report\SoukoSiyouryoList.rpx" />
+    <Content Include="Areas\Fdass\Report\WareHouseDetailCodeList.rpx" />
+    <Content Include="Areas\Fdass\Report\WareHouseDetailsModelAList.rpx" />
+    <Content Include="Areas\Fdass\Report\WareHouseDetailsUnitList.rpx" />
+    <Content Include="Areas\Tass\Views\Hinmei\Details.cshtml" />
+    <Content Include="Areas\Tass\Views\Hinmei\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\MaintTyuumonshoPattern\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\Shared\ShukkabashoCodeHelp.cshtml" />
+    <Content Include="Areas\Fdass\Excel\FpsKyotenData.xlsx" />
+    <Content Include="Areas\Fdass\Excel\KyotenData.xlsx" />
+    <Content Include="Areas\Fdass\Views\BackUp\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\ShuukaTyuumonshoEntry\Details.cshtml" />
+    <Content Include="Areas\Tass\Views\ShuukaTyuumonshoEntry\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\Shared\SiiresakiCodeHelp.cshtml" />
+    <Content Include="Areas\Tass\Views\Shared\TodokesakiCodeHelp.cshtml" />
+    <Content Include="Areas\Tass\Views\Shared\TokuisakiCodeHelp.cshtml" />
+    <Content Include="Areas\Tass\Views\Shared\UnsohohoCodeHelp.cshtml" />
+    <Content Include="Areas\Tass\Views\Shared\UnsokbnCodeHelp.cshtml" />
+    <Content Include="Areas\Tass\Views\Shared\YubinbangoCodeHelp.cshtml" />
+    <Content Include="Areas\Tass\Views\Shared\HinmeisakiCodeHelp.cshtml" />
+    <Content Include="Areas\Tass\Views\ShuukatyuumonshoPrint\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\ShuukaTehai\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\ShuukaTehai\Details.cshtml" />
+    <Content Include="Areas\Tass\Report\ShuukaTyuumonsho.rpx" />
+    <Content Include="Areas\Fdass\Views\SeihinResult\index.cshtml" />
+    <Content Include="Areas\Tass\Views\ShuukaRuiseki\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\Shared\TyuumonshoPatternCodeHelp.cshtml" />
+    <None Include="bundleconfig.json" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\messages_ja.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper-utils.min.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Views\Control\Index.cshtml" />
+    <Content Include="Views\UseStatus\Index.cshtml" />
+    <None Include="Web.config_本番" />
+    <None Include="Web.config_ステージング">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web.config_検証" />
+    <None Include="Web.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config_検証</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config_検証</DependentUpon>
+    </None>
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\Details.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Role\Details.cshtml" />
+    <Content Include="Views\Group\Details.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Log\Index.cshtml" />
+    <Content Include="Views\Maintenance\Index.cshtml" />
+    <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\Group\Index.cshtml" />
+    <Content Include="Views\Shared\_BootstrapFunction.cshtml" />
+    <Content Include="Areas\Fdass\Report\PcCodeErrorList.rpx">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="UploadFiles\_._">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\Fdass\Views\Shared\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\Message.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Message.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+    <EmbeddedResource Include="licenses.licx" />
+    <EmbeddedResource Include="Migrations\201903130615147_create_table9.resx">
+      <DependentUpon>201903130615147_create_table9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903130917199_create_table10.resx">
+      <DependentUpon>201903130917199_create_table10.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903130924159_create_table11.resx">
+      <DependentUpon>201903130924159_create_table11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903140942171_create_table12.resx">
+      <DependentUpon>201903140942171_create_table12.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903141212119_create_table13.resx">
+      <DependentUpon>201903141212119_create_table13.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903210009269_create_table.resx">
+      <DependentUpon>201903210009269_create_table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904110123566_create_table1.resx">
+      <DependentUpon>201904110123566_create_table1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904110159097_create_table2.resx">
+      <DependentUpon>201904110159097_create_table2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904190659422_create_table3.resx">
+      <DependentUpon>201904190659422_create_table3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905090528314_create_table4.resx">
+      <DependentUpon>201905090528314_create_table4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905170408066_create_table5.resx">
+      <DependentUpon>201905170408066_create_table5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905200450119_create_table6.resx">
+      <DependentUpon>201905200450119_create_table6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905300648476_create_table7.resx">
+      <DependentUpon>201905300648476_create_table7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905300653351_create_table8.resx">
+      <DependentUpon>201905300653351_create_table8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905301014558_create_table14.resx">
+      <DependentUpon>201905301014558_create_table14.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906130429440_create_table15.resx">
+      <DependentUpon>201906130429440_create_table15.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906130806515_create_table16.resx">
+      <DependentUpon>201906130806515_create_table16.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906140014578_create_table17.resx">
+      <DependentUpon>201906140014578_create_table17.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906260454451_create_table18.resx">
+      <DependentUpon>201906260454451_create_table18.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906260525401_create_table19.resx">
+      <DependentUpon>201906260525401_create_table19.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907090011579_create_table20.resx">
+      <DependentUpon>201907090011579_create_table20.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907170416530_create_table21.resx">
+      <DependentUpon>201907170416530_create_table21.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907170652083_create_table22.resx">
+      <DependentUpon>201907170652083_create_table22.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909130558381_create_table23.resx">
+      <DependentUpon>201909130558381_create_table23.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>このプロジェクトは、このコンピューター上にない NuGet パッケージを参照しています。それらのパッケージをダウンロードするには、[NuGet パッケージの復元] を使用します。詳細については、http://go.microsoft.com/fwlink/?LinkID=322105 を参照してください。見つからないファイルは {0} です。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.9.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.9.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

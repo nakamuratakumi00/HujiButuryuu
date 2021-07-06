@@ -1,0 +1,68 @@
+﻿@using Macss.ViewModels
+@model UseStatusViewModel
+
+<style>
+    h1, .h1,
+    h2, .h2,
+    h3, .h3 {
+        margin-top: 2px;
+        margin-bottom: 0px;
+    }
+</style>
+
+@{
+    ViewBag.Title = ViewBag.Title;
+}
+
+<div class="row">
+    <div class="navbar2 navbar-default">
+        <h2>@ViewBag.Title</h2>
+
+        <hr />
+        <table>
+            <tr>
+                <td width="250px">
+                    <h2>【@ViewBag.Date 現在】</h2>
+                </td>
+                <td>
+                    <p>
+                        @Html.ActionLink("再表示", "Index", FormMethod.Post, htmlAttributes: new { type = "submit", @class = "btn btn-default", @style = "width:60px; height:30px; padding: 0px; padding:5px; text-align: center" })
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <table id="table"
+               class="table"
+               data-url="@Url.Action("All")"
+               data-toggle="table"
+               data-method="POST"
+               data-filter-control="true"
+               data-id-table="advancedTable"
+               data-page-list="[10, 25, 50, 1000]"
+               data-click-to-select="true"
+               data-pagination="true">
+
+            <thead>
+                <tr id="data">
+                    @Html.ThFor(model => model.AccountId, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                    @Html.ThFor(model => model.AccountName, htmlAttributes: new { data_filter_control = "input", data_sortable = "true", @class = "imeZen" })
+                    @Html.ThFor(model => model.BumonCd, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                    @Html.ThFor(model => model.TitleName, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                    @Html.ThFor(model => model.UpdateDate, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+@section Scripts  {
+    @Html.Partial("_BootstrapFunction")
+    @Scripts.Render("~/bundles/my-bootstrap-export")
+    <script>
+
+        window.onload = function () {
+            $('#sidebar').toggleClass('active');
+        };
+
+    </script>
+}

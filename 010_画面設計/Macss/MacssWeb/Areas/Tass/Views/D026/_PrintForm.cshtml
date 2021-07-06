@@ -1,0 +1,110 @@
+﻿@model Macss.Database.Entity.AccountMaster
+
+@Html.AntiForgeryToken()
+
+<!--テスト値-->
+@{ var testVal = string.Empty; }
+
+<div>
+    @Html.ValidationSummary(false, "入力エラーがあります。", new { @class = "alert alert-danger" })
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.BackToList</a>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div>
+        <p>
+            @ViewBag.ConfirmMessage
+        </p>
+    </div>
+</div>
+
+<div class="row mr-0 mb-1">
+    <div class="col-3">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="Condition1">配布先コード</span>
+            </div>
+            <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="Condition3">印刷コード</span>
+            </div>
+            <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+        </div>
+    </div>
+</div>
+
+<div class="row mr-0 mb-1">
+    <div class="col-3">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text required">発行枚数</label>
+            </div>
+            <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text required">出荷No印刷</label>
+            </div>
+            <select class="custom-select form-control" id="Condition3">
+                <option value=""></option>
+                <option value="0">印刷しない</option>
+                <option value="1">印刷する</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.BackToList</a>
+    </div>
+    <div class="col-8 text-right">
+        <button type="submit" class="btn btn-primary">@MacssWeb.Resources.ControlText.Print</button>
+    </div>
+</div>
+
+<div class="modal" id="TransitionConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.TransitionConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @MacssWeb.Resources.Messages.TransitionConfirm
+                <br>
+                @MacssWeb.Resources.Messages.Confirm
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary macss-btn" href="@Url.Action("Index")" role="button">@MacssWeb.Resources.ControlText.Yes</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function setDepartmentCode(code, value) {
+        $("#bumon_cd").val(code);
+        $("#DepartmentName").text(value);
+    }
+    $(function () {
+        var createDatePicker = new Macss.DatetimePicker.MacssDtPicker("#totyaku_date", "#TotyakuDateCalendar");
+        createDatePicker.configure();
+        var updateDatePicker = new Macss.DatetimePicker.MacssDtPicker("#syukka_date", "#SyukkaDateCalendar");
+        updateDatePicker.configure();
+    });
+</script>

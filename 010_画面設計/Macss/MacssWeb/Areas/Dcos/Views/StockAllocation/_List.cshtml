@@ -1,0 +1,188 @@
+﻿@using MacssWeb.Areas.Dcos.Helper
+@model IEnumerable<Macss.Database.Entity.DummyStock>
+
+<script>
+    $(function () {
+
+        var dt = new Macss.DataTables.MacssDataTable("#SampleList");
+        dt.configure();
+
+    });
+
+</script>
+
+<table id="SampleList" class="table table-striped table-hover macss-data-table" style="width:100%">
+    <thead class="macss-data-table-header">
+        <tr>
+
+            @if (ViewBag.StockScreen.HasFlag(StockScreens.StockAllocationIndex))
+            {
+                <th>ステータス</th>
+            }
+            @if (ViewBag.StockScreen.HasFlag(StockScreens.StockAllocationIndex))
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.InYMD)
+                </th>
+            }
+            @if (ViewBag.StockScreen.HasFlag(StockScreens.StockAllocationPickingList))
+            {
+                <th>出力選択</th>
+            }
+            <th>
+                @Html.DisplayNameFor(model => model.OutOrderYMD)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClientCode)
+            </th>
+            <th>
+                オリジナル出庫指示No
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductCode)
+            </th>
+            @if (ViewBag.StockScreen.HasFlag(StockScreens.StockAutoAllocation)
+            || ViewBag.StockScreen.HasFlag(StockScreens.StockAllocationPickingList)
+            || ViewBag.StockScreen.HasFlag(StockScreens.StockAutoAllocationResult))
+            {
+                <th style="min-width:200px;">
+                    @Html.DisplayNameFor(model => model.ProductName)
+                </th>
+            }
+            <th>
+                @Html.DisplayNameFor(model => model.WarehouseCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RackNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LotNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StockQuantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FixAllocationQuantity)
+            </th>
+            @if (ViewBag.StockScreen.HasFlag(StockScreens.StockAllocationIndex)
+                    || ViewBag.StockScreen.HasFlag(StockScreens.StockAutoAllocation))
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.OutOrderQuantity)
+                </th>
+            }
+            <th>
+                @Html.DisplayNameFor(model => model.AllocationPlanQuantity)
+            </th>
+            @if (!ViewBag.StockScreen.HasFlag(StockScreens.StockAllocationPickingList))
+            {
+
+                <th>
+                    @Html.DisplayNameFor(model => model.AllocationExecQuantity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StockRemaining)
+                </th>
+            }
+            @if (ViewBag.StockScreen.HasFlag(StockScreens.StockAllocationIndex)
+                    || ViewBag.StockScreen.HasFlag(StockScreens.StockAllocationPickingList))
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.PickingList)
+                </th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            @if (ViewBag.StockScreen.HasFlag(StockScreens.StockAllocationIndex))
+            {
+            <td style="white-space:nowrap;">
+                @*<a href="@Url.Action("Edit", new { id = item.Id })" title="@MacssWeb.Resources.Dcos.StockPlanEditMainTitle"><i class="fas fa-pencil-alt" style="color:#007bff" aria-hidden="true"></i></a>*@
+                @*<a href="@Url.Action("Details", new { id = item.Id })" title="詳細"><i class="far fa-file-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                <a href="@Url.Action("AllocationPlanFixConfirm", new { id = item.Id })" title="在庫引当確定"><i class="fas fa-check" style="color:#007bff" aria-hidden="true"></i></a>
+                <a href="@Url.Action("AllocationPlanFixCancelConfirm", new { id = item.Id })" title="在庫引当確定解除"><i class="fas fa-undo-alt" style="color:#007bff" aria-hidden="true"></i></a>*@
+                計画済
+            </td>
+            }
+            @if (ViewBag.StockScreen.HasFlag(StockScreens.StockAllocationIndex))
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.InYMD)
+                </td>
+            }
+            @if (ViewBag.StockScreen.HasFlag(StockScreens.StockAllocationPickingList))
+            {
+                <td>
+                    <input type="checkbox" id="subscribeNews" name="subscribe" value="newsletter">
+                </td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.OutOrderYMD)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientCode)
+            </td>
+            <td>
+                123456789012345
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductCode)
+            </td>
+            @if (ViewBag.StockScreen.HasFlag(StockScreens.StockAutoAllocation)
+                    || ViewBag.StockScreen.HasFlag(StockScreens.StockAllocationPickingList)
+                    || ViewBag.StockScreen.HasFlag(StockScreens.StockAutoAllocationResult))
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.WarehouseCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RackNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LotNumber)
+            </td>
+            <td class="text-right">
+                @Html.DisplayFor(modelItem => item.StockQuantity)
+            </td>
+            <td class="text-right">
+                @Html.DisplayFor(modelItem => item.FixAllocationQuantity)
+            </td>
+            @if (ViewBag.StockScreen.HasFlag(StockScreens.StockAllocationIndex)
+                    || ViewBag.StockScreen.HasFlag(StockScreens.StockAutoAllocation))
+            {
+                <td class="text-right">
+                    @Html.DisplayFor(modelItem => item.OutOrderQuantity)
+                </td>
+            }
+            <td class="text-right">
+                @Html.DisplayFor(modelItem => item.AllocationPlanQuantity)
+            </td>
+            @if (!ViewBag.StockScreen.HasFlag(StockScreens.StockAllocationPickingList))
+            {
+                <td class="text-right">
+                    @Html.DisplayFor(modelItem => item.AllocationExecQuantity)
+                </td>
+                <td class="text-right">
+                    @Html.DisplayFor(modelItem => item.StockRemaining)
+                </td>
+            }
+            @if (ViewBag.StockScreen.HasFlag(StockScreens.StockAllocationIndex)
+                    || ViewBag.StockScreen.HasFlag(StockScreens.StockAllocationPickingList))
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.PickingList)
+                </td>
+            }
+        </tr>
+            break;
+        }
+    </tbody>
+</table>
+

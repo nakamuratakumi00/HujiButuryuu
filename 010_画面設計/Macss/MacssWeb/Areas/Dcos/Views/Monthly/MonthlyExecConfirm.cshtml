@@ -1,0 +1,120 @@
+﻿<html lang="ja">
+
+@{
+    ViewBag.Title = "月次データ更新";
+    ViewBag.PageMainTitle = "月次データ更新実行確認";
+    ViewBag.Date = "2020年12月";
+}
+@section Scripts {
+    <script>
+        $(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#UploadConfirmList");
+            dt.setScrollY("600px");
+            dt.configure();
+
+        });
+    </script>
+}
+
+<div class="alert alert-info">
+    <span>月次データを更新します。よろしいですか？</span>
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("MonthlyExec")">戻る</a>
+    </div>
+    <div class="col-4 text-right">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDialog">実行</button>
+    </div>
+</div>
+
+<div class="mb-4">
+</div>
+
+<div class="row mr-4 mb-1">
+    <div class="col-4">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">年月</span>
+            </div>
+            <span class="form-control">@ViewBag.Date</span>
+        </div>
+    </div>
+</div>
+
+<div class="row mr-0 mb-1">
+    <div class="col-4">
+        <div class="input-group mb-0">
+            <div class="input-group-prepend">
+                <span class="input-group-text">入出庫在庫実績データ更新件数</span>
+            </div>
+            <span class="form-control">101件</span>
+        </div>
+    </div>
+</div>
+<div class="row mr-0 mb-1">
+    <div class="col-4">
+        <div class="input-group mb-0">
+            <div class="input-group-prepend">
+                <span class="input-group-text">保管荷役請求引渡しデータ更新件数</span>
+            </div>
+            <span class="form-control">102件</span>
+        </div>
+    </div>
+</div>
+<div class="row mr-0 mb-1">
+    <div class="col-4">
+        <div class="input-group mb-0">
+            <div class="input-group-prepend">
+                <span class="input-group-text">保管取引先マスタ更新件数</span>
+            </div>
+            <span class="form-control">103件</span>
+        </div>
+    </div>
+</div>
+<div class="row mr-0 mb-1">
+    <div class="col-4">
+        <div class="input-group mb-0">
+            <div class="input-group-prepend">
+                <span class="input-group-text">契約品名マスタ更新件数</span>
+            </div>
+            <span class="form-control">104件</span>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="ConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                更新処理を実行します。よろしいですか？
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.Cancel</button>
+                @using (Html.BeginForm("MonthlyComplete", "Monthly", null, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="UploadFileName" name="uploadFileName" value="@ViewBag.UploadFileName" />
+                    <button type="submit" class="btn btn-primary">実行</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mb-4">
+</div>
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("MonthlyExec")">戻る</a>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = MacssWeb.Resources.Tass.TMSFixedDataMainTitle;
+    ViewBag.PageMainTitle = MacssWeb.Resources.Tass.TMSFixedDataUploadMainTitle;
+    ViewBag.ScreenId = "TASS-D025-05";
+    ViewBag.Caption = "TMSデータのアップロードを行います。";
+    ViewBag.Caption2 = "アップロードするファイルを選択してください。";
+    //ViewBag.UploadFileAccept = new List<string>() { ".csv, .txt" };
+    ViewBag.UploadFileAccept = new List<string>() { ".csv" };
+}
+
+
+    @using (Html.BeginForm("UploadConfirm", "TMSFixedData", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.Partial("_TMSFixedDataUpload")
+}

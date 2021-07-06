@@ -1,0 +1,501 @@
+﻿@{
+    ViewBag.Title = "トップ";
+    ViewBag.PageMainTitle = String.Format("{0} {1}", MacssWeb.Resources.Application.SystemName, "");
+
+    const string menuTitleFormat = "{0} - {1}";
+    var tassMenuTitle = String.Format(menuTitleFormat
+        , MacssWeb.Resources.Application.TassJpName, MacssWeb.Resources.Application.TassAbbrName);
+    var fdassMenuTitle = String.Format(menuTitleFormat
+        , MacssWeb.Resources.Application.FdassJpName, MacssWeb.Resources.Application.FdassAbbrName);
+    var patsMenuTitle = String.Format(menuTitleFormat
+        , MacssWeb.Resources.Application.PatsJpName, MacssWeb.Resources.Application.PatsAbbrName);
+    var dcosMenuTitle = String.Format(menuTitleFormat
+        , MacssWeb.Resources.Application.DcosJpName, MacssWeb.Resources.Application.DcosAbbrName);
+    var aimsMenuTitle = String.Format(menuTitleFormat
+        , MacssWeb.Resources.Application.AimsJpName, MacssWeb.Resources.Application.AimsAbbrName);
+    var bassMenuTitle = String.Format(menuTitleFormat
+        , MacssWeb.Resources.Application.BaseJpName, MacssWeb.Resources.Application.BaseAbbrName);
+}
+@section Scripts {
+    <script>
+        $(function () {
+
+            for (var i = 0; i <= 7; i++) {
+                var acc = "#MenuAccordion" + i;
+                var shw = "#MenuShow" + i;
+                var hdn = "#MenuHidden" + i;
+
+                var cond = new Macss.Collapse.MenuBar(acc, shw, hdn);
+                cond.setCollapseEvent();
+            }
+        });
+    </script>
+}
+
+@if (!String.IsNullOrEmpty(ViewBag.ImportantInfoHtml))
+{
+    <div class="card border-danger mb-3">
+        <div class="card-header">重要なお知らせ</div>
+        <div class="card-body text-danger">
+            @Html.Raw(ViewBag.ImportantInfoHtml)
+        </div>
+    </div>
+}
+
+<div class="card border-primary mb-3">
+    <div class="card-header">お知らせ</div>
+    <div class="card-body">
+        <p class="card-text">請求書ができました。</p>
+    </div>
+</div>
+
+<hr />
+
+<div class="container-fluid">
+    <div class="row justify-content-between">
+        <div class="col-9">
+            <div class="col-12">
+                <div id="MenuAccordion1" class="accordion macss-main-menu-subsystem">
+                    <div class="macss-main-menu-subsystem-title">
+                        <div class="row justify-content-between">
+                            <div class="col-10">
+                                @Html.ActionLink("サンプル", "SubMenu", "Sample", new { area = "" }, null)
+                            </div>
+                            <div class="col-2 text-right">
+                                <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse"
+                                        data-target="#MenuCollapse1" aria-expanded="true" aria-controls="MenuCollapse1">
+                                    <i id="MenuHidden1" class="far fa-caret-square-up" aria-hidden="true" style="display:none;"></i>
+                                    <i id="MenuShow1" class="far fa-caret-square-down" aria-hidden="true" style="display:none;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="MenuCollapse1" class="macss-main-menu-subsystem-item collapse" data-parent="#MenuAccordion1">
+                        <ul class="list-unstyled components">
+                            <li>
+                                @Html.ActionLink(".Net 自動生成ページサンプル", "Index", "AccountMasters", new { area = "" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("一覧", "Index", "Sample")
+                            </li>
+                            <li>
+                                @Html.ActionLink("一覧（左端3列を固定表示）", "MultiColFixSample", "Sample")
+                            </li>
+                            <li>
+                                @Html.ActionLink("新規作成", "Create", "Sample")
+                            </li>
+                            <li>
+                                @Html.ActionLink("編集", "Edit", "Sample", new { id = "TISAdmin" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("削除", "DeleteConfirm", "Sample", new { id = "TISAdmin" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("詳細", "Details", "Sample", new { id = "TISAdmin" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("アップロード", "Upload", "Sample")
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="MenuAccordion2" class="accordion macss-main-menu-subsystem">
+                    <div class="macss-main-menu-subsystem-title">
+                        <div class="row justify-content-between">
+                            <div class="col-10">
+                                @Html.ActionLink(tassMenuTitle, "Index", "Home", new { area = "Tass" }, null)
+                            </div>
+                            <div class="col-2 text-right">
+                                <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse"
+                                        data-target="#MenuCollapse2" aria-expanded="true" aria-controls="MenuCollapse2">
+                                    <i id="MenuHidden2" class="far fa-caret-square-up" aria-hidden="true" style="display:none;"></i>
+                                    <i id="MenuShow2" class="far fa-caret-square-down" aria-hidden="true" style="display:none;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="MenuCollapse2" class="macss-main-menu-subsystem-item collapse" data-parent="#MenuAccordion2">
+                        <ul class="list-unstyled components">
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Application.TassJpName, "Index", "Home", new { area = "Tass" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Application.TassJpName, "Index", "Home", new { area = "Tass" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Tass.DossDataMainTitle, "Index", "DossData", new { area = "Tass" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Tass.ShipmentResultsForTMSMainTitle, "Index", "ShipmentResultsForTMS", new { area = "Tass" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Tass.ShippingCostForTMSMainTitle, "Index", "ShippingCostForTMS", new { area = "Tass" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Tass.TMSFixedDataMainTitle, "Index", "TMSFixedData", new { area = "Tass" }, null)
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="MenuAccordion3" class="accordion macss-main-menu-subsystem">
+                    <div class="macss-main-menu-subsystem-title">
+                        <div class="row justify-content-between">
+                            <div class="col-10">
+                                @Html.ActionLink(fdassMenuTitle, "Index", "Home", new { area = "Fdass" }, null)
+                            </div>
+                            <div class="col-2 text-right">
+                                <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse"
+                                        data-target="#MenuCollapse3" aria-expanded="true" aria-controls="MenuCollapse3">
+                                    <i id="MenuHidden3" class="far fa-caret-square-up" aria-hidden="true" style="display:none;"></i>
+                                    <i id="MenuShow3" class="far fa-caret-square-down" aria-hidden="true" style="display:none;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="MenuCollapse3" class="macss-main-menu-subsystem-item collapse" data-parent="#MenuAccordion3">
+                        <ul class="list-unstyled components">
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Application.FdassJpName, "Index", "Home", new { area = "Fdass" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Application.FdassJpName, "Index", "Home", new { area = "Fdass" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Application.FdassJpName, "Index", "Home", new { area = "Fdass" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Application.FdassJpName, "Index", "Home", new { area = "Fdass" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Application.FdassJpName, "Index", "Home", new { area = "Fdass" }, null)
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="MenuAccordion4" class="accordion macss-main-menu-subsystem">
+                    <div class="macss-main-menu-subsystem-title">
+                        <div class="row justify-content-between">
+                            <div class="col-10">
+                                @Html.ActionLink(patsMenuTitle, "Index", "Home", new { area = "Pats" }, null)
+                            </div>
+                            <div class="col-2 text-right">
+                                <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse"
+                                        data-target="#MenuCollapse4" aria-expanded="true" aria-controls="MenuCollapse4">
+                                    <i id="MenuHidden4" class="far fa-caret-square-up" aria-hidden="true" style="display:none;"></i>
+                                    <i id="MenuShow4" class="far fa-caret-square-down" aria-hidden="true" style="display:none;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="MenuCollapse4" class="macss-main-menu-subsystem-item collapse" data-parent="#MenuAccordion4">
+                        <ul class="list-unstyled components">
+                            @* 内示・発注 *@
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Pats.Ordering + "一覧", "D001_01", "D001", new { area = "Pats" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("内示一括登録", "D001_03", "D001", new { area = "Pats", naihatsu = "naiji" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("発注一括登録", "D001_03", "D001", new { area = "Pats", naihatsu = "hachu" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("内示個別登録", "D001_05", "D001", new { area = "Pats", naihatsu = "naiji" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("発注個別登録", "D001_05", "D001", new { area = "Pats", naihatsu = "hachu" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("内示・発注情報アップロード", "D001_03", "D001", new { area = "Pats" }, null)
+                            </li>
+                            @* 検収 *@
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Pats.Acceptance + "一覧", "D002_01", "D002", new { area = "Pats" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Pats.Acceptance + "登録(完納)", "D002_03", "D002", new { area = "Pats", kanbun = "kan" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Pats.Acceptance + "登録(分納)", "D002_03", "D002", new { area = "Pats", kanbun = "bun" }, null)
+                            </li>
+                            @* 取引実績 *@
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Pats.Trading + "一覧", "D003_01", "D003", new { area = "Pats" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("売上データ登録", "D003_03", "D003", new { area = "Pats" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("出庫実績登録", "D003_05", "D003", new { area = "Pats" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("受入払出実績データアップロード", "D003_10", "D003", new { area = "Pats" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("納品明細書出力", "D003_13", "D003", new { area = "Pats" }, null)
+                            </li>
+                            @* 在庫 *@
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Pats.Inventory + "一覧", "D004_01", "D004", new { area = "Pats" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("棚卸表作成", "D004_03", "D004", new { area = "Pats" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("貯蔵品勘定決算書/在庫管理表出力", "D004_05", "D004", new { area = "Pats" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("PC別払出表/PC別在庫表出力", "D004_07", "D004", new { area = "Pats" }, null)
+                            </li>
+                            @* 締処理 *@
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Pats.BillingPurchasing + "データ作成", "D005_01", "D005", new { area = "Pats" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Pats.MonthlyData + "作成", "D006_01", "D006", new { area = "Pats" }, null)
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="MenuAccordion5" class="accordion macss-main-menu-subsystem">
+                    <div class="macss-main-menu-subsystem-title">
+                        <div class="row justify-content-between">
+                            <div class="col-10">
+                                @Html.ActionLink(dcosMenuTitle, "SubMenu", "Home", new { area = "Dcos" }, null)
+                            </div>
+                            <div class="col-2 text-right">
+                                <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse"
+                                        data-target="#MenuCollapse5" aria-expanded="true" aria-controls="MenuCollapse5">
+                                    <i id="MenuHidden5" class="far fa-caret-square-up" aria-hidden="true" style="display:none;"></i>
+                                    <i id="MenuShow5" class="far fa-caret-square-down" aria-hidden="true" style="display:none;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="MenuCollapse5" class="macss-main-menu-subsystem-item collapse" data-parent="#MenuAccordion5">
+                        <ul class="list-unstyled components">
+                            <li>
+                                @Html.ActionLink("入庫実績一覧", "Index", "D001", new { area = "Dcos" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("入庫実績登録", "Create", "D001", new { area = "Dcos" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("入庫実績アップロード", "Upload", "D001", new { area = "Dcos" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("出庫指示一覧", "Index", "D002", new { area = "Dcos" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("出庫指示登録", "Create", "D002", new { area = "Dcos" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("出庫指示アップロード", "Upload", "D002", new { area = "Dcos" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("在庫引当一覧", "index", "StockAllocation", new { area = "Dcos" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("入出庫実績照会", "Index", "D004", new { area = "Dcos" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("在庫データ一覧", "Index", "Stock", new { area = "Dcos" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("在庫報告書作成", "Report", "Stock", new { area = "Dcos" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("TASSデータ連携取込選択", "Index", "D006", new { area = "Dcos" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("TASSデータ連携エラー一覧", "List", "D006", new { area = "Dcos" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("得意先在庫データ照合", "Index", "Customer", new { area = "Dcos" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("保管料荷役料一覧", "List", "Cargo", new { area = "Dcos" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("保管料荷役料登録", "Create", "Cargo", new { area = "Dcos" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("保管料荷役料明細書(確認用)作成", "Exec", "Cargo", new { area = "Dcos" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("保管料荷役料未計上データ照会", "Inquiry", "Cargo", new { area = "Dcos" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("請求データ作成", "BillingExec", "Billing", new { area = "Dcos" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("月次データ更新", "MonthlyExec", "Monthly", new { area = "Dcos" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("倉庫・保存期限一括変更", "Index", "D011", new { area = "Dcos" }, null)
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="MenuAccordion6" class="accordion macss-main-menu-subsystem">
+                    <div class="macss-main-menu-subsystem-title">
+                        <div class="row justify-content-between">
+                            <div class="col-10">
+                                @Html.ActionLink(aimsMenuTitle, "Index", "Home", new { area = "Aims" }, null)
+                            </div>
+                            <div class="col-2 text-right">
+                                <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse"
+                                        data-target="#MenuCollapse6" aria-expanded="true" aria-controls="MenuCollapse6">
+                                    <i id="MenuHidden6" class="far fa-caret-square-up" aria-hidden="true" style="display:none;"></i>
+                                    <i id="MenuShow6" class="far fa-caret-square-down" aria-hidden="true" style="display:none;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="MenuCollapse6" class="macss-main-menu-subsystem-item collapse" data-parent="#MenuAccordion6">
+                        <ul class="list-unstyled components">
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Aims.RegistrationRequestDetail, "Index", "D001", new { area = "Aims" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Aims.RegistrationRequestDetailCreate, "Create", "D001", new { area = "Aims" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Aims.SalesSlip, "Index", "D002", new { area = "Aims" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Aims.RegistrationPurchasingDetail, "Index", "D003", new { area = "Aims" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Aims.RegistrationPurchasingDetailCreate, "Create", "D003", new { area = "Aims" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Aims.DetailedRecording, "Make", "D004", new { area = "Aims" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Aims.SalesRecording, "RecordSales", "D004", new { area = "Aims" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Aims.BusinessCostDataMake, "Make", "D005", new { area = "Aims" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Aims.RequestSalesStockFixed, "Exec", "D006", new { area = "Aims" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Aims.FeOrderDataMake, "Make", "D007", new { area = "Aims" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Aims.FeRequestDataMake, "Make", "D008", new { area = "Aims" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Aims.RequestTraditionDataMake, "Make", "D009", new { area = "Aims" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Aims.ProgressDetailTraditionDataMake, "Make", "D010", new { area = "Aims" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Aims.EspInvoiceitemMst, "Upload01", "D011", new { area = "Aims" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Aims.EspDataConvMst, "Upload02", "D011", new { area = "Aims" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Aims.EspCustomerMst, "Upload03", "D011", new { area = "Aims" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Aims.EspVendorMst, "Upload04", "D011", new { area = "Aims" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Aims.EpsRequestDataMake, "MakeShiire", "D011", new { area = "Aims" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Aims.EpsPurchasingDataMake, "MakeShiire", "D011", new { area = "Aims" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Aims.RequestDocumentPrint, "Print", "D012", new { area = "Aims" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Aims.RequestDetail, "Index", "D013", new { area = "Aims" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Aims.RequestDetailPcCode, "Change", "D013", new { area = "Aims" }, null)
+                            </li>
+
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Aims.BusinessCost, "Index", "D014", new { area = "Aims" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink(MacssWeb.Resources.Aims.BusinessCostPcAccountingCode, "Change", "D014", new { area = "Aims" }, null)
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="MenuAccordion7" class="accordion macss-main-menu-subsystem">
+                    <div class="macss-main-menu-subsystem-title">
+                        <div class="row justify-content-between">
+                            <div class="col-10">
+                                @Html.ActionLink(bassMenuTitle, "SubMenu", "Home", new { area = "Base" }, null)
+                            </div>
+                            <div class="col-2 text-right">
+                                <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse"
+                                        data-target="#MenuCollapse7" aria-expanded="true" aria-controls="MenuCollapse7">
+                                    <i id="MenuHidden7" class="far fa-caret-square-up" aria-hidden="true" style="display:none;"></i>
+                                    <i id="MenuShow7" class="far fa-caret-square-down" aria-hidden="true" style="display:none;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="MenuCollapse7" class="macss-main-menu-subsystem-item collapse" data-parent="#MenuAccordion7">
+                        <ul class="list-unstyled components">
+                            <li>
+                                @Html.ActionLink("マスターメンテナンス(エントリ一覧式・承認有)", "SubMenuD100", "Home", new { area = "Base" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("マスターメンテナンス(エントリ一覧式・承認無)", "SubMenuD200", "Home", new { area = "Base" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("マスターメンテナンス(一括式)", "SubMenuD300", "Home", new { area = "Base" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("マスターメンテナンス(汎用式)", "SubMenuD400", "Home", new { area = "Base" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("操作手引書", "ManualList", "Manual", new { area = "Base" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("保存データ", "StorageList", "Storage", new { area = "Base" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("承認", "ApprovalList", "Approval", new { area = "Base" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("バッチ管理一覧", "BatchList", "Batch", new { area = "Base" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("バッチ管理起動", "Exec", "Batch", new { area = "Base" }, null)
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-3 border-left">
+            <div class="card bg-light mb-3">
+                <div class="card-header">稼働時間</div>
+                <div class="card-body">
+                    @Html.Raw(ViewBag.UpTimeInfoHtml)
+                </div>
+            </div>
+            @if (!String.IsNullOrEmpty(ViewBag.InternalInfoHtml))
+            {
+                <div class="card bg-light mb-3">
+                    <div class="card-header">お知らせ</div>
+                    <div class="card-body">
+                        @Html.Raw(ViewBag.InternalInfoHtml)
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

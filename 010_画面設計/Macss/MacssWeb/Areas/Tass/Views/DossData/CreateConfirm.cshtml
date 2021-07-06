@@ -1,0 +1,13 @@
+﻿@model Macss.Database.Entity.DummyDossData
+
+@{
+    ViewBag.Title = MacssWeb.Resources.Tass.DossDataMainTitle;
+    ViewBag.PageMainTitle = String.Format("{0}{1}", MacssWeb.Resources.Tass.DossDataCreateMainTitle, "確認");
+    ViewBag.ScreenId = "TASS-D006-05";
+}
+
+@using (Html.BeginForm("Create", null, FormMethod.Post))
+{
+
+    @Html.Partial("_Show", Model)
+}

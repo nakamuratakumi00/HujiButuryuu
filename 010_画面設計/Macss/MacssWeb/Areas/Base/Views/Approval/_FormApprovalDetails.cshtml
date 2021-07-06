@@ -1,0 +1,300 @@
+﻿@model Macss.Database.Entity.ApprovalData
+
+@Html.AntiForgeryToken()
+
+@Html.Partial("../Shared/Dialog/_DepartmentCodeSearch")
+
+<div>
+    @Html.ValidationSummary(false, "入力エラーがあります。", new { @class = "alert alert-danger" })
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a class="btn btn-secondary" href="@Url.Action("ApprovalList", "Home", new { area = "Base" }, null)" role="button">@MacssWeb.Resources.ControlText.BackToList</a>
+    </div>
+    <div class="col-4 text-right">
+        @if (ViewBag.PageMainTitle == @"承認 詳細(請求関係書印刷)")
+        {
+            <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDialog">承認</button>
+            <a role="button" class="btn btn-primary" href="@Url.Action("ApprovalConfirmDenial", new { id = Model.id })">否認</a>
+            <a role="button" class="btn btn-primary" href="@Url.Action("ApprovalConfirmRecovery", new { id = Model.id })">取戻</a>
+        }
+        else if (ViewBag.PageMainTitle == @"承認 一括否認")
+        {
+            <a role="button" class="btn btn-primary" href="@Url.Action("ApprovalConfirmDenial", new { id = Model.id })">否認</a>
+        }
+        else if (ViewBag.PageMainTitle == @"承認 一括取戻")
+        {
+            <a role="button" class="btn btn-primary" href="@Url.Action("ApprovalConfirmRecovery", new { id = Model.id })">取戻</a>
+        }
+        else
+        {
+            ;
+        }
+    </div>
+</div>
+<table class="table macss-form-table2">
+    <colgroup>
+        <col class="macss-form-table2-title" />
+        <col class="macss-form-table2-contents" />
+        <col class="macss-form-table2-title" />
+        <col class="macss-form-table2-contents" />
+    </colgroup>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.status, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.DisplayFor(model => model.status, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.status)
+            </div>
+        </td>
+        <th scope="row">
+            @Html.LabelFor(model => model.target, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.DisplayFor(model => model.target, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.target)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.application_date, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.DisplayFor(model => model.application_date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.application_date)
+            </div>
+        </td>
+        <th scope="row">
+            @Html.LabelFor(model => model.applicant, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.DisplayFor(model => model.applicant, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.applicant)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.primary_approval_date, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.DisplayFor(model => model.primary_approval_date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.primary_approval_date)
+            </div>
+        </td>
+        <th scope="row">
+            @Html.LabelFor(model => model.primary_approver, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.DisplayFor(model => model.primary_approver, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.primary_approver)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.secondary_approval_date, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.DisplayFor(model => model.secondary_approval_date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.secondary_approval_date)
+            </div>
+        </td>
+        <th scope="row">
+            @Html.LabelFor(model => model.secondary_approver, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.DisplayFor(model => model.secondary_approver, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.secondary_approver)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.denial_date, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.DisplayFor(model => model.denial_date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.denial_date)
+            </div>
+        </td>
+        <th scope="row">
+            @Html.LabelFor(model => model.reason_denial, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @if (ViewBag.PageMainTitle == @"承認 詳細(請求関係書印刷)"
+                || ViewBag.PageMainTitle == @"承認 一括否認")
+            {
+                <div>
+                    <div class="input-group">
+                        @Html.EditorFor(model => model.reason_denial, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.reason_denial, "", new { @class = "text-danger" })
+                </div>
+            }
+            else if (ViewBag.PageMainTitle == @"承認 一括取戻")
+            {
+                <div>
+                    @Html.DisplayFor(model => model.reason_denial, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.reason_denial)
+                </div>
+            }
+            else
+            {
+                ;
+            }
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.recovery_approval_date, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.DisplayFor(model => model.recovery_approval_date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.recovery_approval_date)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.recovery_date, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                <div class="input-group">
+                    @Html.DisplayFor(model => model.recovery_date, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                @Html.HiddenFor(model => model.recovery_date)
+            </div>
+        </td>
+        <th scope="row">
+            @Html.LabelFor(model => model.reason_recovery, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @if (ViewBag.PageMainTitle == @"承認 詳細(請求関係書印刷)"
+                || ViewBag.PageMainTitle == @"承認 一括取戻")
+            {
+                <div>
+                    <div class="input-group">
+                        @Html.EditorFor(model => model.reason_recovery, new { htmlAttributes = new { @class = "form-control required" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.reason_recovery, "", new { @class = "text-danger" })
+                </div>
+            }
+            else if (ViewBag.PageMainTitle == @"承認 一括否認")
+            {
+                <div>
+                    @Html.DisplayFor(model => model.reason_recovery, new { htmlAttributes = new { @class = "form-control required" } })
+                    @Html.HiddenFor(model => model.reason_recovery)
+                </div>
+            }
+            else
+            {
+                ;
+            }
+        </td>
+    </tr>
+</table>
+
+@if (ViewBag.PageMainTitle == @"承認 詳細(請求関係書印刷)")
+{
+    <p>　</p>
+    <div class="row justify-content-between macss-form-button-group-row">
+        <div class="col text-center">
+            <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#PreviewDialog">プレビュー</button>
+        </div>
+    </div>
+    <p>　</p>
+
+}
+else
+{
+    ;
+}
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a class="btn btn-secondary" href="@Url.Action("ApprovalList", "Home", new { area = "Base" }, null)" role="button">@MacssWeb.Resources.ControlText.BackToList</a>
+    </div>
+    <div class="col-4 text-right">
+        @if (ViewBag.PageMainTitle == @"承認 詳細(請求関係書印刷)")
+        {
+            <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDialog">承認</button>
+            <a role="button" class="btn btn-primary" href="@Url.Action("ApprovalConfirmDenial", new { id = Model.id })">否認</a>
+            <a role="button" class="btn btn-primary" href="@Url.Action("ApprovalConfirmRecovery", new { id = Model.id })">取戻</a>
+        }
+        else if (ViewBag.PageMainTitle == @"承認 一括否認")
+        {
+            <a role="button" class="btn btn-primary" href="@Url.Action("ApprovalConfirmDenial", new { id = Model.id })">否認</a>
+        }
+        else if (ViewBag.PageMainTitle == @"承認 一括取戻")
+        {
+            <a role="button" class="btn btn-primary" href="@Url.Action("ApprovalConfirmRecovery", new { id = Model.id })">取戻</a>
+        }
+        else
+        {
+            ;
+        }
+    </div>
+
+    <script>
+        function setDepartmentCode(code, value) {
+            $("#bumon_cd").val(code);
+            $("#DepartmentName").text(value);
+        }
+        $(function () {
+            var createDatePicker = new Macss.DatetimePicker.MacssDtPicker("#create_date", "#CreateDateCalendar");
+            createDatePicker.configure();
+            var updateDatePicker = new Macss.DatetimePicker.MacssDtPicker("#update_date", "#UpdateDateCalendar");
+            updateDatePicker.configure();
+        });
+
+    </script>
+
+    <div class="modal" id="PreviewDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ConfirmDialogTitle">プレビュー</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">全ての請求関係書をプレビュー</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="ConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">承認します。よろしいですか?</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.Cancel</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">承認</button>
+                </div>
+            </div>
+        </div>
+    </div>

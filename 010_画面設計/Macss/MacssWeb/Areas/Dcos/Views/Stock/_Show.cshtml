@@ -1,0 +1,524 @@
+﻿
+@using MacssWeb.Areas.Dcos.Helper
+@model Macss.Database.Entity.DummyStock
+
+@Html.AntiForgeryToken()
+
+@if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+{
+    if (ViewBag.StockScreen.HasFlag(StockScreens.StockAllocationShow))
+    {
+        <div class="alert alert-warning">
+            <span>引当数が在庫数を超過しています。このまま、更新しますか？</span>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            <span>@ViewBag.ConfirmMessage</span>
+        </div>
+    }
+}
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="row justify-content-between macss-form-button-group-row">
+        @if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+        {
+            if (ViewBag.StockScreen.HasFlag(StockScreens.StockAllocationPlanFix)
+                || ViewBag.StockScreen.HasFlag(StockScreens.StockAllocationPlanFixCancel))
+            {
+                <div class="col-4">
+                    <a role="button" class="btn btn-secondary" href="@Url.Action("Index", "StockAllocation")">@MacssWeb.Resources.ControlText.BackToList</a>
+                </div>
+            }
+            else
+            {
+                <div class="col-4">
+                    <button type="submit" class="btn btn-secondary" name="cmdBtmBack" value="@((int)MacssWeb.Common.ButtonValues.Back)">@MacssWeb.Resources.ControlText.Back</button>
+                </div>
+            }
+        }
+        else
+        {
+            if (ViewBag.BackAction != null)
+            {
+                <div class="col-4">
+                    <a role="button" class="btn btn-secondary" href="@Url.Action(ViewBag.BackAction)">@MacssWeb.Resources.ControlText.Back</a>
+                </div>
+            }
+            else
+            {
+                <div class="col-4">
+                    <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.Back</a>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+@Html.HiddenFor(model => model.Id)
+
+<table class="table macss-form-table">
+    <colgroup>
+        <col class="macss-form-table-title" />
+        <col class="macss-form-table-contents" />
+    </colgroup>
+    @if (ViewBag.StockScreen.HasFlag(StockScreens.StockDetail))
+    {
+        <tr>
+            <th scope="row">
+                年月日
+            </th>
+            <td></td>
+        </tr>
+    }
+    @if (ViewBag.StockScreen.HasFlag(StockScreens.StockAllocationDetail)
+            || ViewBag.StockScreen.HasFlag(StockScreens.StockAllocationShow)
+            || ViewBag.StockScreen.HasFlag(StockScreens.StockAllocationPlanFix)
+            || ViewBag.StockScreen.HasFlag(StockScreens.StockAllocationPlanFixCancel))
+    {
+        <tr>
+            <th scope="row">
+                @Html.LabelFor(model => model.InYMD, htmlAttributes: new { @class = "control-label" })
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.InYMD, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.InYMD)
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                @Html.LabelFor(model => model.OutOrderYMD, htmlAttributes: new { @class = "control-label" })
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.OutOrderYMD, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.InOutYMD)
+            </td>
+        </tr>
+    }
+    @if (ViewBag.StockScreen.HasFlag(StockScreens.StockDetail))
+    {
+
+        <tr>
+            <th scope="row">
+                @Html.LabelFor(model => model.InOutYMD, htmlAttributes: new { @class = "control-label" })
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.InOutYMD, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.InOutYMD)
+            </td>
+        </tr>
+    }
+    @if (ViewBag.StockScreen.HasFlag(StockScreens.StockDetail))
+    {
+        <tr>
+            <th scope="row">
+                入出庫No
+            </th>
+            <td></td>
+        </tr>
+        <tr>
+            <th scope="row">
+                入出庫枝番
+            </th>
+            <td></td>
+        </tr>
+        <tr>
+            <th scope="row">
+                伝票区分
+            </th>
+            <td></td>
+        </tr>
+    }
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.Client, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div class="row">
+                <div class="col-2">
+                    @Html.DisplayFor(model => model.ClientCode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.ClientCode)
+                </div>
+                <div class="col-10">
+                    @Html.DisplayFor(model => model.ClientName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.ClientName)
+                </div>
+            </div>
+        </td>
+    </tr>
+    @if (ViewBag.StockScreen.HasFlag(StockScreens.StockAllocationDetail)
+            || ViewBag.StockScreen.HasFlag(StockScreens.StockAllocationShow)
+            || ViewBag.StockScreen.HasFlag(StockScreens.StockAllocationPlanFix)
+            || ViewBag.StockScreen.HasFlag(StockScreens.StockAllocationPlanFixCancel))
+    {
+
+        <tr>
+            <th scope="row">
+                オリジナル出庫指示No
+            </th>
+            <td>
+                1234567890123456
+            </td>
+        </tr>
+    }
+
+
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.Product, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div class="row">
+                <div class="col-2">
+                    @Html.DisplayFor(model => model.ProductCode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.ProductCode)
+                </div>
+                <div class="col-10">
+                    @Html.DisplayFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.ProductName)
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.Standards, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.Standards, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.Standards)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.LabelFor(model => model.Unit, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div class="row">
+                <div class="col-2">
+                    CS
+                </div>
+                <div class="col-10">
+                    ｃｓ
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.Warehouse, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div class="row">
+                <div class="col-2">
+                    @Html.DisplayFor(model => model.WarehouseCode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.WarehouseCode)
+                </div>
+                <div class="col-10">
+                    @Html.DisplayFor(model => model.WarehouseName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.WarehouseName)
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.RackNumber, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.DisplayFor(model => model.RackNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.RackNumber)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.LotNumber, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.DisplayFor(model => model.LotNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.LotNumber)
+            </div>
+        </td>
+    </tr>
+    @if (ViewBag.StockScreen.HasFlag(StockScreens.StockDetail))
+    {
+        <tr>
+            <th scope="row">
+                @Html.LabelFor(model => model.PreviousMonthRemaining, htmlAttributes: new { @class = "control-label" })
+            </th>
+            <td>
+                <div class="row">
+                    <div class="col-1 text-right">
+                        @Html.DisplayFor(model => model.PreviousMonthRemaining, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    @Html.HiddenFor(model => model.PreviousMonthRemaining)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                @Html.LabelFor(model => model.PresentMonthInQuantity, htmlAttributes: new { @class = "control-label" })
+            </th>
+            <td>
+                <div class="row">
+                    <div class="col-1 text-right">
+                        @Html.DisplayFor(model => model.PresentMonthInQuantity, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    @Html.HiddenFor(model => model.PresentMonthInQuantity)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                @Html.LabelFor(model => model.PresentMonthOutQuantity, htmlAttributes: new { @class = "control-label" })
+            </th>
+            <td>
+                <div class="row">
+                    <div class="col-1 text-right">
+                        @Html.DisplayFor(model => model.PresentMonthOutQuantity, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    @Html.HiddenFor(model => model.PresentMonthOutQuantity)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                @Html.LabelFor(model => model.PresentMonthRemaining, htmlAttributes: new { @class = "control-label" })
+            </th>
+            <td>
+                <div class="row">
+                    <div class="col-1 text-right">
+                        @Html.DisplayFor(model => model.PresentMonthRemaining, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    @Html.HiddenFor(model => model.PresentMonthRemaining)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                @Html.LabelFor(model => model.StockLimitYM, htmlAttributes: new { @class = "control-label" })
+            </th>
+            <td>
+                <div class="row">
+                    <div class="col-1">
+                        @Html.DisplayFor(model => model.StockLimitYM, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    @Html.HiddenFor(model => model.StockLimitYM)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                伝票No
+            </th>
+            <td></td>
+        </tr>
+        <tr>
+            <th scope="row">
+                備考
+            </th>
+            <td></td>
+        </tr>
+        <tr>
+            <th scope="row">
+                @Html.LabelFor(model => model.BeforeInOutYMD, htmlAttributes: new { @class = "control-label" })
+            </th>
+            <td>
+                <div class="row">
+                    <div class="col-1">
+                        @Html.DisplayFor(model => model.BeforeInOutYMD, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    @Html.HiddenFor(model => model.BeforeInOutYMD)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                @Html.LabelFor(model => model.BeforeRackNumber, htmlAttributes: new { @class = "control-label" })
+            </th>
+            <td>
+                <div class="row">
+                    <div class="col-1">
+                        @Html.DisplayFor(model => model.BeforeRackNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    @Html.HiddenFor(model => model.BeforeRackNumber)
+                </div>
+            </td>
+        </tr>
+    }
+    @if (ViewBag.StockScreen.HasFlag(StockScreens.StockAllocationDetail)
+            || ViewBag.StockScreen.HasFlag(StockScreens.StockAllocationShow)
+            || ViewBag.StockScreen.HasFlag(StockScreens.StockAllocationPlanFix)
+            || ViewBag.StockScreen.HasFlag(StockScreens.StockAllocationPlanFixCancel))
+    {
+        <tr>
+            <th scope="row">
+                @Html.LabelFor(model => model.StockQuantity, htmlAttributes: new { @class = "control-label" })
+            </th>
+            <td>
+                <div class="row">
+                    <div class="col-1 text-right">
+                        @Html.DisplayFor(model => model.StockQuantity, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    @Html.HiddenFor(model => model.StockQuantity)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                @Html.LabelFor(model => model.FixAllocationQuantity, htmlAttributes: new { @class = "control-label" })
+            </th>
+            <td>
+                <div class="row">
+                    <div class="col-1 text-right">
+                        @Html.DisplayFor(model => model.FixAllocationQuantity, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    @Html.HiddenFor(model => model.FixAllocationQuantity)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                @Html.LabelFor(model => model.FixStockRemaining, htmlAttributes: new { @class = "control-label" })
+            </th>
+            <td>
+                <div class="row">
+                    <div class="col-1 text-right">
+                        @Html.DisplayFor(model => model.FixStockRemaining, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    @Html.HiddenFor(model => model.FixStockRemaining)
+                </div>
+            </td>
+        </tr>
+
+
+        <tr>
+            <th scope="row">
+                @Html.LabelFor(model => model.OutOrderQuantity, htmlAttributes: new { @class = "control-label" })
+            </th>
+            <td>
+                <div class="row">
+                    <div class="col-1 text-right">
+                        @Html.DisplayFor(model => model.OutOrderQuantity, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    @Html.HiddenFor(model => model.OutOrderQuantity)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                @Html.LabelFor(model => model.AllocationPlanQuantity, htmlAttributes: new { @class = "control-label" })
+            </th>
+            <td>
+                <div class="row">
+                    <div class="col-1 text-right">
+                        @Html.DisplayFor(model => model.AllocationPlanQuantity, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    @Html.HiddenFor(model => model.AllocationPlanQuantity)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                @Html.LabelFor(model => model.AllocationExecQuantity, htmlAttributes: new { @class = "control-label" })
+            </th>
+            <td>
+                <div class="row">
+                    <div class="col-1 text-right">
+                        @Html.DisplayFor(model => model.AllocationExecQuantity, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    @Html.HiddenFor(model => model.AllocationExecQuantity)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                @Html.LabelFor(model => model.StockRemaining, htmlAttributes: new { @class = "control-label" })
+            </th>
+            <td>
+                <div class="row">
+                    <div class="col-1 text-right">
+                        @Html.DisplayFor(model => model.StockRemaining, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    @Html.HiddenFor(model => model.StockRemaining)
+                </div>
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    @if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+    {
+        if (ViewBag.StockScreen.HasFlag(StockScreens.StockAllocationPlanFix)
+                || ViewBag.StockScreen.HasFlag(StockScreens.StockAllocationPlanFixCancel))
+        {
+            <div class="col-4">
+                <a role="button" class="btn btn-secondary" href="@Url.Action("Index", "StockAllocation")">@MacssWeb.Resources.ControlText.BackToList</a>
+            </div>
+        }
+        else
+        {
+            <div class="col-4">
+                <button type="submit" class="btn btn-secondary" name="cmdBtmBack" value="@((int)MacssWeb.Common.ButtonValues.Back)">@MacssWeb.Resources.ControlText.Back</button>
+            </div>
+        }
+        <div class="col-5 text-right">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDialog">@ViewBag.ButtonText</button>
+        </div>
+    }
+    else
+    {
+        if (ViewBag.StockScreen.HasFlag(StockScreens.StockDetail))
+        {
+            <div class="col-4">
+                <a role="button" class="btn btn-secondary" href="@Url.Action("Index", "Stock")">@MacssWeb.Resources.ControlText.Back</a>
+            </div>
+            <div class="col-5 text-right">
+                <a role="button" class="btn btn-primary" href="@Url.Action("RackChange", new { id = Model.Id })">棚番変更</a>
+            </div>
+        }
+        if (ViewBag.StockScreen.HasFlag(StockScreens.StockAllocationDetail))
+        {
+            <div class="col-4">
+                <a role="button" class="btn btn-secondary" href="@Url.Action("Index", "StockAllocation")">@MacssWeb.Resources.ControlText.Back</a>
+            </div>
+            <div class="col-7 text-right">
+                @*<a role="button" class="btn btn-primary" href="@Url.Action("Edit", "StockAllocation", new { id = Model.Id })">
+                    @MacssWeb.Resources.Dcos.StockPlanEditMainTitle
+                </a>*@
+                <a role="button" class="btn btn-primary" href="@Url.Action("AllocationPlanFixConfirm", "StockAllocation", new { id = Model.Id })">
+                    在庫引当確定
+                </a>
+                <a role="button" class="btn btn-danger" href="@Url.Action("AllocationPlanFixCancelConfirm", "StockAllocation", new { id = Model.Id })">
+                    在庫引当確定解除
+                </a>
+            </div>
+        }
+    }
+</div>
+
+<div class="modal" id="ConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @ViewBag.ConfirmDialogText
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.Cancel</button>
+                <button type="submit" class="btn btn-primary" name="cmdBtmExec" value="@((int)MacssWeb.Common.ButtonValues.Exec)">@ViewBag.ButtonText</button>
+            </div>
+        </div>
+    </div>
+</div>

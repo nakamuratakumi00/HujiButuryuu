@@ -1,0 +1,13 @@
+﻿<html lang="ja">
+@{
+    ViewBag.Title = "保管料荷役料";
+    ViewBag.PageMainTitle = "保管料荷役料明細書(確認用)作成実行";
+
+    ViewBag.UploadFileAccept = new List<string>() { ".csv" };
+}
+
+
+@using (Html.BeginForm("ExecConfirm", "Sample", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.Partial("_Exec")
+}

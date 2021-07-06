@@ -1,0 +1,44 @@
+﻿
+<div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+    <div class="row mr-0 mb-1">
+        <div class="col-4">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="Condition3">バッチ名称</span>
+                </div>
+                <select class="custom-select form-control" id="Condition3" aria-describedby="Condition3">
+                    <option value=""></option>
+                    <option value="">運送会社請求データ取込</option>
+                    <option value="">送状データ作成/送信</option>
+                    <option value="">出荷検品実績データ送信</option>
+                    <option value="">FB本社WMS出荷実績データ送信</option>
+                    <option value="">運送方法制御マスタ送信</option>
+                    <option value="">届先／品名／運送方法制御マスタ更新</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row mr-0 mb-1">
+        <div class="col-4">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="Condition3">バッチ処理基準日</span>
+                </div>
+                <input type="text" id="SampleDTPicker" class="form-control" />
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="SampleCalendar1"><i class="fa fa-calendar-alt"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a class="btn btn-secondary" href="@Url.Action("List")" role="button">@MacssWeb.Resources.ControlText.BackToList</a>
+    </div>
+    <div class="col-4 text-right">
+        <a class="btn btn-primary" href="@Url.Action("ExecConfirm")" role="button">確認</a>
+    </div>
+</div>
+

@@ -1,0 +1,2241 @@
+﻿@using Macss.Areas.Tass.ViewModels
+@model ShuukaTyuumonshoEntryViewModel
+@using Macss.HtmlHelpers
+
+@{
+    ViewBag.Title = ViewBag.TitleName;
+    int rowIdx = 0;
+}
+@section Heads {
+    <link href="/Content/details.css" rel="stylesheet" />
+}
+
+<style>
+    h1, .h1,
+    h2, .h2,
+    h3, .h3 {
+        margin-top: 2px;
+        margin-bottom: 0px;
+    }
+</style>
+
+<div class="row">
+    <div class="navbar2 navbar-default" style="padding-bottom:10px;">
+
+        <h2>@ViewBag.Title</h2>
+        <hr />
+
+        @using (Html.BeginForm("Details", "ShuukaTyuumonshoEntry", FormMethod.Post, htmlAttributes: new { id = "upDate" }))
+        {
+            @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            @if (ViewBag.Mode != null)
+            {
+                <div class="form-group" style=" height: 0;">
+                    <div class="col-sm-10">
+                    </div>
+                    <div class="col-sm-2">
+                        <a class="btn btn-default" style="width:45px; height:30px; padding: 0px; text-align: center; padding-top: 3px;" href=@Url.Action("Index")>戻る</a>
+                    </div>
+                </div>
+            }
+
+            <div class="row" style="line-height:2">
+                @Html.ValidationSummary(true, "", new { @id = "oputError" })
+            </div>
+
+            @if (ViewBag.Mode == null)
+            {
+                <div class="form-group" style=" height: 0;">
+                    <div class="col-sm-10">
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="button" class="btn btn-default" id="clear" value="クリア" style="font-size:95%; width:50px; height:30px; padding: 0; text-align: center; padding-top: 3px;" />
+                    </div>
+                </div>
+            }
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Syukno, htmlAttributes: new { @class = "col-sm-2 control-label required-item", style = "width:90px" })
+                <div class="col-sm-3" style="width:180px">
+                    @if (ViewBag.Mode == null)
+                    {
+                        <div valign="middle" style="display:inline-flex">
+                            @Html.EditorFor(model => model.SyuknoMae, new { htmlAttributes = new { @class = "form-control", @maxlength = "3", @minlength = "3", style = "width:45px; ime-mode: inactive" } })
+                            @Html.EditorFor(model => model.SyuknoAto, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", style = "width:55px" } })
+                            <span>&nbsp;&nbsp;&nbsp;</span>
+                            <input type="button" class="btn btn-default" id="getnumber" value="採番" style="font-size:90%; height:22px; width:30px; padding:1px 2px" />
+                        </div><br />
+                        @Html.HiddenFor(model => model.NumberingFlg)
+                    }
+                    else
+                    {
+                        @Html.HiddenFor(model => model.SyuknoMae)
+                        @Html.HiddenFor(model => model.Syukno)
+                        @Html.EditorFor(model => model.VSyukno, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", style = "width:70px" } })
+                    }
+                </div>
+                @Html.HiddenFor(model => model.Cdate)
+
+                @Html.LabelFor(model => model.Inscod, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:70px" })
+                <div class="col-sm-1" style="width: 90px; padding-right: 0px;">
+                    <div valign="middle" style="display:flex">
+                        @Html.EditorFor(model => model.Inscod, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", @style = "width:40px; ime-mode: inactive" } })
+                        @Html.Partial("TyuumonshoPatternCodeHelp", new CodeHelpViewModels.TyuumonshoPatternViewData())
+                    </div>
+                </div>
+
+                @Html.LabelFor(model => model.Pccod1, htmlAttributes: new { @class = "col-sm-2 control-label required-item", style = "width:60px" })
+                <div class="col-sm-4" style="width:185px;">
+                    <div valign="middle" style="display:inline-flex">
+                        @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                        {
+                            @Html.EditorFor(model => model.Pccod1, new { htmlAttributes = new { @class = "form-control", style = "width:50px; ime-mode: inactive", @maxlength = "4", onChange = "onChangePccod1(this.value)" } })
+                        }
+                        else
+                        {
+                            @Html.EditorFor(model => model.Pccod1, new { htmlAttributes = new { @class = "form-control", style = "width:50px", @readonly = "readonly", tabindex = "-1" } })
+                        }
+                        @Html.EditorFor(model => model.Pccod1n, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1" } })
+                    </div><br />
+                    @Html.ValidationMessageFor(model => model.Pccod1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:1">
+                <label class="col-sm-2 control-label" style="width: 90px;"></label>
+                <div class="col-sm-3" style="width: 180px;">
+                    <small>先頭3桁を入力後、採番ボタンを押す</small>
+                </div>
+                <div class="col-sm-2 control-label" style="width: 70px; text-align: center; padding-top: 0px;">
+                    (参照用)
+                </div>
+                <div class="col-sm-2" style="width: 150px;">
+                    @Html.ValidationMessageFor(model => model.Inscod, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row" style="line-height:2">
+                <label class="col-sm-2 control-label" style="width: 90px;"></label>
+                <div class="col-sm-3" style="width: 180px;">
+                    @Html.ValidationMessageFor(model => model.SyuknoMae, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+
+                @Html.LabelFor(model => model.Htynam, htmlAttributes: new { @class = "col-sm-2 control-label required-item", style = "width:90px" })
+                <div class="col-sm-4 text_jp_middle">
+                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                    {
+                        @Html.EditorFor(model => model.Htynam, new { htmlAttributes = new { @class = "form-control", @maxlength = "20", style = "ime-mode: active" } })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.Htynam, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1" } })
+                    }
+                    @Html.ValidationMessageFor(model => model.Htynam, "", new { @class = "text-danger" })
+                </div>
+
+                @Html.LabelFor(model => model.Htykah, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:90px" })
+                <div class="col-sm-4 text_jp_middle">
+                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                    {
+                        @Html.EditorFor(model => model.Htykah, new { htmlAttributes = new { @class = "form-control", @maxlength = "10", style = "ime-mode: active" } })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.Htykah, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1" } })
+                    }
+                    @Html.ValidationMessageFor(model => model.Htykah, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Tancod, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:90px" })
+                <div class="col-sm-4 text_jp_middle">
+                    <div valign="middle" style="display:inline-flex">
+                        @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                        {
+                            @Html.EditorFor(model => model.Tancod, new { htmlAttributes = new { @class = "form-control", @maxlength = "8", style = "width:120px; ime-mode: inactive", onChange = "onChangeTancod(this.value)" } })
+                        }
+                        else
+                        {
+                            @Html.EditorFor(model => model.Tancod, new { htmlAttributes = new { @class = "form-control", style = "width:120px", @readonly = "readonly", tabindex = "-1" } })
+                        }
+
+                        @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                        {
+                            @Html.EditorFor(model => model.Tannam, new { htmlAttributes = new { @class = "form-control", @maxlength = "10", style = "ime-mode: active", onChange = "onMatchTancod(this.value)" } })
+                        }
+                        else
+                        {
+                            @Html.EditorFor(model => model.Tannam, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1" } })
+                        }
+
+                        @*@Html.EditorFor(model => model.Tannam, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1" } })*@
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Tancod, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.Tannam, "", new { @class = "text-danger" })
+                    @Html.ValidationSummary("担当者コードと担当者名が一致しません。", new { @class = "text-danger", @id = "oputError1", style = "display:none" })
+
+                </div>
+
+                @Html.LabelFor(model => model.Htytel, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:90px" })
+                <div class="col-sm-4 text_jp_middle">
+                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                    {
+                        @Html.EditorFor(model => model.Htytel, new { htmlAttributes = new { @class = "form-control", @maxlength = "20", style = "ime-mode: inactive" } })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.Htytel, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1" } })
+                    }
+                    @Html.ValidationMessageFor(model => model.Htytel, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Basyo, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:90px" })
+                <div class="col-sm-4 text_jp_middle">
+                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                    {
+                        @Html.EditorFor(model => model.Basyo, new { htmlAttributes = new { @class = "form-control", @maxlength = "20", style = "ime-mode: active" } })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.Basyo, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1" } })
+                    }
+                    @Html.ValidationMessageFor(model => model.Basyo, "", new { @class = "text-danger" })
+                </div>
+
+                @Html.LabelFor(model => model.Fsykno, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:90px" })
+                <div class="col-sm-4 text_jp_middle">
+                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                    {
+                        @Html.EditorFor(model => model.Fsykno, new { htmlAttributes = new { @class = "form-control", @maxlength = "20", style = "ime-mode: inactive" } })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.Fsykno, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1" } })
+                    }
+                    @Html.ValidationMessageFor(model => model.Fsykno, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Tokcod, htmlAttributes: new { @class = "col-sm-2 control-label required-item", style = "width:90px" })
+                <div class="col-sm-9" style="width: 590px">
+                    <div valign="middle" style="display:flex">
+                        @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                        {
+                            @Html.EditorFor(model => model.Tokcod, new { htmlAttributes = new { @class = "form-control", style = "width:60px; ime-mode: inactive", @maxlength = "9", onChange = "onChangeTokcod(this.value)" } })
+                            @Html.Partial("TokuisakiCodeHelp", new CodeHelpViewModels.TokuisakiViewData())
+                        }
+                        else
+                        {
+                            @Html.EditorFor(model => model.Tokcod, new { htmlAttributes = new { @class = "form-control", style = "width:60px", @readonly = "readonly", tabindex = "-1" } })
+                        }
+                        @Html.EditorFor(model => model.Toknam, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Tokcod, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Sybcod, htmlAttributes: new { @class = "col-sm-2 control-label required-item", style = "width:90px" })
+                <div class="col-sm-6" style="width: 590px">
+                    <div valign="middle" style="display:flex">
+                        @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                        {
+                            @Html.EditorFor(model => model.Sybcod, new { htmlAttributes = new { @class = "form-control", style = "width:60px; ime-mode: inactive", @maxlength = "2", onChange = "onChangeSybcod(this.value)" } })
+                            @Html.Partial("ShukkabashoCodeHelp", new CodeHelpViewModels.ShukkabashoViewData())
+                        }
+                        else
+                        {
+                            @Html.EditorFor(model => model.Sybcod, new { htmlAttributes = new { @class = "form-control", style = "width:40px", @readonly = "readonly", tabindex = "-1" } })
+                        }
+                        @Html.EditorFor(model => model.Sybnam, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Sybcod, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Sykymd, htmlAttributes: new { @class = "col-sm-2 control-label required-item", style = "width:90px" })
+                <div class="col-sm-2" style="width: 125px">
+                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                    {
+                        @Html.TextBoxFor(model => model.Sykymd, htmlAttributes: new { @class = "form-control datearea-form date", style = "me-mode: inactive" })
+                    }
+                    else
+                    {
+                        @Html.TextBoxFor(model => model.Sykymd, htmlAttributes: new { @class = "form-control datearea-form", @readonly = "readonly", tabindex = "-1" })
+                    }
+                    @Html.ValidationMessageFor(model => model.Sykymd, "", new { @class = "text-danger" })
+                </div>
+
+                @Html.LabelFor(model => model.Ufutan, htmlAttributes: new { @class = "col-sm-2 control-label required-item", style = "width:105px" })
+                <div class="col-sm-2" style="width:90px">
+                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                    {
+                        @Html.DropDownListFor(model => model.Ufutan, (IEnumerable<SelectListItem>)ViewBag.UfutanList, "", new { @class = "form-control", style = "height: 22px; padding-left: 4px; border-radius: 4px;" })
+                    }
+                    else
+                    {
+                        @Html.DropDownListFor(model => model.Ufutan, (IEnumerable<SelectListItem>)ViewBag.UfutanList, "", new { @class = "form-control", style = "height: 22px; padding-left: 4px; border-radius: 4px;", @disabled = "disabled" })
+                        @Html.HiddenFor(model => model.Ufutan)
+                    }
+                    @Html.ValidationMessageFor(model => model.Ufutan, "", new { @class = "text-danger", style = "width:90px" })
+                </div>
+
+                @Html.LabelFor(model => model.Keifno, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:90px; margin-left: 4px" })
+                <div class="col-sm-3" style="width: 175px">
+                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                    {
+                        @Html.EditorFor(model => model.Keifno, new { htmlAttributes = new { @class = "form-control", @maxlength = "30", style = "ime-mode: inactive" } })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.Keifno, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1" } })
+                    }
+                    @Html.ValidationMessageFor(model => model.Keifno, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Tdkcod, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:90px" })
+                <div class="col-sm-2" style="width:125px;">
+                    <div valign="middle" style="display:inline-flex">
+                        @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                        {
+                            @Html.EditorFor(model => model.Tdkcod, new { htmlAttributes = new { @class = "form-control ", @maxlength = "15", onChange = "onChangeTdkcod(this.value)", style = "width: 100px; ime-mode: inactive" } })
+                            @Html.Partial("TodokesakiCodeHelp", new CodeHelpViewModels.TodokesakiViewData())
+                        }
+                        else
+                        {
+                            @Html.EditorFor(model => model.Tdkcod, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", style = "width: 95px" } })
+                        }
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Tdkcod, "", new { @class = "text-danger" })
+                </div>
+
+
+
+                @*<div class="col-sm-1" style="width:160px"></div>*@
+                @Html.LabelFor(model => model.Tdkyub, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:105px" })
+                <div class="col-sm-2" style="width:160px">
+                    <div valign="middle" style="display:inline-flex">
+                        @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                        {
+                            @Html.EditorFor(model => model.Tdkyub, new { htmlAttributes = new { @class = "form-control", @maxlength = "10", onChange = "onChangeTdkyub(this.value)", style = "width: 150px; ime-mode: inactive" } })
+                            @Html.Partial("YubinbangoCodeHelp", new CodeHelpViewModels.YubinbangoViewData())
+                        }
+                        else
+                        {
+                            @Html.EditorFor(model => model.Tdkyub, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", style = "width: 150px;" } })
+                        }
+                    </div>
+                    <small>※注）ハイフン無し</small><br />
+                    @Html.ValidationMessageFor(model => model.Tdkyub, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Tdkjyu, htmlAttributes: new { @class = "col-sm-2 control-label required-item", style = "width:90px" })
+                <div class="col-sm-10" style="width: 590px">
+                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                    {
+                        @Html.EditorFor(model => model.Tdkjyu, new { htmlAttributes = new { @class = "form-control", @maxlength = "60", onChange = "onChangeTdkjyu(this.value)", style = "ime-mode: active" } })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.Tdkjyu, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1" } })
+                    }
+                    <small>※注）都道府県名から入力</small><br />
+                    @Html.ValidationMessageFor(model => model.Tdkjyu, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Tdknam, htmlAttributes: new { @class = "col-sm-2 control-label required-item", style = "width:90px" })
+                <div class="col-sm-10" style="width: 300px">
+                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                    {
+                        @Html.EditorFor(model => model.Tdknam, new { htmlAttributes = new { @class = "form-control", @maxlength = "20", style = "ime-mode: active" } })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.Tdknam, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1" } })
+                    }
+                    @Html.ValidationMessageFor(model => model.Tdknam, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Tdsnam, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:90px" })
+                <div class="col-sm-10" style="width: 300px">
+                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                    {
+                        @Html.EditorFor(model => model.Tdsnam, new { htmlAttributes = new { @class = "form-control", @maxlength = "20", style = "ime-mode: active" } })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.Tdsnam, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1" } })
+                    }
+                    @Html.ValidationMessageFor(model => model.Tdsnam, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Tdbnam, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:90px" })
+                <div class="col-sm-10" style="width: 300px">
+                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                    {
+                        @Html.EditorFor(model => model.Tdbnam, new { htmlAttributes = new { @class = "form-control", @maxlength = "20", style = "ime-mode: active" } })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.Tdbnam, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1" } })
+                    }
+                    @Html.ValidationMessageFor(model => model.Tdbnam, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Tdktan, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:90px" })
+                <div class="col-sm-6" style="width: 300px">
+                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                    {
+                        @Html.EditorFor(model => model.Tdktan, new { htmlAttributes = new { @class = "form-control", @maxlength = "20", style = "ime-mode: active" } })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.Tdktan, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1" } })
+                    }
+                    @Html.ValidationMessageFor(model => model.Tdktan, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-1" style="width: 30px"></div>
+                @Html.LabelFor(model => model.Tdktel, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:90px" })
+                <div class="col-sm-2" style="width: 170px">
+                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                    {
+                        @Html.EditorFor(model => model.Tdktel, new { htmlAttributes = new { @class = "form-control", @maxlength = "20", style = "ime-mode: inactive" } })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.Tdktel, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1" } })
+                    }
+                    @Html.ValidationMessageFor(model => model.Tdktel, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Meisai, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:90px" })
+                <div class="col-sm-10">
+                    <table id="table" border="1" cellpadding="10">
+                        <thead>
+                            <tr style="height:22px">
+                                <th>&nbsp;No&nbsp;</th>
+                                <th colspan="2">&nbsp;品名コード</th>
+                                @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                                {
+                                    <th width="300">&nbsp;<font color="red">※</font>品名　　※注）26文字迄有効&nbsp;</th>
+                                }
+                                else
+                                {
+                                    <th width="300">&nbsp;<font color="red">※</font>品名&nbsp;</th>
+                                }
+                                <th width="100">&nbsp;<font color="red">※</font>数量&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+                            @foreach (ShuukaTyuumonshoEntryMeisaiViewModel dtl in ViewBag.Meisai)
+                            {
+                                <tr style="height:22px">
+                                    <td align="center">@(rowIdx + 1)</td>
+                                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                                    {
+                                        <td>
+                                            @Html.EditorFor(model => dtl.Hincod, new { htmlAttributes = new { id = "Hincod" + rowIdx.ToString("00"), onChange = "onChangeHincod(this)", @class = "form-control", @maxlength = "15", style = "height:24px; ime-mode: inactive" } })
+                                        </td>
+                                        <td @rowIdx.ToString("id=chHinmei00")>@Html.Partial("HinmeisakiCodeHelp", new CodeHelpViewModels.HinmeisakiViewData())</td>
+                                        <td>
+                                            @Html.EditorFor(model => dtl.Hinnam, new { htmlAttributes = new { id = "Hinnam" + rowIdx.ToString("00"), onChange = "onChangeSyuksu(this)", @class = "form-control", @maxlength = "26", style = "height:24px; width:300px; ime-mode: active" } })
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => dtl.Syuksu, new { htmlAttributes = new { id = "Syuksu" + rowIdx.ToString("00"), onChange = "onChangeSyuksu(this)", @class = "form-control", @maxlength = "11", style = "height:24px; width:100px; ime-mode: inactive" } })
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>@Html.EditorFor(model => dtl.Hincod, new { htmlAttributes = new { id = "Hincod" + rowIdx.ToString("00"), @class = "form-control", @readonly = "readonly", tabindex = "-1", style = "height:24px" } })</td>
+                                        <td></td>
+                                        <td>@Html.EditorFor(model => dtl.Hinnam, new { htmlAttributes = new { id = "Hinnam" + rowIdx.ToString("00"), @class = "form-control", @readonly = "readonly", tabindex = "-1", style = "height:24px; width:300px" } })</td>
+                                        <td>@Html.EditorFor(model => dtl.Syuksu, new { htmlAttributes = new { id = "Syuksu" + rowIdx.ToString("00"), @class = "form-control", @readonly = "readonly", tabindex = "-1", style = "height:24px; width:100px" } })</td>
+                                    }
+                                </tr>
+                                rowIdx++;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+            {
+                <div class="row" style="line-height:2">
+                    @*<div class="col-sm-10"></div>*@
+                    <div class="col-sm-1" style="margin-left: 610px">
+                        <input type="button" class="btn btn-default" id="insertRow" style="width:50px; height:30px; margin-top:2px; padding-left:0; padding-right:0; text-align: center" value="行追加" />
+                    </div>
+                </div>
+            }
+            <div class="row" style="margin-top :2px;">
+            </div>
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Tricod, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:90px" })
+                <div class="col-sm-6" style="display:inline-flex; width: 350px">
+                    @Html.EditorFor(model => model.Tricod, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", style = "width:110px" } })
+                    @Html.EditorFor(model => model.Trinam, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1" } })
+                </div>
+
+                @Html.LabelFor(model => model.Dsyuksu, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:100px" })
+                <div class="col-sm-2 text_cd_middle">
+                    @Html.EditorFor(model => model.Dsyuksu, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1" } })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Tkjiko1, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:90px" })
+                <div class="col-sm-6" style="width: 350px">
+                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                    {
+                        @Html.EditorFor(model => model.Tkjiko1, new { htmlAttributes = new { @class = "form-control", @maxlength = "20", style = "ime-mode: active" } })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.Tkjiko1, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1" } })
+                    }
+                    @Html.ValidationMessageFor(model => model.Tkjiko1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Tkjiko2, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:90px" })
+                <div class="col-sm-6" style="width: 350px">
+                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                    {
+                        @Html.EditorFor(model => model.Tkjiko2, new { htmlAttributes = new { @class = "form-control", @maxlength = "20", style = "ime-mode: active" } })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.Tkjiko2, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1" } })
+                    }
+                    @Html.ValidationMessageFor(model => model.Tkjiko2, "", new { @class = "text-danger" })
+                </div>
+
+                @Html.LabelFor(model => model.Yusono, htmlAttributes: new { @class = "col-sm-2 control-label", @style = "width: 100px;" })
+                <div class="col-sm-2 text_cd_middle">
+                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                    {
+                        @Html.DropDownListFor(model => model.Yusono, (IEnumerable<SelectListItem>)ViewBag.YusonoList, "", new { @class = "form-control", style = "height: 22px; padding-left: 4px; border-radius: 4px;" })
+                    }
+                    else
+                    {
+                        @Html.DropDownListFor(model => model.Yusono, (IEnumerable<SelectListItem>)ViewBag.YusonoList, "", new { @class = "form-control", style = "height: 22px; padding-left: 4px; border-radius: 4px;", @disabled = "disabled" })
+                    }
+                    @Html.ValidationMessageFor(model => model.Yusono, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Coment, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:90px" })
+                <div class="col-sm-6" style="width: 350px">
+                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                    {
+                        @Html.EditorFor(model => model.Coment, new { htmlAttributes = new { @class = "form-control", @maxlength = "20", style = "ime-mode: active" } })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.Coment, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1" } })
+                    }
+                    @Html.ValidationMessageFor(model => model.Coment, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Kisyua, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:90px" })
+                <div class="col-sm-1" style="width: 130px;">
+                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                    {
+                        @Html.EditorFor(model => model.Kisyua, new { htmlAttributes = new { @class = "form-control", @maxlength = "2", style = "width: 30px; ime-mode: inactive" } })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.Kisyua, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", style = "width: 30px;" } })
+                    }
+                    @Html.ValidationMessageFor(model => model.Kisyua, "", new { @class = "text-danger" })
+                </div>
+
+                @Html.LabelFor(model => model.Kisyub, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:80px" })
+                <div class="col-sm-2 text_cd_middle">
+                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                    {
+                        @Html.EditorFor(model => model.Kisyub, new { htmlAttributes = new { @class = "form-control", @maxlength = "6", style = "ime-mode: inactive" } })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.Kisyub, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1" } })
+                    }
+                    @Html.ValidationMessageFor(model => model.Kisyub, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Unscod, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:90px" })
+                <div class="col-sm-5" style="width:280px">
+                    <div valign="middle" style="display:flex">
+                        @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                        {
+                            @Html.EditorFor(model => model.Unscod, new { htmlAttributes = new { @class = "form-control", style = "width:40px; ime-mode: inactive", @maxlength = "2", onChange = "onChangeUnscod(this.value)" } })
+                            @Html.Partial("UnsohohoCodeHelp", new CodeHelpViewModels.UnsohohoViewData())
+                        }
+                        else
+                        {
+                            @Html.EditorFor(model => model.Unscod, new { htmlAttributes = new { @class = "form-control", style = "width:40px", @readonly = "readonly", tabindex = "-1" } })
+                        }
+                        @Html.EditorFor(model => model.Unscodnam, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Unscod, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Unscrs, htmlAttributes: new { @class = "col-sm-1 control-label", style = "width:90px" })
+                <div class="col-sm-5" style="width:280px">
+                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                    {
+                        @Html.DropDownListFor(model => model.Unscrs, (IEnumerable<SelectListItem>)ViewBag.UnscrsList, "", new { @class = "form-control", style = "height: 22px; padding-left: 4px; border-radius: 4px;" })
+                    }
+                    else
+                    {
+                        @Html.DropDownListFor(model => model.Unscrs, (IEnumerable<SelectListItem>)ViewBag.UnscrsList, "", new { @class = "form-control", style = "height: 22px; padding-left: 4px; border-radius: 4px;", @disabled = "disabled" })
+                    }
+                    @Html.ValidationMessageFor(model => model.Unscrs, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Sircod, htmlAttributes: new { @class = "col-sm-1 control-label", style = "width:90px" })
+                <div class="col-sm-9" style="width: 590px">
+                    <div valign="middle" style="display:flex">
+                        @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                        {
+                            @Html.EditorFor(model => model.Sircod, new { htmlAttributes = new { @class = "form-control", style = "width:60px; ime-mode: inactive", @maxlength = "9", onChange = "onChangeSircod(this.value)" } })
+                            @Html.Partial("SiiresakiCodeHelp", new CodeHelpViewModels.SiiresakiViewData())
+                        }
+                        else
+                        {
+                            @Html.EditorFor(model => model.Sircod, new { htmlAttributes = new { @class = "form-control", style = "width:60px", @readonly = "readonly", tabindex = "-1" } })
+                        }
+                        @Html.EditorFor(model => model.Sirnam, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Sircod, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                @Html.LabelFor(model => model.Unskbn, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:90px" })
+                <div class="col-sm-6" style="width: 590px">
+                    <div valign="middle" style="display:flex">
+                        @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                        {
+                            @Html.EditorFor(model => model.Unskbn, new { htmlAttributes = new { @class = "form-control", style = "width:60px; ime-mode: inactive", @maxlength = "5", onChange = "onChangeUnskbn(this.value)" } })
+                            @Html.Partial("UnsokbnCodeHelp", new CodeHelpViewModels.UnsokbnViewData())
+                        }
+                        else
+                        {
+                            @Html.EditorFor(model => model.Unskbn, new { htmlAttributes = new { @class = "form-control", style = "width:60px", @readonly = "readonly", tabindex = "-1" } })
+                        }
+                        @Html.EditorFor(model => model.Unskbnnam, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Unskbn, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row" style="line-height:2">
+                <div class="col-sm-2" style="width:90px"></div>
+                <div class="col-sm-3" style="width:160px">
+                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                    {
+                        @Html.CheckBoxFor(model => model.Yubflg)
+                    }
+                    else
+                    {
+                        @Html.CheckBoxFor(model => model.Yubflg, new { @disabled = "disabled" })
+                    }
+                    <label>郵便番号を必須としない</label>
+                </div>
+
+                @if (ViewBag.Mode == null)
+                {
+                    <div>
+                        @Html.HiddenFor(model => model.Mukoukbn)
+                        @Html.HiddenFor(model => model.Mukouriyuu)
+                    </div>
+                }
+                else if (ViewBag.Mode == "2")
+                {
+                    @*<div class="col-sm-1"></div>*@
+
+                    <div class="col-sm-2" style="width:80px">
+                        @Html.CheckBoxFor(model => model.Mukoukbn)
+                        <label>無効化</label>
+                    </div>
+
+                    @Html.LabelFor(model => model.Mukouriyuu, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:90px" })
+                    <div class="col-sm-3" style="width: 260px;">
+                        @Html.EditorFor(model => model.Mukouriyuu, new { htmlAttributes = new { @class = "form-control", @maxlength = "20" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Mukouriyuu, "", new { @class = "text-danger" })
+                }
+                else
+                {
+                    @*<div class="col-sm-1"></div>*@
+
+                    <div class="col-sm-2" style="width:80px">
+                        @Html.CheckBoxFor(model => model.Mukoukbn, new { @disabled = "disabled" })
+                        <label>無効化</label>
+                    </div>
+
+                    @Html.LabelFor(model => model.Mukouriyuu, htmlAttributes: new { @class = "col-sm-2 control-label", style = "width:90px" })
+                    <div class="col-sm-3" style="width: 260px;">
+                        @Html.EditorFor(model => model.Mukouriyuu, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Mukouriyuu, "", new { @class = "text-danger" })
+                }
+            </div>
+
+            <div class="row" style="line-height:2">
+                @Html.HiddenFor(model => model.Mode)
+                @Html.HiddenFor(model => model.MeisaiJson)
+            </div>
+            <div class="row  text-center" style="line-height:2">
+                @if (ViewBag.Mode == null)
+                {
+                    <input type="button" class="btn btn-default" id="btnUpdate" value="登録" />
+                }
+                @if (ViewBag.Mode == "1")
+                {
+                    <a class="btn btn-default" href=@Url.Action("Index")>戻る</a>
+                }
+                @if (ViewBag.Mode == "2")
+                {
+                    <input type="button" class="btn btn-default" id="btnUpdate" style="width:45px; height:30px; padding:0; text-align: center;" value="更新" />
+                }
+                @if (ViewBag.Mode == "3")
+                {
+                    <input type="button" class="btn btn-default" id="btnUpdate" style="width:45px; height:30px; padding:0; text-align: center;" value="削除" />
+                }
+            </div>
+        </div>
+        }
+    </div>
+</div>
+
+@section Scripts  {
+    @Html.Partial("_BootstrapFunction")
+    @Scripts.Render("~/bundles/my-bootstrap-export")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Styles.Render("~/Content/bootstrap-datepicker")
+    @Scripts.Render("~/bundles/bootstrap-datepicker")
+
+    <script>
+
+    window.onload = function () {
+        $('#sidebar').toggleClass('active');
+        //処理
+        //if ($('#Yusono').val().length) {
+        //    $('input[name="Tkjiko2"]').attr('readonly', true);
+        //}
+    };
+
+    jQuery(document).ready(function () {
+
+    });
+
+    // 採番済み 表示切替
+    addOnload(function () {
+        if ($('input[name="NumberingFlg"]').val() == 1) {
+            $('input[name="SyuknoMae"]').attr('readonly', true);
+            $('input[name="SyuknoMae"]').attr('tabindex', '-1');
+            $('input[name="SyuknoMae"]').attr('unselectable', 'on');
+            $('#getnumber').attr('disabled', true);
+            $('#getnumber').attr('tabindex', '-1');
+            $('#getnumber').attr('unselectable', 'on');
+            $('input[name="Inscod"]').attr('readonly', false);
+            $('input[name="Inscod"]').attr('tabindex', '0');
+            $('input[name="Inscod"]').attr('unselectable', 'off');
+            $('input[name="Inscod"]').attr('maxlength', '6');
+            $('input[name="Inscod"]').attr('onChange', 'onChangeInscod(this.value)');
+        };    
+
+    });
+
+    // 採番
+    $(function () {
+        $('#getnumber').click(function (e) {
+
+            var aaa = $('input[name="SyuknoMae"]').val().length;
+            if ($('input[name="SyuknoMae"]').val() == "" || $('input[name="SyuknoMae"]').val().length != 3) {
+                $('input[name="SyuknoMae"]').valid();
+                return;
+            }
+
+            var postData = {
+                param: $('input[name="SyuknoMae"]').val()
+            };
+            $.ajax({
+                url: '@Url.Action("GetSyuknoAto")',
+                type: 'POST',
+                dataType: 'json',
+                data: JSON.stringify(postData),
+                contentType: 'application/json',
+            }).done(function (result) {
+                if (result.succsess == 1) {
+                    //成功したとき
+                    $('input[name="SyuknoAto"]').val(result.SyuknoAto);
+                    $('input[name="SyuknoMae"]').attr('readonly', true);
+                    $('input[name="SyuknoMae"]').attr('tabindex', '-1');
+                    $('input[name="SyuknoMae"]').attr('unselectable', 'on');
+                    $('#getnumber').attr('disabled', true);
+                    $('#getnumber').attr('tabindex', '-1');
+                    $('#getnumber').attr('unselectable', 'on');
+                    $('input[name="NumberingFlg"]').val(1);
+                    $('input[name="Inscod"]').attr('readonly', false);
+                    $('input[name="Inscod"]').attr('tabindex', '0');
+                    $('input[name="Inscod"]').attr('unselectable', 'off');
+                    $('input[name="Inscod"]').attr('maxlength', '6');
+                    $('input[name="Inscod"]').attr('onChange', 'onChangeInscod(this.value)');
+                    $('#patternCodeHelp').attr('disabled', false);
+                } else {
+                    $('input[name="SyuknoAto"]').val("");
+                    $('input[name="NumberingFlg"]').val(0);
+                }
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                //例外の場合、エラー画面に飛ばす
+                window.location.href = '/Error/Index'
+            }).always(function () {
+            });
+        });
+    });
+
+    // パターン 変更
+    function onChangeInscod(value) {
+
+        if (value == "") {
+            AllClear();
+            AllValid();
+            return;
+        }
+
+        var postData = {
+            param1: $('input[name="SyuknoMae"]').val(),
+            param2: value
+        };
+        $.ajax({
+        url: '@Url.Action("GetShuukaTyuumonshoPattern")',
+            type: 'POST',
+            dataType: 'json',
+            data: JSON.stringify(postData),
+            contentType: 'application/json',
+        }).done(function (result) {
+
+            AllClear();
+
+            if (result.succsess == 0) {
+                alert("パターンデータがありません　");
+                AllValid();
+                return;
+            }
+            if ($('input[name="Htynam"]').val() == "") {
+                $('input[name="Htynam"]').val(result.Htynam);
+            }
+            if ($('input[name="Htykah"]').val() == "") {
+                $('input[name="Htykah"]').val(result.Htykah);
+            }
+            if ($('input[name="Tancod"]').val() == "") {
+                $('input[name="Tancod"]').val(result.Tancod);
+            }
+            if ($('input[name="Tannam"]').val() == "") {
+                $('input[name="Tannam"]').val(result.Tannam);
+            }
+            if ($('input[name="Htytel"]').val() == "") {
+                $('input[name="Htytel"]').val(result.Htytel);
+            }
+            if ($('input[name="Basyo"]').val() == "") {
+                $('input[name="Basyo"]').val(result.Basyo);
+            }
+            if ($('input[name="Tokcod"]').val() == "") {
+                $('input[name="Tokcod"]').val(result.Tokcod);
+            }
+            if ($('input[name="Toknam"]').val() == "") {
+                $('input[name="Toknam"]').val(result.Toknam);
+            }
+            $('input[name="Sybcod"]').val(result.Sybcod);
+            $('input[name="Sybnam"]').val(result.Sybnam);
+            if ($('#Ufutan').val() == "") {
+                $('#Ufutan').val(result.Ufutan);
+            }
+            if ($('input[name="Keifno"]').val() == "") {
+                $('input[name="Keifno"]').val(result.Keifno);
+            }
+            if ($('input[name="Tdkcod"]').val() == "") {
+                $('input[name="Tdkcod"]').val(result.Tdkcod);
+            }
+            if ($('input[name="Tdkyub"]').val() == "") {
+                $('input[name="Tdkyub"]').val(result.Tdkyub);
+            }
+            if ($('input[name="Tdkjyu"]').val() == "") {
+                $('input[name="Tdkjyu"]').val(result.Tdkjyu);
+            }
+            if ($('input[name="Tdknam"]').val() == "") {
+                $('input[name="Tdknam"]').val(result.Tdknam);
+            }
+            if ($('input[name="Tdsnam"]').val() == "") {
+                $('input[name="Tdsnam"]').val(result.Tdsnam);
+            }
+            if ($('input[name="Tdbnam"]').val() == "") {
+                $('input[name="Tdbnam"]').val(result.Tdbnam);
+            }
+            if ($('input[name="Tdktan"]').val() == "") {
+                $('input[name="Tdktan"]').val(result.Tdktan);
+            }
+            if ($('input[name="Tdktel"]').val() == "") {
+                $('input[name="Tdktel"]').val(result.Tdktel);
+            }
+            if ($('#Hincod00').val() == "") {
+                $('#Hincod00').val(result.Hincd1);
+            }
+            if ($('#Hincod01').val() == "") {
+                $('#Hincod01').val(result.Hincd2);
+            }
+            if ($('#Hincod02').val() == "") {
+                $('#Hincod02').val(result.Hincd3);
+            }
+            if ($('#Hincod03').val() == "") {
+                $('#Hincod03').val(result.Hincd4);
+            }
+            if ($('#Hincod04').val() == "") {
+                $('#Hincod04').val(result.Hincd5);
+            }
+            if ($('#Hinnam00').val() == "") {
+                $('#Hinnam00').val(result.Hinnm1);
+            }
+            if ($('#Hinnam01').val() == "") {
+                $('#Hinnam01').val(result.Hinnm2);
+            }
+            if ($('#Hinnam02').val() == "") {
+                $('#Hinnam02').val(result.Hinnm3);
+            }
+            if ($('#Hinnam03').val() == "") {
+                $('#Hinnam03').val(result.Hinnm4);
+            }
+            if ($('#Hinnam04').val() == "") {
+                $('#Hinnam04').val(result.Hinnm5);
+            }
+            if ($('#Syuksu00').val() == "") {
+                $('#Syuksu00').val(result.Syksu1);
+            }
+            if ($('#Syuksu01').val() == "") {
+                $('#Syuksu01').val(result.Syksu2);
+            }
+            if ($('#Syuksu02').val() == "") {
+                $('#Syuksu02').val(result.Syksu3);
+            }
+            if ($('#Syuksu03').val() == "") {
+                $('#Syuksu03').val(result.Syksu4);
+            }
+            if ($('#Syuksu04').val() == "") {
+                $('#Syuksu04').val(result.Syksu5);
+            }
+            onChangeSyuksu(this)
+            if ($('input[name="Tkjiko1"]').val() == "") {
+                $('input[name="Tkjiko1"]').val(result.Tkjiko1);
+            }
+            if ($('input[name="Tkjiko2"]').val() == "") {
+                $('input[name="Tkjiko2"]').val(result.Tkjiko2);
+            }
+            if ($('input[name="Unscod"]').val() == "") {
+                $('input[name="Unscod"]').val(result.Unscod);
+                onChangeUnscod(result.Unscod);
+            }
+            if ($('input[name="Unscodnam"]').val() == "") {
+                $('input[name="Unscodnam"]').val(result.Unscodnam);
+            }
+            if ($('#Unscrs').val() == "") {
+                $('#Unscrs').val(result.Unscrs);
+            }
+
+            AllValid();
+
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+            //例外の場合、エラー画面に飛ばす
+            window.location.href = '/Error/Index'
+        }).always(function () {
+        });
+    };
+
+    // 部門 変更
+    function onChangePccod1(value) {
+        var postData = {
+            param: value
+        };
+        $.ajax({
+            url: '@Url.Action("GetBumonName")',
+            type: 'POST',
+            dataType: 'json',
+            data: JSON.stringify(postData),
+            contentType: 'application/json',
+        }).done(function (result) {
+            $('input[name="Pccod1n"]').val(result.BumonName);
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            //例外の場合、エラー画面に飛ばす
+            window.location.href = '/Error/Index'
+        }).always(function () {
+        });
+    };
+
+    // 担当者 変更
+    function onChangeTancod(value) {
+
+        if (value == "") {
+            return;
+        }
+
+        var postData = {
+            param: value
+        };
+        $.ajax({
+            url: '@Url.Action("GetTantoName")',
+            type: 'POST',
+            dataType: 'json',
+            data: JSON.stringify(postData),
+            contentType: 'application/json',
+        }).done(function (result) {
+            $('input[name="Tannam"]').val(result.TantoName);
+            $('input[name="Tannam"]').valid();
+            $('#oputError1').hide();
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            //例外の場合、エラー画面に飛ばす
+            window.location.href = '/Error/Index'
+        }).always(function () {
+        });
+    };
+
+    //担当者コードと担当者名の一致チェック
+        function onMatchTancod(value) {
+            var tancod = $('input[name="Tancod"]').val();
+            var postData = {
+                cd: tancod 
+                ,name: value
+            };
+                    $.ajax({
+            url: '@Url.Action("GetMatchTannam")',
+            type: 'POST',
+            dataType: 'json',
+            data: JSON.stringify(postData),
+            contentType: 'application/json',
+                    }).done(function (result) {
+                        if (result.succsess == 1) {
+                            $('#oputError1').show();
+                        }
+                        else {
+                            $('#oputError1').hide();
+                        }
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            //例外の場合、エラー画面に飛ばす
+            window.location.href = '/Error/Index'
+        }).always(function () {
+        });
+        }
+
+    // 得意先 変更
+        function onChangeTokcod(value) {
+        var postData = {
+            param: value 
+        };
+        $.ajax({
+            url: '@Url.Action("GetTorihikisakiName")',
+            type: 'POST',
+            dataType: 'json',
+            data: JSON.stringify(postData),
+            contentType: 'application/json',
+        }).done(function (result) {
+            $('input[name="Toknam"]').val(result.TorihikisakiName);
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            //例外の場合、エラー画面に飛ばす
+            window.location.href = '/Error/Index'
+        }).always(function () {
+        });
+    };
+
+    // 得意先 コードヘルプ
+    $(function () {
+        $('#TokuisakiTable').on('click-row.bs.table', function (e, row, $element) {
+            $('.success').removeClass('success');
+            $($element).addClass('success');
+        });
+    });
+    $('#TokuisakiSelect').on('click', function (e) {
+        var index = $('.success').attr('data-index');
+        if (index) {
+            var row = $('.success').parents('table:first').bootstrapTable('getData')[index];
+            $('input[name="Tokcod"]').val(row.@nameof(CodeHelpViewModels.TokuisakiInformation.Torcod));
+            $('input[name="Toknam"]').val(row.@nameof(CodeHelpViewModels.TokuisakiInformation.Tornam));
+        }
+        $('input[name="Tokcod"]').valid();
+    });
+    $('#TokuisakiSearch').on('click', function (e) {
+        TokuisakiTableBootstrapTableRefresh();
+    });
+    function TokuisakiQueryParams(params) {
+        return JSON.stringify({
+            'Tornmk': $('input[name="Serch.Tornmk"]').val(),
+            'Torcod': $('input[name="Serch.Torcod"]').val(),
+            'Fbtcod': $('input[name="Serch.Fbtcod"]').val(),
+            'Tornam': $('input[name="Serch.Tornam"]').val(),
+            'Buknam': $('input[name="Serch.Buknam"]').val(),
+            'Jysyo': $('input[name="Serch.Jysyo"]').val()
+        });
+    }
+
+    function TokuisakiTableBootstrapTableRefresh() {
+        var $table = $('#TokuisakiTable')
+        var temp = $table.css('display')
+        $table.bootstrapTable('refresh', { url: "@Url.Action("TokuisakiSearch", "CodeHelp")" });
+        setTimeout(function () {
+            $table.css({ display: 'none' })
+            setTimeout(function () {
+                $table.css({ display: temp })
+            }, 100)
+        }, 100)
+    }
+
+    $('#TokuisakiModal').on('hide.bs.modal', function () {
+        TokuisakiTableClear();
+        $('#TokuisakiTable').bootstrapTable('destroy').bootstrapTable();
+    });
+
+    function TokuisakiTableClear() {
+        $('input[name="Serch.Tornmk"]').val("");
+        $('input[name="Serch.Torcod"]').val("");
+        $('input[name="Serch.Fbtcod"]').val("");
+        $('input[name="Serch.Tornam"]').val("");
+        $('input[name="Serch.Buknam"]').val("");
+        $('input[name="Serch.Jysyo"]').val("");
+        $('#TokuisakiTable').bootstrapTable('removeAll');
+    }
+
+    // 出荷場所 変更
+    function onChangeSybcod(value) {
+        var postData = {
+            param: value
+        };
+        $.ajax({
+            url: '@Url.Action("GetSyukabashoName")',
+            type: 'POST',
+            dataType: 'json',
+            data: JSON.stringify(postData),
+            contentType: 'application/json',
+        }).done(function (result) {
+            $('input[name="Sybnam"]').val(result.SyukabashoName);
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            //例外の場合、エラー画面に飛ばす
+            window.location.href = '/Error/Index'
+        }).always(function () {
+        });
+    };
+
+    // 出荷場所 コードヘルプ
+    $(function () {
+        $('#ShukkabashoTable').on('click-row.bs.table', function (e, row, $element) {
+            $('.success').removeClass('success');
+            $($element).addClass('success');
+        });
+    });
+    $('#ShukkabashoSelect').on('click', function (e) {
+        var index = $('.success').attr('data-index');
+        if (index) {
+            var row = $('.success').parents('table:first').bootstrapTable('getData')[index];
+            $('input[name="Sybcod"]').val(row.@nameof(CodeHelpViewModels.ShukkabashoInformation.SybcodCh));
+            $('input[name="Sybnam"]').val(row.@nameof(CodeHelpViewModels.ShukkabashoInformation.SybnamCh));
+        }
+        $('input[name="Sybcod"]').valid();
+    });
+    $('#shukkabashoSearch').on('click', function (e) {
+        ShukkabashoTableBootstrapTableRefresh();
+    });
+    function shukkabashoQueryParams(params) {
+        return JSON.stringify({
+            'Sybcod': $('input[name="Serch.SybcodCh"]').val(),
+            'Sybnam': $('input[name="Serch.SybnamCh"]').val()
+        });
+    }
+    function ShukkabashoTableBootstrapTableRefresh() {
+        var $table = $('#ShukkabashoTable')
+        var temp = $table.css('display')
+        $table.bootstrapTable('refresh', { url: "@Url.Action("ShukkabashoSearch", "CodeHelp")" });
+        setTimeout(function () {
+            $table.css({ display: 'none' })
+            setTimeout(function () {
+                $table.css({ display: temp })
+            }, 100)
+        }, 100)
+    }
+
+    $('#ShukkabashoModal').on('hide.bs.modal', function () {
+        ShukkabashoTableClear();
+        $('#ShukkabashoTable').bootstrapTable('destroy').bootstrapTable();
+    });
+
+    function ShukkabashoTableClear() {
+        $('input[name="Serch.SybcodCh"]').val("");
+        $('input[name="Serch.SybnamCh"]').val("");
+        $('#ShukkabashoTable').bootstrapTable('removeAll');
+    }
+
+    // 出荷日カレンダー
+    $(function () {
+        $('.date').datepicker({
+            format: "yyyy/mm/dd",
+            language: "ja",
+            autoclose: true, //日付選択で自動的にカレンダーを閉じる
+            orientation: 'bottom left'
+        });
+    });
+
+    // 届先コード 変更
+    function onChangeTdkcod(value) {
+
+        if (value.trim() == "") {
+            $('input[name="Tdkcod"]').val("");
+            return;
+        }
+
+        var postData = {
+            param: value
+        };
+        $.ajax({
+            url: '@Url.Action("GetTodokesaki")',
+            type: 'POST',
+            dataType: 'json',
+            data: JSON.stringify(postData),
+            contentType: 'application/json',
+        }).done(function (result) {
+            if (value == "") {
+                return;
+            }
+
+            if (result.succsess == 2) {
+                alert("届先マスタは現在レプリケーション中です　");
+                $('input[name="Tdkcod"]').val("");
+                return;
+            }
+
+            $('input[name="Tdkjyu"]').val(result.Tdkjyu);
+            $('input[name="Tdknam"]').val(result.Tdknam);
+            $('input[name="Tdsnam"]').val(result.Tdsnam);
+            $('input[name="Tdbnam"]').val(result.Tdbnam);
+            $('input[name="Tdktan"]').val(result.Tdktan);
+            $('input[name="Tdktel"]').val(result.Tdktel);
+            $('input[name="Tdkyub"]').val(result.Tdkyub);
+
+            //if ($('input[name="Tdbnam"]').val() == "") {
+            //    $('input[name="Tdbnam"]').val(result.Tdbnam);
+            //}
+            //if ($('input[name="Tdktan"]').val() == "") {
+            //    $('input[name="Tdktan"]').val(result.Tdktan);
+            //}
+            //if ($('input[name="Tdktel"]').val() == "") {
+            //    $('input[name="Tdktel"]').val(result.Tdktel);
+            //}
+            //if ($('input[name="Tdkyub"]').val() == "") {
+            //    $('input[name="Tdkyub"]').val(result.Tdkyub);
+            //}
+            
+            $('input[name="Tdkjyu"]').valid();
+            $('input[name="Tdknam"]').valid();
+            $('input[name="Tdsnam"]').valid();
+
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            //例外の場合、エラー画面に飛ばす
+            window.location.href = '/Error/Index'
+        }).always(function () {
+        });
+    };
+
+    // 届先コード コードヘルプ
+    $(function () {
+        $('#TodokesakiTable').on('click-row.bs.table', function (e, row, $element) {
+            $('.success').removeClass('success');
+            $($element).addClass('success');
+        });
+    });
+    $('#TodokesakiSelect').on('click', function (e) {
+        var index = $('.success').attr('data-index');
+        if (index) {
+            var row = $('.success').parents('table:first').bootstrapTable('getData')[index];
+            $('input[name="Tdkcod"]').val(row.@nameof(CodeHelpViewModels.TodokesakihelpInformation.Tdkcod));
+            onChangeTdkcod($('input[name="Tdkcod"]').val());
+        }
+    });
+    $('#TodokesakiSearch').on('click', function (e) {
+        TodokesakiTableBbootstrapTableRefresh();
+    });
+    function TodokesakiQueryParams(params) {
+        return JSON.stringify({
+            'Tdknmk': $('input[name="Serch.Tdknmk"]').val(),
+            'Tdkcod': $('input[name="Serch.Tdkcod"]').val(),
+            'Tdknam': $('input[name="Serch.Tdknam"]').val(),
+            'Tdknms': $('input[name="Serch.Tdknms"]').val(),
+            'Tdbnam': $('input[name="Serch.Tdbnam"]').val(),
+            'Ktdkcd': $('input[name="Serch.Ktdkcd"]').val(),
+            'Jyusyo': $('input[name="Serch.Jyusyo"]').val(),
+            'Tornam': $('input[name="Serch.Tornam"]').val(),
+            'Sdek01': $('input[name="Serch.Sdek01"]').val(),
+            'Sdek02': $('input[name="Serch.Sdek02"]').val(),
+            'Sdek03': $('input[name="Serch.Sdek03"]').val(),
+            'Sdek04': $('input[name="Serch.Sdek04"]').val(),
+            'Sdek05': $('input[name="Serch.Sdek05"]').val(),
+            'Sdek06': $('input[name="Serch.Sdek06"]').val(),
+            'Sdek07': $('input[name="Serch.Sdek07"]').val(),
+            'Sdek08': $('input[name="Serch.Sdek08"]').val(),
+            'Sdek09': $('input[name="Serch.Sdek09"]').val(),
+            'Sdek10': $('input[name="Serch.Sdek10"]').val(),
+            'Sdek11': $('input[name="Serch.Sdek11"]').val(),
+            'Sdek12': $('input[name="Serch.Sdek12"]').val(),
+            'Sdek13': $('input[name="Serch.Sdek13"]').val(),
+            'Sdek14': $('input[name="Serch.Sdek14"]').val(),
+            'Sdek15': $('input[name="Serch.Sdek15"]').val()
+        });
+    }
+    function TodokesakiTableBbootstrapTableRefresh() {
+
+        $('#TodokesakiTable').bootstrapTable('removeAll');
+        var tbl = document.getElementById("TodokesakiTable");
+        var tr = tbl.rows[1];
+        var td = tr.cells[0];
+        td.innerHTML = "検索中です。";
+
+        $.ajax({
+            url: '@Url.Action("TodokesakiSearch", "CodeHelp")',
+            type: 'POST',
+            dataType: 'json',
+            data: TodokesakiQueryParams(0),
+            contentType: 'application/json',
+        }).done(function (result) {
+            if (result.succsess == 1) {
+                $('#TodokesakiTable').bootstrapTable('load', result.data);
+            }
+            else {
+                $('#TodokesakiTable').bootstrapTable('removeAll');
+                var tbl = document.getElementById("TodokesakiTable");
+                var tr = tbl.rows[1];
+                var td = tr.cells[0];
+                if (result.succsess == 2) {
+                    td.innerHTML = "検索結果がありません。";
+                } else if (result.succsess == 3) {
+                    td.innerHTML = "レプリケーション中です。しばらく待って検索してください。";
+                } else {
+                    td.innerHTML = "検索結果が多すぎます。検索条件を絞り込んでください。";
+                }
+            }
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            //例外の場合、エラー画面に飛ばす
+            window.location.href = '/Error/Index'
+        }).always(function () {
+        });
+    }
+
+    $('#TodokesakiModal').on('hide.bs.modal', function () {
+        TodokesakiTableClear();
+        $('#TodokesakiTable').bootstrapTable('destroy').bootstrapTable();
+    });
+
+    function TodokesakiTableClear() {
+        $('input[name="Serch.Tdknmk"]').val("");
+        $('input[name="Serch.Tdkcod"]').val("");
+        $('input[name="Serch.Tdknam"]').val("");
+        $('input[name="Serch.Tdknms"]').val("");
+        $('input[name="Serch.Tdbnam"]').val("");
+        $('input[name="Serch.Ktdkcd"]').val("");
+        $('input[name="Serch.Jyusyo"]').val("");
+        $('input[name="Serch.Tornam"]').val("");
+        $('input[name="Serch.Sdek01"]').val("");
+        $('input[name="Serch.Sdek02"]').val("");
+        $('input[name="Serch.Sdek03"]').val("");
+        $('input[name="Serch.Sdek04"]').val("");
+        $('input[name="Serch.Sdek05"]').val("");
+        $('input[name="Serch.Sdek06"]').val("");
+        $('input[name="Serch.Sdek07"]').val("");
+        $('input[name="Serch.Sdek08"]').val("");
+        $('input[name="Serch.Sdek09"]').val("");
+        $('input[name="Serch.Sdek10"]').val("");
+        $('input[name="Serch.Sdek11"]').val("");
+        $('input[name="Serch.Sdek12"]').val("");
+        $('input[name="Serch.Sdek13"]').val("");
+        $('input[name="Serch.Sdek14"]').val("");
+        $('input[name="Serch.Sdek15"]').val("");
+        $('#TodokesakiTable').bootstrapTable('removeAll');
+        var tbl = document.getElementById("TodokesakiTable");
+        var tr = tbl.rows[1];
+        var td = tr.cells[0];
+        td.innerHTML = "検索結果がありません。";
+    }
+
+    // 届先郵便番号コード 変更
+    function onChangeTdkyub(value) {
+        var postData = {
+            param: value
+        };
+        $.ajax({
+            url: '@Url.Action("GetJyusyo")',
+            type: 'POST',
+            dataType: 'json',
+            data: JSON.stringify(postData),
+            contentType: 'application/json',
+        }).done(function (result) {
+            if ($('input[name="Tdkjyu"]').val() == "") {
+                $('input[name="Tdkjyu"]').val(result.Jyusyo);
+                $('input[name="Tdkjyu"]').valid();
+            }
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            //例外の場合、エラー画面に飛ばす
+            window.location.href = '/Error/Index'
+        }).always(function () {
+        });
+    };
+
+    // 届先住所 変更
+        function onChangeTdkjyu(value) {
+        var postData = {
+            param1: value,
+            param2: $('input[name="Tdkyub"]').val(),
+            param3: $('input[name="Yubflg"]').prop("checked")
+        };
+        $.ajax({
+            url: '@Url.Action("GetYubinn")',
+            type: 'POST',
+            dataType: 'json',
+            data: JSON.stringify(postData),
+            contentType: 'application/json',
+        }).done(function (result) {
+            if (result.succsess == 1) {
+                $('input[name="Tdkyub"]').val(result.Yubinn);
+            } else {
+                alert("届先郵便番号と届先住所が一致しません　");
+            }
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            //例外の場合、エラー画面に飛ばす
+            window.location.href = '/Error/Index'
+        }).always(function () {
+        });
+    };
+
+    // 届先郵便番号コード コードヘルプ
+    $(function () {
+        $('#YubinbangoTable').on('click-row.bs.table', function (e, row, $element) {
+            $('.success').removeClass('success');
+            $($element).addClass('success');
+        });
+    });
+    $('#YubinbangoSelect').on('click', function (e) {
+        var index = $('.success').attr('data-index');
+        if (index) {
+            var row = $('.success').parents('table:first').bootstrapTable('getData')[index];
+            $('input[name="Tdkyub"]').val(row.@nameof(CodeHelpViewModels.YubinbangoInformation.Yubinn));
+            if ($('input[name="Tdkjyu"]').val() == "") {
+                $('input[name="Tdkjyu"]').val(row.@nameof(CodeHelpViewModels.YubinbangoInformation.Jyusy1) + row.@nameof(CodeHelpViewModels.YubinbangoInformation.Jyusy2));
+            }
+        }
+    });
+    $('#YubinbangoSerch').on('click', function (e) {
+        YubinbangoTableBbootstrapTableRefresh();
+    });
+    function YubinbangoQueryParams(params) {
+        return JSON.stringify({
+            'Jyusy1': $('input[name="Serch.Jyusy1"]').val(),
+            'Jyusy2': $('input[name="Serch.Jyusy2"]').val(),
+            'Yubinn': $('input[name="Serch.Yubinn"]').val()
+        });
+    }
+    function YubinbangoTableBbootstrapTableRefresh() {
+
+        $('#YubinbangoTable').bootstrapTable('removeAll');
+        var tbl = document.getElementById("YubinbangoTable");
+        var tr = tbl.rows[1];
+        var td = tr.cells[0];
+        td.innerHTML = "検索中です。";
+
+        $.ajax({
+            url: '@Url.Action("YubinbangoSerch", "CodeHelp")',
+            type: 'POST',
+            dataType: 'json',
+            data: YubinbangoQueryParams(0),
+            contentType: 'application/json',
+        }).done(function (result) {
+            if (result.succsess == 1) {
+                $('#YubinbangoTable').bootstrapTable('load', result.data);
+            }
+            else {
+                $('#YubinbangoTable').bootstrapTable('removeAll');
+                var tbl = document.getElementById("YubinbangoTable");
+                var tr = tbl.rows[1];
+                var td = tr.cells[0];
+                if (result.succsess == 2) {
+                    td.innerHTML = "検索結果がありません。";
+                } else {
+                    td.innerHTML = "検索結果が多すぎます。検索条件を絞り込んでください。";
+                }
+            }
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            //例外の場合、エラー画面に飛ばす
+            window.location.href = '/Error/Index'
+        }).always(function () {
+        });
+    }
+
+    $('#YubinbangoModal').on('hide.bs.modal', function () {
+        YubinbangoTableClear();
+        $('#YubinbangoTable').bootstrapTable('destroy').bootstrapTable();
+    });
+
+    function YubinbangoTableClear() {
+        $('input[name="Serch.Jyusy1"]').val("");
+        $('input[name="Serch.Jyusy2"]').val("");
+        $('input[name="Serch.Yubinn"]').val("");
+        $('#YubinbangoTable').bootstrapTable('removeAll');
+        var tbl = document.getElementById("YubinbangoTable");
+        var tr = tbl.rows[1];
+        var td = tr.cells[0];
+        td.innerHTML = "検索結果がありません。";
+    }
+
+    // 品名コード 変更
+    function onChangeHincod(ele) {
+
+        if (ele.value.trim() == "") {
+            $('#Hincod' + ele.id.substring(6)).val("");
+            onChangeSyuksu(this);
+            return;
+        }
+
+        var postData = {
+            param: ele.value
+        };
+        $.ajax({
+            url: '@Url.Action("GetHinmei")',
+            type: 'POST',
+            dataType: 'json',
+            data: JSON.stringify(postData),
+            contentType: 'application/json',
+        }).done(function (result) {
+
+            if (result.succsess == 2) {
+                alert("品名マスタは現在レプリケーション中です　");
+                $('#Hincod' + ele.id.substring(6)).val("");
+                return;
+            }
+            if (ele.value == "") {
+                return;
+            }
+            $('#Hinnam' + ele.id.substring(6)).val(result.Hinnam.substr(0, 26));
+            onChangeSyuksu(this);
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            //例外の場合、エラー画面に飛ばす
+            window.location.href = '/Error/Index'
+        }).always(function () {
+        });
+    };
+
+    // 品名 コードヘルプ
+    function onClickChHinmei(ele) {
+        window.sessionStorage.setItem(['chHinmei'], [ele.parentNode.id.substring(8)]);
+    };
+    $(function () {
+        $('#HinmeisakiTable').on('click-row.bs.table', function (e, row, $element) {
+            $('.success').removeClass('success');
+            $($element).addClass('success');
+        });
+    });
+    $('#HinmeisakiSelect').on('click', function (e) {
+        var index = $('.success').attr('data-index');
+        if (index) {
+            var row = $('.success').parents('table:first').bootstrapTable('getData')[index];
+            var subId = window.sessionStorage.getItem(['chHinmei']);
+            window.sessionStorage.removeItem(['chHinmei']);
+            $('#Hincod' + subId).val(row.@nameof(CodeHelpViewModels.HinmeisakiInformation.Hincod));
+            $('#Hinnam' + subId).val(String(row.@nameof(CodeHelpViewModels.HinmeisakiInformation.Hinnam)).substr(0, 26));
+            onChangeSyuksu(this);
+        }
+    });
+    $('#HinmeisakiSearch').on('click', function (e) {
+        HinmeisakiTableBbootstrapTableRefresh();
+    });
+    function hinmeiQueryParams(params) {
+        return JSON.stringify({
+            'Hinnmk': $('input[name="Serch.Hinnmk"]').val(),
+            'Hincod': $('input[name="Serch.Hincod"]').val(),
+            'Hinnam': $('input[name="Serch.Hinnam"]').val(),
+            'Ctlfl1': $('[name="Serch.Ctlfl1"]').val(),
+            'Khincd': $('[name="Serch.Khincd"]').val()            
+        });
+    }
+
+    function HinmeisakiTableBbootstrapTableRefresh() {
+
+        $('#HinmeisakiTable').bootstrapTable('removeAll');
+        var tbl = document.getElementById("HinmeisakiTable");
+        var tr = tbl.rows[1];
+        var td = tr.cells[0];
+        td.innerHTML = "検索中です。";
+
+        $.ajax({
+            url: '@Url.Action("HinmeisakiSearch", "CodeHelp")',
+            type: 'POST',
+            dataType: 'json',
+            data: hinmeiQueryParams(0),
+            contentType: 'application/json',
+        }).done(function (result) {
+            if (result.succsess == 1) {
+                $('#HinmeisakiTable').bootstrapTable('load', result.data);
+            }
+            else {
+                $('#HinmeisakiTable').bootstrapTable('removeAll');
+                var tbl = document.getElementById("HinmeisakiTable");
+                var tr = tbl.rows[1];
+                var td = tr.cells[0];
+                if (result.succsess == 2) {
+                    td.innerHTML = "検索結果がありません。";
+                } else if (result.succsess == 3) {
+                    td.innerHTML = "レプリケーション中です。しばらく待って検索してください。";
+                } else {
+                    td.innerHTML = "検索結果が多すぎます。検索条件を絞り込んでください。";
+                }
+            }
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            //例外の場合、エラー画面に飛ばす
+            window.location.href = '/Error/Index'
+        }).always(function () {
+        });
+    }
+
+    $('#HinmeisakiModal').on('hide.bs.modal', function () {
+        HinmeisakiTableClear();
+        $('#HinmeisakiTable').bootstrapTable('destroy').bootstrapTable();
+    });
+
+    function HinmeisakiTableClear() {
+        $('input[name="Serch.Hinnmk"]').val("");
+        $('input[name="Serch.Hincod"]').val("");
+        $('input[name="Serch.Hinnam"]').val("");
+        $('[name="Serch.Ctlfl1"]').val("");
+        $('[name="Serch.Khincd"]').val("");
+        $('#HinmeisakiTable').bootstrapTable('removeAll');
+        var tbl = document.getElementById("HinmeisakiTable");
+        var tr = tbl.rows[1];
+        var td = tr.cells[0];
+        td.innerHTML = "検索結果がありません。";
+    }
+
+    // 取込名コード・取込名・出荷数 変更
+    function onChangeSyuksu(ele) {
+        var Tricod = "";
+        var TricodCnt = Number(0);
+        var Trinam = "";
+        var TrinamCnt = Number(0);
+        var Dsyuksu = Number(0);
+        var table = document.getElementById("table");
+        for (var i = 0; i < table.rows.length - 1; i++) {
+            // 取込名コード
+            if (TricodCnt == 0) {
+                if (document.getElementById("Hincod" + ('00' + i).slice(-2)).value != "") {
+                    Tricod = document.getElementById("Hincod" + ('00' + i).slice(-2)).value;
+                    TricodCnt++;
+                }
+            }
+            else if (TricodCnt == 1) {
+                if (document.getElementById("Hincod" + ('00' + i).slice(-2)).value != "") {
+                    Tricod = "";
+                    TricodCnt++;
+                }
+            //else {
+            //    if (document.getElementById("Hincod" + ('00' + i).slice(-2)).value != "") {
+            //        Tricod = "";
+            //        TricodCnt++;
+            //    }
+            }
+            // 取込名
+            if (TrinamCnt == 0) {
+                if (document.getElementById("Hinnam" + ('00' + i).slice(-2)).value != "") {
+                    Trinam = document.getElementById("Hinnam" + ('00' + i).slice(-2)).value;
+                    TrinamCnt++;
+                }
+            }
+            else if(TrinamCnt == 1) {
+                if (document.getElementById("Hinnam" + ('00' + i).slice(-2)).value != "") {
+                    Trinam = Trinam + "　他";
+                    Tricod = "";
+                    TrinamCnt++;
+                }
+            }
+            // 出荷数
+            if (document.getElementById("Hinnam" + ('00' + i).slice(-2)).value != "") {
+                var num = Number(document.getElementById("Syuksu" + ('00' + i).slice(-2)).value);
+                if (!isNaN(num)) {
+                    Dsyuksu += Number(num);
+                }
+            }
+        }
+
+        if (TricodCnt > 1 || TrinamCnt > 1) {
+            Tricod = "";
+        }
+        $('input[name="Tricod"]').val(Tricod);
+        $('input[name="Trinam"]').val(Trinam);
+        if (isNaN(Dsyuksu)) {
+            $('input[name="Dsyuksu"]').val(0);
+        } else {
+            $('input[name="Dsyuksu"]').val(Number(Dsyuksu));
+        }
+    };
+
+    // 行追加
+    $(function () {
+        $('#insertRow').click(function (e) {
+            var table = document.getElementById("table");
+            // 行数取得
+            var row_len = table.rows.length - 1;
+            // tr追加
+            var row = table.insertRow(-1);
+            // td追加
+            var cell1 = row.insertCell(-1);
+            var cell2 = row.insertCell(-1);
+            var cell3 = row.insertCell(-1);
+            var cell4 = row.insertCell(-1);
+            var cell5 = row.insertCell(-1);
+            // tdの内容入力
+            var ch = "";
+            ch += '<button class="btn btn-default" style="padding: 4px; width: 30px; height: 22px;" onclick="onClickChHinmei(this)" type="button" data-toggle="modal" data-target="#HinmeisakiModal">';
+            ch += '    *';
+            ch += '</button>';
+            ch += '<!-- コードヘルプ -->';
+            ch += '<div tabindex="-1" class="modal fade bs-example-modal-lg" id="HinmeisakiModal" role="dialog" aria-labelledby="myModalLabel">';
+            ch += '    <div class="modal-dialog modal-lg" role="document">';
+            ch += '        <div class="modal-content">';
+            ch += '            <div class="modal-header">';
+            ch += '                <h4 class="modal-title" id="myModalLabel">コードヘルプ - 品名マスタ</h4>';
+            ch += '            </div>';
+            ch += '            <div class="modal-body">';
+            ch += '                <div class="row" style="line-height: 2;">';
+            ch += '                    <label class="control-label col-sm-1 label_large" for="Serch_Hinnmk">品名カナ</label>';
+            ch += '                    <div class="col-sm-1 text_jp_middle">';
+            ch += '                        <input name="Serch.Hinnmk" class="form-control text-box single-line" id="Serch_Hinnmk" type="text" maxlength="90" value="" data-val="true" data-val-maxlength-max="80" data-val-maxlength="80文字以内で入力してください。">';
+            ch += '                        <span class="field-validation-valid text-danger" data-valmsg-replace="true" data-valmsg-for="Serch.Hinnmk"></span>';
+            ch += '                    </div>';
+            ch += '                    <label class="control-label col-sm-2 label_large" for="Serch_Hincod">コード</label>';
+            ch += '                    <div class="col-sm-2 text_cd_middle">';
+            ch += '                        <input name="Serch.Hincod" class="form-control text-box single-line" id="Serch_Hincod" type="text" maxlength="9" value="" data-val="true" data-val-maxlength-max="15" data-val-maxlength="15文字以内で入力してください。">';
+            ch += '                        <span class="field-validation-valid text-danger" data-valmsg-replace="true" data-valmsg-for="Serch.Hincod"></span>';
+            ch += '                    </div>';
+            ch += '                </div>';
+            ch += '                <div class="row" style="line-height: 2;">';
+            ch += '                    <label class="control-label col-sm-2 label_large" for="Serch_Hinnam">品名型式</label>';
+            ch += '                    <div class="col-sm-1 text_jp_middle">';
+            ch += '                        <input name="Serch.Hinnam" class="form-control text-box single-line" id="Serch_Hinnam" type="text" maxlength="9" value="" data-val="true" data-val-maxlength-max="80" data-val-maxlength="80文字以内で入力してください。">';
+            ch += '                        <span class="field-validation-valid text-danger" data-valmsg-replace="true" data-valmsg-for="Serch.Hinnam"></span>';
+            ch += '                    </div>';
+            ch += '                    <label class="control-label col-sm-1 label_large" for="Serch_Ctlfl1">抽出フラグ</label>';
+            ch += '                    <div class="col-sm-2 text_cd_small">';
+            ch += '                        <input name="Serch.Ctlfl1" class="form-control text-box single-line" id="Serch_Ctlfl1" type="text" maxlength="40" value="" data-val="true" data-val-maxlength-max="2" data-val-maxlength="2文字以内で入力してください。">';
+            ch += '                        <span class="field-validation-valid text-danger" data-valmsg-replace="true" data-valmsg-for="Serch.Ctlfl1"></span>';
+            ch += '                    </div>';
+            ch += '                </div>';
+            ch += '                <div class="row">';
+            ch += '                    <div class="col-sm-11"></div>';
+            ch += '                    <div class="col-sm-1"><input name="HinmeisakiSearch" class="btn btn-default" id="HinmeisakiSearch" style="padding: 0px; width: 50px; height: 30px; text-align: center;" type="button" value="検索"></div>';
+            ch += '                </div>';
+            ch += '                <br>';
+            ch += '                <div class="row">';
+            ch += '                    <div class="col-sm-12 nbase-bootstrap-table" style="height: 350px;">';
+            ch += '                        <div class="bootstrap-table"><div class="fixed-table-toolbar"></div><div class="fixed-table-container" style="padding-bottom: 0px;"><div class="fixed-table-header" style="display: none;"><table></table></div><div class="fixed-table-body"><div class="fixed-table-loading" style="top: 1px;">Loading, please wait...</div><table class="table table-hover" id="HinmeisakiTable" data-toggle="table" data-pagination="true" data-filter-show-clear="true" data-click-to-select="true" data-page-list="[10, 25, 50, 1000]" data-id-table="advancedTable" data-query-params="hinmeiQueryParams" data-method="POST">';
+            ch += '                            <thead><tr><th data-field="Hinnmk"><div class="th-inner sortable both">品名カナ</div><div class="fht-cell"></div></th><th data-field="Hincod"><div class="th-inner sortable both">コード</div><div class="fht-cell"></div></th><th data-field="Hinnam"><div class="th-inner sortable both">品名型式</div><div class="fht-cell"></div></th><th data-field="Ctlfl1"><div class="th-inner sortable both">抽出フラグ</div><div class="fht-cell"></div></th></tr></thead>';
+            ch += '                        <tbody><tr class="no-records-found"><td colspan="4">No matching records found</td></tr></tbody></table></div><div class="fixed-table-footer" style="display: none;"><table><tbody><tr></tr></tbody></table></div></div><div class="fixed-table-pagination" style="display: none;"><div class="pull-left pagination-detail"><span class="pagination-info">Showing 1 to 0 of 0 rows</span><span class="page-list" style="display: none;"><span class="btn-group dropup"><button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"><span class="page-size">10</span> <span class="caret"></span></button><ul class="dropdown-menu" role="menu"><li class="active" role="menuitem"><a href="#">10</a></li></ul></span> rows per page</span></div><div class="pull-right pagination" style="display: none;"><ul class="pagination"><li class="page-item page-pre"><a class="page-link" href="#">‹</a></li><li class="page-item page-next"><a class="page-link" href="#">›</a></li></ul></div></div></div><div class="clearfix"></div>';
+            ch += '                    </div>';
+            ch += '                </div>';
+            ch += '                <br>';
+            ch += '                <div class="row">';
+            ch += '                    <div class="col-sm-9" style="width: 700px;"></div>';
+            ch += '                    <div class="col-sm-1"><input name="HinmeisakiSelect" class="btn btn-default" id="HinmeisakiSelect" style="padding: 0px; width: 50px; height: 30px; text-align: center;" type="button" value="選択" data-dismiss="modal"></div>';
+            ch += '                    <div class="col-sm-1" style="width: 10px;"></div>';
+            ch += '                    <div class="col-sm-1"><input name="close" class="btn btn-default" id="HinmeisakiClose" style="padding: 0px; width: 50px; height: 30px; text-align: center;" type="button" value="閉じる" data-dismiss="modal"></div>';
+            ch += '                </div>';
+            ch += '            </div>';
+            ch += '        </div>';
+            ch += '    </div>';
+            ch += '</div>';
+            cell1.innerHTML = Number(row_len) + 1;
+            cell1.setAttribute("align", "center");
+            cell2.innerHTML = '<input name="dtl.Hincod" class="form-control text-box single-line" id="Hincod' + ('00' + row_len).slice(-2) + '" style="height: 24px; -ms-ime-mode: inactive" onChange="onChangeHincod(this)" type="text" maxlength="15" value="">';
+            cell3.innerHTML = ch;
+            cell3.setAttribute("id", "chHinmei" + ('00' + row_len).slice(-2));
+            cell4.innerHTML = '<input name="dtl.Hinnam" class="form-control text-box single-line" id="Hinnam' + ('00' + row_len).slice(-2) + '" style="width: 300px; height: 24px; -ms-ime-mode: active;" onChange="onChangeSyuksu(this)" type="text" maxlength="26" value="">';
+            cell5.innerHTML = '<input name="dtl.Syuksu" class="form-control text-box single-line" id="Syuksu' + ('00' + row_len).slice(-2) + '" style="width: 100px; height: 24px; -ms-ime-mode: inactive;" onChange="onChangeSyuksu(this)" type="text" maxlength="11" value="">';
+        });
+    });
+
+    // 特別指定コード 変更
+    $(function ($) {
+        $('#Yusono').change(function () {
+            var postData = {
+                param: $(this).val()
+            };
+            $.ajax({
+                url: '@Url.Action("GetTkjiko")',
+                type: 'POST',
+                dataType: 'json',
+                data: JSON.stringify(postData),
+                contentType: 'application/json',
+            }).done(function (result) {
+                if (result.succsess == 1) {
+                    $('input[name="Tkjiko2"]').val(result.addTkjiko2);
+                    //$('input[name="Tkjiko2"]').attr('readonly', true);
+
+                }
+                else {
+                    //$('input[name="Tkjiko2"]').val("");
+                    //$('input[name="Tkjiko2"]').attr('readonly', false);
+
+                }
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                //例外の場合、エラー画面に飛ばす
+                window.location.href = '/Error/Index'
+            }).always(function () {
+            });
+        });
+    });
+
+    // 運送方法 変更
+    function onChangeUnscod(value) {
+        var postData = {
+            param: value
+        };
+        $.ajax({
+            url: '@Url.Action("GetUnsonhouhouName")',
+            type: 'POST',
+            dataType: 'json',
+            data: JSON.stringify(postData),
+            contentType: 'application/json',
+        }).done(function (result) {
+            $('input[name="Unscodnam"]').val(result.Unsnam);
+            $('input[name="Sircod"]').val(result.Torcod);
+            onChangeSircod(result.Torcod);
+            $('input[name="Unskbn"]').val(result.Unskbn);
+            onChangeUnskbn(result.Unskbn);
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            //例外の場合、エラー画面に飛ばす
+            window.location.href = '/Error/Index'
+        }).always(function () {
+        });
+    };
+
+    // 運送方法 コードヘルプ
+    $(function () {
+        $('#UnsohohoTable').on('click-row.bs.table', function (e, row, $element) {
+            $('.success').removeClass('success');
+            $($element).addClass('success');
+        });
+    });
+    $('#UnsohohoSelect').on('click', function (e) {
+        var index = $('.success').attr('data-index');
+        if (index) {
+            var row = $('.success').parents('table:first').bootstrapTable('getData')[index];
+            $('input[name="Unscod"]').val(row.@nameof(CodeHelpViewModels.UnsohohoInformation.Unscod));
+            onChangeUnscod($('input[name="Unscod"]').val());
+        }
+    });
+    $('#UnsohohoSearch').on('click', function (e) {
+        UnsohohoTableBootstrapTableRefresh();
+    });
+    function UnsohohoQueryParams(params) {
+        return JSON.stringify({
+            'Unscod': $('input[name="Serch.Unscod"]').val(),
+            'Unsnam': $('input[name="Serch.Unsnam"]').val()
+        });
+    }
+    function UnsohohoTableBootstrapTableRefresh() {
+        var $table = $('#UnsohohoTable')
+        var temp = $table.css('display')
+        $table.bootstrapTable('refresh', { url: "@Url.Action("UnsohohoSearch", "CodeHelp")" });
+        setTimeout(function () {
+            $table.css({ display: 'none' })
+            setTimeout(function () {
+                $table.css({ display: temp })
+            }, 100)
+        }, 100)
+    }
+
+    $('#UnsohohoModal').on('hide.bs.modal', function () {
+        UnsohohoTableClear();
+        $('#UnsohohoTable').bootstrapTable('destroy').bootstrapTable();
+    });
+
+    function UnsohohoTableClear() {
+        $('input[name="Serch.Unscod"]').val("");
+        $('input[name="Serch.Unsnam"]').val("");
+        $('#UnsohohoTable').bootstrapTable('removeAll');
+    }
+
+    // 仕入先 変更
+    function onChangeSircod(value) {
+        var postData = {
+            param: value
+        };
+        $.ajax({
+            url: '@Url.Action("GetTorihikisakiName")',
+            type: 'POST',
+            dataType: 'json',
+            data: JSON.stringify(postData),
+            contentType: 'application/json',
+        }).done(function (result) {
+            $('input[name="Sirnam"]').val(result.TorihikisakiName);
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            //例外の場合、エラー画面に飛ばす
+            window.location.href = '/Error/Index'
+        }).always(function () {
+        });
+    };
+
+    // 仕入先 コードヘルプ
+    $(function () {
+        $('#SiiresakiTable').on('click-row.bs.table', function (e, row, $element) {
+            $('.success').removeClass('success');
+            $($element).addClass('success');
+        });
+    });
+    $('#SiiresakiSelect').on('click', function (e) {
+        var index = $('.success').attr('data-index');
+        if (index) {
+            var row = $('.success').parents('table:first').bootstrapTable('getData')[index];
+            $('input[name="Sircod"]').val(row.@nameof(CodeHelpViewModels.SiiresakiInformation.TorcodSi));
+            $('input[name="Sirnam"]').val(row.@nameof(CodeHelpViewModels.SiiresakiInformation.TornamSi));
+        }
+    });
+    $('#SiiresakiSearch').on('click', function (e) {
+        SiiresakiTableBootstrapTableRefresh();
+    });
+    function SiiresakiQueryParams(params) {
+        return JSON.stringify({
+            'Tornmk': $('input[name="Serch.TornmkSi"]').val(),
+            'Torcod': $('input[name="Serch.TorcodSi"]').val(),
+            'Fbtcod': $('input[name="Serch.FbtcodSi"]').val(),
+            'Tornam': $('input[name="Serch.TornamSi"]').val(),
+            'Buknam': $('input[name="Serch.BuknamSi"]').val(),
+            'Jysyo': $('input[name="Serch.JysyoSi"]').val()
+        });
+    }
+    function SiiresakiTableBootstrapTableRefresh() {
+        var $table = $('#SiiresakiTable')
+        var temp = $table.css('display')
+        $table.bootstrapTable('refresh', { url: "@Url.Action("SiiresakiSearch", "CodeHelp")" });
+        setTimeout(function () {
+            $table.css({ display: 'none' })
+            setTimeout(function () {
+                $table.css({ display: temp })
+            }, 100)
+        }, 100)
+    }
+
+    $('#SiiresakiModal').on('hide.bs.modal', function () {
+        SiiresakiTableClear();
+        $('#SiiresakiTable').bootstrapTable('destroy').bootstrapTable();
+    });
+
+    function SiiresakiTableClear() {
+        $('input[name="Serch.TornmkSi"]').val("");
+        $('input[name="Serch.TorcodSi"]').val("");
+        $('input[name="Serch.FbtcodSi"]').val("");
+        $('input[name="Serch.TornamSi"]').val("");
+        $('input[name="Serch.BuknamSi"]').val("");
+        $('input[name="Serch.JysyoSi"]').val("");
+        $('#SiiresakiTable').bootstrapTable('removeAll');
+    }
+
+    // 運送区分 変更
+    function onChangeUnskbn(value) {
+        var postData = {
+            param: value
+        };
+        $.ajax({
+            url: '@Url.Action("GetUnsonkubunName")',
+            type: 'POST',
+            dataType: 'json',
+            data: JSON.stringify(postData),
+            contentType: 'application/json',
+        }).done(function (result) {
+            $('input[name="Unskbnnam"]').val(result.UnsonkubunName);
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            //例外の場合、エラー画面に飛ばす
+            window.location.href = '/Error/Index'
+        }).always(function () {
+        });
+    };
+
+    // 運送区分 コードヘルプ
+    $(function () {
+        $('#UnsokbnTable').on('click-row.bs.table', function (e, row, $element) {
+            $('.success').removeClass('success');
+            $($element).addClass('success');
+        });
+    });
+    $('#UnsokbnSelect').on('click', function (e) {
+        var index = $('.success').attr('data-index');
+        if (index) {
+            var row = $('.success').parents('table:first').bootstrapTable('getData')[index];
+            $('input[name="Unskbn"]').val(row.@nameof(CodeHelpViewModels.UnsokbnInformation.Unskbn));
+            $('input[name="Unskbnnam"]').val(row.@nameof(CodeHelpViewModels.UnsokbnInformation.Unsknam));
+        }
+    });
+    $('#UnsokbnSearch').on('click', function (e) {
+        UnsokbnTableBootstrapTableRefresh();
+    });
+    function UnsokbnQueryParams(params) {
+        return JSON.stringify({
+            'Unskbn': $('input[name="Serch.Unskbn"]').val(),
+            'Unsnam': $('input[name="Serch.Unsknam"]').val()
+        });
+    }
+    function UnsokbnTableBootstrapTableRefresh() {
+        var $table = $('#UnsokbnTable')
+        var temp = $table.css('display')
+        $table.bootstrapTable('refresh', { url: "@Url.Action("UnsokbnSearch", "CodeHelp")" });
+        setTimeout(function () {
+            $table.css({ display: 'none' })
+            setTimeout(function () {
+                $table.css({ display: temp })
+            }, 100)
+        }, 100)
+    }
+
+    $('#UnsokbnModal').on('hide.bs.modal', function () {
+        UnsokbnTableClear();
+        $('#UnsokbnTable').bootstrapTable('destroy').bootstrapTable();
+    });
+
+    function UnsokbnTableClear() {
+        $('input[name="Serch.Unskbn"]').val("");
+        $('input[name="Serch.Unsknam"]').val("");
+        $('#UnsokbnTable').bootstrapTable('removeAll');
+    }
+
+    // パターンマスタ コードヘルプ
+    $('#patternCodeHelp').on('click', function (e) {
+        PatternTableBbootstrapTableRefresh();
+    });
+
+    function PatternQueryParams(params) {
+        return JSON.stringify({
+            'SyuknoMae': $('input[name="SyuknoMae"]').val()
+        });
+    }
+
+    function PatternTableBbootstrapTableRefresh() {
+
+        $('#PatternTable').bootstrapTable('removeAll');
+        var tbl = document.getElementById("PatternTable");
+        var tr = tbl.rows[1];
+        var td = tr.cells[0];
+        td.innerHTML = "検索中です。";
+
+        $.ajax({
+            url: '@Url.Action("PatternSearch", "CodeHelp")',
+            type: 'POST',
+            dataType: 'json',
+            data: PatternQueryParams(0),
+            contentType: 'application/json',
+        }).done(function (result) {
+            if (result.succsess == 1) {
+                $('#PatternTable').bootstrapTable('load', result.data);
+            }
+            else {
+                $('#PatternTable').bootstrapTable('removeAll');
+                var tbl = document.getElementById("PatternTable");
+                var tr = tbl.rows[1];
+                var td = tr.cells[0];
+                if (result.succsess == 2) {
+                    td.innerHTML = "検索結果がありません。";
+                } else {
+                    td.innerHTML = "検索結果が多すぎます。検索条件を絞り込んでください。";
+                }
+            }
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            //例外の場合、エラー画面に飛ばす
+            window.location.href = '/Error/Index'
+        }).always(function () {
+        });
+    }
+
+    $(function () {
+        $('#PatternTable').on('click-row.bs.table', function (e, row, $element) {
+            $('.success').removeClass('success');
+            $($element).addClass('success');
+        });
+    });
+        $('#PatternSelect').on('click', function (e) {
+        var index = $('.success').attr('data-index');
+        if (index) {
+            var row = $('.success').parents('table:first').bootstrapTable('getData')[index];
+            $('input[name="Inscod"]').val(row.@nameof(CodeHelpViewModels.TyuumonshoPatternInformation.Inscod));
+            onChangeInscod($('input[name="Inscod"]').val());
+        }
+    });
+
+    // 操作ボタン
+    $(function () {
+        $('#btnUpdate').click(function (e) {
+
+            var mode = "@ViewBag.Mode";
+            var msg = "";
+            if (mode == "") {
+                msg = "@Resources.Message.CQ004";
+            } else if (mode == "2") {
+                msg = "@Resources.Message.CQ005";
+            } else if (mode == "3") {
+                msg = "@Resources.Message.CQ006";
+            }
+            if (window.confirm(msg)) {
+                var json = "[";
+                var delimiter = "";
+                var no;
+                var table = document.getElementById("table");
+                for (var i = 0; i < table.rows.length - 1; i++) {
+                    no = i + 1;
+                    json = json + delimiter + '{ "Hincod":"' + document.getElementById("Hincod" + ('00' + i).slice(-2)).value
+                        + '", "Hinnam":"' + document.getElementById("Hinnam" + ('00' + i).slice(-2)).value
+                        + '", "Syuksu":"' + document.getElementById("Syuksu" + ('00' + i).slice(-2)).value
+                        + '", "No":"' + no + '" }';
+                    delimiter = ",";
+                }
+                $('input[name="MeisaiJson"]').val(json + "]");
+                $('#upDate').submit();
+            }
+        });
+    });
+
+    // 複数window.onload対応
+    function addOnload(func) {
+        try {
+            window.addEventListener("load", func, false);
+        } catch (e) {
+            // IE用
+            window.attachEvent("onload", func);
+        }
+    }
+
+    function AllClear() {
+        $('input[name="Htynam"]').val("");
+        $('input[name="Htykah"]').val("");
+        $('input[name="Tancod"]').val("");
+        $('input[name="Tannam"]').val("");
+        $('#oputError1').hide();
+        $('input[name="Htytel"]').val("");
+        $('input[name="Basyo"]').val("");
+        $('input[name="Fsykno"]').val("");
+        $('input[name="Tokcod"]').val("");
+        $('input[name="Toknam"]').val("");
+        $('input[name="Sybcod"]').val("");
+        $('input[name="Sybnam"]').val("");
+        $('input[name="Sykymd"]').val("");
+        $('#Ufutan').val("");
+        $('input[name="Keifno"]').val("");
+        $('input[name="Tdkcod"]').val("");
+        $('input[name="Tdkyub"]').val("");
+        $('input[name="Tdkjyu"]').val("");
+        $('input[name="Tdknam"]').val("");
+        $('input[name="Tdsnam"]').val("");
+        $('input[name="Tdbnam"]').val("");
+        $('input[name="Tdktan"]').val("");
+        $('input[name="Tdktel"]').val("");
+        $('input[name="Tricod"]').val("");
+        $('input[name="Trinam"]').val("");
+        $('input[name="Dsyuksu"]').val("");
+        $('input[name="Tkjiko1"]').val("");
+        $('input[name="Tkjiko2"]').val("");
+        $('#Yusono').val("");
+        $('input[name="Coment"]').val("");
+        $('input[name="Kisyua"]').val("");
+        $('input[name="Kisyub"]').val("");
+        $('input[name="Unscod"]').val("");
+        $('input[name="Unscodnam"]').val("");
+        $('#Unscrs').val("");
+        $('input[name="Sircod"]').val("");
+        $('input[name="Sirnam"]').val("");
+        $('input[name="Unskbn"]').val("");
+        $('input[name="Unskbnnam"]').val("");
+        //$('input[name="Yubflg"]').val("");
+        $('input[name="Yubflg"]').prop("checked", false)
+
+        var table = document.getElementById("table");
+        for (var i = 0; i < table.rows.length - 1; i++) {
+            document.getElementById("Hincod" + ('00' + i).slice(-2)).value = "";
+            document.getElementById("Hinnam" + ('00' + i).slice(-2)).value = "";
+            document.getElementById("Syuksu" + ('00' + i).slice(-2)).value = "";
+        }
+    }
+
+    function AllValid() {
+
+        $('input[name="Htynam"]').valid();
+        $('input[name="Htykah"]').valid();
+        $('input[name="Tancod"]').valid();
+        $('input[name="Tannam"]').valid();
+        $('input[name="Htytel"]').valid();
+        $('input[name="Basyo"]').valid();
+        $('input[name="Fsykno"]').valid();
+        $('input[name="Tokcod"]').valid();
+        $('input[name="Toknam"]').valid();
+        $('input[name="Sybcod"]').valid();
+        $('input[name="Sybnam"]').valid();
+        $('input[name="Keifno"]').valid();
+        $('input[name="Tdkcod"]').valid();
+        $('input[name="Tdkyub"]').valid();
+        $('input[name="Tdkjyu"]').valid();
+        $('input[name="Tdknam"]').valid();
+        $('input[name="Tdsnam"]').valid();
+        $('input[name="Tdbnam"]').valid();
+        $('input[name="Tdktan"]').valid();
+        $('input[name="Tdktel"]').valid();
+        $('input[name="Tkjiko1"]').valid();
+        $('input[name="Tkjiko2"]').valid();
+        $('input[name="Coment"]').valid();
+        $('input[name="Kisyua"]').valid();
+        $('input[name="Kisyub"]').valid();
+        $('input[name="Unscod"]').valid();
+        $('input[name="Unscodnam"]').valid();
+        $('input[name="Sircod"]').valid();
+        $('input[name="Sirnam"]').valid();
+        $('input[name="Unskbn"]').valid();
+        $('input[name="Unskbnnam"]').valid();
+
+    }
+
+    $('#clear').on('click', function (e) {
+
+        if (!window.confirm('クリアしてもよろしいですか？  ')) {
+            return;
+        }
+        window.location.href = '@Url.Action("Details")';
+        });
+
+</script>
+}

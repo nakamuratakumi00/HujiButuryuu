@@ -1,0 +1,766 @@
+﻿@* 個別登録 *@
+
+@section Scripts {
+    <script>
+        $(function () {
+            $("#hinmeiCd1").show();
+            $("#hinmei1").show();
+            $("#hinmeiCd2").hide();
+            $("#hinmei2").hide();
+            $("#zumenNo1").show();
+            $("#zumenNo2").hide();
+            $("#kikaku1").show();
+            $("#kikaku2").hide();
+            $("#motoTyumon").prop("disabled", false);
+            $("#tani1").show();
+            $("#tani2").hide();
+            $("#tyumonTanka1").show();
+            $("#tyumonTanka2").hide();
+            $("#arari1").show();
+            $("#arari2").hide();
+            $("#zaikoKbn").addClass("required");
+            $("#uriTanka1").show();
+            $("#uriTanka2").hide();
+            $("#uriKin1").show();
+            $("#uriKin2").hide();
+            $("#soko").show();
+            $("#hatyusaki").removeClass("required");
+
+            if ($('[id=naiji]').prop('checked')) {
+                // 内示
+                console.log("naiji-1");
+                naihatsu = "naiji";
+                $("#chumonbiLbl").removeClass("required");
+                $("#date1").prop("disabled", true);
+                $("#date1").val("");
+                $("#tyubanLbl").removeClass("required");
+                $("#tokuisakiLbl").removeClass("required");
+                $("#genkaKbn").removeClass("required");
+                $("#zaikoKbn").removeClass("required");
+                $("#nonyusakiLbl").removeClass("required");
+                $("#pcLbl").removeClass("required");
+                $("#noukiLbl").removeClass("required");
+
+                $("#syubetsuLbl").removeClass("required");
+                $("#1").prop("checked", true);
+                $("#1").prop("disabled", true);
+                $("#2").prop("disabled", true);
+
+            } else {
+                // 発注
+                console.log("hachu-1");
+                naihatsu = "hachu";
+                $("#tyubanLbl").removeClass("required");
+                $("#tyubanIn").prop("disabled", true);
+                $("#tyubanIn").val("");
+                $("#chumonbiLbl").addClass("required");
+                $("#date1").prop("disabled", false);
+                $("#date1").val("YYYY/MM/DD");
+
+                if ($("#hachu").prop("disabled")) {
+                    $("#naihatsuLbl").removeClass("required");
+                    $("#syubetsuLbl").removeClass("required");
+                } else {
+                    $("#syubetsuLbl").addClass("required");
+                    $("#1").prop("disabled", false);
+                    $("#2").prop("disabled", false);
+                }
+            }
+        });
+
+        var naihatsu = "naiji";
+        var syu = 1;
+
+        // 内示・発注ラジオボタン変更
+        $('[name="naihatsu"]:radio').change(function () {
+            if ($('[id=naiji]').prop('checked')) {
+                // 内示
+                console.log("naiji");
+                naihatsu = "naiji";
+                $("#chumonbiLbl").removeClass("required");
+                $("#date1").prop("disabled", true);
+                $("#date1").val("");
+                $("#tyubanLbl").removeClass("required");
+                $("#tokuisakiLbl").removeClass("required");
+                $("#genkaKbn").removeClass("required");
+                $("#zaikoKbn").removeClass("required");
+                $("#nonyusakiLbl").removeClass("required");
+                $("#pcLbl").removeClass("required");
+                $("#noukiLbl").removeClass("required");
+
+                $("#syubetsuLbl").removeClass("required");
+                $("#1").prop("checked", true);
+                $("#1").prop("disabled", true);
+                $("#2").prop("disabled", true);
+
+            } else if ($('[id=hachu]').prop('checked')) {
+                // 発注
+                console.log("hachu");
+                naihatsu = "hachu";
+                $("#chumonbiLbl").addClass("required");
+                $("#date1").prop("disabled", false);
+                $("#date1").val("YYYY/MM/DD");
+                $("#tokuisakiLbl").addClass("required");
+                $("#genkaKbn").addClass("required");
+                $("#zaikoKbn").addClass("required");
+                $("#nonyusakiLbl").addClass("required");
+                $("#pcLbl").addClass("required");
+                $("#noukiLbl").addClass("required");
+
+                if (syubetsu == "syubetsu1") {
+                    // 入力無し
+                    $("#tyubanLbl").removeClass("required");
+                    $("#tyubanIn").prop("disabled", true);
+                    $("#tyubanIn").val("");
+                } else {
+                    // 入力有り
+                    $("#tyubanLbl").addClass("required");
+                    $("#tyubanIn").prop("disabled", false);
+                    $("#tyubanIn").val("12345678901234567890");
+                }
+
+                $("#syubetsuLbl").addClass("required");
+                $("#1").prop("disabled", false);
+                $("#2").prop("disabled", false);
+            }
+        });
+
+        // 品名登録有無ラジオボタン変更
+        $('[name="syubetsu"]:radio').change(function () {
+            if ($('[id=1]').prop('checked')) {
+                // 登録済み
+                console.log("1");
+                syu = 1;
+                $("#hinmeiCd1").show();
+                $("#hinmei1").show();
+                $("#hinmeiCd2").hide();
+                $("#hinmei2").hide();
+                $("#zumenNo1").show();
+                $("#zumenNo2").hide();
+                $("#kikaku1").show();
+                $("#kikaku2").hide();
+                $("#motoTyumon").prop("disabled", false);
+                $("#motoTyumon").val("123,456,789");
+                $("#tani1").show();
+                $("#tani2").hide();
+                $("#tyumonTanka1").show();
+                $("#tyumonTanka2").hide();
+                $("#arari1").show();
+                $("#arari2").hide();
+                $("#zaikoKbn").addClass("required");
+                $("#uriTanka1").show();
+                $("#uriTanka2").hide();
+                $("#uriKin1").show();
+                $("#uriKin2").hide();
+                $("#soko").show();
+                $("#hatyusaki").removeClass("required");
+                $("#hatyusakiCd").prop("disabled",true);
+
+            } else if ($('[id=2]').prop('checked')) {
+                // 未登録
+                console.log("2");
+                syu = 2;
+                $("#hinmeiCd1").hide();
+                $("#hinmei1").hide();
+                $("#hinmeiCd2").show();
+                $("#hinmei2").show();
+                $("#zumenNo1").hide();
+                $("#zumenNo2").show();
+                $("#kikaku1").hide();
+                $("#kikaku2").show();
+                $("#motoTyumon").prop("disabled", true);
+                $("#motoTyumon").val("");
+                $("#tani1").hide();
+                $("#tani2").show();
+                $("#tyumonTanka1").hide();
+                $("#tyumonTanka2").show();
+                $("#arari1").hide();
+                $("#arari2").show();
+                $("#zaikoKbn").addClass("required");
+                $("#uriTanka1").hide();
+                $("#uriTanka2").show();
+                $("#uriKin1").hide();
+                $("#uriKin2").show();
+                $("#soko").hide();
+                $("#hatyusaki").addClass("required");
+                $("#hatyusakiCd").prop("disabled", false);
+            }
+        });
+
+        // 確認ボタンクリック
+        $("#confirm").click(function () {
+            console.log("click");
+            location.href = "@Url.Action("D001_06")" + "?naihatsu=" + naihatsu + "&syubetsu=" + syu;
+        });
+
+    </script>
+}
+
+@Html.AntiForgeryToken()
+
+@Html.Partial("../Shared/Dialog/_DepartmentCodeSearch")
+@Html.Partial("~/Areas/Tass/Views/Shared/Dialog/_HinmeiCodeSearch.cshtml")
+@Html.Partial("~/Areas/Tass/Views/Shared/Dialog/_TokuisakiCodeSearch.cshtml")
+
+<div>
+    @Html.ValidationSummary(false, "入力エラーがあります。", new { @class = "alert alert-danger" })
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#TransitionConfirmDialog">@MacssWeb.Resources.ControlText.BackToList</button>
+    </div>
+    <div class="col-4 text-right">
+        <a id="confirm" class="btn btn-primary macss-btn" href=# role="button">@MacssWeb.Resources.ControlText.InputConfirm</a>
+    </div>
+</div>
+
+@* 登録項目 *@
+<table class="table macss-form-table">
+    <colgroup>
+        <col class="macss-form-table-title" />
+        <col class="macss-form-table-contents" />
+    </colgroup>
+
+    @* 内示・発注選択 必須 *@
+    <tr style="border-bottom:ridge">
+        <th scope="row">
+            <label id="naihatsuLbl" class="required">内示・発注</label>
+        </th>
+        <td>
+            <div class="row">
+                <div class="input-group col-4">
+                    <div class="form-control">
+                        @if (ViewBag.NaiHatsu == "naiji")
+                        {
+
+                            <div class="form-check-inline mr-5">
+                                <input type="radio" class="" name="naihatsu" id="naiji" checked />
+                                <label class="form-check-label">内示</label>
+                            </div>
+                            <div class="form-check-inline">
+                                <input type="radio" class="" name="naihatsu" id="hachu" />
+                                <label class="form-check-label">発注</label>
+                            </div>
+                        }
+                        else if (ViewBag.NaiHatsu == "hachu")
+                        {
+                            <div class="form-check-inline mr-5">
+                                <input type="radio" class="" name="naihatsu" id="naiji" />
+                                <label class="form-check-label">内示</label>
+                            </div>
+                            <div class="form-check-inline">
+                                <input type="radio" class="" name="naihatsu" id="hachu" checked />
+                                <label class="form-check-label">発注</label>
+                            </div>
+                        }
+                        else
+                        {   // 引用登録
+                            <div class="form-check-inline mr-5">
+                                <input type="radio" class="" name="naihatsu" id="naiji" disabled />
+                                <label class="form-check-label">内示</label>
+                            </div>
+                            <div class="form-check-inline">
+                                <input type="radio" class="" name="naihatsu" id="hachu" checked disabled />
+                                <label class="form-check-label">発注</label>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+
+    @* 品名登録有無選択 必須 *@
+    <tr>
+        <th scope="row">
+            <label id="syubetsuLbl" class="required">品名登録有無</label>
+        </th>
+        <td>
+            <div class="row">
+                <div class="input-group col-4">
+                    @if (ViewBag.NaiHatsu == "inyo")
+                    {
+                        <div class="macss-input-group-input form-control-plaintext">
+                            <div class="form-check-inline mr-5">
+                                <input type="radio" class="" name="syubetsu" id="1" checked disabled />
+                                <label class="form-check-label">登録済</label>
+                            </div>
+                            <div class="form-check-inline">
+                                <input type="radio" class="" name="syubetsu" id="2" disabled />
+                                <label class="form-check-label">未登録</label>
+                            </div>
+                        </div>
+
+                    }
+                    else
+                    {
+                        <div class="macss-input-group-input form-control-plaintext">
+                            <div class="form-check-inline mr-5">
+                                <input type="radio" class="" name="syubetsu" id="1" checked />
+                                <label class="form-check-label">登録済</label>
+                            </div>
+                            <div class="form-check-inline">
+                                <input type="radio" class="" name="syubetsu" id="2" />
+                                <label class="form-check-label">未登録</label>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </td>
+    </tr>
+
+    @* 注文日 自動 *@
+    <tr>
+        <th scope="row">
+            <label id="chumonbiLbl" class="required">注文日</label>
+        </th>
+        <td>
+            <div class="input-group">
+                <input type="text" id="date1" class="form-control" value="YYYY/MM/DD" />
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="Calendar1"><i class="fa fa-calendar-alt"></i></button>
+                </div>
+            </div>
+        </td>
+    </tr>
+
+    @* ★品名登録済★ *@
+    @* 品名コード 必須 *@
+    <tr id="hinmeiCd1">
+        <th>
+            <label class="required">品名コード</label>
+        </th>
+        <td>
+            <div class="input-group">
+                <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="" name="" type="text" value="123456789012" style="border-top-left-radius:0; border-bottom-left-radius:0;">
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#HinmeiCodeSearchDialog">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </td>
+    </tr>
+    @* 品名 表示 *@
+    <tr id="hinmei1">
+        <th>
+            <label class="">品名</label>
+        </th>
+        <td>
+            <label id="" class="align-middle">１２３４５６７８９０１２３４５６７８９０</label>
+        </td>
+    </tr>
+    @* ★品名未登録★ *@
+    @* 品名コード 9999999固定表示 *@
+    <tr id="hinmeiCd2">
+        <th>
+            <label class="">品名コード</label>
+        </th>
+        <td>
+            <label id="" class="align-middle">9999999</label>
+        </td>
+    </tr>
+    @* 品名 必須 *@
+    <tr id="hinmei2">
+        <th>
+            <label class="required">品名</label>
+        </th>
+        <td>
+            <input class="form-control" value="１２３４５６７８９０１２３４５６７８９０" />
+        </td>
+    </tr>
+
+    @* 規格・寸法 *@
+    <tr>
+        <th scope="row">
+            規格・寸法
+        </th>
+        @* 品名登録済 表示 *@
+        <td id="kikaku1">
+            １２３４５６７８９０１２３４５６７８９０
+        </td>
+        @* 品名未登録 入力 *@
+        <td id="kikaku2">
+            <input class="form-control" type="text" value="１２３４５６７８９０１２３４５６７８９０" />
+        </td>
+    </tr>
+    @* 納期 必須 *@
+    <tr>
+        <th scope="row">
+            <label id="noukiLbl" class="required">納期</label>
+        </th>
+        <td>
+            <div class="input-group">
+                <input type="text" id="date2" class="form-control" />
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="Calendar2"><i class="fa fa-calendar-alt"></i></button>
+                </div>
+            </div>
+        </td>
+    </tr>
+    @* 注文数 必須 *@
+    <tr>
+        <th scope="row">
+            <label class="required">注文数</label>
+        </th>
+        <td>
+            <input class="form-control" value="123,456,789" />
+        </td>
+    </tr>
+    @* 元注文数 入力 *@
+    <tr>
+        <th scope="row">
+            <label class="">元注文数</label>
+        </th>
+        @* 品名登録済 入力 *@
+        @* 品名未登録 入力不可 *@
+        <td>
+            <input class="form-control" id="motoTyumon" value="123,456,789" />
+        </td>
+    </tr>
+
+    @* 単位 *@
+    @* 品名登録済 表示 *@
+    <tr id="tani1">
+        <th scope="row">
+            単位
+        </th>
+        <td>
+            12 １２３４５６７８９０
+        </td>
+    </tr>
+    @* 品名未登録 必須 *@
+    <tr id="tani2">
+        <th scope="row">
+            <label id="taniLbl" class="control-label required">単位</label>
+        </th>
+        <td>
+            <div class="row">
+                <div class="col-4">
+                    <div class="input-group">
+                        <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="" name="" type="text" value="12">
+                        <div class="input-group-append">
+                            <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="">
+                                <i class="fas fa-redo"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <span id="" class="align-middle">１２３４５６７８９０</span>
+                </div>
+            </div>
+        </td>
+    </tr>
+    @* 注文単価 *@
+    @* 品名登録済 表示 *@
+    <tr id="tyumonTanka1">
+        <th scope="row">
+            注文単価
+        </th>
+        <td>
+            12,345,678,901.12
+        </td>
+    </tr>
+    @* 品名未登録 必須 *@
+    <tr id="tyumonTanka2">
+        <th scope="row">
+            <label id="chutankaLbl" class="required">注文単価</label>
+        </th>
+        <td>
+            <input class="form-control" value="12,345,678,901.12" />
+        </td>
+    </tr>
+    @* 注文金額 表示 *@
+    <tr>
+        <th scope="row">
+            注文金額
+        </th>
+        <td>
+            12,345,678,901
+        </td>
+    </tr>
+    @* 粗利益額 *@
+    <tr>
+        <th scope="row">
+            粗利益額
+        </th>
+        @* 品名登録済 未使用 *@
+        <td id="arari1"></td>
+        @* 品名未登録 表示 *@
+        <td id="arari2">
+            123,456,789
+        </td>
+    </tr>
+
+    @* 売上予定単価 *@
+    @* 品名登録済 在庫区分が10 or 24の場合のみ表示 *@
+    <tr id="uriTanka1">
+        <th scope="row">
+            売上予定単価
+        </th>
+        <td>
+            12,345,678,901.12
+        </td>
+    </tr>
+    @* 売上予定金額 *@
+    @* 品名登録済 表示 *@
+    <tr id="uriKin1">
+        <th scope="row">
+            売上予定金額
+        </th>
+        <td>
+            12,345,678,901
+        </td>
+    </tr>
+    @* 売上単価 *@
+    @* 品名未登録 在庫区分が10の場合のみ必須、以外は入力不可 *@
+    <tr id="uriTanka2">
+        <th scope="row">
+            <label class="required">売上単価</label>
+        </th>
+        <td>
+            <input class="form-control" type="text" value="12,345,678,901.12" />
+        </td>
+    </tr>
+    @* 売上金額 *@
+    @* 品名未登録 表示 *@
+    <tr id="uriKin2">
+        <th scope="row">
+            売上金額
+        </th>
+        <td>
+            12,345,678,901
+        </td>
+    </tr>
+
+    @* 在庫区分 *@
+    @* 品名登録済 自動（入力可） *@
+    @* 品名未登録 必須 *@
+    <tr>
+        <th scope="row">
+            <label id="zaikoKbn" class="">在庫区分</label>
+        </th>
+        <td>
+            <select class="custom-select">
+                <option></option>
+                <option>10:自社在庫にしない</option>
+                <option>21:自社在庫にする</option>
+                <option>90:その他</option>
+            </select>
+        </td>
+    </tr>
+
+    @* 倉庫 表示 *@
+    @* 品名登録済 表示 在庫区分が21 or 24の場合のみ納入先コードの内容を納入先マスタから表示 *@
+    @* 品名未登録 未使用 *@
+    <tr>
+        <th scope="row">
+            倉庫
+        </th>
+        <td>
+            <label id="soko">12 １２３４５６７８９０１２３４５</label>
+        </td>
+    </tr>
+    @* 発注先 *@
+    @* 品名登録済 自動（入力不可） *@
+    @* 品名未登録 必須 *@
+    <tr>
+        <th scope="row">
+            <label id="hatyusaki" class="">発注先</label>
+        </th>
+        <td>
+            <div class="row">
+                <div class="col-4">
+                    <div class="input-group">
+                        <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="hatyusakiCd" name="" type="text" value="1234567" style="border-top-left-radius:0; border-bottom-left-radius:0;">
+                        <div class="input-group-append">
+                            <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#SiiresakiCodeSearchDialog">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <span id="" class="align-middle">１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０</span>
+                </div>
+            </div>
+        </td>
+    </tr>
+    @* 得意先 *@
+    @* 品名登録済 条必 在庫区分が10 or 24の場合必須 *@
+    @* 品名未登録 条必 在庫区分が10の場合必須 *@
+    <tr>
+        <th scope="row">
+            <label id="tokuisakiLbl" class="required">得意先</label>
+        </th>
+        <td>
+            <div class="row">
+                <div class="col-4">
+                    <div class="input-group">
+                        <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="" name="" type="text" value="1234567" style="border-top-left-radius:0; border-bottom-left-radius:0;">
+                        <div class="input-group-append">
+                            <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#TokuisakiCodeSearchDialog">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <span id="" class="align-middle">１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０</span>
+                </div>
+            </div>
+        </td>
+    </tr>
+    @* 原価区分 *@
+    @* 品名登録済 条必 在庫区分が10 or 24の場合必須 *@
+    @* 品名未登録 条必 在庫区分が10の場合必須 *@
+    <tr>
+        <th scope="row">
+            <label id="genkaKbn" class="required">原価区分</label>
+        </th>
+        <td>
+            <select class="custom-select form-control">
+                <option></option>
+                <option>1:原価</option>
+                <option>2:経費</option>
+            </select>
+        </td>
+    </tr>
+    @* 得意先製造番号 入力 *@
+    <tr>
+        <th scope="row">
+            得意先製造番号
+        </th>
+        <td>
+            <input class="form-control" type="text" value="123456789012345678901234567890" />
+        </td>
+    </tr>
+    @* 得意先注文番号 入力 *@
+    <tr>
+        <th scope="row">
+            得意先注文番号
+        </th>
+        <td>
+            <input class="form-control" type="text" value="12345678901234567890" />
+        </td>
+    </tr>
+    @* 納入先コード 条必 *@
+    <tr>
+        <th scope="row">
+            <label class="">納入先コード</label>
+        </th>
+        <td>
+            <div class="input-group">
+                <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="" name="" type="text" value="12345" style="border-top-left-radius:0; border-bottom-left-radius:0;">
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#NonyusakiCodeSearchDialog">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </td>
+    </tr>
+    @* 納入先名 条必 *@
+    <tr>
+        <th scope="row">
+            <label id="nonyusakiLbl" class="required">納入先名</label>
+        </th>
+        <td>
+            <input class="form-control" type="text" value="１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０" />
+        </td>
+    </tr>
+    @* 売上PC 必須 *@
+    <tr>
+        <th scope="row">
+            <label id="pcLbl" class="required">売上PC</label>
+        </th>
+        <td>
+            <div class="row">
+                <div class="col-4">
+                    <div class="input-group">
+                        <input class="form-control" type="text" value="1234" />
+                        <input class="form-control" type="text" value="5678" />
+                        <input class="form-control" type="text" value="9012" />
+                        <div class="input-group-append">
+                            <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="">
+                                <i class="fas fa-redo"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <span class="align-middle">１２３４５６７８９０ １２３４５６７８９０ １２３４５６７８９０１２３４５６７８９０</span>
+                </div>
+            </div>
+        </td>
+    </tr>
+    @* 得意先担当者名 入力 *@
+    <tr>
+        <th scope="row">
+            <label class="" id="">得意先担当者名</label>
+        </th>
+        <td>
+            <input class="form-control" type="text" value="１２３４５６７８９０" />
+        </td>
+    </tr>
+    @* 特記事項 入力 *@
+    <tr>
+        <th scope="row">
+            特記事項
+        </th>
+        <td>
+            <input class="form-control" type="text" value="１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０" />
+        </td>
+    </tr>
+</table>
+
+@* ボタン *@
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#TransitionConfirmDialog">@MacssWeb.Resources.ControlText.BackToList</button>
+    </div>
+    <div class="col-4 text-right">
+        <a id="confirm" class="btn btn-primary macss-btn" href=# role="button">@MacssWeb.Resources.ControlText.InputConfirm</a>
+    </div>
+</div>
+
+@* 画面遷移確認ダイアログ *@
+<div class="modal" id="TransitionConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.TransitionConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @MacssWeb.Resources.Messages.TransitionConfirm
+                <br>
+                @MacssWeb.Resources.Messages.Confirm
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary macss-btn" href="@Url.Action("D001_01")" role="button">@MacssWeb.Resources.ControlText.Yes</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function setDepartmentCode(code, value) {
+        $("#bumon_cd").val(code);
+        $("#DepartmentName").text(value);
+    }
+    $(function () {
+        var date1 = new Macss.DatetimePicker.MacssDtPicker("#date1", "#Calendar1");
+        date1.configure();
+        var date2 = new Macss.DatetimePicker.MacssDtPicker("#date2", "#Calendar2");
+        date2.configure();
+
+    });
+
+</script>

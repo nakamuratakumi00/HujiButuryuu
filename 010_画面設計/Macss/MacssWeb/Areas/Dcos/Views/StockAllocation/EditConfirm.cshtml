@@ -1,0 +1,173 @@
+﻿@{
+    ViewBag.PageMainTitle = "在庫引当更新確認";
+}
+@section Scripts {
+    <script>
+        $(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#SampleList", [{
+                "className": "macss-table-proc-column", "width": 80, "orderable": false, "targets": 0
+            },], 1);
+            dt.configure();
+
+            var cond = new Macss.Collapse.ConditionsPanel("#ConditionAccordion", "#CollapseShow", "#CollapseHidden");
+            cond.setCollapseEvent();
+
+            var sampleDatePicker11 = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker11", "#SampleCalendar11");
+            sampleDatePicker11.configure();
+            var sampleDatePicker12 = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker12", "#SampleCalendar12");
+            sampleDatePicker12.configure();
+            var sampleDatePicker21 = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker21", "#SampleCalendar21");
+            sampleDatePicker21.configure();
+            var sampleDatePicker22 = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker22", "#SampleCalendar22");
+            sampleDatePicker22.configure();
+
+        });
+
+    </script>
+}
+
+@section CssExtended{
+    <style type="text/css">
+    </style>
+}
+
+@Html.Partial("../../Views/Shared/Dialog/_DepartmentCodeSearch")
+
+
+@using (Html.BeginForm("Search", "Stock", null, FormMethod.Post))
+{
+    <div class="alert alert-info">
+        <span>以下を更新します。よろしいですか？</span>
+    </div>
+    <div class="row justify-content-between macss-form-button-group-row">
+        <div class="col-4">
+            <a class="btn btn-secondary" href="@Url.Action("Edit")" role="button">@MacssWeb.Resources.ControlText.Back</a>
+        </div>
+    </div>
+
+    <div class="accordion" id="ConditionAccordion">
+        <div class="card">
+            <div class="card-header macss-search-config-collapse-header" id="headingOne">
+                <div class="mb-0">
+                    <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain" aria-expanded="true" aria-controls="ConditionMain">
+                        <div class="d-inline-block" style="color:#333"></div>
+                        <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="display:none;"></i>
+                        <i id="CollapseShow" class="fas fa-chevron-circle-down" aria-hidden="true" style="display:none;"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+                <table class="table macss-form-table2">
+                    <colgroup>
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">得意先</label>
+                            </th>
+                            <td>
+                                <div>
+
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">品名</label>
+                            </th>
+                            <td>
+                                <div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">倉庫</label>
+                            </th>
+                            <td>
+                                <div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+
+<table id="SampleList" class="table table-striped table-hover macss-data-table">
+    <thead class="macss-data-table-header">
+        <!-- thの文字数で列の幅が決まってしまうため、必要に応じて全角スペースを入れて列の幅を調整する必要がある-->
+        <tr>
+            <th>編集状態</th>
+            <th>出庫指示No</th>
+            <th>出庫指示枝番</th>
+            <th>引当枝番</th>
+            <th>引当状態</th>
+            <th>出庫日</th>
+            <th>ロットNo</th>
+            <th>棚番</th></th>
+            <th>引当数量</th>
+            <th>出庫指示数量</th>
+            <th>出庫指示ロットNo</th>
+            <th>出庫指示棚番</th>
+            <th>オリジナル出庫指示No</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="mt-4"></div>
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a class="btn btn-secondary" href="@Url.Action("Edit")" role="button">@MacssWeb.Resources.ControlText.Back</a>
+    </div>
+    <div class="col-4 text-right">
+        <a role="button" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDialog">更新</a>
+    </div>
+</div>
+
+<div class="modal" id="ConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @MacssWeb.Resources.Messages.EditReconfirm
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("Index", "StockAllocation", null, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="UploadFileName" name="uploadFileName" value="@ViewBag.UploadFileName" />
+                    <button type="submit" class="btn btn-primary">@MacssWeb.Resources.ControlText.Yes</button>
+                }
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>

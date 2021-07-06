@@ -1,0 +1,389 @@
+﻿<!-- ■詳細・確認系フォーム -->
+@Html.AntiForgeryToken()
+
+@if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+{
+    <div class="alert alert-info">
+        <span>@ViewBag.ConfirmMessage</span>
+    </div>
+}
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="row justify-content-between macss-form-button-group-row">
+        @if (ViewBag.OnlyShow != null && ViewBag.OnlyShow == true)
+        {
+            // 詳細
+            <div class="col-4">
+                <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.BackToList</a>
+            </div>
+        }
+        else if (ViewBag.ReissueExec != null && ViewBag.ReissueExec == true)
+        {
+            // 再発行
+            <div class="col-4">
+                <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.BackToList</a>
+            </div>
+        }
+        else if (ViewBag.DeleteExec != null && ViewBag.DeleteExec == true)
+        {
+            // 削除
+            <div class="col-4">
+                <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.BackToList</a>
+            </div>
+        }
+        else
+        {
+            // 登録・更新
+            <div class="col-4">
+                <button type="submit" class="btn btn-secondary" name="cmdTopBack" value="@((int)MacssWeb.Common.ButtonValues.Back)">@MacssWeb.Resources.ControlText.Back</button>
+            </div>
+        }
+    </div>
+</div>
+<table class="table macss-form-table2">
+    <colgroup>
+        <col class="macss-form-table-title2" />
+        <col class="macss-form-table-contents2" />
+        <col class="macss-form-table-title2" />
+        <col class="macss-form-table-contents2" />
+    </colgroup>
+    <tr>
+        <th scope="row">
+            @Html.Label("荷札発行", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                <div>荷札発行</div>
+            </div>
+        </td>
+        <th scope="row">
+            @Html.Label("荷札種別", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                検品用荷札
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("詰合せ代表出荷No", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                <div>20-00019</div>
+            </div>
+        </td>
+        <th scope="row">
+            @Html.Label("送状処理状態", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                伝送完了
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("得意先", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                17601 ＦＤＴ）半導体事業＊＊＊＊＊＊＊
+            </div>
+        </td>
+        <th scope="row">
+            @Html.Label("運送方法", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                41 航空便　信川名鉄運輸㈱
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("出荷日", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                2023/01/01
+            </div>
+        </td>
+        <th scope="row">
+            @Html.Label("運送コース", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                F Ｆコース（ＦＦＪ定期）
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("包装数(個)", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                1
+            </div>
+        </td>
+        <th scope="row">
+            @Html.Label("荷札発行枚数(枚)", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                2
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("重量(kg)", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                100.00
+            </div>
+        </td>
+        <th scope="row">
+            @Html.Label("体積", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                縦 99.999 ＊ 横 99.999 ＊ 高さ 99.999
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("サイズ", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                00
+            </div>
+        </td>
+        <th scope="row">
+            @Html.Label("出荷場所", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                B0　ＦＢ二子＊＊＊＊＊＊
+            </div>
+        </td>
+    </tr>
+    <tr>
+        @if (ViewBag.ReissueExec != null && ViewBag.ReissueExec == true)
+        {
+            // 再発行
+            <th scope="row">
+                @Html.Label("特記事項", htmlAttributes: new { @class = "control-label required" })
+            </th>
+            @*<td colspan="3">*@
+            <td>
+                <div>
+                    <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="元払">
+                </div>
+            </td>
+        }
+        else
+        {
+            // 詳細・登録・更新・削除
+            <th scope="row">
+                @Html.Label("特記事項", htmlAttributes: new { @class = "control-label" })
+            </th>
+            @*<td colspan="3">*@
+            <td>
+                <div>
+                    元払
+                </div>
+            </td>
+        }
+
+
+        @if ((ViewBag.OnlyShow != null && ViewBag.OnlyShow == true) ||        // 詳細
+            (ViewBag.ReissueExec != null && ViewBag.ReissueExec == true) ||  // 再発行
+            (ViewBag.DeleteExec != null && ViewBag.DeleteExec == true))      // 削除
+        {
+            <th scope="row" rowspan="7">
+                @Html.Label("詰合せ出荷No", htmlAttributes: new { @class = "control-label" })
+            </th>
+            <td rowspan="7">
+                <div>
+                    <div class="col-4">
+                        <select class="custom-select form-control" id="IDListBox" size="10" multiple>
+                            <option value="0">29-00019</option>
+                            <option value="1">29-00020</option>
+                            <option value="2">29-00021</option>
+                        </select>
+                    </div>
+                </div>
+            </td>
+
+        }
+        else
+        {
+            // 登録or更新
+            <th scope="row" rowspan="8">
+                @Html.Label("詰合せ出荷No", htmlAttributes: new { @class = "control-label" })
+            </th>
+            <td rowspan="8">
+                <div>
+                    <div class="col-4">
+                        <select class="custom-select form-control" id="IDListBox" size="10" multiple>
+                            <option value="0">29-00019</option>
+                            <option value="1">29-00020</option>
+                            <option value="2">29-00021</option>
+                        </select>
+                    </div>
+                </div>
+            </td>
+        }
+
+    </tr>
+        <th scope="row">
+            @Html.Label("郵便番号", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                123-0001
+            </div>
+        </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                @Html.Label("ＪＩＳコード", htmlAttributes: new { @class = "control-label" })
+            </th>
+            <td>
+                <div>
+                    13101
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                @Html.Label("仕分コード", htmlAttributes: new { @class = "control-label" })
+            </th>
+            <td>
+                <div>
+                    00
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                @Html.Label("基幹届先", htmlAttributes: new { @class = "control-label" })
+            </th>
+            <td>
+                <div>
+                    00
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                @Html.Label("基幹ルートコード", htmlAttributes: new { @class = "control-label" })
+            </th>
+            <td>
+                <div>
+                    00
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                @Html.Label("基幹車両コード", htmlAttributes: new { @class = "control-label" })
+            </th>
+            <td>
+                <div>
+                    00
+                </div>
+            </td>
+        </tr>
+
+        @if ((ViewBag.OnlyShow != null && ViewBag.OnlyShow == true) ||        // 詳細
+            (ViewBag.ReissueExec != null && ViewBag.ReissueExec == true) ||  // 再発行
+            (ViewBag.DeleteExec != null && ViewBag.DeleteExec == true))      // 削除
+        {
+
+        }
+        else
+        {
+            // 登録or更新
+            <tr>
+                <th scope="row">
+                    @Html.Label("登録・更新時　荷札発行", htmlAttributes: new { @class = "control-label" })
+                </th>
+                <td>
+                    <div>
+                        しない
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    @if (ViewBag.OnlyShow != null && ViewBag.OnlyShow == true)
+    {
+        // 詳細
+        <div class="col-4">
+            <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.BackToList</a>
+        </div>
+        <div class="col-8 text-right">
+            <a role="button" class="btn btn-primary" href="@Url.Action("Edit", new { id = @"0173146" })">@MacssWeb.Resources.ControlText.Edit</a>
+            <a role="button" class="btn btn-danger" href="@Url.Action("DeleteConfirm", new { id = @"0173146" })">@MacssWeb.Resources.ControlText.Delete</a>
+        </div>
+    }
+    else if (ViewBag.ReissueExec != null && ViewBag.ReissueExec == true)
+    {
+        // 再発行
+        <div class="col-4">
+            <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.BackToList</a>
+        </div>
+        <div class="col-4 text-right">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDialog">@ViewBag.ButtonText</button>
+        </div>
+    }
+    else if (ViewBag.DeleteExec != null && ViewBag.DeleteExec == true)
+    {
+        // 削除
+        <div class="col-4">
+            <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.BackToList</a>
+        </div>
+        <div class="col-4 text-right">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDialog">@ViewBag.ButtonText</button>
+        </div>
+    }
+    else
+    {
+        // 登録or更新
+        <div class="col-4">
+            <button type="submit" class="btn btn-secondary" name="cmdTopBack" value="@((int)MacssWeb.Common.ButtonValues.Back)">@MacssWeb.Resources.ControlText.Back</button>
+        </div>
+        <div class="col-4 text-right">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDialog">@ViewBag.ButtonText</button>
+        </div>
+    }
+</div>
+
+<div class="modal" id="ConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @ViewBag.ConfirmDialogText
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" name="cmdBtmExec" value="@((int)MacssWeb.Common.ButtonValues.Exec)">@MacssWeb.Resources.ControlText.Yes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>

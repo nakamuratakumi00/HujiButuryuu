@@ -1,0 +1,4 @@
+﻿本システムの運用時間は、<font color="red">8:00～23:00</font>までとなります。<br>
+データ連携時間は、<font color="red">12:20～12:45</font>までとなります。この間は操作不可となります。<br>
+システムに関する手順書を参照できます。<font color="red"><a href="http://10.61.81.248/Home/Login" target="_blank">手順書へ</a></font><br>
+本システムを新たに利用するためには利用申請書が必要です。<font color="red"><a href="http://10.61.81.245/Home/Login" target="_blank">利用申請書へ</a></font><br>

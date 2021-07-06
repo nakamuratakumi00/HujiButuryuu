@@ -1,0 +1,123 @@
+﻿@using Macss.ViewModels
+@model LogViewModel
+
+@section Heads {
+    <style>
+        h1, .h1,
+        h2, .h2,
+        h3, .h3 {
+            margin-top: 2px;
+            margin-bottom: 0px;
+        }
+    </style>
+    <link href="/Content/details.css" rel="stylesheet" />
+}
+
+@{
+    ViewBag.Title = ViewBag.Title;
+}
+
+<div class="row">
+    <div class="navbar2 navbar-default"  style="padding-bottom:10px;">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                <h2>@ViewBag.Title</h2>
+                <hr />
+                <p>
+                    <input type="submit" value="出力" style="width: 45px; height:30px; padding:0; text-align:center;" class="btn btn-default" id="btnExport" onclick="return window.confirm('ダウンロードしてもよろしいですか？');" />
+                </p>
+                <div>
+                    @Html.ValidationSummary(true, "", new { @class = "", id = "error" })
+                </div>
+                <div class="row" style="line-height:2">
+                    @Html.LabelFor(model => model.MenuName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10 text_jp_middle">
+                        @Html.DropDownListFor(model => model.MenuName, (IEnumerable<SelectListItem>)ViewBag.MenuName, "", htmlAttributes: new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="row" style="line-height:2">
+                    @Html.LabelFor(model => model.ProcessingId, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10 text_jp_middle">
+                        @Html.DropDownListFor(model => model.ProcessingId, (IEnumerable<SelectListItem>)ViewBag.RoleName, "", htmlAttributes: new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="row" style="line-height:2">
+                    @Html.LabelFor(model => model.ExcectionFrom, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10 text_jp_middle" style="line-height:0;display:inline-flex">
+                        @Html.TextBoxFor(model => model.ExcectionFrom, htmlAttributes: new { @class = "form-control ; datearea-form ; date" , style = "ime-mode: inactive" })
+                        <b class="side-comment" style="padding-left:5px; padding-right:5px">～</b>
+                        @Html.TextBoxFor(model => model.ExcectionTo, htmlAttributes: new { @class = "form-control ; datearea-form ; date", style = "ime-mode: inactive" })
+                    </div>
+                </div>
+                <div class="row" style="line-height:2">
+                    @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10 text_jp_middle">
+                        @Html.TextBoxFor(model => model.UserId, htmlAttributes: new { @class = "form-control", @maxlength = "32" , style = "ime-mode: inactive" })
+                        @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row" style="line-height:2">
+                    @Html.LabelFor(model => model.Function, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10 text_jp_middle">
+                        @Html.DropDownListFor(model => model.Function, (IEnumerable<SelectListItem>)ViewBag.Control, "", htmlAttributes: new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@section Scripts  {
+    @Styles.Render("~/Content/bootstrap-datepicker")
+    @Scripts.Render("~/bundles/bootstrap-datepicker")
+    <script>
+
+        window.onload = function () {
+            $('#sidebar').toggleClass('active');
+        };
+
+        var allData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.AllData));
+
+    $('#MenuName').on('change', function () {
+        $('#ProcessingId').val("");
+        var menuNameGroup = $('#MenuName').val();
+        var roleNameGroup = allData;
+        var $select = $('#ProcessingId');
+        if (menuNameGroup != "") {
+            var roleNameGroup = roleNameGroup.filter(function (v, i) {
+                return v.Group == menuNameGroup
+            });
+        }
+        $select.html("");
+        $('#ProcessingId').append($('<option>'));
+        $.each(roleNameGroup, function (i, v) {
+            var $option = $('<option>', { value: v.MenuId, text: v.RoleName });
+            $select.append($option);
+        })
+    });
+    $(function () {
+        $('.date').datepicker({
+            format: "yyyy/mm/dd",
+            language: "ja",
+            autoclose: true, //日付選択で自動的にカレンダーを閉じる
+            orientation: 'bottom left'
+        });
+    });
+
+    (function ($) {
+        $.fn.resetValidation = function () {
+            $("div#error").removeClass("validation-summary-errors");
+            $("div#error").addClass("validation-summary-valid").find("ul").empty();
+            return;
+        };
+    })(jQuery);
+
+    $(function () {
+        $('#btnExport').click(function () {
+            $(this).resetValidation();
+            $('#export').submit();
+        });
+    });
+    </script>
+}

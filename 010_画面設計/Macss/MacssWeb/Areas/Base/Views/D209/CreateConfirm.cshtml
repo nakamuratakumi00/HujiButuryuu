@@ -1,0 +1,235 @@
+﻿@{
+    ViewBag.Title = "運送方法制御登録確認";
+    ViewBag.PageMainTitle = "運送方法制御登録確認";
+    ViewBag.ConfirmMessage = MacssWeb.Resources.Messages.DeleteConfirm;
+    ViewBag.ButtonText = MacssWeb.Resources.ControlText.DeleteExec;
+    ViewBag.ConfirmDialogText = MacssWeb.Resources.Messages.DeleteReconfirm;
+}
+@section Scripts {
+    <script>$(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#SampleList");
+            dt.configure();
+
+            //MacssDataTable（dataTables.fixedColumns.js）に表示する列が15件以上あると計算間違いで最左端列にスクロールバーが表示されるため、非表示にする
+            $('.DTFC_LeftBodyLiner').css('overflow-y', 'hidden');
+
+        });</script>
+}
+@using (Html.BeginForm("Delete", "Shipping", null, FormMethod.Post))
+{
+    <div class="alert alert-info">
+        <span>以下を登録します。よろしいですか？</span>
+    </div>
+    <div class="row justify-content-between macss-form-button-group-row">
+        <div class="col-4">
+            <a class="btn btn-secondary" href="@Url.Action("Create")" role="button">@MacssWeb.Resources.ControlText.Back</a>
+        </div>
+    </div>
+    <div class="accordion" id="ConditionAccordion">
+        <div class="card">
+            <div class="card-header macss-search-config-collapse-header" id="headingOne">
+                <div class="mb-0">
+                    <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain" aria-expanded="true" aria-controls="ConditionMain">
+                        <div class="d-inline-block" style="color:#333"></div>
+                        <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="color: rgb(120, 188, 255);"></i>
+                        <i id="CollapseShow" class="fas fa-chevron-circle-down" aria-hidden="true" style="color: rgb(120, 188, 255); display: none;"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+                <table class="table macss-form-table2">
+                    <colgroup>
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                        <col style="padding: 10px; margin-bottom: 10px; border: 1px solid #dddddd;">
+                        <col style="padding: 10px; margin-bottom: 10px; border: 1px solid #dddddd;">
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">届先</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div>
+                                    </div>
+                                </div>
+                            </td>
+                            <th style="width:500px; background-color: #c8edf7; text-align:center;">出荷場所</th>
+                            <th style="width:200px; background-color: #c8edf7; text-align:center;">運送方法コード</th>
+
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">機種コードA</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><label class="">B1 富士物流㈱ 構内分室</label></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">運送コース</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><label class="">B2 富士物流㈱ 半導体工場在庫</label></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">届先社名</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><label class="">B0 富士物流㈱ 二子物流センター</label></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">届先支店名</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><label class="">A1 富士電気メーター㈱</label></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">届先住所</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><label class="">H1 FPS北陸工場</label></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">データ管理元区分(届先マスター)</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><label class="">B3 FB半導体出荷センター</label></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">データ管理元区分</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><label class="">O1 FPS大町工場 使用禁止</label></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>
+                            </th>
+                            <td></td>
+                            <td><label class="">EC SW電源FE事業部倉庫</label></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label"></label>
+                            </th>
+                            <td></td>
+                            <td><label class="">K1 山梨事業所</label></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label"></label>
+                            </th>
+                            <td></td>
+                            <td><label class="">S1 信州富士電機㈱</label></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label"></label>
+                            </th>
+                            <td></td>
+                            <td><label class="">S2 富士物流㈱ 丸子出張所</label></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label"></label>
+                            </th>
+                            <td></td>
+                            <td><label class="">E1 営業在庫 半導体営業在庫(E1)</label></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label"></label>
+                            </th>
+                            <td></td>
+                            <td><label class="">99 予備(運送方法制御M用)</label></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table> 
+            </div>
+        </div>
+    </div>
+}
+
+<div class="mt-4"></div>
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a class="btn btn-secondary" href="@Url.Action("Create")" role="button">@MacssWeb.Resources.ControlText.Back</a>
+    </div>
+    <div class="col-4 text-right">
+        <a role="button" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDialog">登録</a>
+    </div>
+</div>
+<div class="modal" id="ConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                登録処理を実行します。よろしいですか？
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary macss-btn" href="@Url.Action("Create")" role="button">@MacssWeb.Resources.ControlText.Yes</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>

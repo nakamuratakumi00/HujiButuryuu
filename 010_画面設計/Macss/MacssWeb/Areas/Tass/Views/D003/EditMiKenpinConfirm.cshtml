@@ -1,0 +1,16 @@
+﻿@model Macss.Database.Entity.AccountMaster
+
+@{
+    ViewBag.Title = "運送業務 - TASS";
+    ViewBag.PageMainTitle = "出荷現品情報更新確認";
+    ViewBag.ScreenId = "";
+    ViewBag.ConfirmMessage = MacssWeb.Resources.Messages.EditConfirm;
+    ViewBag.ButtonText = MacssWeb.Resources.ControlText.EditExec;
+    ViewBag.ConfirmDialogText = MacssWeb.Resources.Messages.EditReconfirm;
+}
+
+@using (Html.BeginForm("EditMiKenpin", "D003", null, FormMethod.Post))
+{
+
+    @Html.Partial("_ShowMikenpin", Model)
+}

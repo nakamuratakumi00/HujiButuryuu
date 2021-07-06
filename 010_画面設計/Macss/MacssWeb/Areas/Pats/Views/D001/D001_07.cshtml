@@ -1,0 +1,643 @@
+﻿@* 内示・発注更新 *@
+
+@Html.AntiForgeryToken()
+
+@Html.Partial("../Shared/Dialog/_DepartmentCodeSearch")
+@Html.Partial("~/Areas/Tass/Views/Shared/Dialog/_HinmeiCodeSearch.cshtml")
+
+<div>
+    @Html.ValidationSummary(false, "登録エラーがあります。", new { @class = "alert alert-danger" })
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#TransitionConfirmDialog">@MacssWeb.Resources.ControlText.BackToList</button>
+    </div>
+    <div class="col-4 text-right">
+        <a class="btn btn-primary macss-btn" href="@Url.Action("D001_08")" role="button">@MacssWeb.Resources.ControlText.InputConfirm</a>
+    </div>
+</div>
+
+@* 更新項目 *@
+<table class="table macss-form-table">
+    <colgroup>
+        <col class="macss-form-table-title" />
+        <col class="macss-form-table-contents" />
+    </colgroup>
+
+    @* 内示発注区分 *@
+    <tr>
+        <th scope="row">
+            <label class="control-label">内示発注区分</label>
+        </th>
+        <td>
+            @if (ViewBag.NaiHatsu == "naiji")
+            {
+                <label>0:内示</label>
+            }
+            else
+            {
+                <label>1:注文</label>
+            }
+        </td>
+    </tr>
+
+    <tr>
+        @* 注文No(内示No) 不可 *@
+        <th scope="row">
+            注文No(内示No)
+        </th>
+        <td>
+            1234567890
+        </td>
+    </tr>
+    @* 注文日 自動 *@
+    @if (ViewBag.NaiHatsu == "naiji")
+    {
+        <tr>
+            <th scope="row">
+                <label class="">注文日</label>
+            </th>
+            <td></td>
+        </tr>
+    }
+    else
+    {
+        <tr>
+            <th scope="row">
+                <label class="required">注文日</label>
+            </th>
+            <td>
+                <div class="input-group">
+                    <input type="text" id="date1" class="form-control" value="YYYY/MM/DD" />
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="Calendar1"><i class="fa fa-calendar-alt"></i></button>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    }
+
+    @* 品名コード/品名 条件 *@
+    @* 品名コード'9999999'以外の場合：品名コード：修正可、品名：表示 *@
+    @* 品名コード'9999999'の場合：品名コード：修正不可、品名：修正可 *@
+    @if (@ViewBag.ChumonNo != "9999999")
+    {
+        @* 品名コード 必須 *@
+        <tr>
+            <th>
+                <label class="required">品名コード</label>
+            </th>
+            <td>
+                <div class="input-group">
+                    <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="" name="" type="text" value="123456789012" style="border-top-left-radius:0; border-bottom-left-radius:0;">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#HinmeiCodeSearchDialog">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        @* 品名 表示 *@
+        <tr>
+            <th>
+                <label class="">品名</label>
+            </th>
+            <td>
+                <label id="" class="align-middle">１２３４５６７８９０１２３４５６７８９０</label>
+            </td>
+        </tr>
+    }
+    else
+    {
+        @* 品名コード 表示 *@
+        <tr>
+            <th scope="row">
+                品名コード
+            </th>
+            <td>
+                @ViewBag.ChumonNo
+            </td>
+        </tr>
+        @* 品名 必須 *@
+        <tr>
+            <th scope="row">
+                <label class="required">品名</label>
+            </th>
+            <td>
+                <input class="form-control" type="text" value="１２３４５６７８９０１２３４５６７８９０" />
+            </td>
+        </tr>
+    }
+
+    @* 規格・寸法 条件 *@
+    @* 品名コード'9999999'以外の場合表示 *@
+    <tr>
+        <th scope="row">
+            規格・寸法
+        </th>
+        @if (@ViewBag.ChumonNo != "9999999")
+        {
+            <td>
+                １２３４５６７８９０１２３４５６７８９０
+            </td>
+        }
+        else
+        {
+            <td>
+                <input class="form-control" type="text" value="１２３４５６７８９０１２３４５６７８９０" />
+            </td>
+        }
+    </tr>
+
+    @* 納期 必須 *@
+    <tr>
+        <th scope="row">
+            @if (ViewBag.NaiHatsu == "naiji")
+            {
+                <label class="">納期</label>
+            }
+            else
+            {
+                <label class="required">納期</label>
+            }
+        </th>
+        <td>
+
+            <div class="input-group">
+                <input type="text" id="date1" class="form-control" />
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="Calendar1"><i class="fa fa-calendar-alt"></i></button>
+                </div>
+            </div>
+        </td>
+    </tr>
+    @* 注文数 必須 *@
+    <tr>
+        <th scope="row">
+            <label class="required">注文数</label>
+        </th>
+        <td>
+            <input class="form-control" value="123,456,789" />
+        </td>
+    </tr>
+    @* 元注文数 条件 *@
+    @* 品名コード'9999999'以外の場合修正可 *@
+    <tr>
+        <th scope="row">
+            <label>元注文数</label>
+        </th>
+        <td>
+            @if (@ViewBag.ChumonNo != "9999999")
+            {
+                <input class="form-control" value="123,456,789" />
+            }
+            else
+            {
+                <label></label>
+            }
+        </td>
+    </tr>
+
+    @* 単位 条件 *@
+    @* 品名コード'9999999'以外の場合表示 *@
+    @if (@ViewBag.ChumonNo != "9999999")
+    {
+        <tr>
+            <th scope="row">
+                単位
+            </th>
+            <td>
+                12 １２３４５６７８９０
+            </td>
+        </tr>
+    }
+    else
+    {
+        <tr>
+            <th scope="row">
+                @if (ViewBag.NaiHatsu == "naiji")
+                {
+                    <label class="">単位</label>
+                }
+                else
+                {
+                    <label class="control-label required">単位</label>
+                }
+            </th>
+            <td>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="input-group">
+                            <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="" name="" type="text" value="12">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="">
+                                    <i class="fas fa-redo"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <span id="" class="align-middle">１２３４５６７８９０</span>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    }
+
+    @* 注文単価 条件 *@
+    @* 品名登録済 表示 *@
+    @if (@ViewBag.ChumonNo != "9999999")
+    {
+        <tr>
+            <th scope="row">
+                注文単価
+            </th>
+            <td>
+                12,345,678,901.12
+            </td>
+        </tr>
+    }
+    else
+    {
+        @* 品名未登録 必須 *@
+        <tr>
+            <th scope="row">
+                <label class="required">注文単価</label>
+            </th>
+            <td>
+                <input class="form-control" value="12,345,678,901.12" />
+            </td>
+        </tr>
+    }
+
+    @* 注文金額 不可 *@
+    <tr>
+        <th scope="row">
+            注文金額
+        </th>
+        <td>
+            12,345,678,901
+        </td>
+    </tr>
+    @* 粗利益額 *@
+    <tr>
+        <th scope="row">
+            粗利益額
+        </th>
+        @if (@ViewBag.ChumonNo != "9999999")
+        {
+            @* 品名登録済 未使用 *@
+            <td></td>
+        }
+        else
+        {
+            @* 品名未登録 表示 *@
+            <td>
+                123,456,789
+            </td>
+        }
+    </tr>
+
+    @* 売上予定単価、売上予定金額、売上単価、売上金額 条件 *@
+    @if (@ViewBag.ChumonNo != "9999999")
+    {
+        @* 売上予定単価 *@
+        @* 品名登録済 在庫区分が10 or 24の場合のみ表示 *@
+        <tr>
+            <th scope="row">
+                売上予定単価
+            </th>
+            <td>
+                12,345,678,901.12
+            </td>
+        </tr>
+        @* 売上予定金額 *@
+        @* 品名登録済 表示 *@
+        <tr>
+            <th scope="row">
+                売上予定金額
+            </th>
+            <td>
+                12,345,678,901
+            </td>
+        </tr>
+    }
+    else
+    {
+        @* 売上単価 *@
+        @* 品名未登録 在庫区分が10の場合のみ必須、以外は入力不可 *@
+        <tr>
+            <th scope="row">
+                <label class="required">売上単価</label>
+            </th>
+            <td>
+                <input class="form-control" type="text" value="12,345,678,901.12" />
+            </td>
+        </tr>
+        @* 売上金額 *@
+        @* 品名未登録 表示 *@
+        <tr>
+            <th scope="row">
+                売上金額
+            </th>
+            <td>
+                12,345,678,901
+            </td>
+        </tr>
+    }
+
+    @* 在庫区分 必須 *@
+    <tr>
+        <th scope="row">
+            @if (ViewBag.NaiHatsu == "naiji")
+            {
+                <label class="">在庫区分</label>
+            }
+            else
+            {
+                <label class="required">在庫区分</label>
+            }
+        </th>
+        <td>
+            <select class="custom-select">
+                <option></option>
+                <option>10:自社在庫にしない</option>
+                <option>21:自社在庫にする</option>
+                <option>90:その他</option>
+            </select>
+        </td>
+    </tr>
+
+    @* 倉庫 表示 *@
+    @* 品名登録済 表示 在庫区分が21 or 24の場合のみ納入先コードの内容を納入先マスタから表示 *@
+    @* 品名未登録 未使用 *@
+    <tr>
+        <th scope="row">
+            倉庫
+        </th>
+        <td>
+            @if (@ViewBag.ChumonNo != "9999999")
+            {
+                <label>12 １２３４５６７８９０１２３４５</label>
+            }
+            else
+            {
+                <label></label>
+            }
+        </td>
+    </tr>
+
+    @* 発注先 条件 *@
+    @* 品名登録済 自動（入力不可） *@
+    @* 品名未登録 必須 *@
+    @if (@ViewBag.ChumonNo != "9999999")
+    {
+        <tr>
+            <th scope="row">
+                発注先
+            </th>
+            <td>
+                1234567 １２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０
+            </td>
+        </tr>
+    }
+    else
+    {
+        <tr>
+            <th scope="row">
+                <label class="required">発注先</label>
+            </th>
+            <td>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="input-group">
+                            <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="hatyusakiCd" name="" type="text" value="1234567" style="border-top-left-radius:0; border-bottom-left-radius:0;">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#SiiresakiCodeSearchDialog">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <span id="" class="align-middle">１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０</span>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    }
+
+    @* 得意先コード 可 得意先名 不可 *@
+    @* 在庫区分が「１０」又は「２４」の時のみ入力必須 *@
+    <tr>
+        <th scope="row">
+            @if (ViewBag.NaiHatsu == "naiji")
+            {
+                <label class="">得意先</label>
+            }
+            else
+            {
+                <label class="required">得意先</label>
+            }
+        </th>
+        <td>
+            <div class="row">
+                <div class="col-4">
+                    <div class="input-group">
+                        <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="" name="" type="text" value="1234567" style="border-top-left-radius:0; border-bottom-left-radius:0;">
+                        <div class="input-group-append">
+                            <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#HinmeiCodeSearchDialog">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <span id="" class="align-middle">１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０</span>
+                </div>
+            </div>
+        </td>
+    </tr>
+    @* 原価区分 可 *@
+    @* 現行システムでは得意先コードと同じ枠内 *@
+    @* 在庫区分が「１０」又は「２４」の時のみ入力必須 *@
+    <tr>
+        <th scope="row">
+            @if (ViewBag.NaiHatsu == "naiji")
+            {
+                <label class="">原価区分</label>
+            }
+            else
+            {
+                <label class="required">原価区分</label>
+            }
+        </th>
+        <td>
+            <select class="custom-select form-control">
+                <option></option>
+                <option>1:原価</option>
+                <option>2:経費</option>
+            </select>
+        </td>
+    </tr>
+
+    @* 得意先製造番号 可 *@
+    <tr>
+        <th scope="row">
+            得意先製造番号
+        </th>
+        <td>
+            <input class="form-control" type="text" value="123456789012345678901234567890" />
+        </td>
+    </tr>
+    @* 得意先注文番号 可 *@
+    <tr>
+        <th scope="row">
+            得意先注文番号
+        </th>
+        <td>
+            <input class="form-control" type="text" value="12345678901234567890" />
+        </td>
+    </tr>
+    @* 納入先コード 可 *@
+    <tr>
+        <th scope="row">
+            @if (ViewBag.NaiHatsu == "naiji")
+            {
+                <label class="">納入先コード</label>
+            }
+            else
+            {
+                <label class="required">納入先コード</label>
+
+            }
+        </th>
+        <td>
+            <div class="row">
+                <div class="col-4">
+                    <div class="input-group">
+                        <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="" name="" type="text" value="12345" style="border-top-left-radius:0; border-bottom-left-radius:0;">
+                        <div class="input-group-append">
+                            <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#NonyusakiCodeSearchDialog">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+    @* 納入先名 可 *@
+    <tr>
+        <th scope="row">
+            @if (ViewBag.NaiHatsu == "naiji")
+            {
+                <label class="">納入先名</label>
+            }
+            else
+            {
+                <label class="required">納入先名</label>
+
+            }
+        </th>
+        <td>
+            <input class="form-control" type="text" value="１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０" />
+        </td>
+    </tr>
+    @* 売上PC 必須 *@
+    <tr>
+        <th scope="row">
+            @if (ViewBag.NaiHatsu == "naiji")
+            {
+                <label class="">売上PC</label>
+            }
+            else
+            {
+                <label class="required">売上PC</label>
+
+            }
+        </th>
+        <td>
+            <div class="row">
+                <div class="col-4">
+                    <div class="input-group">
+                        <input class="form-control" type="text" value="1234" />
+                        <input class="form-control" type="text" value="5678" />
+                        <input class="form-control" type="text" value="9012" />
+                        <div class="input-group-append">
+                            <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="">
+                                <i class="fas fa-redo"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <span class="align-middle">１２３４５６７８９０ １２３４５６７８９０ １２３４５６７８９０１２３４５６７８９０</span>
+                </div>
+            </div>
+        </td>
+    </tr>
+    @* 得意先担当者名 入力 *@
+    <tr>
+        <th scope="row">
+            <label class="" id="">得意先担当者名</label>
+        </th>
+        <td>
+            <input class="form-control" type="text" value="１２３４５６７８９０" />
+        </td>
+    </tr>
+    @* 特記事項 可 *@
+    <tr>
+        <th scope="row">
+            特記事項
+        </th>
+        <td>
+            <input class="form-control" type="text" value="１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０" />
+        </td>
+    </tr>
+</table>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#TransitionConfirmDialog">@MacssWeb.Resources.ControlText.BackToList</button>
+    </div>
+    <div class="col-4 text-right">
+        <a class="btn btn-primary macss-btn" href="@Url.Action("D001_08")" role="button">@MacssWeb.Resources.ControlText.InputConfirm</a>
+    </div>
+</div>
+
+@* 画面遷移確認ダイアログ *@
+<div class="modal" id="TransitionConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.TransitionConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @MacssWeb.Resources.Messages.TransitionConfirm
+                <br>
+                @MacssWeb.Resources.Messages.Confirm
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary macss-btn" href="@Url.Action("D001_01")" role="button">@MacssWeb.Resources.ControlText.Yes</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function setDepartmentCode(code, value) {
+        $("#bumon_cd").val(code);
+        $("#DepartmentName").text(value);
+    }
+    $(function () {
+        new Macss.DatetimePicker.MacssDtPicker("#date1", "#Calendar1").configure();
+    });
+
+</script>

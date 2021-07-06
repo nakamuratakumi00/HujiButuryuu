@@ -1,0 +1,147 @@
+﻿@using MacssWeb.Areas.Tass.Helper
+@model Macss.Database.Entity.DummyDossData
+
+@Html.AntiForgeryToken()
+
+<div>
+    @Html.ValidationSummary(false, "入力エラーがあります。", new { @class = "alert alert-danger" })
+</div>
+
+<table class="table macss-form-table">
+    <colgroup>
+        <col class="macss-form-table-title" />
+        <col class="macss-form-table-contents" />
+    </colgroup>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.OutYMD, htmlAttributes: new { @class = "control-label required" })
+        </th>
+        <td>
+            <div>
+                <div class="input-group">
+                    @Html.EditorFor(model => model.OutYMD, new { htmlAttributes = new { @class = "form-control" } })
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="OutYMDCalendar"><i class="fa fa-calendar-alt"></i></button>
+                    </div>
+                </div>
+
+                @Html.ValidationMessageFor(model => model.OutYMD, "", new { @class = "text-danger" })
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.Route, htmlAttributes: new { @class = "control-label required" })
+        </th>
+        <td>
+            @Html.DropDownListFor(model => model.Route, 
+                DossDataHelper.RouteSelectList,
+                new { @class = "form-control" } )
+            @Html.HiddenFor(model => model.Route)
+        </td>
+    </tr>
+    @*<tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label required" })
+        </th>
+        <td>
+            @Html.DropDownListFor(model => model.Location,
+                DossDataHelper.LocationSelectList,
+                new { @class = "form-control" } )
+            @Html.HiddenFor(model => model.Location)
+        </td>
+    </tr>*@
+    @*<tr>
+        <th>
+            @Html.LabelFor(model => model.TargetDossData, htmlAttributes: new { @class = "control-label required" })
+        </th>
+        <td>
+            <div class="row">
+                <div class="col-2">
+                    <div class="form-check form-check-inline">
+                        @Html.CheckBoxFor(model => model.DossDataAll,
+                            new { @class = "form-check-input" } )
+                        @Html.LabelFor(model => model.DossDataAll, htmlAttributes: new { @class = "form-check-label" })
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="form-check form-check-inline">
+                        @Html.CheckBoxFor(model => model.DossDataKitaKanto,
+                            new { @class = "form-check-input" } )
+                        @Html.LabelFor(model => model.DossDataKitaKanto, htmlAttributes: new { @class = "form-check-label" })
+                    </div>
+                </div>
+            </div>
+                @Html.HiddenFor(model => model.DossDataAll)
+                @Html.HiddenFor(model => model.DossDataKitaKanto)
+        </td>
+    </tr>*@
+    @*<tr>*@
+        @*<th>
+            @Html.LabelFor(model => model.CreateType, htmlAttributes: new { @class = "control-label required" })
+        </th>
+        <td>
+            <div class="row">
+                <div class="col-2">
+                    <label>
+                        @Html.RadioButtonFor(
+                          model => model.CreateType,
+                          "未作成分出力"
+                        )
+                        未作成分出力
+                    </label>
+                </div>
+                <div class="col-2">
+                    <label>
+                        @Html.RadioButtonFor(
+                          model => model.CreateType,
+                          "再作成"
+                        )
+                        再作成
+                    </label>
+                </div>
+            </div>
+            @Html.HiddenFor(model => model.CreateType)
+        </td>*@
+        @*<td>
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-outline-primary">
+                    @Html.RadioButtonFor(
+                      model => model.CreateType,
+                      "未作成分出力"
+                    )
+                    未作成分出力
+                </label>
+                <label class="btn btn-outline-primary">
+                    @Html.RadioButtonFor(
+                      model => model.CreateType,
+                      "再作成"
+                    )
+                    再作成
+                </label>
+            </div>
+            @Html.HiddenFor(model => model.CreateType)
+        </td>*@
+    @*</tr>*@
+</table>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+    </div>
+    <div class="col-4 text-right">
+        <button type="submit" class="btn btn-primary">確認</button>
+    </div>
+</div>
+
+<script>
+    function setDepartmentCode(code, value) {
+        $("#bumon_cd").val(code);
+        $("#DepartmentName").text(value);
+    }
+    $(function () {
+        var createDatePicker = new Macss.DatetimePicker.MacssDtPicker("#OutYMD", "#OutYMDCalendar");
+        createDatePicker.configure();
+
+    });
+
+</script>

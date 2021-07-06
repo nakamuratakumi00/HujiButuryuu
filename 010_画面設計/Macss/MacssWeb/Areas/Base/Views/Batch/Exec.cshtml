@@ -1,0 +1,10 @@
+﻿@{
+    ViewBag.Title = "バッチ管理";
+    ViewBag.PageMainTitle = "バッチ管理起動";
+}
+
+
+@using (Html.BeginForm("ExecConfirm", "Batch", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.Partial("_Exec")
+}

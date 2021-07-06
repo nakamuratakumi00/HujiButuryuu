@@ -1,0 +1,80 @@
+﻿@model IEnumerable<MacssWeb.Models.AccountMasterUpload>
+
+@{
+    ViewBag.Title = "請求仕入 - AIMS";
+    ViewBag.ScreenId = "";
+    ViewBag.PageMainTitle = "Fe請求データ作成完了";
+}
+@section Scripts {
+    <script>
+
+        $(function () {
+            var dt = new Macss.DataTables.MacssDataTable("#MakeConfirmList");
+            dt.setScrollY("600px");
+            dt.configure();
+            $('[data-toggle="popover"]').popover();
+        });
+    </script>
+}
+
+<div class="alert @ViewBag.AlertType">
+    <span>@ViewBag.ResultMessage</span>
+</div>
+
+<div class="alert alert-info">
+    <span>@Html.Raw(@ViewBag.ResultInfoMessage)</span>
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+    </div>
+    <div class="col-4 text-right">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("Index", "Home")">@MacssWeb.Resources.ControlText.BackToSubMenu</a>
+    </div>
+</div>
+
+<div class="container-fluid mt-4">
+    <div class="form-inline">
+        <div class="col-3 mb-1">
+            <span class="input-group-text">Fe経理様用</span>
+        </div>
+        <div class="col-2">
+            <div class="input-group mb-1">
+                <div class="input-group-prepend" style="width:6rem;">
+                    <span class="input-group-text w-100">作成件数</span>
+                </div>
+                <span class="form-control text-right">@ViewBag.MakeCountFe</span>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="input-group mb-1">
+                <div class="input-group-prepend" style="width:8rem;">
+                    <span class="input-group-text w-100">作成合計金額</span>
+                </div>
+                <span class="form-control text-right">@ViewBag.TotalKingakuFe</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline">
+        <div class="col-3 mb-1">
+            <span class="input-group-text">全件</span>
+        </div>
+        <div class="col-2">
+            <div class="input-group mb-1">
+                <div class="input-group-prepend" style="width:6rem;">
+                    <span class="input-group-text w-100">作成件数</span>
+                </div>
+                <span class="form-control text-right">@ViewBag.MakeCountAll</span>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="input-group mb-1">
+                <div class="input-group-prepend" style="width:8rem;">
+                    <span class="input-group-text w-100">作成合計金額</span>
+                </div>
+                <span class="form-control text-right">@ViewBag.TotalKingakuAll</span>
+            </div>
+        </div>
+    </div>
+</div>

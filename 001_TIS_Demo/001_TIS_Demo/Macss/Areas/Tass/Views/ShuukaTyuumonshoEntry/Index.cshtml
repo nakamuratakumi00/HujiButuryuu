@@ -1,0 +1,551 @@
+﻿@using Macss.Areas.Tass.ViewModels
+@model ShuukaTyuumonshoEntryData
+@using Macss.HtmlHelpers
+
+<style>
+    h1, .h1,
+    h2, .h2,
+    h3, .h3 {
+        margin-top: 2px;
+        margin-bottom: 0px;
+    }
+
+    #tbl-bdr table, #tbl-bdr td, #tbl-bdr th {
+        border-collapse: collapse;
+        border: 1px solid #dcdcdc;
+    }
+
+    #ShuukaTable td {
+        word-break: break-all;
+    }
+
+</style>
+
+@{
+    ViewBag.Title = ViewBag.Title;
+}
+
+<div class="row">
+
+    <div class="navbar2 navbar-default" style="padding-bottom:10px;">
+        <h2>@ViewBag.Title</h2>
+        <hr />
+
+        @using (Html.BeginForm("Index", "ShuukaTyuumonshoEntry", FormMethod.Post, htmlAttributes: new { id = "transitions" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="row">
+                @Html.ValidationSummary(true, "", new { @id = "oputError" })
+                <br />
+            </div>
+            <div class="row">
+                <div class="col-sm-10 validation-summary-errors " style="display: none" id="error"><ul><li></li></ul></div>
+                <br />
+            </div>
+            <div class="row">
+                <div class="col-sm-10">
+                    <div class="row" style="line-height:2">
+                        @Html.LabelFor(model => model.Serch.Syukno, htmlAttributes: new { @class = "control-label col-sm-2", style = "width: 90px" })
+                        <div class="col-sm-2" style="width:100px">
+                            @Html.EditorFor(model => model.Serch.Syukno, new { htmlAttributes = new { @class = "form-control", style = "ime-mode: inactive" } })
+
+                            @Html.ValidationMessageFor(model => model.Serch.Syukno, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.LabelFor(model => model.Serch.Sybcod, htmlAttributes: new { @class = "control-label col-sm-2 label_large" })
+                        <div class="col-sm-2" style="display:inline-flex; width: 80px;">
+                            @Html.EditorFor(model => model.Serch.Sybcod, new { htmlAttributes = new { @class = "form-control", style = "ime-mode: inactive" } })
+                            @Html.Partial("ShukkabashoCodeHelp", new CodeHelpViewModels.ShukkabashoViewData())
+                            @Html.ValidationMessageFor(model => model.Serch.Sybcod, "", new { @class = "text-danger" })
+                        </div>
+
+                        @Html.LabelFor(model => model.Serch.Fsykno, htmlAttributes: new { @class = "control-label col-sm-2", style = "width: 85px" })
+                        <div class="col-sm-2" style="width:100px;">
+                            @Html.EditorFor(model => model.Serch.Fsykno, new { htmlAttributes = new { @class = "form-control", style = "ime-mode: inactive" } })
+                            @Html.ValidationMessageFor(model => model.Serch.Fsykno, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row" style="line-height:2">
+                        <div style="margin-left: 100px;">
+                            <small style="font-size:80%">※↑ハイフンなしで入力</small>
+                        </div>
+                    </div>
+
+
+                    <div class="row" style="line-height:2">
+                        @Html.LabelFor(model => model.Serch.Crtnam, htmlAttributes: new { @class = "control-label col-sm-2", style = "width: 90px" })
+                        <div class="col-sm-2" style="width: 195px;">
+                            @Html.EditorFor(model => model.Serch.Crtnam, new { htmlAttributes = new { @class = "form-control", style = "ime-mode: active" } })
+                            @Html.ValidationMessageFor(model => model.Serch.Crtnam, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.LabelFor(model => model.Serch.SykymdFrom, htmlAttributes: new { @class = "control-label col-sm-2 label_small" })
+                        <div class="col-sm-4" style="display:inline-flex;width:200px;">
+                            @Html.TextBoxFor(model => model.Serch.SykymdFrom, htmlAttributes: new { @class = "form-control datearea-form date", style = "width:90px;ime-mode: inactive" })
+                            <b class="side-comment" style="padding-left:5px; padding-right:5px">～</b>
+                            @Html.TextBoxFor(model => model.Serch.SykymdTo, htmlAttributes: new { @class = "form-control datearea-form date", style = "width:90px;ime-mode: inactive" })
+                        </div>
+                    </div>
+
+                    <div class="row" style="line-height:2">
+                        @Html.LabelFor(model => model.Serch.Tokcod, htmlAttributes: new { @class = "control-label col-sm-2", style = "width: 90px" })
+                        <div class="col-sm-2" style="width: 195px;">
+                            @Html.EditorFor(model => model.Serch.Tokcod, new { htmlAttributes = new { @class = "form-control", style = "ime-mode: inactive" } })
+                            @Html.ValidationMessageFor(model => model.Serch.Tokcod, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.LabelFor(model => model.Serch.Toknam, htmlAttributes: new { @class = "control-label col-sm-2 label_small" })
+                        <div class="col-sm-2" style="width:200px;">
+                            @Html.EditorFor(model => model.Serch.Toknam, new { htmlAttributes = new { @class = "form-control", style = "ime-mode: active" } })
+                            @Html.ValidationMessageFor(model => model.Serch.Toknam, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row" style="line-height:2">
+                        @Html.LabelFor(model => model.Serch.Tdkcod, htmlAttributes: new { @class = "control-label col-sm-2", style = "width: 90px" })
+                        <div class="col-sm-2" style="width: 195px;">
+                            @Html.EditorFor(model => model.Serch.Tdkcod, new { htmlAttributes = new { @class = "form-control", style = "ime-mode: inactive" } })
+                            @Html.ValidationMessageFor(model => model.Serch.Tdkcod, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.LabelFor(model => model.Serch.Tdknam, htmlAttributes: new { @class = "control-label col-sm-2 label_small" })
+                        <div class="col-sm-2" style="width:200px;">
+                            @Html.EditorFor(model => model.Serch.Tdknam, new { htmlAttributes = new { @class = "form-control", style = "ime-mode: active" } })
+                            @Html.ValidationMessageFor(model => model.Serch.Tdknam, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row" style="line-height:2">
+                        @Html.LabelFor(model => model.Serch.Tdsnam, htmlAttributes: new { @class = "control-label col-sm-2", style = "width: 90px" })
+                        <div class="col-sm-2 text_jp_middle">
+                            @Html.EditorFor(model => model.Serch.Tdsnam, new { htmlAttributes = new { @class = "form-control", style = "ime-mode: active" } })
+                            @Html.ValidationMessageFor(model => model.Serch.Tdsnam, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row" style="line-height:2">
+                        @Html.LabelFor(model => model.Serch.Tdbnam, htmlAttributes: new { @class = "control-label col-sm-2", style = "width: 90px" })
+                        <div class="col-sm-2 text_jp_middle">
+                            @Html.EditorFor(model => model.Serch.Tdbnam, new { htmlAttributes = new { @class = "form-control", style = "ime-mode: active" } })
+                            @Html.ValidationMessageFor(model => model.Serch.Tdbnam, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row" style="line-height:2">
+                        @Html.LabelFor(model => model.Serch.Tdktan, htmlAttributes: new { @class = "control-label col-sm-2", style = "width: 90px" })
+                        <div class="col-sm-2 text_jp_middle">
+                            @Html.EditorFor(model => model.Serch.Tdktan, new { htmlAttributes = new { @class = "form-control", style = "ime-mode: active" } })
+                            @Html.ValidationMessageFor(model => model.Serch.Tdktan, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row" style="line-height:2">
+                        <label class="col-md-2 control-label label_large" style="width:95px">発行状況</label>
+                        <div class="col-sm-2" style="width:80px">
+                            @Html.CheckBoxFor(model => model.Serch.Denfn, new { htmlAttributes = new { @class = "form-control" } })
+                            未発行
+                        </div>
+                        <div class="col-sm-2">
+                            @Html.CheckBoxFor(model => model.Serch.Denfy, new { htmlAttributes = new { @class = "form-control" } })
+                            発行済
+                        </div>
+                        @Html.EditorFor(model => model.Serch.GroupCd, new { htmlAttributes = new { @class = "form-control", style = "display:none" } })
+                    </div>
+                </div>
+                <div class="col-sm-2">
+
+                    <div id="tbl-bdr">
+                        <table>
+                            <tr>
+                                <td width="20px">列</td>
+                                <td width="60px">項目名</td>
+                                <td width="20px">S</td>
+                            </tr>
+                            <tr bgcolor="#d9edf7">
+                                <td>1</td>
+                                <td>無効</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>発行</td>
+                                <td></td>
+                            </tr>
+                            <tr bgcolor="#d9edf7">
+                                <td>3</td>
+                                <td>出荷日</td>
+                                <td>1↓</td>
+                            </tr>
+                            <tr bgcolor="#d9edf7">
+                                <td>4</td>
+                                <td>場所</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>出荷No</td>
+                                <td>2↑</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>届先名</td>
+                                <td></td>
+                            </tr>
+                            <tr bgcolor="#d9edf7">
+                                <td>7</td>
+                                <td>品名</td>
+                                <td></td>
+                            </tr>
+                            <tr bgcolor="#d9edf7">
+                                <td>8</td>
+                                <td>得意先C</td>
+                                <td></td>
+                            </tr>
+                            <tr bgcolor="#d9edf7">
+                                <td>9</td>
+                                <td>得意先名</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td>登録担当者</td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-11"></div>
+                <div class="col-sm-1"><input type="button" name="search" id="search" class="btn btn-primary" style="width:50px; height:30px; padding:0; text-align: center;" value="検索" /></div>
+            </div>
+
+            @Html.HiddenFor(model => model.Serch.SearchFlg)
+            @Html.HiddenFor(model => model.Information.Syukno)
+            @Html.HiddenFor(model => model.Information.Cdate)
+            @Html.HiddenFor(model => model.Mode)
+
+            <div class="row">
+                <div class="col-sm-11 nbase-bootstrap-table" style="height:350px">
+                    <table id="ShuukaTable"
+                           class="table"
+                           data-method="POST"
+                           data-toggle="table"
+                           data-query-params="queryParams"
+                           data-id-table="advancedTable"
+                           data-page-list="[10, 25, 50, 100, 1000]"
+                           @*data-toolbar="#toolbar"*@
+                           data-pagination="true"
+                           data-filter-show-clear="true">
+                        <colgroup>
+                            <col />
+                            <col />
+                            <col style="min-width: 7em" />
+                            <col />
+                            <col />
+                            <col style="min-width: 20em" />
+                            <col style="min-width: 17em" />
+                            <col />
+                            <col style="min-width: 15em" />
+                            <col />
+                            <col />
+                        </colgroup>
+                        <thead>
+                            <tr id="data">
+                                @Html.ThFor(model => model.Information.Mukounam, htmlAttributes: new { data_sortable = "true", @class = "info" })
+                                @Html.ThFor(model => model.Information.Denf, htmlAttributes: new { data_sortable = "true" })
+                                @Html.ThFor(model => model.Information.Sykymd, htmlAttributes: new { data_sortable = "true", @class = "info" })
+                                @Html.ThFor(model => model.Information.Sybcod, htmlAttributes: new { data_sortable = "true", @class = "info" })
+                                @Html.ThFor(model => model.Information.Syukno, htmlAttributes: new { data_sortable = "true" })
+                                @Html.ThFor(model => model.Information.Tdknam, htmlAttributes: new { data_sortable = "true" })
+                                @Html.ThFor(model => model.Information.Dhinnam, htmlAttributes: new { data_sortable = "true", @class = "info" })
+                                @Html.ThFor(model => model.Information.Tokcod, htmlAttributes: new { data_sortable = "true", @class = "info" })
+                                @Html.ThFor(model => model.Information.Toknam, htmlAttributes: new { data_sortable = "true", @class = "info" })
+                                @Html.ThFor(model => model.Information.Crtnam, htmlAttributes: new { data_sortable = "true" })
+                                @Html.ThFor(model => model.Information.Cdate, htmlAttributes: new { data_sortable = "true", data_visible = "false" })
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div>
+                    <div class="col-sm-1">
+                        <br />
+                        <input type="button" name="inquiry" id="inquiry" class="btn btn-default" style="width:50px; height:30px; padding:0; text-align: center;" value="照会" /><br />
+                        <br />
+                        <input type="button" name="edit" id="edit" class="btn btn-default" style="width:50px; height:30px; padding:0; text-align: center;" value="更新" /><br />
+                        <br />
+                        <input type="button" name="delete" id="delete" class="btn btn-default" style="width:50px; height:30px; padding:0; text-align: center;" value="削除" /><br />
+                    </div>
+
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts  {
+    @Html.Partial("_BootstrapFunction")
+    @Styles.Render("~/Content/bootstrap-datepicker")
+    @Scripts.Render("~/bundles/bootstrap-datepicker")
+    @Scripts.Render("~/bundles/my-bootstrap-export")
+    <script>
+
+        window.onload = function () {
+            $('#sidebar').toggleClass('active');
+        };
+
+        // 登録 -> 一覧 明細表示
+        addOnload(function () {
+            if ($('input[name="Serch.SearchFlg"]').val() == 1)
+            {
+                TableBootstrapTableRefresh();
+            }
+        }); 
+
+        // 検索
+        $('#search').click(function () {
+
+            var SykymdFrom = $('input[name="Serch.SykymdFrom"]').val();
+            var SykymdTo = $('input[name="Serch.SykymdTo"]').val();
+            if (SykymdFrom != "" && SykymdTo != "") {
+                if (SykymdFrom > SykymdTo) {
+                    document.getElementById("error").innerHTML = "<ul><li>出荷日が不正です</li></ul>";
+                    document.getElementById("error").style.display = "";
+                    $('#ShuukaTable').bootstrapTable('removeAll');
+                    return;
+                }
+            }
+            document.getElementById("error").style.display = "none";
+
+            $('input[name="Serch.SearchFlg"]').val(1);
+            TableBootstrapTableRefresh();
+
+            //alert("test1");
+            //var status = $('input[name="Information.Sybcod"]').val();
+            //alert(status);
+
+            //if (status == null | status == "") {
+            //    alert("aaa");
+            //    $('#table').bootstrapTable('removeAll');
+            //    var tbl = document.getElementById("table");
+            //    var tr = tbl.rows[1];
+            //    var td = tr.cells[0];
+
+            //    td.innerHTML = "検索結果がありません。";
+            //}
+        });
+
+        function TableBootstrapTableRefresh() {
+
+            var $table = $('#ShuukaTable')
+            var temp = $table.css('display')
+
+            $('#ShuukaTable').bootstrapTable('removeAll');
+            var tbl = document.getElementById("ShuukaTable");
+            var tr = tbl.rows[1];
+            var td = tr.cells[0];
+            td.innerHTML = "検索中です。";
+
+            $.ajax({
+                url: '@Url.Action("Search")',
+                type: 'POST',
+                dataType: 'json',
+                data: queryParams(0),
+                contentType: 'application/json',
+            }).done(function (result) {
+                if (result.succsess == 1) {
+                    $('#ShuukaTable').bootstrapTable('load', result.data);
+                }
+                else {
+                    $('#ShuukaTable').bootstrapTable('removeAll');
+                    var tbl = document.getElementById("ShuukaTable");
+                    var tr = tbl.rows[1];
+                    var td = tr.cells[0];
+                    td.innerHTML = "検索結果がありません。";
+                }
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                //例外の場合、エラー画面に飛ばす
+                window.location.href = '/Error/Index'
+            }).always(function () {
+            });
+        }
+
+
+
+        @*function TableBootstrapTableRefresh() {
+            var $table = $('#table')
+            var temp = $table.css('display')
+            $table.bootstrapTable('refresh', { url: "@Url.Action("Search")" });
+
+            setTimeout(function () {
+                $table.css({ display: 'none' })
+                alert("test1");
+
+                setTimeout(function () {
+                    $table.css({ display: temp })
+                }, 100)
+            }, 100)
+        }*@
+
+        // 出荷場所 コードヘルプ
+        $(function () {
+            $('#ShukkabashoTable').on('click-row.bs.table', function (e, row, $element) {
+                $('.success').removeClass('success');
+                $($element).addClass('success');
+            });
+        });
+        $('#ShukkabashoSelect').on('click', function (e) {
+            var index = $('.success').attr('data-index');
+            if (index) {
+                var row = $('.success').parents('table:first').bootstrapTable('getData')[index];
+                $('input[name="Serch.Sybcod"]').val(row.@nameof(CodeHelpViewModels.ShukkabashoInformation.SybcodCh));
+            }
+        });
+        $('#shukkabashoSearch').on('click', function (e) {
+            ShukkabashoTableBootstrapTableRefresh();
+        });
+        function shukkabashoQueryParams(params) {
+            return JSON.stringify({
+                'Sybcod': $('input[name="Serch.SybcodCh"]').val(),
+                'Sybnam': $('input[name="Serch.SybnamCh"]').val()
+            });
+        }
+        function ShukkabashoTableBootstrapTableRefresh() {
+            var $table = $('#ShukkabashoTable')
+            var temp = $table.css('display')
+            $table.bootstrapTable('refresh', { url: "@Url.Action("ShukkabashoSearch", "CodeHelp")" });
+            setTimeout(function () {
+                $table.css({ display: 'none' })
+                setTimeout(function () {
+                    $table.css({ display: temp })
+                }, 100)
+            }, 100)
+        }
+
+        $('#ShukkabashoModal').on('hide.bs.modal', function () {
+            ShukkabashoTableClear();
+            $('#ShukkabashoTable').bootstrapTable('destroy').bootstrapTable();
+        });
+
+        function ShukkabashoTableClear() {
+            $('input[name="Serch.SybcodCh"]').val("");
+            $('input[name="Serch.SybnamCh"]').val("");
+            $('#ShukkabashoTable').bootstrapTable('removeAll');
+        }
+
+        $(function () {
+            // 出荷日カレンダー
+            $('.date').datepicker({
+                format: "yyyy/mm/dd",
+                language: "ja",
+                autoclose: true, //日付選択で自動的にカレンダーを閉じる
+                orientation: 'bottom left'
+            });
+        });
+
+        $(function () {
+            // 選択確認用
+            $('#ShuukaTable').on('click-row.bs.table', function (e, row, $element) {
+                $('.success').removeClass('success');
+                $($element).addClass('success');
+            });
+            // 照会
+            $('#inquiry').click(function (e) {
+                var index = $('.success').attr('data-index');
+                if (index) {
+                    var row = $('.success').parents('table:first').bootstrapTable('getData')[index];
+                    $('input[name="Information.Syukno"]').val(row.@nameof(EntryInformation.Syukno));
+                    $('input[name="Information.Cdate"]').val(row.@nameof(EntryInformation.Cdate));
+                    $('input[name="Mode"]').val("1");
+                    $('#transitions').submit();
+                }
+            });
+            // 更新
+            $('#edit').click(function (e) {
+                var index = $('.success').attr('data-index');
+                if (index) {
+                    var row = $('.success').parents('table:first').bootstrapTable('getData')[index];
+                    $('input[name="Information.Syukno"]').val(row.@nameof(EntryInformation.Syukno));
+                    $('input[name="Information.Cdate"]').val(row.@nameof(EntryInformation.Cdate));
+                    $('input[name="Mode"]').val("2");
+                    $('#transitions').submit();
+                }
+            });
+            // 削除
+            $('#delete').click(function (e) {
+                var index = $('.success').attr('data-index');
+                if (index) {
+                    var row = $('.success').parents('table:first').bootstrapTable('getData')[index];
+                    $('input[name="Information.Syukno"]').val(row.@nameof(EntryInformation.Syukno));
+                    $('input[name="Information.Cdate"]').val(row.@nameof(EntryInformation.Cdate));
+                    $('input[name="Mode"]').val("3");
+                    $('#transitions').submit();
+                }
+            });
+        });
+
+        // 複数window.onload対応
+        function addOnload(func) {
+            try {
+                window.addEventListener("load", func, false);
+            } catch (e) {
+                // IE用 
+                window.attachEvent("onload", func);
+            }
+        }
+
+        $('#ShuukaTable').bootstrapTable({
+            exportUrl: "@Url.Action("Export")",
+            exportQueryParams: exportQueryParams,
+            exportFileName: "出荷注文書手配一覧",
+            onLoadError: function (status, res) {
+                if (res.responseText) {
+                    $('.top_nav a').prop('disabled', true);
+                    $('.right_col button').prop('disabled', true);
+                    setTimeout(function () {
+                        document.write(res.responseText);
+                    }, 0);
+                }
+            },
+        });
+
+        function exportQueryParams($el, ext) {
+            var data = $el.bootstrapTable('getData');
+            var list = [];
+            @{
+                var paramList = new List<string>() {
+                    nameof(EntryInformation.Syukno),
+                    nameof(EntryInformation.Cdate)
+                };
+            }
+            $.each($el.find('[data-index]'), function (i, v) {
+            var row = data[$(v).data('index')];
+                list.push({
+                    @foreach (var param in paramList) {
+                        @: @param: row.@param,
+                    }
+                });
+            });
+            return { paramList: list ,extention: ext};
+        }
+
+        function queryParams(params) {
+            return JSON.stringify({
+                'Syukno': $('input[name="Serch.Syukno"]').val(),
+                'Sybcod': $('input[name="Serch.Sybcod"]').val(),
+                'Crtnam': $('input[name="Serch.Crtnam"]').val(),
+                'Fsykno': $('input[name="Serch.Fsykno"]').val(),
+                'SykymdFrom': $('input[name="Serch.SykymdFrom"]').val(),
+                'SykymdTo': $('input[name="Serch.SykymdTo"]').val(),
+                'Tokcod': $('input[name="Serch.Tokcod"]').val(),
+                'Toknam': $('input[name="Serch.Toknam"]').val(),
+                'Tdkcod': $('input[name="Serch.Tdkcod"]').val(),
+                'Tdknam': $('input[name="Serch.Tdknam"]').val(),
+                'Tdsnam': $('input[name="Serch.Tdsnam"]').val(),
+                'Tdbnam': $('input[name="Serch.Tdbnam"]').val(),
+                'Tdktan': $('input[name="Serch.Tdktan"]').val(),
+                'Denfn': $('input[name="Serch.Denfn"]').prop("checked"),
+                'Denfy': $('input[name="Serch.Denfy"]').prop("checked"),
+                'GroupCd': $('input[name="Serch.GroupCd"]').val()
+            });
+        }
+
+    </script>
+}

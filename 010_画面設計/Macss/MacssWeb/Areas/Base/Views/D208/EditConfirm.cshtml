@@ -1,0 +1,714 @@
+﻿@{
+    ViewBag.Title = "出荷場所更新確認";
+    ViewBag.PageMainTitle = "出荷場所更新確認";
+    ViewBag.ConfirmMessage = MacssWeb.Resources.Messages.DeleteConfirm;
+    ViewBag.ButtonText = MacssWeb.Resources.ControlText.DeleteExec;
+    ViewBag.ConfirmDialogText = MacssWeb.Resources.Messages.DeleteReconfirm;
+}
+@section Scripts {
+    <script>
+$(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#SampleList");
+            dt.configure();
+
+            //MacssDataTable（dataTables.fixedColumns.js）に表示する列が15件以上あると計算間違いで最左端列にスクロールバーが表示されるため、非表示にする
+            $('.DTFC_LeftBodyLiner').css('overflow-y', 'hidden');
+
+        });</script>
+}
+@using (Html.BeginForm("Delete", "Shipping", null, FormMethod.Post))
+{
+    <div class="alert alert-info">
+        <span>以下を更新します。よろしいですか？</span>
+    </div>
+    <div class="row justify-content-between macss-form-button-group-row">
+        <div class="col-4">
+            <a class="btn btn-secondary" href="@Url.Action("Edit")" role="button">@MacssWeb.Resources.ControlText.Back</a>
+        </div>
+    </div>
+    <div class="accordion" id="ConditionAccordion">
+        <div class="card">
+            <div class="card-header macss-search-config-collapse-header" id="headingOne">
+                <div class="mb-0">
+                    <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain" aria-expanded="true" aria-controls="ConditionMain">
+                        <div class="d-inline-block" style="color:#333"></div>
+                        <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="color: rgb(120, 188, 255);"></i>
+                        <i id="CollapseShow" class="fas fa-chevron-circle-down" aria-hidden="true" style="color: rgb(120, 188, 255); display: none;"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+                <table class="table macss-form-table2">
+                    <colgroup>
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                    </colgroup>
+                    <tbody>
+                        <!--1行サンプル
+                            <tr>
+                            <th scope="row">
+                            <label class="control-label">出荷No</label>
+                            </th>
+                            <td colspan="3">
+                            <div>
+                            <div>05260</div>
+                            </div>
+                            </td>
+                            </tr>-->                            
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">出荷場所コード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div></div>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">表示順</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div></div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">出荷場所名</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div></div>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">住所</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">拠点コード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div></div>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">利用者利用可否</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">使用不可開始日</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div></div>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">使用不可理由</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>                     
+                    </tbody>    
+                </table> 
+                <table class="table macss-form-table2">
+                    <colgroup>
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                    </colgroup>
+                    <tbody>
+                        <!--1行サンプル
+                            <tr>
+                            <th scope="row">
+                            <label class="control-label">出荷No</label>
+                            </th>
+                            <td colspan="3">
+                            <div>
+                            <div>05260</div>
+                            </div>
+                            </td>
+                            </tr>-->                                                    
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">出荷検品判断区分</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">品名編集判断区分</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>    
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">荷札日付編集判断区分</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">オリジナル出荷No必須</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">運送区分編集判断区分</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">括り出荷区分</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">出荷検品試験年月チェック有効月</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">荷送り元編集区分</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">外装検品実施有無区分</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">荷札登録エラー区分</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">出荷実績データ送信有無</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">出荷手配特記事項編集区分</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>                                                
+                    </tbody>    
+                </table>
+                <table class="table macss-form-table2">
+                    <colgroup>
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                    </colgroup>
+                    <tbody>
+                        <!--1行サンプル
+                            <tr>
+                            <th scope="row">
+                            <label class="control-label">出荷No</label>
+                            </th>
+                            <td colspan="3">
+                            <div>
+                            <div>05260</div>
+                            </div>
+                            </td>
+                            </tr>-->                            
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">東海西濃運輸伝送対象区分</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">東海西濃運輸伝送区分</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">信州名鉄運輸伝送対象区分</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">信州名鉄運輸伝送区分</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">ヤマト運輸送状発行対象区分</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">運送会社原票No発番区分</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">北陸名鉄運輸送状発行対象区分</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">基幹配送便対象区分</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">全社基幹配送便対象区分</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">荷札発行拠点チェック対象区分</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>                        
+                    </tbody>    
+                </table>                
+                <table class="table macss-form-table2">
+                    <colgroup>
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                    </colgroup>
+                    <tbody>
+                        <!--1行サンプル
+                            <tr>
+                            <th scope="row">
+                            <label class="control-label">出荷No</label>
+                            </th>
+                            <td colspan="3">
+                            <div>
+                            <div>05260</div>
+                            </div>
+                            </td>
+                            </tr>-->                            
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">データ作成区分1</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">データ作成区分2</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">データ作成区分3</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">データ作成区分4</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">データ作成区分5</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">データ作成区分6</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">データ作成区分7</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">データ作成区分8</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">処理制御区分1</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">処理制御区分2</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">処理制御区分3</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">処理制御区分4</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">処理制御区分5</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">SSE送状括り出荷場所コード</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>                        
+                    </tbody>    
+                </table>
+                <table class="table macss-form-table2">
+                    <colgroup>
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                    </colgroup>
+                    <tbody>
+                        <!--1行サンプル
+                            <tr>
+                            <th scope="row">
+                            <label class="control-label">出荷No</label>
+                            </th>
+                            <td colspan="3">
+                            <div>
+                            <div>05260</div>
+                            </div>
+                            </td>
+                            </tr>-->                            
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">出荷検品試験年月チェック区分</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">路線便運賃チェックリスト用出荷場所コード</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">FRS新部品システム倉庫コード</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">手配データ編集用出荷場所コード</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">荷札発行チェック用出荷場所コード</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">ヤマト送状用出荷場所コード</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">出荷案内書用出荷場所コード</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">出荷案内書編集用出荷場所コード</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">東海西濃送状用出荷場所コード</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">休日取得用出荷場所コード_TASS</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">休日取得用出荷場所コード_FDASS</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">TMS引渡データ編集用出荷場所コード</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">日々管理括り編集用出荷場所コード</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">検収明細用出荷場所コード</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">送状データ絞込用出荷場所コード</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">運送方法制御取得用出荷場所コード</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>                        
+                    </tbody>    
+                </table>
+                <table class="table macss-form-table2">
+                    <colgroup>
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                    </colgroup>
+                    <tbody>
+                        <!--1行サンプル
+                            <tr>
+                            <th scope="row">
+                            <label class="control-label">出荷No</label>
+                            </th>
+                            <td colspan="3">
+                            <div>
+                            <div>05260</div>
+                            </div>
+                            </td>
+                            </tr>-->                                                    
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">出荷場所名3桁略称</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">出荷場所名6桁略称</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">出荷場所名10桁略称</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">表示用出荷場所名</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">支払明細書用出荷場所名</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">全社基幹配送用出荷場所名略称</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">出荷場所地区名</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">出荷場所県名</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">全社基幹配送絞込コード</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">基幹配送出荷場所コード</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">基幹配送ファイルID</label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label"></label>
+                            </th>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>                        
+                    </tbody>    
+                </table>                
+            </div>
+        </div>
+    </div>
+}
+
+<div class="mt-4"></div>
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a class="btn btn-secondary" href="@Url.Action("Edit")" role="button">@MacssWeb.Resources.ControlText.Back</a>
+    </div>
+    <div class="col-4 text-right">
+        <a role="button" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDialog">更新</a>
+    </div>
+</div>
+<div class="modal" id="ConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                更新処理を実行します。よろしいですか？
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary macss-btn" href="@Url.Action("Index")" role="button">@MacssWeb.Resources.ControlText.Yes</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,161 @@
+﻿<html lang="ja">
+@*@model IEnumerable<Macss.Database.Entity.CargoData>*@
+
+@{
+    ViewBag.Title = "保管料荷役料";
+    ViewBag.PageMainTitle = "保管料荷役料明細書(確認用)作成確認";
+
+    ViewBag.Date = "2020年12月";
+    ViewBag.Data = "リハーサル";
+
+}
+@section Scripts {
+    <script>
+        $(function () {
+
+            var dt1 = new Macss.DataTables.MacssDataTable("#ExecConfirmList1");
+            dt1.setScrollY("600px");
+            dt1.configure();
+
+            var dt2 = new Macss.DataTables.MacssDataTable("#ExecConfirmList2");
+            dt2.setScrollY("600px");
+            dt2.configure();
+        });
+    </script>
+}
+
+<div class="alert alert-info">
+    <span>明細書(確認用)を作成します。よろしいですか？</span>
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("Exec")">戻る</a>
+    </div>
+    <div class="col-4 text-right">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDialog">作成</button>
+    </div>
+</div>
+
+@using (Html.BeginForm("Search", "Sample", null, FormMethod.Post))
+{
+
+    <div class="accordion" id="ConditionAccordion">
+        <div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+            <div class="row mr-0 mb-1">
+                <div class="col-4">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="Condition1">出力対象</span>
+                        </div>
+                        <span class="form-control">全て</span>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="Condition1">配布先区分</span>
+                        </div>
+                        <span class="form-control"></span>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="Condition1">得意先</span>
+                        </div>
+                        <span class="form-control"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row mr-0 mb-1">
+                <div class="col-4">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="Condition1">締日</span>
+                        </div>
+                        <span class="form-control">10日締</span>
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="Condition1">請求期間</span>
+                        </div>
+                        <input type="text" id="SampleDTPicker1" class="form-control" />
+                        <div class="input-group-append">
+                            <span class="input-group-text">～</span>
+                        </div>
+                        <input type="text" id="SampleDTPicker2" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="row mr-0 mb-1">
+                <div class="col-4">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="Condition1">出力内容</span>
+                        </div>
+                        <span class="form-control">明細あり</span>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="Condition1">請求作成済フラグ</span>
+                        </div>
+                        <span class="form-control">未作成</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="row mr-0 mb-1">
+    <div class="col-4">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">請求明細書出力分件数</span>
+            </div>
+            <span class="form-control">100件</span>
+        </div>
+    </div>
+</div>
+
+
+<div class="mb-4">
+</div>
+
+<div class="modal" id="ConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                明細書(確認用)を作成します。よろしいですか？
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("ExecComplete", "Cargo", null, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="UploadFileName" name="uploadFileName" value="@ViewBag.UploadFileName" />
+                    <button type="submit" class="btn btn-primary">はい</button>
+                }
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("Exec")">戻る</a>
+    </div>
+</div>

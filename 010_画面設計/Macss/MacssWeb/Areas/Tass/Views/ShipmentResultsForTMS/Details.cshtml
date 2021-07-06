@@ -1,0 +1,10 @@
+﻿@model Macss.Database.Entity.DummyShipmentResults
+
+@{
+    ViewBag.OnlyShow = true;
+    ViewBag.Title = MacssWeb.Resources.Tass.ShipmentResultsForTMSMainTitle;
+    ViewBag.PageMainTitle = MacssWeb.Resources.Tass.ShipmentResultsForTMSDetailsMainTitle;
+    ViewBag.ScreenId = "TASS-D023-02";
+}
+
+@Html.Partial("_Show", Model)

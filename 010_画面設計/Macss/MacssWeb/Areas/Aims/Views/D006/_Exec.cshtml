@@ -1,0 +1,73 @@
+﻿<div>
+    @* 対象締日 *@
+    <div class="row mr-0 mb-1">
+        <div class="col-2">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">対象締日</span>
+                </div>
+                <span class="form-control">31 日締</span>
+            </div>
+        </div>
+    </div>
+
+    @* 顧客請求期間 from to／月度 *@
+    <div class="row mr-0 mb-1">
+        <div class="col-4">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">顧客請求期間</span>
+                </div>
+                <span class="form-control">@ViewBag.Date.Year/@ViewBag.Date.Month/1</span>
+                <div class="input-group-prepend">
+                    <span class="input-group-text">～</span>
+                </div>
+                <span class="form-control">@ViewBag.Date.Year/@ViewBag.Date.Month/31</span>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">対象月度</span>
+                </div>
+                <span class="form-control">@ViewBag.Date.Year 年 @ViewBag.Date.Month 月度</span>
+            </div>
+        </div>
+    </div>
+
+    @* 社内売上期間 from to／月度 *@
+    <div class="row mr-0 mb-1">
+        <div class="col-4">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">社内売上期間</span>
+                </div>
+                <span class="form-control">@ViewBag.Date.Year/@ViewBag.Date.Month/1</span>
+                <div class="input-group-prepend">
+                    <span class="input-group-text">～</span>
+                </div>
+                <span class="form-control">@ViewBag.Date.Year/@ViewBag.Date.Month/31</span>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">対象月度</span>
+                </div>
+                <span class="form-control">@ViewBag.Date.Year 年 @ViewBag.Date.Month 月度</span>
+            </div>
+        </div>
+    </div>
+
+    @* 手番 *@
+    <div class="row mr-0 mb-1">
+        <div class="col-2">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">対象手番</span>
+                </div>
+                <span class="form-control">1</span>
+            </div>
+        </div>
+    </div>
+</div>

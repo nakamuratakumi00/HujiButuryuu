@@ -1,0 +1,152 @@
+﻿<html lang="ja">
+@functions {
+    public string GetAccept(List<string> accepts, string separator = ", ")
+    {
+        if (accepts == null || accepts.Count <= 0)
+        {
+            return String.Empty;
+        }
+
+        return String.Join(separator, accepts);
+    }
+
+    public string GetUploadFileCaption(List<string> accepts)
+    {
+        var ext = GetAccept(accepts, "、");
+
+        return String.Format("拡張子が、{0}で{1}以下のファイルを選択してください。", ext, MacssWeb.Common.Config.UploadMaxFileSizeText);
+    }
+}
+
+@Html.AntiForgeryToken()
+
+<div class="container-fluid">
+    <div>
+        <p>
+            @ViewBag.Caption
+        </p>
+    </div>
+    <div>
+        <div>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="customFile" name="postedFile" accept="@GetAccept(ViewBag.UploadFileAccept)">
+                <label class="custom-file-label" for="customFile" data-browse="参 照">ファイル選択...</label>
+            </div>
+            <small class="form-text text-muted">
+                @GetUploadFileCaption(ViewBag.UploadFileAccept)
+            </small>
+            <div id="UploadErrorMessageArea" style="display:none">
+                <span id="UploadErrorMessage" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-between macss-form-button-group-row mt-3">
+        <div class="col-4">
+            <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">戻る</a>
+        </div>
+        <div class="macss-form-button-group-row pr-0">
+            <div class="text-right">
+                <button type="button" id="UploadExec" class="btn btn-primary">@MacssWeb.Resources.ControlText.UploadConfirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+
+        var fu = new Macss.FileUpload.MacssFileUpload();
+        fu.configure();
+
+        $('#UploadExec').on('click', function () {
+
+            var form = $(this).parents('form');
+            $("#UploadErrorMessageArea").hide();
+            var accepts = [];
+
+            @foreach (var item in ViewBag.UploadFileAccept)
+            {
+                @:accepts.push("@item");
+            }
+
+            var ret = false;
+
+            ret = fu.acceptExt(accepts);
+
+            if (ret == false) {
+                $("#UploadErrorMessage").text("@MacssWeb.Resources.Validation.NotAllowedFileExtension");
+                $("#UploadErrorMessageArea").show();
+                return false;
+            }
+
+            ret = fu.withinRangeOfFileSize(@MacssWeb.Common.Config.UploadMaxFileSize);
+
+            if (ret == false) {
+                $("#UploadErrorMessage").text("@MacssWeb.Resources.Validation.OverFileSize");
+                $("#UploadErrorMessageArea").show();
+                return false;
+            }
+
+            form.submit();
+        });
+    })
+    let DownloadListTable;
+    var colDef =
+        [
+
+        ];
+    $(function () {
+        DownloadListTable = new Macss.DataTables.MacssSearchDialogTable("#DownloadList", colDef);
+        DownloadListTable.configure();
+        $('#CsvDownloadDialog').on('shown.bs.modal', function (e) {
+            //dt.configure(colDef);
+        })
+    });
+</script>
+
+<div class="modal" id="InputDateDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">照合日付入力</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table macss-form-table">
+                    <colgroup>
+                        <col class="macss-form-table-title" />
+                        <col class="macss-form-table-contents" />
+                    </colgroup>
+                    <tr>
+                        <th scope="row">
+                            <label class="control-label" for="inlineRadio2">照合日付</label>
+                        </th>
+                        <td>
+                            <div>
+                                <div class="input-group mb-0">
+                                    <input type="text" id="SampleDTPicker" class="form-control" />
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button" id="SampleCalendar"><i class="fa fa-calendar-alt"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-4">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">戻る</button>
+                    </div>
+                    <div class="col-8 text-right">
+                        <a class="btn btn-primary " href="@Url.Action("List")" role="button">確定</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

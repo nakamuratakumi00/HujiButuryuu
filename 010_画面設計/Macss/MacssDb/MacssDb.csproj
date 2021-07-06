@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FA25B8F0-AECD-4967-A188-1347E1631D70}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Macss.Database</RootNamespace>
+    <AssemblyName>MacssDb</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.11\lib\net45\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="SclAtr, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SclAtr.2.0.0\lib\net45\SclAtr.dll</HintPath>
+    </Reference>
+    <Reference Include="SclUtl, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SclUtl.2.0.0\lib\net45\SclUtl.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Entity\Common.cs" />
+    <Compile Include="Entity\DummyShipmentResults.cs" />
+    <Compile Include="Entity\DummyShipmentResultsDetail.cs" />
+    <Compile Include="Entity\DummyShippingCost.cs" />
+    <Compile Include="Entity\DummyTMSFixedData.cs" />
+    <Compile Include="Entity\DummyTMSFixedDataBilling.cs" />
+    <Compile Include="Entity\DummyTMSFixedDataPayment.cs" />
+    <Compile Include="Entity\DummyTMSFixedDataRequest.cs" />
+    <Compile Include="Entity\dummy_T_DossData.cs" />
+    <Compile Include="Entity\Dummy_T_DossDataForAll.cs" />
+    <Compile Include="Entity\Dummy_T_DossDataForKitaKanto.cs" />
+    <Compile Include="Entity\dummy_t_stock.cs" />
+    <Compile Include="Entity\m_account.cs" />
+    <Compile Include="Entity\m_account_role.cs" />
+    <Compile Include="Entity\m_calendar.cs" />
+    <Compile Include="Entity\m_control.cs" />
+    <Compile Include="Entity\m_group.cs" />
+    <Compile Include="Entity\m_hokan_bumon.cs" />
+    <Compile Include="Entity\m_hokan_jouken.cs" />
+    <Compile Include="Entity\m_hokan_keiyaku.cs" />
+    <Compile Include="Entity\m_hokan_rireki_bumon.cs" />
+    <Compile Include="Entity\m_hokan_rireki_jouken.cs" />
+    <Compile Include="Entity\m_hokan_rireki_keiyaku.cs" />
+    <Compile Include="Entity\m_hokan_rireki_seikyuusaki_change.cs" />
+    <Compile Include="Entity\m_hokan_rireki_tanka.cs" />
+    <Compile Include="Entity\m_hokan_seihin.cs" />
+    <Compile Include="Entity\m_hokan_seikyuusaki_change.cs" />
+    <Compile Include="Entity\m_hokan_tanka.cs" />
+    <Compile Include="Entity\m_kishu.cs" />
+    <Compile Include="Entity\m_menu.cs" />
+    <Compile Include="Entity\m_menu_role.cs" />
+    <Compile Include="Entity\m_role.cs" />
+    <Compile Include="Entity\m_seikyusaki.cs" />
+    <Compile Include="Entity\m_shukkabasho.cs" />
+    <Compile Include="Entity\m_torihikisaki.cs" />
+    <Compile Include="Entity\m_unsou_hinmei.cs" />
+    <Compile Include="Entity\m_unsou_hinmei_koyuu.cs" />
+    <Compile Include="Entity\m_unsou_jiscode.cs" />
+    <Compile Include="Entity\m_unsou_postalcode.cs" />
+    <Compile Include="Entity\m_unsou_shuuka_tyuumonsho_pattern.cs" />
+    <Compile Include="Entity\m_unsou_todokesaki.cs" />
+    <Compile Include="Entity\m_unsou_todokesaki_koyuu.cs" />
+    <Compile Include="Entity\m_unsou_unsouhouhou.cs" />
+    <Compile Include="Entity\m_unsou_unsoukousu.cs" />
+    <Compile Include="Entity\m_unsou_unsoukubun.cs" />
+    <Compile Include="Entity\t_hokan_denpyokensu.cs" />
+    <Compile Include="Entity\t_hokan_denpyokensu_kurikosi.cs" />
+    <Compile Include="Entity\t_hokan_matujime_kanri.cs" />
+    <Compile Include="Entity\t_hokan_nyuushuuko.cs" />
+    <Compile Include="Entity\t_hokan_nyuushuuko_kurikosi.cs" />
+    <Compile Include="Entity\t_hokan_rireki_denpyokensu.cs" />
+    <Compile Include="Entity\t_hokan_rireki_denpyokensu_kurikosi.cs" />
+    <Compile Include="Entity\t_hokan_rireki_nyuushuuko.cs" />
+    <Compile Include="Entity\t_hokan_rireki_nyuushuuko_kurikosi.cs" />
+    <Compile Include="Entity\t_hokan_rireki_seikyu.cs" />
+    <Compile Include="Entity\t_hokan_rireki_seikyu_b.cs" />
+    <Compile Include="Entity\t_hokan_rireki_seikyu_kyoten.cs" />
+    <Compile Include="Entity\t_hokan_seikyu.cs" />
+    <Compile Include="Entity\t_hokan_seikyu_b.cs" />
+    <Compile Include="Entity\t_hokan_seikyu_kyoten.cs" />
+    <Compile Include="Entity\t_log_history.cs" />
+    <Compile Include="Entity\t_password_history.cs" />
+    <Compile Include="Entity\t_unsou_rireki_shuuka_jiseki.cs" />
+    <Compile Include="Entity\t_unsou_shuukatehai.cs" />
+    <Compile Include="Entity\t_unsou_shuuka_jiseki1.cs" />
+    <Compile Include="Entity\t_unsou_shuuka_jiseki2.cs" />
+    <Compile Include="Entity\t_unsou_shuuka_tehai_all.cs" />
+    <Compile Include="Entity\t_unsou_shuuka_tyuumonsho_tehai.cs" />
+    <Compile Include="Entity\t_unsou_shuuka_tyuumonsho_tehai_k.cs" />
+    <Compile Include="Entity\t_unsou_shuuka_tyuumonsho_tehai_meisai.cs" />
+    <Compile Include="Entity\t_unsou_shuuka_tyuumonsho_tehai_mk.cs" />
+    <Compile Include="Entity\t_use_status.cs" />
+    <Compile Include="Entity\v_hokan_denpyokensu.cs" />
+    <Compile Include="Entity\v_hokan_nyuushuuko.cs" />
+    <Compile Include="Entity\v_hokan_tanka.cs" />
+    <Compile Include="Entity\v_table_lock.cs" />
+    <Compile Include="Entity\v_unsou_hinmei.cs" />
+    <Compile Include="Entity\v_unsou_shuukatehai.cs" />
+    <Compile Include="Entity\v_unsou_shuuka_tehai.cs" />
+    <Compile Include="Entity\v_unsou_todokesaki.cs" />
+    <Compile Include="Entity\w_hokan_denpyokensu.cs" />
+    <Compile Include="Entity\w_hokan_nyuushuuko.cs" />
+    <Compile Include="Entity\w_hokan_seihin.cs" />
+    <Compile Include="Entity\w_unsou_shuuka_tyuumonsho_tehai_kouho.cs" />
+    <Compile Include="Entity\w_unsou_shuuka_tyuumonsho_tehai_meisai_kouho.cs" />
+    <Compile Include="MacssDbContext.cs" />
+    <Compile Include="MacssDbContextBase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interface\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>このプロジェクトは、このコンピューター上にない NuGet パッケージを参照しています。それらのパッケージをダウンロードするには、[NuGet パッケージの復元] を使用します。詳細については、http://go.microsoft.com/fwlink/?LinkID=322105 を参照してください。見つからないファイルは {0} です。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+</Project>

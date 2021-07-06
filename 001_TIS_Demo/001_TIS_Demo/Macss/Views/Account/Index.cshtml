@@ -1,0 +1,149 @@
+﻿@using Macss.ViewModels
+@model AccountInformation
+<style>
+    h1, .h1,
+    h2, .h2,
+    h3, .h3 {
+        margin-top: 2px;
+        margin-bottom: 0px;
+    }
+</style>
+
+@{
+    ViewBag.Title = ViewBag.Title;
+}
+
+<div class="row">
+    <div class="navbar2 navbar-default">
+        <h2>@ViewBag.Title</h2>
+        <hr />
+        <p>
+            @Html.ActionLink("新規", "Details", FormMethod.Post, htmlAttributes: new { type = "submit", @class = "btn btn-default", @style = "width:50px; height:30px; padding: 0px; padding:5px; text-align: center" })
+            <input type="submit" value="編集" class="btn btn-default" style="width:50px; height:30px; padding: 0px; text-align: center" id="edit" />
+        </p>
+        <table id="table"
+               class="table"
+               data-url="@Url.Action("All")"
+               data-toggle="table"
+               data-method="POST"   
+               data-filter-control="true"
+               data-id-table="advancedTable"
+               data-show-pagination-switch="true"
+               data-page-list="[10, 25, 50, 1000]"
+               data-show-columns="true"
+               data-show-export="true"
+               @*data-export-types="['excel','csv']"*@
+               data-show-multi-sort="true"
+               data-click-to-select="true"
+               data-toolbar="#toolbar"
+               @*data-filter-show-clear="true"*@
+               data-show-search-clear-button="true"
+               data-pagination="true">
+
+            <thead>
+                <tr id="data">
+                    @Html.ThFor(model => model.AccountId, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                    @Html.ThFor(model => model.AccountName, htmlAttributes: new { data_filter_control = "input", data_sortable = "true", @class = "imeZen" })
+                    @Html.ThFor(model => model.BumonCd, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                    @Html.ThFor(model => model.BasyoCd, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                    @Html.ThFor(model => model.GroupCd, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                    @Html.ThFor(model => model.Role, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                    @Html.ThFor(model => model.DeleteFlg, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                    @Html.ThFor(model => model.RockFlg, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                    @Html.ThFor(model => model.CreateDate, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                    @Html.ThFor(model => model.UpdateDate, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+@section Scripts  {
+    @*@Html.Partial("_BootstrapFunction")
+    @Scripts.Render("~/bundles/my-bootstrap-export")*@
+
+    @Html.Partial("_BootstrapFunction")
+    @Scripts.Render("~/bundles/table-export-xlsx")
+
+    <script>
+
+        window.onload = function () {
+            $('#sidebar').toggleClass('active');
+        };
+
+        var $table = $('#table');
+
+        $(function () {
+            $table.on('click-row.bs.table', function (e, row, $element) {
+                $('.success').removeClass('success');
+                $($element).addClass('success');
+            });
+            //一覧ダブルクリック時
+            //$('#table').on('dblclick', function (e) {
+            //    var index = $('.success').attr('data-index');
+            //    var row = $('.success').parents('table:first').bootstrapTable('getData')[index];
+            //    goEdit(row);
+            //});
+            $('#edit').on('click', function (e) {
+                var index = $('.success').attr('data-index');
+                if (index) {
+                    var row = $('.success').parents('table:first').bootstrapTable('getData')[index];
+                    goEdit(row)
+                } else {
+                    alert("@String.Format(Resources.Message.CE039,"アカウント")");
+                }
+            });
+        });
+
+        function goEdit(row) {
+            window.location.href = '@Url.Action("Details")?Id=' + row.@nameof(AccountInformation.AccountId);
+        }
+
+        function exportQueryParams($el,ext) {
+            var data = $el.bootstrapTable('getData');
+            var list = [];
+            @{
+                var paramList = new List<string>() {
+                    nameof(AccountInformation.AccountId),
+                };
+            }
+            $.each($el.find('[data-index]'), function (i, v) {
+            var row = data[$(v).data('index')];
+                list.push({
+                    @foreach (var param in paramList) {
+                        @: @param: row.@param,
+                    }
+                });
+            });
+            return { paramList: list ,extention: ext};
+        }
+
+        $('#table').bootstrapTable({
+            uniqueId: 'id',
+            sortName: 'no',
+            showExport: true,
+            exportTypes: ['csv', 'excel'],
+            exportOptions: {
+                mso: {
+                    fileFormat: 'xlsx'
+                }
+            }
+        });
+
+        @*$('#table').bootstrapTable({
+
+            exportUrl: "@Url.Action("Export")",
+            exportQueryParams: exportQueryParams,
+            exportFileName: "アカウントマスタ（一覧）",
+            onLoadError: function (status, res) {
+                if (res.responseText) {
+                    $('.top_nav a').prop('disabled', true);
+                    $('.right_col button').prop('disabled', true);
+                    setTimeout(function () {
+                        document.write(res.responseText);
+                    }, 0);
+                }
+            }
+        });*@
+    </script>
+}

@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "AIMSメニュー";
+    ViewBag.PageMainTitle = "請求仕入 - AIMS";
+}
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <ul class="macss-submenu">
+                <li>
+                    @Html.ActionLink(MacssWeb.Resources.Aims.RegistrationRequestDetail, "Index", "D001")
+                </li>
+                <li>
+                    @Html.ActionLink(MacssWeb.Resources.Aims.RegistrationRequestDetailCreate, "Create", "D001")
+                </li>
+                <li>
+                    @Html.ActionLink(MacssWeb.Resources.Aims.SalesSlip, "Index", "D002")
+                </li>
+                <li>
+                    @Html.ActionLink(MacssWeb.Resources.Aims.RegistrationPurchasingDetail, "Index", "D003")
+                </li>
+                <li>
+                    @Html.ActionLink(MacssWeb.Resources.Aims.RegistrationPurchasingDetailCreate, "Create", "D003")
+                </li>
+                <li>
+                    @Html.ActionLink(MacssWeb.Resources.Aims.DetailedRecording, "Make", "D004")
+                </li>
+                <li>
+                    @Html.ActionLink(MacssWeb.Resources.Aims.SalesRecording, "RecordSales", "D004")
+                </li>
+                <li>
+                    @Html.ActionLink(MacssWeb.Resources.Aims.BusinessCostDataMake, "Make", "D005")
+                </li>
+                <li>
+                    @Html.ActionLink(MacssWeb.Resources.Aims.RequestSalesStockFixed, "Exec", "D006")
+                </li>
+                <li>
+                    @Html.ActionLink(MacssWeb.Resources.Aims.FeOrderDataMake, "Make", "D007")
+                </li>
+                <li>
+                    @Html.ActionLink(MacssWeb.Resources.Aims.FeRequestDataMake, "Make", "D008")
+                </li>
+                <li>
+                    @Html.ActionLink(MacssWeb.Resources.Aims.RequestTraditionDataMake, "Make", "D009")
+                </li>
+                <li>
+                    @Html.ActionLink(MacssWeb.Resources.Aims.EspInvoiceitemMst, "Upload01", "D011")
+                </li>
+                <li>
+                    @Html.ActionLink(MacssWeb.Resources.Aims.EspDataConvMst, "Upload02", "D011")
+                </li>
+                <li>
+                    @Html.ActionLink(MacssWeb.Resources.Aims.EspCustomerMst, "Upload03", "D011")
+                </li>
+                <li>
+                    @Html.ActionLink(MacssWeb.Resources.Aims.EspVendorMst, "Upload04", "D011")
+                </li>
+                <li>
+                    @Html.ActionLink(MacssWeb.Resources.Aims.EpsRequestDataMake, "MakeSeikyu", "D011")
+                </li>
+                <li>
+                    @Html.ActionLink(MacssWeb.Resources.Aims.EpsPurchasingDataMake, "MakeShiire", "D011")
+                </li>
+                <li>
+                    @Html.ActionLink(MacssWeb.Resources.Aims.RequestDocumentPrint, "Print", "D012")
+                </li>
+                <li>
+                    @Html.ActionLink(MacssWeb.Resources.Aims.RequestDetail, "Index", "D013")
+                </li>
+                <li>
+                    @Html.ActionLink(MacssWeb.Resources.Aims.RequestDetailPcCode, "Change", "D013")
+                </li>
+                <li>
+                    @Html.ActionLink(MacssWeb.Resources.Aims.BusinessCost, "Index", "D014")
+                </li>
+                <li>
+                    @Html.ActionLink(MacssWeb.Resources.Aims.BusinessCostPcAccountingCode, "Change", "D014")
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

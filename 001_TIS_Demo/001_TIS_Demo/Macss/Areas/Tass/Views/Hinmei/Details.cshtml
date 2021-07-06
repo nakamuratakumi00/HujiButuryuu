@@ -1,0 +1,428 @@
+﻿@using Macss.Areas.Tass.ViewModels
+@model HinmeiViewModel
+
+@section Heads {
+    <link href="/Content/details.css" rel="stylesheet" />
+}
+
+<style>
+    h1, .h1,
+    h2, .h2,
+    h3, .h3 {
+        margin-top: 2px;
+        margin-bottom: 0px;
+    }
+</style>
+
+@{
+    ViewBag.Title = ViewBag.TitleName;
+}
+
+<div class="row">
+    <div class="navbar2 navbar-default" style="padding-bottom:10px;">
+
+        <h2>@ViewBag.Title</h2>
+        <hr />
+
+        @using (Html.BeginForm("Details", "Hinmei", FormMethod.Post, htmlAttributes: new { id = "upDate" }))
+        {
+            @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+
+            @if (ViewBag.Mode != null)
+            {
+                <div class="form-group" style=" height: 0;">
+                    <div class="col-sm-10">
+                    </div>
+                    <div class="col-sm-2">
+                        <a class="btn btn-default" style="width:45px; height:30px; padding: 0px; text-align: center; padding-top: 3px;" href=@Url.Action("Index")>戻る</a>
+                    </div>
+                </div>
+            }
+
+            <div class="form-group">
+                @(ViewBag.Delflg == 1 && ViewBag.Mode != null ?
+                                @Html.ValidationSummary(true, "", new { @class = "validation-summary-success" }) :
+                                @Html.ValidationSummary(true, "", new { @id = "oputError" })
+                )
+            </div>
+
+            <div class="row">
+                @Html.LabelFor(model => model.Hincod, htmlAttributes: new { @class = "col-sm-2 control-label required-item label_large", @id = "lblHincod" })
+                <div class="col-sm-2" style="width:150px">
+                    @if (ViewBag.Mode == null)
+                    {
+                        @Html.EditorFor(model => model.Hincod, new { htmlAttributes = new { @class = "form-control", style = "ime-mode: inactive", @maxlength = "15" } })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.Hincod, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                    }
+                    @Html.ValidationMessageFor(model => model.Hincod, "", new { @class = "text-danger" })
+                </div>
+
+                @if (ViewBag.Mode == null)
+                {
+                    <div class="col-sm-3" style="width:170px">
+                        <input type="button" class="btn btn-default" id="getnumber" value="採番" style="font-size:95%; height:22px; width:50px; padding:1px 2px" /><br />
+                        <small>※自動採番を行う場合には<br />「採番」ボタンを押す</small>
+                        @Html.EditorFor(model => model.NumberingFlg, new { htmlAttributes = new { @class = "form-control", style = "display:none" } })
+                    </div>
+                }
+                else
+                {
+                    <div class="col-sm-3" style="width:170px; height:25px"></div>
+                }
+
+                @Html.LabelFor(model => model.Khincd, htmlAttributes: new { @class = "col-sm-2 control-label label_large", @id = "lblKhincd" })
+                <div class="col-sm-3" style="width:150px">
+                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                    {
+                        @Html.EditorFor(model => model.Khincd, new { htmlAttributes = new { @class = "form-control", style = "ime-mode: inactive", @maxlength = "15" } })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.Khincd, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                    }
+                    @Html.ValidationMessageFor(model => model.Khincd, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+            {
+                <div class="row" style="line-height: 2">
+                    @Html.LabelFor(model => model.Hinnam, htmlAttributes: new { @class = "col-sm-2 control-label required-item label_large", @id = "lblHinnam" })
+                    <div class="col-sm-10 text_jp_large">
+                        @Html.EditorFor(model => model.Hinnam, new { htmlAttributes = new { @class = "form-control", style = "ime-mode: active", @maxlength = "80" } })
+                        @Html.ValidationMessageFor(model => model.Hinnam, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="row" style="line-height: 3.5">
+                    @Html.LabelFor(model => model.Hinnam, htmlAttributes: new { @class = "col-sm-2 control-label required-item label_large", @id = "lblHinnam" })
+                    <div class="col-sm-10 text_jp_large">
+                        @Html.TextAreaFor(model => model.Hinnam, 2, 50, htmlAttributes: new { @class = "form-control", @disabled = "disabled", style = "ime-mode: active; overflow: hidden; cursor: auto; word-break: keep-all; height: 38px" })
+                    </div>
+                </div>
+            }
+
+            <div class="row" style="line-height: 2">
+                @Html.LabelFor(model => model.Hinnmk, htmlAttributes: new { @class = "col-sm-2 control-label required-item label_large", @id = "lblHinnmk" })
+                <div class="col-sm-10 text_jp_large">
+                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                    {
+                        @Html.EditorFor(model => model.Hinnmk, new { htmlAttributes = new { @class = "form-control", style = "ime-mode: inactive", @maxlength = "80" } })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.Hinnmk, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                    }
+                    @Html.ValidationMessageFor(model => model.Hinnmk, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row" style="line-height: 2">
+                @Html.LabelFor(model => model.Torcod, htmlAttributes: new { @class = "col-sm-2 control-label label_large", @id = "lblTorcod" })
+                <div class="col-sm-10 text_jp_large">
+                    <div valign="middle" style="display:flex">
+                        @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                        {
+                            @Html.EditorFor(model => model.Torcod, new { htmlAttributes = new { @class = "form-control", style = "width:110px; ime-mode: inactive", @maxlength = "9", onChange = "onChangeTorcod(this.value)" } })
+                            @Html.Partial("TokuisakiCodeHelp", new CodeHelpViewModels.TokuisakiViewData())
+                        }
+                        else
+                        {
+                            @Html.EditorFor(model => model.Torcod, new { htmlAttributes = new { @class = "form-control", style = "width:110px", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                        }
+                        @Html.EditorFor(model => model.Tornam, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Torcod, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row" style="line-height: 2">
+                @Html.LabelFor(model => model.Kisyua, htmlAttributes: new { @class = "col-sm-2 control-label label_large", @id = "lblKisyua" })
+                <div class="col-sm-1 text_cd_middle">
+                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                    {
+                        @Html.EditorFor(model => model.Kisyua, new { htmlAttributes = new { @class = "form-control", style = "ime-mode: inactive", @maxlength = "2" } })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.Kisyua, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                    }
+                    @Html.ValidationMessageFor(model => model.Kisyua, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row" style="line-height: 2">
+                @Html.LabelFor(model => model.Kisyub, htmlAttributes: new { @class = "col-sm-2 control-label label_large", @id = "lblKisyub" })
+                <div class="col-sm-1 text_cd_middle">
+                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                    {
+                        @Html.EditorFor(model => model.Kisyub, new { htmlAttributes = new { @class = "form-control", style = "ime-mode: inactive", @maxlength = "6" } })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.Kisyub, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                    }
+                    @Html.ValidationMessageFor(model => model.Kisyub, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row" style="line-height: 2">
+                @Html.LabelFor(model => model.Tkcod, htmlAttributes: new { @class = "col-sm-2 control-label label_large", @id = "lblTkcod" })
+                <div class="col-sm-2 text_cd_middle">
+                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                    {
+                        @Html.EditorFor(model => model.Tkcod, new { htmlAttributes = new { @class = "form-control", style = "ime-mode: inactive", @maxlength = "5" } })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.Tkcod, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                    }
+                    @Html.ValidationMessageFor(model => model.Tkcod, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row" style="line-height: 2">
+                @Html.LabelFor(model => model.Syubtu, htmlAttributes: new { @class = "col-sm-2 control-label label_large", @id = "lblSyubtu" })
+                <div class="col-sm-2 text_cd_middle">
+                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                    {
+                        @Html.EditorFor(model => model.Syubtu, new { htmlAttributes = new { @class = "form-control", style = "ime-mode: inactive", @maxlength = "2" } })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.Syubtu, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                    }
+                    @Html.ValidationMessageFor(model => model.Syubtu, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row" style="line-height: 2">
+                @Html.LabelFor(model => model.Ctlfl1, htmlAttributes: new { @class = "col-sm-2 control-label label_large", @id = "lblCtlfl1" })
+                <div class="col-sm-3 text_jp_middle">
+                    @if (ViewBag.Mode == null || ViewBag.Mode == "2")
+                    {
+                        @Html.DropDownListFor(model => model.Ctlfl1, (IEnumerable<SelectListItem>)ViewBag.SCtlfl1, new { @class = "form-control", style = "height: 22px; padding-left: 4px; border-radius: 4px;" })
+                    }
+                    else
+                    {
+                        @Html.DropDownListFor(model => model.Ctlfl1, (IEnumerable<SelectListItem>)ViewBag.SCtlfl1, new { @class = "form-control", style = "height: 22px; padding-left: 4px; border-radius: 4px;", @disabled = "@disabled" })
+                    }
+                    @Html.ValidationMessageFor(model => model.Ctlfl1, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-1" style="width: 31px"></div>
+                @Html.LabelFor(model => model.Dtmoto, htmlAttributes: new { @class = "col-sm-2 control-label label_large", @id = "lblDtmoto", @style = "margin-left:10px;" })
+                <div class="col-sm-1 text_cd_small">
+                    @Html.EditorFor(model => model.Dtmoto, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+            </div>
+
+            <div class="row" style="line-height: 2">
+                @Html.LabelFor(model => model.Crtymd, htmlAttributes: new { @class = "col-sm-2 control-label label_large" })
+                <div class="col-sm-3 text_cd_middle">
+                    @Html.EditorFor(model => model.Crtymd, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+                <div class="col-sm-1" style="width: 140px"></div>
+                @Html.LabelFor(model => model.Updymd, htmlAttributes: new { @class = "col-sm-2 control-label label_large", @id = "lblDtmoto", @style = "margin-left:10px;" })
+                <div class="col-sm-1 text_cd_middle">
+                    @Html.EditorFor(model => model.Updymd, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                </div>
+            </div>
+
+            @Html.HiddenFor(model => model.Mode)
+
+            <div class="row" style="line-height: 2; text-align: center;">
+                @if (ViewBag.Mode == null)
+                {
+                    <input type="button" style="width:50px; height:30px; padding: 0; text-align: center;" class="btn btn-default" id="btnUpdate" value="登録" />
+                }
+                @if (ViewBag.Mode == "1")
+                {
+                    <a class="btn btn-default" style="width:50px; height:30px; padding: 0; padding-top: 3px; text-align: center;" href=@Url.Action("Index")>戻る</a>
+                }
+                @if (ViewBag.Mode == "2")
+                {
+                    <input type="button" style="width:50px; height:30px; padding: 0;  text-align: center;" class="btn btn-default" id="btnUpdate" value="更新" />
+                }
+                @if (ViewBag.Mode == "3")
+                {
+                    <input type="button" style="width:50px; height:30px; padding: 0;  text-align: center;" class="btn btn-default" id="btnUpdate" value="削除" />
+                }
+            </div>
+        </div>
+        }
+    </div>
+</div>
+
+@section Scripts  {
+    @Html.Partial("_BootstrapFunction")
+    @Scripts.Render("~/bundles/table-export")
+    <script>
+
+        window.onload = function () {
+            $('#sidebar').toggleClass('active');
+        };
+
+        // 採番済み 表示切替
+        addOnload(function () {
+            if ($('input[name="NumberingFlg"]').val() == 1) {
+                $('input[name="Hincod"]').attr('readonly', true);
+                $('input[name="Hincod"]').attr('tabindex', '-1');
+                $('input[name="Hincod"]').attr('unselectable', 'on');
+                $('#getnumber').attr('disabled', true);
+                $('#getnumber').attr('tabindex', '-1');
+                $('#getnumber').attr('unselectable', 'on');
+            };
+        });
+
+        // 採番
+        $(function () {
+
+            $('#getnumber').click(function (e) {
+
+                if ($('input[name="Hincod"]').val() != "") {
+                    alert("品名コードが入力済みです。　");
+                    return;
+                }
+
+                $.ajax({
+                    url: '@Url.Action("GetHincod")',
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                }).done(function (result) {
+                    if (result.succsess == 1) {
+                        //成功したとき
+                        $('input[name="Hincod"]').val(result.Hincod);
+                        $('input[name="Hincod"]').attr('readonly', true);
+                        $('input[name="Hincod"]').attr('tabindex', '-1');
+                        $('input[name="Hincod"]').attr('unselectable', 'on');
+                        $('#getnumber').attr('disabled', true);
+                        $('#getnumber').attr('tabindex', '-1');
+                        $('#getnumber').attr('unselectable', 'on');
+                        $('input[name="NumberingFlg"]').val(1);
+                    } else {
+                        $('input[name="Hincod"]').val("");
+                        $('input[name="NumberingFlg"]').val(0);
+                    }
+                    $('input[name="Hincod"]').valid();
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    //例外の場合、エラー画面に飛ばす
+                    window.location.href = '/Error/Index'
+                }).always(function () {
+                });
+            });
+        });
+
+        // 得意先コード 変更
+        function onChangeTorcod(value) {
+            var postData = {
+                param: value
+            };
+            $.ajax({
+                url: '@Url.Action("GetTorName")',
+                type: 'POST',
+                dataType: 'json',
+                data: JSON.stringify(postData),
+                contentType: 'application/json',
+            }).done(function (result) {
+                $('input[name="Tornam"]').val(result.torNam);
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                //例外の場合、エラー画面に飛ばす
+                window.location.href = '/Error/Index'
+            }).always(function () {
+            });
+        };
+
+        // 得意先 コードヘルプ
+        $(function () {
+            $('#TokuisakiTable').on('click-row.bs.table', function (e, row, $element) {
+                $('.success').removeClass('success');
+                $($element).addClass('success');
+            });
+        });
+        $('#TokuisakiSelect').on('click', function (e) {
+            var index = $('.success').attr('data-index');
+            if (index) {
+                var row = $('.success').parents('table:first').bootstrapTable('getData')[index];
+                $('input[name="Torcod"]').val(row.@nameof(CodeHelpViewModels.TokuisakiInformation.Torcod));
+                $('input[name="Tornam"]').val(row.@nameof(CodeHelpViewModels.TokuisakiInformation.Tornam));
+            }
+        });
+        $('#TokuisakiSearch').on('click', function (e) {
+            TokuisakiTableBootstrapTableRefresh();
+        });
+        function TokuisakiQueryParams(params) {
+            return JSON.stringify({
+                'Tornmk': $('input[name="Serch.Tornmk"]').val(),
+                'Torcod': $('input[name="Serch.Torcod"]').val(),
+                'Fbtcod': $('input[name="Serch.Fbtcod"]').val(),
+                'Tornam': $('input[name="Serch.Tornam"]').val(),
+                'Buknam': $('input[name="Serch.Buknam"]').val(),
+                'Jysyo': $('input[name="Serch.Jysyo"]').val()
+            });
+        }
+        function TokuisakiTableBootstrapTableRefresh() {
+            var $table = $('#TokuisakiTable')
+            var temp = $table.css('display')
+            $table.bootstrapTable('refresh', { url: "@Url.Action("TokuisakiSearch", "CodeHelp")" });
+            setTimeout(function () {
+                $table.css({ display: 'none' })
+                setTimeout(function () {
+                    $table.css({ display: temp })
+                }, 100)
+            }, 100)
+        }
+
+        $('#TokuisakiModal').on('hide.bs.modal', function () {
+            TokuisakiTableClear();
+            $('#TokuisakiTable').bootstrapTable('destroy').bootstrapTable();
+        });
+
+        function TokuisakiTableClear() {
+            $('input[name="Serch.Tornmk"]').val("");
+            $('input[name="Serch.Torcod"]').val("");
+            $('input[name="Serch.Fbtcod"]').val("");
+            $('input[name="Serch.Tornam"]').val("");
+            $('input[name="Serch.Buknam"]').val("");
+            $('input[name="Serch.Jysyo"]').val("");
+            $('#TokuisakiTable').bootstrapTable('removeAll');
+        }
+
+        // 操作ボタン
+        $(function () {
+            $('#btnUpdate').click(function (e) {
+
+                var mode = "@ViewBag.Mode";
+                var msg = "";
+                if (mode == "") {
+                    msg = "@Resources.Message.CQ004";
+                } else if (mode == "2") {
+                    msg = "@Resources.Message.CQ005";
+                } else if (mode == "3") {
+                    msg = "@Resources.Message.CQ006";
+                }
+                if (window.confirm(msg)) {
+                    $('#upDate').submit();
+                }
+
+            });
+        });
+
+        // 複数window.onload対応
+        function addOnload(func) {
+            try {
+                window.addEventListener("load", func, false);
+            } catch (e) {
+                // IE用
+                window.attachEvent("onload", func);
+            }
+        }
+
+    </script>
+}

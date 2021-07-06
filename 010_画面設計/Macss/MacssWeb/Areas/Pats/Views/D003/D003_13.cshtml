@@ -1,0 +1,270 @@
+﻿@* 納品明細書出力 *@
+
+@Html.Partial("~/Areas/Tass/Views/Shared/Dialog/_TokuisakiCodeSearch.cshtml")
+
+@section Scripts {
+    <script>
+        $(function () {
+            new Macss.DatetimePicker.MacssDtPicker("#date1", "#Calendar1").configure();
+            new Macss.DatetimePicker.MacssDtPicker("#date2", "#Calendar2").configure();
+            new Macss.DatetimePicker.MacssDtPicker("#date3", "#Calendar3").configure();
+            new Macss.DatetimePicker.MacssDtPicker("#date4", "#Calendar4").configure();
+            new Macss.DatetimePicker.MacssDtPicker("#date5", "#Calendar5").configure();
+            new Macss.DatetimePicker.MacssDtPicker("#date6", "#Calendar6").configure();
+
+            $("#kubun").prop("disabled", true);
+            $("#tokuisaki").prop("disabled", true);
+            $("#tantousya").prop("disabled", true);
+            $("#date1").prop("disabled", true);
+            $("#date2").prop("disabled", true);
+            $("#date3").prop("disabled", true);
+            $("#date4").prop("disabled", true);
+            $("#date5").prop("disabled", true);
+            $("#date6").prop("disabled", true);
+        });
+
+        var syu = 0;
+        var kbn = 1;
+        // 種別ラジオボタン変更
+        $('[name="syubetsu"]:radio').change(function () {
+            if ($('[id=1]').prop('checked')) {
+                // 明細
+                console.log("1");
+                syu = 1;
+                if ($('[id=k1]').prop('checked')) {
+                    // 初回発行
+                    console.log("k1");
+                    kbn = 1;
+                    $("#tokuisaki").prop("disabled", false);
+                    $("#tantousya").prop("disabled", false);
+                    $("#date1").prop("disabled", false);
+                    $("#date2").prop("disabled", false);
+                    $("#date3").prop("disabled", true);
+                    $("#date4").prop("disabled", true);
+                    $("#date5").prop("disabled", true);
+                    $("#date6").prop("disabled", true);
+
+                } else if ($('[id=k2]').prop('checked')) {
+                    // 再発行
+                    console.log("k2");
+                    kbn = 2;
+                    $("#tokuisaki").prop("disabled", false);
+                    $("#tantousya").prop("disabled", false);
+                    $("#date1").prop("disabled", true);
+                    $("#date2").prop("disabled", true);
+                    $("#date3").prop("disabled", true);
+                    $("#date4").prop("disabled", true);
+                    $("#date5").prop("disabled", false);
+                    $("#date6").prop("disabled", true);
+                }
+
+            } else if ($('[id=2]').prop('checked')) {
+                // 数量合計
+                console.log("2");
+                syu = 2;
+                if ($('[id=k1]').prop('checked')) {
+                    // 初回発行
+                    console.log("k1");
+                    kbn = 1;
+                    $("#tokuisaki").prop("disabled", false);
+                    $("#tantousya").prop("disabled", false);
+                    $("#date1").prop("disabled", true);
+                    $("#date2").prop("disabled", true);
+                    $("#date3").prop("disabled", false);
+                    $("#date4").prop("disabled", false);
+                    $("#date5").prop("disabled", true);
+                    $("#date6").prop("disabled", true);
+                } else if ($('[id=k2]').prop('checked')) {
+                    // 再発行
+                    console.log("k2");
+                    kbn = 2;
+                    $("#tokuisaki").prop("disabled", false);
+                    $("#tantousya").prop("disabled", false);
+                    $("#date1").prop("disabled", true);
+                    $("#date2").prop("disabled", true);
+                    $("#date3").prop("disabled", true);
+                    $("#date4").prop("disabled", true);
+                    $("#date5").prop("disabled", false);
+                    $("#date6").prop("disabled", false);
+                }
+            }
+        });
+
+        // 確認ボタンクリック
+        $("#confirm").click(function () {
+            console.log("click");
+            location.href = "@Url.Action("D003_14")" + "?syubetsu=" + syu;
+        });
+    </script>
+}
+
+<div class="container-fluid mt-4">
+    @* 一段目 *@
+    <div class="row mr-0 mb-3">
+        @* 種別 *@
+        <div class="col-4">
+            <div class="input-group">
+                <div class="input-group-prepend w-25">
+                    <span class="input-group-text w-100">種別</span>
+                </div>
+                <div class="macss-input-group-input">
+
+                    <div class="form-check form-check-inline mr-5">
+                        <input type="radio" class="form-check-input" name="syubetsu" id="1" />
+                        <label class="form-check-label">明細</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-inline" name="syubetsu" id="2" />
+                        <label class="form-check-label">数量合計</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @* 発行区分 *@
+        <div class="col-4">
+            <div class="input-group">
+                <div class="input-group-prepend w-25">
+                    <span class="input-group-text w-100">発行区分</span>
+                </div>
+                <div class="macss-input-group-input">
+
+                    <div class="form-check form-check-inline mr-5">
+                        <input type="radio" class="form-check-input" name="kubun" id="k1" checked />
+                        <label class="form-check-label">初回発行</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-inline" name="kubun" id="k2" />
+                        <label class="form-check-label">再発行</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* 二段目 *@
+    <div class="row mr-0 mb-3">
+        @* 得意先 (共通) *@
+        <div class="col-4">
+            <div class="input-group">
+                <div class="input-group-prepend w-25">
+                    <span class="input-group-text w-100" id="">得意先コード</span>
+                </div>
+                <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="tokuisaki" name="" type="text" value="" style="border-top-left-radius:0; border-bottom-left-radius:0;">
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#TokuisakiCodeSearchDialog" style="border-top-right-radius:0.25rem; border-bottom-right-radius:0.25rem;">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="">
+                <span id="" class="align-middle">得意先名</span>
+            </div>
+        </div>
+        @* 発行用登録日 (明細選択時有効) *@
+        @* FB松本で直売り分の「検収処理」を行った日付を入力する *@
+        <div class="col-4">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend w-25">
+                    <span class="input-group-text w-100" id="">発行用登録日</span>
+                </div>
+                <input type="text" id="date1" class="form-control" />
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="Calendar1"><i class="fa fa-calendar-alt"></i></button>
+                </div>
+            </div>
+        </div>
+        @* 発行用納品日 (明細選択時有効) *@
+        @* 当日日付が初期表示される *@
+        <div class="col-4">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend w-25">
+                    <span class="input-group-text w-100" id="">発行用納品日</span>
+                </div>
+                <input type="text" id="date2" class="form-control" />
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="Calendar2"><i class="fa fa-calendar-alt"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* 三段目 *@
+    <div class="row mr-0 mb-3">
+        @* 担当者 (共通) *@
+        <div class="col-4">
+            <div class="input-group">
+                <div class="input-group-prepend w-25">
+                    <span class="input-group-text w-100" id="">担当者コード</span>
+                </div>
+                <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="tantousya" name="" type="text" value="" style="border-top-left-radius:0; border-bottom-left-radius:0;">
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="" style="border-top-right-radius:0.25rem; border-bottom-right-radius:0.25rem;">
+                        <i class="fas fa-redo"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="">
+                <span id="" class="align-middle">担当者名</span>
+            </div>
+        </div>
+        @* 発行用取引日　期間 (数量合計選択時有効) *@
+        @* 出力対象期間 *@
+        <div class="col-8">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="">発行用取引日</span>
+                </div>
+                <input type="text" id="date3" class="form-control" />
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="Calendar3"><i class="fa fa-calendar-alt"></i></button>
+                </div>
+                <div class="input-group-append">
+                    <span class="input-group-text">～</span>
+                </div>
+                <input type="text" id="date4" class="form-control" />
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="Calendar4"><i class="fa fa-calendar-alt"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* 四段目 *@
+    <div class="row mr-0 mb-3">
+        @* 再発行用納品日 （共通） *@
+        @* 再発行する「納品明細書」の「納品日」を入力する *@
+        <div class="col-4">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend w-25">
+                    <span class="input-group-text w-100" id="">再発行用納品日</span>
+                </div>
+                <input type="text" id="date5" class="form-control" />
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="Calendar5"><i class="fa fa-calendar-alt"></i></button>
+                </div>
+            </div>
+        </div>
+        @* 再発行用印刷用取引開始日 （数量合計選択時有効） *@
+        @* 再発行したい「納品明細書」の出力対象期間(自)を入力する(ノーチェック) *@
+        <div class="col-4">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text w-100" id="">再発行用印刷用取引開始日</span>
+                </div>
+                <input type="text" id="date6" class="form-control" />
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="Calendar6"><i class="fa fa-calendar-alt"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-end macss-form-button-group-row">
+    <div class="col-8">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("D003_01", "D003")">@MacssWeb.Resources.ControlText.BackToList</a>
+    </div>
+    <div class="col-4 text-right">
+        <a role="button" class="btn btn-primary" id="confirm" href=#>確認</a>
+    </div>
+</div>

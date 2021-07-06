@@ -1,0 +1,138 @@
+﻿@model IEnumerable<MacssWeb.Models.AccountMasterUpload>
+
+@{
+    ViewBag.Title = "請求仕入 - AIMS";
+    ViewBag.ScreenId = "";
+    ViewBag.PageMainTitle = "営業費用PCコード設定結果";
+}
+@section Scripts {
+    <script>
+
+        $(function () {
+            var dt = new Macss.DataTables.MacssDataTable("#MakeConfirmList", [{
+                "className": "macss-table-proc-column", "width": 0, "orderable": true, "targets": 0
+            }, {
+                "className": "macss-table-proc-column", "width": 0, "orderable": true, "targets": 1
+            }, {
+                "className": "macss-table-proc-column", "width": 0, "orderable": false, "targets": 2
+            }], 3);
+            dt.configure();
+            $('[data-toggle="popover"]').popover();
+        });
+    </script>
+
+}
+
+<div class="alert @ViewBag.AlertType">
+    <span>@ViewBag.ResultMessage</span>
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+    </div>   
+    <div class="col-4 text-right">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("Index", "Home")">@MacssWeb.Resources.ControlText.BackToSubMenu</a>
+    </div>
+</div>
+
+<div class="container-fluid mt-4">
+    <div class="form-inline">
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">処理日時</span>
+            </div>
+            <span class="form-control">YYYY/MM/DD HH:MM:SS</span>
+        </div>
+    </div>
+    <div class="form-inline">
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">対象件数</span>
+            </div>
+            <span class="form-control">@ViewBag.MakeCount</span>
+        </div>
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">変更件数</span>
+            </div>
+            <span class="form-control">@ViewBag.ChangeCount</span>
+        </div>
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">エラー件数</span>
+            </div>
+            <span class="form-control">@ViewBag.ErrorCount</span>
+        </div>
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">エラー金額</span>
+            </div>
+            <span class="form-control">999,999,999</span>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-2 mb-2">
+    <div class="col-12 text-right">
+        <div class="dropdown">
+            <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#CsvDownloadDialog">CSVダウンロード</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table id="MakeConfirmList" class="table table-striped table-hover macss-data-table">
+    <thead class="macss-data-table-header">
+        <!-- thの文字数で列の幅が決まってしまうため、必要に応じて全角スペースを入れて列の幅を調整する必要がある-->
+        <tr>
+            <th>処理区分</th>
+            <th>エラー詳細</th>
+            <th>業務コード</th>
+            <th>伝票No</th>
+            <th>伝票日付</th>
+            <th>仕入先コード</th>
+            <th>仕入先名称</th>
+            <th>原票No</th>
+            <th>課税区分</th>
+            <th>仕入金額</th>
+            <th>請求先コード</th>
+            <th>得意先コード</th>
+            <th>得意先名称</th>
+            <th>PC顧客区分コード</th>
+            <th>PC顧客区分名</th>
+            <th>設定前PCコード</th>
+            <th>設定後PCコード</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td></td>
+            <td>
+                <a tabindex="0" class="btn btn-sm btn-danger" role="button" data-toggle="popover"
+                   data-trigger="focus" title="エラー詳細"
+                   data-content="該当する取引先マスタがありません。">詳細</a>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+    </tbody>
+</table>
+
+

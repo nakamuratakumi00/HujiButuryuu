@@ -1,0 +1,297 @@
+/*
+    STYLE
+*/
+/*@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";*/
+
+
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: #fafafa;
+    width: 100%;
+    height: 100%;
+}
+
+p {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1.1em;
+    font-weight: 300;
+    line-height: 1.7em;
+    color: #999;
+}
+
+a, a:hover, a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.navbar {
+    padding: 15px 15px;
+    background: #fff;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 40px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.navbar2 {
+    padding: 0px 15px;
+    background: #fff;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 40px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-btn {
+    box-shadow: none;
+    outline: none !important;
+    border: none;
+}
+.navbar-header {
+    display: table-cell;
+}
+.navbar-collapse {
+    display: table-cell;
+    border-top: 0px;
+}
+
+.nav > li {
+    display: inline-table;
+}
+
+.line {
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px dashed #ddd;
+    margin: 40px 0;
+}
+
+/* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+.wrapper {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+}
+
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    background: #49c3e7;
+    color: #fff;
+    min-height: 100vh;
+    height: auto !important;
+    height: 100vh;
+}
+
+    #sidebar.active {
+        margin-left: -250px;
+    }
+
+    #sidebar .sidebar-header {
+        padding: 20px;
+        background: #39b3d7;
+    }
+
+    #sidebar ul.components {
+        padding: 20px 0;
+        border-bottom: 1px solid #47748b;
+    }
+
+    #sidebar ul p {
+        color: #fff;
+        padding: 10px;
+    }
+
+    #sidebar ul li a {
+        color: white;
+        padding: 10px;
+        font-size: 1.1em;
+        display: block;
+        outline: 0;
+        text-decoration: none;
+    }
+
+        #sidebar ul li a:hover {
+            color: #49c3e7;
+            background: #fff;
+            text-decoration: none;
+        }
+
+    #sidebar ul li.active > a, a[aria-expanded="true"] {
+        color: #fff;
+        background: #39b3d7;
+    }
+
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
+    content: '\e114';
+    display: block;
+    position: absolute;
+    right: 20px;
+    font-family: 'Glyphicons Halflings';
+    font-size: 0.6em;
+}
+
+a[aria-expanded="true"]::before {
+    content: '\e260';
+}
+
+
+ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: #39b3d7;
+}
+
+ul.CTAs {
+    padding: 20px;
+}
+
+    ul.CTAs a {
+        text-align: center;
+        font-size: 0.9em !important;
+        display: block;
+        border-radius: 5px;
+        margin-bottom: 5px;
+    }
+
+a.download {
+    background: #fff;
+    color: #49c3e7;
+}
+
+a.article, a.article:hover {
+    background: #39b3d7 !important;
+    color: #fff !important;
+}
+
+
+
+/* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+#content {
+    padding: 10px;
+    transition: all 0.3s;
+    width: 100%;
+    height: 100%;
+
+}
+
+/* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+
+    #sidebarCollapse span {
+        display: none;
+    }
+}
+/* ---------------------------------------------------
+    SubMenuCss
+----------------------------------------------------- */
+.SubMenu0 { /* 階層別のフォントサイズは仕様に準拠する */
+    font-size: 1.5em !important;
+}
+
+.SubMenu1 {
+    padding-left: 30px !important;
+    font-size: 1.5em !important;
+    /*font-size: 1.3em !important;*/
+    /*font-size: 1.0em !important;*/
+}
+
+.SubMenu2 {
+    padding-left: 60px !important;
+    font-size: 1.3em !important;
+    /*font-size: 0.9em !important;*/
+}
+
+.SubMenu3 {
+    padding-left: 90px !important;
+    font-size: 0.9em !important;
+}
+
+.menu-body {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    min-width: 768px;
+    overflow:auto;
+}
+
+.menu-header-adj {
+    margin-bottom: 10px;
+}
+
+.h-adj {
+    margin-top: 0px;
+}
+
+.start-up-sc {
+    background: #329fbf;
+}
+
+/* ---------------------------------------------------
+    MainMenuCss
+----------------------------------------------------- */
+.menu-frame {
+    padding: 10px;
+    border: 1px solid #333333;
+    border-radius: 10px;
+    width: 400px;
+}
+
+.MainMenu0 {
+    font-size: 1.1em !important;
+}
+
+.MainMenu1 {
+    font-size: 1.1em !important;
+}
+
+.MainMenu2 {
+    padding-left: 30px !important;
+    font-size: 1.1em !important;
+}
+
+.MainMenu3 {
+    padding-left: 60px !important;
+    font-size: 1.1em !important;
+}
+
+.MainMenuLink {
+    font-size: 1.1em !important;
+    text-decoration: underline;
+    color: #0000FF;
+}
+a.MainMenuLink:link {
+    color: #0000FF;
+    text-decoration: underline;
+}
+
+a.MainMenuLink:visited {
+    color: #000080;
+    text-decoration: underline;
+}
+
+a.MainMenuLink:hover {
+    color: #ff0000;
+    text-decoration: underline;
+}
+
+a.MainMenuLink:active {
+    color: #ff8000;
+    text-decoration: underline;
+}
+

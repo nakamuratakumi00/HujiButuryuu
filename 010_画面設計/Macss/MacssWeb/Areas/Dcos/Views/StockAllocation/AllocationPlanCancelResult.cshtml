@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewBag.Title = MacssWeb.Resources.Dcos.StockAllocationPlanCancelMainTitle;
+    ViewBag.PageMainTitle = String.Format("{0}{1}", MacssWeb.Resources.Dcos.StockAllocationPlanCancelMainTitle, "結果");
+    ViewBag.ScreenId = "DCOS-D003-13";
+}
+
+<div class="alert alert-primary">
+    <span>@ViewBag.ResultMessage</span>
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-12 text-right">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.BackToList</a>
+    </div>
+</div>
+<div class="container-fluid mt-4">
+    <div class="form-inline">
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">得意先</span>
+            </div>
+            <span class="form-control">@String.Format("{0} {1}", "71281", "サンプル商事(株)")</span>
+        </div>
+    </div>
+</div>
+<div class="container-fluid mt-2">
+    <div class="form-inline">
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">オリジナル出庫指示No</span>
+            </div>
+            <span class="form-control">123456789012345</span>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt-4">
+    <div class="form-inline">
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">計画実施済解除引当件数</span>
+            </div>
+            <span class="form-control">@ViewBag.AllocCount</span>
+        </div>
+        @*<div class="input-group mr-2 mb-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">引当不能数</span>
+                </div>
+                <span class="form-control">@ViewBag.ImpossibleAllocCount</span>
+            </div>*@
+    </div>
+</div>
+
+<div class="row mt-1 mb-1">
+    <div class="col-12 text-right">
+        <div class="dropdown">
+            <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#">一覧データダウンロード</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("_List")

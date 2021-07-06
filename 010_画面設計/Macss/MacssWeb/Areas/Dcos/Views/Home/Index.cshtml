@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "DCOSメニュー";
+    ViewBag.PageMainTitle = "保管業務 - DCOS";
+}
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <ul class="macss-submenu">
+                <li>
+                    @Html.ActionLink("一覧", "Index")
+                </li>
+                <li>
+                    @Html.ActionLink("新規作成", "Create")
+                </li>
+                <li>
+                    @Html.ActionLink("編集", "Edit", new { id = "TISAdmin" })
+                </li>
+                <li>
+                    @Html.ActionLink("削除", "DeleteConfirm", new { id = "TISAdmin" })
+                </li>
+                <li>
+                    @Html.ActionLink(MacssWeb.Resources.Dcos.StockAllocationMainTitle, "Index", "StockAllocation")
+                </li>
+                <li>
+                    @Html.ActionLink(MacssWeb.Resources.Dcos.StockMainTitle, "Index", "Stock")
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

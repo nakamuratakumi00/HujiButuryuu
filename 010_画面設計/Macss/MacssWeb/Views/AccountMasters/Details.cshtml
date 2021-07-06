@@ -1,0 +1,154 @@
+﻿@model Macss.Database.Entity.AccountMaster
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AccountMaster</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.account_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.account_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.account_name_kana)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.account_name_kana)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.account_password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.account_password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.group_cd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.group_cd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.login_count)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.login_count)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.login_failure_count)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.login_failure_count)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.last_login_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.last_login_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.delete_flg)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.delete_flg)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.create_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.create_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.create_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.create_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.update_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.update_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.update_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.update_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bumon_cd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bumon_cd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.basyo_cd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.basyo_cd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.account_password_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.account_password_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sdek12)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sdek12)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ctlfl1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ctlfl1)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.account_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

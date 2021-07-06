@@ -1,0 +1,248 @@
+﻿@* 在庫詳細確認 *@
+
+@section Scripts {
+    <script>
+        $(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#D004_02List");
+            dt.configure();
+
+            //MacssDataTable（dataTables.fixedColumns.js）に表示する列が15件以上あると計算間違いで最左端列にスクロールバーが表示されるため、非表示にする
+            $('.DTFC_LeftBodyLiner').css('overflow-y', 'hidden');
+
+        });</script>
+}
+
+@* ボタン類 *@
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a class="btn btn-secondary" href="@Url.Action("D004_01")" role="button">@MacssWeb.Resources.ControlText.Back</a>
+    </div>
+    <div class="col-4 text-right">
+    </div>
+</div>
+
+@* 共通項目 *@
+<div class="accordion" id="ConditionAccordion">
+    <div class="card">
+        <div class="card-header macss-search-config-collapse-header" id="headingOne">
+            <div class="mb-0">
+                <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain" aria-expanded="true" aria-controls="ConditionMain">
+                    <div class="d-inline-block" style="color:#333"></div>
+                    <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="color: rgb(120, 188, 255);"></i>
+                    <i id="CollapseShow" class="fas fa-chevron-circle-down" aria-hidden="true" style="color: rgb(120, 188, 255); display: none;"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+            <table class="table macss-form-table2">
+                <colgroup>
+                    <col class="macss-form-table-title2">
+                    <col class="macss-form-table-contents2">
+                </colgroup>
+
+                @* 取引日 *@
+                <tr>
+                    <th scope="row">
+                        取引日
+                    </th>
+                    <td>
+                        YYYY/MM/DD　～　YYYY/MM/DD
+                    </td>
+                </tr>
+                @* 管理倉庫 *@
+                <tr>
+                    <th scope="row">
+                        管理倉庫
+                    </th>
+                    <td>
+                        12 １２３４５６７８９０１２３４５
+                    </td>
+                </tr>
+                @* 品名コード *@
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">品名</label>
+                    </th>
+                    <td>
+                        123456789012345 １２３４５６７８９０１２３４５６７８９０
+                    </td>
+                </tr>
+                @* 規格・寸法 *@
+                <tr>
+                    <th scope="row">
+                        規格・寸法
+                    </th>
+                    <td>
+                        １２３４５６７８９０１２３４５６７８９０
+                    </td>
+                </tr>
+                @* 在庫管理クラス *@
+                <tr>
+                    <th scope="row">
+                        <label class="control-label" for="">在庫管理クラス</label>
+                    </th>
+                    <td>
+                        A
+                    </td>
+                </tr>
+                @* 最新入庫日 *@
+                <tr>
+                    <th scope="row">
+                        <label class="control-label" for="">最新入庫日</label>
+                    </th>
+                    <td>
+                        YYYY/MM/DD
+                    </td>
+                </tr>
+                @* 最新出庫日 *@
+                <tr>
+                    <th scope="row">
+                        <label class="control-label" for="">最新出庫日</label>
+                    </th>
+                    <td>
+                        YYYY/MM/DD
+                    </td>
+                </tr>
+                @* 最新発注日 *@
+                <tr>
+                    <th scope="row">
+                        <label class="control-label" for="">最新発注日</label>
+                    </th>
+                    <td>
+                        YYYY/MM/DD
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+@* 当月累計（月初～当日の累計） *@
+<div class="accordion" id="SumAccordion">
+    <div class="card">
+        <div class="card-header macss-search-config-collapse-header" id="headingOne">
+            <div class="mb-0">
+                <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#Sum" aria-expanded="true" aria-controls="Sum">
+                    <div class="d-inline-block" style="color:#333">当月累計（月初～当日の累計）</div>
+                    <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="color: rgb(120, 188, 255);"></i>
+                    <i id="CollapseShow" class="fas fa-chevron-circle-down" aria-hidden="true" style="color: rgb(120, 188, 255); display: none;"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="Sum" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#SumAccordion">
+            <table class="table macss-form-table2">
+                <colgroup>
+                    <col class="macss-form-table-title2">
+                    <col class="macss-form-table-contents2">
+                </colgroup>
+                @* 前月在庫 *@
+                <tr>
+                    <th scope="row">
+                        <label class="control-label" for="">前月在庫</label>
+                    </th>
+                    <td>
+                        123,456,789
+                    </td>
+                </tr>
+                @* 入庫数量 *@
+                <tr>
+                    <th scope="row">
+                        <label class="control-label" for="">入庫数量</label>
+                    </th>
+                    <td>
+                        123,456,789
+                    </td>
+                </tr>
+                @* 出庫数量 *@
+                <tr>
+                    <th scope="row">
+                        <label class="control-label" for="">出庫数量</label>
+                    </th>
+                    <td>
+                        123,456,789
+                    </td>
+                </tr>
+                @* 当月残数 *@
+                <tr>
+                    <th scope="row">
+                        <label class="control-label" for="">当月残数</label>
+                    </th>
+                    <td>
+                        123,456,789
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+@* ボタン類 *@
+<div class="row mt-3 mb-4">
+</div>
+
+@* 明細一覧 *@
+<table id="D004_02List" class="table table-striped table-hover macss-data-table" style="width:100%">
+    <thead class="macss-data-table-header">
+        <!-- thの文字数で列の幅が決まってしまうため、必要に応じて全角スペースを入れて列の幅を調整する必要がある-->
+        <tr>
+            <th>
+                取引日
+            </th>
+            <th>
+                データNo
+            </th>
+            <th>
+                取引区分
+            </th>
+            <th>
+                入庫
+            </th>
+            <th>
+                出庫
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                YYYY/MM/DD
+            </td>
+            <td>
+                1234567890
+            </td>
+            <td>
+                仕入
+            </td>
+            <td>
+                60
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                YYYY/MM/DD
+            </td>
+            <td>
+                1234567890
+            </td>
+            <td>
+                出庫
+            </td>
+            <td></td>
+            <td>60</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="mt-4"></div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a class="btn btn-secondary" href="@Url.Action("D004_01")" role="button">@MacssWeb.Resources.ControlText.Back</a>
+    </div>
+    <div class="col-4 text-right">
+    </div>
+</div>

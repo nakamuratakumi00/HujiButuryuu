@@ -1,0 +1,164 @@
+﻿@Html.AntiForgeryToken()
+
+@section Scripts {
+    <script>
+        $(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#SampleList");
+            dt.configure();
+
+            //MacssDataTable（dataTables.fixedColumns.js）に表示する列が15件以上あると計算間違いで最左端列にスクロールバーが表示されるため、非表示にする
+            $('.DTFC_LeftBodyLiner').css('overflow-y', 'hidden');
+
+        });
+    </script>
+}
+
+@if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+{
+    <div class="alert alert-info">
+        <span>@ViewBag.ConfirmMessage</span>
+    </div>
+}
+
+<div class="row justify-content-between macss-form-button-group-row">
+    @if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+    {
+        <div class="col-4">
+            <button type="submit" class="btn btn-secondary" name="cmdBtmBack" value="@((int)MacssWeb.Common.ButtonValues.Back)">@MacssWeb.Resources.ControlText.Back</button>
+        </div>
+        <div class="col-4 text-right">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDialog">@ViewBag.ButtonText</button>
+        </div>
+    }
+    else
+    {
+        <div class="col-4">
+            <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.Back</a>
+        </div>
+        <div class="col-8 text-right">
+            <a role="button" class="btn btn-primary" href="@Url.Action("Edit", new { id = @"0173146" })">@MacssWeb.Resources.ControlText.Edit</a>
+            <a role="button" class="btn btn-primary" href="@Url.Action("Copy", new { id = @"0173146" })">@MacssWeb.Resources.ControlText.Copy</a>
+            <a role="button" class="btn btn-danger" href="@Url.Action("DeleteConfirm", new { id = @"0173146" })">@MacssWeb.Resources.ControlText.Delete</a>
+        </div>
+    }
+</div>
+
+<div class="row mr-0 mb-1">
+    <div class="col-3">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="Condition1">締日</span>
+            </div>
+            <div id="targetDate" class="form-control">
+                20日
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="Condition3">出荷日</span>
+            </div>
+            <div id="targetDate" class="form-control">
+                2023/01/20
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="Condition3">対象件数</span>
+            </div>
+            <div id="targetDate" class="form-control">
+                1,234件
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mr-0 mb-1">
+    <div class="col-3">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="Condition1">締日</span>
+            </div>
+            <div id="targetDate" class="form-control">
+                25日
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="Condition3">出荷日</span>
+            </div>
+            <div id="targetDate" class="form-control">
+                2023/01/25
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="Condition3">対象件数</span>
+            </div>
+            <div id="targetDate" class="form-control">
+                1,234件
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mr-0 mb-1">
+    <div class="col-3">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="Condition1">締日</span>
+            </div>
+            <div id="targetDate" class="form-control">
+                31日
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="Condition3">出荷日</span>
+            </div>
+            <div id="targetDate" class="form-control">
+                2023/01/31
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="Condition3">対象件数</span>
+            </div>
+            <div id="targetDate" class="form-control">
+                2,345件
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="ConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @ViewBag.ConfirmDialogText
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" name="cmdBtmExec" value="@((int)MacssWeb.Common.ButtonValues.Exec)">@MacssWeb.Resources.ControlText.Yes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>

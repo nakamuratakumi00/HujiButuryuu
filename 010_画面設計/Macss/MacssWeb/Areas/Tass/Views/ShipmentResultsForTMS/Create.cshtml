@@ -1,0 +1,110 @@
+﻿@using Macss.Database.Entity
+@model Macss.Database.Entity.DummyShipmentResults
+
+@{
+    ViewBag.Title = MacssWeb.Resources.Tass.ShipmentResultsForTMSMainTitle;
+    ViewBag.PageMainTitle = MacssWeb.Resources.Tass.ShipmentResultsForTMSCreateMainTitle;
+    ViewBag.ScreenId = "TASS-D023-02";
+}
+
+@using (Html.BeginForm("CreateConfirm", null, FormMethod.Post))
+{
+
+    @Html.AntiForgeryToken()
+
+    <div>
+        @Html.ValidationSummary(false, "入力エラーがあります。", new { @class = "alert alert-danger" })
+    </div>
+
+    <div class="row justify-content-between macss-form-button-group-row">
+        <div class="col-4">
+@*            <a class="btn btn-secondary" href="@Url.Action("Index")" role="button">@MacssWeb.Resources.ControlText.BackToList</a>*@
+        </div>
+        <div class="col-4 text-right">
+            <button type="submit" class="btn btn-primary">実行確認</button>
+        </div>
+    </div>
+    <table class="table macss-form-table">
+        <colgroup>
+            <col class="macss-form-table-title" />
+            <col class="macss-form-table-contents" />
+        </colgroup>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.CreateType, htmlAttributes: new { @class = "control-label required" })
+            </th>
+            <td>
+                <div class="row">
+                    <div class="col-2">
+                        <label>
+                            @Html.RadioButtonFor(
+                              model => model.CreateType,
+                              DummyShipmentResults.CreateTypes.All, new { @checked = "checked" }
+                            )
+                            全て
+                        </label>
+                    </div>
+                    <div class="col-2">
+                        <label>
+                            @Html.RadioButtonFor(
+                              model => model.CreateType,
+                              DummyShipmentResults.CreateTypes.ExistChargeList
+                            )
+                            TMS連携
+                        </label>
+                    </div>
+                    <div class="col-2">
+                        <label>
+                            @Html.RadioButtonFor(
+                              model => model.CreateType,
+                              DummyShipmentResults.CreateTypes.NoExistChargeList
+                            )
+                            Access連携
+                        </label>
+                    </div>
+                </div>
+                @Html.HiddenFor(model => model.CreateType)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                作成期間
+            </th>
+            <td>
+                <div class="row">
+                    <div class="col-4">
+                        <label>
+                            2021/04/01　～　2021/04/30
+                        </label>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    @*<div class="row justify-content-between macss-form-button-group-row">
+            <div class="col-4">
+                <a class="btn btn-secondary" href="@Url.Action("Index")" role="button">@MacssWeb.Resources.ControlText.BackToList</a>
+            </div>
+            <div class="col-4 text-right">
+                <button type="submit" class="btn btn-primary">実行確認</button>
+            </div>
+        </div>*@
+
+    <script>
+        function setDepartmentCode(code, value) {
+            $("#bumon_cd").val(code);
+            $("#DepartmentName").text(value);
+        }
+        $(function () {
+            var createDatePicker = new Macss.DatetimePicker.MacssDtPicker("#OutYMD", "#OutYMDCalendar");
+            createDatePicker.configure();
+
+        });
+    </script>
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,97 @@
+﻿@model IEnumerable<MacssWeb.Models.AccountMasterUpload>
+@{
+    ViewBag.Title = "棚番マスターメンテナンス（一括）取込結果";
+    ViewBag.PageMainTitle = "棚番マスターメンテナンス（一括）取込結果";
+}
+@section Scripts {
+    <script>$(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#UploadConfirmList");
+            dt.setScrollY("600px");
+            dt.configure();
+
+            $('[data-toggle="popover"]').popover();
+
+        });</script>
+}
+
+<div class="alert @ViewBag.AlertType">
+    <span>マスターメンテナンスを完了しましたが、以下のデータはエラーのため取込できませんでした。</span>
+</div>
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+    </div>
+    <div class="col-4 text-right">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">再アップロード</a>
+    </div>
+</div>
+<div class="container-fluid mt-4">
+    <div class="form-inline">
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">ファイル</span>
+            </div>
+            <span class="form-control">@ViewBag.UploadFileName</span>
+        </div>
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">取込件数</span>
+            </div>
+            <span class="form-control">@ViewBag.UploadedCount</span>
+        </div>
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">エラー件数</span>
+            </div>
+            <span class="form-control">@ViewBag.ErrorCount</span>
+        </div>
+    </div>
+    <div class="text-right">
+        <div class="dropdown">
+            <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#CsvDownloadDialog">CSVダウンロード</a>
+            </div>
+        </div>
+    </div>
+</div>
+<table id="UploadConfirmList" class="table table-striped table-hover macss-data-table" style="width:100%">
+    <thead class="macss-data-table-header">
+        <tr>
+            <th>
+                No
+            </th>
+            <th>
+                エラー
+            </th>
+            <th>
+                更新区分
+            </th>
+            <th>
+                倉庫コード
+            </th>
+            <th>
+                棚番
+            </th>
+            <th>
+                棚情報
+            </th>
+            <th>
+                数量
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>

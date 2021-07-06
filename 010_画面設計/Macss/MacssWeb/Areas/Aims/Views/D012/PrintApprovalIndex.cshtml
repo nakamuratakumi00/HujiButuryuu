@@ -1,0 +1,334 @@
+﻿@* 請求関連データ 承認申請 *@
+
+@model IEnumerable<Macss.Database.Entity.AccountMaster>
+
+@section Scripts {
+    <script>
+        $(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#PrintApprovalList", [], 0);
+            dt.configure();
+
+            var cond = new Macss.Collapse.ConditionsPanel("#ConditionAccordion", "#CollapseShow", "#CollapseHidden");
+            cond.setCollapseEvent();
+        });
+    </script>
+}
+
+@Html.Partial("~/Areas/Tass/Views/Shared/Dialog/_TokuisakiCodeSearch.cshtml")
+
+@* 検索設定 *@
+@using (Html.BeginForm("Search", "Sample", null, FormMethod.Post))
+{
+
+    <div class="accordion" id="ConditionAccordion">
+        <div class="card">
+            <div class="card-header macss-search-config-collapse-header" id="headingOne">
+                <div class="mb-0">
+                    <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain" aria-expanded="true" aria-controls="ConditionMain">
+                        <div class="d-inline-block" style="color:#333">検索設定</div>
+                        <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="display:none;"></i>
+                        <i id="CollapseShow" class="fas fa-chevron-circle-down" aria-hidden="true" style="display:none;"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+                <div class="row mr-0 mb-1">
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">サブシステム</span>
+                            </div>
+                            <div class="macss-input-group-input form-control-plaintext">
+                                <div class="form-check-inline mr-4">
+                                    <input class="form-check-input" type="checkbox" name="" id="" value="" checked>
+                                    <label class="form-check-label" for="">AIMS</label>
+                                </div>
+                                <div class="form-check-inline mr-4">
+                                    <input class="form-check-input" type="checkbox" name="" id="" value="" checked>
+                                    <label class="form-check-label" for="">TASS-1</label>
+                                </div>
+                                <div class="form-check-inline mr-4">
+                                    <input class="form-check-input" type="checkbox" name="" id="" value="" checked>
+                                    <label class="form-check-label" for="">TASS-2</label>
+                                </div>
+                                <div class="form-check-inline mr-4">
+                                    <input class="form-check-input" type="checkbox" name="" id="" value="" checked>
+                                    <label class="form-check-label" for="">PATS</label>
+                                </div>
+                                <div class="form-check-inline mr-4">
+                                    <input class="form-check-input" type="checkbox" name="" id="" value="" checked>
+                                    <label class="form-check-label" for="">DCOS</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="small" style="padding-left:8rem">
+                            TASS-1：運賃と運賃に関連付く包装費<br />
+                            TASS-2：個別単価の包装費
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition8">請求先コード</span>
+                            </div>
+                            <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="bumon_cd" name="bumon_cd" type="text" value="" style="border-top-left-radius:0; border-bottom-left-radius:0;">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#TokuisakiCodeSearchDialog" style="border-top-right-radius:0.25rem; border-bottom-right-radius:0.25rem;">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="">
+                            <span id="DepartmentName" class="align-middle"></span>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition8">請求No</span>
+                            </div>
+                            <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="bumon_cd" name="bumon_cd" type="text" value="" style="border-top-left-radius:0; border-bottom-left-radius:0;">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mr-0 mb-1"></div>
+                <div class="row mr-0 mb-1"></div>
+                <div class="row mr-0 mb-1"></div>
+                <div class="row mr-0 mb-1"></div>
+
+                <div class="container-fluid pt-4 pb-3 pl-0 clearfix">
+                    <div class="float-left">
+                        <button type="reset" class="btn btn-secondary btn-lg macss-btn-main">@MacssWeb.Resources.ControlText.ConditionClear</button>
+                    </div>
+                    <div class="float-right">
+                        <button type="submit" class="btn btn-primary btn-lg macss-btn-main">@MacssWeb.Resources.ControlText.Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@* ボタン類 *@
+<div class="row mt-3">
+    <div class="col-4">
+    </div>
+    <div class="col-8 text-right">
+        <div class="dropdown">
+            <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#">CSVダウンロード</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* 一覧 *@
+<table id="PrintApprovalList" class="table table-striped table-hover macss-data-table" style="width:100%">
+    <thead class="macss-data-table-header">
+        <tr>
+            <th>
+                サブシステム
+            </th>
+            <th>
+                請求No
+            </th>
+            <th>
+                請求先コード
+            </th>
+            <th>
+                得意先コード
+            </th>
+            <th>
+                得意先名
+            </th>
+            <th>
+                請求金額合計
+            </th>
+            <th>
+                消費税額
+            </th>
+            <th>
+                税抜金額
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                AIMS
+            </td>
+            <td>
+                123456-7
+            </td>
+            <td>
+                1234567
+            </td>
+            <td>
+                1234567
+            </td>
+            <td>
+                得意先Ａ
+            </td>
+            <td class="text-right">
+                11,000
+            </td>
+            <td class="text-right">
+                1,000
+            </td>
+            <td class="text-right">
+                10,000
+            </td>
+        </tr>
+        <tr>
+            <td>
+                TASS-1
+            </td>
+            <td>
+                123456-7
+            </td>
+            <td>
+                1234567
+            </td>
+            <td>
+                1234567
+            </td>
+            <td>
+                得意先Ａ
+            </td>
+            <td class="text-right">
+                11,000
+            </td>
+            <td class="text-right">
+                1,000
+            </td>
+            <td class="text-right">
+                10,000
+            </td>
+        </tr>
+        <tr>
+            <td>
+                TASS-2
+            </td>
+            <td>
+                123456-7
+            </td>
+            <td>
+                1234567
+            </td>
+            <td>
+                1234567
+            </td>
+            <td>
+                得意先Ａ
+            </td>
+            <td class="text-right">
+                11,000
+            </td>
+            <td class="text-right">
+                1,000
+            </td>
+            <td class="text-right">
+                10,000
+            </td>
+        </tr>
+        <tr>
+            <td>
+                PATS
+            </td>
+            <td>
+                123456-7
+            </td>
+            <td>
+                1234567
+            </td>
+            <td>
+                1234567
+            </td>
+            <td>
+                得意先Ａ
+            </td>
+            <td class="text-right">
+                11,000
+            </td>
+            <td class="text-right">
+                1,000
+            </td>
+            <td class="text-right">
+                10,000
+            </td>
+        </tr>
+        <tr>
+            <td>
+                DCOS
+            </td>
+            <td>
+                123456-7
+            </td>
+            <td>
+                1234567
+            </td>
+            <td>
+                1234567
+            </td>
+            <td>
+                得意先Ａ
+            </td>
+            <td class="text-right">
+                11,000
+            </td>
+            <td class="text-right">
+                1,000
+            </td>
+            <td class="text-right">
+                10,000
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+@* 戻る *@
+<div class="row justify-content-between macss-form-button-group-row mt-4">
+    <div class="col-4">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("Print")">@MacssWeb.Resources.ControlText.Back</a>
+    </div>
+    <div class="col-4 text-right">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDialog">承認申請</button>
+    </div>
+</div>
+
+@* 確認ダイアログ *@
+<div class="modal" id="ConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                請求関連データの承認申請を行います。よろしいですか？
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("Print", "D012", null, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-primary">@MacssWeb.Resources.ControlText.Yes</button>
+                }
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function setDepartmentCode(code, value) {
+        $("#bumon_cd").val(code);
+        $("#DepartmentName").text(value);
+    }
+</script>

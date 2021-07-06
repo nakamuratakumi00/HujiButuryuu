@@ -1,0 +1,389 @@
+﻿@model Macss.Database.Entity.AccountMaster
+
+@{
+    ViewBag.PageMainTitle = "登録仕入明細更新確認";
+    ViewBag.ConfirmMessage = MacssWeb.Resources.Messages.DeleteConfirm;
+    ViewBag.ButtonText = MacssWeb.Resources.ControlText.DeleteExec;
+    ViewBag.ConfirmDialogText = MacssWeb.Resources.Messages.DeleteReconfirm;
+}
+
+@section Scripts {
+    <script>
+        $(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#SampleList");
+            dt.configure();
+
+            //MacssDataTable（dataTables.fixedColumns.js）に表示する列が15件以上あると計算間違いで最左端列にスクロールバーが表示されるため、非表示にする
+            $('.DTFC_LeftBodyLiner').css('overflow-y', 'hidden');
+
+        });
+    </script>
+}
+
+@using (Html.BeginForm("Delete", "D003", null, FormMethod.Post))
+{
+
+    <div class="alert alert-info">
+        <span>以下を更新します。よろしいですか？</span>
+    </div>
+    <div class="row justify-content-between macss-form-button-group-row">
+        <div class="col-4">
+            <a class="btn btn-secondary" href="@Url.Action("Edit")" role="button">@MacssWeb.Resources.ControlText.Back</a>
+        </div>
+    </div>
+    <div class="accordion" id="ConditionAccordion">
+        <div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+            <table class="table macss-form-table2">
+                <colgroup>
+                    <col class="macss-form-table-title2">
+                    <col class="macss-form-table-contents2">
+                    <col class="macss-form-table-title2">
+                    <col class="macss-form-table-contents2">
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <th scope="row">
+                            <label class="control-label">業務名</label>
+                        </th>
+                        <td>
+                            <div>
+                                <div>01 テスト</div>
+                            </div>
+                        </td>
+                        <th scope="row">
+                            <label class="control-label">仕入パターン</label>
+                        </th>
+                        <td>
+                            <div>
+                                <div>01 テスト</div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="accordion" id="ConditionAccordion">
+        <div class="card">
+            <div class="card-header macss-search-config-collapse-header" id="headingOne">
+                <div class="mb-0">
+                    <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain" aria-expanded="true" aria-controls="ConditionMain">
+                        <div class="d-inline-block" style="color:#333"></div>
+                        <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="color: rgb(120, 188, 255);"></i>
+                        <i id="CollapseShow" class="fas fa-chevron-circle-down" aria-hidden="true" style="color: rgb(120, 188, 255); display: none;"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+                <table class="table macss-form-table2">
+                    <colgroup>
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">伝票No</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div>0123456</div>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">参照No</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div>0123456</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">年月度</label>
+                            </th>
+                            <td>
+                                <div>0123456</div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">原票No</label>
+                            </th>
+                            <td>
+                                <div>0123456</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">仕入先</label>
+                            </th>
+                            <td>
+                                <div>01 テスト</div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">社内伝票</label>
+                            </th>
+                            <td>
+                                <div>01 テスト</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">伝票日付</label>
+                            </th>
+                            <td>
+                                <div>0123456</div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">FB本社仕入先</label>
+                            </th>
+                            <td>
+                                <div>01 テスト</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">事業所</label>
+                            </th>
+                            <td>
+                                <div>01 テスト</div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">処理日</label>
+                            </th>
+                            <td>
+                                <div>0123456</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">期間(社内用)</label>
+                            </th>
+                            <td>
+                                <div>0123456</div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">伝送月度</label>
+                            </th>
+                            <td>
+                                <div>0123456</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">項目1</label>
+                            </th>
+                            <td>
+                                <div>テスト</div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">確定日(社内用)</label>
+                            </th>
+                            <td>
+                                <div>0123456</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">項目2</label>
+                            </th>
+                            <td>
+                                <div>テスト</div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">月度(社内用)</label>
+                            </th>
+                            <td>
+                                <div>0123456</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label">摘要1</label>
+                            </th>
+                            <td>
+                                <div>テスト</div>
+                            </td>
+                            <th scope="row">
+                                <label class="control-label">摘要2</label>
+                            </th>
+                            <td>
+                                <div>テスト</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="row mt-3 mb-4">
+</div>
+
+<table id="SampleList" class="table table-striped table-hover macss-data-table">
+    <thead class="macss-data-table-header">
+        <!-- thの文字数で列の幅が決まってしまうため、必要に応じて全角スペースを入れて列の幅を調整する必要がある-->
+        <tr>
+            <th>
+                編集状態
+            </th>
+            <th>
+                No
+            </th>
+            <th>
+                PCコード
+            </th>
+            <th>
+                課税区分
+            </th>
+            <th>
+                税抜内訳金額
+            </th>
+            <th>
+                勘定コード
+            </th>
+            <th>
+                勘定科目名
+            </th>
+            <th>
+                得意先コード
+            </th>
+            <th>
+                得意先名
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="white-space:nowrap;" class=" macss-table-proc-column" data-dt-row="0" data-dt-column="1">
+                <a tabindex="0" class="btn-sm" role="button" data-toggle="popover" data-trigger="focus" style="background-color:mistyrose;color:black">変更</a>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td style="white-space:nowrap;" class=" macss-table-proc-column" data-dt-row="0" data-dt-column="1">
+                <a tabindex="0" class="btn-sm" role="button" data-toggle="popover" data-trigger="focus" style="background-color:mistyrose;color:black">削除</a>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td style="white-space:nowrap;" class=" macss-table-proc-column" data-dt-row="0" data-dt-column="1">
+                <a tabindex="0" class="btn-sm" role="button" data-toggle="popover" data-trigger="focus" style="background-color:mistyrose;color:black">追加</a>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="mt-4">
+</div>
+<div class="row mr-0 mb-1">
+    <div class="col-8"></div>
+    <div class="col-3 text-right">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="Condition3">税抜金額合計</span>
+            </div>
+            <div class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div>
+        <p>【仕入伝票発行時参考情報】</p>
+    </div>
+</div>
+
+<div class="row mr-0 mb-1">
+    <div class="col-3">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="Condition3">仕入金額合計</span>
+            </div>
+            <div class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="Condition3">消費税合計</span>
+            </div>
+            <div class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="Condition3">税抜金額合計</span>
+            </div>
+            <div class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4"></div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a class="btn btn-secondary" href="@Url.Action("Edit")" role="button">@MacssWeb.Resources.ControlText.Back</a>
+    </div>
+    <div class="col-4 text-right">
+        <a role="button" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDialog">更新</a>
+    </div>
+</div>
+
+<div class="modal" id="ConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @MacssWeb.Resources.Messages.EditReconfirm
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("Index", "D003", null, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="UploadFileName" name="uploadFileName" value="@ViewBag.UploadFileName" />
+                    <button type="submit" class="btn btn-primary">@MacssWeb.Resources.ControlText.Yes</button>
+                }
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+﻿@model Macss.Database.Entity.AccountMaster
+
+@{
+    ViewBag.Title = "運送業務 - TASS";
+    ViewBag.PageMainTitle = "既定出荷手配計上確認";
+    ViewBag.ScreenId = "";
+    ViewBag.ConfirmMessage = "以下のデータの計上を行います。よろしいですか？";
+    ViewBag.ButtonText = MacssWeb.Resources.ControlText.Execute;
+    ViewBag.ConfirmDialogText = "計上処理を実行します。よろしいですか？";
+
+    ViewBag.SummConfirmExec = false;
+}
+
+@using (Html.BeginForm("Summ", "D019", null, FormMethod.Post))
+{
+    @Html.Partial("_SummShow", Model)
+}

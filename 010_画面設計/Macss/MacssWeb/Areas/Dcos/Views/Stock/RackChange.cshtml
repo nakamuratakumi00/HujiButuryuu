@@ -1,0 +1,18 @@
+﻿
+@model Macss.Database.Entity.DummyStock
+
+@{
+    ViewBag.Title = MacssWeb.Resources.Dcos.StockRachChangeMainTitle;
+    ViewBag.PageMainTitle = MacssWeb.Resources.Dcos.StockRachChangeMainTitle;
+    ViewBag.ScreenId = "DCOS-D005-03";
+}
+
+@using (Html.BeginForm("RackChangeConfirm", "Stock", null, FormMethod.Post))
+{
+    @Html.Partial("_RackChangeForm", Model)
+}
+
+
+@section Scripts {
+    @System.Web.Optimization.Scripts.Render("~/bundles/jqueryval")
+}

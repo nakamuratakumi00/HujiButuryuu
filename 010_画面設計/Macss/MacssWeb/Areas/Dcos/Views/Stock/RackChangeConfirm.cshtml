@@ -1,0 +1,16 @@
+﻿
+@model Macss.Database.Entity.DummyStock
+
+@{
+    ViewBag.Title = MacssWeb.Resources.Dcos.StockRachChangeMainTitle;
+    ViewBag.PageMainTitle = String.Format("{0}{1}", MacssWeb.Resources.Dcos.StockRachChangeMainTitle, "確認");
+    ViewBag.ScreenId = "DCOS-D005-03";
+    ViewBag.ConfirmMessage = MacssWeb.Resources.Messages.RackChengeConfirm;
+    ViewBag.ButtonText = MacssWeb.Resources.ControlText.RackChange;
+    ViewBag.ConfirmDialogText = MacssWeb.Resources.Messages.RackChengeReconfirm;
+}
+
+@using (Html.BeginForm("RackChange", "Stock", null, FormMethod.Post))
+{
+    @Html.Partial("_RackChangeShow", Model)
+}

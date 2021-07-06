@@ -1,0 +1,463 @@
+﻿@section Scripts {
+    <script>
+        $(function () {
+
+            var cond = new Macss.Collapse.ConditionsPanel("#ConditionAccordion", "#CollapseShow", "#CollapseHidden");
+            cond.setCollapseEvent();
+
+        });
+    </script>
+}
+@if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+{
+    <div class="alert alert-info">
+        <span>@ViewBag.ConfirmMessage</span>
+    </div>
+}
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="row justify-content-between macss-form-button-group-row">
+        @if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+        {
+            <div class="col-4">
+                <button type="submit" class="btn btn-secondary" name="cmdTopBack" value="@((int)MacssWeb.Common.ButtonValues.Back)">@MacssWeb.Resources.ControlText.Back</button>
+            </div>
+        }
+        else
+        {
+            <div class="col-4">
+                <a role="button" class="btn btn-secondary" href="@Url.Action("List")">@MacssWeb.Resources.ControlText.Back</a>
+            </div>
+        }
+    </div>
+</div>
+<table class="table macss-form-table2t">
+    <colgroup>
+        <col class="macss-form-table-title2t" />
+        <col class="macss-form-table-contents2t" />
+        <col class="macss-form-table-title2t" />
+        <col class="macss-form-table-contents2t" />
+    </colgroup>
+    <tr>
+        @if (ViewBag.hokan_niyaku_no == true)
+        {
+        <tr>
+            <th scope="row">
+                <label for="textBox">保管荷役No</label>
+            </th>
+            <td>
+                <div>
+                    1234567890
+                </div>
+            </td>
+            <th scope="row">
+            </th>
+            <td>
+                <div>
+                </div>
+            </td>
+        </tr>
+    }
+        <th scope="row">
+            <label for="textBox">伝票日付</label>
+        </th>
+        <td>
+            <div>
+                2021/01/19
+            </div>
+        </td>
+        <th scope="row">
+            <label for="textBox">得意先</label>
+        </th>
+        <td>
+            <div>
+                0077991 一般顧客その他
+            </div>
+        </td>
+        </tr>
+    </table>
+@using (Html.BeginForm("Search", "Sample", null, FormMethod.Post))
+{
+    for (int j = 0; j < 3; j++)
+    {
+        <div class="accordion" id="ConditionAccordion">
+            <div class="card mb-3">
+                <div class="card-header macss-search-config-collapse-header" id="headingOne">
+                    <div class="mb-0">
+                        <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain" aria-expanded="true" aria-controls="ConditionMain">
+                            <div class="d-inline-block" style="color:#333">@String.Format("枝番" + (j + 1))</div>
+                            @*<i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="display:none;"></i>
+                                <i id="CollapseShow" class="fas fa-chevron-circle-down" aria-hidden="true" style="display:none;"></i>*@
+                            <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="color:#007bff;"></i>
+                        </button>
+                        @if (ViewBag.Edit == true)
+                        {
+                            if (j == 0 || j == 2)
+                            {
+                            }
+                            else if (j == 1)
+                            {
+                                <span>　　</span>
+                                <span class="btn-sm State01" style="background-color:mistyrose;color:black">削除</span>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="row ml-3 mr-2 mb-2">
+                    <table class="table macss-form-table2">
+                        <colgroup>
+                            <col class="macss-form-table-title2" />
+                            <col class="macss-form-table-contents2" />
+                            <col class="macss-form-table-title2" />
+                            <col class="macss-form-table-contents2" />
+                        </colgroup>
+                        @if (ViewBag.is_deleted == true)
+                        {
+                            <tr>
+                                <th scope="row">
+                                    削除
+                                </th>
+                                <td></td>
+                                <th scope="row">
+                                </th>
+                                <td></td>
+                            </tr>
+                        }
+                            <tr>
+                                <th scope="row">
+                                    品名コード
+                                </th>
+                                <td>
+                                    <div>
+                                        123456789012345 ＭＬＨ８０９６Ｖ
+                                    </div>
+                                </td>
+                                <th scope="row">
+                                    品名
+                                </th>
+                                <td>
+                                    <div>
+                                        ＭＬＨ８０９６Ｖ
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    ソート文字列
+                                </th>
+                                <td>
+                                    <div>
+                                        MLH8096V
+                                    </div>
+                                </td>
+                                <th scope="row">
+                                    倉庫
+                                </th>
+                                <td>
+                                    <div>
+                                        11 庄内１Ｆ
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    集約コード
+                                </th>
+                                <td>
+                                    <div>
+                                        123456789
+                                    </div>
+                                </td>
+                                <th scope="row">
+                                    規格
+                                </th>
+                                <td>
+                                    <div>
+                                        12345678
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    単位
+                                </th>
+                                <td>
+                                    <div>
+                                        KO 個
+                                    </div>
+                                </td>
+                                <th scope="row">
+                                    <label class="control-label" for="inlineRadio2">PC部門</label>
+                                </th>
+                                <td>
+                                    1234 12345678901234567890123456789
+                                </td>
+                            </tr>
+                        </table>
+                    <table class="table macss-form-table10h">
+                        <colgroup>
+                            <col class="macss-form-table-title10h" />
+                            <col class="macss-form-table-contents10h" />
+                            <col class="macss-form-table-contents10h" />
+                            <col class="macss-form-table-contents10h" />
+                            <col class="macss-form-table-contents10h" />
+                            <col class="macss-form-table-contents10h" />
+                            <col class="macss-form-table-contents10hkazei" />
+                            <col class="macss-form-table-contents10h" />
+                            <col class="macss-form-table-contents10hgenka" />
+                            <col class="macss-form-table-contents10hkeihi" />
+                            <col class="macss-form-table-contents10h" />
+                        </colgroup>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="inlineRadio2"></label>
+                            </th>
+                            <td>
+                                <div style="text-align:center;background-color:#c8edf7">数量</div>
+                            </td>
+                            <td>
+                                <div style="text-align:center;background-color:#c8edf7">単価</div>
+                            </td>
+                            <td>
+                                <div style="text-align:center;background-color:#c8edf7">金額</div>
+                            </td>
+                            <td>
+                                <div style="text-align:center;background-color:#c8edf7">請求パターン</div>
+                            </td>
+                            <td>
+                                <div style="text-align:center;background-color:#c8edf7">明細コード</div>
+                            </td>
+                            <td>
+                                <div style="text-align:center;background-color:#c8edf7">課税区分</div>
+                            </td>
+                            <td>
+                                <div style="text-align:center;background-color:#c8edf7">区分コード</div>
+                            </td>
+                            <td>
+                                <div style="text-align:center;background-color:#c8edf7">原価区分</div>
+                            </td>
+                            <td>
+                                <div style="text-align:center;background-color:#c8edf7">経費負担No</div>
+                            </td>
+                            <td>
+                                <div style="text-align:center;background-color:#c8edf7">担当者名</div>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table macss-form-table10">
+                        <colgroup>
+                            <col class="macss-form-table-title10" />
+                            <col class="macss-form-table-contents10" />
+                            <col class="macss-form-table-contents10" />
+                            <col class="macss-form-table-contents10" />
+                            <col class="macss-form-table-contents10" />
+                            <col class="macss-form-table-contents10" />
+                            <col class="macss-form-table-contents10kazei" />
+                            <col class="macss-form-table-contents10" />
+                            <col class="macss-form-table-contents10genka" />
+                            <col class="macss-form-table-contents10keihi" />
+                            <col class="macss-form-table-contents10" />
+                        </colgroup>
+                        @for (int i = 0; i < 3; i++)
+                        {
+                            <tr>
+                                <th scope="row">
+                                    @if (i == 0)
+                                    {
+                                        <label class="control-label" for="inlineRadio2">保管料</label>
+                                    }
+                                    else if (i == 1)
+                                    {
+                                        <label class="control-label" for="inlineRadio2">荷役料</label>
+                                    }
+                                    else if (i == 2)
+                                    {
+                                        <label class="control-label" for="inlineRadio2">その他</label>
+                                    }
+                                </th>
+                                @if (ViewBag.Edit == true)
+                                {
+                                    if (j == 0 && i == 0)
+                                    {
+                                        <td bgcolor="mistyrose">
+                                            <div>
+                                                100000
+                                            </div>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <div>
+                                                1234567
+                                            </div>
+                                        </td>
+                                    }
+                                }
+                                else
+                                {
+                                    <td>
+                                        <div>
+                                            1234567
+                                        </div>
+                                    </td>
+                                }
+                                <td>
+                                    <div>
+                                        1234567.01
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        123456789
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        1234
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        1234
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        1
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        1
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        1
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        12345678901234567890
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        １２３４５
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+}
+@if (ViewBag.Create == true)
+{
+    <div class="accordion" id="ConditionAccordion">
+        <div class="card mb-3">
+            <div class="card-header macss-search-config-collapse-header" id="headingOne">
+                <div class="mb-0">
+                    <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain" aria-expanded="true" aria-controls="ConditionMain">
+                        <div class="d-inline-block" style="color:#333">スポット発番用エリア</div>
+                        <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="color:#007bff;"></i>
+                    </button>
+                    <span id="DepartmentName" class="align-middle">　</span>
+                </div>
+            </div>
+            <div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+                <div class="row ml-3 mr-2 mb-2">
+                    <table class="table macss-form-table2t">
+                        <colgroup>
+                            <col class="macss-form-table-title2t" />
+                            <col class="macss-form-table-contents2t" />
+                            <col class="macss-form-table-title2t" />
+                            <col class="macss-form-table-contents2t" />
+                        </colgroup>
+                        <tr>
+                            <th scope="row">
+                                <label class="" for="textBox">得意先名</label>
+                            </th>
+                            <td>
+                                <div>
+                                </div>
+                            </td>
+                            <th scope="row">
+                                <label class="" for="textBox">住所</label>
+                            </th>
+                            <td>
+                                <div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label for="textBox">締日</label>
+                            </th>
+                            <td>
+                                <div>
+                                </div>
+                            </td>
+                            <th scope="row">
+                            </th>
+                            <td>
+                                <div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="row justify-content-between macss-form-button-group-row">
+    @if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+    {
+        <div class="col-4">
+            <button type="submit" class="btn btn-secondary" name="cmdTopBack" value="@((int)MacssWeb.Common.ButtonValues.Back)">@MacssWeb.Resources.ControlText.Back</button>
+        </div>
+        <div class="col-4 text-right">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDialog">@ViewBag.ButtonText</button>
+        </div>
+    }
+    else
+    {
+        <div class="col-4">
+            <a role="button" class="btn btn-secondary" href="@Url.Action("List")">@MacssWeb.Resources.ControlText.Back</a>
+        </div>
+        <div class="col-4 text-right">
+            <a role="button" class="btn btn-primary" href="@Url.Action("Edit")">@MacssWeb.Resources.ControlText.Edit</a>
+            <a role="button" class="btn btn-danger" href="@Url.Action("DeleteConfirm")">@MacssWeb.Resources.ControlText.Delete</a>
+        </div>
+    }
+</div>
+<div class="modal" id="ConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @ViewBag.ConfirmDialogText
+            </div>
+            <div class="modal-footer">
+                @if (@ViewBag.ConfirmDialogText == "登録処理を実行します。よろしいですか？")
+                {
+                    <a class="btn btn-primary macss-btn" href="@Url.Action("Create")" role="button">@MacssWeb.Resources.ControlText.Yes</a>
+                }
+                else
+                {
+                    <a class="btn btn-primary macss-btn" href="@Url.Action("List")" role="button">@MacssWeb.Resources.ControlText.Yes</a>
+                }
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>

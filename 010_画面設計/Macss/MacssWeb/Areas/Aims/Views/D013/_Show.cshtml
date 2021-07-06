@@ -1,0 +1,527 @@
+﻿@Html.AntiForgeryToken()
+
+@if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+{
+    <div class="alert alert-info">
+        <span>@ViewBag.ConfirmMessage</span>
+    </div>
+}
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="row justify-content-between macss-form-button-group-row">
+        @if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+        {
+            <div class="col-4">
+                <button type="submit" class="btn btn-secondary" name="cmdTopBack" value="@((int)MacssWeb.Common.ButtonValues.Back)">@MacssWeb.Resources.ControlText.Back</button>
+            </div>
+        }
+        else
+        {
+            <div class="col-4">
+                <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.Back</a>
+            </div>
+        }
+    </div>
+</div>
+<table class="table macss-form-table">
+    <colgroup>
+        <col class="macss-form-table-title" />
+        <col class="macss-form-table-contents" />
+    </colgroup>
+    <tr>
+        <th scope="row">
+            @Html.Label("仕入先コード", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg == null || ViewBag.CreateFlg == false) && (ViewBag.CopyFlg == null || ViewBag.CopyFlg == false))
+                {
+                    <div> </div>
+                }
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("出荷No", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg == null || ViewBag.CreateFlg == false) && (ViewBag.CopyFlg == null || ViewBag.CopyFlg == false))
+                {
+                    <div> </div>
+                }
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("出荷No2", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg == null || ViewBag.CreateFlg == false) && (ViewBag.CopyFlg == null || ViewBag.CopyFlg == false))
+                {
+                    <div> </div>
+                }
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("注文番号", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg == null || ViewBag.CreateFlg == false) && (ViewBag.CopyFlg == null || ViewBag.CopyFlg == false))
+                {
+                    <div> </div>
+                }
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("注文日", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg == null || ViewBag.CreateFlg == false) && (ViewBag.CopyFlg == null || ViewBag.CopyFlg == false))
+                {
+                    <div> </div>
+                }
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("関連付No", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg == null || ViewBag.CreateFlg == false) && (ViewBag.CopyFlg == null || ViewBag.CopyFlg == false))
+                {
+                    <div> </div>
+                }
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("納期", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg == null || ViewBag.CreateFlg == false) && (ViewBag.CopyFlg == null || ViewBag.CopyFlg == false))
+                {
+                    <div> </div>
+                }
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("作業完了日", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg == null || ViewBag.CreateFlg == false) && (ViewBag.CopyFlg == null || ViewBag.CopyFlg == false))
+                {
+                    <div> </div>
+                }
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("作業コード", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg == null || ViewBag.CreateFlg == false) && (ViewBag.CopyFlg == null || ViewBag.CopyFlg == false))
+                {
+                    <div> </div>
+                }
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("作業内容", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg == null || ViewBag.CreateFlg == false) && (ViewBag.CopyFlg == null || ViewBag.CopyFlg == false))
+                {
+                    <div> </div>
+                }
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("単価コード", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg == null || ViewBag.CreateFlg == false) && (ViewBag.CopyFlg == null || ViewBag.CopyFlg == false))
+                {
+                    <div> </div>
+                }
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("単価", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg == null || ViewBag.CreateFlg == false) && (ViewBag.CopyFlg == null || ViewBag.CopyFlg == false))
+                {
+                    <div> </div>
+                }
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("数量", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg == null || ViewBag.CreateFlg == false) && (ViewBag.CopyFlg == null || ViewBag.CopyFlg == false))
+                {
+                    <div> </div>
+                }
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("仕入金額", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg == null || ViewBag.CreateFlg == false) && (ViewBag.CopyFlg == null || ViewBag.CopyFlg == false))
+                {
+                    <div> </div>
+                }
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("備考", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg == null || ViewBag.CreateFlg == false) && (ViewBag.CopyFlg == null || ViewBag.CopyFlg == false))
+                {
+                    <div> </div>
+                }
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("連絡用項目", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg == null || ViewBag.CreateFlg == false) && (ViewBag.CopyFlg == null || ViewBag.CopyFlg == false))
+                {
+                    <div> </div>
+                }
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("指定得意先コード", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg == null || ViewBag.CreateFlg == false) && (ViewBag.CopyFlg == null || ViewBag.CopyFlg == false))
+                {
+                    <div> </div>
+                }
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("FB請求金額", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg == null || ViewBag.CreateFlg == false) && (ViewBag.CopyFlg == null || ViewBag.CopyFlg == false))
+                {
+                    <div> </div>
+                }
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("物流単価区分", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg == null || ViewBag.CreateFlg == false) && (ViewBag.CopyFlg == null || ViewBag.CopyFlg == false))
+                {
+                    <div> </div>
+                }
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("単価区分", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg == null || ViewBag.CreateFlg == false) && (ViewBag.CopyFlg == null || ViewBag.CopyFlg == false))
+                {
+                    <div> </div>
+                }
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("振分区分", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg == null || ViewBag.CreateFlg == false) && (ViewBag.CopyFlg == null || ViewBag.CopyFlg == false))
+                {
+                    <div> </div>
+                }
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("PC部門コード", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg == null || ViewBag.CreateFlg == false) && (ViewBag.CopyFlg == null || ViewBag.CopyFlg == false))
+                {
+                    <div> </div>
+                }
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("PC事業区分コード", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg == null || ViewBag.CreateFlg == false) && (ViewBag.CopyFlg == null || ViewBag.CopyFlg == false))
+                {
+                    <div> </div>
+                }
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("得意先コード", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg == null || ViewBag.CreateFlg == false) && (ViewBag.CopyFlg == null || ViewBag.CopyFlg == false))
+                {
+                    <div> </div>
+                }
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("出荷場所コード", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg == null || ViewBag.CreateFlg == false) && (ViewBag.CopyFlg == null || ViewBag.CopyFlg == false))
+                {
+                    <div> </div>
+                }
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("FBレコード区分", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg == null || ViewBag.CreateFlg == false) && (ViewBag.CopyFlg == null || ViewBag.CopyFlg == false))
+                {
+                    <div> </div>
+                }
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("注文番号用担当", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg == null || ViewBag.CreateFlg == false) && (ViewBag.CopyFlg == null || ViewBag.CopyFlg == false))
+                {
+                    <div> </div>
+                }
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("NK担当", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg == null || ViewBag.CreateFlg == false) && (ViewBag.CopyFlg == null || ViewBag.CopyFlg == false))
+                {
+                    <div> </div>
+                }
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("FB担当", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg == null || ViewBag.CreateFlg == false) && (ViewBag.CopyFlg == null || ViewBag.CopyFlg == false))
+                {
+                    <div> </div>
+                }
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("確定フラグ", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg == null || ViewBag.CreateFlg == false) && (ViewBag.CopyFlg == null || ViewBag.CopyFlg == false))
+                {
+                    <div> </div>
+                }
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("エラーフラグ", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg == null || ViewBag.CreateFlg == false) && (ViewBag.CopyFlg == null || ViewBag.CopyFlg == false))
+                {
+                    <div> </div>
+                }
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.Label("削除フラグ", htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @if ((ViewBag.CreateFlg == null || ViewBag.CreateFlg == false) && (ViewBag.CopyFlg == null || ViewBag.CopyFlg == false))
+                {
+                    <div> </div>
+                }
+
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    @if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+    {
+        <div class="col-4">
+            <button type="submit" class="btn btn-secondary" name="cmdBtmBack" value="@((int)MacssWeb.Common.ButtonValues.Back)">@MacssWeb.Resources.ControlText.Back</button>
+        </div>
+        <div class="col-4 text-right">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDialog">@ViewBag.ButtonText</button>
+        </div>
+    }
+    else
+    {
+        <div class="col-4">
+            <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.Back</a>
+        </div>
+        <div class="col-8 text-right">
+            <!--@if (ViewBag.myId == null || ViewBag.myId != "0173147")
+            {
+                <a role="button" class="btn btn-primary" href="@Url.Action("Edit", new { id = @"0173146" })">@MacssWeb.Resources.ControlText.Edit</a>
+            }
+            <a role="button" class="btn btn-primary" href="@Url.Action("Copy", new { id = @"0173146" })">@MacssWeb.Resources.ControlText.Copy</a>-->
+            @if (ViewBag.myId == null || ViewBag.myId != "0173147")
+            {
+                <a role="button" class="btn btn-danger" href="@Url.Action("DeleteConfirm", new { id = @"0173146" })">@MacssWeb.Resources.ControlText.Delete</a>
+            }
+        </div>
+    }
+</div>
+
+<div class="modal" id="ConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @ViewBag.ConfirmDialogText
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" name="cmdBtmExec" value="@((int)MacssWeb.Common.ButtonValues.Exec)">@MacssWeb.Resources.ControlText.Yes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>

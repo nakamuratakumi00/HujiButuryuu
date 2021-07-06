@@ -1,0 +1,33 @@
+﻿@model Macss.Database.Entity.AccountMaster
+
+@Html.AntiForgeryToken()
+
+<!--テスト値-->
+@{ var testVal = string.Empty; }
+
+<div>
+    @Html.ValidationSummary(false, "入力エラーがあります。", new { @class = "alert alert-danger" })
+</div>
+
+<table class="table macss-form-table">
+    <colgroup>
+        <col class="macss-form-table-title" />
+        <col class="macss-form-table-contents" />
+    </colgroup>
+    <tr>
+        <th scope="row">
+            <label class="control-label ">年月</label>
+        </th>
+        <td>
+            <div>
+                <label class="control-label">@DateTime.Now.ToString(@"yyyy年MM月")</label>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-12 text-right">
+        <button type="submit" class="btn btn-primary">@MacssWeb.Resources.ControlText.Confirm</button>
+    </div>
+</div>

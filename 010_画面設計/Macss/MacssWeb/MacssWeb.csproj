@@ -1,0 +1,2337 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{78E3B814-735B-4A7E-BE90-AEEF23AAF450}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MacssWeb</RootNamespace>
+    <AssemblyName>MacssWeb</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.11\lib\net45\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.3\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.3\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=3.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=4.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.1.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.1.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.1.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=4.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.1.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook, Version=4.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.4.1.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google, Version=4.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.4.1.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount, Version=4.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.4.1.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.1.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter, Version=4.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.4.1.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SclAtr, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SclAtr.2.0.0\lib\net45\SclAtr.dll</HintPath>
+    </Reference>
+    <Reference Include="SclUtl, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SclUtl.2.0.0\lib\net45\SclUtl.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.0.0\lib\net451\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Aims\AimsAreaRegistration.cs" />
+    <Compile Include="Areas\Aims\Controllers\D001Controller.cs" />
+    <Compile Include="Areas\Aims\Controllers\D002Controller.cs" />
+    <Compile Include="Areas\Aims\Controllers\D003Controller.cs" />
+    <Compile Include="Areas\Aims\Controllers\D004Controller.cs" />
+    <Compile Include="Areas\Aims\Controllers\D005Controller.cs" />
+    <Compile Include="Areas\Aims\Controllers\D010Controller.cs" />
+    <Compile Include="Areas\Aims\Controllers\D009Controller.cs" />
+    <Compile Include="Areas\Aims\Controllers\D008Controller.cs" />
+    <Compile Include="Areas\Aims\Controllers\D007Controller.cs" />
+    <Compile Include="Areas\Aims\Controllers\D006Controller.cs" />
+    <Compile Include="Areas\Aims\Controllers\D011Controller.cs" />
+    <Compile Include="Areas\Aims\Controllers\D012Controller.cs" />
+    <Compile Include="Areas\Aims\Controllers\D013Controller.cs" />
+    <Compile Include="Areas\Aims\Controllers\D014Controller.cs" />
+    <Compile Include="Areas\Aims\Controllers\D017Controller.cs" />
+    <Compile Include="Areas\Aims\Controllers\D018Controller.cs" />
+    <Compile Include="Areas\Aims\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Aims\Controllers\InvoiceController.cs" />
+    <Compile Include="Areas\Base\BaseAreaRegistration.cs" />
+    <Compile Include="Areas\Base\Controllers\ApprovalController.cs" />
+    <Compile Include="Areas\Base\Controllers\BatchController.cs" />
+    <Compile Include="Areas\Base\Controllers\D103Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D101Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D102Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D104Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D105Controllerr.cs" />
+    <Compile Include="Areas\Base\Controllers\D106Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D201Controllerr.cs" />
+    <Compile Include="Areas\Base\Controllers\D202Controllerr.cs" />
+    <Compile Include="Areas\Base\Controllers\D203Controllerr.cs" />
+    <Compile Include="Areas\Base\Controllers\D204Controllerr.cs" />
+    <Compile Include="Areas\Base\Controllers\D205Controllerr.cs" />
+    <Compile Include="Areas\Base\Controllers\D207Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D209Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D212Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D107Controllerr.cs" />
+    <Compile Include="Areas\Base\Controllers\D206Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D208Controllerr.cs" />
+    <Compile Include="Areas\Base\Controllers\D210Controllerr.cs" />
+    <Compile Include="Areas\Base\Controllers\D211Controllerr.cs" />
+    <Compile Include="Areas\Base\Controllers\D213Controllerr.cs" />
+    <Compile Include="Areas\Base\Controllers\D214Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D215Controllerr.cs" />
+    <Compile Include="Areas\Base\Controllers\D216Controllerr.cs" />
+    <Compile Include="Areas\Base\Controllers\D217Controllerr.cs" />
+    <Compile Include="Areas\Base\Controllers\D218Controllerr.cs" />
+    <Compile Include="Areas\Base\Controllers\D302Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D305Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D304Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D303Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D301Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D310Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D311Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D309Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D312Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D314Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D315Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D316Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D317Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D318Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D313Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D308Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D307Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D419Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D421Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D422Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D423Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D425Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D424Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D420Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D418Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D417Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D416Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D415Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D414Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D413Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D412Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D411Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D410Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D409Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D408Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D407Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D406Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D405Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D404Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D403Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D402Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D401Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\D306Controller.cs" />
+    <Compile Include="Areas\Base\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Base\Controllers\ManualController.cs" />
+    <Compile Include="Areas\Base\Controllers\MasterBatchController.cs" />
+    <Compile Include="Areas\Base\Controllers\StorageController.cs" />
+    <Compile Include="Areas\Dcos\Controllers\BillingController.cs" />
+    <Compile Include="Areas\Dcos\Controllers\CargoController.cs" />
+    <Compile Include="Areas\Dcos\Controllers\CustomerController.cs" />
+    <Compile Include="Areas\Dcos\Controllers\D001Controller.cs" />
+    <Compile Include="Areas\Dcos\Controllers\D002Controller.cs" />
+    <Compile Include="Areas\Dcos\Controllers\D004Controller.cs" />
+    <Compile Include="Areas\Dcos\Controllers\D006Controller.cs" />
+    <Compile Include="Areas\Dcos\Controllers\D011Controller.cs" />
+    <Compile Include="Areas\Dcos\Controllers\MonthlyController.cs" />
+    <Compile Include="Areas\Dcos\Controllers\StockAllocationController.cs" />
+    <Compile Include="Areas\Dcos\Controllers\StockBaseController.cs" />
+    <Compile Include="Areas\Dcos\Helper\StockAllocationHelper.cs" />
+    <Compile Include="Areas\Dcos\Helper\StockHelper.cs" />
+    <Compile Include="Areas\Dcos\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Dcos\Controllers\StockController.cs" />
+    <Compile Include="Areas\Dcos\DcosAreaRegistration.cs" />
+    <Compile Include="Areas\Dcos\ViewModels\D011UpdateViewModel.cs" />
+    <Compile Include="Areas\Fdass\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Fdass\FdassAreaRegistration.cs" />
+    <Compile Include="Areas\Pats\Controllers\D001Controller.cs" />
+    <Compile Include="Areas\Pats\Controllers\D002Controller.cs" />
+    <Compile Include="Areas\Pats\Controllers\D003Controller.cs" />
+    <Compile Include="Areas\Pats\Controllers\D004Controller.cs" />
+    <Compile Include="Areas\Pats\Controllers\D005Controller.cs" />
+    <Compile Include="Areas\Pats\Controllers\D006Controller.cs" />
+    <Compile Include="Areas\Pats\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Pats\PatsAreaRegistration.cs" />
+    <Compile Include="Areas\Tass\Controllers\D001Controller.cs" />
+    <Compile Include="Areas\Tass\Controllers\D007Controller.cs" />
+    <Compile Include="Areas\Tass\Controllers\D008Controllerr.cs" />
+    <Compile Include="Areas\Tass\Controllers\D009Controller.cs" />
+    <Compile Include="Areas\Tass\Controllers\D010Controller.cs" />
+    <Compile Include="Areas\Tass\Controllers\D011Controller.cs" />
+    <Compile Include="Areas\Tass\Controllers\D012Controllerr.cs" />
+    <Compile Include="Areas\Tass\Controllers\D013Controller .cs" />
+    <Compile Include="Areas\Tass\Controllers\D014Controllerr.cs" />
+    <Compile Include="Areas\Tass\Controllers\D003Controller.cs" />
+    <Compile Include="Areas\Tass\Controllers\D015Controller.cs" />
+    <Compile Include="Areas\Tass\Controllers\D020Controller.cs" />
+    <Compile Include="Areas\Tass\Controllers\D021Controller.cs" />
+    <Compile Include="Areas\Tass\Controllers\D022Controller.cs" />
+    <Compile Include="Areas\Tass\Controllers\D029Controller.cs" />
+    <Compile Include="Areas\Tass\Controllers\D030Controller.cs" />
+    <Compile Include="Areas\Tass\Controllers\D032Controller.cs" />
+    <Compile Include="Areas\Tass\Controllers\D033Controller.cs" />
+    <Compile Include="Areas\Tass\Controllers\D026Controller.cs" />
+    <Compile Include="Areas\Tass\Controllers\D019Controller.cs" />
+    <Compile Include="Areas\Tass\Controllers\D005Controller.cs" />
+    <Compile Include="Areas\Tass\Controllers\D004Controller.cs" />
+    <Compile Include="Areas\Tass\Controllers\D018Controller.cs" />
+    <Compile Include="Areas\Tass\Controllers\D031Controller.cs" />
+    <Compile Include="Areas\Tass\Controllers\D002Controller.cs" />
+    <Compile Include="Areas\Tass\Controllers\D034Controllerr.cs" />
+    <Compile Include="Areas\Tass\Controllers\D035Controller.cs" />
+    <Compile Include="Areas\Tass\Controllers\D036Controller.cs" />
+    <Compile Include="Areas\Tass\Controllers\DossDataController.cs" />
+    <Compile Include="Areas\Tass\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Tass\Controllers\ShipmentResultsForTMSController.cs" />
+    <Compile Include="Areas\Tass\Controllers\ShippingCostForTMSController.cs" />
+    <Compile Include="Areas\Tass\Controllers\TMSFixedDataController.cs" />
+    <Compile Include="Areas\Tass\Helper\DossDataHelper.cs" />
+    <Compile Include="Areas\Tass\Helper\ShipmentResultsForTMSHelper.cs" />
+    <Compile Include="Areas\Tass\Helper\ShippingCostForTMSHelper.cs" />
+    <Compile Include="Areas\Tass\Helper\TMSFixedDataHelper.cs" />
+    <Compile Include="Areas\Tass\Models\TMSFixedDataListViewModel.cs" />
+    <Compile Include="Areas\Tass\TassAreaRegistration.cs" />
+    <Compile Include="Common\ButtonUtil.cs" />
+    <Compile Include="Common\Config.cs" />
+    <Compile Include="Common\Enums.cs" />
+    <Compile Include="Common\SelectUtil.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AccountMastersController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SampleController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012150845366_Stock.cs" />
+    <Compile Include="Migrations\202012150845366_Stock.designer.cs">
+      <DependentUpon>202012150845366_Stock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012150922129_Stock2.cs" />
+    <Compile Include="Migrations\202012150922129_Stock2.designer.cs">
+      <DependentUpon>202012150922129_Stock2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AccountMasterUpload.cs" />
+    <Compile Include="Models\Context\MacssWebAccountDbContext.cs" />
+    <Compile Include="Models\Context\MacssWebDbContext.cs" />
+    <Compile Include="Models\MacssLogin.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Aims.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Aims.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Application.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Application.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Base.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Base.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ControlText.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ControlText.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Dcos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Dcos.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Fdas.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Fdas.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Messages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Pats.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Pats.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Tass.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Tass.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Title.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Title.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Validation.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Validation.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\Account\ChangePasswordViewModel.cs" />
+    <Compile Include="ViewModels\Account\LoginViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\ImportantInformation.txt" />
+    <Content Include="App_Data\InternalInformation.txt" />
+    <Content Include="App_Data\LoginInformation.txt" />
+    <Content Include="App_Data\UptimeInformation.txt" />
+    <Content Include="Areas\Tass\Views\D005\CreateConfirm.cshtml" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\autoFill.bootstrap.css" />
+    <Content Include="Content\DataTables\css\autoFill.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\autoFill.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\autoFill.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\autoFill.dataTables.css" />
+    <Content Include="Content\DataTables\css\autoFill.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\autoFill.foundation.css" />
+    <Content Include="Content\DataTables\css\autoFill.foundation.min.css" />
+    <Content Include="Content\DataTables\css\autoFill.jqueryui.css" />
+    <Content Include="Content\DataTables\css\autoFill.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\autoFill.semanticui.css" />
+    <Content Include="Content\DataTables\css\autoFill.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\buttons.bootstrap.css" />
+    <Content Include="Content\DataTables\css\buttons.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\buttons.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\buttons.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\buttons.dataTables.css" />
+    <Content Include="Content\DataTables\css\buttons.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\buttons.foundation.css" />
+    <Content Include="Content\DataTables\css\buttons.foundation.min.css" />
+    <Content Include="Content\DataTables\css\buttons.jqueryui.css" />
+    <Content Include="Content\DataTables\css\buttons.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\buttons.semanticui.css" />
+    <Content Include="Content\DataTables\css\buttons.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\colReorder.bootstrap.css" />
+    <Content Include="Content\DataTables\css\colReorder.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\colReorder.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\colReorder.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\colReorder.dataTables.css" />
+    <Content Include="Content\DataTables\css\colReorder.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\colReorder.foundation.css" />
+    <Content Include="Content\DataTables\css\colReorder.foundation.min.css" />
+    <Content Include="Content\DataTables\css\colReorder.jqueryui.css" />
+    <Content Include="Content\DataTables\css\colReorder.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\colReorder.semanticui.css" />
+    <Content Include="Content\DataTables\css\colReorder.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.bootstrap.css" />
+    <Content Include="Content\DataTables\css\dataTables.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\dataTables.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.foundation.css" />
+    <Content Include="Content\DataTables\css\dataTables.foundation.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.jqueryui.css" />
+    <Content Include="Content\DataTables\css\dataTables.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.material.css" />
+    <Content Include="Content\DataTables\css\dataTables.material.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.semanticui.css" />
+    <Content Include="Content\DataTables\css\dataTables.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.uikit.css" />
+    <Content Include="Content\DataTables\css\dataTables.uikit.min.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.bootstrap.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.dataTables.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.foundation.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.foundation.min.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.jqueryui.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.semanticui.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.bootstrap.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.dataTables.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.foundation.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.foundation.min.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.jqueryui.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.semanticui.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\jquery.dataTables.css" />
+    <Content Include="Content\DataTables\css\jquery.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\jquery.dataTables_themeroller.css" />
+    <Content Include="Content\DataTables\css\keyTable.bootstrap.css" />
+    <Content Include="Content\DataTables\css\keyTable.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\keyTable.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\keyTable.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\keyTable.dataTables.css" />
+    <Content Include="Content\DataTables\css\keyTable.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\keyTable.foundation.css" />
+    <Content Include="Content\DataTables\css\keyTable.foundation.min.css" />
+    <Content Include="Content\DataTables\css\keyTable.jqueryui.css" />
+    <Content Include="Content\DataTables\css\keyTable.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\keyTable.semanticui.css" />
+    <Content Include="Content\DataTables\css\keyTable.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\responsive.bootstrap.css" />
+    <Content Include="Content\DataTables\css\responsive.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\responsive.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\responsive.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\responsive.dataTables.css" />
+    <Content Include="Content\DataTables\css\responsive.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\responsive.foundation.css" />
+    <Content Include="Content\DataTables\css\responsive.foundation.min.css" />
+    <Content Include="Content\DataTables\css\responsive.jqueryui.css" />
+    <Content Include="Content\DataTables\css\responsive.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\responsive.semanticui.css" />
+    <Content Include="Content\DataTables\css\responsive.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\rowGroup.bootstrap.css" />
+    <Content Include="Content\DataTables\css\rowGroup.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\rowGroup.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\rowGroup.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\rowGroup.dataTables.css" />
+    <Content Include="Content\DataTables\css\rowGroup.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\rowGroup.foundation.css" />
+    <Content Include="Content\DataTables\css\rowGroup.foundation.min.css" />
+    <Content Include="Content\DataTables\css\rowGroup.jqueryui.css" />
+    <Content Include="Content\DataTables\css\rowGroup.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\rowGroup.semanticui.css" />
+    <Content Include="Content\DataTables\css\rowGroup.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\rowReorder.bootstrap.css" />
+    <Content Include="Content\DataTables\css\rowReorder.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\rowReorder.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\rowReorder.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\rowReorder.dataTables.css" />
+    <Content Include="Content\DataTables\css\rowReorder.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\rowReorder.foundation.css" />
+    <Content Include="Content\DataTables\css\rowReorder.foundation.min.css" />
+    <Content Include="Content\DataTables\css\rowReorder.jqueryui.css" />
+    <Content Include="Content\DataTables\css\rowReorder.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\rowReorder.semanticui.css" />
+    <Content Include="Content\DataTables\css\rowReorder.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\scroller.bootstrap.css" />
+    <Content Include="Content\DataTables\css\scroller.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\scroller.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\scroller.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\scroller.dataTables.css" />
+    <Content Include="Content\DataTables\css\scroller.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\scroller.foundation.css" />
+    <Content Include="Content\DataTables\css\scroller.foundation.min.css" />
+    <Content Include="Content\DataTables\css\scroller.jqueryui.css" />
+    <Content Include="Content\DataTables\css\scroller.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\scroller.semanticui.css" />
+    <Content Include="Content\DataTables\css\scroller.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\select.bootstrap.css" />
+    <Content Include="Content\DataTables\css\select.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\select.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\select.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\select.dataTables.css" />
+    <Content Include="Content\DataTables\css\select.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\select.foundation.css" />
+    <Content Include="Content\DataTables\css\select.foundation.min.css" />
+    <Content Include="Content\DataTables\css\select.jqueryui.css" />
+    <Content Include="Content\DataTables\css\select.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\select.semanticui.css" />
+    <Content Include="Content\DataTables\css\select.semanticui.min.css" />
+    <Content Include="Content\DataTables\extensions\AutoFill\css\autoFill.bootstrap.css" />
+    <Content Include="Content\DataTables\extensions\AutoFill\css\autoFill.bootstrap.min.css" />
+    <Content Include="Content\DataTables\extensions\AutoFill\css\autoFill.bootstrap4.css" />
+    <Content Include="Content\DataTables\extensions\AutoFill\css\autoFill.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\extensions\AutoFill\css\autoFill.dataTables.css" />
+    <Content Include="Content\DataTables\extensions\AutoFill\css\autoFill.dataTables.min.css" />
+    <Content Include="Content\DataTables\extensions\AutoFill\css\autoFill.foundation.css" />
+    <Content Include="Content\DataTables\extensions\AutoFill\css\autoFill.foundation.min.css" />
+    <Content Include="Content\DataTables\extensions\AutoFill\css\autoFill.jqueryui.css" />
+    <Content Include="Content\DataTables\extensions\AutoFill\css\autoFill.jqueryui.min.css" />
+    <Content Include="Content\DataTables\extensions\AutoFill\css\autoFill.semanticui.css" />
+    <Content Include="Content\DataTables\extensions\AutoFill\css\autoFill.semanticui.min.css" />
+    <Content Include="Content\DataTables\extensions\Buttons\css\buttons.bootstrap.css" />
+    <Content Include="Content\DataTables\extensions\Buttons\css\buttons.bootstrap.min.css" />
+    <Content Include="Content\DataTables\extensions\Buttons\css\buttons.bootstrap4.css" />
+    <Content Include="Content\DataTables\extensions\Buttons\css\buttons.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\extensions\Buttons\css\buttons.dataTables.css" />
+    <Content Include="Content\DataTables\extensions\Buttons\css\buttons.dataTables.min.css" />
+    <Content Include="Content\DataTables\extensions\Buttons\css\buttons.foundation.css" />
+    <Content Include="Content\DataTables\extensions\Buttons\css\buttons.foundation.min.css" />
+    <Content Include="Content\DataTables\extensions\Buttons\css\buttons.jqueryui.css" />
+    <Content Include="Content\DataTables\extensions\Buttons\css\buttons.jqueryui.min.css" />
+    <Content Include="Content\DataTables\extensions\Buttons\css\buttons.semanticui.css" />
+    <Content Include="Content\DataTables\extensions\Buttons\css\buttons.semanticui.min.css" />
+    <Content Include="Content\DataTables\extensions\ColReorder\css\colReorder.bootstrap.css" />
+    <Content Include="Content\DataTables\extensions\ColReorder\css\colReorder.bootstrap.min.css" />
+    <Content Include="Content\DataTables\extensions\ColReorder\css\colReorder.bootstrap4.css" />
+    <Content Include="Content\DataTables\extensions\ColReorder\css\colReorder.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\extensions\ColReorder\css\colReorder.dataTables.css" />
+    <Content Include="Content\DataTables\extensions\ColReorder\css\colReorder.dataTables.min.css" />
+    <Content Include="Content\DataTables\extensions\ColReorder\css\colReorder.foundation.css" />
+    <Content Include="Content\DataTables\extensions\ColReorder\css\colReorder.foundation.min.css" />
+    <Content Include="Content\DataTables\extensions\ColReorder\css\colReorder.jqueryui.css" />
+    <Content Include="Content\DataTables\extensions\ColReorder\css\colReorder.jqueryui.min.css" />
+    <Content Include="Content\DataTables\extensions\ColReorder\css\colReorder.semanticui.css" />
+    <Content Include="Content\DataTables\extensions\ColReorder\css\colReorder.semanticui.min.css" />
+    <Content Include="Content\DataTables\extensions\FixedColumns\css\fixedColumns.bootstrap.css" />
+    <Content Include="Content\DataTables\extensions\FixedColumns\css\fixedColumns.bootstrap.min.css" />
+    <Content Include="Content\DataTables\extensions\FixedColumns\css\fixedColumns.bootstrap4.css" />
+    <Content Include="Content\DataTables\extensions\FixedColumns\css\fixedColumns.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\extensions\FixedColumns\css\fixedColumns.dataTables.css" />
+    <Content Include="Content\DataTables\extensions\FixedColumns\css\fixedColumns.dataTables.min.css" />
+    <Content Include="Content\DataTables\extensions\FixedColumns\css\fixedColumns.foundation.css" />
+    <Content Include="Content\DataTables\extensions\FixedColumns\css\fixedColumns.foundation.min.css" />
+    <Content Include="Content\DataTables\extensions\FixedColumns\css\fixedColumns.jqueryui.css" />
+    <Content Include="Content\DataTables\extensions\FixedColumns\css\fixedColumns.jqueryui.min.css" />
+    <Content Include="Content\DataTables\extensions\FixedColumns\css\fixedColumns.semanticui.css" />
+    <Content Include="Content\DataTables\extensions\FixedColumns\css\fixedColumns.semanticui.min.css" />
+    <Content Include="Content\DataTables\extensions\FixedHeader\css\fixedHeader.bootstrap.css" />
+    <Content Include="Content\DataTables\extensions\FixedHeader\css\fixedHeader.bootstrap.min.css" />
+    <Content Include="Content\DataTables\extensions\FixedHeader\css\fixedHeader.bootstrap4.css" />
+    <Content Include="Content\DataTables\extensions\FixedHeader\css\fixedHeader.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\extensions\FixedHeader\css\fixedHeader.dataTables.css" />
+    <Content Include="Content\DataTables\extensions\FixedHeader\css\fixedHeader.dataTables.min.css" />
+    <Content Include="Content\DataTables\extensions\FixedHeader\css\fixedHeader.foundation.css" />
+    <Content Include="Content\DataTables\extensions\FixedHeader\css\fixedHeader.foundation.min.css" />
+    <Content Include="Content\DataTables\extensions\FixedHeader\css\fixedHeader.jqueryui.css" />
+    <Content Include="Content\DataTables\extensions\FixedHeader\css\fixedHeader.jqueryui.min.css" />
+    <Content Include="Content\DataTables\extensions\FixedHeader\css\fixedHeader.semanticui.css" />
+    <Content Include="Content\DataTables\extensions\FixedHeader\css\fixedHeader.semanticui.min.css" />
+    <Content Include="Content\DataTables\extensions\KeyTable\css\keyTable.bootstrap.css" />
+    <Content Include="Content\DataTables\extensions\KeyTable\css\keyTable.bootstrap.min.css" />
+    <Content Include="Content\DataTables\extensions\KeyTable\css\keyTable.bootstrap4.css" />
+    <Content Include="Content\DataTables\extensions\KeyTable\css\keyTable.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\extensions\KeyTable\css\keyTable.dataTables.css" />
+    <Content Include="Content\DataTables\extensions\KeyTable\css\keyTable.dataTables.min.css" />
+    <Content Include="Content\DataTables\extensions\KeyTable\css\keyTable.foundation.css" />
+    <Content Include="Content\DataTables\extensions\KeyTable\css\keyTable.foundation.min.css" />
+    <Content Include="Content\DataTables\extensions\KeyTable\css\keyTable.jqueryui.css" />
+    <Content Include="Content\DataTables\extensions\KeyTable\css\keyTable.jqueryui.min.css" />
+    <Content Include="Content\DataTables\extensions\KeyTable\css\keyTable.semanticui.css" />
+    <Content Include="Content\DataTables\extensions\KeyTable\css\keyTable.semanticui.min.css" />
+    <Content Include="Content\DataTables\extensions\Responsive\css\responsive.bootstrap.css" />
+    <Content Include="Content\DataTables\extensions\Responsive\css\responsive.bootstrap.min.css" />
+    <Content Include="Content\DataTables\extensions\Responsive\css\responsive.bootstrap4.css" />
+    <Content Include="Content\DataTables\extensions\Responsive\css\responsive.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\extensions\Responsive\css\responsive.dataTables.css" />
+    <Content Include="Content\DataTables\extensions\Responsive\css\responsive.dataTables.min.css" />
+    <Content Include="Content\DataTables\extensions\Responsive\css\responsive.foundation.css" />
+    <Content Include="Content\DataTables\extensions\Responsive\css\responsive.foundation.min.css" />
+    <Content Include="Content\DataTables\extensions\Responsive\css\responsive.jqueryui.css" />
+    <Content Include="Content\DataTables\extensions\Responsive\css\responsive.jqueryui.min.css" />
+    <Content Include="Content\DataTables\extensions\Responsive\css\responsive.semanticui.css" />
+    <Content Include="Content\DataTables\extensions\Responsive\css\responsive.semanticui.min.css" />
+    <Content Include="Content\DataTables\extensions\RowGroup\css\rowGroup.bootstrap.css" />
+    <Content Include="Content\DataTables\extensions\RowGroup\css\rowGroup.bootstrap.min.css" />
+    <Content Include="Content\DataTables\extensions\RowGroup\css\rowGroup.bootstrap4.css" />
+    <Content Include="Content\DataTables\extensions\RowGroup\css\rowGroup.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\extensions\RowGroup\css\rowGroup.dataTables.css" />
+    <Content Include="Content\DataTables\extensions\RowGroup\css\rowGroup.dataTables.min.css" />
+    <Content Include="Content\DataTables\extensions\RowGroup\css\rowGroup.foundation.css" />
+    <Content Include="Content\DataTables\extensions\RowGroup\css\rowGroup.foundation.min.css" />
+    <Content Include="Content\DataTables\extensions\RowGroup\css\rowGroup.jqueryui.css" />
+    <Content Include="Content\DataTables\extensions\RowGroup\css\rowGroup.jqueryui.min.css" />
+    <Content Include="Content\DataTables\extensions\RowGroup\css\rowGroup.semanticui.css" />
+    <Content Include="Content\DataTables\extensions\RowGroup\css\rowGroup.semanticui.min.css" />
+    <Content Include="Content\DataTables\extensions\RowReorder\css\rowReorder.bootstrap.css" />
+    <Content Include="Content\DataTables\extensions\RowReorder\css\rowReorder.bootstrap.min.css" />
+    <Content Include="Content\DataTables\extensions\RowReorder\css\rowReorder.bootstrap4.css" />
+    <Content Include="Content\DataTables\extensions\RowReorder\css\rowReorder.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\extensions\RowReorder\css\rowReorder.dataTables.css" />
+    <Content Include="Content\DataTables\extensions\RowReorder\css\rowReorder.dataTables.min.css" />
+    <Content Include="Content\DataTables\extensions\RowReorder\css\rowReorder.foundation.css" />
+    <Content Include="Content\DataTables\extensions\RowReorder\css\rowReorder.foundation.min.css" />
+    <Content Include="Content\DataTables\extensions\RowReorder\css\rowReorder.jqueryui.css" />
+    <Content Include="Content\DataTables\extensions\RowReorder\css\rowReorder.jqueryui.min.css" />
+    <Content Include="Content\DataTables\extensions\RowReorder\css\rowReorder.semanticui.css" />
+    <Content Include="Content\DataTables\extensions\RowReorder\css\rowReorder.semanticui.min.css" />
+    <Content Include="Content\DataTables\extensions\Scroller\css\scroller.bootstrap.css" />
+    <Content Include="Content\DataTables\extensions\Scroller\css\scroller.bootstrap.min.css" />
+    <Content Include="Content\DataTables\extensions\Scroller\css\scroller.bootstrap4.css" />
+    <Content Include="Content\DataTables\extensions\Scroller\css\scroller.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\extensions\Scroller\css\scroller.dataTables.css" />
+    <Content Include="Content\DataTables\extensions\Scroller\css\scroller.dataTables.min.css" />
+    <Content Include="Content\DataTables\extensions\Scroller\css\scroller.foundation.css" />
+    <Content Include="Content\DataTables\extensions\Scroller\css\scroller.foundation.min.css" />
+    <Content Include="Content\DataTables\extensions\Scroller\css\scroller.jqueryui.css" />
+    <Content Include="Content\DataTables\extensions\Scroller\css\scroller.jqueryui.min.css" />
+    <Content Include="Content\DataTables\extensions\Scroller\css\scroller.semanticui.css" />
+    <Content Include="Content\DataTables\extensions\Scroller\css\scroller.semanticui.min.css" />
+    <Content Include="Content\DataTables\extensions\Select\css\select.bootstrap.css" />
+    <Content Include="Content\DataTables\extensions\Select\css\select.bootstrap.min.css" />
+    <Content Include="Content\DataTables\extensions\Select\css\select.bootstrap4.css" />
+    <Content Include="Content\DataTables\extensions\Select\css\select.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\extensions\Select\css\select.dataTables.css" />
+    <Content Include="Content\DataTables\extensions\Select\css\select.dataTables.min.css" />
+    <Content Include="Content\DataTables\extensions\Select\css\select.foundation.css" />
+    <Content Include="Content\DataTables\extensions\Select\css\select.foundation.min.css" />
+    <Content Include="Content\DataTables\extensions\Select\css\select.jqueryui.css" />
+    <Content Include="Content\DataTables\extensions\Select\css\select.jqueryui.min.css" />
+    <Content Include="Content\DataTables\extensions\Select\css\select.semanticui.css" />
+    <Content Include="Content\DataTables\extensions\Select\css\select.semanticui.min.css" />
+    <Content Include="Content\DataTables\images\details_close.png" />
+    <Content Include="Content\DataTables\images\details_open.png" />
+    <Content Include="Content\DataTables\images\sort_asc.png" />
+    <Content Include="Content\DataTables\images\sort_asc_disabled.png" />
+    <Content Include="Content\DataTables\images\sort_both.png" />
+    <Content Include="Content\DataTables\images\sort_desc.png" />
+    <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
+    <Content Include="Content\DataTables\media\css\dataTables.bootstrap.css" />
+    <Content Include="Content\DataTables\media\css\dataTables.bootstrap.min.css" />
+    <Content Include="Content\DataTables\media\css\dataTables.bootstrap4.css" />
+    <Content Include="Content\DataTables\media\css\dataTables.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\media\css\dataTables.foundation.css" />
+    <Content Include="Content\DataTables\media\css\dataTables.foundation.min.css" />
+    <Content Include="Content\DataTables\media\css\dataTables.jqueryui.css" />
+    <Content Include="Content\DataTables\media\css\dataTables.jqueryui.min.css" />
+    <Content Include="Content\DataTables\media\css\dataTables.material.css" />
+    <Content Include="Content\DataTables\media\css\dataTables.material.min.css" />
+    <Content Include="Content\DataTables\media\css\dataTables.semanticui.css" />
+    <Content Include="Content\DataTables\media\css\dataTables.semanticui.min.css" />
+    <Content Include="Content\DataTables\media\css\dataTables.uikit.css" />
+    <Content Include="Content\DataTables\media\css\dataTables.uikit.min.css" />
+    <Content Include="Content\DataTables\media\css\jquery.dataTables.css" />
+    <Content Include="Content\DataTables\media\css\jquery.dataTables.min.css" />
+    <Content Include="Content\DataTables\media\css\jquery.dataTables_themeroller.css" />
+    <Content Include="Content\DataTables\media\images\favicon.ico" />
+    <Content Include="Content\DataTables\media\images\sort_asc.png" />
+    <Content Include="Content\DataTables\media\images\sort_asc_disabled.png" />
+    <Content Include="Content\DataTables\media\images\sort_both.png" />
+    <Content Include="Content\DataTables\media\images\sort_desc.png" />
+    <Content Include="Content\DataTables\media\images\sort_desc_disabled.png" />
+    <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\fontawesome\css\all.css" />
+    <Content Include="Content\fontawesome\css\all.min.css" />
+    <Content Include="Content\fontawesome\css\brands.css" />
+    <Content Include="Content\fontawesome\css\brands.min.css" />
+    <Content Include="Content\fontawesome\css\fontawesome.css" />
+    <Content Include="Content\fontawesome\css\fontawesome.min.css" />
+    <Content Include="Content\fontawesome\css\regular.css" />
+    <Content Include="Content\fontawesome\css\regular.min.css" />
+    <Content Include="Content\fontawesome\css\solid.css" />
+    <Content Include="Content\fontawesome\css\solid.min.css" />
+    <Content Include="Content\fontawesome\css\svg-with-js.css" />
+    <Content Include="Content\fontawesome\css\svg-with-js.min.css" />
+    <Content Include="Content\fontawesome\css\v4-shims.css" />
+    <Content Include="Content\fontawesome\css\v4-shims.min.css" />
+    <Content Include="Content\fontawesome\webfonts\fa-brands-400.svg" />
+    <Content Include="Content\fontawesome\webfonts\fa-regular-400.svg" />
+    <Content Include="Content\fontawesome\webfonts\fa-solid-900.svg" />
+    <Content Include="Content\jquery.datetimepicker.css" />
+    <Content Include="Content\Layout.css">
+      <DependentUpon>Layout.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\Layout.min.css">
+      <DependentUpon>Layout.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Macss.css">
+      <DependentUpon>Macss.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\Macss.min.css">
+      <DependentUpon>Macss.css</DependentUpon>
+    </Content>
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Images\main_logo.png" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
+    <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
+    <Content Include="Scripts\DataTables\autoFill.bootstrap4.js" />
+    <Content Include="Scripts\DataTables\autoFill.bootstrap4.min.js" />
+    <Content Include="Scripts\DataTables\autoFill.foundation.js" />
+    <Content Include="Scripts\DataTables\autoFill.foundation.min.js" />
+    <Content Include="Scripts\DataTables\autoFill.jqueryui.js" />
+    <Content Include="Scripts\DataTables\autoFill.jqueryui.min.js" />
+    <Content Include="Scripts\DataTables\autoFill.semanticui.js" />
+    <Content Include="Scripts\DataTables\autoFill.semanticui.min.js" />
+    <Content Include="Scripts\DataTables\buttons.bootstrap.js" />
+    <Content Include="Scripts\DataTables\buttons.bootstrap.min.js" />
+    <Content Include="Scripts\DataTables\buttons.bootstrap4.js" />
+    <Content Include="Scripts\DataTables\buttons.bootstrap4.min.js" />
+    <Content Include="Scripts\DataTables\buttons.colVis.js" />
+    <Content Include="Scripts\DataTables\buttons.colVis.min.js" />
+    <Content Include="Scripts\DataTables\buttons.flash.js" />
+    <Content Include="Scripts\DataTables\buttons.flash.min.js" />
+    <Content Include="Scripts\DataTables\buttons.foundation.js" />
+    <Content Include="Scripts\DataTables\buttons.foundation.min.js" />
+    <Content Include="Scripts\DataTables\buttons.html5.js" />
+    <Content Include="Scripts\DataTables\buttons.html5.min.js" />
+    <Content Include="Scripts\DataTables\buttons.jqueryui.js" />
+    <Content Include="Scripts\DataTables\buttons.jqueryui.min.js" />
+    <Content Include="Scripts\DataTables\buttons.print.js" />
+    <Content Include="Scripts\DataTables\buttons.print.min.js" />
+    <Content Include="Scripts\DataTables\buttons.semanticui.js" />
+    <Content Include="Scripts\DataTables\buttons.semanticui.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.autoFill.js" />
+    <Content Include="Scripts\DataTables\dataTables.autoFill.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.bootstrap.js" />
+    <Content Include="Scripts\DataTables\dataTables.bootstrap.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.bootstrap4.js" />
+    <Content Include="Scripts\DataTables\dataTables.bootstrap4.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.buttons.js" />
+    <Content Include="Scripts\DataTables\dataTables.buttons.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.colReorder.js" />
+    <Content Include="Scripts\DataTables\dataTables.colReorder.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.fixedColumns.js" />
+    <Content Include="Scripts\DataTables\dataTables.fixedColumns.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.fixedHeader.js" />
+    <Content Include="Scripts\DataTables\dataTables.fixedHeader.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.foundation.js" />
+    <Content Include="Scripts\DataTables\dataTables.foundation.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.jqueryui.js" />
+    <Content Include="Scripts\DataTables\dataTables.jqueryui.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.keyTable.js" />
+    <Content Include="Scripts\DataTables\dataTables.keyTable.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.material.js" />
+    <Content Include="Scripts\DataTables\dataTables.material.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.responsive.js" />
+    <Content Include="Scripts\DataTables\dataTables.responsive.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.rowGroup.js" />
+    <Content Include="Scripts\DataTables\dataTables.rowGroup.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.rowReorder.js" />
+    <Content Include="Scripts\DataTables\dataTables.rowReorder.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.scroller.js" />
+    <Content Include="Scripts\DataTables\dataTables.scroller.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.select.js" />
+    <Content Include="Scripts\DataTables\dataTables.select.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.semanticui.js" />
+    <Content Include="Scripts\DataTables\dataTables.semanticui.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.uikit.js" />
+    <Content Include="Scripts\DataTables\dataTables.uikit.min.js" />
+    <Content Include="Scripts\DataTables\extensions\AutoFill\js\autoFill.bootstrap.js" />
+    <Content Include="Scripts\DataTables\extensions\AutoFill\js\autoFill.bootstrap.min.js" />
+    <Content Include="Scripts\DataTables\extensions\AutoFill\js\autoFill.bootstrap4.js" />
+    <Content Include="Scripts\DataTables\extensions\AutoFill\js\autoFill.bootstrap4.min.js" />
+    <Content Include="Scripts\DataTables\extensions\AutoFill\js\autoFill.foundation.js" />
+    <Content Include="Scripts\DataTables\extensions\AutoFill\js\autoFill.foundation.min.js" />
+    <Content Include="Scripts\DataTables\extensions\AutoFill\js\autoFill.jqueryui.js" />
+    <Content Include="Scripts\DataTables\extensions\AutoFill\js\autoFill.jqueryui.min.js" />
+    <Content Include="Scripts\DataTables\extensions\AutoFill\js\autoFill.semanticui.js" />
+    <Content Include="Scripts\DataTables\extensions\AutoFill\js\autoFill.semanticui.min.js" />
+    <Content Include="Scripts\DataTables\extensions\AutoFill\js\dataTables.autoFill.js" />
+    <Content Include="Scripts\DataTables\extensions\AutoFill\js\dataTables.autoFill.min.js" />
+    <Content Include="Scripts\DataTables\extensions\Buttons\js\buttons.bootstrap.js" />
+    <Content Include="Scripts\DataTables\extensions\Buttons\js\buttons.bootstrap.min.js" />
+    <Content Include="Scripts\DataTables\extensions\Buttons\js\buttons.bootstrap4.js" />
+    <Content Include="Scripts\DataTables\extensions\Buttons\js\buttons.bootstrap4.min.js" />
+    <Content Include="Scripts\DataTables\extensions\Buttons\js\buttons.colVis.js" />
+    <Content Include="Scripts\DataTables\extensions\Buttons\js\buttons.colVis.min.js" />
+    <Content Include="Scripts\DataTables\extensions\Buttons\js\buttons.flash.js" />
+    <Content Include="Scripts\DataTables\extensions\Buttons\js\buttons.flash.min.js" />
+    <Content Include="Scripts\DataTables\extensions\Buttons\js\buttons.foundation.js" />
+    <Content Include="Scripts\DataTables\extensions\Buttons\js\buttons.foundation.min.js" />
+    <Content Include="Scripts\DataTables\extensions\Buttons\js\buttons.html5.js" />
+    <Content Include="Scripts\DataTables\extensions\Buttons\js\buttons.html5.min.js" />
+    <Content Include="Scripts\DataTables\extensions\Buttons\js\buttons.jqueryui.js" />
+    <Content Include="Scripts\DataTables\extensions\Buttons\js\buttons.jqueryui.min.js" />
+    <Content Include="Scripts\DataTables\extensions\Buttons\js\buttons.print.js" />
+    <Content Include="Scripts\DataTables\extensions\Buttons\js\buttons.print.min.js" />
+    <Content Include="Scripts\DataTables\extensions\Buttons\js\buttons.semanticui.js" />
+    <Content Include="Scripts\DataTables\extensions\Buttons\js\buttons.semanticui.min.js" />
+    <Content Include="Scripts\DataTables\extensions\Buttons\js\dataTables.buttons.js" />
+    <Content Include="Scripts\DataTables\extensions\Buttons\js\dataTables.buttons.min.js" />
+    <Content Include="Scripts\DataTables\extensions\Buttons\swf\flashExport.swf" />
+    <Content Include="Scripts\DataTables\extensions\ColReorder\js\dataTables.colReorder.js" />
+    <Content Include="Scripts\DataTables\extensions\ColReorder\js\dataTables.colReorder.min.js" />
+    <Content Include="Scripts\DataTables\extensions\FixedColumns\js\dataTables.fixedColumns.js" />
+    <Content Include="Scripts\DataTables\extensions\FixedColumns\js\dataTables.fixedColumns.min.js" />
+    <Content Include="Scripts\DataTables\extensions\FixedHeader\js\dataTables.fixedHeader.js" />
+    <Content Include="Scripts\DataTables\extensions\FixedHeader\js\dataTables.fixedHeader.min.js" />
+    <Content Include="Scripts\DataTables\extensions\KeyTable\js\dataTables.keyTable.js" />
+    <Content Include="Scripts\DataTables\extensions\KeyTable\js\dataTables.keyTable.min.js" />
+    <Content Include="Scripts\DataTables\extensions\Responsive\js\dataTables.responsive.js" />
+    <Content Include="Scripts\DataTables\extensions\Responsive\js\dataTables.responsive.min.js" />
+    <Content Include="Scripts\DataTables\extensions\Responsive\js\responsive.bootstrap.js" />
+    <Content Include="Scripts\DataTables\extensions\Responsive\js\responsive.bootstrap.min.js" />
+    <Content Include="Scripts\DataTables\extensions\Responsive\js\responsive.bootstrap4.js" />
+    <Content Include="Scripts\DataTables\extensions\Responsive\js\responsive.bootstrap4.min.js" />
+    <Content Include="Scripts\DataTables\extensions\Responsive\js\responsive.foundation.js" />
+    <Content Include="Scripts\DataTables\extensions\Responsive\js\responsive.foundation.min.js" />
+    <Content Include="Scripts\DataTables\extensions\Responsive\js\responsive.jqueryui.js" />
+    <Content Include="Scripts\DataTables\extensions\Responsive\js\responsive.jqueryui.min.js" />
+    <Content Include="Scripts\DataTables\extensions\Responsive\js\responsive.semanticui.js" />
+    <Content Include="Scripts\DataTables\extensions\Responsive\js\responsive.semanticui.min.js" />
+    <Content Include="Scripts\DataTables\extensions\RowGroup\js\dataTables.rowGroup.js" />
+    <Content Include="Scripts\DataTables\extensions\RowGroup\js\dataTables.rowGroup.min.js" />
+    <Content Include="Scripts\DataTables\extensions\RowReorder\js\dataTables.rowReorder.js" />
+    <Content Include="Scripts\DataTables\extensions\RowReorder\js\dataTables.rowReorder.min.js" />
+    <Content Include="Scripts\DataTables\extensions\Scroller\js\dataTables.scroller.js" />
+    <Content Include="Scripts\DataTables\extensions\Scroller\js\dataTables.scroller.min.js" />
+    <Content Include="Scripts\DataTables\extensions\Select\js\dataTables.select.js" />
+    <Content Include="Scripts\DataTables\extensions\Select\js\dataTables.select.min.js" />
+    <Content Include="Scripts\DataTables\jquery.dataTables.js" />
+    <Content Include="Scripts\DataTables\jquery.dataTables.min.js" />
+    <Content Include="Scripts\DataTables\media\js\dataTables.bootstrap.js" />
+    <Content Include="Scripts\DataTables\media\js\dataTables.bootstrap.min.js" />
+    <Content Include="Scripts\DataTables\media\js\dataTables.bootstrap4.js" />
+    <Content Include="Scripts\DataTables\media\js\dataTables.bootstrap4.min.js" />
+    <Content Include="Scripts\DataTables\media\js\dataTables.foundation.js" />
+    <Content Include="Scripts\DataTables\media\js\dataTables.foundation.min.js" />
+    <Content Include="Scripts\DataTables\media\js\dataTables.jqueryui.js" />
+    <Content Include="Scripts\DataTables\media\js\dataTables.jqueryui.min.js" />
+    <Content Include="Scripts\DataTables\media\js\dataTables.material.js" />
+    <Content Include="Scripts\DataTables\media\js\dataTables.material.min.js" />
+    <Content Include="Scripts\DataTables\media\js\dataTables.semanticui.js" />
+    <Content Include="Scripts\DataTables\media\js\dataTables.semanticui.min.js" />
+    <Content Include="Scripts\DataTables\media\js\dataTables.uikit.js" />
+    <Content Include="Scripts\DataTables\media\js\dataTables.uikit.min.js" />
+    <Content Include="Scripts\DataTables\media\js\jquery.dataTables.js" />
+    <Content Include="Scripts\DataTables\media\js\jquery.dataTables.min.js" />
+    <Content Include="Scripts\DataTables\media\js\jquery.js" />
+    <Content Include="Scripts\DataTables\responsive.bootstrap.js" />
+    <Content Include="Scripts\DataTables\responsive.bootstrap.min.js" />
+    <Content Include="Scripts\DataTables\responsive.bootstrap4.js" />
+    <Content Include="Scripts\DataTables\responsive.bootstrap4.min.js" />
+    <Content Include="Scripts\DataTables\responsive.foundation.js" />
+    <Content Include="Scripts\DataTables\responsive.foundation.min.js" />
+    <Content Include="Scripts\DataTables\responsive.jqueryui.js" />
+    <Content Include="Scripts\DataTables\responsive.jqueryui.min.js" />
+    <Content Include="Scripts\DataTables\responsive.semanticui.js" />
+    <Content Include="Scripts\DataTables\responsive.semanticui.min.js" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\index.js.flow" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Areas\Aims\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Aims\Views\Invoice\Index.cshtml" />
+    <Content Include="Areas\Aims\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Aims\Views\web.config" />
+    <Content Include="Areas\Aims\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Dcos\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Dcos\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Dcos\Views\web.config" />
+    <Content Include="Areas\Dcos\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Fdass\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Fdass\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Fdass\Views\web.config" />
+    <Content Include="Areas\Fdass\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Pats\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Pats\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Pats\Views\web.config" />
+    <Content Include="Areas\Pats\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Tass\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Tass\Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\Tass\Views\_ViewStart.cshtml" />
+    <Content Include="Content\Macss.scss" />
+    <Content Include="Content\fontawesome\webfonts\fa-brands-400.eot" />
+    <Content Include="Content\fontawesome\webfonts\fa-brands-400.ttf" />
+    <Content Include="Content\fontawesome\webfonts\fa-brands-400.woff" />
+    <Content Include="Content\fontawesome\webfonts\fa-brands-400.woff2" />
+    <Content Include="Content\fontawesome\webfonts\fa-regular-400.eot" />
+    <Content Include="Content\fontawesome\webfonts\fa-regular-400.ttf" />
+    <Content Include="Content\fontawesome\webfonts\fa-regular-400.woff" />
+    <Content Include="Content\fontawesome\webfonts\fa-regular-400.woff2" />
+    <Content Include="Content\fontawesome\webfonts\fa-solid-900.eot" />
+    <Content Include="Content\fontawesome\webfonts\fa-solid-900.ttf" />
+    <Content Include="Content\fontawesome\webfonts\fa-solid-900.woff" />
+    <Content Include="Content\fontawesome\webfonts\fa-solid-900.woff2" />
+    <Content Include="Areas\Base\Views\web.config" />
+    <Content Include="Areas\Base\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Base\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Base\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Dcos\Views\Stock\Index.cshtml" />
+    <Content Include="Areas\Dcos\Views\Stock\RackChange.cshtml" />
+    <Content Include="Areas\Dcos\Views\Stock\RackChangeConfirm.cshtml" />
+    <Content Include="Areas\Dcos\Views\Stock\_RackChangeShow.cshtml" />
+    <Content Include="Areas\Dcos\Views\Stock\_RackChangeForm.cshtml" />
+    <Content Include="Areas\Dcos\Views\Stock\_Show.cshtml" />
+    <Content Include="Areas\Dcos\Views\Stock\Details.cshtml" />
+    <Content Include="Areas\Dcos\Views\Stock\_InventoryListDialog.cshtml" />
+    <Content Include="Areas\Dcos\Views\Stock\_StockReportDialog.cshtml" />
+    <Content Include="Areas\Dcos\Views\StockAllocation\Index.cshtml" />
+    <Content Include="Areas\Dcos\Views\StockAllocation\_List.cshtml" />
+    <Content Include="Areas\Dcos\Views\StockAllocation\AutoAllocationConfirm.cshtml" />
+    <Content Include="Areas\Dcos\Views\StockAllocation\AutoAllocationResult.cshtml" />
+    <Content Include="Areas\Dcos\Views\StockAllocation\Edit.cshtml" />
+    <Content Include="Areas\Dcos\Views\StockAllocation\_Form.cshtml" />
+    <Content Include="Areas\Tass\Views\Shared\Dialog\_CsvDownload.cshtml" />
+    <Content Include="Areas\Tass\Views\Shared\Dialog\_DenpyoKbnCodeSearch.cshtml" />
+    <Content Include="Areas\Tass\Views\Shared\Dialog\_HinmeiCodeSearch.cshtml" />
+    <Content Include="Areas\Tass\Views\Shared\Dialog\_KisyuACodeSearch.cshtml" />
+    <Content Include="Areas\Tass\Views\Shared\Dialog\_ListSetting.cshtml" />
+    <Content Include="Areas\Tass\Views\Shared\Dialog\_OkyakusamaCodeSearch.cshtml" />
+    <Content Include="Areas\Tass\Views\Shared\Dialog\_SaisyuJuyoCodeSearch.cshtml" />
+    <Content Include="Areas\Tass\Views\Shared\Dialog\_ShiiresakiCodeSearch.cshtml" />
+    <Content Include="Areas\Tass\Views\Shared\Dialog\_SyukkaBashoCodeSearchMulti.cshtml" />
+    <Content Include="Areas\Tass\Views\Shared\Dialog\_TantoshaCodeSearch.cshtml" />
+    <Content Include="Areas\Tass\Views\Shared\Dialog\_TodokesakiCodeSearch.cshtml" />
+    <Content Include="Areas\Tass\Views\Shared\Dialog\_TokuisakiCodeSearch.cshtml" />
+    <Content Include="Areas\Tass\Views\Shared\Dialog\_UnsocorseCodeSearch.cshtml" />
+    <Content Include="Areas\Tass\Views\Shared\Dialog\_UnsohohoCodeSearch.cshtml" />
+    <Content Include="Areas\Tass\Views\Shared\Dialog\_UnsokbnCodeSearch.cshtml" />
+    <Content Include="Areas\Tass\Views\Shared\Dialog\_YubinNoSearch.cshtml" />
+    <Content Include="Areas\Tass\Views\D001\Upload01.cshtml" />
+    <Content Include="Areas\Tass\Views\D001\UploadConfirm01.cshtml" />
+    <Content Include="Areas\Tass\Views\D001\UploadResult01.cshtml" />
+    <Content Include="Areas\Tass\Views\D001\_SimpleUpload01.cshtml" />
+    <Content Include="Areas\Tass\Views\D002\Copy.cshtml" />
+    <Content Include="Areas\Tass\Views\D002\CopyConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D002\Create.cshtml" />
+    <Content Include="Areas\Tass\Views\D002\CreateConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D002\DeleteConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D002\Details.cshtml" />
+    <Content Include="Areas\Tass\Views\D002\Edit.cshtml" />
+    <Content Include="Areas\Tass\Views\D002\EditConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D002\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\D002\Upload.cshtml" />
+    <Content Include="Areas\Tass\Views\D002\UploadConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D002\UploadResult.cshtml" />
+    <Content Include="Areas\Tass\Views\D002\_Form.cshtml" />
+    <Content Include="Areas\Tass\Views\D002\_Show.cshtml" />
+    <Content Include="Areas\Tass\Views\D002\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Tass\Views\D001\Upload02.cshtml" />
+    <Content Include="Areas\Tass\Views\D001\Upload03.cshtml" />
+    <Content Include="Areas\Tass\Views\D001\Upload04.cshtml" />
+    <Content Include="Areas\Tass\Views\D001\Upload05.cshtml" />
+    <Content Include="Areas\Tass\Views\D001\Upload06.cshtml" />
+    <Content Include="Areas\Tass\Views\D001\UploadConfirm02.cshtml" />
+    <Content Include="Areas\Tass\Views\D001\UploadConfirm03.cshtml" />
+    <Content Include="Areas\Tass\Views\D001\UploadConfirm04.cshtml" />
+    <Content Include="Areas\Tass\Views\D001\UploadConfirm05.cshtml" />
+    <Content Include="Areas\Tass\Views\D001\UploadConfirm06.cshtml" />
+    <Content Include="Areas\Tass\Views\D001\UploadResult02.cshtml" />
+    <Content Include="Areas\Tass\Views\D001\UploadResult03.cshtml" />
+    <Content Include="Areas\Tass\Views\D001\UploadResult04.cshtml" />
+    <Content Include="Areas\Tass\Views\D001\UploadResult05.cshtml" />
+    <Content Include="Areas\Tass\Views\D001\UploadResult06.cshtml" />
+    <Content Include="Areas\Tass\Views\D001\_SimpleUpload02.cshtml" />
+    <Content Include="Areas\Tass\Views\D001\_SimpleUpload03.cshtml" />
+    <Content Include="Areas\Tass\Views\D001\_SimpleUpload04.cshtml" />
+    <Content Include="Areas\Tass\Views\D001\_SimpleUpload05.cshtml" />
+    <Content Include="Areas\Tass\Views\D001\_SimpleUpload06.cshtml" />
+    <Content Include="Areas\Dcos\Views\StockAllocation\EditConfirm.cshtml" />
+    <Content Include="Areas\Dcos\Views\StockAllocation\AllocationExecConfirm.cshtml" />
+    <Content Include="Areas\Dcos\Views\StockAllocation\AllocationPlanCancelConfirm.cshtml" />
+    <Content Include="Areas\Dcos\Views\StockAllocation\AllocationExecResult.cshtml" />
+    <Content Include="Areas\Dcos\Views\StockAllocation\PickingListOutput.cshtml" />
+    <Content Include="Areas\Dcos\Views\StockAllocation\AllocationPlanCancelResult.cshtml" />
+    <Content Include="Areas\Dcos\Views\StockAllocation\AllocationPlanFixConfirm.cshtml" />
+    <Content Include="Areas\Dcos\Views\StockAllocation\AllocationPlanListFixResult.cshtml" />
+    <Content Include="Areas\Dcos\Views\StockAllocation\AllocationPlanFixCancelConfirm.cshtml" />
+    <Content Include="Areas\Dcos\Views\StockAllocation\AllocationPlanListFixCancelResult.cshtml" />
+    <Content Include="Areas\Dcos\Views\StockAllocation\AllocationPlanListFixCancelConfirm.cshtml" />
+    <Content Include="Areas\Dcos\Views\StockAllocation\AllocationPlanListFixConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\Shared\Dialog\_UserSearch.cshtml" />
+    <Content Include="Areas\Aims\Views\D007\Make.cshtml" />
+    <Content Include="Areas\Aims\Views\D007\MakeConfirm.cshtml" />
+    <Content Include="Areas\Aims\Views\D007\MakeResult.cshtml" />
+    <Content Include="Areas\Aims\Views\D010\Make.cshtml" />
+    <Content Include="Areas\Aims\Views\D010\MakeConfirm.cshtml" />
+    <Content Include="Areas\Aims\Views\D010\MakeResult.cshtml" />
+    <Content Include="Areas\Aims\Views\D008\Make.cshtml" />
+    <Content Include="Areas\Aims\Views\D008\MakeConfirm.cshtml" />
+    <Content Include="Areas\Aims\Views\D008\MakeResult.cshtml" />
+    <Content Include="Areas\Aims\Views\D009\Make.cshtml" />
+    <Content Include="Areas\Aims\Views\D009\MakeConfirm.cshtml" />
+    <Content Include="Areas\Aims\Views\D009\MakeResult.cshtml" />
+    <Content Include="Areas\Aims\Views\D006\_Exec.cshtml" />
+    <Content Include="Areas\Aims\Views\D006\Exec.cshtml" />
+    <Content Include="Areas\Aims\Views\D006\ExecComplete.cshtml" />
+    <Content Include="Areas\Aims\Views\D011\MakeSeikyu.cshtml" />
+    <Content Include="Areas\Aims\Views\D011\MakeSeikyuConfirm.cshtml" />
+    <Content Include="Areas\Aims\Views\D011\MakeSeikyuResult.cshtml" />
+    <Content Include="Areas\Aims\Views\D011\MakeShiire.cshtml" />
+    <Content Include="Areas\Aims\Views\D011\MakeShiireConfirm.cshtml" />
+    <Content Include="Areas\Aims\Views\D011\MakeShiireResult.cshtml" />
+    <Content Include="Areas\Aims\Views\D011\Upload01.cshtml" />
+    <Content Include="Areas\Aims\Views\D011\Upload02.cshtml" />
+    <Content Include="Areas\Aims\Views\D011\Upload03.cshtml" />
+    <Content Include="Areas\Aims\Views\D011\Upload04.cshtml" />
+    <Content Include="Areas\Aims\Views\D011\UploadConfirm01.cshtml" />
+    <Content Include="Areas\Aims\Views\D011\UploadConfirm02.cshtml" />
+    <Content Include="Areas\Aims\Views\D011\UploadConfirm03.cshtml" />
+    <Content Include="Areas\Aims\Views\D011\UploadConfirm04.cshtml" />
+    <Content Include="Areas\Aims\Views\D011\UploadResult01.cshtml" />
+    <Content Include="Areas\Aims\Views\D011\UploadResult02.cshtml" />
+    <Content Include="Areas\Aims\Views\D011\UploadResult03.cshtml" />
+    <Content Include="Areas\Aims\Views\D011\UploadResult04.cshtml" />
+    <Content Include="Areas\Aims\Views\D011\_SimpleUpload01.cshtml" />
+    <Content Include="Areas\Aims\Views\D011\_SimpleUpload02.cshtml" />
+    <Content Include="Areas\Aims\Views\D011\_SimpleUpload03.cshtml" />
+    <Content Include="Areas\Aims\Views\D011\_SimpleUpload04.cshtml" />
+    <Content Include="Areas\Aims\Views\D012\_Print.cshtml" />
+    <Content Include="Areas\Aims\Views\D012\Print.cshtml" />
+    <Content Include="Areas\Aims\Views\D012\PrintApprovalIndex.cshtml" />
+    <Content Include="Areas\Aims\Views\D012\PrintCancelApprovalIndex.cshtml" />
+    <Content Include="Areas\Aims\Views\D012\PrintConfirm.cshtml" />
+    <Content Include="Areas\Aims\Views\D012\PrintResult.cshtml" />
+    <Content Include="Areas\Base\Views\MasterBatch\MasterBatchSubMenu.cshtml" />
+    <Content Include="Areas\Base\Views\Storage\StorageList.cshtml" />
+    <Content Include="Areas\Base\Views\Manual\ManualList.cshtml" />
+    <Content Include="Areas\Base\Views\Batch\BatchList.cshtml" />
+    <Content Include="Areas\Base\Views\Batch\Exec.cshtml" />
+    <Content Include="Areas\Base\Views\Batch\ExecComplete.cshtml" />
+    <Content Include="Areas\Base\Views\Batch\ExecConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\Batch\_Exec.cshtml" />
+    <Content Include="Areas\Base\Views\Approval\ApprovalConfirmDenial.cshtml" />
+    <Content Include="Areas\Base\Views\Approval\ApprovalConfirmRecovery.cshtml" />
+    <Content Include="Areas\Base\Views\Approval\ApprovalDetails.cshtml" />
+    <Content Include="Areas\Base\Views\Approval\ApprovalDetailsBulkDenial.cshtml" />
+    <Content Include="Areas\Base\Views\Approval\ApprovalDetailsBulkRecovery.cshtml" />
+    <Content Include="Areas\Base\Views\Approval\ApprovalList.cshtml" />
+    <Content Include="Areas\Base\Views\Approval\_FormApprovalConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\Approval\_FormApprovalDetails.cshtml" />
+    <Content Include="Areas\Base\Views\Home\SubMenu.cshtml" />
+    <Content Include="Areas\Dcos\Views\Billing\Billing.cshtml" />
+    <Content Include="Areas\Dcos\Views\Billing\BillingComplete.cshtml" />
+    <Content Include="Areas\Dcos\Views\Billing\BillingExec.cshtml" />
+    <Content Include="Areas\Dcos\Views\Billing\BillingExecConfirm.cshtml" />
+    <Content Include="Areas\Dcos\Views\Billing\_Billing.cshtml" />
+    <Content Include="Areas\Dcos\Views\Cargo\Create.cshtml" />
+    <Content Include="Areas\Dcos\Views\Cargo\CreateConfirm.cshtml" />
+    <Content Include="Areas\Dcos\Views\Cargo\DeleteConfirm.cshtml" />
+    <Content Include="Areas\Dcos\Views\Cargo\Details.cshtml" />
+    <Content Include="Areas\Dcos\Views\Cargo\Edit.cshtml" />
+    <Content Include="Areas\Dcos\Views\Cargo\EditConfirm.cshtml" />
+    <Content Include="Areas\Dcos\Views\Cargo\Exec.cshtml" />
+    <Content Include="Areas\Dcos\Views\Cargo\ExecComplete.cshtml" />
+    <Content Include="Areas\Dcos\Views\Cargo\ExecConfirm.cshtml" />
+    <Content Include="Areas\Dcos\Views\Cargo\Inquiry.cshtml" />
+    <Content Include="Areas\Dcos\Views\Cargo\List.cshtml" />
+    <Content Include="Areas\Dcos\Views\Cargo\_Exec.cshtml" />
+    <Content Include="Areas\Dcos\Views\Cargo\_Form.cshtml" />
+    <Content Include="Areas\Dcos\Views\Cargo\_Show.cshtml" />
+    <Content Include="Areas\Dcos\Views\Customer\Index.cshtml" />
+    <Content Include="Areas\Dcos\Views\Customer\List.cshtml" />
+    <Content Include="Areas\Dcos\Views\Customer\Upload.cshtml" />
+    <Content Include="Areas\Dcos\Views\Customer\UploadConfirm.cshtml" />
+    <Content Include="Areas\Dcos\Views\Customer\UploadResult.cshtml" />
+    <Content Include="Areas\Dcos\Views\Customer\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Dcos\Views\D002\Create.cshtml" />
+    <Content Include="Areas\Dcos\Views\D002\CreateConfirm.cshtml" />
+    <Content Include="Areas\Dcos\Views\D002\DeleteConfirm.cshtml" />
+    <Content Include="Areas\Dcos\Views\D002\Details.cshtml" />
+    <Content Include="Areas\Dcos\Views\D002\Edit.cshtml" />
+    <Content Include="Areas\Dcos\Views\D002\EditConfirm.cshtml" />
+    <Content Include="Areas\Dcos\Views\D002\Index.cshtml" />
+    <Content Include="Areas\Dcos\Views\D002\Upload.cshtml" />
+    <Content Include="Areas\Dcos\Views\D002\UploadConfirm.cshtml" />
+    <Content Include="Areas\Dcos\Views\D002\UploadResult.cshtml" />
+    <Content Include="Areas\Dcos\Views\D002\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Dcos\Views\D004\Create.cshtml" />
+    <Content Include="Areas\Dcos\Views\D004\CreateConfirm.cshtml" />
+    <Content Include="Areas\Dcos\Views\D004\DeleteConfirm.cshtml" />
+    <Content Include="Areas\Dcos\Views\D004\Details.cshtml" />
+    <Content Include="Areas\Dcos\Views\D004\Edit.cshtml" />
+    <Content Include="Areas\Dcos\Views\D004\EditConfirm.cshtml" />
+    <Content Include="Areas\Dcos\Views\D004\Index.cshtml" />
+    <Content Include="Areas\Dcos\Views\D004\Upload.cshtml" />
+    <Content Include="Areas\Dcos\Views\D004\UploadConfirm.cshtml" />
+    <Content Include="Areas\Dcos\Views\D004\UploadResult.cshtml" />
+    <Content Include="Areas\Dcos\Views\D004\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Dcos\Views\D006\DeleteConfirm.cshtml" />
+    <Content Include="Areas\Dcos\Views\D006\ErrorList.cshtml" />
+    <Content Include="Areas\Dcos\Views\D006\ExecComplete.cshtml" />
+    <Content Include="Areas\Dcos\Views\D006\ExecConfirm.cshtml" />
+    <Content Include="Areas\Dcos\Views\D006\Index.cshtml" />
+    <Content Include="Areas\Dcos\Views\D006\List.cshtml" />
+    <Content Include="Areas\Dcos\Views\D006\_Show.cshtml" />
+    <Content Include="Areas\Dcos\Views\Monthly\MonthlyComplete.cshtml" />
+    <Content Include="Areas\Dcos\Views\Monthly\MonthlyExec.cshtml" />
+    <Content Include="Areas\Dcos\Views\Monthly\MonthlyExecConfirm.cshtml" />
+    <Content Include="Areas\Dcos\Views\Monthly\_Monthly.cshtml" />
+    <Content Include="Areas\Dcos\Views\Shared\Dialog\_CsvDownload.cshtml" />
+    <Content Include="Areas\Dcos\Views\Shared\Dialog\_DenpyoKbnCodeSearch.cshtml" />
+    <Content Include="Areas\Dcos\Views\Shared\Dialog\_HinmeiCodeSearch.cshtml" />
+    <Content Include="Areas\Dcos\Views\Shared\Dialog\_KisyuACodeSearch.cshtml" />
+    <Content Include="Areas\Dcos\Views\Shared\Dialog\_ListSetting.cshtml" />
+    <Content Include="Areas\Dcos\Views\Shared\Dialog\_OkyakusamaCodeSearch.cshtml" />
+    <Content Include="Areas\Dcos\Views\Shared\Dialog\_ShiiresakiCodeSearch.cshtml" />
+    <Content Include="Areas\Dcos\Views\Shared\Dialog\_SyukkaBashoCodeSearch.cshtml" />
+    <Content Include="Areas\Dcos\Views\Shared\Dialog\_TantoshaCodeSearch.cshtml" />
+    <Content Include="Areas\Dcos\Views\Shared\Dialog\_TodokesakiCodeSearch.cshtml" />
+    <Content Include="Areas\Dcos\Views\Shared\Dialog\_TokuisakiCodeSearch.cshtml" />
+    <Content Include="Areas\Dcos\Views\Shared\Dialog\_UnsocorseCodeSearch.cshtml" />
+    <Content Include="Areas\Dcos\Views\Shared\Dialog\_UnsohohoCodeSearch.cshtml" />
+    <Content Include="Areas\Dcos\Views\Shared\Dialog\_UnsokbnCodeSearch.cshtml" />
+    <Content Include="Areas\Dcos\Views\Shared\Dialog\_YubinNoSearch.cshtml" />
+    <Content Include="Areas\Dcos\Views\Home\SubMenu.cshtml" />
+    <Content Include="Areas\Dcos\Views\D006\Details.cshtml" />
+    <Content Include="Areas\Dcos\Views\D006\Edit.cshtml" />
+    <Content Include="Areas\Dcos\Views\D006\EditConfirm.cshtml" />
+    <Content Include="Areas\Dcos\Views\D004\DetailsReceipt.cshtml" />
+    <Content Include="Areas\Tass\Views\DossData\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\Shared\Dialog\_SyukkaBashoCodeSearch.cshtml" />
+    <Content Include="Areas\Tass\Views\DossData\DetailsForAll.cshtml" />
+    <Content Include="Areas\Tass\Views\DossData\DetailsForKitaKanto.cshtml" />
+    <Content Include="Areas\Tass\Views\DossData\_Form.cshtml" />
+    <Content Include="Areas\Tass\Views\DossData\CreateConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\DossData\Create.cshtml" />
+    <Content Include="Areas\Tass\Views\DossData\_Show.cshtml" />
+    <Content Include="Areas\Dcos\Views\D006\RecaptureConfirm.cshtml" />
+    <Content Include="Areas\Dcos\Views\D006\RecaptureComplete.cshtml" />
+    <Content Include="Areas\Aims\Views\D011\SumSeikyu.cshtml" />
+    <Content Include="Areas\Aims\Views\D011\SumShiire.cshtml" />
+    <Content Include="Areas\Dcos\Views\D001\Create.cshtml" />
+    <Content Include="Areas\Dcos\Views\D001\CreateConfirm.cshtml" />
+    <Content Include="Areas\Dcos\Views\D001\DeleteConfirm.cshtml" />
+    <Content Include="Areas\Dcos\Views\D001\Details.cshtml" />
+    <Content Include="Areas\Dcos\Views\D001\Edit.cshtml" />
+    <Content Include="Areas\Dcos\Views\D001\EditConfirm.cshtml" />
+    <Content Include="Areas\Dcos\Views\D001\Index.cshtml" />
+    <Content Include="Areas\Dcos\Views\D001\SubMenu.cshtml" />
+    <Content Include="Areas\Dcos\Views\D001\Upload.cshtml" />
+    <Content Include="Areas\Dcos\Views\D001\UploadConfirm.cshtml" />
+    <Content Include="Areas\Dcos\Views\D001\UploadResult.cshtml" />
+    <Content Include="Areas\Dcos\Views\D001\_Form.cshtml" />
+    <Content Include="Areas\Dcos\Views\D001\_Show.cshtml" />
+    <Content Include="Areas\Dcos\Views\D001\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Dcos\Views\Shared\Dialog\_StockCreate.cshtml" />
+    <Content Include="Areas\Dcos\Views\Shared\Dialog\_StockEdit.cshtml" />
+    <Content Include="Areas\Dcos\Views\Shared\Dialog\_RevertBeforeDeletionDialog.cshtml" />
+    <Content Include="Areas\Pats\Views\D001\D001_01.cshtml" />
+    <Content Include="Areas\Pats\Views\D001\D001_02.cshtml" />
+    <Content Include="Areas\Pats\Views\D001\D001_03.cshtml" />
+    <Content Include="Areas\Pats\Views\D001\D001_04.cshtml" />
+    <Content Include="Areas\Pats\Views\D001\D001_05.cshtml" />
+    <Content Include="Areas\Pats\Views\D001\D001_06.cshtml" />
+    <Content Include="Areas\Pats\Views\D001\D001_07.cshtml" />
+    <Content Include="Areas\Pats\Views\D001\D001_08.cshtml" />
+    <Content Include="Areas\Pats\Views\D001\D001_09.cshtml" />
+    <Content Include="Areas\Pats\Views\D001\D001_10.cshtml" />
+    <Content Include="Areas\Pats\Views\D001\D001_11.cshtml" />
+    <Content Include="Areas\Pats\Views\D001\D001_12.cshtml" />
+    <Content Include="Areas\Pats\Views\D001\_Show.cshtml" />
+    <Content Include="Areas\Pats\Views\D001\Dialog\_D001_03_Create.cshtml" />
+    <Content Include="Areas\Pats\Views\D001\Dialog\_D001_03_Edit.cshtml" />
+    <Content Include="Areas\Pats\Views\D002\D002_01.cshtml" />
+    <Content Include="Areas\Pats\Views\D002\D002_02.cshtml" />
+    <Content Include="Areas\Pats\Views\D002\D002_03.cshtml" />
+    <Content Include="Areas\Pats\Views\D002\D002_04.cshtml" />
+    <Content Include="Areas\Pats\Views\D002\D002_05.cshtml" />
+    <Content Include="Areas\Pats\Views\D002\D002_06.cshtml" />
+    <Content Include="Areas\Pats\Views\D002\D002_07.cshtml" />
+    <Content Include="Areas\Pats\Views\D002\_Show.cshtml" />
+    <Content Include="Areas\Pats\Views\D003\D003_01.cshtml" />
+    <Content Include="Areas\Pats\Views\D003\D003_02.cshtml" />
+    <Content Include="Areas\Pats\Views\D003\D003_03.cshtml" />
+    <Content Include="Areas\Pats\Views\D003\D003_04.cshtml" />
+    <Content Include="Areas\Pats\Views\D003\D003_05.cshtml" />
+    <Content Include="Areas\Pats\Views\D003\D003_06.cshtml" />
+    <Content Include="Areas\Pats\Views\D003\D003_07.cshtml" />
+    <Content Include="Areas\Pats\Views\D003\D003_08.cshtml" />
+    <Content Include="Areas\Pats\Views\D003\D003_09.cshtml" />
+    <Content Include="Areas\Pats\Views\D003\D003_10.cshtml" />
+    <Content Include="Areas\Pats\Views\D003\D003_11.cshtml" />
+    <Content Include="Areas\Pats\Views\D003\D003_12.cshtml" />
+    <Content Include="Areas\Pats\Views\D003\D003_13.cshtml" />
+    <Content Include="Areas\Pats\Views\D003\D003_14.cshtml" />
+    <Content Include="Areas\Pats\Views\D003\_Show.cshtml" />
+    <Content Include="Areas\Pats\Views\D004\D004_01.cshtml" />
+    <Content Include="Areas\Pats\Views\D004\D004_02.cshtml" />
+    <Content Include="Areas\Pats\Views\D004\D004_03.cshtml" />
+    <Content Include="Areas\Pats\Views\D004\D004_04.cshtml" />
+    <Content Include="Areas\Pats\Views\D004\D004_05.cshtml" />
+    <Content Include="Areas\Pats\Views\D004\D004_06.cshtml" />
+    <Content Include="Areas\Pats\Views\D004\D004_07.cshtml" />
+    <Content Include="Areas\Pats\Views\D004\D004_08.cshtml" />
+    <Content Include="Areas\Pats\Views\D005\D005_01.cshtml" />
+    <Content Include="Areas\Pats\Views\D005\D005_02.cshtml" />
+    <Content Include="Areas\Pats\Views\D006\D006_01.cshtml" />
+    <Content Include="Areas\Pats\Views\D006\D006_02.cshtml" />
+    <Content Include="Areas\Tass\Views\ShipmentResultsForTMS\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\ShipmentResultsForTMS\Details.cshtml" />
+    <Content Include="Areas\Tass\Views\ShipmentResultsForTMS\_Show.cshtml" />
+    <Content Include="Areas\Tass\Views\ShipmentResultsForTMS\Create.cshtml" />
+    <Content Include="Areas\Tass\Views\ShipmentResultsForTMS\CreateConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\ShipmentResultsForTMS\CreateResult.cshtml" />
+    <Content Include="Areas\Tass\Views\ShipmentResultsForTMS\_TMSEntryListDialog.cshtml" />
+    <Content Include="Areas\Tass\Views\D031\Index.cshtml" />
+    <Content Include="Areas\Dcos\Views\Shared\Dialog\_DeliveryCreate.cshtml" />
+    <Content Include="Areas\Dcos\Views\Shared\Dialog\_DeliveryEdit.cshtml" />
+    <Content Include="Areas\Dcos\Views\Stock\Report.cshtml" />
+    <Content Include="Areas\Dcos\Views\Stock\ReportConfirm.cshtml" />
+    <Content Include="Areas\Dcos\Views\Stock\_Report.cshtml" />
+    <Content Include="Areas\Tass\Views\D018\Details.cshtml" />
+    <Content Include="Areas\Tass\Views\D018\Edit.cshtml" />
+    <Content Include="Areas\Tass\Views\D018\EditConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D004\Create.cshtml" />
+    <Content Include="Areas\Tass\Views\D004\CreateConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D004\DeleteConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D004\Details.cshtml" />
+    <Content Include="Areas\Tass\Views\D004\Edit.cshtml" />
+    <Content Include="Areas\Tass\Views\D004\EditConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D004\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\D004\Reissue.cshtml" />
+    <Content Include="Areas\Tass\Views\D004\_Form.cshtml" />
+    <Content Include="Areas\Tass\Views\D004\_Show.cshtml" />
+    <Content Include="Areas\Tass\Views\D005\_Form.cshtml" />
+    <Content Include="Areas\Tass\Views\D005\_Show.cshtml" />
+    <Content Include="Areas\Tass\Views\D005\Create.cshtml" />
+    <Content Include="Areas\Tass\Views\D005\CancelConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D005\Details.cshtml" />
+    <Content Include="Areas\Tass\Views\D005\Edit.cshtml" />
+    <Content Include="Areas\Tass\Views\D005\EditConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D005\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\D005\Return.cshtml" />
+    <Content Include="Areas\Tass\Views\D005\ReturnConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D018\_DeliveryCreate.cshtml" />
+    <Content Include="Areas\Tass\Views\D018\_DeliveryEdit.cshtml" />
+    <Content Include="Areas\Tass\Views\Shared\Dialog\_RevertBeforeDeletionDialog.cshtml" />
+    <Content Include="Areas\Tass\Views\D019\_Form.cshtml" />
+    <Content Include="Areas\Tass\Views\D019\_Show.cshtml" />
+    <Content Include="Areas\Tass\Views\D019\Copy.cshtml" />
+    <Content Include="Areas\Tass\Views\D019\CopyConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D019\Create.cshtml" />
+    <Content Include="Areas\Tass\Views\D019\CreateConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D019\Details.cshtml" />
+    <Content Include="Areas\Tass\Views\D019\Edit.cshtml" />
+    <Content Include="Areas\Tass\Views\D019\EditConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D019\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\D019\DeleteConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D019\Summ.cshtml" />
+    <Content Include="Areas\Tass\Views\D019\SummConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D019\_SummForm.cshtml" />
+    <Content Include="Areas\Tass\Views\D019\_SummShow.cshtml" />
+    <Content Include="Areas\Tass\Views\D019\SummResult.cshtml" />
+    <Content Include="Areas\Tass\Views\D026\_Form.cshtml" />
+    <Content Include="Areas\Tass\Views\D026\_Show.cshtml" />
+    <Content Include="Areas\Tass\Views\D026\_PrintForm.cshtml" />
+    <Content Include="Areas\Tass\Views\D026\_PrintShow.cshtml" />
+    <Content Include="Areas\Tass\Views\D026\Create.cshtml" />
+    <Content Include="Areas\Tass\Views\D026\CreateConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D026\DeleteConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D026\Details.cshtml" />
+    <Content Include="Areas\Tass\Views\D026\Edit.cshtml" />
+    <Content Include="Areas\Tass\Views\D026\EditConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D026\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\D026\Print.cshtml" />
+    <Content Include="Areas\Tass\Views\D026\PrintConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D033\_MonthaggForm.cshtml" />
+    <Content Include="Areas\Tass\Views\D033\_MonthaggShow.cshtml" />
+    <Content Include="Areas\Tass\Views\D033\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\D033\Monthagg.cshtml" />
+    <Content Include="Areas\Tass\Views\D033\MonthaggConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D033\MonthaggResult.cshtml" />
+    <Content Include="Areas\Tass\Views\D033\_SettingForm.cshtml" />
+    <Content Include="Areas\Tass\Views\D033\Setting.cshtml" />
+    <Content Include="Areas\Tass\Views\D033\SettingConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D009\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\D033\_EneprintShow.cshtml" />
+    <Content Include="Areas\Tass\Views\D033\Eneprint.cshtml" />
+    <Content Include="Areas\Tass\Views\D033\EneprintResult.cshtml" />
+    <Content Include="Areas\Tass\Views\ShippingCostForTMS\CreateResult.cshtml" />
+    <Content Include="Areas\Tass\Views\ShippingCostForTMS\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\TMSFixedData\Upload.cshtml" />
+    <Content Include="Areas\Tass\Views\TMSFixedData\UploadConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\TMSFixedData\_TMSFixedDataUpload.cshtml" />
+    <Content Include="Areas\Tass\Views\TMSFixedData\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\TMSFixedData\_TMSFixedDataRequestList.cshtml" />
+    <Content Include="Areas\Tass\Views\TMSFixedData\_TMSFixedDataBillingList.cshtml" />
+    <Content Include="Areas\Tass\Views\TMSFixedData\_TMSFixedDataPaymentList.cshtml" />
+    <Content Include="Areas\Tass\Views\TMSFixedData\CreateData.cshtml" />
+    <Content Include="Areas\Tass\Views\TMSFixedData\_TMSFixedDataListScript.cshtml" />
+    <Content Include="Areas\Tass\Views\TMSFixedData\_Form.cshtml" />
+    <Content Include="Areas\Tass\Views\TMSFixedData\_Show.cshtml" />
+    <Content Include="Areas\Tass\Views\TMSFixedData\Details.cshtml" />
+    <Content Include="Areas\Tass\Views\TMSFixedData\Edit.cshtml" />
+    <Content Include="Areas\Tass\Views\TMSFixedData\EditConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\TMSFixedData\_TMSFixedDataList.cshtml" />
+    <Content Include="Areas\Tass\Views\D032\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\D036\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\D029\_RehearsalForm.cshtml" />
+    <Content Include="Areas\Tass\Views\D029\_RehearsalShow.cshtml" />
+    <Content Include="Areas\Tass\Views\D029\Rehearsal.cshtml" />
+    <Content Include="Areas\Tass\Views\D029\RehearsalConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D029\RehearsalResult.cshtml" />
+    <Content Include="Areas\Tass\Views\D029\_RequestdataForm.cshtml" />
+    <Content Include="Areas\Tass\Views\D029\_RequestdataShow.cshtml" />
+    <Content Include="Areas\Tass\Views\D029\Requestdata.cshtml" />
+    <Content Include="Areas\Tass\Views\D029\RequestdataConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D029\RequestdataResult.cshtml" />
+    <Content Include="Areas\Tass\Views\D029\_PurchasingForm.cshtml" />
+    <Content Include="Areas\Tass\Views\D029\_PurchasingShow.cshtml" />
+    <Content Include="Areas\Tass\Views\D029\Purchasing.cshtml" />
+    <Content Include="Areas\Tass\Views\D029\PurchasingConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D029\PurchasingResult.cshtml" />
+    <Content Include="Areas\Aims\Views\D002\Index.cshtml" />
+    <Content Include="Areas\Aims\Views\D002\Details.cshtml" />
+    <Content Include="Areas\Aims\Views\D004\Make.cshtml" />
+    <Content Include="Areas\Aims\Views\D004\MakeComplete.cshtml" />
+    <Content Include="Areas\Aims\Views\D004\RecordSales.cshtml" />
+    <Content Include="Areas\Aims\Views\D004\RecordSalesComplete.cshtml" />
+    <Content Include="Areas\Tass\Views\D005\CreateHinban.cshtml" />
+    <Content Include="Areas\Tass\Views\D010\Create.cshtml" />
+    <Content Include="Areas\Tass\Views\D010\CreateConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D010\DeleteConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D010\Details.cshtml" />
+    <Content Include="Areas\Tass\Views\D010\Edit.cshtml" />
+    <Content Include="Areas\Tass\Views\D010\EditConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D010\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\D010\Make.cshtml" />
+    <Content Include="Areas\Tass\Views\D010\MakeConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D010\MakeResult.cshtml" />
+    <Content Include="Areas\Tass\Views\D010\_Form.cshtml" />
+    <Content Include="Areas\Tass\Views\D010\_Show.cshtml" />
+    <Content Include="Areas\Tass\Views\D015\Create.cshtml" />
+    <Content Include="Areas\Tass\Views\D015\CreateConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D015\DeleteConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D015\Details.cshtml" />
+    <Content Include="Areas\Tass\Views\D015\Edit.cshtml" />
+    <Content Include="Areas\Tass\Views\D015\EditConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D015\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\D015\_Form.cshtml" />
+    <Content Include="Areas\Tass\Views\D015\_Show.cshtml" />
+    <Content Include="Areas\Tass\Views\D007\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\D008\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\D022\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\D022\_Form.cshtml" />
+    <Content Include="Areas\Tass\Views\D022\_Show.cshtml" />
+    <Content Include="Areas\Tass\Views\D022\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Tass\Views\D011\Upload.cshtml" />
+    <Content Include="Areas\Tass\Views\D011\UploadConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D011\UploadResult.cshtml" />
+    <Content Include="Areas\Tass\Views\D011\_Form.cshtml" />
+    <Content Include="Areas\Tass\Views\D011\_Show.cshtml" />
+    <Content Include="Areas\Tass\Views\D011\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Tass\Views\D012\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\D013\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\D014\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\D034\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\D035\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\D015\Copy.cshtml" />
+    <Content Include="Areas\Tass\Views\D015\CopyConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D015\DetailsTsumeawase.cshtml" />
+    <Content Include="Areas\Tass\Views\D015\EditTsumeawase.cshtml" />
+    <Content Include="Areas\Tass\Views\D015\_FormTsumeawase.cshtml" />
+    <Content Include="Areas\Tass\Views\D015\_ShowTsumeawase.cshtml" />
+    <Content Include="Areas\Tass\Views\D020\Details.cshtml" />
+    <Content Include="Areas\Tass\Views\D020\Edit.cshtml" />
+    <Content Include="Areas\Tass\Views\D018\Create.cshtml" />
+    <Content Include="Areas\Tass\Views\D018\CreateConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D018\DeleteConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D018\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\D021\_DanballCreate.cshtml" />
+    <Content Include="Areas\Tass\Views\D021\_DanballEdit.cshtml" />
+    <Content Include="Areas\Tass\Views\D021\Create.cshtml" />
+    <Content Include="Areas\Tass\Views\D021\Details.cshtml" />
+    <Content Include="Areas\Tass\Views\D021\Edit.cshtml" />
+    <Content Include="Areas\Tass\Views\D021\DetailsKobetsu.cshtml" />
+    <Content Include="Areas\Tass\Views\D021\CreateKobetsu.cshtml" />
+    <Content Include="Areas\Tass\Views\D021\CreateNew.cshtml" />
+    <Content Include="Areas\Tass\Views\D021\CreateNewConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D021\CreateNewKobetsu.cshtml" />
+    <Content Include="Areas\Tass\Views\D021\CreateNewKobetsuConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D021\EditKobetsu.cshtml" />
+    <Content Include="Areas\Tass\Views\D030\Create.cshtml" />
+    <Content Include="Areas\Tass\Views\D030\Details.cshtml" />
+    <Content Include="Areas\Tass\Views\D030\Edit.cshtml" />
+    <Content Include="Areas\Tass\Views\D030\CreateAll.cshtml" />
+    <Content Include="Areas\Tass\Views\D030\CreateAllConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D030\Upload.cshtml" />
+    <Content Include="Areas\Tass\Views\D030\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Tass\Views\D030\UploadConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D030\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\Home\SubMenuD100.cshtml" />
+    <Content Include="Areas\Base\Views\Home\SubMenuD200.cshtml" />
+    <Content Include="Areas\Base\Views\Home\SubMenuD300.cshtml" />
+    <Content Include="Areas\Base\Views\Home\SubMenuD400.cshtml" />
+    <Content Include="Areas\Base\Views\D101\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D101\Details.cshtml" />
+    <Content Include="Areas\Base\Views\D101\Create.cshtml" />
+    <Content Include="Areas\Base\Views\Shared\Dialog\_D101Create.cshtml" />
+    <Content Include="Areas\Base\Views\Shared\Dialog\_D101Edit.cshtml" />
+    <Content Include="Areas\Base\Views\D101\CreateConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D101\Edit.cshtml" />
+    <Content Include="Areas\Base\Views\D101\EditConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D306\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D306\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D306\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D306\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D102\Create.cshtml" />
+    <Content Include="Areas\Base\Views\D206\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D401\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D401\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D401\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D401\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D212\Create.cshtml" />
+    <Content Include="Areas\Base\Views\D212\CreateConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D212\Details.cshtml" />
+    <Content Include="Areas\Base\Views\D212\Edit.cshtml" />
+    <Content Include="Areas\Base\Views\D212\EditConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D212\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D103\Create.cshtml" />
+    <Content Include="Areas\Base\Views\D103\CreateConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D103\Details.cshtml" />
+    <Content Include="Areas\Base\Views\D103\Edit.cshtml" />
+    <Content Include="Areas\Base\Views\D103\EditConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D103\Index.cshtml" />
+    <Content Include="Areas\Base\Views\Shared\Dialog\_D103Create.cshtml" />
+    <Content Include="Areas\Base\Views\Shared\Dialog\_D103Edit.cshtml" />
+    <Content Include="Areas\Base\Views\D301\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D301\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D301\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D301\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D303\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D303\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D303\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D303\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D304\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D304\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D304\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D304\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D307\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D307\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D307\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D307\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D307\Index2.cshtml" />
+    <Content Include="Areas\Base\Views\D307\UploadConfirm2.cshtml" />
+    <Content Include="Areas\Base\Views\D307\UploadResult2.cshtml" />
+    <Content Include="Areas\Base\Views\D308\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D308\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D308\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D308\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D309\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D309\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D309\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D309\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D310\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D310\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D310\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D310\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D311\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D311\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D311\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D311\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D312\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D312\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D312\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D312\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D313\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D313\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D313\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D313\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D314\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D314\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D314\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D314\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D315\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D315\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D315\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D315\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D317\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D317\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D317\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D317\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D402\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D402\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D402\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D402\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D403\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D403\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D403\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D403\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D404\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D404\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D404\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D404\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D405\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D405\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D405\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D405\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D406\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D406\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D406\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D406\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D407\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D407\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D407\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D407\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D408\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D408\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D408\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D408\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D409\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D409\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D409\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D409\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D410\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D410\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D410\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D410\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D411\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D411\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D411\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D411\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D412\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D412\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D412\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D412\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D413\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D413\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D413\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D413\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D414\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D414\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D414\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D414\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D415\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D415\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D415\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D415\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D416\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D416\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D416\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D416\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D417\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D417\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D417\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D417\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D418\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D418\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D418\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D418\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D419\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D419\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D419\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D419\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D420\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D420\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D420\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D420\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D421\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D421\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D421\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D421\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D423\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D423\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D423\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D423\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D424\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D424\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D424\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D424\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D425\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D425\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D425\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D425\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D422\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D422\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D422\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D422\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D318\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D318\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D318\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D318\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D305\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D305\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D305\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D305\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D316\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D316\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D316\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D316\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D102\Create.cshtml" />
+    <Content Include="Areas\Base\Views\D206\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\D010\Test.cshtml" />
+    <Content Include="Areas\Tass\Views\D015\EditKashikiribin.cshtml" />
+    <Content Include="Areas\Tass\Views\D015\_FormKashikiribin.cshtml" />
+    <Content Include="Areas\Tass\Views\D015\DetailsKashikiribin.cshtml" />
+    <Content Include="Areas\Tass\Views\D015\_ShowKashikiribin.cshtml" />
+    <Content Include="Areas\Tass\Views\D015\DetailsSeikyu.cshtml" />
+    <Content Include="Areas\Tass\Views\D015\_ShowSeikyu.cshtml" />
+    <Content Include="Areas\Tass\Views\D007\Make.cshtml" />
+    <Content Include="Areas\Tass\Views\D007\MakeConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D007\MakeResult.cshtml" />
+    <Content Include="Areas\Tass\Views\D022\DeleteConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D022\Details.cshtml" />
+    <Content Include="Areas\Tass\Views\D022\Edit.cshtml" />
+    <Content Include="Areas\Tass\Views\D022\EditConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D034\DeleteConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D034\Details.cshtml" />
+    <Content Include="Areas\Tass\Views\D034\IndexGetsuji.cshtml" />
+    <Content Include="Areas\Tass\Views\D034\IndexSantei.cshtml" />
+    <Content Include="Areas\Tass\Views\D034\Upload.cshtml" />
+    <Content Include="Areas\Tass\Views\D034\UploadConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D034\UploadResult.cshtml" />
+    <Content Include="Areas\Tass\Views\D034\_Form.cshtml" />
+    <Content Include="Areas\Tass\Views\D034\_Show.cshtml" />
+    <Content Include="Areas\Tass\Views\D034\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Tass\Views\D035\Create.cshtml" />
+    <Content Include="Areas\Tass\Views\D035\CreateConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D035\DeleteConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D035\Details.cshtml" />
+    <Content Include="Areas\Tass\Views\D035\Edit.cshtml" />
+    <Content Include="Areas\Tass\Views\D035\EditConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D035\Make.cshtml" />
+    <Content Include="Areas\Tass\Views\D035\MakeConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D035\MakeResult.cshtml" />
+    <Content Include="Areas\Tass\Views\D035\Upload.cshtml" />
+    <Content Include="Areas\Tass\Views\D035\UploadConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D035\UploadResult.cshtml" />
+    <Content Include="Areas\Tass\Views\D035\_Form.cshtml" />
+    <Content Include="Areas\Tass\Views\D035\_Show.cshtml" />
+    <Content Include="Areas\Tass\Views\D035\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Tass\Views\D030\_CreateAllDialog.cshtml" />
+    <Content Include="Areas\Tass\Views\D030\_EditAllDialog.cshtml" />
+    <Content Include="Areas\Tass\Views\Shared\Dialog\_D022EditDialog.cshtml" />
+    <Content Include="Areas\Tass\Views\D015\EditConfirmKashikiribin.cshtml" />
+    <Content Include="Areas\Tass\Views\D015\EditConfirmTsumeawase.cshtml" />
+    <Content Include="Areas\Tass\Views\Shared\Dialog\_YushutsuDialog.cshtml" />
+    <Content Include="Areas\Tass\Views\D020\Delete.cshtml" />
+    <Content Include="Areas\Tass\Views\D030\Delete.cshtml" />
+    <Content Include="Areas\Aims\Views\D005\Make.cshtml" />
+    <Content Include="Areas\Aims\Views\D005\MakeCostResult.cshtml" />
+    <Content Include="Areas\Aims\Views\D005\MakeCodeResult.cshtml" />
+    <Content Include="Areas\Tass\Views\D021\Delete.cshtml" />
+    <Content Include="Areas\Tass\Views\D021\DeleteKobetsu.cshtml" />
+    <Content Include="Areas\Aims\Views\D003\Change.cshtml" />
+    <Content Include="Areas\Aims\Views\D003\ChangeConfirm.cshtml" />
+    <Content Include="Areas\Aims\Views\D003\ChangeResult.cshtml" />
+    <Content Include="Areas\Aims\Views\D003\Create.cshtml" />
+    <Content Include="Areas\Aims\Views\D003\CreateConfirm.cshtml" />
+    <Content Include="Areas\Aims\Views\D003\DeleteConfirm.cshtml" />
+    <Content Include="Areas\Aims\Views\D003\Details.cshtml" />
+    <Content Include="Areas\Aims\Views\D003\Edit.cshtml" />
+    <Content Include="Areas\Aims\Views\D003\EditConfirm.cshtml" />
+    <Content Include="Areas\Aims\Views\D003\Index.cshtml" />
+    <Content Include="Areas\Aims\Views\D003\_Form.cshtml" />
+    <Content Include="Areas\Aims\Views\D003\_Show.cshtml" />
+    <Content Include="Areas\Aims\Views\D003\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Tass\Views\D021\_KobetsuCreate.cshtml" />
+    <Content Include="Areas\Tass\Views\D021\_KobetsuEdit.cshtml" />
+    <Content Include="Areas\Aims\Views\Shared\Dialog\_SalesCostDialog.cshtml" />
+    <Content Include="Areas\Aims\Views\D001\Create.cshtml" />
+    <Content Include="Areas\Aims\Views\D001\CreateConfirm.cshtml" />
+    <Content Include="Areas\Aims\Views\D001\DeleteConfirm.cshtml" />
+    <Content Include="Areas\Aims\Views\D001\Details.cshtml" />
+    <Content Include="Areas\Aims\Views\D001\Edit.cshtml" />
+    <Content Include="Areas\Aims\Views\D001\EditConfirm.cshtml" />
+    <Content Include="Areas\Aims\Views\D001\Index.cshtml" />
+    <Content Include="Areas\Aims\Views\D001\MakeConfirm.cshtml" />
+    <Content Include="Areas\Aims\Views\D001\MakeResult.cshtml" />
+    <Content Include="Areas\Aims\Views\D001\Change.cshtml" />
+    <Content Include="Areas\Aims\Views\D001\ChangeConfirm.cshtml" />
+    <Content Include="Areas\Aims\Views\D001\ChangeResult.cshtml" />
+    <Content Include="Areas\Aims\Views\D001\_Form.cshtml" />
+    <Content Include="Areas\Aims\Views\D001\_Show.cshtml" />
+    <Content Include="Areas\Aims\Views\D001\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Aims\Views\Shared\Dialog\_ClaimDetailsDialog.cshtml" />
+    <Content Include="Areas\Tass\Views\Shared\Dialog\_YushutsuEditDialog.cshtml" />
+    <Content Include="Areas\Base\Views\D107\Create.cshtml" />
+    <Content Include="Areas\Base\Views\D107\CreateConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D107\Details.cshtml" />
+    <Content Include="Areas\Base\Views\D107\Edit.cshtml" />
+    <Content Include="Areas\Base\Views\D107\EditConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D107\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D208\Create.cshtml" />
+    <Content Include="Areas\Base\Views\D208\CreateConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D208\Details.cshtml" />
+    <Content Include="Areas\Base\Views\D208\Edit.cshtml" />
+    <Content Include="Areas\Base\Views\D208\EditConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D208\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D210\Create.cshtml" />
+    <Content Include="Areas\Base\Views\D210\CreateConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D210\Details.cshtml" />
+    <Content Include="Areas\Base\Views\D210\Edit.cshtml" />
+    <Content Include="Areas\Base\Views\D210\EditConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D210\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D211\Create.cshtml" />
+    <Content Include="Areas\Base\Views\D211\CreateConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D211\Details.cshtml" />
+    <Content Include="Areas\Base\Views\D211\Edit.cshtml" />
+    <Content Include="Areas\Base\Views\D211\EditConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D211\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D213\Create.cshtml" />
+    <Content Include="Areas\Base\Views\D213\CreateConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D213\DeleteConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D213\Details.cshtml" />
+    <Content Include="Areas\Base\Views\D213\Edit.cshtml" />
+    <Content Include="Areas\Base\Views\D213\EditConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D213\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D215\Create.cshtml" />
+    <Content Include="Areas\Base\Views\D215\CreateConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D215\DeleteConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D215\Details.cshtml" />
+    <Content Include="Areas\Base\Views\D215\Edit.cshtml" />
+    <Content Include="Areas\Base\Views\D215\EditConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D215\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D216\Create.cshtml" />
+    <Content Include="Areas\Base\Views\D216\CreateConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D216\Details.cshtml" />
+    <Content Include="Areas\Base\Views\D216\Edit.cshtml" />
+    <Content Include="Areas\Base\Views\D216\EditConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D216\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D217\Create.cshtml" />
+    <Content Include="Areas\Base\Views\D217\CreateConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D217\DeleteConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D217\Details.cshtml" />
+    <Content Include="Areas\Base\Views\D217\Edit.cshtml" />
+    <Content Include="Areas\Base\Views\D217\EditConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D217\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D205\Create.cshtml" />
+    <Content Include="Areas\Base\Views\D205\CreateConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D205\DeleteConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D205\Details.cshtml" />
+    <Content Include="Areas\Base\Views\D205\Edit.cshtml" />
+    <Content Include="Areas\Base\Views\D205\EditConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D205\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D102\CreateConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D102\Details.cshtml" />
+    <Content Include="Areas\Base\Views\D102\Edit.cshtml" />
+    <Content Include="Areas\Base\Views\D102\EditConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D102\Index.cshtml" />
+    <Content Include="Areas\Base\Views\Shared\Dialog\_D102Create.cshtml" />
+    <Content Include="Areas\Base\Views\Shared\Dialog\_D102Edit.cshtml" />
+    <Content Include="Areas\Base\Views\Shared\Dialog\_D104Create.cshtml" />
+    <Content Include="Areas\Base\Views\Shared\Dialog\_D104Edit.cshtml" />
+    <Content Include="Areas\Base\Views\D104\Create.cshtml" />
+    <Content Include="Areas\Base\Views\D104\CreateConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D104\Details.cshtml" />
+    <Content Include="Areas\Base\Views\D104\Edit.cshtml" />
+    <Content Include="Areas\Base\Views\D104\EditConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D104\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D105\Create.cshtml" />
+    <Content Include="Areas\Base\Views\D105\CreateConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D105\DeleteConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D105\Details.cshtml" />
+    <Content Include="Areas\Base\Views\D105\Edit.cshtml" />
+    <Content Include="Areas\Base\Views\D105\EditConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D105\Index.cshtml" />
+    <Content Include="Areas\Base\Views\Shared\Dialog\_D105Create.cshtml" />
+    <Content Include="Areas\Base\Views\Shared\Dialog\_D105Edit.cshtml" />
+    <Content Include="Areas\Base\Views\Shared\Dialog\_D106Create.cshtml" />
+    <Content Include="Areas\Base\Views\Shared\Dialog\_D106Edit.cshtml" />
+    <Content Include="Areas\Base\Views\D106\Create.cshtml" />
+    <Content Include="Areas\Base\Views\D106\CreateConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D106\Details.cshtml" />
+    <Content Include="Areas\Base\Views\D106\Edit.cshtml" />
+    <Content Include="Areas\Base\Views\D106\EditConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D106\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D203\Create.cshtml" />
+    <Content Include="Areas\Base\Views\D203\CreateConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D203\DeleteConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D203\Details.cshtml" />
+    <Content Include="Areas\Base\Views\D203\Edit.cshtml" />
+    <Content Include="Areas\Base\Views\D203\EditConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D203\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D204\Create.cshtml" />
+    <Content Include="Areas\Base\Views\D204\CreateConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D204\DeleteConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D204\Details.cshtml" />
+    <Content Include="Areas\Base\Views\D204\Edit.cshtml" />
+    <Content Include="Areas\Base\Views\D204\EditConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D204\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D206\Create.cshtml" />
+    <Content Include="Areas\Base\Views\D206\CreateConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D206\Details.cshtml" />
+    <Content Include="Areas\Base\Views\D206\Edit.cshtml" />
+    <Content Include="Areas\Base\Views\D206\EditConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\Shared\Dialog\_D206Create.cshtml" />
+    <Content Include="Areas\Base\Views\Shared\Dialog\_D206Edit.cshtml" />
+    <Content Include="Areas\Base\Views\D207\Create.cshtml" />
+    <Content Include="Areas\Base\Views\D207\CreateConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D207\DeleteConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D207\Details.cshtml" />
+    <Content Include="Areas\Base\Views\D207\Edit.cshtml" />
+    <Content Include="Areas\Base\Views\D207\EditConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D207\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D209\Create.cshtml" />
+    <Content Include="Areas\Base\Views\D209\CreateConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D209\DeleteConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D209\Details.cshtml" />
+    <Content Include="Areas\Base\Views\D209\Edit.cshtml" />
+    <Content Include="Areas\Base\Views\D209\EditConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D209\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D201\Create.cshtml" />
+    <Content Include="Areas\Base\Views\D201\CreateConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D201\Details.cshtml" />
+    <Content Include="Areas\Base\Views\D201\Edit.cshtml" />
+    <Content Include="Areas\Base\Views\D201\EditConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D201\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D202\Create.cshtml" />
+    <Content Include="Areas\Base\Views\D202\CreateConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D202\Edit.cshtml" />
+    <Content Include="Areas\Base\Views\D202\EditConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D202\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D214\Create.cshtml" />
+    <Content Include="Areas\Base\Views\D214\CreateConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D214\DeleteConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D214\Details.cshtml" />
+    <Content Include="Areas\Base\Views\D214\Edit.cshtml" />
+    <Content Include="Areas\Base\Views\D214\EditConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D214\Index.cshtml" />
+    <Content Include="Areas\Base\Views\Shared\Dialog\_D214Create.cshtml" />
+    <Content Include="Areas\Base\Views\Shared\Dialog\_D214Edit.cshtml" />
+    <Content Include="Areas\Base\Views\D302\Index.cshtml" />
+    <Content Include="Areas\Base\Views\D302\UploadConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D302\UploadResult.cshtml" />
+    <Content Include="Areas\Base\Views\D302\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Base\Views\D218\Create.cshtml" />
+    <Content Include="Areas\Base\Views\D218\CreateConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D218\Details.cshtml" />
+    <Content Include="Areas\Base\Views\D218\Edit.cshtml" />
+    <Content Include="Areas\Base\Views\D218\EditConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D218\Index.cshtml" />
+    <Content Include="Areas\Dcos\Views\D011\Index.cshtml" />
+    <Content Include="Areas\Dcos\Views\D011\_List.cshtml" />
+    <Content Include="Areas\Dcos\Views\D011\Update.cshtml" />
+    <Content Include="Areas\Dcos\Views\D011\UpdateConfirm.cshtml" />
+    <Content Include="Areas\Dcos\Views\D011\UpdateResult.cshtml" />
+    <Content Include="Areas\Dcos\Views\D011\_Show.cshtml" />
+    <Content Include="Areas\Tass\Views\D003\_FormMikenpin.cshtml" />
+    <Content Include="Areas\Tass\Views\D003\_Show.cshtml" />
+    <Content Include="Areas\Tass\Views\D003\Create.cshtml" />
+    <Content Include="Areas\Tass\Views\D003\CreateConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D003\DeleteMikenpinConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D003\Details.cshtml" />
+    <Content Include="Areas\Tass\Views\D003\EditKenpin.cshtml" />
+    <Content Include="Areas\Tass\Views\D003\EditMiKenpinConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D003\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\D003\CreateZaiko.cshtml" />
+    <Content Include="Areas\Tass\Views\D003\CreateZaikoConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D003\DetailsZaiko.cshtml" />
+    <Content Include="Areas\Tass\Views\D003\EditZaiko.cshtml" />
+    <Content Include="Areas\Tass\Views\D003\EditZaikoConfirm.cshtml" />
+    <Content Include="Areas\Aims\Views\D017\Change.cshtml" />
+    <Content Include="Areas\Aims\Views\D017\ChangeConfirm.cshtml" />
+    <Content Include="Areas\Aims\Views\D017\ChangeResult.cshtml" />
+    <Content Include="Areas\Aims\Views\D017\Create.cshtml" />
+    <Content Include="Areas\Aims\Views\D017\CreateConfirm.cshtml" />
+    <Content Include="Areas\Aims\Views\D017\DeleteConfirm.cshtml" />
+    <Content Include="Areas\Aims\Views\D017\Details.cshtml" />
+    <Content Include="Areas\Aims\Views\D017\Edit.cshtml" />
+    <Content Include="Areas\Aims\Views\D017\EditConfirm.cshtml" />
+    <Content Include="Areas\Aims\Views\D017\Index.cshtml" />
+    <Content Include="Areas\Aims\Views\D017\MakeConfirm.cshtml" />
+    <Content Include="Areas\Aims\Views\D017\MakeResult.cshtml" />
+    <Content Include="Areas\Aims\Views\D017\_Form.cshtml" />
+    <Content Include="Areas\Aims\Views\D017\_Show.cshtml" />
+    <Content Include="Areas\Aims\Views\D017\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Aims\Views\D018\Change.cshtml" />
+    <Content Include="Areas\Aims\Views\D018\ChangeConfirm.cshtml" />
+    <Content Include="Areas\Aims\Views\D018\ChangeResult.cshtml" />
+    <Content Include="Areas\Aims\Views\D018\Create.cshtml" />
+    <Content Include="Areas\Aims\Views\D018\CreateConfirm.cshtml" />
+    <Content Include="Areas\Aims\Views\D018\DeleteConfirm.cshtml" />
+    <Content Include="Areas\Aims\Views\D018\Details.cshtml" />
+    <Content Include="Areas\Aims\Views\D018\Edit.cshtml" />
+    <Content Include="Areas\Aims\Views\D018\EditConfirm.cshtml" />
+    <Content Include="Areas\Aims\Views\D018\Index.cshtml" />
+    <Content Include="Areas\Aims\Views\D018\_Form.cshtml" />
+    <Content Include="Areas\Aims\Views\D018\_Show.cshtml" />
+    <Content Include="Areas\Aims\Views\D018\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Aims\Views\Shared\Dialog\_PurchasingDialog.cshtml" />
+    <Content Include="Areas\Tass\Views\D003\DeleteZaikoConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D003\Transfer.cshtml" />
+    <Content Include="Areas\Tass\Views\D003\TransferConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D003\_TransferForm.cshtml" />
+    <Content Include="Areas\Tass\Views\D003\_TransferShow.cshtml" />
+    <Content Include="Areas\Tass\Views\DossData\CreateResult.cshtml" />
+    <Content Include="Areas\Tass\Views\ShippingCostForTMS\Create.cshtml" />
+    <Content Include="Areas\Tass\Views\ShippingCostForTMS\CreateConfirm.cshtml" />
+    <Content Include="Areas\Aims\Views\D013\Change.cshtml" />
+    <Content Include="Areas\Aims\Views\D013\ChangeConfirm.cshtml" />
+    <Content Include="Areas\Aims\Views\D013\ChangeResult.cshtml" />
+    <Content Include="Areas\Aims\Views\D013\Create.cshtml" />
+    <Content Include="Areas\Aims\Views\D013\CreateConfirm.cshtml" />
+    <Content Include="Areas\Aims\Views\D013\DeleteConfirm.cshtml" />
+    <Content Include="Areas\Aims\Views\D013\Details.cshtml" />
+    <Content Include="Areas\Aims\Views\D013\Edit.cshtml" />
+    <Content Include="Areas\Aims\Views\D013\EditConfirm.cshtml" />
+    <Content Include="Areas\Aims\Views\D013\Index.cshtml" />
+    <Content Include="Areas\Aims\Views\D013\MakeConfirm.cshtml" />
+    <Content Include="Areas\Aims\Views\D013\MakeResult.cshtml" />
+    <Content Include="Areas\Aims\Views\D013\_Form.cshtml" />
+    <Content Include="Areas\Aims\Views\D013\_Show.cshtml" />
+    <Content Include="Areas\Aims\Views\D013\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Aims\Views\D014\Change.cshtml" />
+    <Content Include="Areas\Aims\Views\D014\ChangeConfirm.cshtml" />
+    <Content Include="Areas\Aims\Views\D014\ChangeResult.cshtml" />
+    <Content Include="Areas\Aims\Views\D014\Create.cshtml" />
+    <Content Include="Areas\Aims\Views\D014\CreateConfirm.cshtml" />
+    <Content Include="Areas\Aims\Views\D014\DeleteConfirm.cshtml" />
+    <Content Include="Areas\Aims\Views\D014\Details.cshtml" />
+    <Content Include="Areas\Aims\Views\D014\Edit.cshtml" />
+    <Content Include="Areas\Aims\Views\D014\EditConfirm.cshtml" />
+    <Content Include="Areas\Aims\Views\D014\Index.cshtml" />
+    <Content Include="Areas\Aims\Views\D014\_Form.cshtml" />
+    <Content Include="Areas\Aims\Views\D014\_Show.cshtml" />
+    <Content Include="Areas\Aims\Views\D014\_SimpleUpload.cshtml" />
+    <Content Include="Areas\Tass\Views\TMSFixedData\CreateConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\D102\DeleteConfirm.cshtml" />
+    <Content Include="Areas\Base\Views\Batch\Details.cshtml" />
+    <Content Include="Areas\Tass\Views\D003\_FormZaiko.cshtml" />
+    <Content Include="Areas\Tass\Views\D003\_FormShiji.cshtml" />
+    <Content Include="Areas\Tass\Views\D003\_ShowZaiko.cshtml" />
+    <Content Include="Areas\Tass\Views\D003\_ShowShiji.cshtml" />
+    <Content Include="Areas\Tass\Views\D003\_FormKenpin.cshtml" />
+    <Content Include="Areas\Tass\Views\D003\_ShowKenpin.cshtml" />
+    <Content Include="Areas\Tass\Views\D003\EditMiKenpin.cshtml" />
+    <Content Include="Areas\Tass\Views\D003\EditKenpinConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D003\EditDenso.cshtml" />
+    <Content Include="Areas\Tass\Views\D003\EditDensoConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D003\_FormDenso.cshtml" />
+    <Content Include="Areas\Tass\Views\D003\_ShowDenso.cshtml" />
+    <Content Include="Areas\Tass\Views\D003\DeleteDensoConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D003\DeleteKenpinConfirm.cshtml" />
+    <Content Include="Areas\Tass\Views\D003\TransferDelete.cshtml" />
+    <Content Include="Areas\Tass\Views\D003\_ShowMiKenpin.cshtml" />
+    <Content Include="Areas\Tass\Views\D020\Index.cshtml" />
+    <Content Include="Areas\Tass\Views\D021\Index.cshtml" />
+    <Content Include="Areas\Dcos\Views\StockAllocation\AutoAllocation.cshtml" />
+    <Content Include="Areas\Dcos\Views\StockAllocation\Details.cshtml" />
+    <Content Include="Areas\Dcos\Views\Shared\Dialog\_ReserveEdit.cshtml" />
+    <Content Include="Areas\Dcos\Views\StockAllocation\DeleteConfirm.cshtml" />
+    <Content Include="Areas\Dcos\Views\StockAllocation\AllocationExecCancelConfirm.cshtml" />
+    <Content Include="Areas\Dcos\Views\StockAllocation\ReserveStatus.cshtml" />
+    <Content Include="Areas\Dcos\Views\D002\AutoAllocationConfirm.cshtml" />
+    <Content Include="Areas\Dcos\Views\D001\Check.cshtml" />
+    <Content Include="Areas\Dcos\Views\D001\CheckResult.cshtml" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
+    <Content Include="Content\Layout.scss" />
+    <Content Include="log4net.config" />
+    <Content Include="Content\DataTables\css\semanticui.scss" />
+    <Content Include="Content\DataTables\css\mixins.scss" />
+    <Content Include="Content\DataTables\css\common.scss" />
+    <Content Include="Scripts\DataTables\extensions\Select\Readme.md" />
+    <Content Include="Scripts\DataTables\extensions\Scroller\Readme.md" />
+    <Content Include="Scripts\DataTables\extensions\RowReorder\Readme.md" />
+    <Content Include="Scripts\DataTables\extensions\RowGroup\Readme.md" />
+    <Content Include="Scripts\DataTables\extensions\Responsive\Readme.md" />
+    <Content Include="Scripts\DataTables\extensions\KeyTable\Readme.md" />
+    <Content Include="Scripts\DataTables\extensions\FixedHeader\Readme.md" />
+    <Content Include="Scripts\DataTables\extensions\FixedColumns\Readme.md" />
+    <Content Include="Scripts\DataTables\extensions\ColReorder\Readme.md" />
+    <Content Include="Scripts\DataTables\extensions\Buttons\Readme.md" />
+    <Content Include="Scripts\DataTables\extensions\AutoFill\Readme.md" />
+    <Content Include="Content\DataTables\media\images\Sorting icons.psd" />
+    <Content Include="Content\DataTables\extensions\RowReorder\css\semanticui.scss" />
+    <Content Include="Content\DataTables\extensions\Buttons\css\mixins.scss" />
+    <Content Include="Content\DataTables\extensions\Buttons\css\common.scss" />
+    <None Include="Scripts\jquery-3.5.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.5.1.js" />
+    <Content Include="Scripts\jquery-3.5.1.min.js" />
+    <Content Include="Scripts\jquery-3.5.1.slim.js" />
+    <Content Include="Scripts\jquery-3.5.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.datetimepicker.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jszip.js" />
+    <Content Include="Scripts\jszip.min.js" />
+    <Content Include="Scripts\macss.startup.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\pdfmake\pdfmake.min.js" />
+    <Content Include="Scripts\pdfmake\vfs_fonts.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper-utils.min.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\src\index.js" />
+    <Content Include="Scripts\src\methods\defaults.js" />
+    <Content Include="Scripts\src\methods\destroy.js" />
+    <Content Include="Scripts\src\methods\disableEventListeners.js" />
+    <Content Include="Scripts\src\methods\enableEventListeners.js" />
+    <Content Include="Scripts\src\methods\placements.js" />
+    <Content Include="Scripts\src\methods\update.js" />
+    <Content Include="Scripts\src\modifiers\applyStyle.js" />
+    <Content Include="Scripts\src\modifiers\arrow.js" />
+    <Content Include="Scripts\src\modifiers\computeStyle.js" />
+    <Content Include="Scripts\src\modifiers\flip.js" />
+    <Content Include="Scripts\src\modifiers\hide.js" />
+    <Content Include="Scripts\src\modifiers\index.js" />
+    <Content Include="Scripts\src\modifiers\inner.js" />
+    <Content Include="Scripts\src\modifiers\keepTogether.js" />
+    <Content Include="Scripts\src\modifiers\offset.js" />
+    <Content Include="Scripts\src\modifiers\preventOverflow.js" />
+    <Content Include="Scripts\src\modifiers\shift.js" />
+    <Content Include="Scripts\src\utils\clockwise.js" />
+    <Content Include="Scripts\src\utils\computeAutoPlacement.js" />
+    <Content Include="Scripts\src\utils\debounce.js" />
+    <Content Include="Scripts\src\utils\find.js" />
+    <Content Include="Scripts\src\utils\findCommonOffsetParent.js" />
+    <Content Include="Scripts\src\utils\findIndex.js" />
+    <Content Include="Scripts\src\utils\getBordersSize.js" />
+    <Content Include="Scripts\src\utils\getBoundaries.js" />
+    <Content Include="Scripts\src\utils\getBoundingClientRect.js" />
+    <Content Include="Scripts\src\utils\getClientRect.js" />
+    <Content Include="Scripts\src\utils\getFixedPositionOffsetParent.js" />
+    <Content Include="Scripts\src\utils\getOffsetParent.js" />
+    <Content Include="Scripts\src\utils\getOffsetRect.js" />
+    <Content Include="Scripts\src\utils\getOffsetRectRelativeToArbitraryNode.js" />
+    <Content Include="Scripts\src\utils\getOppositePlacement.js" />
+    <Content Include="Scripts\src\utils\getOppositeVariation.js" />
+    <Content Include="Scripts\src\utils\getOuterSizes.js" />
+    <Content Include="Scripts\src\utils\getParentNode.js" />
+    <Content Include="Scripts\src\utils\getPopperOffsets.js" />
+    <Content Include="Scripts\src\utils\getReferenceNode.js" />
+    <Content Include="Scripts\src\utils\getReferenceOffsets.js" />
+    <Content Include="Scripts\src\utils\getRoot.js" />
+    <Content Include="Scripts\src\utils\getRoundedOffsets.js" />
+    <Content Include="Scripts\src\utils\getScroll.js" />
+    <Content Include="Scripts\src\utils\getScrollParent.js" />
+    <Content Include="Scripts\src\utils\getStyleComputedProperty.js" />
+    <Content Include="Scripts\src\utils\getSupportedPropertyName.js" />
+    <Content Include="Scripts\src\utils\getViewportOffsetRectRelativeToArtbitraryNode.js" />
+    <Content Include="Scripts\src\utils\getWindow.js" />
+    <Content Include="Scripts\src\utils\getWindowSizes.js" />
+    <Content Include="Scripts\src\utils\includeScroll.js" />
+    <Content Include="Scripts\src\utils\index.js" />
+    <Content Include="Scripts\src\utils\isBrowser.js" />
+    <Content Include="Scripts\src\utils\isFixed.js" />
+    <Content Include="Scripts\src\utils\isFunction.js" />
+    <Content Include="Scripts\src\utils\isIE.js" />
+    <Content Include="Scripts\src\utils\isModifierEnabled.js" />
+    <Content Include="Scripts\src\utils\isModifierRequired.js" />
+    <Content Include="Scripts\src\utils\isNumeric.js" />
+    <Content Include="Scripts\src\utils\isOffsetContainer.js" />
+    <Content Include="Scripts\src\utils\removeEventListeners.js" />
+    <Content Include="Scripts\src\utils\runModifiers.js" />
+    <Content Include="Scripts\src\utils\setAttributes.js" />
+    <Content Include="Scripts\src\utils\setStyles.js" />
+    <Content Include="Scripts\src\utils\setupEventListeners.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper.js.flow" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Sample\SubMenu.cshtml" />
+    <Content Include="Views\Sample\Index.cshtml" />
+    <Content Include="Views\Sample\Create.cshtml" />
+    <Content Include="Views\Sample\_Form.cshtml" />
+    <Content Include="Views\Sample\Edit.cshtml" />
+    <Content Include="Views\Sample\Details.cshtml" />
+    <Content Include="Views\Sample\CreateConfirm.cshtml" />
+    <Content Include="Views\Sample\_Show.cshtml" />
+    <Content Include="Views\Sample\EditConfirm.cshtml" />
+    <Content Include="Views\Sample\DeleteConfirm.cshtml" />
+    <Content Include="Views\Shared\Dialog\_DepartmentCodeSearch.cshtml" />
+    <Content Include="Views\Sample\Upload.cshtml" />
+    <Content Include="Views\Sample\_SimpleUpload.cshtml" />
+    <Content Include="Views\Sample\UploadConfirm.cshtml" />
+    <Content Include="Views\Sample\UploadResult.cshtml" />
+    <Content Include="Views\AccountMasters\Create.cshtml" />
+    <Content Include="Views\AccountMasters\Delete.cshtml" />
+    <Content Include="Views\AccountMasters\Details.cshtml" />
+    <Content Include="Views\AccountMasters\Edit.cshtml" />
+    <Content Include="Views\AccountMasters\Index.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Sample\MultiColFixSample.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\Aims\Models\" />
+    <Folder Include="Areas\Base\Models\" />
+    <Folder Include="Areas\Dcos\Models\" />
+    <Folder Include="Areas\Fdass\Models\" />
+    <Folder Include="Areas\Pats\Models\" />
+    <Folder Include="Areas\Tass\Views\Base\" />
+    <Folder Include="Views\Search\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-3.5.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.5.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\macss.collapse.ts" />
+    <TypeScriptCompile Include="Scripts\macss.datatable.ts" />
+    <TypeScriptCompile Include="Scripts\macss.datetimepicker.ts" />
+    <TypeScriptCompile Include="Scripts\macss.fileupload.ts" />
+    <TypeScriptCompile Include="Scripts\macss.time.ts" />
+    <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MacssDb\MacssDb.csproj">
+      <Project>{fa25b8f0-aecd-4967-a188-1347e1631d70}</Project>
+      <Name>MacssDb</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202012150845366_Stock.resx">
+      <DependentUpon>202012150845366_Stock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012150922129_Stock2.resx">
+      <DependentUpon>202012150922129_Stock2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Aims.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Aims.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Application.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Base.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Base.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ControlText.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ControlText.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Dcos.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Dcos.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Fdas.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Fdas.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Messages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Pats.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Pats.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Tass.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Tass.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Title.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Title.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Validation.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Validation.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>このプロジェクトは、このコンピューター上にない NuGet パッケージを参照しています。それらのパッケージをダウンロードするには、[NuGet パッケージの復元] を使用します。詳細については、http://go.microsoft.com/fwlink/?LinkID=322105 を参照してください。見つからないファイルは {0} です。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

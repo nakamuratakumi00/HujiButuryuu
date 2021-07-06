@@ -1,0 +1,26 @@
+[
+  {
+    "outputFileName": "Content/bootstrap-table.min.js",
+    "inputFiles": [
+      "Content/bootstrap-table.js"
+    ]
+  },
+  {
+    "outputFileName": "Content/extensions/export/bootstrap-table-export.min.js",
+    "inputFiles": [
+      "Content/extensions/export/bootstrap-table-export.js"
+    ]
+  },
+  {
+    "outputFileName": "Content/extensions/filter-control/bootstrap-table-filter-control.min.js",
+    "inputFiles": [
+      "Content/extensions/filter-control/bootstrap-table-filter-control.js"
+    ]
+  },
+  {
+    "outputFileName": "Content/extensions/multiple-sort/bootstrap-table-multiple-sort.min.js",
+    "inputFiles": [
+      "Content/extensions/multiple-sort/bootstrap-table-multiple-sort.js"
+    ]
+  }
+]

@@ -1,0 +1,551 @@
+﻿@model Macss.Database.Entity.AccountMaster
+@{
+    ViewBag.Title = "運送業務";
+    ViewBag.PageMainTitle = "包装費実績明細登録（出荷実績なし）（個別単価）";
+    ViewBag.ConfirmMessage = MacssWeb.Resources.Messages.DeleteConfirm;
+    ViewBag.ButtonText = MacssWeb.Resources.ControlText.DeleteExec;
+    ViewBag.ConfirmDialogText = MacssWeb.Resources.Messages.DeleteReconfirm;
+}
+@section Scripts {
+    <script>
+    $(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#SampleList");
+            dt.configure();
+
+            //MacssDataTable（dataTables.fixedColumns.js）に表示する列が15件以上あると計算間違いで最左端列にスクロールバーが表示されるため、非表示にする
+            $('.DTFC_LeftBodyLiner').css('overflow-y', 'hidden');
+
+        });</script>
+}
+
+@Html.Partial("./_KobetsuCreate")
+@Html.Partial("./_KobetsuEdit")
+@Html.Partial("../Shared/Dialog/_TokuisakiCodeSearch")
+@Html.Partial("../Shared/Dialog/_RevertBeforeDeletionDialog")
+
+@using (Html.BeginForm("CreateNewKobetsu", "D021", null, FormMethod.Post))
+{
+    <div class="row justify-content-between macss-form-button-group-row">
+        <div class="col-4">
+            <a class="btn btn-secondary" data-toggle="modal" data-target="#TransitionConfirmDialog" role="button">@MacssWeb.Resources.ControlText.BackToList</a>
+        </div>
+        <div class="col-4 text-right">
+            <a class="btn btn-primary" href="@Url.Action("CreateNewKobetsuConfirm")" role="button">@MacssWeb.Resources.ControlText.InputConfirm</a>
+        </div>
+    </div>
+    <div class="accordion mt-3" id="ConditionAccordion">
+        <div class="card">
+            <div class="card-header macss-search-config-collapse-header" id="headingOne">
+                <div class="mb-0">
+                    <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain" aria-expanded="true" aria-controls="ConditionMain">
+                        <div class="d-inline-block" style="color:#333">基本項目</div>
+                        <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="color: rgb(120, 188, 255);"></i>
+                        <i id="CollapseShow" class="fas fa-chevron-circle-down" aria-hidden="true" style="color: rgb(120, 188, 255); display: none;"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+                <table class="table macss-form-table2">
+                    <colgroup>
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">梱包区分</label>
+                            </th>
+                            <td>
+                                <div>1 国内梱包</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label required" for="account_id">出荷No</label>
+                            </th>
+                            <td>
+                                <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label required" for="account_id">オリジナル出荷No</label>
+                            </th>
+                            <td>
+                                <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label required" for="account_id">出荷日</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="input-group">
+                                                <input class="form-control text-box single-line tokushu" id="totyaku_date" name="IDName" type="text" value="">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-outline-secondary tokushu" type="button" id="TotyakuDateCalendar" disabled><i class="fa fa-calendar-alt"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">経費負担No</label>
+                            </th>
+                            <td>
+                                <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">届先コード</label>
+                            </th>
+                            <td>
+                                <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">届先名</label>
+                            </th>
+                            <td>
+                                <input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label required" for="account_id">得意先コード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="input-group">
+                                                <input class="form-control text-box single-line" data-val="true" data-val-length="フィールド 部門コード は最大長が 4 の文字列である必要があります。" data-val-length-max="4" data-val-required="部門コード フィールドが必要です。" id="bumon_cd" name="bumon_cd" type="text" value="">
+                                                <div class="input-group-append">
+                                                    <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#TokuisakiCodeSearchDialog">
+                                                        <i class="fas fa-search"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="macss-val-ref col-6">
+                                            <span id="DepartmentName" class="align-middle"></span>
+                                        </div>
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="bumon_cd" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">出荷場所コード</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="input-group">
+                                                <input class="form-control text-box single-line" data-val="true" data-val-length="フィールド 部門コード は最大長が 4 の文字列である必要があります。" data-val-length-max="4" data-val-required="部門コード フィールドが必要です。" id="bumon_cd" name="bumon_cd" type="text" value="">
+                                                <div class="input-group-append">
+                                                    <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#TokuisakiCodeSearchDialog">
+                                                        <i class="fas fa-search"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="macss-val-ref col-6">
+                                            <span id="DepartmentName" class="align-middle"></span>
+                                        </div>
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="bumon_cd" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+
+@* 明細入力項目 *@
+<div class="accordion mt-3" id="DetailAccordion">
+    <div class="card">
+        <div class="card-header macss-search-config-collapse-header" id="headingOne">
+            <div class="mb-0">
+                <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#DetailMain" aria-expanded="true" aria-controls="DetailMain">
+                    <div class="d-inline-block" style="color:#333">明細入力項目</div>
+                    <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="color: rgb(120, 188, 255);"></i>
+                    <i id="CollapseShow" class="fas fa-chevron-circle-down" aria-hidden="true" style="color: rgb(120, 188, 255); display: none;"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="DetailMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#DetailAccordion">
+            <table class="table macss-form-table2">
+                <colgroup>
+                    <col class="macss-form-table-title2">
+                    <col class="macss-form-table-contents2">
+                </colgroup>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label" for="account_id">品名コード</label>
+                    </th>
+                    <td>
+                        <div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="input-group">
+                                        <input class="form-control text-box single-line" data-val="true" data-val-length="フィールド 品名コード は最大長が 4 の文字列である必要があります。" data-val-length-max="4" data-val-required="部門コード フィールドが必要です。" id="bumon_cd" name="bumon_cd" type="text" value="91009">
+                                        <div class="input-group-append">
+                                            <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#HinmeiCodeSearchDialog">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="macss-val-ref col-6">
+                                    <span id="DepartmentName" class="align-middle">BS15</span>
+                                </div>
+                            </div>
+                            <span class="field-validation-valid text-danger" data-valmsg-for="hinmei_cd" data-valmsg-replace="true"></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label" for="account_id">品名カナ</label>
+                    </th>
+                    <td>
+                        <div>
+                            <input class="form-control text-box single-line" id="LotNo" name="IDName" type="text" value="BS15">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label" for="account_id">包装数</label>
+                    </th>
+                    <td>
+                        <div>
+                            <input class="form-control text-box single-line" id="LotNo" name="IDName" type="text" value="1">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label required" for="account_id">単価コード</label>
+                    </th>
+                    <td>
+                        <div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="input-group">
+                                        <input class="form-control text-box single-line" data-val="true" data-val-length="フィールド 品名コード は最大長が 4 の文字列である必要があります。" data-val-length-max="4" data-val-required="部門コード フィールドが必要です。" id="bumon_cd" name="bumon_cd" type="text" value="80020">
+                                        <div class="input-group-append">
+                                            <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#HinmeiCodeSearchDialog">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="macss-val-ref col-6">
+                                    <span id="DepartmentName" class="align-middle">梱包荷札</span>
+                                </div>
+                            </div>
+                            <span class="field-validation-valid text-danger" data-valmsg-for="hinmei_cd" data-valmsg-replace="true"></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">単価区分</label>
+                    </th>
+                    <td>
+                        <div>
+                            <select class="custom-select form-control" id="Condition3">
+                                <option value=""></option>
+                                <option value="11">11 設定単価</option>
+                                <option value="19">19 修正単価</option>
+                                <option value="21" selected>21 分単価</option>
+                                <option value="29">29 修正分単価</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">振分区分</label>
+                    </th>
+                    <td>
+                        <div>
+                            <select class="custom-select form-control" id="Condition3">
+                                <option value=""></option>
+                                <option value="11">11 内外装(国内)</option>
+                                <option value="12">12 内外装(輸出)</option>
+                                <option value="21" selected>21 内装(国内)</option>
+                                <option value="22">22 内装(輸出)</option>
+                                <option value="31">31 外装(国内)</option>
+                                <option value="32">32 外装(輸出)</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label" for="account_id">包装単価</label>
+                    </th>
+                    <td>
+                        <table class="table table-bordered" style="width:400px;">
+                            <thead>
+                                <tr>
+                                    <th style="width:100px; background-color: #c8edf7; text-align:center;">内装</th>
+                                    <th style="width:100px; background-color: #c8edf7; text-align:center;">外装</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value=""></td>
+                                    <td><input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value=""></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label class="control-label">分単価</label>
+                    </th>
+                    <td>
+                        <table class="table table-bordered" style="width:700px;">
+                            <thead>
+                                <tr>
+                                    <th style="width:100px; background-color: #c8edf7; text-align:center;">　</th>
+                                    <th style="width:100px; background-color: #c8edf7; text-align:center;">通常</th>
+                                    <th style="width:100px; background-color: #c8edf7; text-align:center;">残業</th>
+                                    <th style="width:100px; background-color: #c8edf7; text-align:center;">休日</th>
+                                    <th style="width:100px; background-color: #c8edf7; text-align:center;">深夜</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th style="width:100px; background-color: #c8edf7; text-align:center;">分数</th>
+                                    <td><input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="10"></td>
+                                    <td><input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value=""></td>
+                                    <td><input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value=""></td>
+                                    <td><input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value=""></td>
+                                </tr>
+                                <tr>
+                                    <th style="width:100px; background-color: #c8edf7; text-align:center;">分単価</th>
+                                    <td><input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value="50.00"></td>
+                                    <td><input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value=""></td>
+                                    <td><input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value=""></td>
+                                    <td><input class="form-control text-box single-line" id="IDName" name="IDName" type="text" value=""></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="input-group mb-1" style="width:300px;">
+                            <div class="input-group-prepend" style="width:8rem;">
+                                <span class="input-group-text w-100">合計</span>
+                            </div>
+                            <span class="form-control text-right">500</span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div class="row">
+                <div class="col-4">
+                    <a class="btn btn-secondary macss-btn-sub" role="button">キャンセル</a>
+                    <a id="addDetail" class="btn btn-primary macss-btn-sub" role="button">追加</a>
+                    <a id="editDetail" class="btn btn-primary macss-btn-sub" role="button" style="display:none;">更新</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* 明細 *@
+<div class="accordion mt-3 mb-3" id="ConditionAccordion3">
+    <div class="card">
+        <div class="card-header macss-search-config-collapse-header" id="headingOne3">
+            <div class="mb-0">
+                <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain3" aria-expanded="true" aria-controls="ConditionMain3">
+                    <div class="d-inline-block" style="color:#333">一覧項目</div>
+                    <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="color: rgb(120, 188, 255);"></i>
+                    <i id="CollapseShow" class="fas fa-chevron-circle-down" aria-hidden="true" style="color: rgb(120, 188, 255); display: none;"></i>
+                </button>
+            </div>
+        </div>
+        <div id="ConditionMain3" class="container-fluid mb-3 pr-1 collapse show" aria-labelledby="headingOne2" data-parent="#ConditionAccordion3">
+            <table id="SampleList" class="table table-striped table-hover macss-data-table">
+                <thead class="macss-data-table-header">
+                    <!-- thの文字数で列の幅が決まってしまうため、必要に応じて全角スペースを入れて列の幅を調整する必要がある-->
+                    <tr>
+                        <th rowspan="2" class="valign-middle">　</th>
+                        <th rowspan="2" class="valign-middle">品名コード</th>
+                        <th rowspan="2" class="valign-middle">品名カナ　　</th>
+                        <th rowspan="2" class="valign-middle">包装数</th>
+                        <th rowspan="2" class="valign-middle">単価コード</th>
+                        <th rowspan="2" class="valign-middle">単価<BR>区分</th>
+                        <th rowspan="2" class="valign-middle">振分<BR>区分</th>
+                        <th colspan="2">包装単価</th>
+                        <th colspan="2" class="valign-middle">通常</th>
+                        <th colspan="2" class="valign-middle">残業</th>
+                        <th colspan="2" class="valign-middle">休日</th>
+                        <th colspan="2" class="valign-middle">深夜</th>
+                        <th rowspan="2" class="valign-middle">合計</th>
+                    </tr>
+                    <tr>
+                        <th>内装</th>
+                        <th>外装</th>
+                        <th>分数</th>
+                        <th>分単価</th>
+                        <th>分数</th>
+                        <th>分単価</th>
+                        <th>分数</th>
+                        <th>分単価</th>
+                        <th>分数</th>
+                        <th>分単価</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="white-space:nowrap;">
+                            <div class="macss-icon-container">
+                                <div class="macss-icon-item">
+                                    <a class="Edit01" data-toggle="modal" data-target="" title="編集"><i class="fas fa-pencil-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                    <a data-toggle="modal" data-target="#D021DeleteDialog" title="削除"><i class="fas fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </td>
+                        <td>197812</td>
+                        <td>FW2C1-R-TO-2</td>
+                        <td class="text-right">3</td>
+                        <td>3FWB</td>
+                        <td>11</td>
+                        <td>11</td>
+                        <td class="text-right">4.00</td>
+                        <td class="text-right">6.00</td>
+                        <td class="text-right"></td>
+                        <td class="text-right"></td>
+                        <td class="text-right"></td>
+                        <td class="text-right"></td>
+                        <td class="text-right"></td>
+                        <td class="text-right"></td>
+                        <td class="text-right"></td>
+                        <td class="text-right"></td>
+                        <td class="text-right">30</td>
+                    </tr>
+                    <tr>
+                        <td style="white-space:nowrap;">
+                            <div class="macss-icon-container">
+                                <div class="macss-icon-item">
+                                    <a class="Edit01" data-toggle="modal" data-target="" title="編集"><i class="fas fa-pencil-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                    <a data-toggle="modal" data-target="#D021DeleteDialog" title="削除"><i class="fas fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </td>
+                        <td>197812</td>
+                        <td>FW2C1-R-TO-2</td>
+                        <td class="text-right">1</td>
+                        <td>3FWB</td>
+                        <td>19</td>
+                        <td>21</td>
+                        <td class="text-right">15.00</td>
+                        <td class="text-right"></td>
+                        <td class="text-right"></td>
+                        <td class="text-right"></td>
+                        <td class="text-right"></td>
+                        <td class="text-right"></td>
+                        <td class="text-right"></td>
+                        <td class="text-right"></td>
+                        <td class="text-right"></td>
+                        <td class="text-right"></td>
+                        <td class="text-right">15</td>
+                    </tr>
+                    <tr>
+                        <td style="white-space:nowrap;">
+                            <div class="macss-icon-container">
+                                <div class="macss-icon-item">
+                                    <a class="Edit01" data-toggle="modal" data-target="" title="編集"><i class="fas fa-pencil-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                    <a data-toggle="modal" data-target="#D021DeleteDialog" title="削除"><i class="fas fa-trash-alt" style="color:#007bff" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </td>
+                        <td>91009</td>
+                        <td>BS15</td>
+                        <td class="text-right">1</td>
+                        <td>81130</td>
+                        <td>21</td>
+                        <td>21</td>
+                        <td class="text-right"></td>
+                        <td class="text-right"></td>
+                        <td class="text-right">10</td>
+                        <td class="text-right">50.00</td>
+                        <td class="text-right"></td>
+                        <td class="text-right"></td>
+                        <td class="text-right"></td>
+                        <td class="text-right"></td>
+                        <td class="text-right"></td>
+                        <td class="text-right"></td>
+                        <td class="text-right">500</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4"></div>
+<div class="row justify-content-between macss-form-button-group-row mt-4">
+    <div class="col-4">
+        <a class="btn btn-secondary" data-toggle="modal" data-target="#TransitionConfirmDialog" role="button">@MacssWeb.Resources.ControlText.BackToList</a>
+    </div>
+    <div class="col-4 text-right">
+        <a class="btn btn-primary" href="@Url.Action("CreateNewKobetsuConfirm")" role="button">@MacssWeb.Resources.ControlText.InputConfirm</a>
+    </div>
+</div>
+<script>
+    function setDepartmentCode(code, value) {
+        $("#bumon_cd").val(code);
+        $("#DepartmentName").text(value);
+    }
+    $(function () {
+        var createDatePicker = new Macss.DatetimePicker.MacssDtPicker("#create_date", "#CreateDateCalendar");
+        createDatePicker.configure();
+        var updateDatePicker = new Macss.DatetimePicker.MacssDtPicker("#update_date", "#UpdateDateCalendar");
+        updateDatePicker.configure();
+    });
+</script>
+
+
+
+<div class="modal" id="TransitionConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.TransitionConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @MacssWeb.Resources.Messages.TransitionConfirm
+                <br>
+                @MacssWeb.Resources.Messages.Confirm
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary macss-btn" href="@Url.Action("Index", "D015")" role="button">@MacssWeb.Resources.ControlText.Yes</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>

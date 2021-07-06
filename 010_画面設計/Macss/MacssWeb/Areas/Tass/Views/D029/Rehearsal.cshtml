@@ -1,0 +1,19 @@
+﻿@using System.Web.Optimization
+@model Macss.Database.Entity.AccountMaster
+
+@{
+    ViewBag.Title = "運送業務 - TASS";
+    ViewBag.PageMainTitle = "請求・仕入リハｰサルデータ作成";
+    ViewBag.ScreenId = "";
+}
+
+@using (Html.BeginForm("RehearsalConfirm", "D029", null, FormMethod.Post))
+{
+    @Html.Hidden("preAction", MacssWeb.Common.Actions.Create);
+
+    @Html.Partial("_RehearsalForm", Model)
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

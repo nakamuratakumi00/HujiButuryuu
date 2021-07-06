@@ -1,0 +1,20 @@
+﻿@model Macss.Database.Entity.DummyDossDataForAll
+
+@{
+    ViewBag.Title = "サンプル";
+    ViewBag.PageMainTitle = "新規作成サンプル";
+    ViewBag.ScreenId = "SMPL-D001";
+}
+
+@using (Html.BeginForm("CreateConfirm", "Sample", null, FormMethod.Post))
+{
+
+    @Html.Hidden("preAction", MacssWeb.Common.Actions.Create);
+
+    @Html.Partial("_Form", Model)
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

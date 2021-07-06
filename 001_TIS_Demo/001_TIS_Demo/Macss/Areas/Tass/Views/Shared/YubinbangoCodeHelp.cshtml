@@ -1,0 +1,148 @@
+﻿
+@using Macss.Areas.Tass.ViewModels
+@model CodeHelpViewModels.YubinbangoViewData
+@using Macss.HtmlHelpers
+
+
+<button type="button" class="btn btn-default" data-toggle="modal" data-target="#YubinbangoModal" style="height:22px; width:30px; padding:4px">
+    *
+</button>
+
+<!-- コードヘルプ -->
+<div class="modal fade bs-example-modal-lg" data-backdrop="static" id="YubinbangoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">コードヘルプ - 郵便番号マスタ</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row" style="line-height:2">
+                    @Html.LabelFor(model => model.Serch.Jyusy1, htmlAttributes: new { @class = "control-label col-sm-1 label_small" })
+                    <div class="col-sm-1 text_jp_small" >
+                        @Html.EditorFor(model => model.Serch.Jyusy1, new { htmlAttributes = new { @class = "form-control", @maxlength = "10" , style = "ime-mode: active" } })
+                        @Html.ValidationMessageFor(model => model.Serch.Jyusy1, "", new { @class = "text-danger" })
+                    </div>
+
+                    @Html.LabelFor(model => model.Serch.Jyusy2, htmlAttributes: new { @class = "control-label col-sm-2 label_small" })
+                    <div class="col-sm-2 text_jp_small" >
+                        @Html.EditorFor(model => model.Serch.Jyusy2, new { htmlAttributes = new { @class = "form-control", @maxlength = "40" , style = "ime-mode: active" } })
+                        @Html.ValidationMessageFor(model => model.Serch.Jyusy2, "", new { @class = "text-danger" })
+                    </div>
+
+                    @Html.LabelFor(model => model.Serch.Yubinn, htmlAttributes: new { @class = "control-label col-sm-2 label_small" })
+                    <div class="col-sm-2 text_cd_middle">
+                        @Html.EditorFor(model => model.Serch.Yubinn, new { htmlAttributes = new { @class = "form-control", @maxlength = "8" , style = "ime-mode: inactive" } })
+                        @Html.ValidationMessageFor(model => model.Serch.Yubinn, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+                    <div class="col-sm-11"></div>
+                    <div class="col-sm-1"><input type="button" name="YubinbangoSerch" id="YubinbangoSerch" class="btn btn-default" style="width:50px; height: 30px; padding:0; text-align: center;" value="検索" /></div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-sm-12 nbase-bootstrap-table" style="height:350px">
+                        <table id="YubinbangoTable"
+                               class="table"
+                               data-method="POST"
+                               data-toggle="table"
+                               data-query-params="YubinbangoQueryParams"
+                               data-id-table="advancedTable"
+                               data-page-list="[10, 25, 50, 1000]"
+                               data-click-to-select="true"
+                               data-filter-show-clear="true"
+                               data-pagination="true">
+                            <colgroup>
+                                <col style="width: 100px" />
+                                <col />
+                            </colgroup>
+                            <thead>
+                                <tr id="data">
+                                    @Html.ThFor(model => model.Information.Yubinn, htmlAttributes: new { data_sortable = "true" })
+                                    @Html.ThFor(model => model.Information.Jyusy1, htmlAttributes: new { data_sortable = "true" })
+                                    @Html.ThFor(model => model.Information.Jyusy2, htmlAttributes: new { data_sortable = "true" })
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-sm-9" style="width:700px"></div>
+                    <div class="col-sm-1"><input type="button" name="YubinbangoSelect" id="YubinbangoSelect" class="btn btn-default" data-dismiss="modal" style="width:50px; height: 30px; padding:0; text-align: center;" value="選択" /></div>
+                    <div class="col-sm-1" style="width:10px"></div>
+                    <div class="col-sm-1"><input type="button" name="YubinbangoClose" id="YubinbangoClose" class="btn btn-default" data-dismiss="modal"  style="width:50px; height: 30px; padding:0; text-align: center;" value="閉じる" /></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts  {
+    @Html.Partial("_BootstrapFunction")
+    @Scripts.Render("~/bundles/my-bootstrap-export")
+
+    <script>
+
+
+        // *********************** コードヘルプ用 *************************
+        // ↓このスクリプトは各画面で実装
+        @*var $YubinbangoTable = $('#YubinbangoTable');
+
+        window.onload = function () {
+
+            if ($('input[name="Serch.Kenjy1"]').val() != '' ||
+                $('input[name="Serch.Kenjy2"]').val() != '' ||
+                $('input[name="Serch.Yubinn"]').val() != '') {
+
+                $('#YubinbangoTable').bootstrapTable('refresh', { url: "@Url.Action("YubinbangoSerch", "CodeHelp")" });
+            }
+
+        };
+
+        $(function () {
+            $YubinbangoTable.on('click-row.bs.table', function (e, row, $element) {
+                $('.success').removeClass('success');
+                $($element).addClass('success');
+            });
+
+        });
+
+        $('#YubinbangoSelect').on('click', function (e) {
+            var index = $('.success').attr('data-index');
+            var row = $('.success').parents('table:first').bootstrapTable('getData')[index];
+            // ↓各画面で変更
+            //$("#serch_Hincod").val(row.@nameof(CodeHelpViewModels.YubinbangoInformation.Kenjy1));
+            //$("#serch_Hinnmk").val(row.@nameof(CodeHelpViewModels.YubinbangoInformation.Kenjy2));
+            //$("#serch_Hinnmk").val(row.@nameof(CodeHelpViewModels.YubinbangoInformation.Yubinn));
+
+        });
+
+        $('#YubinbangoSerch').on('click', function (e) {
+
+            $('#YubinbangoTable').bootstrapTable('refresh', { url: "@Url.Action("YubinbangoSerch", "CodeHelp")" });
+
+        });
+
+        function YubinbangoQueryParams(params) {
+
+            return JSON.stringify({
+                'Kenjy1': $('input[name="Serch.Kenjy1"]').val(),
+                'Kenjy2': $('input[name="Serch.Kenjy2"]').val(),
+                'Yubinn': $('input[name="Serch.Yubinn"]').val()
+
+            });
+        }*@
+        // *********************** コードヘルプ用 *************************
+
+        // このコードを各画面に実装
+        // @Html.Partial("YubinbangoCodeHelp", new CodeHelpViewModels.YubinbangoViewData())
+
+    </script>
+}
+

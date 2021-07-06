@@ -1,0 +1,825 @@
+﻿@Html.AntiForgeryToken()
+
+@if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+{
+    <div class="alert alert-info">
+        <span>@ViewBag.ConfirmMessage</span>
+    </div>
+}
+
+@{ var transAction = ViewContext.Controller.ValueProvider.GetValue("action").RawValue; }
+
+@{ var showAction = string.Empty; }
+@{ var setConfirmStyle = string.Empty; }
+@if (ViewBag.InputFlg != null && ViewBag.InputFlg == true)
+{
+    showAction = "EditConfirm";
+    //setConfirmStyle = "style=\"background-color:pink; \"";
+}
+else
+{
+    showAction = "Details";
+}
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="row justify-content-between macss-form-button-group-row">
+        @if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+        {
+            <div class="col-4">
+                <button type="submit" class="btn btn-secondary" name="cmdTopBack" value="@((int)MacssWeb.Common.ButtonValues.Back)">@MacssWeb.Resources.ControlText.Back</button>
+            </div>
+        }
+        else
+        {
+            <div class="col-4">
+                <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.Back</a>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="accordion mb-4" id="ConditionAccordion1">
+    <div class="card">
+        <div class="card-header macss-search-config-collapse-header" id="headingOne1">
+            <div class="mb-0">
+                <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain1" aria-expanded="true" aria-controls="ConditionMain1">
+                    <div class="d-inline-block" style="color:#333">出荷実績 基本エリア</div>
+                    <i id="CollapseHidden1" class="fas fa-chevron-circle-up" aria-hidden="true" style="color: rgb(120, 188, 255);"></i>
+                    <i id="CollapseShow1" class="fas fa-chevron-circle-down" aria-hidden="true" style="display:none;"></i>
+                </button>
+            </div>
+        </div>
+        <div id="ConditionMain1" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion1">
+            <table class="table macss-form-table">
+                <colgroup>
+                    <col class="macss-form-table-title" />
+                    <col class="macss-form-table-contents" />
+                </colgroup>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("出荷No", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+                            @if ((ViewBag.CreateFlg == null || ViewBag.CreateFlg == false) && (ViewBag.CopyFlg == null || ViewBag.CopyFlg == false))
+                            {
+                                <div>10-03481</div>
+                            }
+                            else
+                            {
+                                <div>10</div>
+                            }
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("オリジナル出荷No", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("伝票区分", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+                            I 出荷発注伝票
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("得意先", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+                            17601 ＦＥ）半導体営業　（松本・ＤＳ）
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("出荷日", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+                            2020/01/04
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("到着日", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("運送方法", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+                            11 路線便　信川名鉄運輸㈱
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("運送コース", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+                            F Ｆコース（ＦＦＪ定期）
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("仕入先", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+                            77571 小鈴産業（株）
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("運送区分", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+                            1211 自車定期便１　自車・車建・定期便
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("運賃負担区分", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+                            元払
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("出荷場所", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+                            A1 士川電機メーター㈱
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("経費負担No", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("機種コード", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+                            DK
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("担当者名", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+                            富士　太郎
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("届先コード", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+                            AA005C
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("届先郵便番号", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+                            101-0052
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("届先住所", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+                            東京都千代田区神田小川町６－１２－１　アンリビル３Ｆ
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("届先会社名", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+                            ㈱エイシーエスエヌ
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("届先支店名", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+                            東京営業所
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("届先部課名", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+                            システム本部
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("届先担当者名", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+                            田中部長代理
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("届先電話番号", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+                            03-3790-4912
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("品名コード", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+                            001002
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("品名", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+                            電気部品
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("品名カナ", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("出荷数", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+                            50
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("特記事項1", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("特記コード2", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+                            901
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("特記事項2", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+                            タイムサービス
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("請求明細書発行区分", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+                            請求書No.1
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("PCコード", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("ベースNo", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("出荷指示番号", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="accordion mb-4" id="ConditionAccordion2">
+    <div class="card">
+        <div class="card-header macss-search-config-collapse-header" id="headingOne2">
+            <div class="mb-0">
+                <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain2" aria-expanded="true" aria-controls="ConditionMain2">
+                    <div class="d-inline-block" style="color:#333">出荷実績 荷札発行エリア</div>
+                    <i id="CollapseHidden2" class="fas fa-chevron-circle-up" aria-hidden="true" style="color: rgb(120, 188, 255);"></i>
+                    <i id="CollapseShow2" class="fas fa-chevron-circle-down" aria-hidden="true" style="display:none;"></i>
+                </button>
+            </div>
+        </div>
+        <div id="ConditionMain2" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion2">
+            <table class="table macss-form-table">
+                <colgroup>
+                    <col class="macss-form-table-title" />
+                    <col class="macss-form-table-contents" />
+                </colgroup>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("包装数", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+                            10
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("包装済総重量", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        @if (ViewBag.InputFlg == null || ViewBag.InputFlg == false)
+                        {
+                            <!---->
+                            <div>
+                                200
+                            </div>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("詰合せ代表出荷No", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("出荷括りNo", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        @if (ViewBag.InputFlg == null || ViewBag.InputFlg == false)
+                        {
+                            <!---->
+                            <div>
+
+                            </div>
+                        }
+
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("出荷統合コード", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        @if (ViewBag.InputFlg == null || ViewBag.InputFlg == false)
+                        {
+                            <!---->
+                            <div>
+                                A104002001
+                            </div>
+                        }
+
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("FB発番仕入先原票No", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("JISコード", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+                            13101
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("仕分コード識別", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("仕分コード", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="accordion mb-4" id="ConditionAccordion3">
+    <div class="card">
+        <div class="card-header macss-search-config-collapse-header" id="headingOne3">
+            <div class="mb-0">
+                <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain3" aria-expanded="true" aria-controls="ConditionMain3">
+                    <div class="d-inline-block" style="color:#333">出荷実績 現品情報用エリア</div>
+                    <i id="CollapseHidden3" class="fas fa-chevron-circle-up" aria-hidden="true" style="color: rgb(120, 188, 255);"></i>
+                    <i id="CollapseShow3" class="fas fa-chevron-circle-down" aria-hidden="true" style="display:none;"></i>
+                </button>
+            </div>
+        </div>
+        <div id="ConditionMain3" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion3">
+            <table class="table macss-form-table">
+                <colgroup>
+                    <col class="macss-form-table-title" />
+                    <col class="macss-form-table-contents" />
+                </colgroup>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("最終需要家コード", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+                            AA005C
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("最終需要家名", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+                            ㈱エイシーエスエヌ
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("お客様コード", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+                            AA005C
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("お客様名称", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+                            ㈱エイシーエスエヌ
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("注文主名称カナ", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td>
+                        <div>
+                            ﾀﾅｶﾃﾞﾊﾞｲｽ
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("確定前・仕入先原票No", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        @Html.Label("サイズ", htmlAttributes: new { @class = "control-label" })
+                    </th>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+@if ((ViewBag.CreateFlg != null || ViewBag.CreateFlg == true) || (ViewBag.CopyFlg != null || ViewBag.CopyFlg == true))
+{
+    <div class="accordion mb-4" id="ConditionAccordion4">
+        <div class="card">
+            <div class="card-header macss-search-config-collapse-header" id="headingOne4">
+                <div class="mb-0">
+                    <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain4" aria-expanded="true" aria-controls="ConditionMain4">
+                        <div class="d-inline-block" style="color:#333">出荷実績 スポット発番用エリア</div>
+                        <i id="CollapseHidden4" class="fas fa-chevron-circle-up" aria-hidden="true" style="color: rgb(120, 188, 255);"></i>
+                        <i id="CollapseShow4" class="fas fa-chevron-circle-down" aria-hidden="true" style="display:none;"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="ConditionMain4" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion4">
+                <table class="table macss-form-table">
+                    <colgroup>
+                        <col class="macss-form-table-title" />
+                        <col class="macss-form-table-contents" />
+                    </colgroup>
+                    <tr>
+                        <th scope="row">
+                            @Html.Label("得意先名", htmlAttributes: new { @class = "control-label" })
+                        </th>
+                        <td>
+                            <div>
+
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            @Html.Label("住所", htmlAttributes: new { @class = "control-label" })
+                        </th>
+                        <td>
+                            <div>
+
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            @Html.Label("締日", htmlAttributes: new { @class = "control-label" })
+                        </th>
+                        <td>
+                            <div>
+
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+
+@if ((ViewBag.CreateFlg == null || ViewBag.CreateFlg == false) && (ViewBag.CopyFlg == null || ViewBag.CopyFlg == false))
+{
+    <div class="accordion mb-5" id="ConditionAccordion5">
+        <div class="card">
+            <div class="card-header macss-search-config-collapse-header" id="headingOne5">
+                <div class="mb-0">
+                    <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain5" aria-expanded="true" aria-controls="ConditionMain5">
+                        <div class="d-inline-block" style="color:#333">出荷実績 関連情報エリア</div>
+                        <i id="CollapseHidden5" class="fas fa-chevron-circle-up" aria-hidden="true" style="color: rgb(120, 188, 255);"></i>
+                        <i id="CollapseShow5" class="fas fa-chevron-circle-down" aria-hidden="true" style="display:none;"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="ConditionMain5" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion5">
+                <table class="table macss-form-table">
+                    <colgroup>
+                        <col class="macss-form-table-title" />
+                        <col class="macss-form-table-contents" />
+                    </colgroup>
+                    <tr>
+                        <th scope="row">
+                            <label class="control-label ">詰合せ</label>
+                        </th>
+                        <td>
+                            <a role="button" class="btn btn-primary" href="@Url.Action(@showAction + "Tsumeawase", new { id = @"01736",transAction = @transAction })">詳細</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            <label class="control-label ">貸切便</label>
+                        </th>
+                        <td>
+                            <span>あり　</span>
+                            <a role="button" class="btn btn-primary" href="@Url.Action(@showAction + "Kashikiribin", new { id = @"01736",transAction = @transAction })">詳細</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            <label class="control-label ">国内運賃</label>
+                        </th>
+                        <td @Html.Raw(setConfirmStyle)>
+                            <span>あり　</span>
+                            <a role="button" class="btn btn-primary" href="@Url.Action("Details","D020", new { id = @"01736",transAction = @transAction })">詳細</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            <label class="control-label ">海外運賃</label>
+                        </th>
+                        <td>
+                            <span>あり　</span>
+                            <a role="button" class="btn btn-primary" href="@Url.Action("Details","D020", new { id = @"01736",transAction = @transAction })">詳細</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            <label class="control-label ">国内梱包</label>
+                        </th>
+                        <td @Html.Raw(setConfirmStyle)>
+                            <span>あり　</span>
+                            <a role="button" class="btn btn-primary" href="@Url.Action("Details","D021", new { id = @"01736",transAction = @transAction })">詳細</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            <label class="control-label ">輸出梱包</label>
+                        </th>
+                        <td @Html.Raw(setConfirmStyle)>
+                            <span>あり　</span>
+                            <a role="button" class="btn btn-primary" href="@Url.Action("Details","D021", new { id = @"01736",transAction = @transAction })">詳細</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            <label class="control-label ">包装費（仕入）</label>
+                        </th>
+                        <td>
+                            @if (2 == 2)
+                            {
+                                <span>あり　</span>
+                                <a role="button" class="btn btn-primary" href="@Url.Action("Details","D021", new { id = @"01736",transAction = @transAction })">詳細</a>
+                            }
+                            else
+                            {
+                                <span>なし　</span>
+                            }
+                        </td>
+                    </tr>
+                    @if (ViewBag.InputFlg == null || ViewBag.InputFlg == false)
+                    {
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label ">請求</label>
+                            </th>
+                            <td>
+                                <a role="button" class="btn btn-primary" href="@Url.Action("DetailsSeikyu", new { id = @"01736",transAction = @transAction })">詳細</a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+}
+
+
+<div class="row justify-content-between macss-form-button-group-row">
+    @if (ViewBag.OnlyShow == null || ViewBag.OnlyShow == false)
+    {
+        <div class="col-4">
+            <button type="submit" class="btn btn-secondary" name="cmdBtmBack" value="@((int)MacssWeb.Common.ButtonValues.Back)">@MacssWeb.Resources.ControlText.Back</button>
+        </div>
+        <div class="col-4 text-right">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDialog">@ViewBag.ButtonText</button>
+        </div>
+    }
+    else
+    {
+        <div class="col-4">
+            <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.Back</a>
+        </div>
+        <div class="col-8 text-right">
+            <a role="button" class="btn btn-primary" href="@Url.Action("Edit", new { id = @"01736" })">@MacssWeb.Resources.ControlText.Edit</a>
+            <a role="button" class="btn btn-primary" href="@Url.Action("Copy", new { id = @"01736" })">@MacssWeb.Resources.ControlText.Copy</a>
+            <a role="button" class="btn btn-danger" href="@Url.Action("DeleteConfirm", new { id = @"01746" })">@MacssWeb.Resources.ControlText.Delete</a>
+        </div>
+    }
+</div>
+
+<div class="modal" id="ConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @ViewBag.ConfirmDialogText
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" name="cmdBtmExec" value="@((int)MacssWeb.Common.ButtonValues.Exec)">@MacssWeb.Resources.ControlText.Yes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        var cond1 = new Macss.Collapse.ConditionsPanel("#ConditionAccordion1", "#CollapseShow1", "#CollapseHidden1");
+        cond1.setCollapseEvent();
+        var cond2 = new Macss.Collapse.ConditionsPanel("#ConditionAccordion2", "#CollapseShow2", "#CollapseHidden2");
+        cond2.setCollapseEvent();
+        var cond3 = new Macss.Collapse.ConditionsPanel("#ConditionAccordion3", "#CollapseShow3", "#CollapseHidden3");
+        cond3.setCollapseEvent();
+        var cond4 = new Macss.Collapse.ConditionsPanel("#ConditionAccordion4", "#CollapseShow4", "#CollapseHidden4");
+        cond4.setCollapseEvent();
+        var cond5 = new Macss.Collapse.ConditionsPanel("#ConditionAccordion5", "#CollapseShow5", "#CollapseHidden5");
+        cond5.setCollapseEvent();
+    });
+</script>

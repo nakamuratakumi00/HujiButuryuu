@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Macss.Database.Entity.DummyShipmentResults>
+
+@{
+    ViewBag.Title = MacssWeb.Resources.Tass.ShipmentResultsForTMSMainTitle;
+    ViewBag.PageMainTitle = String.Format("{0}{1}", MacssWeb.Resources.Tass.ShipmentResultsForTMSCreateMainTitle, "完了");
+    ViewBag.ScreenId = "TASS-D023-04";
+}
+@section Scripts {
+    <script>
+
+        $(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#ErrorList", null, 2);
+            dt.setScrollY("600px");
+            dt.configure();
+
+            $('[data-toggle="popover"]').popover();
+
+        });
+    </script>
+}
+
+<div class="alert @ViewBag.AlertType">
+    <span>@ViewBag.ResultMessage</span>
+</div>
+
+<div class="alert alert-info">
+    <span>TMS用出荷実績データを作成しました。</span>
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-12 text-right">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("Index","HOME")">サブメニューへ</a>
+    </div>
+</div>
+
+
+<table class="table macss-form-table">
+    <colgroup>
+        <col class="macss-form-table-title" />
+        <col class="macss-form-table-contents" />
+    </colgroup>
+    <tr>
+        <th>
+            作成範囲
+        </th>
+        <td>
+            TMS連携
+        </td>
+    </tr>
+    <tr>
+        <th>
+            作成期間
+        </th>
+        <td>
+            <div class="row">
+                <div class="col-4">
+                    <label>
+                        2021/04/01　～　2021/04/30
+                    </label>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th>
+            作成件数
+        </th>
+        <td>
+            <div class="row">
+                <div class="col-4">
+                    <label>
+                        100件
+                    </label>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+

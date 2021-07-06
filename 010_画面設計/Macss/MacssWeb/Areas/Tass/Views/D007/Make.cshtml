@@ -1,0 +1,114 @@
+﻿@{
+    ViewBag.Title = "運送業務 - TASS";
+    ViewBag.ScreenId = "";
+    ViewBag.PageMainTitle = "半導体輸出出荷データ作成";
+    ViewBag.Caption = "半導体輸出出荷データの作成を行います。";
+}
+
+
+@using (Html.BeginForm("MakeConfirm", "D007", FormMethod.Post))
+{
+
+    @Html.AntiForgeryToken()
+
+    <div class="container-fluid">
+        <div>
+            <p>
+                @ViewBag.Caption
+            </p>
+        </div>
+
+        <div class="row mr-0 mb-1">
+            <div class="col-4">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="Condition1">作成区分</span>
+                    </div>
+                    <div class="macss-input-group-input form-control">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
+                            <label class="form-check-label" for="inlineRadio1">差分作成</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                            <label class="form-check-label" for="inlineRadio2">指定作成</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option2">
+                            <label class="form-check-label" for="inlineRadio2">漏れ分作成</label>
+                        </div>
+                    </div>
+                </div>
+            </div>                        
+        </div>
+        <div class="row mr-0 mb-1">            
+            <div class="col-8">                
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="Condition1">作成日時</span>
+                    </div>
+                    <input type="text" id="SampleDTPicker1" class="form-control">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="SampleCalendar1"><i class="fa fa-calendar-alt"></i></button>
+                    </div>
+                    <input class="time-control" id="TimeExample3" type="text" maxlength="5">
+                    <div class="input-group-append">
+                        <span class="input-group-text">～</span>
+                    </div>
+                    <input type="text" id="SampleDTPicker1" class="form-control">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="SampleCalendar2"><i class="fa fa-calendar-alt"></i></button>
+                    </div>
+                    <input class="time-control" id="TimeExample2" type="text" maxlength="5">
+                </div>                                               
+            </div>            
+        </div>
+        <div class="row mr-0 mb-1">                       
+            <div class="col-4">                                
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="Condition1">出荷No</span>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="Condition1">手配No</span>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="Condition1">項番</span>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Condition1" aria-describedby="Condition1">
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <div>
+                <div class="macss-upload-button-group-row pr-0 row">
+                    <div class="col-8">
+                        <a class="btn btn-secondary" href="@Url.Action("Index")" role="button">@MacssWeb.Resources.ControlText.BackToList</a>
+                    </div>
+                    <div class="col-4 text-right">
+                        <button type="button" id="Confirm" class="btn btn-primary">@MacssWeb.Resources.ControlText.Confirm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<script>
+    $(function () {
+        $('#Confirm').on('click', function () {
+            var form = $(this).parents('form');
+            form.submit();
+        });
+
+
+    })
+</script>

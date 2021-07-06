@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = MacssWeb.Resources.Dcos.StockAllocationPlanCancelMainTitle;
+    ViewBag.PageMainTitle = String.Format("{0}{1}", MacssWeb.Resources.Dcos.StockAllocationPlanCancelMainTitle, "確認");
+    ViewBag.ScreenId = "DCOS-D003-12";
+}
+@section Scripts {
+    <script>
+        $(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#UploadConfirmList");
+            dt.setScrollY("600px");
+            dt.configure();
+
+        });
+    </script>
+}
+
+<div class="alert alert-info">
+    <span>@ViewBag.ConfirmMessage</span>
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.BackToList</a>
+    </div>
+    <div class="col-4 text-right">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDialog">引当計画実施済解除</button>
+    </div>
+</div>
+
+<div class="container-fluid mt-4">
+    <div class="form-inline">
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">得意先</span>
+            </div>
+            <span class="form-control">@String.Format("{0} {1}", "71281", "サンプル商事(株)")</span>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt-2">
+    <div class="form-inline">
+        <div class="input-group mr-2 mb-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">オリジナル出庫指示No</span>
+            </div>
+            <span class="form-control">123456789012345</span>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid mt-4">
+    <div class="macss-label-like-btn-primary">@ViewBag.AllocCount</div>
+    @*<div class="macss-label-like-btn-warning">@ViewBag.ImpossibleAllocCount</div>*@
+</div>
+
+@Html.Partial("_List")
+
+<div class="modal" id="ConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                引当計画実施済を解除します。よろしいですか？
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.Cancel</button>
+                @using (Html.BeginForm("AllocationPlanCancelResult", "StockAllocation", null, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="UploadFileName" name="uploadFileName" value="@ViewBag.UploadFileName" />
+                    <button type="submit" class="btn btn-primary">解除</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>

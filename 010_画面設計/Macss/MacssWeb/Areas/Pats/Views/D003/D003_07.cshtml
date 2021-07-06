@@ -1,0 +1,366 @@
+﻿@* 取引実績更新(GH21A取引データ保守参考) *@
+
+@Html.AntiForgeryToken()
+
+@Html.Partial("../Shared/Dialog/_DepartmentCodeSearch")
+@Html.Partial("~/Areas/Tass/Views/Shared/Dialog/_HinmeiCodeSearch.cshtml")
+
+<div>
+    @Html.ValidationSummary(false, "入力エラーがあります。", new { @class = "alert alert-danger" })
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#TransitionConfirmDialog">@MacssWeb.Resources.ControlText.BackToList</button>
+    </div>
+    <div class="col-4 text-right">
+        <a class="btn btn-primary macss-btn" href="@Url.Action("D003_08")" role="button">@MacssWeb.Resources.ControlText.InputConfirm</a>
+    </div>
+</div>
+
+@* 更新項目 *@
+<table class="table macss-form-table">
+    <colgroup>
+        <col class="macss-form-table-title" />
+        <col class="macss-form-table-contents" />
+    </colgroup>
+    @* データNo 必須 *@
+    <tr>
+        <th scope="row">
+            <label class="required">データNo</label>
+        </th>
+        <td>
+            <input class="form-control" type="text" value="1234567890" />
+        </td>
+    </tr>
+    @* データ区分 表示 *@
+    <tr>
+        <th scope="row">
+            データ区分
+        </th>
+        <td>
+            101 直売売上
+        </td>
+    </tr>
+    @* 取引日 必須 *@
+    <tr>
+        <th>
+            <label class="control-label required">取引日</label>
+        </th>
+        <td>
+            <div class="input-group">
+                <input type="text" id="date1" class="form-control" value="YYYY/MM/DD" />
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="Calendar1"><i class="fa fa-calendar-alt"></i></button>
+                </div>
+            </div>
+        </td>
+    </tr>
+    @* 取引先(コード・名) 取引先 *@
+    <tr>
+        <th>
+            <label class="required">取引先コード</label>
+        </th>
+        <td>
+            <div class="row">
+                <div class="col-4">
+                    <div class="input-group">
+                        <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="" name="" type="text" value="123456789">
+                        <div class="input-group-append">
+                            <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#HinmeiCodeSearchDialog">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <span id="" class="align-middle">１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０</span>
+                </div>
+            </div>
+        </td>
+    </tr>
+    @* 原価区分 必須 *@
+    <tr>
+        @* 現行システムでは得意先コードと同じ枠内 *@
+        <th scope="row">
+            <label class="required">原価区分</label>
+        </th>
+        <td>
+            <select class="custom-select form-control">
+                <option></option>
+                <option>1:原価</option>
+                <option>2:経費</option>
+            </select>
+        </td>
+    </tr>
+    @* 請求先(コード・名) 表示 *@
+    <tr>
+        <th scope="row">
+            請求先
+        </th>
+        <td>
+            123456789 １２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０
+        </td>
+    </tr>
+    @* 売上PC(コード・名) 必須 *@
+    <tr>
+        <th scope="row">
+            <label class="required">売上PC</label>
+        </th>
+        <td>
+            <div class="row">
+                <div class="col-4">
+                    <div class="input-group">
+                        <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="" name="" type="text" value="1234">
+                        <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="" name="" type="text" value="5678" style="border-top-left-radius:0; border-bottom-left-radius:0;">
+                        <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="" name="" type="text" value="9012" style="border-top-left-radius:0; border-bottom-left-radius:0;">
+                        <div class="input-group-append">
+                            <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="">
+                                <i class="fas fa-redo"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <span id="" class="align-middle">１２３４５６７８９０ １２３４５６７８９０ １２３４５６７８９０１２３４５６７８９０</span>
+                </div>
+            </div>
+        </td>
+    </tr>
+    @* 得意先製造番号 修正可 *@
+    <tr>
+        <th scope="row">
+            得意先製造番号
+        </th>
+        <td>
+            <input class="form-control" value="123456789012345678901234567890" />
+        </td>
+    </tr>
+    @* 得意先注文No 修正可 *@
+    <tr>
+        <th scope="row">
+            得意先注文番号
+        </th>
+        <td>
+            <input class="form-control" value="12345678901234567890" />
+        </td>
+    </tr>
+    @* 仕入先 表示 *@
+    <tr>
+        <th scope="row">
+            仕入先
+        </th>
+        <td>
+            123456789 １２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０
+        </td>
+    </tr>
+    @* 品名（品名） 表示 *@
+    <tr>
+        <th scope="row">
+            品名
+        </th>
+        <td>
+            123456789012 １２３４５６７８９０１２３４５６７８９０
+        </td>
+    </tr>
+    @* 規格・寸法 表示 *@
+    <tr>
+        <th scope="row">
+            規格・寸法
+        </th>
+        <td>
+            １２３４５６７８９０１２３４５６７８９０
+        </td>
+    </tr>
+    @* 単位 表示 *@
+    <tr>
+        <th scope="row">
+            単位
+        </th>
+        <td>
+            12 １２３４５６７８９０
+        </td>
+    </tr>
+    @* 数量 表示 *@
+    <tr>
+        <th scope="row">
+            数量
+        </th>
+        <td>
+            123,456,789
+        </td>
+    </tr>
+    @* 単価 修正可 *@
+    <tr>
+        <th scope="row">
+            単価
+        </th>
+        <td>
+            <input class="form-control" value="12,345,678,901.12" />
+        </td>
+    </tr>
+    @* 金額 自動 *@
+    <tr>
+        <th scope="row">
+            金額
+        </th>
+        <td>
+            <input class="form-control" value="12,345,678,901" />
+        </td>
+    </tr>
+    @* 仕入単価 表示 *@
+    <tr>
+        <th scope="row">
+            仕入単価
+        </th>
+        <td>
+            12,345,678,901.12
+        </td>
+    </tr>
+    @* 粗利益額 表示 *@
+    <tr>
+        <th scope="row">
+            粗利益額
+        </th>
+        <td>
+            123,456,789
+        </td>
+    </tr>
+    @* 倉庫 表示 *@
+    <tr>
+        <th scope="row">
+            倉庫
+        </th>
+        <td>
+            12 １２３４５６７８９０１２３４５
+        </td>
+    </tr>
+    @* 注文No 表示 *@
+    <tr>
+        <th scope="row">
+            注文No
+        </th>
+        <td>
+            1234567890
+        </td>
+    </tr>
+    @* 在庫区分 表示 *@
+    <tr>
+        <th scope="row">
+            在庫区分
+        </th>
+        <td>
+            10 在庫にしない
+        </td>
+    </tr>
+    @* 在庫種別 表示 *@
+    <tr>
+        <th scope="row">
+            在庫種別
+        </th>
+        <td>
+            1 自社在庫
+        </td>
+    </tr>
+    @* 納品書No 表示 *@
+    <tr>
+        <th scope="row">
+            納品書No
+        </th>
+        <td>
+            1234567
+        </td>
+    </tr>
+    @* 納品日 *@
+    <tr>
+        <th>
+            納品日
+        </th>
+        <td>
+            <div class="input-group">
+                <input type="text" id="date1" class="form-control" />
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="Calendar1"><i class="fa fa-calendar-alt"></i></button>
+                </div>
+            </div>
+        </td>
+    </tr>
+    @* 処理理由 任意 *@
+    <tr>
+        <th scope="row">
+            <label class="control-label">処理理由</label>
+        </th>
+        <td>
+            <div>
+                <input class="form-control" type="text" value="１２３４５６７８９０１２３４５６７８９０">
+            </div>
+        </td>
+    </tr>
+    @* 修正区分 月末データの場合のみ表示 *@
+    <tr>
+        <th scope="row">
+            修正区分
+        </th>
+        <td>
+            1
+        </td>
+    </tr>
+    @* 請求明細作成済フラグ 月末データの場合のみ表示 *@
+    <tr>
+        <th scope="row">
+            請求明細作成済フラグ
+        </th>
+        <td>
+            1:作成済
+        </td>
+    </tr>
+    @* 登録日 *@
+    <tr>
+        <th scope="row">
+            登録日
+        </th>
+        <td>
+            YYYY/MM/DD
+        </td>
+    </tr>
+</table>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#TransitionConfirmDialog">@MacssWeb.Resources.ControlText.BackToList</button>
+    </div>
+    <div class="col-4 text-right">
+        <a class="btn btn-primary macss-btn" href="@Url.Action("D003_08")" role="button">@MacssWeb.Resources.ControlText.InputConfirm</a>
+    </div>
+</div>
+
+@* 画面遷移確認ダイアログ *@
+<div class="modal" id="TransitionConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.TransitionConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @MacssWeb.Resources.Messages.TransitionConfirm
+                <br>
+                @MacssWeb.Resources.Messages.Confirm
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary macss-btn" href="@Url.Action("D003_01")" role="button">@MacssWeb.Resources.ControlText.Yes</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        var createDatePicker = new Macss.DatetimePicker.MacssDtPicker("#date1", "#Calendar1");
+        createDatePicker.configure();
+    });
+
+</script>

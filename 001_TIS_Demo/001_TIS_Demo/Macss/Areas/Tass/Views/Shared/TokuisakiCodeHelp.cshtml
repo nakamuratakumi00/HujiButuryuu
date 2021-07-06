@@ -1,0 +1,172 @@
+﻿
+@using Macss.Areas.Tass.ViewModels
+@model CodeHelpViewModels.TokuisakiViewData
+@using Macss.HtmlHelpers
+
+
+<button type="button" class="btn btn-default" data-toggle="modal" data-target="#TokuisakiModal" style="height:22px; width:30px; padding:4px">
+    *
+</button>
+
+<!-- コードヘルプ -->
+<div class="modal fade bs-example-modal-lg" data-backdrop="static" id="TokuisakiModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">コードヘルプ - 取引先マスタ 得意先コード</h4>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row" style="line-height:2">
+                    @Html.LabelFor(model => model.Serch.Tornmk, htmlAttributes: new { @class = "control-label col-sm-1 label_small" })
+                    <div class="col-sm-1 text_jp_middle">
+                        @Html.EditorFor(model => model.Serch.Tornmk, new { htmlAttributes = new { @class = "form-control", @maxlength = "80", style = "ime-mode: inactive" } })
+                        @*@Html.ValidationMessageFor(model => model.Serch.Tornmk, "", new { @class = "text-danger" })*@
+                    </div>
+
+                    @Html.LabelFor(model => model.Serch.Torcod, htmlAttributes: new { @class = "control-label col-sm-2 label_small"})
+                    <div class="col-sm-2 text_cd_middle">
+                        @Html.EditorFor(model => model.Serch.Torcod, new { htmlAttributes = new { @class = "form-control", @maxlength = "9" , style = "ime-mode: inactive" } })
+                        @Html.ValidationMessageFor(model => model.Serch.Torcod, "", new { @class = "text-danger" })
+                    </div>
+                    @Html.LabelFor(model => model.Serch.Fbtcod, htmlAttributes: new { @class = "control-label col-sm-2", style = "width:130px" })
+                    <div class="col-sm-2 text_cd_middle">
+                        @Html.EditorFor(model => model.Serch.Fbtcod, new { htmlAttributes = new { @class = "form-control", @maxlength = "9", style = "ime-mode: inactive" } })
+                        @Html.ValidationMessageFor(model => model.Serch.Fbtcod, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row" style="line-height:2">
+                    @Html.LabelFor(model => model.Serch.Tornam, htmlAttributes: new { @class = "control-label col-sm-1 label_small" })
+                    <div class="col-sm-1 text_jp_middle">
+                        @Html.EditorFor(model => model.Serch.Tornam, new { htmlAttributes = new { @class = "form-control", @maxlength = "40" , style = "ime-mode: active" } })
+                        @*@Html.ValidationMessageFor(model => model.Serch.Tornam, "", new { @class = "text-danger" })*@
+                    </div>
+
+                    @Html.LabelFor(model => model.Serch.Buknam, htmlAttributes: new { @class = "control-label col-sm-2 label_small" })
+                    <div class="col-sm-2 text_jp_middle">
+                        @Html.EditorFor(model => model.Serch.Buknam, new { htmlAttributes = new { @class = "form-control", @maxlength = "20" , style = "ime-mode: active" } })
+                        @*@Html.ValidationMessageFor(model => model.Serch.Buknam, "", new { @class = "text-danger" })*@
+                    </div>
+                </div>
+                <div class="row" style="line-height:2">
+                    @Html.LabelFor(model => model.Serch.Jysyo, htmlAttributes: new { @class = "control-label col-sm-2 label_small" })
+                    <div class="col-sm-2 text_jp_large">
+                        @Html.EditorFor(model => model.Serch.Jysyo, new { htmlAttributes = new { @class = "form-control", @maxlength = "60", style = "ime-mode: active" } })
+                        @*@Html.ValidationMessageFor(model => model.Serch.Jysyo, "", new { @class = "text-danger" })*@
+                    </div>
+                </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-11"></div>
+                        <div class="col-sm-1"><input type="button" name="TokuisakiSearch" id="TokuisakiSearch" class="btn btn-default" style="width:50px; height: 30px; padding:0; text-align: center;" value="検索" /></div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-12 nbase-bootstrap-table" style="height:350px">
+                            <table id="TokuisakiTable"
+                                   class="table"
+                                   data-method="POST"
+                                   data-toggle="table"
+                                   data-query-params="TokuisakiQueryParams"
+                                   data-id-table="advancedTable"
+                                   data-page-list="[10, 25, 50, 1000]"
+                                   data-click-to-select="true"
+                                   data-filter-show-clear="true"
+                                   data-pagination="true">
+                                <thead>
+                                    <tr id="data">
+                                        @Html.ThFor(model => model.Information.Tornmk, htmlAttributes: new { data_sortable = "true" })
+                                        @Html.ThFor(model => model.Information.Torcod, htmlAttributes: new { data_sortable = "true" })
+                                        @Html.ThFor(model => model.Information.Fbtcod, htmlAttributes: new { data_sortable = "true" })
+                                        @Html.ThFor(model => model.Information.Tornam, htmlAttributes: new { data_sortable = "true" })
+                                        @Html.ThFor(model => model.Information.Buknam, htmlAttributes: new { data_sortable = "true" })
+                                        @Html.ThFor(model => model.Information.Jysyo, htmlAttributes: new { data_sortable = "true" })
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-9" style="width:700px"></div>
+                        <div class="col-sm-1"><input type="button" name="TokuisakiSelect" id="TokuisakiSelect" class="btn btn-default" data-dismiss="modal" style="width:45px; height: 30px; padding:0; text-align: center;" value="選択" /></div>
+                        <div class="col-sm-1" style="width:10px"></div>
+                        <div class="col-sm-1"><input type="button" name="TokuisakiClose" id="TokuisakiClose" class="btn btn-default" data-dismiss="modal" style="width:50px; height: 30px; padding:0; text-align: center;" value="閉じる" /></div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+
+@section Scripts  {
+    @Html.Partial("_BootstrapFunction")
+    @Scripts.Render("~/bundles/my-bootstrap-export")
+
+    <script>
+
+
+        // *********************** コードヘルプ用 *************************
+        // ↓このスクリプトは各画面で実装
+        @*var $TokuisakiTable = $('#TokuisakiTable');
+
+        window.onload = function () {
+
+            if ($('input[name="Serch.Tornmk"]').val() != '' ||
+                $('input[name="Serch.Torcod"]').val() != '' ||
+                $('input[name="Serch.Fbtcod"]').val() != '' ||
+                $('input[name="Serch.Tornam"]').val() != '' ||
+                $('input[name="Serch.Buknam"]').val() != '' ||
+                $('input[name="Serch.Jysyo"]').val() != '') {
+
+                $('#TokuisakiTable').bootstrapTable('refresh', { url: "@Url.Action("TokuisakiSearch", "CodeHelp")" });
+            }
+
+        };
+
+        $(function () {
+            $TokuisakiTable.on('click-row.bs.table', function (e, row, $element) {
+                $('.success').removeClass('success');
+                $($element).addClass('success');
+            });
+
+        });
+
+        $('#TokuisakiSelect').on('click', function (e) {
+            var index = $('.success').attr('data-index');
+            var row = $('.success').parents('table:first').bootstrapTable('getData')[index];
+
+            // ↓各画面で変更
+            //$("#serch_Hincod").val(row.@nameof(CodeHelpViewModels.TokuisakiInformation.Torcod));
+            //$("#serch_Hinnmk").val(row.@nameof(CodeHelpViewModels.TokuisakiInformation.Tornmk));
+
+        });
+
+        $('#TokuisakiSearch').on('click', function (e) {
+
+            $('#TokuisakiTable').bootstrapTable('refresh', { url: "@Url.Action("TokuisakiSearch", "CodeHelp")" });
+
+        });
+
+        function TokuisakiQueryParams(params) {
+
+            return JSON.stringify({
+                'Tornmk': $('input[name="Serch.Tornmk"]').val(),
+                'Torcod': $('input[name="Serch.Torcod"]').val(),
+                'Fbtcod': $('input[name="Serch.Fbtcod"]').val(),
+                'Tornam': $('input[name="Serch.Tornam"]').val(),
+                'Buknam': $('input[name="Serch.Buknam"]').val(),
+                'Jysyo': $('input[name="Serch.Jysyo"]').val()
+            });
+        }*@
+        // *********************** コードヘルプ用 *************************
+
+        // このコードを各画面に実装
+        // @Html.Partial("TokuisakiCodeHelp", new CodeHelpViewModels.TokuisakiViewData())
+
+    </script>
+}
+

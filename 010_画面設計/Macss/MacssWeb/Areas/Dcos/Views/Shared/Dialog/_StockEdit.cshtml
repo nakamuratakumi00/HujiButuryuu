@@ -1,0 +1,171 @@
+﻿@Html.Partial("../Shared/Dialog/_HinmeiCodeSearch")
+@Html.Partial("../Shared/Dialog/_DepartmentCodeSearch")
+
+<div class="modal" id="StockEditDialog" tabindex="-1" role="dialog" aria-labelledby="StockEditDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="StockEditDialogTitle">入出庫実績入力</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="accordion" id="ConditionAccordion">
+                <table class="table macss-form-table2">
+                    <colgroup>
+                        <col class="macss-form-table-title2">
+                        <col class="macss-form-table-contents2">
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">入出庫No枝番</label>
+                            </th>
+                            <td>
+                                <div>
+                                    1
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label required" for="account_id">品名</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="input-group">
+                                                <input class="form-control text-box single-line" data-val="true" data-val-length="フィールド 品名コード は最大長が 4 の文字列である必要があります。" data-val-length-max="4" data-val-required="部門コード フィールドが必要です。" id="bumon_cd" name="bumon_cd" type="text" value="0900103">
+                                                <div class="input-group-append">
+                                                    <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#HinmeiCodeSearchDialog">
+                                                        <i class="fas fa-search"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <span id="DepartmentName" class="align-middle">M－5251</span>
+                                        </div>
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="hinmei_cd" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">単位</label>
+                            </th>
+                            <td>
+                                <div>
+                                    cs
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">規格</label>
+                            </th>
+                            <td>
+                                <div>
+                                    WSA8A72A
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">PC部門</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div>
+                                        <span id="DepartmentName" class="align-middle">8041 庄内物流センター</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label required" for="account_id">入出庫数</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <input class="form-control text-box single-line" id="Quantity" name="IDName" type="text" value="40">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">ロットNo</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <input class="form-control text-box single-line" id="LotNo" name="IDName" type="text" value="K121">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">棚番</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <input class="form-control text-box single-line" id="Shelf number" name="IDName" type="text" value="60">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">保存期限</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" id="SampleDTPicker1" class="form-control" value="2021/12/02">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary" type="button" id="SampleCalendar1">
+                                                <i class="fa fa-calendar-alt"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="StorageLimit_date" data-valmsg-replace="true"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">伝票No</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <input class="form-control text-box single-line" id="Shelf number" name="IDName" type="text" value="">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <label class="control-label" for="account_id">備考</label>
+                            </th>
+                            <td>
+                                <div>
+                                    <input class="form-control text-box single-line" id="Remarks" name="IDName" type="text" value="2021/12/01　40">
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer"></div>
+            <div class="row justify-content-between macss-form-button-group-row">
+                <div class="col-4">
+                    <a class="btn btn-secondary" data-dismiss="modal" role="button">キャンセル</a>
+                </div>
+                <div class="col-8 text-right">
+                    <a role="button" class="btn btn-primary" data-dismiss="modal">更新</a>
+                    <a role="button" class="btn btn-danger" data-dismiss="modal">削除</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

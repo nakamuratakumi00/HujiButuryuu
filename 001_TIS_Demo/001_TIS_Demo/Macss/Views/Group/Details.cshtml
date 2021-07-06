@@ -1,0 +1,105 @@
+﻿@using Macss.ViewModels
+@model GroupViewModel
+
+@section Heads {
+    <link href="/Content/details.css" rel="stylesheet" />
+}
+
+<div class="row">
+    <div class="navbar navbar-default">
+
+        <h2>
+            @(ViewBag.Mode == 0 ?
+                  ViewBag.Title = ViewBag.Title + "（新規）" :
+                  ViewBag.Title = ViewBag.Title + "（編集）"
+            )
+        </h2>
+
+        @using (Html.BeginForm("", "Group/Details", FormMethod.Post, htmlAttributes: new { id = "update" }))
+        {
+            <div>
+                @Html.HiddenFor(model => model.Mode, new { Value = ViewBag.Mode })
+            </div>
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                <hr />
+                <div>
+                    <input type="submit" id='btnUpdate' value="登録" class="btn btn-default" />
+                </div>
+                <div>
+                    @Html.ValidationSummary(true, "", new { @class = "" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UpperClassCd, htmlAttributes: new { @class = "control-label col-md-2", style = "white-space:nowrap" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.UpperClassCd, (IEnumerable<SelectListItem>)ViewBag.UpperGroup, "", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.UpperClassCd, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.GroupCd, htmlAttributes: new { @class = "control-label col-md-2 required-item", @id = "lblGroupCd", style = "white-space:nowrap" })
+                    <div class="col-md-10">
+                        @(ViewBag.Mode == 0 ?
+                          @Html.EditorFor(model => model.GroupCd, new { htmlAttributes = new { @class = "form-control", @maxlength = "32" } }) :
+                          @Html.EditorFor(model => model.GroupCd, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", tabindex = "-1", unselectable = "on" } })
+                        )
+                        @Html.ValidationMessageFor(model => model.GroupCd, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.GroupName, htmlAttributes: new { @class = "control-label col-md-2 required-item", @id = "lblGroupName", style = "white-space:nowrap" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.GroupName, new { htmlAttributes = new { @class = "form-control", @maxlength = "64" } })
+                        @Html.ValidationMessageFor(model => model.GroupName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Kbn, htmlAttributes: new { @class = "control-label col-md-2 required-item", @id = "lblKbn", style = "white-space:nowrap" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.Kbn, (IEnumerable<SelectListItem>)ViewBag.GroupKbn, "", htmlAttributes: new { @class = "form-control" })
+                        <br/>
+                        @Html.ValidationMessageFor(model => model.Kbn, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div id="linkBack">
+    @Html.ActionLink("Back to List", "Index")
+</div>
+<br />
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+    window.onload = function () {
+        if ("@ViewBag.Message" != ""){
+            alert("@ViewBag.Message");
+            window.location.href = '@Url.Action("Details")?id=' + '@Model.GroupCd';
+
+        }
+    };
+    $(function () {
+        $('#btnUpdate').click(function () {
+            if (window.confirm("@Resources.Message.CQ004")) {
+                $('#update').submit();
+            }
+            else {
+                return false;
+            }
+        });
+    });
+    $(function () {
+        $('#linkBack').click(function () {
+
+            if (window.confirm("@Resources.Message.CQ011")) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        });
+    });
+</script>
+}

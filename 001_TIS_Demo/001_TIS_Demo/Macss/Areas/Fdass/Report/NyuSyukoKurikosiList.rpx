@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ActiveReportsLayout Version="3.2" PrintWidth="16431.84" DocumentName="ARNet Document" ScriptLang="C#" MasterReport="0">
+  <StyleSheet>
+    <Style Name="Normal" Value="font-family: Arial; font-style: normal; text-decoration: none; font-weight: normal; font-size: 10pt; color: Black; ddo-char-set: 186" />
+    <Style Name="Heading1" Value="font-size: 16pt; font-weight: bold" />
+    <Style Name="Heading2" Value="font-family: Times New Roman; font-size: 14pt; font-weight: bold; font-style: italic" />
+    <Style Name="Heading3" Value="font-size: 13pt; font-weight: bold" />
+  </StyleSheet>
+  <Sections>
+    <Section Type="PageHeader" Name="PageHeader" Height="2550.6" BackColor="16777215">
+      <Control Type="AR.Label" Name="Title" Left="0" Top="254.88" Width="16431.84" Height="491.0401" Caption="Fe入出庫繰越データリスト" Style="font-size: 20.25pt; text-align: center; ddo-char-set: 0" />
+      <Control Type="AR.Label" Name="Label1" Left="252" Top="953.2801" Width="809.28" Height="434.88" Caption="機種A：" Style="vertical-align: middle" />
+      <Control Type="AR.Label" Name="Labellabal2" DataField="Kisyua" Left="1061.28" Top="953.2801" Width="809.28" Height="434.88" Caption="NN" Style="vertical-align: middle" />
+      <Control Type="AR.ReportInfo" Name="Date" Left="13243.68" Top="145.44" Width="1634.041" Height="255" FormatString="{RunDateTime:yyyy/MM/dd HH:mm:ss}" Style="font-size: 8.25pt; text-align: right; ddo-char-set: 0" />
+      <Control Type="AR.ReportInfo" Name="ReportInfo1" Left="14878.08" Top="145.44" Width="1123.2" Height="209.64" FormatString="{PageNumber} / {PageCount}" Style="font-size: 8.25pt; text-align: right; ddo-char-set: 0" />
+      <Control Type="AR.Label" Name="Label5" DataField="Tanbsy" Left="252" Top="522.72" Width="3374.041" Height="434.88" Caption="NNNNNNNNNNNNNNN" Style="vertical-align: middle" />
+      <Control Type="AR.Label" Name="Label6" Left="252" Top="2069.28" Width="1228.44" Height="404.64" Caption="品番コード" Style="vertical-align: middle" />
+      <Control Type="AR.Label" Name="Label7" Left="1559.52" Top="2070.72" Width="1228.44" Height="404.64" Caption="保管場所" Style="vertical-align: middle" />
+      <Control Type="AR.Label" Name="Label8" Left="6482.88" Top="2069.28" Width="793.4401" Height="404.64" Caption="機種B" Style="vertical-align: middle" />
+      <Control Type="AR.Label" Name="Label9" Left="7809.121" Top="2069.28" Width="1228.44" Height="404.64" Caption="前月残数" Style="text-align: right; vertical-align: middle" />
+      <Control Type="AR.Label" Name="Label10" Left="11606.4" Top="2100.96" Width="1228.44" Height="404.64" Caption="改造倉入数" Style="text-align: right; vertical-align: middle" />
+      <Control Type="AR.Label" Name="Label11" Left="9732.961" Top="2100.96" Width="1228.44" Height="404.64" Caption="仕入倉入数" Style="text-align: right; vertical-align: middle" />
+      <Control Type="AR.Label" Name="Label13" Left="14718.24" Top="2069.28" Width="1228.44" Height="404.64" Caption="繰越年月日" Style="vertical-align: middle" />
+      <Control Type="AR.Label" Name="Label12" Left="13489.92" Top="2069.28" Width="1107.36" Height="404.64" Caption="出　庫　数" Style="text-align: right; vertical-align: middle" />
+      <Control Type="AR.Shape" Name="Shape9" Left="14964.24" Top="657.3001" Width="1036.8" Height="339.48" BackColor="16777215" RoundingRadius="10" />
+      <Control Type="AR.Shape" Name="Shape4" Left="12893.52" Top="657.3001" Width="1036.8" Height="339.48" BackColor="16777215" RoundingRadius="10" />
+      <Control Type="AR.Shape" Name="Shape5" Left="12893.76" Top="1002.24" Width="1035" Height="750" BackColor="16777215" RoundingRadius="10" />
+      <Control Type="AR.Shape" Name="Shape6" Left="13929.12" Top="1002.24" Width="1035" Height="750" BackColor="16777215" RoundingRadius="10" />
+      <Control Type="AR.Shape" Name="Shape7" Left="14964.48" Top="1002.24" Width="1035" Height="750" BackColor="16777215" RoundingRadius="10" />
+      <Control Type="AR.Field" Name="TextBox5" Left="13086.72" Top="741.6002" Width="689.7608" Height="254.8801" Text="承認" Style="font-style: normal; text-align: center" />
+      <Control Type="AR.Shape" Name="Shape8" Left="13928.88" Top="657.3001" Width="1036.8" Height="339.48" BackColor="16777215" RoundingRadius="10" />
+      <Control Type="AR.Field" Name="TextBox6" Left="14186.88" Top="741.6002" Width="599.401" Height="269.2801" Text="確認" Style="text-align: center" />
+      <Control Type="AR.Field" Name="TextBox7" Left="15171.84" Top="727.2003" Width="600.4804" Height="269.2801" Text="作成" Style="text-align: center" />
+      <Control Type="AR.Line" Name="Line2" X1="231.8404" Y1="2505.6" X2="16431.84" Y2="2505.6" />
+      <Control Type="AR.Label" Name="Label2" Left="251.9999" Top="0" Width="1557.721" Height="254.88" Caption="FDASS_LA1M003a" Style="font-size: 8.25pt; vertical-align: middle" />
+    </Section>
+    <Section Type="Detail" Name="Detail" Height="330" BackColor="16777215">
+      <Control Type="AR.Label" Name="Label14" DataField="Hincod" Left="252" Top="0" Width="1228.32" Height="254.88" Caption="XXXXXXXX" Style="vertical-align: middle" />
+      <Control Type="AR.Label" Name="Label15" DataField="Hokcod" Left="1559.52" Top="1.440067" Width="493.0512" Height="254.88" Caption="XX" Style="vertical-align: middle" />
+      <Control Type="AR.Label" Name="Label16" DataField="Sybnam" Left="2128.32" Top="1.44" Width="4282.56" Height="254.88" Caption="ＮＮＮＮＮＮＮＮＮＮＮＮＮＮＮＮ" Style="vertical-align: middle" />
+      <Control Type="AR.Label" Name="Label17" DataField="Kisyub" Left="6503.038" Top="0" Width="599.611" Height="254.88" Caption="XXX" Style="vertical-align: middle" />
+      <Control Type="AR.Field" Name="TextBox1" DataField="Zansuu" Left="7608.96" Top="30.24" Width="1428.48" Height="225" Text="ZZZ,ZZZ,ZZ9" OutputFormat="#,##0" Style="text-align: right" />
+      <Control Type="AR.Field" Name="TextBox2" DataField="Nskosu" Left="13243.68" Top="31.68" Width="1428.48" Height="225" Text="ZZZ,ZZZ,ZZ9" OutputFormat="#,##0" Style="text-align: right" />
+      <Control Type="AR.Field" Name="TextBox3" DataField="Kaisuu" Left="11406.24" Top="31.68011" Width="1428.48" Height="225" Text="ZZZ,ZZZ,ZZ9" OutputFormat="#,##0" Style="text-align: right" />
+      <Control Type="AR.Field" Name="TextBox4" DataField="Siksuu" Left="9532.801" Top="30.24" Width="1428.48" Height="225" Text="ZZZ,ZZZ,ZZ9" OutputFormat="#,##0" Style="text-align: right" />
+      <Control Type="AR.Label" Name="Label18" DataField="Kurymd" Left="14964.48" Top="0" Width="982.0801" Height="254.88" Caption="999999" Style="vertical-align: middle" />
+    </Section>
+    <Section Type="PageFooter" Name="PageFooter" Height="434.9999" BackColor="16777215" />
+  </Sections>
+  <ReportComponentTray />
+  <Script><![CDATA[
+bool color = true;
+private int RowNumber = 0;
+
+
+public void Detail_Format()
+{
+	RowNumber++;
+
+	if (RowNumber < 27)
+	{
+		this.Detail.NewPage = NewPage.None;
+	}
+	else
+	{
+		this.Detail.NewPage = NewPage.After;
+		RowNumber = 0;
+	}
+	
+	if(color)
+	{
+		this.Detail.BackColor = System.Drawing.Color.LightGray;
+		color = false;
+	}
+	else
+	{
+		this.Detail.BackColor = System.Drawing.Color.Transparent;
+		color = true;
+	}
+}
+
+
+
+
+]]></Script>
+  <PageSettings LeftMargin="288" RightMargin="288" TopMargin="0" BottomMargin="0" Orientation="2" />
+  <Parameters />
+</ActiveReportsLayout>

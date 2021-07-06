@@ -1,0 +1,159 @@
+﻿@model Macss.Database.Entity.DummyStock
+@Html.AntiForgeryToken()
+
+<div>
+    @Html.ValidationSummary(false, "入力エラーがあります。", new { @class = "alert alert-danger" })
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a class="btn btn-secondary" href="@Url.Action("Index")" role="button">@MacssWeb.Resources.ControlText.BackToList</a>
+    </div>
+    <div class="col-4 text-right">
+        <button type="submit" class="btn btn-primary">@MacssWeb.Resources.ControlText.InputConfirm</button>
+    </div>
+</div>
+@Html.HiddenFor(model => model.Id )
+
+<table class="table macss-form-table">
+    <colgroup>
+        <col class="macss-form-table-title" />
+        <col class="macss-form-table-contents" />
+        <col class="macss-form-table-contents" />
+    </colgroup>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.Client, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div class="row">
+                <div class="col-2">
+                    @Html.DisplayFor(model => model.ClientCode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.ClientCode)
+                </div>
+                <div class="col-10">
+                    @Html.DisplayFor(model => model.ClientName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.ClientName)
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.Product, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div class="row">
+                <div class="col-2">
+                    @Html.DisplayFor(model => model.ProductCode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.ProductCode)
+                </div>
+                <div class="col-10">
+                    @Html.DisplayFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.ProductName)
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.Warehouse, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div class="row">
+                <div class="col-2">
+                    @Html.DisplayFor(model => model.WarehouseCode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.WarehouseCode)
+                </div>
+                <div class="col-10">
+                    @Html.DisplayFor(model => model.WarehouseName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.WarehouseName)
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.CurrentRackNumber, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.DisplayFor(model => model.RackNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.RackNumber)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.DestinationRackNumber, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.EditorFor(model => model.DestinationRackNumber, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.LotNumber, htmlAttributes: new { @class = "control-label" })
+        </th>
+        <td>
+            <div>
+                @Html.DisplayFor(model => model.LotNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.LotNumber)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @*            @Html.LabelFor(model => model.LotNumberQuantity, htmlAttributes: new { @class = "control-label" })*@
+            現在在庫数
+        </th>
+        <td>
+            <div>
+                @Html.DisplayFor(model => model.LotNumberQuantity, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.LotNumberQuantity)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.MovedAt, htmlAttributes: new { @class = "control-label required" })
+        </th>
+        <td>
+            <div class="row">
+                <div class="col-3">
+                    <div class="input-group">
+                        @Html.EditorFor(model => model.MovedAt, new { htmlAttributes = new { @class = "form-control" } })
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="CreateDateCalendar"><i class="fa fa-calendar-alt"></i></button>
+                        </div>
+                    </div>
+
+                    @Html.ValidationMessageFor(model => model.CreatedAt, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            @Html.LabelFor(model => model.MovedQuantity, htmlAttributes: new { @class = "control-label required" })
+        </th>
+        <td>
+            <div class="row">
+                <div class="col-2">
+                    @Html.EditorFor(model => model.MovedQuantity, new { htmlAttributes = new { @class = "form-control text-right pr-1" } })
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a class="btn btn-secondary" href="@Url.Action("Index")" role="button">@MacssWeb.Resources.ControlText.BackToList</a>
+    </div>
+    <div class="col-4 text-right">
+        <button type="submit" class="btn btn-primary">@MacssWeb.Resources.ControlText.InputConfirm</button>
+    </div>
+</div>

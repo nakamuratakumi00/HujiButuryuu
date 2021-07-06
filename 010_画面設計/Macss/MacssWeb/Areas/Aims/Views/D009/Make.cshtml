@@ -1,0 +1,97 @@
+﻿@{
+    ViewBag.Title = "請求仕入 - AIMS";
+    ViewBag.ScreenId = "";
+    ViewBag.PageMainTitle = "請求引渡しデータ作成";
+    ViewBag.Caption = "請求引渡しデータの作成を行います。";
+}
+
+
+@using (Html.BeginForm("MakeConfirm", "D009", FormMethod.Post))
+{
+
+    @Html.AntiForgeryToken()
+
+    <div class="container-fluid">
+        <div>
+            <p>
+                @ViewBag.Caption
+            </p>
+        </div>
+
+        <div class="row mr-0 mb-1">
+            <div class="col-4">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="Condition1">締日</span>
+                    </div>
+                    <div class="macss-input-group-input form-control-plaintext">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="option1">
+                            <label class="form-check-label" for="option1">20日締</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="option2">
+                            <label class="form-check-label" for="option2">末締1手番</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="option3">
+                            <label class="form-check-label" for="option3">末締2手番</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mr-0 mb-1">
+            <div class="col-6">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="Condition1">出力対象</span>
+                    </div>
+                    <div class="macss-input-group-input form-control-plaintext">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="check3" id="check3" value="3" checked>
+                            <label class="form-check-label" for="check3">LK733.CSV　Feパワーセミコンダクタ㈱(大町)様</label>
+                        </div>                        
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="check8" id="check8" value="8" checked>
+                            <label class="form-check-label" for="check8">LK788.CSV　Feパワーセミコンダクタ㈱様</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="check9" id="check9" value="9" checked>
+                            <label class="form-check-label" for="check9">LK799.CSV　Fe半導体営業様</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="checkA" id="checkA" value="A" checked>
+                            <label class="form-check-label" for="checkA">LK7AA.CSV　Fe松本工場様</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="checkB" id="checkB" value="B" checked>
+                            <label class="form-check-label" for="checkB">LK7BB.CSV　新光商事様</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <div>
+                <div class="macss-form-button-group-row pr-0">
+                    <div class="text-right">
+                        <button type="button" id="Confirm" class="btn btn-primary">@MacssWeb.Resources.ControlText.Confirm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $(function () {
+        $('#Confirm').on('click', function () {
+            var form = $(this).parents('form');
+            form.submit();
+        });
+
+
+    })
+</script>

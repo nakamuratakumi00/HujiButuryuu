@@ -1,0 +1,173 @@
+﻿@using Macss.ViewModels
+@model MaintenanceViewModels
+
+<style>
+    input[type=radio] {
+    display: none;
+    }
+    input[type="radio"]:checked + label {
+        background: #31A9EE;
+        color: #ffffff;
+    }
+    .label {
+        color: #333;
+        font-size: 90%;
+        font-weight: normal;
+        display: block;
+        float: left;
+        width: 45px;
+        height: 28px;
+        padding-left: 5px;
+        padding-right: 5px;
+        text-align: center;
+        line-height: 20px;
+        border: 1px solid #ccc;
+        border-radius: 0px;
+    }
+    select {
+        text-transform: none;
+        width: 100%;
+    }
+    h1, .h1,
+    h2, .h2,
+    h3, .h3 {
+        margin-top: 2px;
+        margin-bottom: 0px;
+    }
+</style>
+
+<div class="row">
+    <div class="navbar2 navbar-default" style="padding-bottom:10px;">
+        <h2>@ViewBag.Title</h2>
+        <hr/>
+@using (Html.BeginForm("", "Maintenance/Index", FormMethod.Post, new { enctype = "multipart/form-data", id = "MaintenanceForm" }))
+{
+        <div class="form-horizontal">
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div style="width:160px;  padding-left:0px;  float: left;">
+                        <input type="submit" name="output" id='output' style="width: 45px; height:30px; padding: 0; text-align: center;" value="出力" class="btn btn-default" onclick="return window.confirm('ダウンロードしてもよろしいですか？');" />
+                        <input type="submit" name="import" id='import' style="width: 45px; height:30px; padding: 0; text-align: center;" value="取込" class="btn btn-default" />
+                    </div>
+                    <div style="width:160px;  padding-left:0px;   margin-top:3px; float: left;">
+                        <input name="format" type="radio" value=0 id="excel" checked="checked">
+                        <label for="excel" class="label">Excel</label>
+                        <input class="" name="format" type="radio" value=1 id="csv" />
+                        <label for="csv" class="label">CSV</label>
+                    </div>
+                </div>
+            </div>
+
+            <div id="Hincod" class="form-group" style="display:none">
+                @Html.LabelFor(model => model.Hincod, htmlAttributes: new { @class = "col-sm-2 control-label required-item", style = "position:relative; width:100px" })
+                <div class="col-md-10 text_jp_middle">
+                    @Html.TextBoxFor(model => model.Hincod, htmlAttributes: new { @class = "form-control ; datearea-form ", @maxlength = "8", style = "width: 80px;ime-mode: inactive" })
+                    @Html.ValidationMessageFor(model => model.Hincod, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10 text_jp_middle">
+                    @Html.DropDownListFor(model => model.Master, (IEnumerable<SelectListItem>)ViewBag.MasterList, htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10 text_jp_middle">
+                    <input type="file" class="FullWidth" name="uploadFile" id='uploadFile' style="float: left;" accept=".csv,.xlsx" />
+                </div>
+            </div>
+            <div>
+                @(ViewBag.Success == 1 ?
+                                            @Html.ValidationSummary(true, "", new { @class = "validation-summary-success", id = "info" }) :
+                                            @Html.ValidationSummary(true, "", new { @class = "", id = "error" })
+                )
+            </div>
+        </div>
+}
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+
+    window.onload = function () {
+        $('#sidebar').toggleClass('active');
+
+        var master = $('#Master').val();
+        if (isNaN(master)) {
+            document.getElementById('import').disabled = "true";
+            document.getElementById('Hincod').style.display = "";
+        } else {
+            document.getElementById('import').disabled = "";
+            document.getElementById('Hincod').style.display = "none";
+        }
+    };
+
+    $(function () { 
+        $('#import').click(function () {
+            $("#import").prop("disabled", true);
+            $("#output").prop("disabled", true);
+
+        });
+    });
+
+    $(function () {
+        $('#uploadFile').click(function () {
+            if (document.getElementById("error") != null) {
+                document.getElementById("error").style.display = "none";
+            }
+
+            if(document.getElementById("info") != null) {
+                document.getElementById("info").style.display = "none";
+            }
+
+        });
+    });
+
+    $('#Master').change(function () {
+            
+        if (isNaN($(this).val())) {
+            document.getElementById('import').disabled = "true";
+            //document.getElementById('uploadFile').disabled = "true";
+            document.getElementById('Hincod').style.display = "";
+        } else {
+            document.getElementById('import').disabled = "";
+            //document.getElementById('uploadFile').disabled = "";
+            document.getElementById('Hincod').style.display = "none";
+        }
+
+    });
+
+    (function ($) {
+        $.fn.resetValidation = function () {
+            $("div#error").removeClass("validation-summary-errors");
+            $("div#error").addClass("validation-summary-valid").find("ul").empty();
+            return;
+        };
+    })(jQuery);
+
+    $(function () {
+        $('#output').click(function () {
+            // ボタンを有効・無効を設定
+            outputBtn = document.getElementById('output');
+            importBtn = document.getElementById('import');
+            outputBtn.disabled = "true";
+            importBtn.disabled = "true";
+
+            $(this).resetValidation();
+            // ボタンの属性設定
+            $('<input>').attr({
+                type: 'hidden',
+                id: 'output',
+                name: 'output',
+                value: '出力'
+            }).appendTo('.output');
+            $('#output').submit();
+
+            outputBtn.disabled = "";
+            importBtn.disabled = "";
+        });
+    });
+    </script>
+}

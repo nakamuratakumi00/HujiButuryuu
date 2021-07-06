@@ -1,0 +1,119 @@
+﻿@* 内示・発注情報アップロード *@
+
+@using (Html.BeginForm("D001_11", "D001", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @functions {
+        public string GetAccept(List<string> accepts, string separator = ", ")
+        {
+            if (accepts == null || accepts.Count <= 0)
+            {
+                return String.Empty;
+            }
+
+            return String.Join(separator, accepts);
+        }
+
+        public string GetUploadFileCaption(List<string> accepts)
+        {
+            var ext = GetAccept(accepts, "、");
+
+            //return String.Format("拡張子が、{0}で{1}以下のファイルを選択してください。", ext, MacssWeb.Common.Config.UploadMaxFileSizeText);
+            return String.Format("EXCEL形式で{0}以下のファイルを選択してください。", MacssWeb.Common.Config.UploadMaxFileSizeText);
+        }
+    }
+    @Html.AntiForgeryToken()
+    <div class="container-fluid">
+        <div>
+            <p>
+                @ViewBag.Caption
+            </p>
+        </div>
+        <div class="row mr-0 mb-3">
+            @* 種別 *@
+            <div class="col-6">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text w-100">種別</span>
+                    </div>
+                    <div class="macss-input-group-input">
+
+                        <div class="form-check form-check-inline mr-5">
+                            <input type="radio" class="form-check-input" name="syubetsu" id="syu1" checked />
+                            <label class="form-check-label">内示</label>
+                        </div>
+                        <div class="form-check form-check-inline mr-5">
+                            <input type="radio" class="form-check-inline" name="syubetsu" id="syu2" />
+                            <label class="form-check-label">発注(得意先注文番号有り)</label>
+                        </div>
+                        <div class="form-check form-check-inline mr-5">
+                            <input type="radio" class="form-check-inline" name="syubetsu" id="syu3" />
+                            <label class="form-check-label">発注(得意先注文番号無し)</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="customFile" name="postedFile" accept="@GetAccept(ViewBag.UploadFileAccept)">
+                    <label class="custom-file-label" for="customFile" data-browse="参 照">ファイル選択...</label>
+                </div>
+                <small class="form-text text-muted">
+                    @GetUploadFileCaption(ViewBag.UploadFileAccept)
+                </small>
+                <div id="UploadErrorMessageArea" style="display:none">
+                    <span id="UploadErrorMessage" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="mt-4"></div>
+        <div class="row justify-content-between macss-form-button-group-row">
+            <div class="col-4">
+                <a role="button" class="btn btn-secondary" href="@Url.Action("D001_01")">@MacssWeb.Resources.ControlText.BackToList</a>
+            </div>
+            <div class="col-4 text-right">
+                <button type="button" id="UploadExec" class="btn btn-primary">@MacssWeb.Resources.ControlText.UploadConfirm</button>
+            </div>
+        </div>
+    </div>
+    <script>
+    $(function () {
+
+        var fu = new Macss.FileUpload.MacssFileUpload();
+        fu.configure();
+
+        $('#UploadExec').on('click', function () {
+
+            var form = $(this).parents('form');
+            $("#UploadErrorMessageArea").hide();
+            var accepts = [];
+
+            @foreach (var item in ViewBag.UploadFileAccept)
+            {
+                @:accepts.push("@item");
+            }
+
+            var ret = false;
+
+            ret = fu.acceptExt(accepts);
+
+            if (ret == false) {
+                $("#UploadErrorMessage").text("@MacssWeb.Resources.Validation.NotAllowedFileExtension");
+                $("#UploadErrorMessageArea").show();
+                return false;
+            }
+
+            ret = fu.withinRangeOfFileSize(@MacssWeb.Common.Config.UploadMaxFileSize);
+
+            if (ret == false) {
+                $("#UploadErrorMessage").text("@MacssWeb.Resources.Validation.OverFileSize");
+                $("#UploadErrorMessageArea").show();
+                return false;
+            }
+
+            form.submit();
+        });
+    })
+    </script>
+}

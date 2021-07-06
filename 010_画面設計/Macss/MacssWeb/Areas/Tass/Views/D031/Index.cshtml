@@ -1,0 +1,271 @@
+﻿@model IEnumerable<Macss.Database.Entity.AccountMaster>
+
+@{
+    ViewBag.Title = "運送業務 - TASS";
+    ViewBag.ScreenId = "TASS-D031-01";
+    ViewBag.PageMainTitle = "出荷実績請求一覧";
+}
+@section Scripts {
+    <script>
+        $(function () {
+
+            var dt = new Macss.DataTables.MacssDataTable("#SampleList", [{
+                "className": "macss-table-proc-column", "width": 90, "orderable": true, "targets": 0
+            }]);
+            dt.configure();
+
+            var cond = new Macss.Collapse.ConditionsPanel("#ConditionAccordion", "#CollapseShow", "#CollapseHidden");
+            cond.setCollapseEvent();
+
+            var sampleDatePicker = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker", "#SampleCalendar");
+            sampleDatePicker.configure();
+            var sampleDatePicker1 = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker1", "#SampleCalendar1");
+            sampleDatePicker1.configure();
+            var sampleDatePicker2 = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker2", "#SampleCalendar2");
+            sampleDatePicker2.configure();
+
+            var sampleDatePicker3 = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker3", "#SampleCalendar3");
+            sampleDatePicker3.configure();
+            var sampleDatePicker4 = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker4", "#SampleCalendar4");
+            sampleDatePicker4.configure();
+
+
+            //MacssDataTable（dataTables.fixedColumns.js）に表示する列が15件以上あると計算間違いで最左端列にスクロールバーが表示されるため、非表示にする
+            $('.DTFC_LeftBodyLiner').css('overflow-y', 'hidden');
+        });
+    </script>
+}
+
+@Html.Partial("../Shared/Dialog/_DenpyoKbnCodeSearch")
+@Html.Partial("../Shared/Dialog/_TokuisakiCodeSearch")
+
+@using (Html.BeginForm("Search", "D031", null, FormMethod.Post))
+{
+
+    <div class="accordion" id="ConditionAccordion">
+        <div class="card">
+            <div class="card-header macss-search-config-collapse-header" id="headingOne">
+                <div class="mb-0">
+                    <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain" aria-expanded="true" aria-controls="ConditionMain">
+                        <div class="d-inline-block" style="color:#333">検索設定</div>
+                        <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="display:none;"></i>
+                        <i id="CollapseShow" class="fas fa-chevron-circle-down" aria-hidden="true" style="display:none;"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+                <div class="row mr-0 mb-1">
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">対象締日</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Condition1" aria-describedby="Condition1" value="31">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="" style="border-top-right-radius:0.25rem; border-bottom-right-radius:0.25rem;">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition1">対象期間</span>
+                            </div>
+                            <input type="text" id="SampleDTPicker1" class="form-control" value="2021/01/01">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar1"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                            <div class="input-group-append">
+                                <span class="input-group-text">～</span>
+                            </div>
+                            <input type="text" id="SampleDTPicker2" class="form-control" value="2021/01/31">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="SampleCalendar2"><i class="fa fa-calendar-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mr-0 mb-1">
+                    <div class="col-4 mb-3">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Condition8">伝票区分</span>
+                            </div>
+                            <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" id="bumon_cd" name="bumon_cd" type="text" value="M" style="border-top-left-radius:0; border-bottom-left-radius:0; border-top-right-radius:0; border-bottom-right-radius:0;">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#DenpyoKbnCodeSearchDialog" style="border-top-right-radius:0.25rem; border-bottom-right-radius:0.25rem;">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="ml-5">
+                            <span id="DenpyoKbnName" class="align-middle">FB業務第3課</span>
+                        </div>
+                    </div>
+
+                    <div class="col-8 mb-3">
+                        <div class="input-group">
+                            <div class="input-group-text" style="border-top-right-radius:0; border-bottom-right-radius:0;">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="option1" checked>
+                                    <label class="form-check-label" for="option1">得意先</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="option2">
+                                    <label class="form-check-label" for="option2">請求先</label>
+                                </div>
+                            </div>
+                            <input class="form-control text-box single-line" data-val="true" data-val-length-max="99" id="TokuisakiCd" name="TokuisakiCd" type="text" value="123000001,123000002,123000003,123000004" style="border-top-right-radius:0; border-bottom-right-radius:0;">
+                            <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#TokuisakiCodeSearchDialog" style="border-top-left-radius:0; border-bottom-left-radius:0;">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                        <div class="ml-5">
+                            <span id="TokuisakiName" class="align-middle">得意先名１,得意先名２,…</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-fluid pt-4 pb-3 pl-0 clearfix">
+                    <div class="float-left">
+                        <button type="reset" class="btn btn-secondary btn-lg macss-btn-main">@MacssWeb.Resources.ControlText.ConditionClear</button>
+                    </div>
+                    <div class="float-right">
+                        <button type="submit" class="btn btn-primary btn-lg macss-btn-main">@MacssWeb.Resources.ControlText.Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="row mt-3 mb-4">
+    <div class="col-12 text-right">
+        <div class="dropdown">
+            <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#CsvDownloadDialog">CSVダウンロード</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table id="SampleList" class="table table-striped table-hover macss-data-table">
+    <thead class="macss-data-table-header">
+        <!-- thの文字数で列の幅が決まってしまうため、必要に応じて全角スペースを入れて列の幅を調整する必要がある-->
+        <tr>
+            <th>得意先コード</th>
+            <th>得意先名　　　</th>
+            <th>請求先コード</th>
+            <th>出荷日</th>
+            <th>出荷No</th>
+            <th>オリジナル出荷No</th>
+            <th>経費負担No</th>
+            <th>届先名　　　</th>
+            <th>伝票区分</th>
+            <th>仕入運賃</th>
+            <th>売上運賃</th>
+            <th>材料費</th>
+            <th>売上包装費</th>
+            <th>売上合計</th>
+            <th>運送方法コード</th>
+            <th>仕入先コード</th>
+            <th>運送区分コード</th>
+            <th>出荷場所コード</th>
+            <th>締日</th>
+            <th>請求明細書発行区分</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>123456789</td>
+            <td>ダミー得意先</td>
+            <td>123456789</td>
+            <td>2021/01/01</td>
+            <td>1234567890</td>
+            <td>1234567890</td>
+            <td>1234567890</td>
+            <td>ダミー届先名</td>
+            <td>1</td>
+            <td class="text-right">1,000</td>
+            <td class="text-right">2,000</td>
+            <td class="text-right">500</td>
+            <td class="text-right">700</td>
+            <td class="text-right">4,200</td>
+            <td>1</td>
+            <td>123456789</td>
+            <td>1</td>
+            <td>11</td>
+            <td>31</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>123456789</td>
+            <td>ダミー得意先</td>
+            <td>123456789</td>
+            <td>2021/01/01</td>
+            <td>1234567890</td>
+            <td>1234567890</td>
+            <td>1234567890</td>
+            <td>ダミー届先名</td>
+            <td>1</td>
+            <td class="text-right">1,000</td>
+            <td class="text-right">2,000</td>
+            <td class="text-right">500</td>
+            <td class="text-right">700</td>
+            <td class="text-right">4,200</td>
+            <td>1</td>
+            <td>123456789</td>
+            <td>1</td>
+            <td>11</td>
+            <td>31</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>123456789</td>
+            <td>ダミー得意先</td>
+            <td>123456789</td>
+            <td>2021/01/01</td>
+            <td>1234567890</td>
+            <td>1234567890</td>
+            <td>1234567890</td>
+            <td>ダミー届先名</td>
+            <td>1</td>
+            <td class="text-right">1,000</td>
+            <td class="text-right">2,000</td>
+            <td class="text-right">500</td>
+            <td class="text-right">700</td>
+            <td class="text-right">4,200</td>
+            <td>1</td>
+            <td>123456789</td>
+            <td>1</td>
+            <td>11</td>
+            <td>31</td>
+            <td>1</td>
+        </tr>
+    </tbody>
+</table>
+<div class="row mt-3 mb-4">
+    <div class="col-12 text-right">
+        <a class="btn btn-primary" href="@Url.Action("Download", "D031")" role="button">請求明細(確認用)ダウンロード</a>
+    </div>
+</div>
+
+<script>
+    function setDepartmentCode(code, value) {
+        $("#bumon_cd").val(code);
+        $("#DepartmentName").text(value);
+    }
+    $(function () {
+        var createDatePicker = new Macss.DatetimePicker.MacssDtPicker("#totyaku_date", "#TotyakuDateCalendar");
+        createDatePicker.configure();
+        var updateDatePicker = new Macss.DatetimePicker.MacssDtPicker("#syukka_date", "#SyukkaDateCalendar");
+        updateDatePicker.configure();
+    });
+
+</script>

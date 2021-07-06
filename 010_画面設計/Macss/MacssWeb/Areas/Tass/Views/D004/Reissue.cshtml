@@ -1,0 +1,21 @@
+﻿<!-- ■再発行画面呼び出し部 -->
+@model Macss.Database.Entity.AccountMaster
+
+@{
+    // タイトル等キャプションをセット
+    ViewBag.Title = "運送業務 - TASS";
+    ViewBag.PageMainTitle = "荷札再発行";
+    ViewBag.ScreenId = "";
+    ViewBag.ConfirmMessage = "以下を再発行します。よろしいですか？";
+    ViewBag.ButtonText = "更新";
+    ViewBag.ConfirmDialogText = "再発行処理を実行します。よろしいですか？";
+
+    // 動作モードを「再発行」に変更
+    ViewBag.ReissueExec = true;
+}
+
+@using (Html.BeginForm("Reissue", "D004", null, FormMethod.Post))
+{
+    // 詳細・確認系フォームをセット
+    @Html.Partial("_Show", Model)
+}

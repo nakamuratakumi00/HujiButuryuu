@@ -1,0 +1,162 @@
+﻿@{
+    ViewBag.ScreenId = "";
+    ViewBag.PageMainTitle = "請求明細データ作成";
+}
+
+@section Scripts {
+    <script>
+        $(function () {
+
+            var dt1 = new Macss.DataTables.MacssDataTable("#ExecConfirmList1");
+            dt1.setScrollY("600px");
+            dt1.configure();
+
+            var dt2 = new Macss.DataTables.MacssDataTable("#ExecConfirmList2");
+            dt2.setScrollY("600px");
+            dt2.configure();
+        });
+    </script>
+}
+
+@using (Html.BeginForm("D001", "Search", null, FormMethod.Post))
+{
+    <div class="accordion" id="ConditionAccordion">
+        <div class="card  mr-4 mt-2 ml-4">
+            <div class="card-header macss-search-config-collapse-header" id="headingOne">
+                <div class="mb-0">
+                    <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain" aria-expanded="true" aria-controls="ConditionMain">
+                        <div class="d-inline-block" style="color:#333">請求データステータス</div>
+                    </button>
+                </div>
+            </div>
+            <div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" aria-labelledby="headingOne" data-parent="#ConditionAccordion">
+                <div class="row mr-0 mb-1">
+                    <div class="col-4">
+                        運送業務-TASS 1手番 完了 100件
+                    </div>
+                </div>
+                <div class="row mr-0 mb-1">
+                    <div class="col-4">
+                        運送業務-TASS 2手番 完了 100件
+                    </div>
+                </div>
+                <div class="row mr-0 mb-1">
+                    <div class="col-4">
+                        運送業務-TASS 20日締日 完了 100件
+                    </div>
+                </div>
+                <div class="row mr-0 mb-1">
+                    <div class="col-4">
+                        包装商品販売-PATS 1手番 完了 100件
+                    </div>
+                </div>
+                <div class="row mr-0 mb-1">
+                    <div class="col-4">
+                        包装商品販売-PATS 2手番 完了 100件
+                    </div>
+                </div>
+                <div class="row mr-0 mb-1">
+                    <div class="col-4">
+                        包装商品販売-PATS 20日締日 完了 100件
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="container-fluid mt-4">
+    <div class="row mr-0 mb-1">
+        <div class="col-12">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="Condition3">作成データ</span>
+                </div>
+                <select class="custom-select form-control" id="Condition3">
+                    <option value="1"></option>
+                    <option value="2">リハーサル</option>
+                    <option value="3">本番</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row mr-0 mb-1">
+        <div class="col-12">
+            <div class="input-group mb-3" style="border:1px solid #ced4da;">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="Condition3" style="border:none;padding-top:13px;padding-bottom:13px;">締日</span>
+                </div>
+                <div class="macss-input-group-input form-control" style="border:none;">
+                    <div style="">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                            <label class="form-check-label" for="inlineRadio1">末締1手番</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                            <label class="form-check-label" for="inlineRadio2">末締2手番</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                            <label class="form-check-label" for="inlineRadio2">締日指定</label>
+                        </div>
+                        <div class="form-check form-check-inline" style="margin-right:0;width:60px;">
+                            <input class="form-control text-box single-line" id="simebi_nissu" name="simebi_nissu" type="text">
+                        </div>
+                        <div class="form-check form-check-inline col-2">
+                            日締
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    <div class="row mr-0 mb-1">
+        <div class="col-12">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="Condition3">請求先</span>
+                </div>
+                <input class="form-control text-box single-line" data-val="true" data-val-length-max="4" data-val-required="部門コード フィールドが必要です。" id="bumon_cd" name="bumon_cd" type="text">
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#DepartmentCodeSearchDialog">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+    </div>
+    <div class="col-4 text-right">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDialog">@MacssWeb.Resources.ControlText.Execute</button>
+    </div>
+</div>
+
+<div class="modal" id="ConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.ExecConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                請求明細データを作成します。よろしいですか？
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("MakeComplete", "D004", null, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="UploadFileName" name="uploadFileName" value="@ViewBag.UploadFileName" />
+                    <button type="submit" class="btn btn-primary">はい</button>
+                }
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,158 @@
+﻿@using MacssWeb.Areas.Dcos.Helper
+
+@model IEnumerable<Macss.Database.Entity.DummyStock>
+
+@{
+    ViewBag.Title = MacssWeb.Resources.Dcos.StockAllocationListMainTitle;
+    ViewBag.PageMainTitle = "在庫引当計画実施";
+    ViewBag.ScreenId = "DCOS-D003-01";
+}
+@section Scripts {
+    <script>
+        $(function () {
+
+            //var dt = new Macss.DataTables.MacssDataTable("#SampleList", [{
+            //    "className": "macss-table-proc-column", "width": 80, "orderable": false, "targets": 0
+            //}]);
+            //dt.configure();
+
+            var cond = new Macss.Collapse.ConditionsPanel("#ConditionAccordion", "#CollapseShow", "#CollapseHidden");
+            cond.setCollapseEvent();
+
+            var sampleDatePicker11 = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker11", "#SampleCalendar11");
+            sampleDatePicker11.configure();
+            var sampleDatePicker12 = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker12", "#SampleCalendar12");
+            sampleDatePicker12.configure();
+            var sampleDatePicker21 = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker21", "#SampleCalendar21");
+            sampleDatePicker21.configure();
+            var sampleDatePicker22 = new Macss.DatetimePicker.MacssDtPicker("#SampleDTPicker22", "#SampleCalendar22");
+            sampleDatePicker22.configure();
+
+            //disableCondition();
+            //$(".out-data").prop('disabled', false);
+        });
+
+        //function changeTarget(obj) {
+        //    var val = obj.value;
+        //    disableCondition();
+
+        //    switch (val) {
+        //        case "0":
+        //            $(".out-data").prop('disabled', false);
+        //            break;
+        //        case "1":
+        //            $(".plan-order").prop('disabled', false);
+        //            break;
+        //        case "2":
+        //            $(".plan-fix").prop('disabled', false);
+        //            break;
+        //    }
+        //}
+
+        //function disableCondition() {
+        //    $(".out-data").prop('disabled', true);
+        //    $(".plan-order").prop('disabled', true);
+        //    $(".plan-fix").prop('disabled', true);
+        //}
+
+    </script>
+}
+
+@section CssExtended{
+    <style type="text/css">
+    </style>
+}
+
+@Html.Partial("../../Views/Shared/Dialog/_DepartmentCodeSearch")
+
+
+@using (Html.BeginForm("Search", "Stock", null, FormMethod.Post))
+{
+
+    <div class="accordion" id="ConditionAccordion">
+        <div class="card">
+            <div class="card-header macss-search-config-collapse-header" id="headingOne">
+                <div class="mb-0">
+                    <button class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse" data-target="#ConditionMain" aria-expanded="true" aria-controls="ConditionMain">
+                        <div class="d-inline-block" style="color:#333"></div>
+                        <i id="CollapseHidden" class="fas fa-chevron-circle-up" aria-hidden="true" style="display:none;"></i>
+                        <i id="CollapseShow" class="fas fa-chevron-circle-down" aria-hidden="true" style="display:none;"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="ConditionMain" class="container-fluid mt-3 mb-3 pr-1 collapse show" data-parent="#ConditionAccordion">
+                <div class="row mr-0 mb-3">
+                    <div class="col-4">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="StockSearchTargetTitle">実施内容</span>
+                            </div>
+                            <select class="custom-select form-control" onChange="changeTarget(this);">
+                                <option value="00"></option>
+                                <option value="01">計画実施</option>
+                                <option value="02">計画実施解除</option>
+                                <option value="03">確定</option>
+                                <option value="04">確定解除</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mr-0 mb-3">
+                    <div class="col-4">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="ClientSearchTitle">@Html.DisplayNameFor(model => model.Client)</span>
+                            </div>
+                            <input type="text" class="form-control" aria-labelledby="ClientSearchTitle" value="71281">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#DepartmentCodeSearchDialog">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 mt-1">
+                        <span id="ClientName">サンプル商事(株)</span>
+                    </div>
+                </div>
+                <div class="row mr-0 mb-3">
+                    <div class="col-4">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">オリジナル出庫指示No</span>
+                            </div>
+                            <input type="text" class="form-control" value="123456789012345">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mr-0 mb-3">
+                    <div class="col-4">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="StockSearchTargetTitle">ピッキングリスト</span>
+                            </div>
+                            <select class="custom-select form-control" onChange="changeTarget(this);">
+                                <option value="01">出力する</option>
+                                <option value="02">出力しない</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<div class="mt-4">
+    <div>
+        <div class="macss-upload-button-group-row pr-0 row">
+            <div class="col-8">
+                <a class="btn btn-secondary" href="@Url.Action("Index")" role="button">@MacssWeb.Resources.ControlText.BackToList</a>
+            </div>
+            <div class="col-4 text-right">
+                <a class="btn btn-primary" href="@Url.Action("AllocationExecConfirm")" role="button">@MacssWeb.Resources.ControlText.Confirm</a>
+            </div>
+        </div>
+    </div>
+</div>

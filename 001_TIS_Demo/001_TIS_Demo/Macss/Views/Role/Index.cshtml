@@ -1,0 +1,188 @@
+﻿@using Macss.ViewModels
+@model RoleViewModel
+
+@section Heads {
+    <style>
+        input {
+            max-width: 100%;
+        }
+
+        h1, .h1,
+        h2, .h2,
+        h3, .h3 {
+            margin-top: 2px;
+            margin-bottom: 0px;
+        }
+    </style>
+}
+
+@{
+    ViewBag.Title = ViewBag.Title;
+}
+
+<div class="row">
+    <div class="navbar2 navbar-default">
+        <h2>@ViewBag.Title</h2>
+        <hr />
+        <p>
+            @Html.ActionLink("新規", "Details", FormMethod.Post, htmlAttributes: new { type = "submit", @class = "btn btn-default", @style = "width:45px; height: 30px; padding: 0; padding-top:5px; text - align: center; " })
+            <input type="submit" style="width:50px; height:30px; padding:0; text-align: center;" value="編集" class="btn btn-default" id="edit" />
+            <input type="submit" style="width:50px; height:30px; padding:0; text-align: center;" value="削除" class="btn btn-default" id="delete" />
+        </p>
+        <table id="table"
+               class="table"
+               data-url="@Url.Action("All")"
+               data-toggle="table"
+               data-method="POST"
+               data-filter-control="true"
+               data-id-table="advancedTable"
+               data-show-columns="true"
+               data-show-pagination-switch="true"
+               data-page-list="[10, 25, 50, 1000]"
+               data-show-export="true"
+               @*data-export-types="['excel','csv']"*@
+               data-show-multi-sort="true"
+               data-click-to-select="true"
+               data-toolbar="#toolbar"
+               @*data-filter-show-clear="true"*@
+               data-show-search-clear-button="true"
+               data-pagination="true">
+            <thead>
+                <tr id="data">
+                    @Html.ThFor(model => model.Id, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                    @Html.ThFor(model => model.Name, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                    @Html.ThFor(model => model.RoleCmt, htmlAttributes: new { data_filter_control = "input", data_sortable = "true" })
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+@section Scripts  {
+    @*@Html.Partial("_BootstrapFunction")
+    @Scripts.Render("~/bundles/my-bootstrap-export")*@
+
+    @Html.Partial("_BootstrapFunction")
+    @Scripts.Render("~/bundles/table-export-xlsx")
+    <script>
+
+        window.onload = function () {
+            $('#sidebar').toggleClass('active');
+        };
+
+        var $table = $('#table');
+
+        $(function () {
+            $table.on('click-row.bs.table', function (e, row, $element) {
+                $('.success').removeClass('success');
+                $($element).addClass('success');
+            });
+            ////一覧ダブルクリック時
+            //$('#table').on('dblclick', function (e) {
+            //    var index = $('.success').attr('data-index');
+            //    var row = $('.success').parents('table:first').bootstrapTable('getData')[index];
+            //    goEdit(row);
+            //});
+            //編集押下時
+            $('#edit').on('click', function (e) {
+                var index = $('.success').attr('data-index');
+                if (index) {
+                    var row = $('.success').parents('table:first').bootstrapTable('getData')[index];
+                    goEdit(row);
+                } else {
+                    alert("@String.Format(Resources.Message.CE039,"ロール")");
+                }
+            });
+            //削除押下時
+			$('#delete').on('click', function (e) {
+                var index = $('.success').attr('data-index');
+                if (index) {
+                    if (window.confirm("@Resources.Message.CQ006")) {
+                        var row = $('.success').parents('table:first').bootstrapTable('getData')[index];
+                        var postData = {
+                            id: row.@nameof(RoleViewModel.Id)
+                        };
+                        $.ajax({
+                            url: '@Url.Action("Delete")',
+                            type: 'POST',
+                            data: JSON.stringify(postData),
+                            dataType: 'json',
+                            contentType: 'application/json',
+                        }).done(function (result) {
+                            if (result.succsess == 1) {
+                                //削除が成功時
+                                alert(result.errMsg);
+                                window.location.href = '@Url.Action("Index")';
+                            } else {
+                                //アカウントロールテーブルに、指定したロールIDがあった場合
+                                alert(result.errMsg);
+                                return false;
+                            }
+                        }).fail(function (jqXHR, textStatus, errorThrown) {
+                            //例外の場合、エラー画面に飛ばす
+                            window.location.href = '/Error/Index'
+                        }).always(function () {
+                        });
+                    } else {
+                        return false;
+                    }
+                } else {
+                    alert("@String.Format(Resources.Message.CE039,"ロール")");
+                }
+            });
+        });
+
+        function goEdit(row) {
+            window.location.href = '@Url.Action("Details")?id=' + row.@nameof(RoleViewModel.Id);
+        }
+
+        function exportQueryParams($el,ext) {
+            var data = $el.bootstrapTable('getData');
+            var list = [];
+            @{
+                var paramList = new List<string>() {
+                    nameof(RoleViewModel.Id),
+                };
+            }
+            $.each($el.find('[data-index]'), function (i, v) {
+            var row = data[$(v).data('index')];
+                list.push({
+                    @foreach (var param in paramList) {
+                        @: @param: row.@param,
+                    }
+                });
+            });
+            return { paramList: list ,extention: ext};
+        }
+
+
+        $('#table').bootstrapTable({
+            uniqueId: 'id',
+            sortName: 'no',
+            showExport: true,
+            exportTypes: ['csv', 'excel'],
+            exportOptions: {
+                mso: {
+                    fileFormat: 'xlsx'
+                }
+            }
+        });
+
+        @*$('#table').bootstrapTable({
+
+            exportUrl: "@Url.Action("Export")",
+            exportQueryParams: exportQueryParams,
+            exportFileName: "ロールマスタ（一覧）",
+            onLoadError: function (status, res) {
+                if (res.responseText) {
+                    $('.top_nav a').prop('disabled', true);
+                    $('.right_col button').prop('disabled', true);
+                    setTimeout(function () {
+                        document.write(res.responseText);
+                    }, 0);
+                }
+            },
+        });*@
+
+    </script>
+}

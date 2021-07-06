@@ -1,0 +1,21 @@
+﻿<!-- ■更新画面呼び出し部 -->
+@using System.Web.Optimization
+@model Macss.Database.Entity.AccountMaster
+
+@{
+    // タイトル等キャプションをセット
+    ViewBag.Title = "運送業務 - TASS";
+    ViewBag.PageMainTitle = "荷札情報更新";
+    ViewBag.ScreenId = "";
+}
+
+@using (Html.BeginForm("EditConfirm", "D004", null, FormMethod.Post))
+{
+    // 登録・更新系フォームをセット
+    @Html.Partial("_Form", Model)
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,108 @@
+﻿@model Macss.Database.Entity.AccountMaster
+
+@Html.AntiForgeryToken()
+
+<!--テスト値-->
+@{ var testVal = string.Empty; }
+
+<div>
+    @Html.ValidationSummary(false, "入力エラーがあります。", new { @class = "alert alert-danger" })
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.BackToList</a>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div>
+        <p>
+            既定出荷手配の計上を行います。
+        </p>
+    </div>
+</div>
+
+<div class="row mr-0 mb-1">
+    <div class="col-3">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="Condition1" style="width: 170px;">出荷日（２０日締）</span>
+            </div>
+            <input class="form-control text-box single-line" id="syukka_date" name="IDName" type="text" value="2023/01/20">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="SyukkaDateCalendar"><i class="fa fa-calendar-alt"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mr-0 mb-1">
+    <div class="col-3">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="Condition1" style="width: 170px;">出荷日（２５日締）</span>
+            </div>
+            <input class="form-control text-box single-line" id="syukka_date" name="IDName" type="text" value="2023/01/20">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="SyukkaDateCalendar"><i class="fa fa-calendar-alt"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mr-0 mb-1">
+    <div class="col-3">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="Condition3" style="width: 170px;">出荷日（末締）</span>
+            </div>
+            <input class="form-control text-box single-line" id="syukka_date" name="IDName" type="text" value="2023/01/31">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="SyukkaDateCalendar"><i class="fa fa-calendar-alt"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-between macss-form-button-group-row">
+    <div class="col-4">
+        <a role="button" class="btn btn-secondary" href="@Url.Action("Index")">@MacssWeb.Resources.ControlText.BackToList</a>
+    </div>
+    <div class="col-8 text-right">
+        <button type="submit" class="btn btn-primary">@MacssWeb.Resources.ControlText.Confirm</button>
+    </div>
+</div>
+
+<div class="modal" id="TransitionConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="ConfirmDialogTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmDialogTitle">@MacssWeb.Resources.Title.TransitionConfirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @MacssWeb.Resources.Messages.TransitionConfirm
+                <br>
+                @MacssWeb.Resources.Messages.Confirm
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary macss-btn" href="@Url.Action("Index")" role="button">@MacssWeb.Resources.ControlText.Yes</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@MacssWeb.Resources.ControlText.No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function setDepartmentCode(code, value) {
+        $("#bumon_cd").val(code);
+        $("#DepartmentName").text(value);
+    }
+    $(function () {
+        var createDatePicker = new Macss.DatetimePicker.MacssDtPicker("#totyaku_date", "#TotyakuDateCalendar");
+        createDatePicker.configure();
+        var updateDatePicker = new Macss.DatetimePicker.MacssDtPicker("#syukka_date", "#SyukkaDateCalendar");
+        updateDatePicker.configure();
+    });
+</script>

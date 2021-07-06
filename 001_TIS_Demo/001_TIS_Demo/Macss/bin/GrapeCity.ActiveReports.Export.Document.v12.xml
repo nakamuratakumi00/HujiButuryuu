@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+	<assembly>
+		<name>GrapeCity.ActiveReports.Export.Document.v12</name>
+	</assembly>
+	<members>
+		<member name="T:GrapeCity.ActiveReports.Export.Document.IO.ILoadState">
+			<summary>
+            Represents document loader state
+            </summary>
+		</member>
+		<member name="P:GrapeCity.ActiveReports.Export.Document.IO.ILoadState.BytesRequired">
+			<summary>
+            Gets number of bytes expected from data stream
+            </summary>
+		</member>
+		<member name="P:GrapeCity.ActiveReports.Export.Document.IO.ILoadState.DiagInfo">
+			<summary>
+            Gets execution context info for diagnostics/debugging
+            </summary>
+		</member>
+		<member name="T:GrapeCity.ActiveReports.Export.Document.IO.LoadState">
+			<summary>
+            Load states factory
+            </summary>
+		</member>
+		<member name="M:GrapeCity.ActiveReports.Export.Document.IO.LoadState.Expect(System.Int32)">
+			<summary>
+            Returned document loader state waiting specified number of bytes
+            </summary>
+			<param name="numberOfBytes"></param>
+			<returns></returns>
+		</member>
+		<member name="M:GrapeCity.ActiveReports.Export.Document.IO.LoadState.Expect(System.Int32,System.Int32)">
+			<summary>
+            Returned document loader state waiting specified number of bytes
+            </summary>
+			<param name="count"></param>
+			<param name="size"></param>
+			<returns></returns>
+		</member>
+		<member name="M:GrapeCity.ActiveReports.Export.Document.IO.LoadState.Expect(System.String,System.Int32)">
+			<summary>
+            Returned document loader state
+            </summary>
+			<param name="context"></param>
+			<param name="numberOfBytes"></param>
+			<returns></returns>
+		</member>
+		<member name="M:GrapeCity.ActiveReports.Export.Document.IO.LoadState.Expect(System.String,System.Int32,System.Int32)">
+			<summary>
+            Returned document loader state
+            </summary>
+			<param name="context"></param>
+			<param name="count"></param>
+			<param name="size"></param>
+			<returns></returns>
+		</member>
+		<member name="M:GrapeCity.ActiveReports.Export.Document.IO.LoadState.PageLoadDone(System.Int32)">
+			<summary>
+            Represents informational state of loaded page
+            </summary>
+			<param name="pageNumber">the number of loaded page</param>
+			<returns>Document loader state</returns>
+		</member>
+		<member name="F:GrapeCity.ActiveReports.Export.Document.IO.LoadState.NotStarted">
+			<summary>
+            Report loading is not started
+            </summary>
+		</member>
+		<member name="F:GrapeCity.ActiveReports.Export.Document.IO.LoadState.ReportStart">
+			<summary>
+            Report loading is started
+            </summary>
+		</member>
+		<member name="F:GrapeCity.ActiveReports.Export.Document.IO.LoadState.LoadCompleted">
+			<summary>
+            Report loading is completed
+            </summary>
+		</member>
+		<member name="F:GrapeCity.ActiveReports.Export.Document.IO.LoadState.Cancelled">
+			<summary>
+            Report loading is cancelled
+            </summary>
+		</member>
+		<member name="F:GrapeCity.ActiveReports.Export.Document.IO.LoadState.Dummy">
+			<summary>
+            Dummy object
+            </summary>
+		</member>
+		<member name="M:GrapeCity.ActiveReports.Export.Document.IO.LoadState.ObtainedPageCount(System.UInt32)">
+			<summary>
+            Represents informational state of loaded pages
+            </summary>
+			<param name="pages">The count of loaded pages</param>
+			<returns>Document loader state</returns>
+		</member>
+		<member name="M:GrapeCity.ActiveReports.Export.Document.IO.LoadState.Unwind(System.Collections.IEnumerable)">
+			<summary>
+            Processes load states into plain enumerator
+            </summary>
+			<param name="states"></param>
+			<returns></returns>
+		</member>
+		<member name="T:GrapeCity.ActiveReports.Export.Document.IO.WaitBytes">
+			<summary>
+            WaitBytes class
+            </summary>
+		</member>
+		<member name="M:GrapeCity.ActiveReports.Export.Document.IO.WaitBytes.#ctor(System.Int32)">
+			<summary>
+            Sets required amount of bytes
+            </summary>
+			<param name="bytesRequired"></param>
+		</member>
+		<member name="M:GrapeCity.ActiveReports.Export.Document.IO.WaitBytes.#ctor(System.String,System.Int32)">
+			<summary>
+            Sets required amount of bytes and context
+            </summary>
+			<param name="bytesRequired"></param>
+		</member>
+		<member name="P:GrapeCity.ActiveReports.Export.Document.IO.WaitBytes.BytesRequired">
+			<summary>
+            Gets required amount of bytes
+            </summary>
+		</member>
+		<member name="P:GrapeCity.ActiveReports.Export.Document.IO.WaitBytes.DiagInfo">
+			<summary>
+            Gets context
+            </summary>
+		</member>
+		<member name="T:GrapeCity.ActiveReports.Export.Document.Document">
+			<summary>
+            Represents document that provides facility to save/load rendering and layout info.
+            </summary>
+		</member>
+		<member name="M:GrapeCity.ActiveReports.Export.Document.Document.#ctor(System.IServiceProvider)">
+			<summary>
+            Initializes a new instance of the <see cref="T:GrapeCity.ActiveReports.Export.Document.Document" /> class.
+            </summary>
+			<param name="provider">The service provider.</param>
+		</member>
+		<member name="M:GrapeCity.ActiveReports.Export.Document.Document.GetPage(System.Int32)">
+			<summary>
+            Gets the page by index
+            </summary>
+			<param name="index">The index of required page</param>
+			<returns>The required page</returns>
+		</member>
+		<member name="M:GrapeCity.ActiveReports.Export.Document.Document.GetPageWidth(System.Int32)">
+			<summary>
+            Gets the width of page by index
+            </summary>
+			<param name="index">The index of required page</param>
+			<returns>The width of required page</returns>
+		</member>
+		<member name="M:GrapeCity.ActiveReports.Export.Document.Document.GetPageHeight(System.Int32)">
+			<summary>
+            Gets the height of page by index
+            </summary>
+			<param name="index">The index of required page</param>
+			<returns>The height of required page</returns>
+		</member>
+		<member name="F:GrapeCity.ActiveReports.Export.Document.Document.OnLayoutComplete">
+			<summary>
+            Called when layout build has been completed.
+            </summary>
+		</member>
+		<member name="M:GrapeCity.ActiveReports.Export.Document.Document.Save(System.IO.Stream)">
+			<summary>
+            Saves document to specified stream.
+            </summary>
+			<param name="output">output stream where you want to write the document</param>
+		</member>
+		<member name="M:GrapeCity.ActiveReports.Export.Document.Document.Save(System.String)">
+			<summary>
+            Saves document content to specified file.
+            </summary>
+			<param name="path">path to file</param>
+		</member>
+		<member name="M:GrapeCity.ActiveReports.Export.Document.Document.Export(GrapeCity.ActiveReports.Extensibility.Rendering.IO.StreamProvider,GrapeCity.ActiveReports.Extensibility.Rendering.IRenderingExtension,System.Collections.Specialized.NameValueCollection)">
+			<summary>
+            Exports document report to specified rendering extension.
+            </summary>
+			<param name="streamProvider">Stream for output.</param>
+			<param name="renderingExtension">The rendering extension to use for document export.</param>
+			<param name="settings">The rendering extension settings to use for document export.</param>
+		</member>
+		<member name="M:GrapeCity.ActiveReports.Export.Document.Document.Load(System.String)">
+			<summary>
+            Loads document content from given file.
+            </summary>
+			<param name="path">path to file</param>
+		</member>
+		<member name="M:GrapeCity.ActiveReports.Export.Document.Document.Load(System.IO.Stream)">
+			<summary>
+            Loads document content from specified stream.
+            </summary>
+			<param name="input">The input stream with document.</param>
+		</member>
+		<member name="M:GrapeCity.ActiveReports.Export.Document.Document.GetService(System.Type)">
+			<summary>
+            Gets the service object of the specified type.
+            </summary>
+		</member>
+		<member name="P:GrapeCity.ActiveReports.Export.Document.Document.Version">
+			<summary>
+            Gets or sets version
+            </summary>
+		</member>
+		<member name="P:GrapeCity.ActiveReports.Export.Document.Document.Metadata">
+			<summary>
+            Gets or sets collection of metadata
+            </summary>
+		</member>
+		<member name="P:GrapeCity.ActiveReports.Export.Document.Document.Report">
+			<summary>
+            Returns root of rendering tree.
+            </summary>
+		</member>
+		<member name="P:GrapeCity.ActiveReports.Export.Document.Document.Layout">
+			<summary>
+            Returns layout tree.
+            </summary>
+		</member>
+		<member name="P:GrapeCity.ActiveReports.Export.Document.Document.HasLayout">
+			<summary>
+            Gets or sets flag of layout exist
+            </summary>
+		</member>
+		<member name="P:GrapeCity.ActiveReports.Export.Document.Document.PageWidth">
+			<summary>
+            Gets or sets the width of page
+            </summary>
+		</member>
+		<member name="P:GrapeCity.ActiveReports.Export.Document.Document.PageHeight">
+			<summary>
+            Gets or sets the height of page
+            </summary>
+		</member>
+		<member name="P:GrapeCity.ActiveReports.Export.Document.Document.Id">
+			<summary>
+            Gets or sets document id
+            </summary>
+		</member>
+		<member name="P:GrapeCity.ActiveReports.Export.Document.Document.PageCount">
+			<summary>
+            Gets the number of pages.
+            </summary>
+		</member>
+		<member name="E:GrapeCity.ActiveReports.Export.Document.Document.LoadStarted">
+			<summary>
+            Document load started event
+            </summary>
+		</member>
+		<member name="E:GrapeCity.ActiveReports.Export.Document.Document.LoadCompleted">
+			<summary>
+            Document load completed event
+            </summary>
+		</member>
+		<member name="T:GrapeCity.ActiveReports.Export.Document.DocumentRenderingExtension">
+			<summary>
+            Document rendering extension class.
+            </summary>
+		</member>
+		<member name="M:GrapeCity.ActiveReports.Export.Document.DocumentRenderingExtension.GetSupportedSettings">
+			<summary>
+            Gets the information settings for document.
+            </summary>
+			<returns>Settings for document.</returns>
+		</member>
+		<member name="M:GrapeCity.ActiveReports.Export.Document.DocumentRenderingExtension.GetSupportedSettings(System.Boolean)">
+			<summary>
+            Gets the information settings for document.
+            </summary>
+			<returns>Settings for document.</returns>
+		</member>
+		<member name="M:GrapeCity.ActiveReports.Export.Document.DocumentRenderingExtension.Render(GrapeCity.ActiveReports.Extensibility.Rendering.Components.IReport,GrapeCity.ActiveReports.Extensibility.Rendering.IO.StreamProvider)">
+			<summary>
+            Renders the report.
+            </summary>
+			<param name="report">The report to render.</param>
+			<param name="streams">Stream for output.</param>
+		</member>
+		<member name="M:GrapeCity.ActiveReports.Export.Document.DocumentRenderingExtension.Render(GrapeCity.ActiveReports.Extensibility.Rendering.Components.IReport,GrapeCity.ActiveReports.Extensibility.Rendering.IO.StreamProvider,System.Collections.Specialized.NameValueCollection)">
+			<summary>
+            Renders the report.
+            </summary>
+			<param name="report">The report to render.</param>
+			<param name="streams">Stream for output.</param>
+			<param name="settings">Settings used in the report.</param>
+		</member>
+		<member name="M:GrapeCity.ActiveReports.Export.Document.DocumentRenderingExtension.Dispose">
+			<summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+		</member>
+		<member name="E:GrapeCity.ActiveReports.Export.Document.DocumentRenderingExtension.OnLayoutComplete">
+			<summary>
+            Raised when layout build has been completed.
+            </summary>
+		</member>
+	</members>
+</doc>

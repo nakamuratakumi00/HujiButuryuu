@@ -1,0 +1,628 @@
+﻿
+@{
+    ViewBag.Title = "運送業務 - TASS";
+    ViewBag.PageMainTitle = "運送業務 - TASS";
+}
+@section Scripts {
+    <script>
+        $(function () {
+
+            for (var i = 1; i <= 13; i++) {
+                var acc = "#MenuAccordion" + i;
+                var shw = "#MenuShow" + i;
+                var hdn = "#MenuHidden" + i;
+
+                var cond = new Macss.Collapse.MenuBar(acc, shw, hdn);
+                cond.setCollapseEvent();
+            }
+        });
+    </script>
+}
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <div id="MenuAccordion1" class="accordion macss-main-menu-subsystem">
+                <div class="macss-main-menu-subsystem-title">
+                    <div class="row justify-content-between">
+                        <div class="col-10">
+                            <a class="macss-main-menu-openclose" href="javascript:void(0);" onClick="document.getElementById('MenuBtn1').click();">出荷指示データ取込</a>
+                        </div>
+                        <div class="col-2 text-right">
+                            <button id="MenuBtn1" class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse"
+                                    data-target="#MenuCollapse1" aria-expanded="true" aria-controls="MenuCollapse1">
+                                <i id="MenuHidden1" class="far fa-caret-square-up" aria-hidden="true" style="display:none;"></i>
+                                <i id="MenuShow1" class="far fa-caret-square-down" aria-hidden="true" style="display:none;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div id="MenuCollapse1" class="macss-main-menu-subsystem-item collapse show" data-parent="#MenuAccordion1">
+                    <ul class="list-unstyled components macss-submenu-list">
+                        <li>
+                            <ul class="list-unstyled components col-3">
+                                <li>
+                                    @Html.ActionLink("出荷案内書(Fe松本)データアップロード", "Upload01", "D001")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("出荷指示(半導体営業)データアップロード", "Upload02", "D001")
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-unstyled components col-3">
+                                <li>
+                                    @Html.ActionLink("出荷指示(ATMJ一斉)データアップロード", "Upload05", "D001")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("伝票(トピー)データアップロード", "Upload06", "D001")
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-unstyled components col-3">
+                                <li class="empty">
+                                    <p>&nbsp;</p>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="MenuAccordion2" class="accordion macss-main-menu-subsystem">
+                <div class="macss-main-menu-subsystem-title">
+                    <div class="row justify-content-between">
+                        <div class="col-10">
+                            <a class="macss-main-menu-openclose" href="javascript:void(0);" onClick="document.getElementById('MenuBtn2').click();">出荷・荷札・検品</a>
+                        </div>
+                        <div class="col-2 text-right">
+                            <button id="MenuBtn2" class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse"
+                                    data-target="#MenuCollapse2" aria-expanded="true" aria-controls="MenuCollapse2">
+                                <i id="MenuHidden2" class="far fa-caret-square-up" aria-hidden="true" style="display:none;"></i>
+                                <i id="MenuShow2" class="far fa-caret-square-down" aria-hidden="true" style="display:none;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div id="MenuCollapse2" class="macss-main-menu-subsystem-item collapse show" data-parent="#MenuAccordion2">
+                    <ul class="list-unstyled components macss-submenu-list">
+                        <li>
+                            <ul class="list-unstyled components col-3">
+                                <li>
+                                    @Html.ActionLink("出荷手配登録", "Create", "D002")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("出荷手配データアップロード", "Upload", "D002")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("出荷手配一覧", "Index", "D002")
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-unstyled components col-3">
+                                <li>
+                                    @Html.ActionLink("出荷現品情報登録（出荷指示）", "Create", "D003")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("出荷現品情報登録（営業在庫）", "CreateZaiko", "D003")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("出荷現品情報一覧", "Index", "D003")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("固定出荷注文書登録", "Create", "D026")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("固定出荷注文書印刷", "Print", "D026")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("固定出荷注文書一覧", "Index", "D026")
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-unstyled components col-3">
+                                <li>
+                                    @Html.ActionLink("荷札情報登録", "Create", "D004")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("荷札情報一覧", "Index", "D004")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("出荷検品登録", "Create", "D005")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("Fe製品出荷実績データ照合", "Upload", "D011")
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="MenuAccordion3" class="accordion macss-main-menu-subsystem">
+                <div class="macss-main-menu-subsystem-title">
+                    <div class="row justify-content-between">
+                        <div class="col-10">
+                            <a class="macss-main-menu-openclose" href="javascript:void(0);" onClick="document.getElementById('MenuBtn3').click();">データ連携</a>
+                        </div>
+                        <div class="col-2 text-right">
+                            <button id="MenuBtn3" class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse"
+                                    data-target="#MenuCollapse3" aria-expanded="true" aria-controls="MenuCollapse3">
+                                <i id="MenuHidden3" class="far fa-caret-square-up" aria-hidden="true" style="display:none;"></i>
+                                <i id="MenuShow3" class="far fa-caret-square-down" aria-hidden="true" style="display:none;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div id="MenuCollapse3" class="macss-main-menu-subsystem-item collapse show" data-parent="#MenuAccordion3">
+                    <ul class="list-unstyled components macss-submenu-list">
+                        <li>
+                            <ul class="list-unstyled components col-3">
+                                <li>
+                                    @Html.ActionLink(MacssWeb.Resources.Tass.DossDataCreateMainTitle, "Create", "DossData")
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-unstyled components col-3">
+                                <li class="empty">
+                                    <p>&nbsp;</p>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="MenuAccordion4" class="accordion macss-main-menu-subsystem">
+                <div class="macss-main-menu-subsystem-title">
+                    <div class="row justify-content-between">
+                        <div class="col-10">
+                            <a class="macss-main-menu-openclose" href="javascript:void(0);" onClick="document.getElementById('MenuBtn4').click();">半導体輸出</a>
+                        </div>
+                        <div class="col-2 text-right">
+                            <button id="MenuBtn4" class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse"
+                                    data-target="#MenuCollapse4" aria-expanded="true" aria-controls="MenuCollapse4">
+                                <i id="MenuHidden4" class="far fa-caret-square-up" aria-hidden="true" style="display:none;"></i>
+                                <i id="MenuShow4" class="far fa-caret-square-down" aria-hidden="true" style="display:none;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div id="MenuCollapse4" class="macss-main-menu-subsystem-item collapse show" data-parent="#MenuAccordion4">
+                    <ul class="list-unstyled components macss-submenu-list">
+                        <li>
+                            <ul class="list-unstyled components col-3">
+                                <li>
+                                    @Html.ActionLink("半導体輸出出荷データ作成", "Make", "D007")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("半導体輸出出荷データ一覧", "Index", "D007")
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-unstyled components col-3">
+                                <li>
+                                    @Html.ActionLink("半導体輸出梱包実績データアップロード", "Upload", "D035")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("半導体輸出梱包実績一覧", "Index", "D035")
+                                </li>
+                            </ul>
+
+                        </li>
+                        <li>
+                            <ul class="list-unstyled components col-3">
+                                <li class="empty">
+                                    <p>&nbsp;</p>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="MenuAccordion5" class="accordion macss-main-menu-subsystem">
+                <div class="macss-main-menu-subsystem-title">
+                    <div class="row justify-content-between">
+                        <div class="col-10">
+                            <a class="macss-main-menu-openclose" href="javascript:void(0);" onClick="document.getElementById('MenuBtn5').click();">輸送明細・送り状</a>
+                        </div>
+                        <div class="col-2 text-right">
+                            <button id="MenuBtn5" class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse"
+                                    data-target="#MenuCollapse5" aria-expanded="true" aria-controls="MenuCollapse5">
+                                <i id="MenuHidden5" class="far fa-caret-square-up" aria-hidden="true" style="display:none;"></i>
+                                <i id="MenuShow5" class="far fa-caret-square-down" aria-hidden="true" style="display:none;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div id="MenuCollapse5" class="macss-main-menu-subsystem-item collapse show" data-parent="#MenuAccordion5">
+                    <ul class="list-unstyled components macss-submenu-list">
+                        <li>
+                            <ul class="list-unstyled components col-3">
+                                <li>
+                                    @Html.ActionLink("輸送明細一覧", "Index", "D008")
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-unstyled components col-3">
+                                <li>
+                                    @Html.ActionLink("運送委託実績", "Index", "D036")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("送状情報一覧", "Index", "D009")
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-unstyled components col-3">
+                                <li>
+                                    @Html.ActionLink("顧客提供用送状Noデータ出力", "Make", "D010")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("顧客提供用送状登録", "Create", "D010")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("顧客提供用送状一覧", "Index", "D010")
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="MenuAccordion6" class="accordion macss-main-menu-subsystem">
+                <div class="macss-main-menu-subsystem-title">
+                    <div class="row justify-content-between">
+                        <div class="col-10">
+                            <a class="macss-main-menu-openclose" href="javascript:void(0);" onClick="document.getElementById('MenuBtn6').click();">運送会社</a>
+                        </div>
+                        <div class="col-2 text-right">
+                            <button id="MenuBtn6" class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse"
+                                    data-target="#MenuCollapse6" aria-expanded="true" aria-controls="MenuCollapse6">
+                                <i id="MenuHidden6" class="far fa-caret-square-up" aria-hidden="true" style="display:none;"></i>
+                                <i id="MenuShow6" class="far fa-caret-square-down" aria-hidden="true" style="display:none;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div id="MenuCollapse6" class="macss-main-menu-subsystem-item collapse show" data-parent="#MenuAccordion6">
+                    <ul class="list-unstyled components macss-submenu-list">
+                        <li>
+                            <ul class="list-unstyled components col-3">
+                                <li>
+                                    @Html.ActionLink("運送会社用送状データ提供一覧", "Index", "D012")
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-unstyled components col-3">
+                                <li>
+                                    @Html.ActionLink("運送会社請求データ一覧", "Index", "D022")
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-unstyled components col-3">
+                                <li class="empty">
+                                    <p>&nbsp;</p>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="MenuAccordion13" class="accordion macss-main-menu-subsystem">
+                <div class="macss-main-menu-subsystem-title">
+                    <div class="row justify-content-between">
+                        <div class="col-10">
+                            <a class="macss-main-menu-openclose" href="javascript:void(0);" onClick="document.getElementById('MenuBtn13').click();">出荷検品データ提供・FB本社WMS出荷実績</a>
+                        </div>
+                        <div class="col-2 text-right">
+                            <button id="MenuBtn13" class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse"
+                                    data-target="#MenuCollapse13" aria-expanded="true" aria-controls="MenuCollapse6">
+                                <i id="MenuHidden13" class="far fa-caret-square-up" aria-hidden="true" style="display:none;"></i>
+                                <i id="MenuShow13" class="far fa-caret-square-down" aria-hidden="true" style="display:none;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div id="MenuCollapse13" class="macss-main-menu-subsystem-item collapse show" data-parent="#MenuAccordion13">
+                    <ul class="list-unstyled components macss-submenu-list">
+                        <li>
+                            <ul class="list-unstyled components col-3">
+                                <li>
+                                    @Html.ActionLink("出荷検品データ提供一覧", "Index", "D013")
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-unstyled components col-3">
+                                <li>
+                                    @Html.ActionLink("FB本社WMS出荷実績一覧", "Index", "D014")
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-unstyled components col-3">
+                                <li class="empty">
+                                    <p>&nbsp;</p>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="MenuAccordion7" class="accordion macss-main-menu-subsystem">
+                <div class="macss-main-menu-subsystem-title">
+                    <div class="row justify-content-between">
+                        <div class="col-10">
+                            <a class="macss-main-menu-openclose" href="javascript:void(0);" onClick="document.getElementById('MenuBtn7').click();">出荷実績・到着便</a>
+                        </div>
+                        <div class="col-2 text-right">
+                            <button id="MenuBtn7" class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse"
+                                    data-target="#MenuCollapse7" aria-expanded="true" aria-controls="MenuCollapse7">
+                                <i id="MenuHidden7" class="far fa-caret-square-up" aria-hidden="true" style="display:none;"></i>
+                                <i id="MenuShow7" class="far fa-caret-square-down" aria-hidden="true" style="display:none;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div id="MenuCollapse7" class="macss-main-menu-subsystem-item collapse show" data-parent="#MenuAccordion7">
+                    <ul class="list-unstyled components macss-submenu-list">
+                        <li>
+                            <ul class="list-unstyled components col-3">
+                                <li>
+                                    @Html.ActionLink("出荷実績登録", "Create", "D015")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("出荷実績一覧", "Index", "D015")
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-unstyled components col-3">
+                                <li>
+                                    @Html.ActionLink("到着便実績登録", "Create", "D018")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("到着便実績一覧", "Index", "D018")
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-unstyled components col-3">
+                                <li>
+                                    @Html.ActionLink("既定出荷手配登録", "Create", "D019")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("既定出荷手配計上", "Summ", "D019")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("既定出荷手配一覧", "Index", "D019")
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="MenuAccordion8" class="accordion macss-main-menu-subsystem">
+                <div class="macss-main-menu-subsystem-title">
+                    <div class="row justify-content-between">
+                        <div class="col-10">
+                            <a class="macss-main-menu-openclose" href="javascript:void(0);" onClick="document.getElementById('MenuBtn8').click();">運賃・特殊運賃</a>
+                        </div>
+                        <div class="col-2 text-right">
+                            <button id="MenuBtn8" class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse"
+                                    data-target="#MenuCollapse8" aria-expanded="true" aria-controls="MenuCollapse8">
+                                <i id="MenuHidden8" class="far fa-caret-square-up" aria-hidden="true" style="display:none;"></i>
+                                <i id="MenuShow8" class="far fa-caret-square-down" aria-hidden="true" style="display:none;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div id="MenuCollapse8" class="macss-main-menu-subsystem-item collapse show" data-parent="#MenuAccordion8">
+                    <ul class="list-unstyled components macss-submenu-list">
+                        <li>
+                            <ul class="list-unstyled components col-3">
+                                <li>
+                                    @Html.ActionLink("特殊運賃・包装費データアップロード", "Upload", "D030")
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-unstyled components col-3">
+                                <li class="empty">
+                                    <p>&nbsp;</p>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="MenuAccordion9" class="accordion macss-main-menu-subsystem">
+                <div class="macss-main-menu-subsystem-title">
+                    <div class="row justify-content-between">
+                        <div class="col-10">
+                            <a class="macss-main-menu-openclose" href="javascript:void(0);" onClick="document.getElementById('MenuBtn9').click();">包装費</a>
+                        </div>
+                        <div class="col-2 text-right">
+                            <button id="MenuBtn9" class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse"
+                                    data-target="#MenuCollapse9" aria-expanded="true" aria-controls="MenuCollapse9">
+                                <i id="MenuHidden9" class="far fa-caret-square-up" aria-hidden="true" style="display:none;"></i>
+                                <i id="MenuShow9" class="far fa-caret-square-down" aria-hidden="true" style="display:none;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div id="MenuCollapse9" class="macss-main-menu-subsystem-item collapse show" data-parent="#MenuAccordion9">
+                    <ul class="list-unstyled components macss-submenu-list">
+                        <li>
+                            <ul class="list-unstyled components col-4">
+                                <li>
+                                    @Html.ActionLink("包装費実績明細登録（国内梱包）", "CreateNew", "D021")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("包装費実績明細登録（輸出梱包）", "CreateNew", "D021")
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-unstyled components col-4">
+                                <li>
+                                    @Html.ActionLink("包装費実績明細登録（国内梱包　個別単価）", "CreateNewKobetsu", "D021")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("包装費実績明細登録（輸出梱包　個別単価）", "CreateNewKobetsu", "D021")
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-unstyled components col-4">
+                                <li class="empty">
+                                    <p>&nbsp;</p>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="MenuAccordion10" class="accordion macss-main-menu-subsystem">
+                <div class="macss-main-menu-subsystem-title">
+                    <div class="row justify-content-between">
+                        <div class="col-10">
+                            <a class="macss-main-menu-openclose" href="javascript:void(0);" onClick="document.getElementById('MenuBtn10').click();">TMS</a>
+                        </div>
+                        <div class="col-2 text-right">
+                            <button id="MenuBtn10" class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse"
+                                    data-target="#MenuCollapse10" aria-expanded="true" aria-controls="MenuCollapse10">
+                                <i id="MenuHidden10" class="far fa-caret-square-up" aria-hidden="true" style="display:none;"></i>
+                                <i id="MenuShow10" class="far fa-caret-square-down" aria-hidden="true" style="display:none;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div id="MenuCollapse10" class="macss-main-menu-subsystem-item collapse show" data-parent="#MenuAccordion10">
+                    <ul class="list-unstyled components macss-submenu-list">
+                        <li>
+                            <ul class="list-unstyled components col-3">
+                                <li>
+                                    @Html.ActionLink("TMS用出荷実績データ作成", "Create", "ShipmentResultsForTMS")
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-unstyled components col-3">
+                                <li>
+                                    @Html.ActionLink("TMS用運賃データ作成", "Create", "ShippingCostForTMS")
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-unstyled components col-3">
+                                <li>
+                                    @Html.ActionLink(MacssWeb.Resources.Tass.TMSFixedDataListMainTitle, "Index", "TMSFixedData")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("TMSデータアップロード", "Upload", "TMSFixedData")
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="MenuAccordion11" class="accordion macss-main-menu-subsystem">
+                <div class="macss-main-menu-subsystem-title">
+                    <div class="row justify-content-between">
+                        <div class="col-10">
+                            <a class="macss-main-menu-openclose" href="javascript:void(0);" onClick="document.getElementById('MenuBtn11').click();">請求</a>
+                        </div>
+                        <div class="col-2 text-right">
+                            <button id="MenuBtn11" class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse"
+                                    data-target="#MenuCollapse11" aria-expanded="true" aria-controls="MenuCollapse11">
+                                <i id="MenuHidden11" class="far fa-caret-square-up" aria-hidden="true" style="display:none;"></i>
+                                <i id="MenuShow11" class="far fa-caret-square-down" aria-hidden="true" style="display:none;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div id="MenuCollapse11" class="macss-main-menu-subsystem-item collapse show" data-parent="#MenuAccordion11">
+                    <ul class="list-unstyled components macss-submenu-list">
+                        <li>
+                            <ul class="list-unstyled components col-3">
+                                <li>
+                                    @Html.ActionLink("請求データ作成確認", "RequestdataConfirm", "D029")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("仕入データ作成確認", "PurchasingConfirm", "D029")
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-unstyled components col-3">
+                                <li>
+                                    @Html.ActionLink("出荷実績請求一覧", "Index", "D031")
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-unstyled components col-3">
+                                <li>
+                                    @Html.ActionLink("未請求確認", "Index", "D032")
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="MenuAccordion12" class="accordion macss-main-menu-subsystem">
+                <div class="macss-main-menu-subsystem-title">
+                    <div class="row justify-content-between">
+                        <div class="col-10">
+                            <a class="macss-main-menu-openclose" href="javascript:void(0);" onClick="document.getElementById('MenuBtn12').click();">月次</a>
+                        </div>
+                        <div class="col-2 text-right">
+                            <button id="MenuBtn12" class="btn macss-btn-condition-collapse" type="button" data-toggle="collapse"
+                                    data-target="#MenuCollapse12" aria-expanded="true" aria-controls="MenuCollapse12">
+                                <i id="MenuHidden12" class="far fa-caret-square-up" aria-hidden="true" style="display:none;"></i>
+                                <i id="MenuShow12" class="far fa-caret-square-down" aria-hidden="true" style="display:none;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div id="MenuCollapse12" class="macss-main-menu-subsystem-item collapse show" data-parent="#MenuAccordion12">
+                    <ul class="list-unstyled components macss-submenu-list">
+                        <li>
+                            <ul class="list-unstyled components col-3">
+                                <li>
+                                    @Html.ActionLink("TASS全件データ一覧", "Index", "D033")
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-unstyled components col-3">
+                                <li>
+                                    @Html.ActionLink("包装作業実績データアップロード", "Upload", "D034")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("包装作業完了報告一覧", "Index", "D034")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("委託作業費月次一覧", "IndexGetsuji", "D034")
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="list-unstyled components col-3">
+                                <li>
+                                    @Html.ActionLink("算定方式作業実績一覧", "IndexSantei", "D034")
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

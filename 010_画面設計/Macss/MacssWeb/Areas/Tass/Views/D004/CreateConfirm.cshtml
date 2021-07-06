@@ -1,0 +1,18 @@
+﻿<!-- ■登録確認画面呼び出し部 -->
+@model Macss.Database.Entity.AccountMaster
+
+@{
+    // タイトル等キャプションをセット
+    ViewBag.Title = "運送業務 - TASS";
+    ViewBag.PageMainTitle = "荷札情報登録確認";
+    ViewBag.ScreenId = "";
+    ViewBag.ConfirmMessage = MacssWeb.Resources.Messages.CreateConfirm;
+    ViewBag.ButtonText = MacssWeb.Resources.ControlText.CreateExec;
+    ViewBag.ConfirmDialogText = MacssWeb.Resources.Messages.CreateReconfirm;
+}
+
+@using (Html.BeginForm("Create", "D004", null, FormMethod.Post))
+{
+    // 詳細・確認系フォームをセット
+    @Html.Partial("_Show", Model)
+}

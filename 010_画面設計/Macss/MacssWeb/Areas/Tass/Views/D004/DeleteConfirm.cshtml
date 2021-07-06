@@ -1,0 +1,22 @@
+﻿<!-- ■削除確認画面呼び出し部 -->
+@model Macss.Database.Entity.AccountMaster
+
+@{
+    // タイトル等キャプションをセット
+    ViewBag.Title = "運送業務 - TASS";
+    ViewBag.PageMainTitle = "荷札情報出荷完了取消確認";
+    ViewBag.ScreenId = "";
+    //ViewBag.ConfirmMessage = MacssWeb.Resources.Messages.DeleteConfirm;
+    ViewBag.ConfirmMessage = "出荷完了を取消します。よろしいですか？";
+    ViewBag.ButtonText = MacssWeb.Resources.ControlText.DeleteExec;
+    ViewBag.ConfirmDialogText = MacssWeb.Resources.Messages.DeleteReconfirm;
+
+    // フォームの動作モードを削除に変更
+    ViewBag.DeleteExec = true;
+}
+
+@using (Html.BeginForm("Delete", "D004", null, FormMethod.Post))
+{
+    // 詳細・確認系フォームをセット
+    @Html.Partial("_Show")
+}
